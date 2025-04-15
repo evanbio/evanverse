@@ -1,0 +1,17 @@
+Package: evanverse
+Type: Package
+Title: Evan's R Universe of Tools and Creativity
+Version: 0.1.0
+Authors@R: person("Evan", "Zhou", email = "evanzhou.bio@gmail.com", role = c("aut", "cre"))
+Description: A stylish, expressive, and modular R toolkit built by Evan.
+    evanverse includes functions for enhanced string manipulation,
+    fun and formatted output, creative bio-themed helpers, and colorful
+    command-line expression. Designed for daily use and joyful analysis.
+License: MIT + file LICENSE
+Encoding: UTF-8
+LazyData: true
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.3.2
+Suggests: 
+    testthat (>= 3.0.0)
+Config/testthat/edition: 3
