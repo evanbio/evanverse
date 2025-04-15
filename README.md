@@ -1,7 +1,8 @@
-
 # evanverse
 
 <!-- badges: start -->
+[![GitHub version](https://img.shields.io/github/v/tag/evanbio/evanverse?label=version&color=success)](https://github.com/evanbio/evanverse/releases)
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE.md)
 <!-- badges: end -->
 
 **evanverse** is a modular R package created by Evan Zhou.  
@@ -38,7 +39,6 @@ This package is organized into modules:
 - `output_utils.R` – functions for formatted output
 - `bio_utils.R` – functions for bioinformatics flavor
 - `fun_utils.R` – experimental / playful tools
-- `dev/` – internal setup scripts (not exported)
 
 ## Contributing
 
