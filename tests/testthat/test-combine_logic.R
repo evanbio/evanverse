@@ -42,4 +42,3 @@ test_that("fails for invalid operator", {
                "Unsupported operator")
 })
 
-combine_logic(1:5 > 2, 1:5 < 5)
