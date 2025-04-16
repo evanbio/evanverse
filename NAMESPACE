@@ -3,6 +3,7 @@
 export("%is%")
 export("%p%")
 export(combine_logic)
+export(hex2rgb)
 export(remind)
 export(rgb2hex)
 export(with_timer)
