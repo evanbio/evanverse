@@ -16,7 +16,9 @@ remind <- function(keyword = NULL) {
     droplevels = "🧹 `droplevels(df)` removes unused factor levels from a data frame or factor.",
     modifyList = "🧩 `modifyList(x, y)` merges two lists; elements in `y` overwrite those in `x`.",
     do.call = "🛠️ `do.call(fun, args)` calls a function with arguments in a list: do.call(plot, list(x=1:10)).",
-    sprintf = "🧾 `sprintf(\"Hello, %s!\", name)` formats strings with placeholders like `%s`, `%d`, etc."
+    sprintf = "🧾 `sprintf(\"Hello, %s!\", name)` formats strings with placeholders like `%s`, `%d`, etc.",
+    scRNAseq = "🧪 `scRNAseq` from Bioconductor provides example scRNA-seq datasets, e.g., `ZeiselBrainData()`.",
+    stopifnot    = "⛔ `stopifnot(cond1, cond2, ...)` throws an error if any condition is FALSE.\nUseful for lightweight input validation."
   )
 
   # Show all if no keyword is provided
