@@ -10,7 +10,7 @@ remind(keyword = NULL)
 \item{keyword}{A keyword like "glimpse" or "read_excel". If NULL, show all examples.}
 }
 \value{
-Printed reminder or keyword list
+Printed reminder or keyword list (invisibly)
 }
 \description{
 A helper to recall commonly used R functions with examples.

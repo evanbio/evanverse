@@ -2,4 +2,5 @@
 
 export("%is%")
 export("%p%")
+export(combine_logic)
 export(remind)
