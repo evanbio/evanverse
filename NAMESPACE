@@ -2,6 +2,7 @@
 
 export("%is%")
 export("%p%")
+export(check_pkg)
 export(combine_logic)
 export(hex2rgb)
 export(inst_pkg)
