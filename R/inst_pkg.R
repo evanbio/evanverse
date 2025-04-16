@@ -66,7 +66,7 @@ inst_pkg <- function(pkg = NULL,
       install.packages("BiocManager", repos = "https://mirrors.tuna.tsinghua.edu.cn/CRAN/")
     }
     old_mirror <- getOption("BioC_mirror")
-    options(BioC_mirror = "https://mirrors.westlake.edu.cn/bioconductor")
+    options(BioC_mirror = "https://mirrors.tuna.tsinghua.edu.cn/bioconductor/")
     on.exit(options(BioC_mirror = old_mirror), add = TRUE)
     BiocManager::install(pkg, ...)
 
