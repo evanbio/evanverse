@@ -5,14 +5,15 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE.md)
 <!-- badges: end -->
 
-**evanverse** is a modular R package created by Evan Zhou.  
-It aims to provide a flexible and expressive toolkit for daily data analysis, formatting, and function design.
+**evanverse** is a modular and lightweight R package by Evan Zhou.  
+It provides a flexible and expressive toolkit for daily R development, including data processing, scripting, and reproducible analysis workflows.
+
 
 ## Features
 
-- 📦 Modular structure
-- 🛠️ Focus on personal utility and reproducibility
-- ✨ Minimal, expressive, and extensible
+- 📦 Modular structure with a focus on clarity and reusability  
+- 🛠️ Practical utilities for package handling, logic, and workflow automation  
+- ✨ Minimal, expressive, and extensible design
 
 ## Installation
 
@@ -28,17 +29,39 @@ You can install the development version of `evanverse` from GitHub with:
 ```r
 library(evanverse)
 
-# Example functions will go here
+# Example:
+"Hello" %p% "world"
 ```
 
-## Project Structure
+## Functions Overview
 
-This package is organized into modules:
+evanverse currently provides the following utility functions:
 
-- `string_utils.R` – functions for string manipulation
-- `output_utils.R` – functions for formatted output
-- `bio_utils.R` – functions for bioinformatics flavor
-- `fun_utils.R` – experimental / playful tools
+- **Package management**
+  - `check_pkg()` — check if packages are installed
+  - `inst_pkg()` — install packages from CRAN, GitHub, Bioconductor
+  - `update_pkg()` — update packages by source
+
+- **Logical operations**
+  - `%p%` — paste two strings with space
+  - `%is%` — strict identity comparison
+  - `combine_logic()` — combine multiple logical vectors
+
+- **Color conversion**
+  - `hex2rgb()` — convert HEX to RGB
+  - `rgb2hex()` — convert RGB to HEX
+
+- **Visualization**
+  - `plot_venn()` — draw 2–4 set Venn diagrams
+
+- **Workflow tools**
+  - `with_timer()` — wrap and time a function
+  - `remind()` — show helpful R usage tips
+
+## Documentation
+
+Full documentation and vignettes available at:
+👉 https://evanbio.github.io/evanverse/
 
 ## Contributing
 
@@ -47,7 +70,7 @@ Feedback and pull requests are welcome in future versions.
 
 ## License
 
-MIT © 2025 Evan Zhou
+MIT License © 2025 Evan Zhou
 
 ---
 
