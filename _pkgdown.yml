@@ -1,0 +1,34 @@
+url: https://evanbio.github.io/evanverse/
+
+template:
+  bootstrap: 5
+  bootswatch: flatly
+  params:
+    path: /evanverse/
+
+home:
+  title: evanverse
+  tagline: A minimal utility toolkit for everyday R tasks
+
+authors:
+  Evan Zhou:
+    href: https://github.com/evanbio
+
+navbar:
+  structure:
+    left:
+    - home
+    - reference
+    - articles
+    right: github
+  components:
+    github:
+      icon: fab fa-github
+      href: https://github.com/evanbio/evanverse
+
+articles:
+- title: "\U0001F9ED Get Started"
+  contents: get-started
+- title: "\U0001F4E6 Package Management"
+  contents: package-management
+

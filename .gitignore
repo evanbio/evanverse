@@ -17,7 +17,6 @@
 # Quarto / Rendering
 #-------------------------------------------------------
 .quarto/
-*.html
 *.pdf
 *.docx
 
@@ -42,3 +41,6 @@ dev/
 *.xlsx
 *.csv
 *.zip
+inst/doc
+/Meta/
+/doc/

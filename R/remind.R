@@ -19,6 +19,7 @@ remind <- function(keyword = NULL) {
     sprintf = "🧾 `sprintf(\"Hello, %s!\", name)` formats strings with placeholders like `%s`, `%d`, etc.",
     scRNAseq = "🧪 `scRNAseq` from Bioconductor provides example scRNA-seq datasets, e.g., `ZeiselBrainData()`.",
     basename = "🧩 `basename(path)` extracts the filename from a full path string. See also `dirname()`.",
+    here = "📍 `here::here(\"data\", \"raw\", \"sample1.rds\")` constructs a path from the project root, eliminating the need for manual setwd().",
     stopifnot = "⛔ `stopifnot(cond1, cond2, ...)` throws an error if any condition is FALSE.\nUseful for lightweight input validation."
   )
 
