@@ -2,32 +2,30 @@
 % Please edit documentation in R/df2list.R
 \name{df2list}
 \alias{df2list}
-\title{📦 Convert Data Frame to List by Grouping}
+\title{📦 Convert Data Frame to Named List by Grouping}
 \usage{
 df2list(data, key_col, value_col, verbose = TRUE)
 }
 \arguments{
 \item{data}{A data.frame or tibble to be grouped.}
 
-\item{key_col}{Character. Name of the column to group by (e.g., \code{"cell_type"}).}
+\item{key_col}{Character. Column name for list names.}
 
-\item{value_col}{Character. Name of the column to aggregate into lists (e.g., \code{"marker_genes"}).}
+\item{value_col}{Character. Column name for list values.}
 
-\item{verbose}{Logical. Whether to show progress messages. Default is \code{TRUE}.}
+\item{verbose}{Logical. Whether to show message. Default = TRUE.}
 }
 \value{
-A tibble with one row per key and a list-column of aggregated values.
+A named list, where each element is a character vector of values.
 }
 \description{
-Group a data frame by one column and aggregate values from another column into lists.
-Useful for creating marker gene sets: e.g., \code{cell_type -> marker_genes}.
+Group a data frame by one column and convert to named list.
+Each key becomes a list name; each value column becomes vector.
 }
 \examples{
 df <- data.frame(
-  cell_type = c(rep("B_CELLS_MEMORY", 5), rep("T_CELLS_CD8", 4), rep("MONOCYTES", 3)),
-  marker_genes = c("AIM2", "BANK1", "CD19", "CD27", "CD37",
-                   "CD8A", "CD8B", "GZMB", "PRF1",
-                   "LYZ", "S100A9", "CD14")
+  cell_type = c("T_cells", "T_cells", "B_cells", "B_cells"),
+  marker = c("CD3D", "CD3E", "CD79A", "MS4A1")
 )
-df2list(df, key_col = "cell_type", value_col = "marker_genes")
+df2list(df, "cell_type", "marker")
 }
