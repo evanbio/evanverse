@@ -11,8 +11,6 @@
 #' - Workflow automation utilities 🛠️
 #' - Clean wrappers for common scripting tasks
 #'
-#' ---
-#'
 #' **evanverse is not a framework, but a personal, evolving toolbox** —
 #' pragmatically built, cleanly organized, and continuously maintained
 #' for everyday scientific computing.

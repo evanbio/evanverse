@@ -44,3 +44,16 @@ dev/
 inst/doc
 /Meta/
 /doc/
+
+#-------------------------------------------------------
+# Resource files (non-code, non-binary data)
+#-------------------------------------------------------
+resources/
+resources/books/
+resources/papers/
+resources/images/
+
+#-------------------------------------------------------
+# Local notebooks and scratchpads (ignored for now)
+#-------------------------------------------------------
+notebooks/
