@@ -22,3 +22,8 @@ BugReports: https://github.com/evanbio/evanverse/issues
 VignetteBuilder: knitr
 Depends: 
     R (>= 3.5)
+Imports: 
+    cli,
+    GSEABase,
+    tibble,
+    tidyr
