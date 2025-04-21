@@ -22,7 +22,7 @@ msigdb_h_df <- tibble(
   term = names(geneIds(gmt_obj)),
   description = vapply(gmt_obj, function(x) x@shortDescription, character(1)),
   gene = unname(geneIds(gmt_obj))
-) |> 
+) |>
   unnest_longer(gene)
 
 # 💾 Save to /data/
