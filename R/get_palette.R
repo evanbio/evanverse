@@ -6,7 +6,7 @@
 #' @param name Name of the palette (e.g. "vividset").
 #' @param type One of: `"sequential"`, `"diverging"`, `"qualitative"`.
 #' @param n Number of colors to return. Default `NULL` returns all.
-#' @param palette_rds Path to RDS file. Default: `"data/palettes.rds"`.
+#' @param palette_rds Path to RDS file. Default: `here::here("data/palettes.rds")`.
 #'
 #' @return A character vector of HEX color codes.
 #' @export
@@ -17,7 +17,7 @@
 get_palette <- function(name,
                         type = c("sequential", "diverging", "qualitative"),
                         n = NULL,
-                        palette_rds = "data/palettes.rds") {
+                        palette_rds = here::here("data/palettes.rds")) {
 
   # --- Check dependencies
   if (!requireNamespace("cli", quietly = TRUE)) {
@@ -51,16 +51,13 @@ get_palette <- function(name,
     if (!is.null(found_type)) {
       cli::cli_alert_warning("'{name}' not found under '{type}', but exists under '{found_type}'.")
       cli::cli_alert_info("Try: get_palette('{name}', type = '{found_type}')")
-
-      stop(sprintf(
-        "'%s' not found under '%s', but exists under '%s'.",
-        name, type, found_type
-      ))
+      stop(sprintf("'%s' not found under '%s', but exists under '%s'.", name, type, found_type))
     } else {
       cli::cli_alert_danger("Palette '{name}' not found in any type.")
       stop(sprintf("Palette '%s' not found in any type.", name))
     }
   }
+
   # --- Extract colors
   colors <- palettes[[type]][[name]]
   cli::cli_alert_success("Loaded palette '{name}' ({type}), {length(colors)} colors.")

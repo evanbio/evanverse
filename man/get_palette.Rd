@@ -8,7 +8,7 @@ get_palette(
   name,
   type = c("sequential", "diverging", "qualitative"),
   n = NULL,
-  palette_rds = "data/palettes.rds"
+  palette_rds = here::here("data/palettes.rds")
 )
 }
 \arguments{
@@ -18,7 +18,7 @@ get_palette(
 
 \item{n}{Number of colors to return. Default \code{NULL} returns all.}
 
-\item{palette_rds}{Path to RDS file. Default: \code{"data/palettes.rds"}.}
+\item{palette_rds}{Path to RDS file. Default: \code{here::here("data/palettes.rds")}.}
 }
 \value{
 A character vector of HEX color codes.
