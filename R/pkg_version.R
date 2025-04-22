@@ -1,4 +1,4 @@
-#' 🔍 pkg_versions: Check Installed and Latest Versions of R Packages
+#' 🔍 pkg_version: Check Installed and Latest Versions of R Packages
 #'
 #' This function checks the installed and latest available versions of
 #' R packages across CRAN, Bioconductor, and GitHub.
@@ -12,8 +12,8 @@
 #' @export
 #'
 #' @examples
-#' pkg_versions(c("ggplot2", "limma", "MRPRESSO", "nonexistentpackage123"))
-pkg_versions <- function(pkg, preview = TRUE) {
+#' pkg_version(c("ggplot2", "limma", "MRPRESSO", "nonexistentpackage123"))
+pkg_version <- function(pkg, preview = TRUE) {
   pkg <- unique(pkg)
 
   stopifnot(requireNamespace("cli", quietly = TRUE))
@@ -110,5 +110,3 @@ pkg_versions <- function(pkg, preview = TRUE) {
   if (preview) print(result)
   invisible(result)
 }
-
-pkg_versions(c("limma", "ggplot2", "MRPRESSO", "evanverse", "NonexistentPkg"))

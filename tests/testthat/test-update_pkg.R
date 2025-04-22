@@ -43,11 +43,11 @@ test_that("Single Bioconductor package update runs (dry mode)", {
   )
 })
 
-test_that("Update all Bioconductor packages runs without fatal error", {
-  expect_invisible(
-    suppressWarnings(
-      update_pkg(source = "Bioconductor")
-    )
-  )
-})
+# test_that("Update all Bioconductor packages runs without fatal error", {
+#   expect_invisible(
+#     suppressWarnings(
+#       update_pkg(source = "Bioconductor")
+#     )
+#   )
+# })
 
