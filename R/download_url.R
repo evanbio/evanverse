@@ -1,4 +1,4 @@
-#' 📥 ev_download(): Download a file from URL (supports FTP/HTTP + unzip)
+#' 📥 download_url(): Download a file from URL (supports FTP/HTTP + unzip)
 #'
 #' A robust and friendly downloader that supports FTP/HTTP/HTTPS sources.
 #' Automatically skips download if file already exists.
@@ -12,12 +12,12 @@
 #'
 #' @return Invisibly returns path(s) to downloaded (and optionally unzipped) file(s).
 #' @export
-ev_download <- function(url,
-                        dest = basename(url),
-                        method = "auto",
-                        overwrite = FALSE,
-                        unzip = FALSE,
-                        verbose = TRUE) {
+download_url <- function(url,
+                         dest = basename(url),
+                         method = "auto",
+                         overwrite = FALSE,
+                         unzip = FALSE,
+                         verbose = TRUE) {
   # --- Validation
   stopifnot(is.character(url), length(url) == 1)
   stopifnot(method %in% c("auto", "curl", "wget", "internal"))
