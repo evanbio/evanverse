@@ -2,29 +2,50 @@ url: https://evanbio.github.io/evanverse/
 
 template:
   bootstrap: 5
-  bootswatch: flatly
+  bootswatch: sandstone
   params:
     path: /evanverse/
+  opengraph: true
 
 home:
   title: evanverse
-  tagline: A minimal utility toolkit for everyday R tasks
+  tagline: Lightweight tools for data wrangling, visualization, and reproducible R coding
 
 authors:
   Evan Zhou:
     href: https://github.com/evanbio
+    roles: [aut, cre]
+    email: evanzhou.bio@gmail.com
 
 navbar:
   structure:
     left:
-    - home
-    - reference
-    - articles
-    right: github
+      - home
+      - reference
+      - articles
+      - projects
+    right:
+      - blog
+      - cv
+      - github
+
   components:
+    projects:
+      text: Projects
+      href: https://evanbio.github.io/projects/
+
+    blog:
+      text: Blog
+      href: https://blog.evanzhou.org
+
+    cv:
+      text: CV
+      href: https://academic.evanzhou.org
+
     github:
       icon: fab fa-github
       href: https://github.com/evanbio/evanverse
+
 
 articles:
 - title: "\U0001F9ED Get Started"
