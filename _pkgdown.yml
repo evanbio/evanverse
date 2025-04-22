@@ -5,7 +5,7 @@ template:
   bootswatch: sandstone
   params:
     path: /evanverse/
-  opengraph: true
+  opengraph: {}
 
 home:
   title: evanverse
@@ -35,11 +35,11 @@ navbar:
       href: https://evanbio.github.io/projects/
 
     blog:
-      text: Blog
+      icon: fas fa-blog
       href: https://blog.evanzhou.org
 
     cv:
-      text: CV
+      icon: fas fa-user
       href: https://academic.evanzhou.org
 
     github:
