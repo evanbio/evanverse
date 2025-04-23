@@ -5,7 +5,7 @@
 #===============================================================================
 
 test_that("list_palettes() loads and returns expected structure", {
-  f <- here::here("data/palettes.rds")
+  f <- system.file("extdata", "palettes.rds", package = "evanverse")
   skip_if_not(file.exists(f), "Palette RDS not found")
 
   df <- list_palettes(palette_rds = f, verbose = FALSE)
@@ -16,7 +16,7 @@ test_that("list_palettes() loads and returns expected structure", {
 })
 
 test_that("list_palettes() filters by type", {
-  f <- here::here("data/palettes.rds")
+  f <- system.file("extdata", "palettes.rds", package = "evanverse")
   skip_if_not(file.exists(f), "Palette RDS not found")
 
   df <- list_palettes(palette_rds = f, type = "qualitative", verbose = FALSE)
@@ -24,7 +24,7 @@ test_that("list_palettes() filters by type", {
 })
 
 test_that("list_palettes() throws error for invalid type", {
-  f <- here::here("data/palettes.rds")
+  f <- system.file("extdata", "palettes.rds", package = "evanverse")
   skip_if_not(file.exists(f), "Palette RDS not found")
 
   expect_error(

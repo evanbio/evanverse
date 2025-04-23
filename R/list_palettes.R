@@ -2,7 +2,7 @@
 #'
 #' Load and list all available color palettes compiled into an RDS file.
 #'
-#' @param palette_rds Path to the RDS file. Default: `"data/palettes.rds"`.
+#' @param palette_rds Path to the RDS file. Default: `"inst/extdata/palettes.rds"`.
 #' @param type Palette type(s) to filter: `"sequential"`, `"diverging"`, `"qualitative"`. Default: all.
 #' @param sort Whether to sort by type, n_color, name. Default: TRUE.
 #' @param verbose Whether to print listing details to console. Default: TRUE.
@@ -14,7 +14,7 @@
 #' list_palettes()
 #' list_palettes(type = "qualitative")
 #' list_palettes(type = c("sequential", "diverging"))
-list_palettes <- function(palette_rds = "data/palettes.rds",
+list_palettes <- function(palette_rds = system.file("extdata", "palettes.rds", package = "evanverse"),
                           type = c("sequential", "diverging", "qualitative"),
                           sort = TRUE,
                           verbose = TRUE) {

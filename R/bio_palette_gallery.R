@@ -2,7 +2,8 @@
 #'
 #' Display palettes from a compiled RDS in a paged gallery format.
 #'
-#' @param palette_rds Path to compiled RDS (default: "data/palettes.rds")
+#' @param palette_rds Path to compiled RDS.
+#'        Default: internal palettes.rds from `inst/extdata/`.
 #' @param type Palette types to include: "sequential", "diverging", "qualitative"
 #' @param max_palettes Number of palettes per page (default: 30)
 #' @param max_row Max colors per row (default: 12)
@@ -10,7 +11,7 @@
 #'
 #' @return A named list of ggplot objects (one per page)
 #' @export
-bio_palette_gallery <- function(palette_rds = "data/palettes.rds",
+bio_palette_gallery <- function(palette_rds = NULL,
                                 type = c("sequential", "diverging", "qualitative"),
                                 max_palettes = 30,
                                 max_row = 12,
@@ -21,20 +22,27 @@ bio_palette_gallery <- function(palette_rds = "data/palettes.rds",
   library(ggplot2)
   type <- match.arg(type, several.ok = TRUE)
 
+  # --- Set default path from inst/extdata
+  if (is.null(palette_rds)) {
+    palette_rds <- system.file("extdata", "palettes.rds", package = "evanverse")
+  }
+
+  # --- Check file
   if (!file.exists(palette_rds)) {
-    cli::cli_alert_danger("RDS file does not exist: {.path {palette_rds}}")
+    cli::cli_alert_danger("RDS file not found: {.path {palette_rds}}")
     return(invisible(NULL))
   }
 
+  # --- Load RDS
   palettes <- tryCatch(readRDS(palette_rds), error = function(e) {
-    cli::cli_alert_danger("Failed to read RDS file: {e$message}")
+    cli::cli_alert_danger("Failed to read palette RDS: {e$message}")
     return(NULL)
   })
 
   available_types <- names(palettes)
   selected_types <- intersect(type, available_types)
   if (length(selected_types) == 0) {
-    cli::cli_alert_warning("No palettes found for type(s): {paste(type, collapse=', ')}")
+    cli::cli_alert_warning("No matching types in RDS. Available: {paste(available_types, collapse=', ')}")
     return(invisible(NULL))
   }
 
@@ -47,7 +55,7 @@ bio_palette_gallery <- function(palette_rds = "data/palettes.rds",
 
     total <- nrow(pal_info)
     pages <- ceiling(total / max_palettes)
-    if (verbose) cli::cli_alert_info("Type {type_val}: {total} palettes → {pages} page(s)")
+    if (verbose) cli::cli_alert_info("🎨 Type {.strong {type_val}}: {total} palettes → {pages} page(s)")
 
     for (pg in seq_len(pages)) {
       idx <- ((pg - 1) * max_palettes + 1):min(pg * max_palettes, total)
@@ -98,7 +106,7 @@ bio_palette_gallery <- function(palette_rds = "data/palettes.rds",
       plots[[key]] <- p
       if (pg == 1 && verbose) {
         print(p)
-        cli::cli_alert_success("Rendered '{type_val}' page 1 of {pages}")
+        cli::cli_alert_success("✅ Rendered '{type_val}' page 1 of {pages}")
       }
     }
   }

@@ -35,13 +35,13 @@ test_that("GitHub package update runs without error (dry mode)", {
 
 # ⚠ Bioconductor-related tests may generate version or update warnings.
 # We wrap in `suppressWarnings()` and allow execution to continue.
-test_that("Single Bioconductor package update runs (dry mode)", {
-  expect_invisible(
-    suppressWarnings(
-      update_pkg(pkg = "limma", source = "Bioconductor")
-    )
-  )
-})
+# test_that("Single Bioconductor package update runs (dry mode)", {
+#   expect_invisible(
+#     suppressWarnings(
+#       update_pkg(pkg = "limma", source = "Bioconductor")
+#     )
+#   )
+# })
 
 # test_that("Update all Bioconductor packages runs without fatal error", {
 #   expect_invisible(

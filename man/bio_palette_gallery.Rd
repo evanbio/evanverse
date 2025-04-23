@@ -5,7 +5,7 @@
 \title{🌈 bio_palette_gallery(): Visualize All Palettes in a Gallery View}
 \usage{
 bio_palette_gallery(
-  palette_rds = "data/palettes.rds",
+  palette_rds = NULL,
   type = c("sequential", "diverging", "qualitative"),
   max_palettes = 30,
   max_row = 12,
@@ -13,7 +13,8 @@ bio_palette_gallery(
 )
 }
 \arguments{
-\item{palette_rds}{Path to compiled RDS (default: "data/palettes.rds")}
+\item{palette_rds}{Path to compiled RDS.
+Default: internal palettes.rds from \verb{inst/extdata/}.}
 
 \item{type}{Palette types to include: "sequential", "diverging", "qualitative"}
 

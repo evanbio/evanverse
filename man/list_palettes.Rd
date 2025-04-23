@@ -5,14 +5,14 @@
 \title{🎨 list_palettes(): List All Color Palettes from RDS}
 \usage{
 list_palettes(
-  palette_rds = "data/palettes.rds",
+  palette_rds = system.file("extdata", "palettes.rds", package = "evanverse"),
   type = c("sequential", "diverging", "qualitative"),
   sort = TRUE,
   verbose = TRUE
 )
 }
 \arguments{
-\item{palette_rds}{Path to the RDS file. Default: \code{"data/palettes.rds"}.}
+\item{palette_rds}{Path to the RDS file. Default: \code{"inst/extdata/palettes.rds"}.}
 
 \item{type}{Palette type(s) to filter: \code{"sequential"}, \code{"diverging"}, \code{"qualitative"}. Default: all.}
 

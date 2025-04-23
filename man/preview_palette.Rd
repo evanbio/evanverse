@@ -10,7 +10,7 @@ preview_palette(
   n = NULL,
   plot_type = c("bar", "pie", "point", "rect", "circle"),
   title = name,
-  palette_rds = "data/palettes.rds",
+  palette_rds = system.file("extdata", "palettes.rds", package = "evanverse"),
   preview = TRUE
 )
 }
@@ -25,7 +25,7 @@ preview_palette(
 
 \item{title}{Plot title (default: same as palette name).}
 
-\item{palette_rds}{Path to RDS file. Default: "data/palettes.rds".}
+\item{palette_rds}{Path to RDS file. Default: system.file("extdata", "palettes.rds", package = "evanverse").}
 
 \item{preview}{Whether to show the plot immediately. Default: TRUE.}
 }

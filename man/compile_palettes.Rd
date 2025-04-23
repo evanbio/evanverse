@@ -6,7 +6,7 @@
 \usage{
 compile_palettes(
   palettes_dir = "inst/extdata/palettes",
-  output_rds = "data/palettes.rds",
+  output_rds = "inst/extdata/palettes.rds",
   log = TRUE
 )
 }

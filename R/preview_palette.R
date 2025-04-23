@@ -7,7 +7,7 @@
 #' @param n Number of colors to use (default: all).
 #' @param plot_type Plot style: "bar", "pie", "point", "rect", "circle".
 #' @param title Plot title (default: same as palette name).
-#' @param palette_rds Path to RDS file. Default: "data/palettes.rds".
+#' @param palette_rds Path to RDS file. Default: system.file("extdata", "palettes.rds", package = "evanverse").
 #' @param preview Whether to show the plot immediately. Default: TRUE.
 #'
 #' @return NULL (invisible), for plotting side effect.
@@ -17,7 +17,7 @@ preview_palette <- function(name,
                             n = NULL,
                             plot_type = c("bar", "pie", "point", "rect", "circle"),
                             title = name,
-                            palette_rds = "data/palettes.rds",
+                            palette_rds = system.file("extdata", "palettes.rds", package = "evanverse"),
                             preview = TRUE) {
 
   if (!requireNamespace("cli", quietly = TRUE)) stop("Please install the 'cli' package.")

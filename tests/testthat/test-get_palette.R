@@ -6,7 +6,7 @@
 
 # Skip if data file not present
 test_that("get_palette() loads correctly from compiled palettes", {
-  f <- here::here("data/palettes.rds")
+  f <- system.file("extdata", "palettes.rds", package = "evanverse")
   skip_if_not(file.exists(f), "Compiled palette RDS not found.")
 
   # Valid case: full palette
@@ -52,7 +52,7 @@ test_that("get_palette() throws for invalid palette name", {
 #------------------------------------------------------------------------------
 
 test_that("get_palette() throws error for bad n values", {
-  f <- here::here("data/palettes.rds")
+  f <- system.file("extdata", "palettes.rds", package = "evanverse")
   skip_if_not(file.exists(f), "Compiled palette RDS not found.")
 
   expect_error(get_palette("vividset", "qualitative", n = 9999),

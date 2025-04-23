@@ -5,7 +5,7 @@
 #===============================================================================
 
 test_that("bio_palette_gallery() returns named list of ggplot objects", {
-  f <- here::here("data/palettes.rds")
+  f <- system.file("extdata", "palettes.rds", package = "evanverse")
   skip_if_not(file.exists(f), "Palette RDS not found")
 
   plots <- bio_palette_gallery(palette_rds = f, type = "qualitative", max_palettes = 10, verbose = FALSE)
@@ -15,7 +15,7 @@ test_that("bio_palette_gallery() returns named list of ggplot objects", {
 })
 
 test_that("bio_palette_gallery() handles multiple types", {
-  f <- here::here("data/palettes.rds")
+  f <- system.file("extdata", "palettes.rds", package = "evanverse")
   skip_if_not(file.exists(f), "Palette RDS not found")
 
   plots <- bio_palette_gallery(palette_rds = f,
@@ -34,7 +34,7 @@ test_that("bio_palette_gallery() returns NULL if palette_rds is missing", {
 
 
 test_that("bio_palette_gallery() throws error on invalid type", {
-  f <- here::here("data/palettes.rds")
+  f <- system.file("extdata", "palettes.rds", package = "evanverse")
   skip_if_not(file.exists(f), "Palette RDS not found")
 
   expect_error(
@@ -45,7 +45,7 @@ test_that("bio_palette_gallery() throws error on invalid type", {
 
 
 test_that("bio_palette_gallery() supports page limits and row limits", {
-  f <- here::here("data/palettes.rds")
+  f <- system.file("extdata", "palettes.rds", package = "evanverse")
   skip_if_not(file.exists(f), "Palette RDS not found")
 
   plots <- bio_palette_gallery(palette_rds = f, type = "qualitative", max_palettes = 2, max_row = 6, verbose = FALSE)

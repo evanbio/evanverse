@@ -17,7 +17,7 @@
 get_palette <- function(name,
                         type = c("sequential", "diverging", "qualitative"),
                         n = NULL,
-                        palette_rds = here::here("data/palettes.rds")) {
+                        palette_rds = system.file("extdata", "palettes.rds", package = "evanverse")) {
 
   # --- Check dependencies
   if (!requireNamespace("cli", quietly = TRUE)) {
