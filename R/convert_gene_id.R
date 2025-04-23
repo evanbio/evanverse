@@ -89,11 +89,19 @@ convert_gene_id <- function(query,
   if (is.character(query)) {
     input_df <- setNames(data.frame(query, stringsAsFactors = FALSE), from)
     result <- dplyr::left_join(input_df, full_mapping, by = from)
+    
+    matched <- sum(!is.na(result[[to[1]]]))
+    total <- nrow(result)
+    rate <- sprintf("%.1f%%", 100 * matched / total)
+
     if (!keep_na) result <- dplyr::filter(result, !is.na(result[[to[1]]]))
+
     if (preview) {
       cli::cli_h2("🔍 Preview of converted IDs")
+      cli::cli_alert_info("🔢 Input: {total}, Matched: {matched}, Annotated rate: {rate}")
       print(utils::head(result, 6))
     }
+
     return(result)
   }
 
@@ -115,12 +123,17 @@ convert_gene_id <- function(query,
       by = setNames(from, std_col)
     )
 
+    matched <- sum(!is.na(result[[to[1]]]))
+    total <- nrow(result)
+    rate <- sprintf("%.1f%%", 100 * matched / total)
+
     if (!keep_na) {
       result <- dplyr::filter(result, !is.na(result[[to[1]]]))
     }
 
     if (preview) {
       cli::cli_h2("🔍 Preview of converted data.frame")
+      cli::cli_alert_info("🔢 Input: {total}, Matched: {matched}, Annotated rate: {rate}")
       print(utils::head(result, 6))
     }
 
