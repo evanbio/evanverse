@@ -1,7 +1,7 @@
 Package: evanverse
 Type: Package
 Title: Evan's R Universe of Tools and Creativity
-Version: 0.1.0
+Version: 0.2.0
 Authors@R: person("Evan", "Zhou", email = "evanzhou.bio@gmail.com", role = c("aut", "cre"))
 Description: A stylish, expressive, and modular R toolkit built by Evan.
     evanverse includes functions for enhanced string manipulation,
