@@ -13,8 +13,11 @@
 <url><loc>https://evanbio.github.io/evanverse/reference/cols_with_void.html</loc></url>
 <url><loc>https://evanbio.github.io/evanverse/reference/combine_logic.html</loc></url>
 <url><loc>https://evanbio.github.io/evanverse/reference/compile_palettes.html</loc></url>
+<url><loc>https://evanbio.github.io/evanverse/reference/convert_gene_id.html</loc></url>
 <url><loc>https://evanbio.github.io/evanverse/reference/create_palette.html</loc></url>
 <url><loc>https://evanbio.github.io/evanverse/reference/df2list.html</loc></url>
+<url><loc>https://evanbio.github.io/evanverse/reference/download_gene_ref.html</loc></url>
+<url><loc>https://evanbio.github.io/evanverse/reference/download_url.html</loc></url>
 <url><loc>https://evanbio.github.io/evanverse/reference/drop_void.html</loc></url>
 <url><loc>https://evanbio.github.io/evanverse/reference/evanverse.html</loc></url>
 <url><loc>https://evanbio.github.io/evanverse/reference/ev_download.html</loc></url>
@@ -25,6 +28,8 @@
 <url><loc>https://evanbio.github.io/evanverse/reference/gmt2df.html</loc></url>
 <url><loc>https://evanbio.github.io/evanverse/reference/gmt2list.html</loc></url>
 <url><loc>https://evanbio.github.io/evanverse/reference/grapes-is-grapes.html</loc></url>
+<url><loc>https://evanbio.github.io/evanverse/reference/grapes-map-grapes.html</loc></url>
+<url><loc>https://evanbio.github.io/evanverse/reference/grapes-match-grapes.html</loc></url>
 <url><loc>https://evanbio.github.io/evanverse/reference/grapes-nin-grapes.html</loc></url>
 <url><loc>https://evanbio.github.io/evanverse/reference/grapes-p-grapes.html</loc></url>
 <url><loc>https://evanbio.github.io/evanverse/reference/hex2rgb.html</loc></url>
@@ -32,10 +37,12 @@
 <url><loc>https://evanbio.github.io/evanverse/reference/inst_pkg.html</loc></url>
 <url><loc>https://evanbio.github.io/evanverse/reference/is_void.html</loc></url>
 <url><loc>https://evanbio.github.io/evanverse/reference/list_palettes.html</loc></url>
+<url><loc>https://evanbio.github.io/evanverse/reference/map_column.html</loc></url>
 <url><loc>https://evanbio.github.io/evanverse/reference/pkg_version.html</loc></url>
 <url><loc>https://evanbio.github.io/evanverse/reference/plot_pie.html</loc></url>
 <url><loc>https://evanbio.github.io/evanverse/reference/plot_venn.html</loc></url>
 <url><loc>https://evanbio.github.io/evanverse/reference/preview_palette.html</loc></url>
+<url><loc>https://evanbio.github.io/evanverse/reference/read_table_flex.html</loc></url>
 <url><loc>https://evanbio.github.io/evanverse/reference/remind.html</loc></url>
 <url><loc>https://evanbio.github.io/evanverse/reference/replace_void.html</loc></url>
 <url><loc>https://evanbio.github.io/evanverse/reference/rgb2hex.html</loc></url>
