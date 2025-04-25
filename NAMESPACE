@@ -3,6 +3,7 @@
 export("%is%")
 export("%map%")
 export("%match%")
+export("%near%")
 export("%nin%")
 export("%p%")
 export(any_void)
