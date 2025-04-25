@@ -28,7 +28,33 @@ remind <- function(keyword = NULL) {
     untar = "📦 Use `untar(\"file.tar.gz\", exdir = \"dir\")` to extract .tar or .tar.gz archives (supports both .tar and .tar.gz).",
     NoLegend = "🚫 `NoLegend()` removes legends from ggplot2/Seurat plots. Useful for cleaner visuals.",
     RotatedAxis = "↪️ `RotatedAxis()` rotates x-axis text for better readability in dot plots and similar charts.",
-    guides = "🧭 `guides(fill = \"none\")` customizes or removes legends. Use with `scale_*` in ggplot2."
+    guides = "🧭 `guides(fill = \"none\")` customizes or removes legends. Use with `scale_*` in ggplot2.",
+    log2 = "📉 `log2(x)` computes base-2 logarithm. Often used for expression fold change and transformation.",
+    log = "📏 `log(x, base = exp(1))` is the natural logarithm by default. Use `base = 10` or `2` for others.",
+    log10 = "🔟 `log10(x)` computes base-10 logarithm. Useful for plotting scales and orders of magnitude.",
+    round = "🧮 `round(x, digits = 0)` rounds numeric values to the specified number of decimal places.\nUse `signif()` for significant digits instead.",
+    floor = "📉 `floor(x)` returns the greatest integer less than or equal to `x`.\nExample: `floor(2.8)` → 2.",
+    ceiling = "📈 `ceiling(x)` returns the smallest integer greater than or equal to `x`.\nExample: `ceiling(2.1)` → 3.",
+    cut = "📊 `cut(x, breaks)` converts numeric vector into factor bins.\nUse `breaks = 3` (equal-width) or provide custom breakpoints.\nSet `labels = FALSE` to return group indices.",
+    cumsum = "➕ `cumsum(x)` computes the cumulative sum of a numeric vector.\nExample: `cumsum(c(1, 2, 3))` → 1 3 6",
+    cumprod = "✖️ `cumprod(x)` computes the cumulative product of a numeric vector.\nExample: `cumprod(c(2, 3, 4))` → 2 6 24",
+    cummin = "🔽 `cummin(x)` returns the running minimum of a numeric vector.\nExample: `cummin(c(5, 3, 4))` → 5 3 3",
+    cummax = "🔼 `cummax(x)` returns the running maximum of a numeric vector.\nExample: `cummax(c(1, 4, 2))` → 1 4 4",
+    row_number = "🔢 `row_number(x)` returns the ranking (by order) of values in `x`, breaking ties arbitrarily.\nExample: `row_number(c(3, 1, 1, 2))` → 4 1 2 3",
+    min_rank = "🥇 `min_rank(x)` assigns ranks to values with ties getting the same minimum rank.\nExample: `min_rank(c(3, 1, 1, 2))` → 4 1 1 3",
+    dense_rank = "🎯 `dense_rank(x)` gives ranks like `min_rank()`, but with no gaps in the ranking.\nExample: `dense_rank(c(3, 1, 1, 2))` → 3 1 1 2",
+    percent_rank = "📊 `percent_rank(x)` returns the relative rank in [0, 1], normalized by (n - 1).\nLowest = 0, Highest = 1.\nExample: `percent_rank(c(3, 1, 1, 2))` → 1 0 0 0.5",
+    cume_dist = "📈 `cume_dist(x)` returns the cumulative proportion of values ≤ x.\nExample: `cume_dist(c(3, 1, 1, 2))` → 1 0.5 0.5 0.75",
+    str_view = "🔍 `str_view(string, pattern)` visually highlights regex matches in RStudio Viewer.\nUse `str_view_all()` to show all matches.\nExample: `str_view(\"banana\", \"an\")`",
+    str_c = "🧵 `str_c(...)` concatenates strings without separator by default.\nUse `str_c(..., sep = \", \")` or `collapse = \" / \"` for joining vectors.\nExample: `str_c(\"a\", 1:3)` → \"a1\" \"a2\" \"a3\"",
+    str_glue = "🧩 `str_glue(\"Hello, {name}!\")` inserts variables directly in strings using `{}`.\nSupports expressions inside `{}`. Requires `glue` package.\nExample: `str_glue(\"{x} + {y} = {x + y}\")`",
+    str_flatten = "🧵 `str_flatten(x, collapse = \", \")` joins a character vector into a single string.\nMore readable alternative to `str_c(..., collapse = \",\")`.\nExample: `str_flatten(letters[1:3])` → \"a, b, c\"",
+    str_length = "🔤 `str_length(x)` returns the number of characters in each string.\nExample: `str_length(c(\"cat\", \"moose\"))` → 3 5",
+    str_sub = "✂️ `str_sub(x, start, end)` extracts or replaces substrings by position.\nSupports negative indexing and assignment.\nExample: `str_sub(\"apple\", 1, 3)` → \"app\"",
+    today = "📅 `today()` returns the current date as a Date object (no time).\nExample: `today()` → 2025-04-25",
+    now = "⏰ `now()` returns the current date-time as a POSIXct object.\nIncludes hours, minutes, seconds.\nExample: `now()` → 2025-04-25 22:40:00",
+    Sys.timezone = "🌍 `Sys.timezone()` returns the system's default time zone name.\nUseful when working with date-times across systems.\nExample: `Sys.timezone()` → \"Asia/Shanghai\""
+
   )
 
   # Show all if no keyword is provided
