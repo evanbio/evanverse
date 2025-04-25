@@ -2,34 +2,45 @@
 % Please edit documentation in R/download_url.R
 \name{download_url}
 \alias{download_url}
-\title{📥 download_url(): Download a file from URL (supports FTP/HTTP + unzip)}
+\title{📥 download_url(): Professional Downloader based on curl}
 \usage{
 download_url(
   url,
   dest = basename(url),
-  method = "auto",
   overwrite = FALSE,
   unzip = FALSE,
-  verbose = TRUE
+  verbose = TRUE,
+  timeout = 600,
+  headers = NULL,
+  resume = FALSE,
+  speed_limit = NULL,
+  retries = 3
 )
 }
 \arguments{
-\item{url}{Character. Full URL to the file (FTP or HTTP).}
+\item{url}{Character. Full URL to the file (FTP/HTTP/HTTPS/SFTP).}
 
-\item{dest}{Character. Path to save the file (default: basename(url)).}
+\item{dest}{Character. Destination file path. Default: basename(url).}
 
-\item{method}{Character. One of "auto", "curl", "wget", or "internal". Default: "auto".}
+\item{overwrite}{Logical. Whether to overwrite existing files. Default: FALSE.}
 
-\item{overwrite}{Logical. Overwrite if file exists. Default: FALSE.}
+\item{unzip}{Logical. Whether to unzip after download (supports .zip/.gz/.tar.gz). Default: FALSE.}
 
-\item{unzip}{Logical. Whether to unzip after download. Default: FALSE.}
+\item{verbose}{Logical. Show download progress. Default: TRUE.}
 
-\item{verbose}{Logical. Show progress messages. Default: TRUE.}
+\item{timeout}{Integer. Download timeout in seconds. Default: 600.}
+
+\item{headers}{Named list. Custom HTTP headers (e.g., Authorization). Default: NULL.}
+
+\item{resume}{Logical. Try to resume interrupted downloads. Default: FALSE.}
+
+\item{speed_limit}{Numeric. Bandwidth limit in bytes/sec (e.g., 500000 = 500KB/s). Default: NULL (no limit).}
+
+\item{retries}{Integer. Number of retry attempts if failed. Default: 3.}
 }
 \value{
-Invisibly returns path(s) to downloaded (and optionally unzipped) file(s).
+Invisibly returns the downloaded (and optionally unzipped) file path.
 }
 \description{
-A robust and friendly downloader that supports FTP/HTTP/HTTPS sources.
-Automatically skips download if file already exists.
+A robust and flexible downloader using curl. Supports timeout, headers, resume, bandwidth limit, and retries.
 }
