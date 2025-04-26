@@ -8,14 +8,23 @@ Description: A stylish, expressive, and modular R toolkit built by Evan.
     fun and formatted output, creative bio-themed helpers, and colorful
     command-line expression. Designed for daily use and joyful analysis.
 License: MIT + file LICENSE
+License_is_FOSS: yes
+License_restricts_use: no
 Encoding: UTF-8
 LazyData: true
+LazyDataCompression: xz
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.3.2
 Suggests: 
     knitr,
     rmarkdown,
-    testthat (>= 3.0.0)
+    testthat (>= 3.0.0),
+    ggvenn,
+    ggVennDiagram,
+    biomaRt,
+    writexl,
+    R.utils,
+    janitor
 Config/testthat/edition: 3
 URL: https://github.com/evanbio/evanverse, https://evanbio.github.io/evanverse/
 BugReports: https://github.com/evanbio/evanverse/issues
@@ -27,4 +36,18 @@ Imports:
     GSEABase,
     here,
     tibble,
-    tidyr
+    tidyr,
+    data.table,
+    dplyr,
+    ggplot2,
+    jsonlite,
+    curl,
+    BiocManager,
+    openxlsx,
+    readxl,
+    tictoc,
+    fs
+
+
+
+

@@ -7,6 +7,7 @@
 # =============================================================================
 
 test_that("✅ read_excel_flex reads a basic Excel file correctly", {
+  skip_if_not_installed("openxlsx")
   # Create temporary Excel file
   test_file <- tempfile(fileext = ".xlsx")
   test_data <- data.frame("Gene ID" = c("TP53", "EGFR"), "Expr Level" = c(5.2, 3.8))
@@ -25,6 +26,7 @@ test_that("✅ read_excel_flex reads a basic Excel file correctly", {
 
 
 test_that("❌ read_excel_flex throws error if file does not exist", {
+  skip_if_not_installed("openxlsx")
   expect_error(
     read_excel_flex(file_path = "non_existent.xlsx"),
     regexp = "File not found"
@@ -33,6 +35,7 @@ test_that("❌ read_excel_flex throws error if file does not exist", {
 
 
 test_that("⚙️ read_excel_flex supports col_types override", {
+  skip_if_not_installed("openxlsx")
   test_file <- tempfile(fileext = ".xlsx")
   test_data <- data.frame(ID = c("001", "002"), Value = c(10, 20))
   writexl::write_xlsx(test_data, path = test_file)

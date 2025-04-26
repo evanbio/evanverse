@@ -7,6 +7,7 @@
 # =============================================================================
 
 test_that("✅ write_xlsx_flex writes a single data.frame to Excel", {
+  skip_if_not_installed("openxlsx")
   test_file <- tempfile(fileext = ".xlsx")
   df <- data.frame(Gene = c("TP53", "EGFR"), Score = c(5.1, 3.9))
 
@@ -18,6 +19,7 @@ test_that("✅ write_xlsx_flex writes a single data.frame to Excel", {
 })
 
 test_that("✅ write_xlsx_flex writes multiple sheets from named list", {
+  skip_if_not_installed("openxlsx")
   test_file <- tempfile(fileext = ".xlsx")
   df1 <- data.frame(ID = 1:3, Name = letters[1:3])
   df2 <- data.frame(Score = c(3.5, 4.2))
@@ -30,6 +32,7 @@ test_that("✅ write_xlsx_flex writes multiple sheets from named list", {
 })
 
 test_that("⚠️ write_xlsx_flex shows warning when overwriting", {
+  skip_if_not_installed("openxlsx")
   test_file <- tempfile(fileext = ".xlsx")
   df <- data.frame(X = 1:3)
 

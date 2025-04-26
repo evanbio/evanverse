@@ -28,7 +28,7 @@ test_that("get_palette() loads correctly from compiled palettes", {
 #------------------------------------------------------------------------------
 
 test_that("get_palette() gives type suggestion on mismatch", {
-  f <- here::here("data","palettes.rds")
+  f <- system.file("extdata", "palettes.rds", package = "evanverse")
   skip_if_not(file.exists(f), "Compiled palette RDS not found.")
 
   expect_error(
@@ -38,7 +38,7 @@ test_that("get_palette() gives type suggestion on mismatch", {
 })
 
 test_that("get_palette() throws for invalid palette name", {
-  f <- here::here("data","palettes.rds")
+  f <- system.file("extdata", "palettes.rds", package = "evanverse")
   skip_if_not(file.exists(f), "Compiled palette RDS not found.")
 
   expect_error(
