@@ -53,8 +53,8 @@ remind <- function(keyword = NULL) {
     str_sub = "✂️ `str_sub(x, start, end)` extracts or replaces substrings by position.\nSupports negative indexing and assignment.\nExample: `str_sub(\"apple\", 1, 3)` → \"app\"",
     today = "📅 `today()` returns the current date as a Date object (no time).\nExample: `today()` → 2025-04-25",
     now = "⏰ `now()` returns the current date-time as a POSIXct object.\nIncludes hours, minutes, seconds.\nExample: `now()` → 2025-04-25 22:40:00",
-    Sys.timezone = "🌍 `Sys.timezone()` returns the system's default time zone name.\nUseful when working with date-times across systems.\nExample: `Sys.timezone()` → \"Asia/Shanghai\""
-
+    Sys.timezone = "🌍 `Sys.timezone()` returns the system's default time zone name.\nUseful when working with date-times across systems.\nExample: `Sys.timezone()` → \"Asia/Shanghai\"",
+    skimr = "📊 `skimr::skim(df)` from the `skimr` package gives comprehensive and readable data summaries in the console. Handles different data types well. Excellent for EDA."
   )
 
   # Show all if no keyword is provided
