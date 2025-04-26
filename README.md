@@ -4,7 +4,7 @@
 [![GitHub version](https://img.shields.io/github/v/tag/evanbio/evanverse?label=version&color=success)](https://github.com/evanbio/evanverse/releases)
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE.md)
-[![R-CMD-check](https://github.com/evanbio/evanverse/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/evanbio/evanverse/actions)
+
 [![R-CMD-check](https://github.com/evanbio/evanverse/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/evanbio/evanverse/actions/workflows/R-CMD-check.yaml)
 <!-- badges: end -->
 
