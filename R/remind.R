@@ -54,7 +54,11 @@ remind <- function(keyword = NULL) {
     today = "📅 `today()` returns the current date as a Date object (no time).\nExample: `today()` → 2025-04-25",
     now = "⏰ `now()` returns the current date-time as a POSIXct object.\nIncludes hours, minutes, seconds.\nExample: `now()` → 2025-04-25 22:40:00",
     Sys.timezone = "🌍 `Sys.timezone()` returns the system's default time zone name.\nUseful when working with date-times across systems.\nExample: `Sys.timezone()` → \"Asia/Shanghai\"",
-    skimr = "📊 `skimr::skim(df)` from the `skimr` package gives comprehensive and readable data summaries in the console. Handles different data types well. Excellent for EDA."
+    skimr = "📊 `skimr::skim(df)` from the `skimr` package gives comprehensive and readable data summaries in the console. Handles different data types well. Excellent for EDA.",
+    par = "🖼️ `par(mfrow=c(m,n))` splits the plotting area into m rows and n columns.\nUse it to arrange multiple plots on the same canvas.\nExample: `par(mfrow=c(2,2))` → 2×2 grid for 4 plots.",
+    layout = "🖌️ `layout(matrix, widths, heights)` allows custom arrangement of plots.\nMore flexible than `par()`, supports irregular plot layouts.\nExample: layout(matrix(c(1,1,2,3), nrow=2, byrow=TRUE)) → Big plot + two small plots.",
+    datatable = "📋 `DT::datatable(data)` creates an interactive table.\nSupports search, filter, sort, pagination.\nIdeal for quickly exploring large datasets in Viewer.",
+    reactable = "🎨 `reactable(data)` builds a customizable, modern table.\nAllows coloring, filtering, tooltips, mini-charts inside cells.\nRecommended for highly polished interactive tables."
   )
 
   # Show all if no keyword is provided
