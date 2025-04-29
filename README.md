@@ -1,3 +1,7 @@
+<p align="center">
+  <img src="man/figures/logo.png" width="180" />
+</p>
+
 # evanverse
 
 <!-- badges: start -->
