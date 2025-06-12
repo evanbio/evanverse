@@ -58,6 +58,7 @@ remind <- function(keyword = NULL) {
     par = "🖼️ `par(mfrow=c(m,n))` splits the plotting area into m rows and n columns.\nUse it to arrange multiple plots on the same canvas.\nExample: `par(mfrow=c(2,2))` → 2×2 grid for 4 plots.",
     layout = "🖌️ `layout(matrix, widths, heights)` allows custom arrangement of plots.\nMore flexible than `par()`, supports irregular plot layouts.\nExample: layout(matrix(c(1,1,2,3), nrow=2, byrow=TRUE)) → Big plot + two small plots.",
     datatable = "📋 `DT::datatable(data)` creates an interactive table.\nSupports search, filter, sort, pagination.\nIdeal for quickly exploring large datasets in Viewer.",
+    windowsFonts = "🔤 `windowsFonts()` registers system fonts for plot text.\nUseful when customizing font families like Arial or SimSun in `gpar()`.\nRun once per session before using fontfamily in base or grid graphics.",
     reactable = "🎨 `reactable(data)` builds a customizable, modern table.\nAllows coloring, filtering, tooltips, mini-charts inside cells.\nRecommended for highly polished interactive tables."
   )
 

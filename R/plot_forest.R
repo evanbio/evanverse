@@ -140,8 +140,3 @@ plot_forest <- function(data,
   # ---- Return forestplot object ----
   return(fp)
 }
-
-plot_forest(df_forest_test)
-
-windowsFonts()
-
