@@ -59,6 +59,7 @@ remind <- function(keyword = NULL) {
     layout = "🖌️ `layout(matrix, widths, heights)` allows custom arrangement of plots.\nMore flexible than `par()`, supports irregular plot layouts.\nExample: layout(matrix(c(1,1,2,3), nrow=2, byrow=TRUE)) → Big plot + two small plots.",
     datatable = "📋 `DT::datatable(data)` creates an interactive table.\nSupports search, filter, sort, pagination.\nIdeal for quickly exploring large datasets in Viewer.",
     windowsFonts = "🔤 `windowsFonts()` registers system fonts for plot text.\nUseful when customizing font families like Arial or SimSun in `gpar()`.\nRun once per session before using fontfamily in base or grid graphics.",
+    sign = "➕ `sign(x)` returns -1 for negative values, 0 for zero, and 1 for positive values. Handy for extracting the sign of numbers or entire vectors/matrices. Example: `sign(c(-2, 0, 3))` → -1 0 1",
     reactable = "🎨 `reactable(data)` builds a customizable, modern table.\nAllows coloring, filtering, tooltips, mini-charts inside cells.\nRecommended for highly polished interactive tables."
   )
 
