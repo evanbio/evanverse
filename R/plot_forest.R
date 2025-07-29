@@ -11,6 +11,7 @@
 #' @param bold_sig Whether to bold significant rows.
 #' @param arrow_lab Labels at both ends of the forest axis.
 #' @param ticks_at Vector of x-axis tick marks.
+#' @param xlim Range of x-axis (e.g., c(0, 3)). If NULL, auto-calculated. Default: c(0, 3).
 #' @param footnote Caption text below the plot.
 #' @param boxcolor Fill colors for CI boxes, will repeat if too short.
 #' @param align_left Integer column indices to left-align.
@@ -31,6 +32,7 @@ plot_forest <- function(data,
                         bold_sig = TRUE,
                         arrow_lab = c("Unfavorable", "Favorable"),
                         ticks_at = c(0.5, 1, 1.5, 2),
+                        xlim = c(0, 3),
                         footnote = "P-value < 0.05 was considered statistically significant",
                         boxcolor = c("#E64B35", "#4DBBD5", "#00A087", "#3C5488",
                                      "#F39B7F", "#8491B4", "#91D1C2", "#DC0000", "#7E6148"),
@@ -96,7 +98,7 @@ plot_forest <- function(data,
                ci_column = 3,
                ref_line = ref_line,
                arrow_lab = arrow_lab,
-               xlim = range(ticks_at),
+               xlim = xlim,
                ticks_at = ticks_at,
                footnote = footnote,
                theme = tm)
