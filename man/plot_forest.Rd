@@ -16,6 +16,7 @@ plot_forest(
   bold_sig = TRUE,
   arrow_lab = c("Unfavorable", "Favorable"),
   ticks_at = c(0.5, 1, 1.5, 2),
+  xlim = c(0, 3),
   footnote = "P-value < 0.05 was considered statistically significant",
   boxcolor = c("#E64B35", "#4DBBD5", "#00A087", "#3C5488", "#F39B7F", "#8491B4",
     "#91D1C2", "#DC0000", "#7E6148"),
@@ -47,6 +48,8 @@ plot_forest(
 \item{arrow_lab}{Labels at both ends of the forest axis.}
 
 \item{ticks_at}{Vector of x-axis tick marks.}
+
+\item{xlim}{Range of x-axis (e.g., c(0, 3)). If NULL, auto-calculated. Default: c(0, 3).}
 
 \item{footnote}{Caption text below the plot.}
 
