@@ -1,11 +1,11 @@
 #===============================================================================
-# 🧪 Test: any_void()
-# 📁 File: test-any_void.R
-# 🔍 Description: Unit tests for any_void() utility function
+# Test: any_void()
+# File: test-any_void.R
+# Description: Unit tests for any_void() utility function
 #===============================================================================
 
 #------------------------------------------------------------------------------
-# 🧪 Basic functionality
+# Basic functionality
 #------------------------------------------------------------------------------
 
 test_that("any_void() detects NA and empty strings", {
@@ -19,7 +19,7 @@ test_that("any_void() returns FALSE for all valid values", {
 })
 
 #------------------------------------------------------------------------------
-# ⚙️ Parameter variations
+# Parameter variations
 #------------------------------------------------------------------------------
 
 test_that("any_void() respects include_na = FALSE", {
@@ -39,7 +39,7 @@ test_that("any_void() handles NULL correctly", {
 })
 
 #------------------------------------------------------------------------------
-# 🧪 List input support
+# List input support
 #------------------------------------------------------------------------------
 
 test_that("any_void() works on list input", {
@@ -48,11 +48,27 @@ test_that("any_void() works on list input", {
   expect_false(any_void(x, include_na = FALSE, include_empty_str = FALSE, include_null = FALSE))
 })
 
+test_that("any_void() handles nested lists", {
+  x <- list("a", list(NULL, "b"))
+  expect_true(any_void(x))
+})
+
 #------------------------------------------------------------------------------
-# 🧪 Edge cases
+# Edge cases
 #------------------------------------------------------------------------------
 
 test_that("any_void() on empty vector returns FALSE", {
   expect_false(any_void(character(0)))
 })
 
+test_that("any_void() handles numeric input with NA", {
+  x <- c(1, 2, NA)
+  expect_true(any_void(x))
+  expect_false(any_void(x, include_na = FALSE))
+})
+
+test_that("any_void() handles all NA input", {
+  x <- c(NA, NA)
+  expect_true(any_void(x))
+  expect_false(any_void(x, include_na = FALSE))
+})

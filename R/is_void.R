@@ -1,4 +1,4 @@
-#' 🕳️ is_void(): Check for Null / NA / Blank ("") Values
+#' is_void(): Check for Null / NA / Blank ("") Values
 #'
 #' Determine whether input values are considered "void": `NULL`, `NA`, or `""`.
 #' Each condition is controlled by a dedicated argument.
@@ -9,6 +9,11 @@
 #' @param include_empty_str Logical. Consider `""` as void. Default: TRUE.
 #'
 #' @return A logical vector indicating which elements are void.
+#'   - If `x` is `NULL`, returns a single `TRUE` (if include_null=TRUE) or `FALSE`.
+#'   - If `x` is an empty vector, returns `logical(0)`.
+#'   - If `x` is a list, evaluates each element recursively and returns a flattened logical vector.
+#'   - For atomic vectors, returns a logical vector of the same length.
+#'
 #' @export
 #'
 #' @examples
@@ -20,34 +25,37 @@ is_void <- function(x,
                     include_na = TRUE,
                     include_null = TRUE,
                     include_empty_str = TRUE) {
-
-  # Special case: if input is NULL, return TRUE (or FALSE based on setting)
+  # -------------------------------------------------------------------
+  # Case 1: Entire input is NULL
+  # -------------------------------------------------------------------
   if (is.null(x)) return(include_null)
 
-  # If list: recursively evaluate each element
+  # -------------------------------------------------------------------
+  # Case 2: Input is a list (possibly nested)
+  # -------------------------------------------------------------------
   if (is.list(x)) {
-    return(vapply(x, is_void,
-                  logical(1),
-                  include_na = include_na,
-                  include_null = include_null,
-                  include_empty_str = include_empty_str))
+    return(unlist(lapply(
+      x,
+      is_void,
+      include_na = include_na,
+      include_null = include_null,
+      include_empty_str = include_empty_str
+    ), use.names = FALSE))
   }
 
-  # Base logical vector
+  # -------------------------------------------------------------------
+  # Case 3: Input is an atomic vector
+  # -------------------------------------------------------------------
   void <- rep(FALSE, length(x))
 
-  # NA
   if (include_na) {
     void <- void | is.na(x)
   }
 
-  # Empty string
   if (include_empty_str && is.character(x)) {
     void <- void | x == ""
   }
 
-  # Ensure NA is explicitly FALSE if not matched
   void[is.na(void)] <- FALSE
-
   return(void)
 }
