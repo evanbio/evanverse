@@ -1,4 +1,4 @@
-#' ✅ Check if packages are installed and optionally install them
+#' check_pkg(): Check if packages are installed and optionally install them
 #'
 #' A utility to check whether CRAN / GitHub / Bioconductor packages are installed,
 #' with optional auto-installation via `inst_pkg()`.
@@ -19,30 +19,38 @@ check_pkg <- function(pkg = NULL,
                       source = c("CRAN", "GitHub", "Bioconductor"),
                       auto_install = TRUE,
                       ...) {
-  # -- Require cli
-  if (!requireNamespace("cli", quietly = TRUE)) {
-    install.packages("cli", repos = "https://mirrors.tuna.tsinghua.edu.cn/CRAN/")
-  }
 
-  # -- Normalize source
-  source_input <- tolower(source[1])
-  source_matched <- switch(source_input,
-                           "cran"  = "CRAN",
-                           "gh"    = "GitHub", "github" = "GitHub",
-                           "bio"   = "Bioconductor", "bioc" = "Bioconductor", "bioconductor" = "Bioconductor",
-                           stop("❌ Invalid source: ", source_input,
-                                "\n✔ Available sources: CRAN / GitHub / Bioconductor", call. = FALSE)
-  )
+  # ===========================================================================
+  # Parameter Validation Phase
+  # ===========================================================================
 
+  # Validate and normalize source parameter
+  source <- match.arg(tolower(source), c("cran", "github", "bioconductor"))
+  source_matched <- switch(source,
+                           "cran" = "CRAN",
+                           "github" = "GitHub",
+                           "bioconductor" = "Bioconductor")
+
+  # Check if pkg is provided
   if (is.null(pkg)) {
-    stop("❗ Please provide at least one package name.", call. = FALSE)
+    stop("Please provide at least one package name.", call. = FALSE)
   }
 
-  # -- Determine actual pkg names
+  # ===========================================================================
+  # Package Check Phase
+  # ===========================================================================
+
+  # Determine actual package names (handle GitHub repos)
   pkg_names <- if (source_matched == "GitHub") basename(pkg) else pkg
+
+  # Vectorized check for installed packages
   installed <- vapply(pkg_names, requireNamespace, logical(1), quietly = TRUE)
 
-  # -- Report and install if needed
+  # ===========================================================================
+  # Installation and Reporting Phase
+  # ===========================================================================
+
+  # Process each package (vectorized where possible)
   for (i in seq_along(pkg)) {
     if (installed[i]) {
       cli::cli_alert_success("Installed: {pkg_names[i]}")
@@ -50,16 +58,28 @@ check_pkg <- function(pkg = NULL,
       cli::cli_alert_warning("Missing: {pkg_names[i]}")
       if (isTRUE(auto_install)) {
         cli::cli_alert_info("Installing {pkg_names[i]} from {source_matched}...")
-        inst_pkg(pkg = pkg[i], source = source_matched, ...)
+
+        # Wrap installation in tryCatch for error handling
+        tryCatch({
+          inst_pkg(pkg = pkg[i], source = source_matched, ...)
+          cli::cli_alert_success("Successfully installed: {pkg_names[i]}")
+        }, error = function(e) {
+          cli::cli_alert_danger("Failed to install {pkg_names[i]}: {e$message}")
+        })
       }
     }
   }
 
-  # -- Return result
+  # ===========================================================================
+  # Return Result
+  # ===========================================================================
+
+  # Return result as a tibble
   tibble::tibble(
-    package   = pkg,
-    name      = pkg_names,
+    package = pkg,
+    name = pkg_names,
     installed = installed,
-    source    = source_matched
+    source = source_matched,
+    .name_repair = "minimal"
   )
 }
