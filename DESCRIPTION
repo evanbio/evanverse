@@ -1,21 +1,47 @@
 Package: evanverse
 Type: Package
-Title: Evan's R Universe of Tools and Creativity
+Title: Utility Functions for Data Analysis and Visualization
 Version: 0.2.0
-Authors@R: person("Evan", "Zhou", email = "evanzhou.bio@gmail.com", role = c("aut", "cre"))
-Description: A stylish, expressive, and modular R toolkit built by Evan.
-    evanverse includes functions for enhanced string manipulation,
-    fun and formatted output, creative bio-themed helpers, and colorful
-    command-line expression. Designed for daily use and joyful analysis.
+Authors@R: 
+    person("Evan", "Zhou", email = "evanzhou.bio@gmail.com", role = c("aut", "cre"),
+           comment = c(ORCID = "0009-0009-4600-8175"))
+Description: A collection of utility functions to support data analysis
+    and visualization in R. The package provides helpers for string
+    manipulation, file handling, color palettes, bioinformatics data
+    conversion, and common plotting tasks.
 License: MIT + file LICENSE
 License_is_FOSS: yes
 License_restricts_use: no
 Encoding: UTF-8
-LazyData: true
 LazyDataCompression: xz
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.3.2
-Suggests: 
+Config/testthat/edition: 3
+URL: https://github.com/evanbio/evanverse, https://evanbio.github.io/evanverse/
+BugReports: https://github.com/evanbio/evanverse/issues
+VignetteBuilder: knitr
+Depends: 
+    R (>= 3.5)
+Imports: 
+    cli,
+    tibble,
+    tidyr,
+    data.table,
+    dplyr,
+    ggplot2,
+    jsonlite,
+    curl,
+    openxlsx,
+    readxl,
+    tictoc,
+    fs,
+    GSEABase,
+    Biobase,
+    GEOquery,
+    rlang,
+    withr
+Suggests:
+    BiocManager,
     knitr,
     rmarkdown,
     testthat (>= 3.0.0),
@@ -25,28 +51,7 @@ Suggests:
     writexl,
     R.utils,
     janitor
-Config/testthat/edition: 3
-URL: https://github.com/evanbio/evanverse, https://evanbio.github.io/evanverse/
-BugReports: https://github.com/evanbio/evanverse/issues
-VignetteBuilder: knitr
-Depends: 
-    R (>= 3.5)
-Imports: 
-    cli,
-    GSEABase,
-    here,
-    tibble,
-    tidyr,
-    data.table,
-    dplyr,
-    ggplot2,
-    jsonlite,
-    curl,
-    BiocManager,
-    openxlsx,
-    readxl,
-    tictoc,
-    fs
+
 
 
 
