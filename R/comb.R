@@ -1,4 +1,4 @@
-#' 🧮 comb: Calculate Number of Combinations C(n, k)
+#' comb: Calculate Number of Combinations C(n, k)
 #'
 #' Calculates the total number of ways to choose k items from n distinct items (without regard to order),
 #' i.e., the number of combinations C(n, k) = n! / (k! * (n - k)!).
@@ -16,27 +16,51 @@
 #' comb(10, 0)     # 1
 #' comb(5, 6)      # 0
 comb <- function(n, k) {
-  # --- Parameter checks ---
+
+  # ===========================================================================
+  # Parameter Validation Phase
+  # ===========================================================================
+
+  # Check if n and k are single numeric values
   if (!is.numeric(n) || !is.numeric(k) || length(n) != 1 || length(k) != 1) {
-    stop("Arguments 'n' and 'k' must be single numeric values.")
+    cli::cli_abort("Arguments 'n' and 'k' must be single numeric values.")
   }
+
+  # Check for non-negative values
   if (n < 0 || k < 0) {
-    stop("'n' and 'k' must be non-negative integers.")
+    cli::cli_abort("'n' and 'k' must be non-negative integers.")
   }
+
+  # Check for integer values
   if (abs(n - round(n)) > .Machine$double.eps^0.5 ||
       abs(k - round(k)) > .Machine$double.eps^0.5) {
-    stop("'n' and 'k' must be integers.")
+    cli::cli_abort("'n' and 'k' must be integers.")
   }
+
+  # Convert to integers
   n <- as.integer(n)
   k <- as.integer(k)
 
-  # --- Special cases ---
+  # ===========================================================================
+  # Special Cases Handling
+  # ===========================================================================
+
   if (k > n) return(0L)
-  if (k == 0) return(1L)
+  if (k == 0 || k == n) return(1L)
 
-  # --- Main calculation ---
-  result <- factorial(n) / (factorial(k) * factorial(n - k))
+  # ===========================================================================
+  # Main Calculation Phase
+  # ===========================================================================
 
-  # --- Return result ---
+  # Optimize calculation to avoid large factorials: C(n,k) = prod((n-k+1):n) / k!
+  # This prevents overflow for moderate n
+  if (k > n - k) k <- n - k  # Use symmetry: C(n,k) = C(n,n-k)
+
+  result <- prod((n - k + 1):n) / factorial(k)
+
+  # ===========================================================================
+  # Return Result
+  # ===========================================================================
+
   return(result)
 }
