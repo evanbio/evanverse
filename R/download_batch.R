@@ -34,9 +34,6 @@ download_batch <- function(urls,
   if (!requireNamespace("curl", quietly = TRUE)) {
     cli::cli_abort("Please install curl")
   }
-  if (!requireNamespace("cli", quietly = TRUE)) {
-    cli::cli_abort("Please install cli")
-  }
   if (!is.character(urls)) {
     cli::cli_abort("urls must be a character vector")
   }
