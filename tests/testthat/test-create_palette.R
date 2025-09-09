@@ -1,9 +1,12 @@
-#===============================================================================
-# 🧪 Test: create_palette()
-# 📁 File: test-create_palette.R
-# 🔍 Description: Tests for saving custom color palettes as JSON
-#===============================================================================
+# =============================================================================
+# Test: create_palette()
+# File: test-create_palette.R
+# Description: Tests for saving custom color palettes as JSON
+# =============================================================================
 
+# ------------------------------------------------------------------------------
+# Basic functionality tests
+# ------------------------------------------------------------------------------
 test_that("create_palette() creates file in expected directory", {
   tmp_dir <- tempfile("palette_test_")
   dir.create(tmp_dir)
@@ -78,3 +81,4 @@ test_that("create_palette() logs correctly when enabled", {
   log_content <- readLines(log_file)
   expect_true(any(grepl("logtest", log_content)))
 })
+
