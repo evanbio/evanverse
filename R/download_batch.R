@@ -1,4 +1,4 @@
-#' 📥 download_batch(): Batch download files using multi_download (parallel with curl)
+#' download_batch(): Batch download files using multi_download (parallel with curl)
 #'
 #' A robust batch downloader that supports concurrent downloads with flexible options.
 #' Built on top of `curl::multi_download()` for parallelism.
@@ -27,13 +27,28 @@ download_batch <- function(urls,
                            speed_limit = NULL,
                            retries = 3) {
 
-  # --- Validation
-  if (!requireNamespace("curl", quietly = TRUE)) stop("Please install curl")
-  if (!requireNamespace("cli", quietly = TRUE)) stop("Please install cli")
-  stopifnot(is.character(urls))
-  if (length(urls) == 0) stop("No URLs provided.")
+  # ===========================================================================
+  # Parameter Validation Phase
+  # ===========================================================================
 
-  # --- Helper: safe filename generator
+  if (!requireNamespace("curl", quietly = TRUE)) {
+    cli::cli_abort("Please install curl")
+  }
+  if (!requireNamespace("cli", quietly = TRUE)) {
+    cli::cli_abort("Please install cli")
+  }
+  if (!is.character(urls)) {
+    cli::cli_abort("urls must be a character vector")
+  }
+  if (length(urls) == 0) {
+    cli::cli_abort("No URLs provided")
+  }
+
+  # ===========================================================================
+  # Setup Phase
+  # ===========================================================================
+
+  # Safe filename generator (inline)
   safe_filename <- function(url) {
     fname <- basename(url)
     fname <- sub("\\?.*$", "", fname)
@@ -44,17 +59,21 @@ download_batch <- function(urls,
     fname
   }
 
-  if (!dir.exists(dest_dir)) dir.create(dest_dir, recursive = TRUE)
+  if (!dir.exists(dest_dir)) {
+    dir.create(dest_dir, recursive = TRUE)
+  }
   dest_paths <- file.path(dest_dir, vapply(urls, safe_filename, character(1)))
 
-  # --- Start messages
+  # ===========================================================================
+  # Download Phase
+  # ===========================================================================
+
   if (verbose) {
-    cli::cli_h1("🚀 Starting batch download")
+    cli::cli_h1("Starting batch download")
     cli::cli_alert_info("Number of files: {length(urls)}")
-    cli::cli_alert_info("Destination: {.path {dest_dir}}")
+    cli::cli_alert_info("Destination: {dest_dir}")
   }
 
-  # --- Perform the batch download with multi_download
   result <- tryCatch({
     curl::multi_download(
       urls = urls,
@@ -64,10 +83,12 @@ download_batch <- function(urls,
       multi_timeout = timeout,
       multiplex = TRUE
     )
-    cli::cli_alert_success("✅ All downloads complete!")
+    if (verbose) {
+      cli::cli_alert_success("All downloads complete!")
+    }
     return(dest_paths)
   }, error = function(e) {
-    cli::cli_alert_danger("❌ Batch download failed: {e$message}")
+    cli::cli_alert_danger("Batch download failed: {e$message}")
     return(NULL)
   })
 
