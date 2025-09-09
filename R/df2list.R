@@ -1,4 +1,4 @@
-#' 📦 Convert Data Frame to Named List by Grouping
+#' Convert Data Frame to Named List by Grouping
 #'
 #' Group a data frame by one column and convert to named list.
 #' Each key becomes a list name; each value column becomes vector.
@@ -18,23 +18,33 @@
 #' )
 #' df2list(df, "cell_type", "marker")
 df2list <- function(data, key_col, value_col, verbose = TRUE) {
-  # --- Checks ---
+
+  # ===========================================================================
+  # Parameter Validation Phase
+  # ===========================================================================
+
   if (!is.data.frame(data)) {
-    cli::cli_abort("❌ {.arg data} must be a data.frame or tibble.")
+    cli::cli_abort("{.arg data} must be a data.frame or tibble.")
   }
   if (!key_col %in% colnames(data)) {
-    cli::cli_abort("❌ Column {.val {key_col}} not found in {.arg data}.")
+    cli::cli_abort("Column {key_col} not found in {.arg data}.")
   }
   if (!value_col %in% colnames(data)) {
-    cli::cli_abort("❌ Column {.val {value_col}} not found in {.arg data}.")
+    cli::cli_abort("Column {value_col} not found in {.arg data}.")
   }
 
-  # --- Convert to named list ---
+  # ===========================================================================
+  # Conversion Phase
+  # ===========================================================================
+
   result <- split(data[[value_col]], data[[key_col]])
 
-  # --- Message ---
+  # ===========================================================================
+  # Output Phase
+  # ===========================================================================
+
   if (verbose) {
-    cli::cli_alert_success("🎯 Converted {.val {length(result)}} groups into a named list.")
+    cli::cli_alert_success("Converted {length(result)} groups into a named list.")
   }
 
   return(result)
