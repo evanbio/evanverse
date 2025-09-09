@@ -1,4 +1,4 @@
-#' 🎨 create_palette(): Save Custom Color Palettes as JSON
+#' create_palette(): Save Custom Color Palettes as JSON
 #'
 #' Save a named color palette (sequential, diverging, or qualitative) to a JSON file.
 #' Used for palette sharing, reuse, and future compilation.
@@ -20,53 +20,70 @@ create_palette <- function(name,
                            colors,
                            color_dir = "inst/extdata/palettes",
                            log = TRUE) {
-  #-- Dependency check
+
+  # ===========================================================================
+  # Parameter Validation Phase
+  # ===========================================================================
+
+  # Validate dependencies
   if (!requireNamespace("jsonlite", quietly = TRUE)) {
-    stop("Please install the 'jsonlite' package.", call. = FALSE)
+    cli::cli_abort("Please install the 'jsonlite' package.")
   }
   if (!requireNamespace("cli", quietly = TRUE)) {
-    stop("Please install the 'cli' package.", call. = FALSE)
+    cli::cli_abort("Please install the 'cli' package.")
   }
 
+  # Validate type
   type <- match.arg(type)
 
-  #-- Validate HEX
+  # Validate colors (HEX format)
   valid_hex <- grepl("^#[0-9A-Fa-f]{6}([0-9A-Fa-f]{2})?$", colors)
   if (!all(valid_hex)) {
-    stop("❌ Some color values are not valid HEX codes (e.g., '#FF5733' or '#FF5733B2').")
+    cli::cli_abort("Some color values are not valid HEX codes (e.g., '#FF5733' or '#FF5733B2').")
   }
 
-  #-- Validate name
+  # Validate name
   if (!is.character(name) || length(name) != 1) {
-    stop("❌ Palette name must be a single string.")
+    cli::cli_abort("Palette name must be a single string.")
   }
 
-  #-- Directory
+  # ===========================================================================
+  # Directory Setup Phase
+  # ===========================================================================
+
   palette_dir <- file.path(color_dir, type)
   if (!dir.exists(palette_dir)) {
     dir.create(palette_dir, recursive = TRUE)
-    cli::cli_alert_info("📂 Directory created: {.path {palette_dir}}")
+    cli::cli_alert_info("Directory created: {palette_dir}")
   }
 
   json_file <- file.path(palette_dir, paste0(name, ".json"))
   palette_info <- list(name = name, type = type, colors = colors)
 
-  #-- If exists
+  # ===========================================================================
+  # File Existence Check Phase
+  # ===========================================================================
+
   if (file.exists(json_file)) {
-    cli::cli_alert_warning("⚠️ Palette already exists: {.path {json_file}}")
+    cli::cli_alert_warning("Palette already exists: {json_file}")
     return(invisible(list(path = json_file, info = palette_info)))
   }
 
-  #-- Save
+  # ===========================================================================
+  # JSON Saving Phase
+  # ===========================================================================
+
   tryCatch({
     jsonlite::write_json(palette_info, path = json_file, pretty = TRUE, auto_unbox = TRUE)
-    cli::cli_alert_success("✅ Palette saved: {.path {json_file}}")
+    cli::cli_alert_success("Palette saved: {json_file}")
   }, error = function(e) {
-    cli::cli_alert_danger("❌ Failed to write JSON: {e$message}")
-    stop(e)
+    cli::cli_abort("Failed to write JSON: {e$message}")
   })
 
-  #-- Log
+  # ===========================================================================
+  # Logging Phase
+  # ===========================================================================
+
   if (log) {
     log_path <- "logs/palettes/create_palette.log"
     dir.create(dirname(log_path), recursive = TRUE, showWarnings = FALSE)
@@ -80,7 +97,7 @@ create_palette <- function(name,
     tryCatch({
       cat(entry, "\n", file = log_path, append = TRUE)
     }, error = function(e) {
-      cli::cli_alert_danger("❌ Failed to write log: {e$message}")
+      cli::cli_alert_danger("Failed to write log: {e$message}")
     })
   }
 
