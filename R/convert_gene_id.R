@@ -52,6 +52,13 @@ convert_gene_id <- function(query,
     cli::cli_abort("Invalid 'from' or 'to' parameters.")
   }
 
+  # Validate data.frame input early
+  if (is.data.frame(query)) {
+    if (is.null(query_col) || !(query_col %in% colnames(query))) {
+      cli::cli_abort("When query is a data.frame, you must specify a valid `query_col`.")
+    }
+  }
+
   # ===========================================================================
   # Reference Table Loading Phase
   # ===========================================================================
@@ -128,10 +135,6 @@ convert_gene_id <- function(query,
   }
 
   if (is.data.frame(query)) {
-    if (is.null(query_col) || !(query_col %in% colnames(query))) {
-      cli::cli_abort("When query is a data.frame, you must specify a valid `query_col`.")
-    }
-
     std_col <- if (from == "symbol") {
       if (species == "human") paste0(query_col, "_upper") else paste0(query_col, "_lower")
     } else {
