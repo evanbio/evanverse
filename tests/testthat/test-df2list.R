@@ -1,10 +1,12 @@
-# 📦 Tests for `df2list()` — Convert data.frame to named list
-# File: tests/testthat/test-df2list.R
+# =============================================================================
+# Test: df2list()
+# File: test-df2list.R
+# Description: Tests for converting data.frame to named list
+# =============================================================================
 
 # ------------------------------------------------------------------------------
-# ✅ Basic functionality: named list output is correct
+# Basic functionality tests
 # ------------------------------------------------------------------------------
-
 test_that("df2list converts to named list grouped by key_col", {
   df <- data.frame(
     cell_type = c(rep("B", 3), rep("T", 2)),
@@ -21,9 +23,8 @@ test_that("df2list converts to named list grouped by key_col", {
 })
 
 # ------------------------------------------------------------------------------
-# ❌ Invalid inputs: wrong types or missing columns
+# Error handling tests
 # ------------------------------------------------------------------------------
-
 test_that("throws error for non-data.frame input", {
   expect_error(df2list("not_a_df", "a", "b"), "data")
 })
@@ -44,13 +45,11 @@ test_that("throws error if value_col is invalid", {
   )
 })
 
-
-
 # ------------------------------------------------------------------------------
-# ✅ Silent when verbose = FALSE
+# Silent operation tests
 # ------------------------------------------------------------------------------
-
 test_that("runs silently when verbose = FALSE", {
   df <- data.frame(group = c("X", "X", "Y"), val = c(1, 2, 3))
   expect_silent(df2list(df, "group", "val", verbose = FALSE))
 })
+
