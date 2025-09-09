@@ -1,4 +1,4 @@
-#' 🧬 Download gene annotation reference table from Ensembl
+#' Download gene annotation reference table from Ensembl
 #'
 #' @description
 #' Downloads a standardized gene annotation table for human or mouse using `biomaRt`.
@@ -18,20 +18,19 @@ download_gene_ref <- function(species = c("human", "mouse"),
                               save = FALSE,
                               save_path = NULL) {
 
-  # Load namespaces only
-  if (!requireNamespace("biomaRt", quietly = TRUE)) {
-    stop("Please install 'biomaRt' via BiocManager::install('biomaRt').")
-  }
-  if (!requireNamespace("cli", quietly = TRUE)) {
-    stop("Please install 'cli' via install.packages('cli').")
-  }
-  if (!requireNamespace("dplyr", quietly = TRUE)) {
-    stop("Please install 'dplyr' via install.packages('dplyr').")
-  }
+  # ============================================================================
+  # Parameter Validation and Standardization Phase
+  # ============================================================================
 
-  library(dplyr)
+  if (!requireNamespace("biomaRt", quietly = TRUE)) {
+    cli::cli_abort("Please install 'biomaRt' via BiocManager::install('biomaRt').")
+  }
 
   species <- match.arg(species)
+
+  # ============================================================================
+  # Setup Phase
+  # ============================================================================
 
   dataset <- switch(species,
                     "human" = "hsapiens_gene_ensembl",
@@ -48,7 +47,11 @@ download_gene_ref <- function(species = c("human", "mouse"),
     dplyr::filter(current_release == "*") |>
     dplyr::pull(version)
 
-  cli::cli_alert_info("[{Sys.time()}] Downloading {species} gene annotation (Ensembl version {ensembl_version})...")
+  cli::cli_alert_info("Downloading {species} gene annotation (Ensembl version {ensembl_version})...")
+
+  # ============================================================================
+  # Data Retrieval Phase
+  # ============================================================================
 
   # Download data
   annotation <- biomaRt::getBM(
@@ -57,6 +60,10 @@ download_gene_ref <- function(species = c("human", "mouse"),
                    "end_position", "strand", "description"),
     mart = mart
   )
+
+  # ============================================================================
+  # Data Processing Phase
+  # ============================================================================
 
   # Rename columns
   colnames(annotation) <- c("ensembl_id", "symbol", "entrez_id", "gene_type",
@@ -78,7 +85,11 @@ download_gene_ref <- function(species = c("human", "mouse"),
     annotation <- dplyr::filter(annotation, !is.na(entrez_id))
   }
 
-  cli::cli_alert_success("[{Sys.time()}] Retrieved {nrow(annotation)} annotated genes.")
+  cli::cli_alert_success("Retrieved {nrow(annotation)} annotated genes.")
+
+  # ============================================================================
+  # Optional Saving Phase
+  # ============================================================================
 
   # Save to RDS if requested
   if (save) {
@@ -92,6 +103,10 @@ download_gene_ref <- function(species = c("human", "mouse"),
     saveRDS(annotation, file = save_path)
     cli::cli_alert_info("Saved annotation table to {.file {save_path}}")
   }
+
+  # ============================================================================
+  # Return Phase
+  # ============================================================================
 
   return(annotation)
 }
