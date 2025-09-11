@@ -1,37 +1,91 @@
-#' 📄 Convert GMT File to Named List
+#' gmt2list: Convert GMT File to Named List
 #'
-#' Reads a `.gmt` gene set file and returns a named list,
+#' Reads a .gmt gene set file and returns a named list,
 #' where each list element is a gene set.
 #'
-#' @param file Path to a `.gmt` file.
-#' @param verbose Logical. Whether to print message. Default = TRUE.
+#' @param file Character. Path to a .gmt file.
+#' @param verbose Logical. Whether to print message. Default is TRUE.
 #'
 #' @return A named list where each element is a character vector of gene symbols.
-#' @export
-#'
-#' @importFrom GSEABase getGmt geneIds
-#' @importFrom cli cli_alert_success cli_abort
 #'
 #' @examples
-#' # gmt_file <- system.file("extdata", "h.all.v2024.1.Hs.symbols.gmt", package = "evanverse")
-#' # gene_sets <- gmt2list(gmt_file)
+#' \dontrun{
+#' gmt_file <- system.file("extdata", "h.all.v2024.1.Hs.symbols.gmt", package = "evanverse")
+#' gene_sets <- gmt2list(gmt_file)
+#' length(gene_sets)
+#' names(gene_sets)[1:5]
+#' }
+#'
+#' @export
 gmt2list <- function(file, verbose = TRUE) {
-  # --- Check ---
+
+  # ===========================================================================
+  # Parameter Validation Phase
+  # ===========================================================================
+
+  # Validate file parameter
+  if (!is.character(file) || length(file) != 1 || is.na(file) || file == "") {
+    stop("'file' must be a single non-empty character string.", call. = FALSE)
+  }
+
+  # Check if file exists
   if (!file.exists(file)) {
-    cli::cli_abort("❌ GMT file not found: {.path {file}}")
+    stop("GMT file not found: ", file, call. = FALSE)
   }
 
+  # Validate verbose parameter
+  if (!is.logical(verbose) || length(verbose) != 1 || is.na(verbose)) {
+    stop("'verbose' must be a single logical value.", call. = FALSE)
+  }
+
+  # ===========================================================================
+  # Dependency Check Phase
+  # ===========================================================================
+
+  # Check required package
   if (!requireNamespace("GSEABase", quietly = TRUE)) {
-    cli::cli_abort("Please install {.pkg GSEABase} to use {.fn gmt2list}.")
+    stop("Package 'GSEABase' required. Please install it to use gmt2list().", call. = FALSE)
   }
 
-  # --- Read & Parse ---
-  gmt_obj <- GSEABase::getGmt(file)
+  # ===========================================================================
+  # GMT Parsing Phase
+  # ===========================================================================
+
+  # Parse GMT file
+  gmt_obj <- tryCatch({
+    GSEABase::getGmt(file)
+  }, error = function(e) {
+    stop("Failed to parse GMT file: ", e$message, call. = FALSE)
+  })
+
+  # Validate GMT object
+  if (length(gmt_obj) == 0) {
+    stop("GMT file contains no gene sets.", call. = FALSE)
+  }
+
+  # ===========================================================================
+  # Data Conversion Phase
+  # ===========================================================================
+
+  # Extract gene sets as named list
   gene_sets <- GSEABase::geneIds(gmt_obj)
 
-  if (verbose) {
-    cli::cli_alert_success("📄 Parsed {.val {length(gene_sets)}} gene sets from {.file {basename(file)}}.")
+  # Validate gene sets data
+  if (!is.list(gene_sets) || length(gene_sets) == 0) {
+    stop("Invalid gene sets data extracted from GMT file.", call. = FALSE)
   }
 
+  # ===========================================================================
+  # Result Processing Phase
+  # ===========================================================================
+
+  # Display success message if requested
+  if (isTRUE(verbose)) {
+    cli::cli_alert_success(
+      "Parsed {length(gene_sets)} gene sets from {basename(file)}"
+    )
+  }
+
+  # Return result
   return(gene_sets)
 }
