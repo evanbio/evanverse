@@ -1,18 +1,15 @@
 #===============================================================================
-# 📦 Test: file_info()
-# 📁 File: test-file_info.R
-# 🔍 Description: Unit tests for the file_info() utility function
+# Test: file_info()
+# File: test-file_info.R
+# Description: Unit tests for the file_info() utility function
 #===============================================================================
 
-# Load here (recommended in tests too)
-library(here)
-
 #------------------------------------------------------------------------------
-# 🧪 Basic Functionality
+# Basic Functionality
 #------------------------------------------------------------------------------
 
 test_that("file_info() works on existing single file", {
-  desc_file <- here("DESCRIPTION")
+  desc_file <- "DESCRIPTION"
   skip_if_not(file.exists(desc_file), "DESCRIPTION file not found")
 
   info <- file_info(desc_file)
@@ -22,7 +19,7 @@ test_that("file_info() works on existing single file", {
 })
 
 test_that("file_info() works on multiple files", {
-  files <- c(here("DESCRIPTION"), here("README.md"))
+  files <- c("DESCRIPTION", "README.md")
   files <- files[file.exists(files)]
   skip_if(length(files) < 1, "Test files not found")
 
@@ -32,11 +29,11 @@ test_that("file_info() works on multiple files", {
 })
 
 #------------------------------------------------------------------------------
-# ⚙️ Parameter Variants
+# Parameter Variants
 #------------------------------------------------------------------------------
 
 test_that("file_info() skips line count when count_line = FALSE", {
-  f <- here("DESCRIPTION")
+  f <- "DESCRIPTION"
   skip_if_not(file.exists(f), "DESCRIPTION file not found")
 
   info <- file_info(f, count_line = FALSE)
@@ -53,13 +50,13 @@ test_that("file_info() returns relative path when full_name = FALSE", {
 
 
 test_that("file_info() filters by regex pattern", {
-  info <- file_info(here("R"), recursive = TRUE, filter_pattern = "\\.R$")
+  info <- file_info("R", recursive = TRUE, filter_pattern = "\\.R$")
   skip_if(nrow(info) == 0, "No .R files found")
   expect_true(all(grepl("\\.R$", info$file)))
 })
 
 #------------------------------------------------------------------------------
-# ❌ Error / Edge Handling
+# Error / Edge Handling
 #------------------------------------------------------------------------------
 
 test_that("file_info() returns empty data.frame on non-existent file", {
@@ -74,4 +71,9 @@ test_that("file_info() handles empty directory gracefully", {
   info <- file_info(tmpdir, preview = FALSE)
   expect_equal(nrow(info), 0)
 })
+
+#===============================================================================
+# End: test-file_info.R
+#===============================================================================
+
 
