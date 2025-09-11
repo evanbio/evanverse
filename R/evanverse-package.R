@@ -1,22 +1,19 @@
-#' evanverse: A Utility Toolkit for Everyday R Development ⚙️📦
+
+#' evanverse: Utility Toolkit for R Development
 #'
-#' The **evanverse** package offers a lightweight and modular collection of functions,
-#' tailored to support efficient and reproducible R workflows in research and analysis.
+#' The **evanverse** package provides a modular set of functions to support efficient,
+#' reproducible R workflows in research and data analysis.
 #'
-#' It provides tools for:
+#' Main features:
+#' 
+#' - Logical operations
+#' - Package installation and management
+#' - Color formatting and visualization support
+#' - Workflow automation utilities
+#' - Wrappers for common scripting tasks
 #'
-#' - Logical operations 🔁
-#' - Package installation and management 📦
-#' - Color formatting and visualization support 🎨
-#' - Workflow automation utilities 🛠️
-#' - Clean wrappers for common scripting tasks
-#'
-#' **evanverse is not a framework, but a personal, evolving toolbox** —
-#' pragmatically built, cleanly organized, and continuously maintained
-#' for everyday scientific computing.
-#'
-#' Ideal for researchers, developers, and anyone who values simplicity with clarity. ✨
+#' Designed for researchers, developers, and anyone seeking simplicity and clarity in R scripting.
 #'
 #' @docType package
 #' @name evanverse
-"_PACKAGE"
+#' @keywords utilities workflow scripting
