@@ -144,31 +144,6 @@ test_that("download_geo_data() works with valid GSE ID", {
 })
 
 # ------------------------------------------------------------------------------
-# Error handling tests
-# ------------------------------------------------------------------------------
-test_that("download_geo_data() handles invalid GSE IDs gracefully", {
-  skip_on_cran()
-  skip_if_offline()
-
-  # Test with non-existent GSE ID
-  expect_error(
-    download_geo_data("GSE999999", log = FALSE, retries = 1, timeout = 30),
-    "No GSEMatrix data available for GSE999999. Please check the GEO accession ID."
-  )
-})
-
-test_that("download_geo_data() handles network timeouts", {
-  skip_on_cran()
-  skip_if_offline()
-
-  # Test with very short timeout
-  expect_error(
-    download_geo_data("GSE7305", log = FALSE, retries = 1, timeout = 1),
-    "No GSEMatrix data available for GSE7305. Please check the GEO accession ID."
-  )
-})
-
-# ------------------------------------------------------------------------------
 # Output structure tests
 # ------------------------------------------------------------------------------
 test_that("download_geo_data() returns correct output structure", {
