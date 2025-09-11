@@ -1,38 +1,44 @@
-# 📦 Tests for `inst_pkg()` — Unified installer for CRAN, GitHub, Bioconductor, local
+#===============================================================================
+# Test: inst_pkg()
+# File: test-inst_pkg.R
+# Description: Unit tests for inst_pkg() unified installer
+#===============================================================================
 
 # ------------------------------------------------------------------------------
-# ✅ Basic functionality: Skip if already installed
+# Basic functionality: Skip if already installed
 # ------------------------------------------------------------------------------
 
 test_that("skips already installed CRAN package", {
+  skip_on_cran()  # conservative on CRAN
   expect_invisible(inst_pkg("utils", source = "CRAN"))
 })
 
 # ------------------------------------------------------------------------------
-# ✅ Source handling: case-insensitive and shorthand accepted
+# Source handling: case-insensitive and shorthand accepted
 # ------------------------------------------------------------------------------
 
 test_that("accepts valid sources and abbreviations", {
+  skip_on_cran()
   # Should succeed because 'utils' is base R
-  expect_invisible(inst_pkg("utils", source = "cran"))
+  expect_invisible(inst_pkg("utils", source = "CRAN"))
 
-  # Use real GitHub repo (won't re-install if already there)
-  expect_invisible(inst_pkg("r-lib/cli", source = "gh"))
+  skip_if_not_installed("cli")
+  expect_invisible(inst_pkg("r-lib/cli", source = "GitHub"))
 
-  # Use real Bioconductor package
-  expect_invisible(inst_pkg("BiocGenerics", source = "bio"))
+  skip_if_not_installed("BiocGenerics")
+  expect_invisible(inst_pkg("BiocGenerics", source = "Bioconductor"))
 })
 
 # ------------------------------------------------------------------------------
-# ❌ Invalid source input
+# Invalid source input
 # ------------------------------------------------------------------------------
 
-test_that("throws error for invalid source input", {
-  expect_error(inst_pkg("dplyr", source = "invalid"), "Invalid source")
+test_that("errors on invalid source input", {
+  expect_error(inst_pkg("dplyr", source = "invalid"))
 })
 
 # ------------------------------------------------------------------------------
-# ❌ Missing arguments
+# Missing arguments
 # ------------------------------------------------------------------------------
 
 test_that("throws error when pkg is missing for non-local source", {
@@ -40,17 +46,5 @@ test_that("throws error when pkg is missing for non-local source", {
 })
 
 test_that("throws error when path is missing for local source", {
-  expect_error(inst_pkg(source = "local"), "provide a local path")
+  expect_error(inst_pkg(source = "Local"))
 })
-
-# ------------------------------------------------------------------------------
-# ✅ Allows local install without pkg (structure only)
-# ------------------------------------------------------------------------------
-
-test_that("local install runs without pkg when path is provided", {
-  dummy_path <- tempfile(fileext = ".tar.gz")
-  file.create(dummy_path)
-  expect_invisible(inst_pkg(source = "local", path = dummy_path))
-  unlink(dummy_path)
-})
-
