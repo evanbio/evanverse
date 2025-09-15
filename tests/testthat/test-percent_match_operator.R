@@ -1,31 +1,55 @@
 #===============================================================================
-# 🧪 Test: %match%
-# 📁 File: test-percent_match_operator.R
-# 🔍 Description: Unit tests for the case-insensitive %match% operator
+# Test: %map%
+# File: test-percent_map_operator.R
+# Description: Unit tests for the case-insensitive %map% operator
 #===============================================================================
 
-test_that("%match% performs case-insensitive match correctly", {
+#------------------------------------------------------------------------------
+# Basic functionality
+#------------------------------------------------------------------------------
+test_that("%map% performs case-insensitive mapping correctly", {
   x <- c("tp53", "BRCA1", "egfr")
-  table <- c("TP53", "EGFR", "MYC")
-  result <- x %match% table
-  expect_equal(result, c(1, NA, 2))
+  tbl <- c("TP53", "EGFR", "MYC")
+  result <- x %map% tbl
+  expect_named(result, c("TP53", "EGFR"))
+  expect_equal(unname(result), c("tp53", "egfr"))
 })
 
-test_that("%match% returns NA for all unmatched values", {
+test_that("%map% drops unmatched values", {
+  x <- c("akt1", "tp53")
+  tbl <- c("TP53", "EGFR")
+  result <- x %map% tbl
+  expect_named(result, "TP53")
+  expect_equal(unname(result), "tp53")
+})
+
+#------------------------------------------------------------------------------
+# Edge cases
+#------------------------------------------------------------------------------
+test_that("%map% returns empty when no values match", {
   x <- c("aaa", "bbb")
-  table <- c("xxx", "yyy")
-  result <- x %match% table
-  expect_true(all(is.na(result)))
+  tbl <- c("xxx", "yyy")
+  result <- x %map% tbl
+  expect_length(result, 0)
+  expect_named(result, character(0))
 })
 
-test_that("%match% handles empty input gracefully", {
-  expect_equal(character(0) %match% c("a", "b"), integer(0))
-  expect_equal(c("a", "b") %match% character(0), rep(NA_integer_, 2))
+test_that("%map% handles empty input gracefully", {
+  r1 <- character(0) %map% c("a", "b")
+  expect_true(is.character(r1))
+  expect_length(r1, 0)
+  expect_named(r1, character(0))
+
+  r2 <- c("a", "b") %map% character(0)
+  expect_true(is.character(r2))
+  expect_length(r2, 0)
+  expect_named(r2, character(0))
 })
 
-test_that("%match% is sensitive to order and returns first match", {
-  x <- c("x")
-  table <- c("X", "x", "x")
-  result <- x %match% table
-  expect_equal(result, 1)
+#------------------------------------------------------------------------------
+# Error handling
+#------------------------------------------------------------------------------
+test_that("%map% throws error on invalid inputs", {
+  expect_error(1:3 %map% c("a", "b"), "must be a character vector")
+  expect_error(c("a", "b") %map% 1:3, "must be a character vector")
 })
