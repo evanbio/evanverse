@@ -14,26 +14,58 @@
 #' @examples
 #' pkg_version(c("ggplot2", "limma", "MRPRESSO", "nonexistentpackage123"))
 pkg_version <- function(pkg, preview = TRUE) {
+  # Parameter validation
+  if (!is.character(pkg) || length(pkg) == 0) {
+    cli::cli_abort("`pkg` must be a non-empty character vector of package names.")
+  }
+  if (!is.logical(preview) || length(preview) != 1) {
+    cli::cli_abort("`preview` must be a single logical value.")
+  }
+
   pkg <- unique(pkg)
 
-  stopifnot(requireNamespace("cli", quietly = TRUE))
-  stopifnot(requireNamespace("BiocManager", quietly = TRUE))
-  stopifnot(requireNamespace("tools", quietly = TRUE))
+  # Check required packages
+  if (!requireNamespace("BiocManager", quietly = TRUE)) {
+    stop("Package 'BiocManager' is required but not installed.")
+  }
+  if (!requireNamespace("tools", quietly = TRUE)) {
+    stop("Package 'tools' is required but not installed.")
+  }
 
   # Initialize installed package info
   cli::cli_h1("Fetching installed R packages...")
-  installed <- installed.packages()
+  installed <- tryCatch(
+    installed.packages(),
+    error = function(e) {
+      cli::cli_abort("Failed to fetch installed packages: {e$message}")
+    }
+  )
   installed_names_lower <- tolower(rownames(installed))
 
   # Get CRAN package versions
   cli::cli_h1("Fetching CRAN package database...")
-  cran_db <- tools::CRAN_package_db()
+  cran_db <- tryCatch(
+    tools::CRAN_package_db(),
+    error = function(e) {
+      cli::cli_abort("Failed to fetch CRAN package database: {e$message}")
+    }
+  )
   cran_latest <- setNames(cran_db$Version, tolower(cran_db$Package))
 
   # Get Bioconductor package versions
   cli::cli_h1("Fetching Bioconductor package database...")
-  bioc_repo <- BiocManager::repositories()["BioCsoft"]
-  bioc_db <- available.packages(repos = bioc_repo)
+  bioc_repo <- tryCatch(
+    BiocManager::repositories()["BioCsoft"],
+    error = function(e) {
+      cli::cli_abort("Failed to fetch Bioconductor repositories: {e$message}")
+    }
+  )
+  bioc_db <- tryCatch(
+    available.packages(repos = bioc_repo),
+    error = function(e) {
+      cli::cli_abort("Failed to fetch Bioconductor package database: {e$message}")
+    }
+  )
   bioc_latest <- setNames(bioc_db[, "Version"], tolower(bioc_db[, "Package"]))
 
   # Prepare result table
@@ -80,7 +112,13 @@ pkg_version <- function(pkg, preview = TRUE) {
                              installed[idx, "Package"],
                              "DESCRIPTION")
 
-      desc <- tryCatch(read.dcf(desc_path), error = function(e) NULL)
+      desc <- tryCatch(
+        read.dcf(desc_path),
+        error = function(e) {
+          cli::cli_alert_warning("Could not read DESCRIPTION file for {p}: {e$message}")
+          NULL
+        }
+      )
 
       if (!is.null(desc) &&
           "RemoteType" %in% colnames(desc) &&
