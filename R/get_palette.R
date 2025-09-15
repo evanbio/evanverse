@@ -1,4 +1,4 @@
-#' get_palette: Load Color Palette from RDS
+#' Get Palette: Load Color Palette from RDS
 #'
 #' Load a named palette from data/palettes.rds, returning a vector of HEX colors.
 #' Automatically checks for type mismatch and provides smart suggestions.
@@ -11,10 +11,12 @@
 #' @return Character vector of HEX color codes.
 #'
 #' @examples
+#' \dontrun{
 #' get_palette("vividset", type = "qualitative")
 #' get_palette("softtrio", type = "qualitative", n = 2)
 #' get_palette("plasma", type = "sequential", n = 5)
 #' get_palette("RdYlBu", type = "diverging")
+#' }
 #'
 #' @export
 get_palette <- function(name,
@@ -23,12 +25,20 @@ get_palette <- function(name,
                         palette_rds = system.file("extdata", "palettes.rds", package = "evanverse")) {
 
   # ===========================================================================
-  # Parameter Validation Phase
+  # Parameter validation
   # ===========================================================================
 
+  # Check for required packages
+  if (!requireNamespace("cli", quietly = TRUE)) {
+    cli::cli_abort("Package {.pkg cli} is required but not installed.")
+  }
+  if (!requireNamespace("purrr", quietly = TRUE)) {
+    cli::cli_abort("Package {.pkg purrr} is required but not installed.")
+  }
+
   # Validate name parameter
-  if (!is.character(name) || length(name) != 1 || is.na(name) || name == "") {
-    stop("'name' must be a single non-empty character string.", call. = FALSE)
+  if (missing(name) || !is.character(name) || length(name) != 1 || is.na(name) || name == "") {
+    cli::cli_abort("'name' must be a single non-empty character string.")
   }
 
   # Validate and normalize type parameter
@@ -37,23 +47,22 @@ get_palette <- function(name,
   # Validate n parameter
   if (!is.null(n)) {
     if (!is.numeric(n) || length(n) != 1 || is.na(n) || n <= 0 || n != round(n)) {
-      stop("'n' must be a single positive integer.", call. = FALSE)
+      cli::cli_abort("'n' must be a single positive integer.")
     }
   }
 
   # Validate palette file path
-  if (!is.character(palette_rds) || length(palette_rds) != 1) {
-    stop("'palette_rds' must be a single character string.", call. = FALSE)
+  if (!is.character(palette_rds) || length(palette_rds) != 1 || is.na(palette_rds)) {
+    cli::cli_abort("'palette_rds' must be a single character string.")
   }
 
   # ===========================================================================
-  # File Loading Phase
+  # File loading
   # ===========================================================================
 
   # Check if file exists
   if (!file.exists(palette_rds)) {
-    cli::cli_alert_danger("Palette file not found at: {.path {palette_rds}}")
-    stop("Please compile palettes first via compile_palettes().", call. = FALSE)
+    cli::cli_abort("Palette file not found: {.file {palette_rds}}. Please compile palettes first via {.fn compile_palettes}.")
   }
 
   # Load palette data
@@ -61,37 +70,33 @@ get_palette <- function(name,
   valid_types <- names(palettes)
 
   # ===========================================================================
-  # Palette Lookup Phase
+  # Palette lookup
   # ===========================================================================
 
   # Check if type exists
   if (!type %in% valid_types) {
-    cli::cli_alert_danger("Invalid type '{type}'. Must be one of: {.val {valid_types}}")
-    stop("Invalid palette type.", call. = FALSE)
+    cli::cli_abort("Invalid type {.val {type}}. Must be one of: {.val {valid_types}}")
   }
 
   # Check if palette name exists in specified type
   if (!name %in% names(palettes[[type]])) {
-    # Search for palette in other types using purrr
+    # Search for palette in other types
     found_type <- purrr::detect(valid_types, ~ name %in% names(palettes[[.x]]))
 
     if (!is.null(found_type)) {
-      cli::cli_alert_warning("'{name}' not found under '{type}', but exists under '{found_type}'")
-      cli::cli_alert_info("Try: get_palette('{name}', type = '{found_type}')")
-      stop("Palette '", name, "' not found under '", type, "', but exists under '", found_type, "'.", call. = FALSE)
+      cli::cli_abort("Palette {.val {name}} not found under {.val {type}}, but exists under {.val {found_type}}. Try: {.code get_palette(\"{name}\", type = \"{found_type}\")}")
     } else {
-      cli::cli_alert_danger("Palette '{name}' not found in any type")
-      stop("Palette '", name, "' not found in any type.", call. = FALSE)
+      cli::cli_abort("Palette {.val {name}} not found in any type.")
     }
   }
 
   # ===========================================================================
-  # Color Extraction Phase
+  # Color extraction
   # ===========================================================================
 
   # Extract color vector
   colors <- palettes[[type]][[name]]
-  cli::cli_alert_success("Loaded palette '{name}' ({type}), {length(colors)} colors")
+  cli::cli_alert_success("Loaded palette {.val {name}} ({.val {type}}), {.val {length(colors)}} colors")
 
   # Return all colors if n is NULL
   if (is.null(n)) {
@@ -99,12 +104,12 @@ get_palette <- function(name,
   }
 
   # ===========================================================================
-  # Subset Processing Phase
+  # Subset processing
   # ===========================================================================
 
   # Check if requested number is available
   if (n > length(colors)) {
-    stop("Palette '", name, "' only has ", length(colors), " colors, but requested ", n, ".", call. = FALSE)
+    cli::cli_abort("Palette {.val {name}} only has {.val {length(colors)}} colors, but requested {.val {n}}.")
   }
 
   # Return subset of colors
