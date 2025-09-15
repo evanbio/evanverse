@@ -1,13 +1,13 @@
 #===============================================================================
-# 🧪 Test: replace_void()
-# 📁 File: test-replace_void.R
-# 🔍 Description: Unit tests for replace_void() to substitute NA, NULL, and "" values
+# Test: replace_void()
+# File: tests/testthat/test-replace_void.R
+# Description: Unit tests for replace_void() to substitute NA, NULL, and "" values
+# Dependencies: testthat
 #===============================================================================
 
 #------------------------------------------------------------------------------
-# 🧪 Basic replacements
+# Basic replacements
 #------------------------------------------------------------------------------
-
 test_that("replace_void() replaces NA and empty string by default", {
   x <- c("A", "", NA, "B")
   expect_equal(replace_void(x, value = "X"), c("A", "X", "X", "B"))
@@ -25,9 +25,8 @@ test_that("replace_void() returns replacement if input is NULL", {
 })
 
 #------------------------------------------------------------------------------
-# ⚙️ Parameter variations
+# Parameter variations
 #------------------------------------------------------------------------------
-
 test_that("replace_void() respects include_na = FALSE", {
   x <- c("A", "", NA)
   result <- replace_void(x, value = "Z", include_na = FALSE)
@@ -42,15 +41,15 @@ test_that("replace_void() respects include_empty_str = FALSE", {
 
 test_that("replace_void() handles all include_* = FALSE correctly", {
   x <- c("", NA, "X")
-  expect_equal(replace_void(x, value = "Z",
-                            include_na = FALSE,
-                            include_empty_str = FALSE), c("", NA, "X"))
+  expect_equal(
+    replace_void(x, value = "Z", include_na = FALSE, include_empty_str = FALSE),
+    c("", NA, "X")
+  )
 })
 
 #------------------------------------------------------------------------------
-# 🧪 Edge cases
+# Edge cases
 #------------------------------------------------------------------------------
-
 test_that("replace_void() on fully valid input returns unchanged", {
   x <- c("A", "B")
   expect_equal(replace_void(x, value = "Z"), x)
@@ -65,3 +64,18 @@ test_that("replace_void() on list with no void returns original list", {
   expect_equal(replace_void(x, value = "Z"), x)
 })
 
+#------------------------------------------------------------------------------
+# Additional coverage (non-intrusive)
+#------------------------------------------------------------------------------
+test_that("include_null = FALSE leaves NULLs in list unchanged", {
+  x <- list("A", NULL, "B", NA, "")
+  res <- replace_void(x, value = "X", include_null = FALSE)
+  expect_equal(res, list("A", NULL, "B", "X", "X"))
+})
+
+test_that("numeric vectors replace NA with numeric value (type-stable)", {
+  x <- c(1, NA_real_, 3)
+  res <- replace_void(x, value = 0)
+  expect_equal(res, c(1, 0, 3))
+  expect_type(res, "double")
+})
