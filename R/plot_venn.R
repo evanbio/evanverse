@@ -1,4 +1,4 @@
-#' 🎨 Draw Venn Diagrams (2–4 sets, classic or gradient style)
+#' Draw Venn Diagrams (2–4 sets, classic or gradient style)
 #'
 #' A flexible and unified Venn diagram plotting function supporting both `ggvenn`
 #' and `ggVennDiagram`. Automatically handles naming, de-duplication, and visualization.
@@ -77,15 +77,101 @@ plot_venn <- function(set1, set2, set3 = NULL, set4 = NULL,
                       preview = TRUE,
                       return_sets = FALSE,
                       ...) {
-  # -- Check dependencies
-  required_pkgs <- c("ggplot2", "ggvenn", "ggVennDiagram", "cli")
-  missing_pkgs <- required_pkgs[!sapply(required_pkgs, requireNamespace, quietly = TRUE)]
-  if (length(missing_pkgs) > 0) {
-    cli::cli_abort("Missing required packages: {paste(missing_pkgs, collapse = ', ')}")
+
+  # ===========================================================================
+  # Parameter validation
+  # ===========================================================================
+
+  # Check required packages
+  required_pkgs <- c("ggvenn", "ggVennDiagram")
+  missing <- required_pkgs[!sapply(required_pkgs, requireNamespace, quietly = TRUE)]
+  if (length(missing) > 0) {
+    cli::cli_abort("Missing required packages: {paste(missing, collapse = ', ')}")
   }
 
-  # -- Match method
+  # Validate required sets
+  if (missing(set1) || missing(set2)) {
+    cli::cli_abort("At least two sets (set1 and set2) are required.")
+  }
+
+  # Validate method parameter
   method <- match.arg(method)
+
+  # Validate numeric parameters
+  if (!is.numeric(label_size) || length(label_size) != 1 || is.na(label_size) || label_size <= 0) {
+    cli::cli_abort("`label_size` must be a single positive numeric value.")
+  }
+  if (!is.numeric(set_size) || length(set_size) != 1 || is.na(set_size) || set_size <= 0) {
+    cli::cli_abort("`set_size` must be a single positive numeric value.")
+  }
+  if (!is.numeric(edge_size) || length(edge_size) != 1 || is.na(edge_size) || edge_size <= 0) {
+    cli::cli_abort("`edge_size` must be a single positive numeric value.")
+  }
+  if (!is.numeric(title_size) || length(title_size) != 1 || is.na(title_size) || title_size <= 0) {
+    cli::cli_abort("`title_size` must be a single positive numeric value.")
+  }
+  if (!is.numeric(digits) || length(digits) != 1 || is.na(digits) || digits < 0) {
+    cli::cli_abort("`digits` must be a single non-negative integer.")
+  }
+  if (!is.numeric(direction) || length(direction) != 1 || is.na(direction) || abs(direction) != 1) {
+    cli::cli_abort("`direction` must be 1 or -1.")
+  }
+
+  # Validate character parameters
+  if (!is.character(label_color) || length(label_color) != 1 || is.na(label_color)) {
+    cli::cli_abort("`label_color` must be a single non-NA character string.")
+  }
+  if (!is.character(set_color) || length(set_color) != 1 || is.na(set_color)) {
+    cli::cli_abort("`set_color` must be a single non-NA character string.")
+  }
+  if (!is.character(title_color) || length(title_color) != 1 || is.na(title_color)) {
+    cli::cli_abort("`title_color` must be a single non-NA character string.")
+  }
+  if (!is.character(title) || length(title) != 1 || is.na(title)) {
+    cli::cli_abort("`title` must be a single non-NA character string.")
+  }
+  if (!is.character(label_sep) || length(label_sep) != 1 || is.na(label_sep)) {
+    cli::cli_abort("`label_sep` must be a single non-NA character string.")
+  }
+  if (!is.character(palette) || length(palette) != 1 || is.na(palette)) {
+    cli::cli_abort("`palette` must be a single non-NA character string.")
+  }
+
+  # Validate logical parameters
+  if (!is.logical(preview) || length(preview) != 1) {
+    cli::cli_abort("`preview` must be a single logical value.")
+  }
+  if (!is.logical(return_sets) || length(return_sets) != 1) {
+    cli::cli_abort("`return_sets` must be a single logical value.")
+  }
+  if (!is.logical(auto_scale) || length(auto_scale) != 1) {
+    cli::cli_abort("`auto_scale` must be a single logical value.")
+  }
+
+  # Validate alpha parameters
+  if (!is.numeric(label_alpha) || length(label_alpha) != 1 || is.na(label_alpha) || label_alpha < 0 || label_alpha > 1) {
+    cli::cli_abort("`label_alpha` must be a numeric value between 0 and 1.")
+  }
+  if (!is.numeric(fill_alpha) || length(fill_alpha) != 1 || is.na(fill_alpha) || fill_alpha < 0 || fill_alpha > 1) {
+    cli::cli_abort("`fill_alpha` must be a numeric value between 0 and 1.")
+  }
+
+  # Validate label parameter
+  valid_labels <- c("count", "percent", "both", "none")
+  if (!is.character(label) || length(label) != 1 || is.na(label) || !(label %in% valid_labels)) {
+    cli::cli_abort("`label` must be one of: {paste(valid_labels, collapse = ', ')}")
+  }
+
+  # Validate label_geom parameter
+  valid_geoms <- c("label", "text")
+  if (!is.character(label_geom) || length(label_geom) != 1 || is.na(label_geom) || !(label_geom %in% valid_geoms)) {
+    cli::cli_abort("`label_geom` must be one of: {paste(valid_geoms, collapse = ', ')}")
+  }
+
+  # Validate show_outside parameter
+  if (!is.character(show_outside) && !is.logical(show_outside)) {
+    cli::cli_abort("`show_outside` must be a character string or logical value.")
+  }
 
   # -- Extract sets and names
   venn_sets <- list(set1, set2)
