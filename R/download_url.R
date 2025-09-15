@@ -56,13 +56,12 @@
 #'   }
 #' }
 #'
-#' @section Dependencies{
+#' @section Dependencies:
 #' Required R packages (automatically checked at runtime):
 #' \enumerate{
 #'   \item \strong{curl}: For HTTP/FTP/SFTP downloads (install with \code{install.packages('curl')})
 #'   \item \strong{cli}: For user-friendly console output (install with \code{install.packages('cli')})
 #'   \item \strong{R.utils}: For .gz file handling (install with \code{install.packages('R.utils')})
-#' }
 #' }
 #'
 #' @examples
