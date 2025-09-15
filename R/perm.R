@@ -1,4 +1,4 @@
-#' 🧮 perm: Calculate Number of Permutations A(n, k)
+#' Calculate Number of Permutations A(n, k)
 #'
 #' Calculates the total number of ways to arrange k items selected from n distinct items, i.e.,
 #' the number of permutations A(n, k) = n! / (n - k)!.
@@ -16,33 +16,64 @@
 #' perm(10, 0)     # 1
 #' perm(5, 6)      # 0
 perm <- function(n, k) {
-  # --- Parameter checks ---
-  # Ensure n and k are single numeric values
-  if (!is.numeric(n) || !is.numeric(k) || length(n) != 1 || length(k) != 1) {
-    stop("Arguments 'n' and 'k' must be single numeric values.")
+
+  # ===========================================================================
+  # Parameter validation
+  # ===========================================================================
+
+  # Validate n parameter
+  if (missing(n) || !is.numeric(n) || length(n) != 1 || is.na(n)) {
+    cli::cli_abort("'n' must be a single numeric value.")
   }
-  # Ensure non-negative
+
+  # Validate k parameter
+  if (missing(k) || !is.numeric(k) || length(k) != 1 || is.na(k)) {
+    cli::cli_abort("'k' must be a single numeric value.")
+  }
+
+  # Check for non-negative values
   if (n < 0 || k < 0) {
-    stop("'n' and 'k' must be non-negative integers.")
+    cli::cli_abort("'n' and 'k' must be non-negative.")
   }
-  # Ensure integers
-  if (abs(n - round(n)) > .Machine$double.eps^0.5 ||
-      abs(k - round(k)) > .Machine$double.eps^0.5) {
-    stop("'n' and 'k' must be integers.")
+
+  # Check for integer values
+  if (n != round(n) || k != round(k)) {
+    cli::cli_abort("'n' and 'k' must be integers.")
   }
+
+  # Convert to integers
   n <- as.integer(n)
   k <- as.integer(k)
 
-  # --- Special cases ---
-  # If k > n or k < 0, return 0
-  if (k > n) return(0L)
-  # If k == 0, return 1 (the empty permutation)
-  if (k == 0) return(1L)
+  # ===========================================================================
+  # Special cases
+  # ===========================================================================
 
-  # --- Main calculation ---
-  # Calculate the permutation count
-  result <- factorial(n) / factorial(n - k)
+  # If k > n, return 0
+  if (k > n) {
+    return(0L)
+  }
 
-  # --- Return result ---
+  # If k == 0, return 1 (empty permutation)
+  if (k == 0) {
+    return(1L)
+  }
+
+  # ===========================================================================
+  # Main calculation
+  # ===========================================================================
+
+  # For large n, warn about potential overflow
+  if (n > 20) {
+    cli::cli_alert_warning("Large n ({n}) may cause numeric overflow. Consider using the 'gmp' package for arbitrary precision.")
+  }
+
+  # Calculate permutation: P(n,k) = n! / (n-k)!
+  # Use iterative multiplication to avoid computing large factorials
+  result <- 1
+  for (i in 0:(k-1)) {
+    result <- result * (n - i)
+  }
+
   return(result)
 }
