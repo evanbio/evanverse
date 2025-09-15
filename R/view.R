@@ -1,28 +1,7 @@
-# R/view.R
-#-------------------------------------------------------------------------------
-# 📄 view(): Quick Interactive Table Viewer
-#-------------------------------------------------------------------------------
-#
-# Description:
-#   Quickly view a data.frame or tibble as an interactive table in the Viewer pane.
-#   Powered by reactable. Designed for exploration, QC, or light reports.
-#
-# Parameters:
-# - data         : A data.frame or tibble to display.
-# - page_size    : Number of rows per page (default = 10).
-# - searchable   : Whether to enable keyword search (default = TRUE).
-# - filterable   : Whether to enable column filters (default = TRUE).
-# - striped      : Whether to use striped rows (default = TRUE).
-# - highlight    : Whether to highlight rows on hover (default = TRUE).
-# - compact      : Whether to use a compact table style (default = FALSE).
-#
-# Example:
-#   iris |> view()
-#   mtcars |> view(page_size = 20)
-#-------------------------------------------------------------------------------
-
-#' @title view
-#' @description Quick interactive table viewer using reactable.
+#' Quick interactive table viewer (reactable)
+#'
+#' Quickly view a data.frame or tibble as an interactive table in the Viewer pane.
+#'
 #' @param data A data.frame or tibble to display.
 #' @param page_size Number of rows per page (default = 10).
 #' @param searchable Whether to enable search (default = TRUE).
@@ -30,7 +9,12 @@
 #' @param striped Whether to show striped rows (default = TRUE).
 #' @param highlight Whether to highlight rows on hover (default = TRUE).
 #' @param compact Whether to use a compact layout (default = FALSE).
+#'
 #' @return A reactable widget rendered in the Viewer pane.
+#' @examples
+#' view(iris)
+#' view(mtcars, page_size = 20, striped = TRUE, filterable = TRUE)
+#'
 #' @export
 view <- function(
   data,
@@ -41,17 +25,36 @@ view <- function(
   highlight = TRUE,
   compact = FALSE
 ) {
-  # Check dependencies
-  if (!requireNamespace("reactable", quietly = TRUE)) {
-    stop("Please install the 'reactable' package to use view().", call. = FALSE)
-  }
 
-  # Check input validity
+  # ===========================================================================
+  # Parameter validation
+  # ===========================================================================
   if (!is.data.frame(data)) {
-    stop("Input must be a data.frame or tibble.", call. = FALSE)
+    cli::cli_abort("Input 'data' must be a data.frame or tibble.")
   }
 
-  # Render interactive table
+  if (!is.numeric(page_size) || length(page_size) != 1L || is.na(page_size) || page_size < 1) {
+    cli::cli_abort("'page_size' must be a single positive number.")
+  }
+  page_size <- as.integer(page_size)
+
+  for (nm in c("searchable", "filterable", "striped", "highlight", "compact")) {
+    val <- get(nm, inherits = FALSE)
+    if (!is.logical(val) || length(val) != 1L || is.na(val)) {
+      cli::cli_abort("Parameter '{nm}' must be a single logical value (TRUE/FALSE).")
+    }
+  }
+
+  # ===========================================================================
+  # Dependency check
+  # ===========================================================================
+  if (!requireNamespace("reactable", quietly = TRUE)) {
+    cli::cli_abort("Package 'reactable' is required. Please install it to use view().")
+  }
+
+  # ===========================================================================
+  # Render
+  # ===========================================================================
   reactable::reactable(
     data,
     searchable = searchable,
@@ -66,20 +69,20 @@ view <- function(
     showPageInfo = TRUE,
     theme = reactable::reactableTheme(
       headerStyle = list(
-        fontWeight = "bold",           # Bold column headers
-        fontSize = "14px",              # Slightly larger header font
-        backgroundColor = "#f7f7f8",    # Light gray background for headers
-        color = "#333333",              # Darker text color for headers
-        borderBottom = "2px solid #dee2e6" # Bottom border under headers
+        fontWeight = "bold",
+        fontSize = "14px",
+        backgroundColor = "#f7f7f8",
+        color = "#333333",
+        borderBottom = "2px solid #dee2e6"
       ),
       cellStyle = list(
-        fontSize = "13px",              # Slightly smaller text for cells
-        color = "#555555",              # Gray color for cell text
-        padding = "8px 12px"            # Cell padding for spacing
+        fontSize = "13px",
+        color = "#555555",
+        padding = "8px 12px"
       ),
-      stripedColor = "#f6f8fa",          # Color for striped rows
-      highlightColor = "#e8f4fa",        # Color when hovering over a row
-      borderColor = "#dee2e6"            # Border color for the table
+      stripedColor = "#f6f8fa",
+      highlightColor = "#e8f4fa",
+      borderColor = "#dee2e6"
     )
   )
 }
