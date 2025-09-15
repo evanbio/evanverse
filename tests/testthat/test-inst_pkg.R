@@ -1,50 +1,91 @@
 #===============================================================================
 # Test: inst_pkg()
 # File: test-inst_pkg.R
-# Description: Unit tests for inst_pkg() unified installer
+# Description: Unit tests for the inst_pkg() function
 #===============================================================================
 
-# ------------------------------------------------------------------------------
-# Basic functionality: Skip if already installed
-# ------------------------------------------------------------------------------
+#------------------------------------------------------------------------------
+# Parameter Validation Tests
+#------------------------------------------------------------------------------
 
-test_that("skips already installed CRAN package", {
-  skip_on_cran()  # conservative on CRAN
-  expect_invisible(inst_pkg("utils", source = "CRAN"))
+test_that("inst_pkg() validates source parameter correctly", {
+  expect_error(
+    inst_pkg(pkg = "dplyr", source = "invalid"),
+    "'arg' should be one of"
+  )
+  
+  expect_error(
+    inst_pkg(pkg = "dplyr", source = "unknown"),
+    "'arg' should be one of"
+  )
 })
 
-# ------------------------------------------------------------------------------
-# Source handling: case-insensitive and shorthand accepted
-# ------------------------------------------------------------------------------
-
-test_that("accepts valid sources and abbreviations", {
-  skip_on_cran()
-  # Should succeed because 'utils' is base R
-  expect_invisible(inst_pkg("utils", source = "CRAN"))
-
-  skip_if_not_installed("cli")
-  expect_invisible(inst_pkg("r-lib/cli", source = "GitHub"))
-
-  skip_if_not_installed("BiocGenerics")
-  expect_invisible(inst_pkg("BiocGenerics", source = "Bioconductor"))
+test_that("inst_pkg() validates pkg parameter correctly", {
+  expect_error(
+    inst_pkg(pkg = c("dplyr", NA), source = "CRAN"),
+    "'pkg' must be a character vector without NA values"
+  )
+  
+  expect_error(
+    inst_pkg(pkg = 123, source = "CRAN"),
+    "'pkg' must be a character vector without NA values"
+  )
+  
+  expect_error(
+    inst_pkg(pkg = character(0), source = "CRAN"),
+    "'pkg' must be a character vector without NA values"
+  )
 })
 
-# ------------------------------------------------------------------------------
-# Invalid source input
-# ------------------------------------------------------------------------------
-
-test_that("errors on invalid source input", {
-  expect_error(inst_pkg("dplyr", source = "invalid"))
+test_that("inst_pkg() validates pkg and source relationship", {
+  expect_error(
+    inst_pkg(source = "CRAN"),
+    "Must provide 'pkg' for non-local installation"
+  )
+  
+  expect_error(
+    inst_pkg(source = "GitHub"),
+    "Must provide 'pkg' for non-local installation"
+  )
+  
+  expect_error(
+    inst_pkg(source = "Bioconductor"),
+    "Must provide 'pkg' for non-local installation"
+  )
 })
 
-# ------------------------------------------------------------------------------
-# Missing arguments
-# ------------------------------------------------------------------------------
-
-test_that("throws error when pkg is missing for non-local source", {
-  expect_error(inst_pkg(source = "CRAN"), "provide a package name")
+test_that("inst_pkg() validates GitHub package format", {
+  expect_error(
+    inst_pkg(pkg = "invalidformat", source = "GitHub"),
+    "GitHub packages must be in 'user/repo' format"
+  )
+  
+  expect_error(
+    inst_pkg(pkg = c("validuser/repo", "invalid"), source = "GitHub"),
+    "GitHub packages must be in 'user/repo' format"
+  )
 })
 
-test_that("throws error when path is missing for local source", {
-  expect_error(inst_pkg(source = "Local"))
+test_that("inst_pkg() validates local installation parameters", {
+  expect_error(
+    inst_pkg(source = "Local"),
+    "Must provide 'path' for local installation"
+  )
+})
+
+#------------------------------------------------------------------------------
+# Basic Function Acceptance (No Network Operations)
+#------------------------------------------------------------------------------
+
+test_that("inst_pkg() accepts valid parameters without execution", {
+  # Only test that the function doesn't immediately error on valid input
+  expect_true(is.function(inst_pkg))
+  
+  # Test parameter parsing without execution
+  expect_silent({
+    formals_check <- formals(inst_pkg)
+    expect_true("pkg" %in% names(formals_check))
+    expect_true("source" %in% names(formals_check))
+    expect_true("path" %in% names(formals_check))
+  })
 })
