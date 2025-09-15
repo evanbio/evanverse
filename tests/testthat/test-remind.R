@@ -1,52 +1,57 @@
-# tests/testthat/test-remind.R
-# 📌 Tests for `remind()` — keyword-based usage reminder
+#===============================================================================
+# Test: remind()
+# File: tests/testthat/test-remind.R
+# Description: Keyword-based usage reminder
+# Dependencies: testthat, cli
+#===============================================================================
 
-# ------------------------------------------------------------------------------
-# ✅ Basic functionality
-# ------------------------------------------------------------------------------
-
-test_that("returns invisible output for valid keywords", {
-  expect_invisible(remind("glimpse"))
-  expect_invisible(remind("read_excel"))
+#------------------------------------------------------------------------------
+# Basic functionality
+#------------------------------------------------------------------------------
+test_that("returns matched keywords (exact)", {
+  res <- expect_invisible(remind("glimpse"))
+  expect_type(res, "character")
+  expect_true("glimpse" %in% res)
 })
 
 test_that("supports partial matching for keywords", {
-  expect_invisible(remind("glim"))
-  expect_invisible(remind("excel"))
+  res <- expect_invisible(remind("glim"))
+  expect_true("glimpse" %in% res)
+
+  res2 <- expect_invisible(remind("excel"))
+  expect_true("read_excel" %in% res2)
 })
 
-# ------------------------------------------------------------------------------
-# ✅ NULL input prints full keyword list
-# ------------------------------------------------------------------------------
-
-test_that("returns NULL and prints full list when keyword is NULL", {
-  result <- expect_invisible(remind())
-  expect_null(result)
+test_that("is case-insensitive", {
+  res <- expect_invisible(remind("Glim"))
+  expect_true("glimpse" %in% res)
 })
 
-# ------------------------------------------------------------------------------
-# ✅ Handles unmatched keyword
-# ------------------------------------------------------------------------------
-
-test_that("returns FALSE with no match and prints warning", {
-  result <- expect_invisible(remind("notakeyword"))
-  expect_false(result)
+#------------------------------------------------------------------------------
+# NULL keyword shows all entries
+#------------------------------------------------------------------------------
+test_that("NULL keyword returns full keyword list (invisibly)", {
+  res <- expect_invisible(remind())
+  expect_type(res, "character")
+  expect_true(all(c("glimpse", "read_excel") %in% res))
+  expect_gt(length(res), 10)
 })
 
-# ------------------------------------------------------------------------------
-# ✅ Handles  case insensitive
-# ------------------------------------------------------------------------------
-
-test_that("supports partial matches (case-insensitive)", {
-  result <- expect_invisible(remind("Glim"))
-  expect_true(result)
+#------------------------------------------------------------------------------
+# Unmatched keyword
+#------------------------------------------------------------------------------
+test_that("unmatched keyword returns empty character vector", {
+  res <- expect_invisible(remind("notakeyword"))
+  expect_type(res, "character")
+  expect_length(res, 0)
 })
 
-# ------------------------------------------------------------------------------
-# ✅ Handles  multiple matches
-# ------------------------------------------------------------------------------
-
-test_that("prints multiple matches if available", {
-  # You can add another mock entry like "glimpse_data" if needed later
-  expect_invisible(remind("read"))
+#------------------------------------------------------------------------------
+# Multiple matches
+#------------------------------------------------------------------------------
+test_that("pattern can return multiple matches", {
+  res <- expect_invisible(remind("rank"))
+  # e.g., min_rank, dense_rank, percent_rank are possible matches
+  expect_true(any(grepl("^.*rank$", res)))
+  expect_gte(length(res), 2)
 })
