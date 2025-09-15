@@ -39,16 +39,106 @@ plot_density <- function(
   add_rug = FALSE,
   theme = "minimal"
 ) {
-  # ---- Input checks ----
-  stopifnot(is.data.frame(data))
-  stopifnot(x %in% names(data))
-  if (!is.null(group)) stopifnot(group %in% names(data))
-  if (!is.null(facet)) stopifnot(facet %in% names(data))
+  # ===========================================================================
+  # Dependency checks
+  # ===========================================================================
+  if (!requireNamespace("rlang", quietly = TRUE)) {
+    cli::cli_abort("Package {.pkg rlang} is required for plot_density().")
+  }
+  if (!requireNamespace("RColorBrewer", quietly = TRUE)) {
+    cli::cli_abort("Package {.pkg RColorBrewer} is required for plot_density().")
+  }
+
+  # ===========================================================================
+  # Parameter validation
+  # ===========================================================================
+
+  # Validate data
+  if (!is.data.frame(data)) {
+    cli::cli_abort("`data` must be a data.frame.")
+  }
+  if (nrow(data) == 0) {
+    cli::cli_abort("`data` must contain at least one row.")
+  }
+
+  # Validate x parameter
+  if (missing(x) || !is.character(x) || length(x) != 1 || is.na(x) || x == "") {
+    cli::cli_abort("`x` must be a single non-empty character string (column name).")
+  }
+  if (!x %in% names(data)) {
+    cli::cli_abort("Column `{x}` not found in `data`.")
+  }
+  if (!is.numeric(data[[x]])) {
+    cli::cli_abort("Column `{x}` must contain numeric values for density plotting.")
+  }
+
+  # Validate group parameter
+  if (!is.null(group)) {
+    if (!is.character(group) || length(group) != 1 || is.na(group) || group == "") {
+      cli::cli_abort("`group` must be a single non-empty character string (column name).")
+    }
+    if (!group %in% names(data)) {
+      cli::cli_abort("Column `{group}` not found in `data`.")
+    }
+  }
+
+  # Validate facet parameter
+  if (!is.null(facet)) {
+    if (!is.character(facet) || length(facet) != 1 || is.na(facet) || facet == "") {
+      cli::cli_abort("`facet` must be a single non-empty character string (column name).")
+    }
+    if (!facet %in% names(data)) {
+      cli::cli_abort("Column `{facet}` not found in `data`.")
+    }
+  }
+
+  # Validate palette parameter
   if (!is.character(palette) || length(palette) < 1 || any(is.na(palette))) {
-    stop("palette must be a non-empty character vector of color codes, e.g. c('#FF0000', '#00FF00').")
+    cli::cli_abort("`palette` must be a non-empty character vector of color codes, e.g. c('#FF0000', '#00FF00').")
   }
   if (length(palette) == 1 && palette %in% rownames(RColorBrewer::brewer.pal.info)) {
-    stop('palette must be a color vector, not a palette name like "Set1".')
+    cli::cli_abort("`palette` must be a color vector, not a palette name like 'Set1'.")
+  }
+
+  # Validate numeric parameters
+  if (!is.numeric(alpha) || length(alpha) != 1 || is.na(alpha) || alpha < 0 || alpha > 1) {
+    cli::cli_abort("`alpha` must be a single numeric value between 0 and 1.")
+  }
+  if (!is.numeric(base_size) || length(base_size) != 1 || is.na(base_size) || base_size <= 0) {
+    cli::cli_abort("`base_size` must be a single positive numeric value.")
+  }
+  if (!is.numeric(adjust) || length(adjust) != 1 || is.na(adjust) || adjust <= 0) {
+    cli::cli_abort("`adjust` must be a single positive numeric value.")
+  }
+
+  # Validate logical parameters
+  if (!is.logical(show_mean) || length(show_mean) != 1 || is.na(show_mean)) {
+    cli::cli_abort("`show_mean` must be a single logical value.")
+  }
+  if (!is.logical(add_hist) || length(add_hist) != 1 || is.na(add_hist)) {
+    cli::cli_abort("`add_hist` must be a single logical value.")
+  }
+  if (!is.logical(add_rug) || length(add_rug) != 1 || is.na(add_rug)) {
+    cli::cli_abort("`add_rug` must be a single logical value.")
+  }
+
+  # Validate hist_bins if provided
+  if (!is.null(hist_bins)) {
+    if (!is.numeric(hist_bins) || length(hist_bins) != 1 || is.na(hist_bins) || hist_bins <= 0 || hist_bins != round(hist_bins)) {
+      cli::cli_abort("`hist_bins` must be a single positive integer.")
+    }
+  }
+
+  # Validate theme parameter
+  valid_themes <- c("minimal", "classic", "bw", "light", "dark")
+  if (!is.character(theme) || length(theme) != 1 || is.na(theme) || !theme %in% valid_themes) {
+    cli::cli_abort("`theme` must be one of: {.val {valid_themes}}")
+  }
+
+  # Validate legend_pos
+  valid_positions <- c("right", "left", "top", "bottom", "none")
+  if (!is.character(legend_pos) || length(legend_pos) != 1 || is.na(legend_pos) || !legend_pos %in% valid_positions) {
+    cli::cli_abort("`legend_pos` must be one of: {.val {valid_positions}}")
   }
 
   df <- data
@@ -65,7 +155,7 @@ plot_density <- function(
   theme_fn <- theme_dict[[theme]]
 
   # ---- Main aesthetics: only map fill (not color) ----
-  aes_main <- ggplot2::aes(x = .data[[x]])
+  aes_main <- ggplot2::aes(x = !!rlang::sym(x))
   if (!is.null(group)) {
     aes_main$fill <- rlang::sym(group)  # only fill
   }
@@ -85,7 +175,7 @@ plot_density <- function(
   if (add_hist) {
     if (!is.null(group)) {
       p <- p + ggplot2::geom_histogram(
-        ggplot2::aes(y = after_stat(density), fill = .data[[group]]),
+        ggplot2::aes(y = ggplot2::after_stat(density), fill = !!rlang::sym(group)),
         alpha = alpha * 0.6,
         bins = hist_bins,
         position = "identity",
@@ -93,7 +183,7 @@ plot_density <- function(
       )
     } else {
       p <- p + ggplot2::geom_histogram(
-        ggplot2::aes(y = after_stat(density)),
+        ggplot2::aes(y = ggplot2::after_stat(density)),
         fill = "grey80",
         alpha = alpha * 0.6,
         bins = hist_bins,
