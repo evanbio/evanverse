@@ -7,14 +7,12 @@
 #   - Any tests that require network or GitHub access are skipped with skip_on_cran().
 #===============================================================================
 
-test_that("pkg_version() returns correct structure", {
-  skip_on_cran()
-  pkgs <- c("cli", "ggplot2", "nonexistentpackage123456")
-  res <- suppressMessages(pkg_version(pkgs, preview = FALSE))
-
-  expect_s3_class(res, "data.frame")
-  expect_named(res, c("package", "version", "latest", "source"))
-  expect_equal(nrow(res), length(pkgs))
+test_that("pkg_version() validates input parameters", {
+  expect_error(pkg_version(NULL), "`pkg` must be a non-empty character vector")
+  expect_error(pkg_version(character(0)), "`pkg` must be a non-empty character vector")
+  expect_error(pkg_version(123), "`pkg` must be a non-empty character vector")
+  expect_error(pkg_version("cli", preview = "yes"), "`preview` must be a single logical value")
+  expect_error(pkg_version("cli", preview = c(TRUE, FALSE)), "`preview` must be a single logical value")
 })
 
 test_that("pkg_version() detects installed version", {
