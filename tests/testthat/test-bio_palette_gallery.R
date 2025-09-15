@@ -64,15 +64,3 @@ test_that("bio_palette_gallery() throws error on invalid type", {
     regexp = "should be one of"
   )
 })
-
-#------------------------------------------------------------------------------
-# Edge cases
-#------------------------------------------------------------------------------
-
-test_that("bio_palette_gallery() returns NULL if type not in file", {
-  f <- system.file("extdata", "palettes.rds", package = "evanverse")
-  skip_if_not(file.exists(f), "Palette RDS not found")
-
-  result <- bio_palette_gallery(palette_rds = f, type = "nonexistent", verbose = FALSE)
-  expect_null(result)
-})

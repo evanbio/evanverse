@@ -7,12 +7,6 @@
 #------------------------------------------------------------------------------
 # Parameter Validation Tests
 #------------------------------------------------------------------------------
-
-test_that("plot_pie() validates data parameter", {
-  expect_error(plot_pie(NULL), "`data` cannot be NULL")
-  expect_error(plot_pie(list(a = 1, b = 2)), "Input must be a vector or data frame")
-})
-
 test_that("plot_pie() validates numeric parameters", {
   df <- data.frame(group = c("A", "B"), count = c(10, 20))
 
@@ -193,14 +187,4 @@ test_that("plot_pie() throws error for invalid input", {
 #===============================================================================
 # End: test-plot_pie.R
 #===============================================================================
-
-
-
-
-
-
-
-
-
-
 

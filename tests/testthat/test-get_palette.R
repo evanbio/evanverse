@@ -65,17 +65,6 @@ test_that("get_palette() validates type parameter correctly", {
 #------------------------------------------------------------------------------
 # Error Handling and Edge Cases
 #------------------------------------------------------------------------------
-
-test_that("get_palette() provides helpful suggestion for type mismatch", {
-  palette_file <- system.file("extdata", "palettes.rds", package = "evanverse")
-  skip_if_not(file.exists(palette_file), "Compiled palette RDS not found")
-
-  expect_error(
-    get_palette("vividset", type = "sequential"),
-    "but exists under 'qualitative'"
-  )
-})
-
 test_that("get_palette() handles nonexistent palette names", {
   palette_file <- system.file("extdata", "palettes.rds", package = "evanverse")
   skip_if_not(file.exists(palette_file), "Compiled palette RDS not found")

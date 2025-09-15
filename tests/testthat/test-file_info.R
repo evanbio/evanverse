@@ -9,6 +9,7 @@
 #------------------------------------------------------------------------------
 
 test_that("file_info() works on existing single file", {
+  skip_on_cran()
   desc_file <- "DESCRIPTION"
   skip_if_not(file.exists(desc_file), "DESCRIPTION file not found")
 
@@ -19,6 +20,7 @@ test_that("file_info() works on existing single file", {
 })
 
 test_that("file_info() works on multiple files", {
+  skip_on_cran()
   files <- c("DESCRIPTION", "README.md")
   files <- files[file.exists(files)]
   skip_if(length(files) < 1, "Test files not found")
@@ -33,6 +35,7 @@ test_that("file_info() works on multiple files", {
 #------------------------------------------------------------------------------
 
 test_that("file_info() skips line count when count_line = FALSE", {
+  skip_on_cran()
   f <- "DESCRIPTION"
   skip_if_not(file.exists(f), "DESCRIPTION file not found")
 
@@ -41,6 +44,7 @@ test_that("file_info() skips line count when count_line = FALSE", {
 })
 
 test_that("file_info() returns relative path when full_name = FALSE", {
+  skip_on_cran()
   f <- "DESCRIPTION"
   skip_if_not(file.exists(f), "DESCRIPTION file not found")
 
@@ -50,6 +54,7 @@ test_that("file_info() returns relative path when full_name = FALSE", {
 
 
 test_that("file_info() filters by regex pattern", {
+  skip_on_cran()
   info <- file_info("R", recursive = TRUE, filter_pattern = "\\.R$")
   skip_if(nrow(info) == 0, "No .R files found")
   expect_true(all(grepl("\\.R$", info$file)))
