@@ -1,4 +1,4 @@
-#' 🥧 Plot a Clean Pie Chart with Optional Inner Labels
+#' Plot a Clean Pie Chart with Optional Inner Labels
 #'
 #' Generate a polished pie chart from a vector or a grouped data frame.
 #' Labels (optional) are placed inside the pie slices.
@@ -35,17 +35,64 @@ plot_pie <- function(data,
                      save = NULL,
                      return_data = FALSE) {
 
-  # -- Dependency check
-  required_pkgs <- c("ggplot2", "dplyr")
-  missing <- required_pkgs[!sapply(required_pkgs, requireNamespace, quietly = TRUE)]
-  if (length(missing) > 0) {
-    cli::cli_abort("Missing packages: {paste(missing, collapse = ', ')}")
+  # ===========================================================================
+  # Parameter validation
+  # ===========================================================================
+
+  # Validate data parameter
+  if (is.null(data)) {
+    cli::cli_abort("`data` cannot be NULL.")
   }
 
+  # Validate label parameter
   label <- match.arg(label)
 
+  # Validate numeric parameters
+  if (!is.numeric(label_size) || length(label_size) != 1 || is.na(label_size) || label_size <= 0) {
+    cli::cli_abort("`label_size` must be a single positive numeric value.")
+  }
+  if (!is.numeric(title_size) || length(title_size) != 1 || is.na(title_size) || title_size <= 0) {
+    cli::cli_abort("`title_size` must be a single positive numeric value.")
+  }
+
+  # Validate character parameters
+  if (!is.character(label_color) || length(label_color) != 1 || is.na(label_color)) {
+    cli::cli_abort("`label_color` must be a single non-NA character string.")
+  }
+  if (!is.character(title_color) || length(title_color) != 1 || is.na(title_color)) {
+    cli::cli_abort("`title_color` must be a single non-NA character string.")
+  }
+  if (!is.character(title) || length(title) != 1 || is.na(title)) {
+    cli::cli_abort("`title` must be a single non-NA character string.")
+  }
+
+  # Validate logical parameters
+  if (!is.logical(preview) || length(preview) != 1) {
+    cli::cli_abort("`preview` must be a single logical value.")
+  }
+  if (!is.logical(return_data) || length(return_data) != 1) {
+    cli::cli_abort("`return_data` must be a single logical value.")
+  }
+
+  # Validate column names for data.frame input
+  if (is.data.frame(data)) {
+    if (!is.character(group_col) || length(group_col) != 1 || is.na(group_col) || group_col == "") {
+      cli::cli_abort("`group_col` must be a single non-empty character string.")
+    }
+    if (!is.character(count_col) || length(count_col) != 1 || is.na(count_col) || count_col == "") {
+      cli::cli_abort("`count_col` must be a single non-empty character string.")
+    }
+  }
+
+  # Validate save parameter
+  if (!is.null(save)) {
+    if (!is.character(save) || length(save) != 1 || is.na(save) || save == "") {
+      cli::cli_abort("`save` must be a single non-empty character string (file path).")
+    }
+  }
+
   # -- Prepare input data
-  if (is.atomic(data) && is.vector(data)) {
+  if (is.atomic(data) || is.vector(data)) {
     tab <- table(data)
     if (length(tab) < 2) {
       cli::cli_abort("Vector input must contain at least two unique groups.")
