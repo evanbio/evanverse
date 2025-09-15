@@ -1,4 +1,4 @@
-#' 🎨 list_palettes(): List All Color Palettes from RDS
+#' list_palettes(): List All Color Palettes from RDS
 #'
 #' Load and list all available color palettes compiled into an RDS file.
 #'
@@ -19,25 +19,25 @@ list_palettes <- function(palette_rds = system.file("extdata", "palettes.rds", p
                           sort = TRUE,
                           verbose = TRUE) {
 
-  # --- Check dependencies
-  if (!requireNamespace("cli", quietly = TRUE)) {
-    stop("Package 'cli' is required. Please install it.")
-  }
-
   type <- match.arg(type, several.ok = TRUE)
 
-  # --- Check file
+  # ===========================================================================
+  # Check file
+  # ===========================================================================
   if (!file.exists(palette_rds)) {
     cli::cli_alert_danger("Palette file not found: {.path {palette_rds}}")
-    return(invisible(tibble::tibble(
+    return(invisible(data.frame(
       name = character(),
       type = character(),
       n_color = integer(),
-      colors = list()
+      colors = I(list()),
+      stringsAsFactors = FALSE
     )))
   }
 
-  # --- Load data
+  # ===========================================================================
+  # Load data
+  # ===========================================================================
   palettes <- tryCatch(readRDS(palette_rds), error = function(e) {
     cli::cli_alert_danger("Failed to read RDS: {e$message}")
     stop(e)
@@ -47,15 +47,18 @@ list_palettes <- function(palette_rds = system.file("extdata", "palettes.rds", p
 
   if (length(matched_types) == 0) {
     cli::cli_alert_warning("No matching types in RDS. Available: {paste(names(palettes), collapse = ', ')}")
-    return(invisible(tibble::tibble(
+    return(invisible(data.frame(
       name = character(),
       type = character(),
       n_color = integer(),
-      colors = list()
+      colors = I(list()),
+      stringsAsFactors = FALSE
     )))
   }
 
-  # --- Build palette info list
+  # ===========================================================================
+  # Build palette info list
+  # ===========================================================================
   palette_df <- purrr::map_dfr(matched_types, function(t) {
     pset <- palettes[[t]]
     if (length(pset) == 0) return(NULL)
@@ -70,14 +73,21 @@ list_palettes <- function(palette_rds = system.file("extdata", "palettes.rds", p
     })
   })
 
-  # --- Sort if requested
+  # convert to base data.frame for consistency
+  palette_df <- as.data.frame(palette_df, stringsAsFactors = FALSE)
+
+  # ===========================================================================
+  # Sort if requested
+  # ===========================================================================
   if (sort) {
     palette_df <- palette_df[order(palette_df$type, palette_df$n_color, palette_df$name), ]
   }
 
-  # --- Display (optional)
+  # ===========================================================================
+  # Display (optional)
+  # ===========================================================================
   if (verbose) {
-    cli::cli_h1("🎨 Available Color Palettes")
+    cli::cli_h1("Available Color Palettes")
     cli::cli_alert_info("Total palettes: {nrow(palette_df)}")
 
     type_counts <- table(palette_df$type)
@@ -86,7 +96,7 @@ list_palettes <- function(palette_rds = system.file("extdata", "palettes.rds", p
     })
 
     purrr::walk(seq_len(nrow(palette_df)), function(i) {
-      cli::cli_alert_info("• {palette_df$name[i]} ({palette_df$type[i]}) – {palette_df$n_color[i]} colors")
+      cli::cli_alert_info("• {palette_df$name[i]} ({palette_df$type[i]}) - {palette_df$n_color[i]} colors")
     })
   }
 
