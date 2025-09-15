@@ -1,14 +1,15 @@
-#' 🧭 rows_with_void(): Detect Rows Containing Void Values (NA / NULL / "")
+#' rows_with_void: Detect rows containing void values (NA / NULL / "")
 #'
 #' Scan a data.frame or tibble and identify rows that contain any "void" values.
-#' Void values include `NA`, `NULL`, and empty strings (`""`), which can be toggled via parameters.
+#' Void values include `NA`, `NULL`, and empty strings `""` (toggle via flags).
 #'
 #' @param data A data.frame or tibble.
 #' @param include_na Logical. Detect `NA` if TRUE. Default: TRUE.
 #' @param include_null Logical. Detect `NULL` if TRUE. Default: TRUE.
-#' @param include_empty_str Logical. Detect `""` if TRUE. Default: TRUE.
+#' @param include_empty_str Logical. Detect empty strings `""` if TRUE. Default: TRUE.
 #'
-#' @return A logical vector indicating if each row contains any void values.
+#' @return A logical vector of length `nrow(data)` indicating whether each row
+#'   contains at least one void value.
 #' @export
 #'
 #' @examples
@@ -19,17 +20,31 @@ rows_with_void <- function(data,
                            include_na = TRUE,
                            include_null = TRUE,
                            include_empty_str = TRUE) {
+
+  # ===========================================================================
+  # Parameter validation
+  # ===========================================================================
   if (!is.data.frame(data)) {
     cli::cli_abort("Input must be a data.frame or tibble.")
   }
 
-  # Apply is_void function on each row
-  result <- apply(data, 1, function(row) {
-    any(is_void(row,
-                include_na = include_na,
-                include_null = include_null,
-                include_empty_str = include_empty_str))
-  })
+  # ===========================================================================
+  # Row-wise scan using `is_void`
+  # ===========================================================================
+  result <- apply(
+    data, 1,
+    function(row) {
+      any(is_void(
+        row,
+        include_na = include_na,
+        include_null = include_null,
+        include_empty_str = include_empty_str
+      ))
+    }
+  )
 
+  # ===========================================================================
+  # Return
+  # ===========================================================================
   result
 }
