@@ -2,7 +2,7 @@
 % Please edit documentation in R/perm.R
 \name{perm}
 \alias{perm}
-\title{🧮 perm: Calculate Number of Permutations A(n, k)}
+\title{Calculate Number of Permutations A(n, k)}
 \usage{
 perm(n, k)
 }

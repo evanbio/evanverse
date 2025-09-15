@@ -2,7 +2,7 @@
 % Please edit documentation in R/create_palette.R
 \name{create_palette}
 \alias{create_palette}
-\title{🎨 create_palette(): Save Custom Color Palettes as JSON}
+\title{create_palette(): Save Custom Color Palettes as JSON}
 \usage{
 create_palette(
   name,

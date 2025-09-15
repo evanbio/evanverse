@@ -2,7 +2,7 @@
 % Please edit documentation in R/cols_with_void.R
 \name{cols_with_void}
 \alias{cols_with_void}
-\title{🧭 cols_with_void(): Detect Columns Containing Void Values}
+\title{cols_with_void(): Detect Columns Containing Void Values}
 \usage{
 cols_with_void(
   data,
@@ -34,4 +34,5 @@ Void values include \code{NA}, \code{NULL}, and \code{""}, which can be toggled 
 df <- data.frame(name = c("A", "", "C"), score = c(1, NA, 3), id = 1:3)
 cols_with_void(df)
 cols_with_void(df, return_names = FALSE)
+cols_with_void(df, include_na = FALSE)
 }

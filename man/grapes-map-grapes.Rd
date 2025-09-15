@@ -2,7 +2,7 @@
 % Please edit documentation in R/percent_map_operator.R
 \name{\%map\%}
 \alias{\%map\%}
-\title{🔁 \%map\%: Case-insensitive mapping returning named vector}
+\title{\%map\%: Case-insensitive mapping returning named vector}
 \usage{
 x \%map\% table
 }
@@ -12,14 +12,25 @@ x \%map\% table
 \item{table}{Character vector to match against.}
 }
 \value{
-A named character vector. Names come from matched \code{table} values, values from \code{x}.
+A named character vector. Names are from matched \code{table} values, values are from \code{x}.
+If no matches are found, returns a zero-length named character vector.
 }
 \description{
 Performs case-insensitive matching between elements in \code{x} and entries in \code{table},
-returning a named character vector: matched \code{table} entries as names, and \code{x} as values.
-Unmatched values are assigned a default name ("unknown") but removed before returning.
+returning a named character vector: names are the matched entries from \code{table},
+values are the original elements from \code{x}.
+Unmatched values are ignored (not included in the result).
 }
 \examples{
+# Basic matching (case-insensitive)
 c("tp53", "brca1", "egfr") \%map\% c("TP53", "EGFR", "MYC")
-# → Named vector with matches: TP53 = "tp53", EGFR = "egfr"
+# → Named vector: TP53 = "tp53", EGFR = "egfr"
+
+# Values not in table are dropped
+c("akt1", "tp53") \%map\% c("TP53", "EGFR")
+# → TP53 = "tp53"
+
+# All unmatched values → empty result
+c("none1", "none2") \%map\% c("TP53", "EGFR")
+# → character(0)
 }

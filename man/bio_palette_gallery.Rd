@@ -2,7 +2,7 @@
 % Please edit documentation in R/bio_palette_gallery.R
 \name{bio_palette_gallery}
 \alias{bio_palette_gallery}
-\title{🌈 bio_palette_gallery(): Visualize All Palettes in a Gallery View}
+\title{bio_palette_gallery(): Visualize All Palettes in a Gallery View}
 \usage{
 bio_palette_gallery(
   palette_rds = NULL,

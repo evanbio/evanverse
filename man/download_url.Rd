@@ -2,7 +2,7 @@
 % Please edit documentation in R/download_url.R
 \name{download_url}
 \alias{download_url}
-\title{📥 download_url(): Professional Downloader based on curl}
+\title{download_url(): Download File from URL}
 \usage{
 download_url(
   url,
@@ -18,29 +18,94 @@ download_url(
 )
 }
 \arguments{
-\item{url}{Character. Full URL to the file (FTP/HTTP/HTTPS/SFTP).}
+\item{url}{Character string. Full URL to the file to download.
+Supports HTTP, HTTPS, FTP, and SFTP protocols.}
 
-\item{dest}{Character. Destination file path. Default: basename(url).}
+\item{dest}{Character string. Destination file path. If not specified,
+uses the basename of the URL. Default: basename(url).}
 
 \item{overwrite}{Logical. Whether to overwrite existing files. Default: FALSE.}
 
-\item{unzip}{Logical. Whether to unzip after download (supports .zip/.gz/.tar.gz). Default: FALSE.}
+\item{unzip}{Logical. Whether to automatically extract compressed files
+after download. Supports .zip, .gz, .tar.gz formats. Default: FALSE.}
 
-\item{verbose}{Logical. Show download progress. Default: TRUE.}
+\item{verbose}{Logical. Whether to show download progress and status messages. Default: TRUE.}
 
-\item{timeout}{Integer. Download timeout in seconds. Default: 600.}
+\item{timeout}{Numeric. Download timeout in seconds. Default: 600 (10 minutes).}
 
-\item{headers}{Named list. Custom HTTP headers (e.g., Authorization). Default: NULL.}
+\item{headers}{Named list. Custom HTTP headers for the request
+(e.g., list(Authorization = "Bearer token")). Default: NULL.}
 
-\item{resume}{Logical. Try to resume interrupted downloads. Default: FALSE.}
+\item{resume}{Logical. Whether to attempt resuming interrupted downloads
+if a partial file exists. Default: FALSE.}
 
-\item{speed_limit}{Numeric. Bandwidth limit in bytes/sec (e.g., 500000 = 500KB/s). Default: NULL (no limit).}
+\item{speed_limit}{Numeric. Bandwidth limit in bytes per second
+(e.g., 500000 = 500KB/s). Default: NULL (no limit).}
 
-\item{retries}{Integer. Number of retry attempts if failed. Default: 3.}
+\item{retries}{Integer. Number of retry attempts on download failure. Default: 3.}
 }
 \value{
-Invisibly returns the downloaded (and optionally unzipped) file path.
+Invisible character string or vector of file paths:
+\describe{
+\item{If unzip = FALSE}{Path to the downloaded file}
+\item{If unzip = TRUE}{Vector of paths to extracted files}
+}
 }
 \description{
-A robust and flexible downloader using curl. Supports timeout, headers, resume, bandwidth limit, and retries.
+Downloads files from URLs (HTTP/HTTPS/FTP/SFTP) with robust error handling,
+retry mechanisms, and advanced features like resume, bandwidth limiting, and auto-extraction.
+}
+\details{
+This function provides a comprehensive solution for downloading files with:
+
+\subsection{Supported Protocols}{
+\enumerate{
+\item \strong{HTTP/HTTPS}: Standard web downloads
+\item \strong{FTP}: File Transfer Protocol
+\item \strong{SFTP}: Secure File Transfer Protocol
+}
+}
+
+\subsection{Advanced Features}{
+\enumerate{
+\item \strong{Retry Mechanism}: Automatic retry with exponential backoff
+\item \strong{Resume Support}: Continue interrupted downloads
+\item \strong{Bandwidth Control}: Limit download speed
+\item \strong{Auto-Extraction}: Automatic decompression of archives
+\item \strong{Progress Tracking}: Real-time download progress
+\item \strong{Custom Headers}: Support for authentication and custom headers
+}
+}
+
+\subsection{Compression Support}{
+\enumerate{
+\item \strong{.zip}: Extract to directory
+\item \strong{.gz}: Decompress single file
+\item \strong{.tar.gz}: Extract archive contents
+}
+}
+}
+\examples{
+\dontrun{
+# Basic usage
+download_url("https://example.com/data.csv")
+
+# Advanced usage with custom settings
+download_url(
+  url = "https://example.com/large-dataset.zip",
+  dest = "data/my-dataset.zip",
+  unzip = TRUE,
+  resume = TRUE,
+  speed_limit = 1000000,  # 1MB/s limit
+  retries = 5,
+  timeout = 1800  # 30 minutes
+)
+
+# With authentication
+download_url(
+  url = "https://api.example.com/private/data.json",
+  headers = list(Authorization = "Bearer your-token-here")
+)
+}
+
 }

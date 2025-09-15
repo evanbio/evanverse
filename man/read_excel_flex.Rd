@@ -2,7 +2,7 @@
 % Please edit documentation in R/read_excel_flex.R
 \name{read_excel_flex}
 \alias{read_excel_flex}
-\title{📥 Flexible Excel Reader (Upgraded)}
+\title{Flexible Excel reader}
 \usage{
 read_excel_flex(
   file_path,
@@ -19,32 +19,32 @@ read_excel_flex(
 )
 }
 \arguments{
-\item{file_path}{Path to the Excel file (.xlsx or .xls)}
+\item{file_path}{Path to the Excel file (.xlsx or .xls).}
 
-\item{sheet}{Sheet name or number to read (default: 1)}
+\item{sheet}{Sheet name or index to read (default: 1).}
 
-\item{skip}{Number of lines to skip before reading data (default: 0)}
+\item{skip}{Number of lines to skip before reading data (default: 0).}
 
-\item{header}{Whether the first row contains column names (default: TRUE)}
+\item{header}{Logical. Whether the first row contains column names (default: TRUE).}
 
-\item{range}{Cell range to read, e.g., "B2:D100" (default: NULL)}
+\item{range}{Optional cell range (e.g., \code{"B2:D100"}). Default: \code{NULL}.}
 
-\item{col_types}{Optional vector to specify column types}
+\item{col_types}{Optional vector specifying column types; passed to \code{readxl}.}
 
-\item{clean_names}{Whether to clean column names using janitor (default: TRUE)}
+\item{clean_names}{Logical. Clean column names with \code{janitor::clean_names()} (default: TRUE).}
 
-\item{guess_max}{Max number of rows used for column type guessing}
+\item{guess_max}{Max rows to guess column types (default: 1000).}
 
-\item{trim_ws}{Whether to trim whitespace around text fields}
+\item{trim_ws}{Logical. Trim surrounding whitespace in text fields (default: TRUE).}
 
-\item{na}{Values to interpret as NA}
+\item{na}{Values to interpret as NA (default: \code{""}).}
 
-\item{verbose}{Whether to show CLI output}
+\item{verbose}{Logical. Show CLI output (default: TRUE).}
 }
 \value{
-A cleaned data.frame or tibble.
+A tibble (or data.frame) read from the Excel sheet.
 }
 \description{
-An enhanced Excel reader using \code{readxl::read_excel()} with CLI output,
-automatic column name cleaning, and optional type control.
+Read an Excel sheet via \code{readxl::read_excel()} with optional column-name
+cleaning (\code{janitor::clean_names()}), basic type control, and CLI messages.
 }

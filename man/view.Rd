@@ -2,7 +2,7 @@
 % Please edit documentation in R/view.R
 \name{view}
 \alias{view}
-\title{view}
+\title{Quick interactive table viewer (reactable)}
 \usage{
 view(
   data,
@@ -33,5 +33,10 @@ view(
 A reactable widget rendered in the Viewer pane.
 }
 \description{
-Quick interactive table viewer using reactable.
+Quickly view a data.frame or tibble as an interactive table in the Viewer pane.
+}
+\examples{
+view(iris)
+view(mtcars, page_size = 20, striped = TRUE, filterable = TRUE)
+
 }

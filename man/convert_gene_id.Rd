@@ -2,7 +2,7 @@
 % Please edit documentation in R/convert_gene_id.R
 \name{convert_gene_id}
 \alias{convert_gene_id}
-\title{🔄 convert_gene_id(): Convert gene identifiers using a reference table}
+\title{convert_gene_id(): Convert gene identifiers using a reference table}
 \usage{
 convert_gene_id(
   query,

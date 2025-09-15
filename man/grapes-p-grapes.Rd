@@ -2,7 +2,7 @@
 % Please edit documentation in R/percent_p_operator.R
 \name{\%p\%}
 \alias{\%p\%}
-\title{Paste two strings with a space}
+\title{\verb{\%p\%}: paste two strings with a single space}
 \usage{
 lhs \%p\% rhs
 }
@@ -12,14 +12,14 @@ lhs \%p\% rhs
 \item{rhs}{A character vector on the right-hand side.}
 }
 \value{
-A character vector, with elements from \code{lhs} and \code{rhs} pasted together using a space.
+A character vector, concatenating \code{lhs} and \code{rhs} with a single space.
 }
 \description{
-\verb{\%p\%} is a custom infix operator for string concatenation with a single space.
-It’s inspired by the readability of \verb{\%>\%}, but meant for expressive text building.
+An infix operator for string concatenation with one space between \code{lhs} and \code{rhs}.
+Inspired by the readability of \verb{\%>\%}, intended for expressive text building.
 }
 \examples{
 "Hello" \%p\% "world"
 "Good" \%p\% "job"
-
+c("hello", "good") \%p\% c("world", "morning")   # vectorized
 }

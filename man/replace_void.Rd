@@ -2,7 +2,7 @@
 % Please edit documentation in R/replace_void.R
 \name{replace_void}
 \alias{replace_void}
-\title{🔁 replace_void(): Replace Void Values (NA / NULL / "") with a Specified Value}
+\title{Replace void values (NA / NULL / "")}
 \usage{
 replace_void(
   x,
@@ -21,14 +21,14 @@ replace_void(
 
 \item{include_null}{Logical. Replace \code{NULL} if TRUE. Default: TRUE.}
 
-\item{include_empty_str}{Logical. Replace \code{""} if TRUE. Default: TRUE.}
+\item{include_empty_str}{Logical. Replace empty strings \code{""} if TRUE. Default: TRUE.}
 }
 \value{
 A cleaned vector or list with void values replaced.
 }
 \description{
-Replace elements in a vector or list that are considered "void" with a user-defined \code{value}.
-Void values include \code{NA}, \code{NULL}, and empty strings (\code{""}), each toggleable.
+Replace elements in a vector or list considered "void" with a specified value.
+Void values include \code{NA}, \code{NULL}, and empty strings \code{""} (toggle via flags).
 }
 \examples{
 replace_void(c(NA, "", "a"), value = "N/A")

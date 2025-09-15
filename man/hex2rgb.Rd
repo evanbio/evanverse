@@ -2,20 +2,26 @@
 % Please edit documentation in R/hex2rgb.R
 \name{hex2rgb}
 \alias{hex2rgb}
-\title{🎨 Convert HEX color(s) to RGB format}
+\title{Convert HEX color(s) to RGB numeric components}
 \usage{
 hex2rgb(hex)
 }
 \arguments{
-\item{hex}{A HEX color string (e.g., \code{"#FF8000"}) or a character vector of HEX codes.}
+\item{hex}{Character. A HEX color string (e.g. \code{"#FF8000"}) or a character
+vector of HEX codes. No NA values allowed.}
 }
 \value{
-A numeric vector of length 3 for a single HEX input, or a named list of RGB vectors for multiple inputs.
+If \code{hex} has length 1, a named numeric vector with elements
+\code{c(r, g, b)}. If \code{hex} has length > 1, a named list where each element is
+a named numeric vector for the corresponding input.
 }
 \description{
-Converts a single HEX string or a character vector of HEX strings to RGB numeric values.
+Convert a single HEX color string or a character vector of HEX strings to RGB
+numeric components. The function accepts values with or without a leading
+\verb{#}. Messaging uses \code{cli} if available and falls back to \code{message()}.
 }
 \examples{
 hex2rgb("#FF8000")
 hex2rgb(c("#FF8000", "#00FF00"))
+
 }

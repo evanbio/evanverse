@@ -2,7 +2,7 @@
 % Please edit documentation in R/plot_pie.R
 \name{plot_pie}
 \alias{plot_pie}
-\title{🥧 Plot a Clean Pie Chart with Optional Inner Labels}
+\title{Plot a Clean Pie Chart with Optional Inner Labels}
 \usage{
 plot_pie(
   data,

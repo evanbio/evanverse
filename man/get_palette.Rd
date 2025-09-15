@@ -2,7 +2,7 @@
 % Please edit documentation in R/get_palette.R
 \name{get_palette}
 \alias{get_palette}
-\title{🎨 get_palette(): Load Color Palette from RDS}
+\title{Get Palette: Load Color Palette from RDS}
 \usage{
 get_palette(
   name,
@@ -12,22 +12,27 @@ get_palette(
 )
 }
 \arguments{
-\item{name}{Name of the palette (e.g. "vividset").}
+\item{name}{Character. Name of the palette (e.g. "vividset").}
 
-\item{type}{One of: \code{"sequential"}, \code{"diverging"}, \code{"qualitative"}.}
+\item{type}{Character. One of "sequential", "diverging", "qualitative".}
 
-\item{n}{Number of colors to return. Default \code{NULL} returns all.}
+\item{n}{Integer. Number of colors to return. If NULL, returns all colors. Default is NULL.}
 
-\item{palette_rds}{Path to RDS file. Default: \code{here::here("data/palettes.rds")}.}
+\item{palette_rds}{Character. Path to RDS file. Default uses system file in package.}
 }
 \value{
-A character vector of HEX color codes.
+Character vector of HEX color codes.
 }
 \description{
-Load a named palette from \code{data/palettes.rds}, returning a vector of HEX colors.
-Automatically checks for type mismatch and gives smart suggestions.
+Load a named palette from data/palettes.rds, returning a vector of HEX colors.
+Automatically checks for type mismatch and provides smart suggestions.
 }
 \examples{
+\dontrun{
 get_palette("vividset", type = "qualitative")
 get_palette("softtrio", type = "qualitative", n = 2)
+get_palette("plasma", type = "sequential", n = 5)
+get_palette("RdYlBu", type = "diverging")
+}
+
 }

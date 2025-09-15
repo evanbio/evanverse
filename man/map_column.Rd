@@ -2,7 +2,7 @@
 % Please edit documentation in R/map_column.R
 \name{map_column}
 \alias{map_column}
-\title{🔁 map_column(): Map values in a column using named vector or list}
+\title{map_column(): Map values in a column using named vector or list}
 \usage{
 map_column(
   query,
@@ -30,7 +30,7 @@ map_column(
 \item{preview}{Logical. Whether to print preview of result (default TRUE).}
 }
 \value{
-A data.frame with a new or modified column based on the mapping.
+A data.frame with a new or modified column based on the mapping (returned invisibly).
 }
 \description{
 Maps values in a column of a data.frame (query) to new values using a named

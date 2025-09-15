@@ -2,7 +2,7 @@
 % Please edit documentation in R/comb.R
 \name{comb}
 \alias{comb}
-\title{🧮 comb: Calculate Number of Combinations C(n, k)}
+\title{comb: Calculate Number of Combinations C(n, k)}
 \usage{
 comb(n, k)
 }

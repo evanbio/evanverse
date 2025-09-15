@@ -2,7 +2,7 @@
 % Please edit documentation in R/drop_void.R
 \name{drop_void}
 \alias{drop_void}
-\title{🧼 drop_void(): Remove Void Values from a Vector or List}
+\title{drop_void: Remove Void Values from a Vector or List}
 \usage{
 drop_void(x, include_na = TRUE, include_null = TRUE, include_empty_str = TRUE)
 }
@@ -19,8 +19,8 @@ drop_void(x, include_na = TRUE, include_null = TRUE, include_empty_str = TRUE)
 A cleaned vector or list of the same type as input, with void values removed.
 }
 \description{
-Remove elements from a vector or list that are considered "void":
-\code{NA}, \code{NULL}, and empty strings (\code{""}). Each can be toggled via parameters.
+Removes elements from a vector or list that are considered "void":
+\code{NA}, \code{NULL}, and empty strings (`"""). Each can be toggled via parameters.
 }
 \examples{
 drop_void(c("apple", "", NA, "banana"))

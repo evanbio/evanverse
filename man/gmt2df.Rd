@@ -2,23 +2,27 @@
 % Please edit documentation in R/gmt2df.R
 \name{gmt2df}
 \alias{gmt2df}
-\title{📄 Convert GMT File to Long-format Data Frame}
+\title{gmt2df: Convert GMT File to Long-format Data Frame}
 \usage{
 gmt2df(file, verbose = TRUE)
 }
 \arguments{
-\item{file}{Path to a \code{.gmt} file (supports .gmt or .gmt.gz).}
+\item{file}{Character. Path to a .gmt file (supports .gmt or .gmt.gz).}
 
-\item{verbose}{Logical. Whether to show progress message. Default = TRUE.}
+\item{verbose}{Logical. Whether to show progress message. Default is TRUE.}
 }
 \value{
-A tibble with columns: \code{term}, \code{description}, and \code{gene}.
+A tibble with columns: term, description, and gene.
 }
 \description{
-Reads a \code{.gmt} gene set file and returns a long-format data frame with
+Reads a .gmt gene set file and returns a long-format data frame with
 one row per gene, including the gene set name and optional description.
 }
 \examples{
-# gmt_file <- system.file("extdata", "h.all.v2024.1.Hs.symbols.gmt", package = "evanverse")
-# gmt2df(gmt_file)
+\dontrun{
+gmt_file <- system.file("extdata", "h.all.v2024.1.Hs.symbols.gmt", package = "evanverse")
+result <- gmt2df(gmt_file)
+head(result)
+}
+
 }

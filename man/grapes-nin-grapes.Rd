@@ -2,7 +2,7 @@
 % Please edit documentation in R/percent_nin_operator.R
 \name{\%nin\%}
 \alias{\%nin\%}
-\title{❌ \verb{\%nin\%}: Not In Operator}
+\title{\verb{\%nin\%}: Not-in operator (negation of \code{\%in\%})}
 \usage{
 ... \%nin\% NA
 }
@@ -12,14 +12,22 @@
 \item{table}{A vector to match against.}
 }
 \value{
-A logical vector indicating if elements of \code{x} are \strong{not in} \code{table}.
+A logical vector where \code{TRUE} indicates the corresponding element of \code{x}
+is not present in \code{table}. Results involving \code{NA} follow base R semantics:
+e.g., if \code{x} contains \code{NA} and \code{table} does not, the result at that position
+is \code{NA} (since \code{!NA} is \code{NA}).
 }
 \description{
-A binary operator to test if elements of the left-hand vector are \strong{not}
-present in the right-hand vector. This is the negation of \code{\%in\%}, and is
-equivalent to \code{!(x \%in\% y)}.
+A binary operator to test whether elements of the left-hand vector are \strong{not}
+present in the right-hand vector. This is equivalent to \code{!(x \%in\% table)}.
 }
 \examples{
-c("A", "B", "C") \%nin\% c("B", "D")  # TRUE FALSE TRUE
-1:5 \%nin\% c(2, 4)                   # TRUE FALSE TRUE FALSE TRUE
+c("A", "B", "C") \%nin\% c("B", "D")   # TRUE FALSE TRUE
+1:5 \%nin\% c(2, 4)                    # TRUE FALSE TRUE FALSE TRUE
+NA \%nin\% c(1, 2)                     # NA (since NA \%in\% c(1,2) is NA)
+NA \%nin\% c(NA, 1)                    # FALSE (since NA is in table)
+
+# Works with mixed types as `\%in\%` does:
+c(1, "a") \%nin\% c("a", "b", 2)
+
 }

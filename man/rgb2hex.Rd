@@ -2,26 +2,22 @@
 % Please edit documentation in R/rgb2hex.R
 \name{rgb2hex}
 \alias{rgb2hex}
-\title{🎨 Convert RGB values to HEX color codes}
+\title{Convert RGB values to HEX color codes}
 \usage{
 rgb2hex(rgb)
 }
 \arguments{
-\item{rgb}{A numeric vector of length 3 (e.g. \code{c(255, 128, 0)}),
-or a list of such vectors (e.g. \code{list(c(255, 128, 0), c(0, 255, 0))}).}
+\item{rgb}{A numeric vector of length 3 (e.g., \code{c(255, 128, 0)}),
+or a list of such vectors (e.g., \code{list(c(255,128,0), c(0,255,0))}).}
 }
 \value{
-A HEX color string if a single RGB vector is provided,
-or a character vector of HEX codes if a list of RGB values is provided.
+A HEX color string if a single RGB vector is provided, or a character
+vector of HEX codes if a list is provided.
 }
 \description{
-A utility function to convert RGB color values (either a numeric vector or list of vectors)
-into HEX color codes, with informative feedback.
+Convert an RGB triplet (or a list of triplets) to HEX color codes.
 }
 \examples{
-# Convert single RGB value
-rgb2hex(c(255, 128, 0))  # "#FF8000"
-
-# Convert multiple RGB values
-rgb2hex(list(c(255, 128, 0), c(0, 255, 0)))  # c("#FF8000", "#00FF00")
+rgb2hex(c(255, 128, 0))                           # "#FF8000"
+rgb2hex(list(c(255,128,0), c(0,255,0)))           # c("#FF8000", "#00FF00")
 }

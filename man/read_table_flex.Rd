@@ -2,7 +2,7 @@
 % Please edit documentation in R/read_table_flex.R
 \name{read_table_flex}
 \alias{read_table_flex}
-\title{📄 read_table_flex(): Flexible and fast table reader using data.table::fread}
+\title{Flexible and fast table reader using data.table::fread}
 \usage{
 read_table_flex(
   file_path,
@@ -17,17 +17,16 @@ read_table_flex(
 
 \item{sep}{Optional. Field delimiter. If \code{NULL}, auto-detected by file extension.}
 
-\item{encoding}{Character. File encoding. Default: \code{"UTF-8"}.}
+\item{encoding}{Character. File encoding accepted by fread: "unknown", "UTF-8", or "Latin-1".}
 
 \item{header}{Logical. Whether the file contains a header row. Default: \code{TRUE}.}
 
 \item{verbose}{Logical. Show progress and details. Default: \code{FALSE}.}
 }
 \value{
-A \code{data.table::data.table} object containing the parsed tabular data.
+A \code{data.table::data.table} with the parsed data.
 }
 \description{
-A robust and flexible table reader that supports automatic delimiter detection
-for \code{.csv}, \code{.tsv}, \code{.txt}, \code{.gz}, and similar tabular files (including compressed).
-Uses \code{data.table::fread()} for efficient parsing. Displays helpful CLI messages.
+Robust table reader with auto delimiter detection for \code{.csv}, \code{.tsv}, \code{.txt},
+and their \code{.gz} variants. Uses \code{data.table::fread()} and prints CLI messages.
 }

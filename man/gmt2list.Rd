@@ -2,23 +2,28 @@
 % Please edit documentation in R/gmt2list.R
 \name{gmt2list}
 \alias{gmt2list}
-\title{📄 Convert GMT File to Named List}
+\title{gmt2list: Convert GMT File to Named List}
 \usage{
 gmt2list(file, verbose = TRUE)
 }
 \arguments{
-\item{file}{Path to a \code{.gmt} file.}
+\item{file}{Character. Path to a .gmt file.}
 
-\item{verbose}{Logical. Whether to print message. Default = TRUE.}
+\item{verbose}{Logical. Whether to print message. Default is TRUE.}
 }
 \value{
 A named list where each element is a character vector of gene symbols.
 }
 \description{
-Reads a \code{.gmt} gene set file and returns a named list,
+Reads a .gmt gene set file and returns a named list,
 where each list element is a gene set.
 }
 \examples{
-# gmt_file <- system.file("extdata", "h.all.v2024.1.Hs.symbols.gmt", package = "evanverse")
-# gene_sets <- gmt2list(gmt_file)
+\dontrun{
+gmt_file <- system.file("extdata", "h.all.v2024.1.Hs.symbols.gmt", package = "evanverse")
+gene_sets <- gmt2list(gmt_file)
+length(gene_sets)
+names(gene_sets)[1:5]
+}
+
 }

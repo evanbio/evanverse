@@ -2,7 +2,7 @@
 % Please edit documentation in R/check_pkg.R
 \name{check_pkg}
 \alias{check_pkg}
-\title{✅ Check if packages are installed and optionally install them}
+\title{check_pkg(): Check if packages are installed and optionally install them}
 \usage{
 check_pkg(
   pkg = NULL,

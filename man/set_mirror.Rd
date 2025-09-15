@@ -2,20 +2,25 @@
 % Please edit documentation in R/set_mirror.R
 \name{set_mirror}
 \alias{set_mirror}
-\title{🔄 set_mirror: Set CRAN/Bioconductor Mirrors}
+\title{Set CRAN/Bioconductor Mirrors}
 \usage{
-set_mirror(repo = c("cran", "bioc", "all"), mirror = "cran")
+set_mirror(repo = c("all", "cran", "bioc"), mirror = "tuna")
 }
 \arguments{
-\item{repo}{Character. "cran", "bioc", or "all".}
+\item{repo}{Character. Repository type: "cran", "bioc", or "all" (default: "all").}
 
-\item{mirror}{Character. Predefined mirror name or custom URL.}
+\item{mirror}{Character. Predefined mirror name (default: "tuna").}
+}
+\value{
+Previous mirror settings (invisibly)
 }
 \description{
 Switch CRAN and/or Bioconductor mirrors for faster package installation.
 }
 \examples{
+\dontrun{
+set_mirror()  # Use default: all repos with tuna mirror
 set_mirror("cran", "westlake")
-set_mirror("bioc", "bioc_tuna")
-set_mirror("all", "ustc")
+set_mirror("bioc", "ustc")
+}
 }

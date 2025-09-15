@@ -2,26 +2,32 @@
 % Please edit documentation in R/get_ext.R
 \name{get_ext}
 \alias{get_ext}
-\title{🧾 Get File Extension(s)}
+\title{get_ext: Extract File Extension(s)}
 \usage{
-get_ext(paths, keep_all = FALSE)
+get_ext(paths, keep_all = FALSE, include_dot = FALSE, to_lower = FALSE)
 }
 \arguments{
-\item{paths}{A character vector of file names or paths.}
+\item{paths}{Character vector of file names or paths.}
 
-\item{keep_all}{Logical. If TRUE, returns full suffix after first dot in basename
-(e.g., "tar.gz"); otherwise returns only the last extension. Default: FALSE.}
+\item{keep_all}{Logical. If TRUE, returns full suffix after first dot in basename.
+If FALSE, returns only the last extension. Default is FALSE.}
+
+\item{include_dot}{Logical. If TRUE, includes the leading dot in result. Default is FALSE.}
+
+\item{to_lower}{Logical. If TRUE, converts extensions to lowercase. Default is FALSE.}
 }
 \value{
-A character vector of extensions (no leading dots).
+Character vector of extensions.
 }
 \description{
 Extract file extension(s) from a file name or path. Supports vector input and
-optionally preserves compound extensions (e.g., \code{.tar.gz}) when \code{keep_all = TRUE}.
+optionally preserves compound extensions (e.g., .tar.gz) when keep_all = TRUE.
 }
 \examples{
 get_ext("data.csv")               # "csv"
-get_ext("archive.tar.gz")        # "gz"
-get_ext("archive.tar.gz", TRUE)  # "tar.gz"
+get_ext("archive.tar.gz")         # "gz"
+get_ext("archive.tar.gz", TRUE)   # "tar.gz"
 get_ext(c("a.R", "b.txt", "c"))   # "R" "txt" ""
+get_ext("data.CSV", to_lower = TRUE)  # "csv"
+
 }

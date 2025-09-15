@@ -2,7 +2,7 @@
 % Please edit documentation in R/download_batch.R
 \name{download_batch}
 \alias{download_batch}
-\title{📥 download_batch(): Batch download files using multi_download (parallel with curl)}
+\title{download_batch(): Batch download files using multi_download (parallel with curl)}
 \usage{
 download_batch(
   urls,

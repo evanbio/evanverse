@@ -2,7 +2,7 @@
 % Please edit documentation in R/list_palettes.R
 \name{list_palettes}
 \alias{list_palettes}
-\title{🎨 list_palettes(): List All Color Palettes from RDS}
+\title{list_palettes(): List All Color Palettes from RDS}
 \usage{
 list_palettes(
   palette_rds = system.file("extdata", "palettes.rds", package = "evanverse"),

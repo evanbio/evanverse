@@ -2,20 +2,20 @@
 % Please edit documentation in R/remind.R
 \name{remind}
 \alias{remind}
-\title{📌 Show usage tips for common R commands}
+\title{Show usage tips for common R commands}
 \usage{
 remind(keyword = NULL)
 }
 \arguments{
-\item{keyword}{A keyword like "glimpse" or "read_excel". If NULL, show all examples.}
+\item{keyword}{A keyword like "glimpse" or "read_excel". If \code{NULL}, show all.}
 }
 \value{
-Printed reminder or keyword list (invisibly)
+Invisibly returns the matched keywords (character vector).
 }
 \description{
-A helper to recall commonly used R functions with examples.
+A helper to recall commonly used R functions with short examples.
 }
 \examples{
 remind("glimpse")
-remind()  # Show all keywords
+remind()  # show all keywords
 }

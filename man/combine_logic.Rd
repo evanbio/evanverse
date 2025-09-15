@@ -2,7 +2,7 @@
 % Please edit documentation in R/combine_logic.R
 \name{combine_logic}
 \alias{combine_logic}
-\title{🧮 Combine multiple logical vectors with a logical operator}
+\title{combine_logic: Combine multiple logical vectors with a logical operator}
 \usage{
 combine_logic(..., op = "&", na.rm = FALSE)
 }

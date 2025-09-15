@@ -2,21 +2,21 @@
 % Please edit documentation in R/pkg_functions.R
 \name{pkg_functions}
 \alias{pkg_functions}
-\title{📦 pkg_functions: List Exported Functions from an R Package}
+\title{pkg_functions: List exported functions from a package}
 \usage{
 pkg_functions(pkg, key = NULL)
 }
 \arguments{
-\item{pkg}{A character string. Package name.}
+\item{pkg}{Character scalar. Package name.}
 
-\item{key}{Optional keyword to filter function names (case-insensitive).}
+\item{key}{Optional character scalar. Keyword to filter function names (case-insensitive).}
 }
 \value{
-A character vector of exported function names.
+Character vector of exported names (invisibly).
 }
 \description{
-List exported functions from a package (via NAMESPACE). Optionally filter by keyword.
-The results are sorted alphabetically for better readability.
+List exported symbols from a package (via its NAMESPACE). Optionally filter
+by a case-insensitive keyword. Results are sorted alphabetically.
 }
 \examples{
 pkg_functions("evanverse")

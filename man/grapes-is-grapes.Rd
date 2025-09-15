@@ -19,7 +19,11 @@ A semantic operator that checks whether two objects are strictly identical,
 and prints where they differ if not.
 }
 \examples{
-1:3 \%is\% 1:3          # TRUE
-1:3 \%is\% c(1, 2, 3)   # FALSE, type mismatch
-data.frame(x=1) \%is\% data.frame(y=1)  # FALSE, name mismatch
+1:3 \%is\% 1:3                  # TRUE
+1:3 \%is\% c(1, 2, 3)           # FALSE, type mismatch (integer vs double)
+data.frame(x=1) \%is\% data.frame(y=1)  # FALSE, column name mismatch
+m1 <- matrix(1:4, nrow=2)
+m2 <- matrix(c(1,99,3,4), nrow=2)
+m1 \%is\% m2                  # FALSE, value differs at [1,2]
+c(a=1, b=2) \%is\% c(b=2, a=1) # FALSE, names differ
 }

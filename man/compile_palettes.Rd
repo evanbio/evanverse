@@ -2,7 +2,7 @@
 % Please edit documentation in R/compile_palettes.R
 \name{compile_palettes}
 \alias{compile_palettes}
-\title{🔄 compile_palettes(): Compile JSON palettes into RDS}
+\title{compile_palettes(): Compile JSON palettes into RDS}
 \usage{
 compile_palettes(
   palettes_dir = "inst/extdata/palettes",

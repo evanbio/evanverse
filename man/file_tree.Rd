@@ -2,7 +2,7 @@
 % Please edit documentation in R/file_tree.R
 \name{file_tree}
 \alias{file_tree}
-\title{🌲 Print and Log Directory Tree Structure}
+\title{file_tree: Print and Log Directory Tree Structure}
 \usage{
 file_tree(
   path = ".",
@@ -14,17 +14,17 @@ file_tree(
 )
 }
 \arguments{
-\item{path}{Character. The target root directory path to print. Default is \code{"."}.}
+\item{path}{Character. The target root directory path to print. Default is ".".}
 
-\item{max_depth}{Integer. Maximum depth of recursion into subdirectories. Default is \code{2}.}
+\item{max_depth}{Integer. Maximum depth of recursion into subdirectories. Default is 2.}
 
-\item{log}{Logical. Whether to save the tree output as a log file. Default is \code{FALSE}.}
+\item{log}{Logical. Whether to save the tree output as a log file. Default is FALSE.}
 
-\item{log_path}{Character. Directory path to save the log file if \code{log = TRUE}. Default is \code{"logs/tree"}.}
+\item{log_path}{Character. Directory path to save the log file if log = TRUE. Default is "logs/tree".}
 
-\item{file_name}{Character. Custom file name for the log file. If \code{NULL}, a name like \code{"file_tree_YYYYMMDD_HHMMSS.log"} will be used.}
+\item{file_name}{Character. Custom file name for the log file. If NULL, a name like "file_tree_YYYYMMDD_HHMMSS.log" will be used.}
 
-\item{append}{Logical. If \code{TRUE}, appends to an existing file (if present). If \code{FALSE}, overwrites the file. Default is \code{FALSE}.}
+\item{append}{Logical. If TRUE, appends to an existing file (if present). If FALSE, overwrites the file. Default is FALSE.}
 }
 \value{
 Invisibly returns a character vector containing each line of the file tree.

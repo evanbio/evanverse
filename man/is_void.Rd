@@ -2,7 +2,7 @@
 % Please edit documentation in R/is_void.R
 \name{is_void}
 \alias{is_void}
-\title{🕳️ is_void(): Check for Null / NA / Blank ("") Values}
+\title{is_void(): Check for Null / NA / Blank ("") Values}
 \usage{
 is_void(x, include_na = TRUE, include_null = TRUE, include_empty_str = TRUE)
 }
@@ -17,6 +17,12 @@ is_void(x, include_na = TRUE, include_null = TRUE, include_empty_str = TRUE)
 }
 \value{
 A logical vector indicating which elements are void.
+\itemize{
+\item If \code{x} is \code{NULL}, returns a single \code{TRUE} (if include_null=TRUE) or \code{FALSE}.
+\item If \code{x} is an empty vector, returns \code{logical(0)}.
+\item If \code{x} is a list, evaluates each element recursively and returns a flattened logical vector.
+\item For atomic vectors, returns a logical vector of the same length.
+}
 }
 \description{
 Determine whether input values are considered "void": \code{NULL}, \code{NA}, or \code{""}.

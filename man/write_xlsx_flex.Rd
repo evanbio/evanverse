@@ -2,7 +2,7 @@
 % Please edit documentation in R/write_xlsx_flex.R
 \name{write_xlsx_flex}
 \alias{write_xlsx_flex}
-\title{📤 Flexible Excel Writer}
+\title{Flexible Excel writer}
 \usage{
 write_xlsx_flex(
   data,
@@ -16,25 +16,25 @@ write_xlsx_flex(
 )
 }
 \arguments{
-\item{data}{A data.frame or a named list of data.frames}
+\item{data}{A data.frame, or a \strong{named} list of data.frames.}
 
-\item{file_path}{Output path to .xlsx file}
+\item{file_path}{Output path to a \code{.xlsx} file.}
 
-\item{overwrite}{Whether to overwrite if the file exists (default: TRUE)}
+\item{overwrite}{Whether to overwrite if the file exists. Default: TRUE.}
 
-\item{timestamp}{Whether to append a date suffix to the filename}
+\item{timestamp}{Whether to append a date suffix (\code{YYYY-MM-DD}) to the filename. Default: FALSE.}
 
-\item{with_style}{Whether to apply header styling (default: TRUE)}
+\item{with_style}{Whether to apply a simple header style (bold, fill, centered). Default: TRUE.}
 
-\item{auto_col_width}{Whether to auto-adjust column widths}
+\item{auto_col_width}{Whether to auto-adjust column widths. Default: TRUE.}
 
-\item{open_after}{Whether to open the file after writing (platform dependent)}
+\item{open_after}{Whether to open the file after writing (platform-dependent). Default: FALSE.}
 
-\item{verbose}{Whether to print CLI messages}
+\item{verbose}{Whether to print CLI messages (info/warn/success). Errors are always shown. Default: TRUE.}
 }
 \value{
-No return value; writes file to disk.
+No return value; writes a file to disk.
 }
 \description{
-Write a data frame or named list of data frames to an Excel file with optional styling.
+Write a data frame or a \strong{named} list of data frames to an Excel file with optional styling.
 }

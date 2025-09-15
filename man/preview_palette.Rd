@@ -2,7 +2,7 @@
 % Please edit documentation in R/preview_palette.R
 \name{preview_palette}
 \alias{preview_palette}
-\title{🖼 preview_palette(): Visualize a Palette from RDS}
+\title{Preview Palette: Visualize a Palette from RDS}
 \usage{
 preview_palette(
   name,
@@ -34,4 +34,11 @@ NULL (invisible), for plotting side effect.
 }
 \description{
 Preview the appearance of a palette from \code{data/palettes.rds} using various plot types.
+This function provides multiple visualization options to help users evaluate color palettes.
+}
+\examples{
+\dontrun{
+preview_palette("viridis", type = "sequential", plot_type = "bar")
+preview_palette("RdYlBu", type = "diverging", plot_type = "pie")
+}
 }

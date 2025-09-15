@@ -2,7 +2,7 @@
 % Please edit documentation in R/rows_with_void.R
 \name{rows_with_void}
 \alias{rows_with_void}
-\title{🧭 rows_with_void(): Detect Rows Containing Void Values (NA / NULL / "")}
+\title{rows_with_void: Detect rows containing void values (NA / NULL / "")}
 \usage{
 rows_with_void(
   data,
@@ -18,14 +18,15 @@ rows_with_void(
 
 \item{include_null}{Logical. Detect \code{NULL} if TRUE. Default: TRUE.}
 
-\item{include_empty_str}{Logical. Detect \code{""} if TRUE. Default: TRUE.}
+\item{include_empty_str}{Logical. Detect empty strings \code{""} if TRUE. Default: TRUE.}
 }
 \value{
-A logical vector indicating if each row contains any void values.
+A logical vector of length \code{nrow(data)} indicating whether each row
+contains at least one void value.
 }
 \description{
 Scan a data.frame or tibble and identify rows that contain any "void" values.
-Void values include \code{NA}, \code{NULL}, and empty strings (\code{""}), which can be toggled via parameters.
+Void values include \code{NA}, \code{NULL}, and empty strings \code{""} (toggle via flags).
 }
 \examples{
 df <- data.frame(id = 1:3, name = c("A", "", "C"), score = c(10, NA, 20))

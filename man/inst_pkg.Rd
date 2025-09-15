@@ -2,19 +2,19 @@
 % Please edit documentation in R/inst_pkg.R
 \name{inst_pkg}
 \alias{inst_pkg}
-\title{📦 Install R Packages from Multiple Sources}
+\title{Install R Packages from Multiple Sources}
 \usage{
 inst_pkg(
   pkg = NULL,
-  source = c("CRAN", "GitHub", "Bioconductor", "local"),
+  source = c("CRAN", "GitHub", "Bioconductor", "Local"),
   path = NULL,
   ...
 )
 }
 \arguments{
-\item{pkg}{Package name(s) or GitHub repo (e.g., \code{"user/repo"}). Not required for \code{source = "local"}.}
+\item{pkg}{Package name(s) or GitHub repo (e.g., "user/repo"). Not required for \code{source = "local"}.}
 
-\item{source}{Source of package: \code{"CRAN"}, \code{"GitHub"}, \code{"Bioconductor"}, \code{"local"}. Case-insensitive, shorthand allowed.}
+\item{source}{Source of package: "CRAN", "GitHub", "Bioconductor", "local". Case-insensitive, shorthand allowed.}
 
 \item{path}{Path to local package file (used when \code{source = "local"}).}
 

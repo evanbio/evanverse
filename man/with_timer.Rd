@@ -2,24 +2,24 @@
 % Please edit documentation in R/with_timer.R
 \name{with_timer}
 \alias{with_timer}
-\title{⏱️ Wrap a function to measure and display execution time}
+\title{Wrap a function to measure and display execution time}
 \usage{
 with_timer(fn, name = "Task")
 }
 \arguments{
-\item{fn}{A function to be wrapped}
+\item{fn}{A function to be wrapped.}
 
-\item{name}{A short descriptive name of the task (used in log output)}
+\item{name}{A short descriptive name of the task (used in log output).}
 }
 \value{
-A new function that executes \code{fn(...)} and prints timing information
+A function that executes \code{fn(...)} and prints timing information (returns invisibly).
 }
 \description{
-This utility wraps a function with CLI-based timing and displays its runtime in seconds.
-It is especially useful for benchmarking or logging time-consuming tasks.
+Wraps a function with CLI-based timing and prints its runtime in seconds.
+Useful for benchmarking or logging time-consuming tasks.
 }
 \details{
-This function requires the \code{cli} and \code{tictoc} packages.
+Requires the \code{tictoc} package (CLI messages are emitted via \code{cli}).
 }
 \examples{
 slow_fn <- function(n) { Sys.sleep(0.2); n^2 }

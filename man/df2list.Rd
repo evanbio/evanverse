@@ -2,7 +2,7 @@
 % Please edit documentation in R/df2list.R
 \name{df2list}
 \alias{df2list}
-\title{📦 Convert Data Frame to Named List by Grouping}
+\title{Convert Data Frame to Named List by Grouping}
 \usage{
 df2list(data, key_col, value_col, verbose = TRUE)
 }

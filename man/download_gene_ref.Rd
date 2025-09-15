@@ -2,7 +2,7 @@
 % Please edit documentation in R/download_gene_ref.R
 \name{download_gene_ref}
 \alias{download_gene_ref}
-\title{🧬 Download gene annotation reference table from Ensembl}
+\title{Download gene annotation reference table from Ensembl}
 \usage{
 download_gene_ref(
   species = c("human", "mouse"),

@@ -5,7 +5,6 @@
 #'
 #' @format A data frame with multiple rows (genes) and columns such as `symbol` and `entrez_id`.
 #' @source Downloaded and processed from Ensembl database (via `download_gene_ref()` function).
-"gene_ref_human_all"
 
 #' Human Gene Reference (Filtered Genes)
 #'
@@ -14,7 +13,6 @@
 #'
 #' @format A data frame with multiple rows (filtered genes) and similar columns as the full set.
 #' @source Derived from the full human gene reference dataset after filtering missing or invalid entries.
-"gene_ref_human_filtered"
 
 #' Mouse Gene Reference (All Genes)
 #'
@@ -23,7 +21,6 @@
 #'
 #' @format A data frame with rows representing genes and columns including `symbol` and `entrez_id`.
 #' @source Downloaded and processed from Ensembl database (via `download_gene_ref()` function).
-"gene_ref_mouse_all"
 
 #' Mouse Gene Reference (Filtered Genes)
 #'
@@ -32,7 +29,6 @@
 #'
 #' @format A data frame with multiple rows (filtered genes) and standard annotation columns.
 #' @source Derived from the full mouse gene reference dataset after filtering missing or invalid entries.
-"gene_ref_mouse_filtered"
 
 #' MSigDB Hallmark Gene Sets (Expanded Format)
 #'
@@ -46,4 +42,3 @@
 #'   \item{gene}{Gene symbol associated with the term}
 #' }
 #' @source Extracted and parsed from the MSigDB v2024.1 (h.all.v2024.1.Hs.symbols.gmt).
-"msigdb_h_df"

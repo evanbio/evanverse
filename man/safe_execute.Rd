@@ -9,15 +9,16 @@ safe_execute(expr, fail_message = "An error occurred", quiet = FALSE)
 \arguments{
 \item{expr}{Code to evaluate.}
 
-\item{fail_message}{Message to display if an error occurs. Default is "An error occurred".}
+\item{fail_message}{Message to display if an error occurs. Default: "An error occurred".}
 
-\item{quiet}{Logical. If TRUE, suppress warning messages. Default is FALSE.}
+\item{quiet}{Logical. If \code{TRUE}, suppress messages. Default: \code{FALSE}.}
 }
 \value{
-The result of the expression if successful; otherwise NULL.
+The result of the expression if successful; otherwise \code{NULL}.
 }
 \description{
-Provides a unified error-handling wrapper for evaluating code expressions.
+Evaluate code with unified error handling (and consistent warning reporting).
+On error, prints a CLI message (unless \code{quiet = TRUE}) and returns \code{NULL}.
 }
 \examples{
 safe_execute(log(1))

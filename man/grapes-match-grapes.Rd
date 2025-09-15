@@ -2,7 +2,7 @@
 % Please edit documentation in R/percent_match_operator.R
 \name{\%match\%}
 \alias{\%match\%}
-\title{🔍 \%match\%: Case-insensitive match returning indices}
+\title{\%match\%: Case-insensitive match returning indices}
 \usage{
 x \%match\% table
 }
@@ -13,12 +13,24 @@ x \%match\% table
 }
 \value{
 An integer vector of the positions of matches of \code{x} in \code{table},
-like \code{match()}. Returns \code{NA} for non-matches.
+like \code{\link[base:match]{base::match()}}. Returns \code{NA} for non-matches. Returns an integer(0)
+if \code{x} is length 0.
 }
 \description{
-Performs case-insensitive matching, like \code{match()}, but ignores letter case.
+Performs case-insensitive matching, like \code{\link[base:match]{base::match()}}, but ignores letter case.
 }
 \examples{
+# Basic matching
 c("tp53", "BRCA1", "egfr") \%match\% c("TP53", "EGFR", "MYC")
-# Returns: 1 NA 2
+# → 1 NA 2
+
+# No matches → all NA
+c("aaa", "bbb") \%match\% c("xxx", "yyy")
+
+# Empty input
+character(0) \%match\% c("a", "b")
+
+# Order sensitivity (like match): first match is returned
+c("x") \%match\% c("X", "x", "x")
+# → 1
 }

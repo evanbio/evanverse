@@ -18,29 +18,31 @@ plot_bar(
 )
 }
 \arguments{
-\item{data}{A data frame containing the input data.}
+\item{data}{A data frame.}
 
 \item{x}{Column name for the x-axis (quoted or unquoted).}
 
 \item{y}{Column name for the y-axis (quoted or unquoted).}
 
-\item{fill}{Optional. A character string specifying the column name to be mapped to fill (grouping).}
+\item{fill}{Optional character scalar. Column name to map to fill (grouping).}
 
-\item{direction}{Plot direction. Either "vertical" or "horizontal". Default is "vertical".}
+\item{direction}{Plot direction: "vertical" or "horizontal". Default: "vertical".}
 
-\item{sort}{Logical. Whether to sort the bars based on y values. Default is FALSE.}
+\item{sort}{Logical. Whether to sort bars based on y values. Default: FALSE.}
 
-\item{sort_by}{Optional. If \code{fill} is specified and \code{sort = TRUE}, this selects which level of \code{fill} is used for sorting.}
+\item{sort_by}{Optional. If \code{fill} is set and \code{sort = TRUE}, choose which level
+of \code{fill} is used for sorting.}
 
-\item{sort_dir}{Sorting direction. Either "asc" (increasing) or "desc" (decreasing). Default is "asc".}
+\item{sort_dir}{Sorting direction: "asc" or "desc". Default: "asc".}
 
-\item{width}{Numeric. Width of bars. Default is 0.7.}
+\item{width}{Numeric. Bar width. Default: 0.7.}
 
-\item{...}{Additional arguments passed to \code{geom_bar()}, such as \code{alpha}, \code{color}, etc.}
+\item{...}{Additional args passed to \code{ggplot2::geom_bar()}, e.g. \code{alpha}, \code{color}.}
 }
 \value{
-A ggplot object showing a bar chart.
+A \code{ggplot} object.
 }
 \description{
-Bar plot with optional fill grouping, sorting, and directional layout
+Create a bar chart from a data frame with optional grouping (\code{fill}),
+vertical/horizontal orientation, and sorting by values.
 }

@@ -2,7 +2,7 @@
 % Please edit documentation in R/update_pkg.R
 \name{update_pkg}
 \alias{update_pkg}
-\title{🔄 Update R Packages from CRAN, GitHub, or Bioconductor}
+\title{Update R Packages from CRAN, GitHub, or Bioconductor}
 \usage{
 update_pkg(pkg = NULL, source = NULL)
 }
@@ -10,11 +10,11 @@ update_pkg(pkg = NULL, source = NULL)
 \item{pkg}{Character vector. Name(s) of package(s) to update. For GitHub, use \code{"user/repo"} format.
 Only required when \code{source} is specified.}
 
-\item{source}{Character. The source of the package(s): \code{"CRAN"}, \code{"GitHub"} (or \code{"gh"}), or \code{"Bioconductor"} (or \code{"bio"}).
+\item{source}{Character. The source of the package(s): \code{"CRAN"}, \code{"GitHub"}, or \code{"Bioconductor"}.
 Optional if updating all installed CRAN and Bioconductor packages.}
 }
 \value{
-Invisible \code{NULL}. Outputs update progress and logs via \code{message()}.
+Invisible \code{NULL}. Outputs update progress and logs via \code{cli}.
 }
 \description{
 A unified function to update R packages by source. Supports full updates,
