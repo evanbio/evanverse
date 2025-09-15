@@ -41,29 +41,31 @@ plot_forest <- function(data,
                         align_center = NULL,
                         gap_width = 30) {
 
-  # ---- Load packages ----
-  library(dplyr)
-  library(forestploter)
-  library(grid)
+  # ---- Dependency checks (no library() calls) ----
+  if (!requireNamespace("forestploter", quietly = TRUE)) {
+    cli::cli_abort("Package {.pkg forestploter} is required for plot_forest().")
+  }
+  if (!requireNamespace("grid", quietly = TRUE)) {
+    cli::cli_abort("Package {.pkg grid} is required for plot_forest().")
+  }
 
   # ---- Column validation ----
   required_cols <- c(estimate_col, lower_col, upper_col, label_col, p_col)
   missing_cols <- setdiff(required_cols, colnames(data))
   if (length(missing_cols) > 0) {
-    stop("Missing required columns: ", paste(missing_cols, collapse = ", "))
+    cli::cli_abort("Missing required columns: {paste(missing_cols, collapse = ', ')}")
   }
 
   # ---- Prepare core data ----
-  df <- data %>%
-    mutate(
-      .estimate = .data[[estimate_col]],
-      .lower = .data[[lower_col]],
-      .upper = .data[[upper_col]],
-      .label = .data[[label_col]],
-      .pvalue = .data[[p_col]],
-      `OR (95% CI)` = sprintf("%.3f (%.3f–%.3f)", .estimate, .lower, .upper),
-      " " = paste(rep(" ", gap_width), collapse = "")
-    )
+  # Prepare core data without attaching dplyr: use base R to avoid NSE issues
+  df <- as.data.frame(data, stringsAsFactors = FALSE)
+  df$.estimate <- df[[estimate_col]]
+  df$.lower <- df[[lower_col]]
+  df$.upper <- df[[upper_col]]
+  df$.label <- as.character(df[[label_col]])
+  df$.pvalue <- df[[p_col]]
+  df[["OR (95% CI)"]] <- sprintf("%.3f (%.3f–%.3f)", df$.estimate, df$.lower, df$.upper)
+  df[[" "]] <- rep(paste(rep(" ", gap_width), collapse = ""), nrow(df))
 
   plot_df <- df[, c(label_col, "OR (95% CI)", " ", p_col)]
 
@@ -71,7 +73,7 @@ plot_forest <- function(data,
   boxcolor <- rep(boxcolor, length.out = nrow(df))
 
   # ---- Default forestploter theme ----
-  tm <- forest_theme(
+  tm <- forestploter::forest_theme(
     base_size = 18,
     ci_pch = 16,
     ci_lty = 1,
@@ -80,10 +82,10 @@ plot_forest <- function(data,
     ci_alpha = 0.8,
     ci_fill = "#E64B35",
     ci_Theight = 0.2,
-    refline_gp = gpar(lwd = 1, lty = "dashed", col = "grey20"),
+    refline_gp = grid::gpar(lwd = 1, lty = "dashed", col = "grey20"),
     base_family = "sans",
-    xaxis_gp = gpar(fontsize = 12, fontfamily = "sans"),
-    footnote_gp = gpar(cex = 0.6, fontface = "italic", col = "blue")
+    xaxis_gp = grid::gpar(fontsize = 12, fontfamily = "sans"),
+    footnote_gp = grid::gpar(cex = 0.6, fontface = "italic", col = "blue")
   )
 
   if (length(arrow_lab) != 2) {
@@ -91,7 +93,7 @@ plot_forest <- function(data,
   }
 
   # ---- Draw base forest plot ----
-  fp <- forest(plot_df,
+  fp <- forestploter::forest(plot_df,
                est = df$.estimate,
                lower = df$.lower,
                upper = df$.upper,
@@ -105,11 +107,11 @@ plot_forest <- function(data,
 
   # ---- Add box color and bold ----
   for (i in seq_len(nrow(df))) {
-    fp <- edit_plot(fp, col = 3, row = i, which = "ci",
-                    gp = gpar(fill = boxcolor[i]))
+    fp <- forestploter::edit_plot(fp, col = 3, row = i, which = "ci",
+                    gp = grid::gpar(fill = boxcolor[i]))
     if (bold_sig && !is.na(df$.pvalue[i]) && df$.pvalue[i] < sig_level) {
-      fp <- edit_plot(fp, col = 2, row = i, which = "text",
-                      gp = gpar(fontface = "bold"))
+      fp <- forestploter::edit_plot(fp, col = 2, row = i, which = "text",
+                      gp = grid::gpar(fontface = "bold"))
     }
   }
 
@@ -121,22 +123,22 @@ plot_forest <- function(data,
   align_right <- setdiff(all_cols, union(align_left, align_center))
 
   for (col in align_left) {
-    fp <- edit_plot(fp, col = col, which = "text", part = "body",
-                  hjust = unit(0, "npc"), x = unit(0, "npc"))
-    fp <- edit_plot(fp, col = col, which = "text", part = "header",
-                  hjust = unit(0, "npc"), x = unit(0, "npc"))
+    fp <- forestploter::edit_plot(fp, col = col, which = "text", part = "body",
+                  hjust = grid::unit(0, "npc"), x = grid::unit(0, "npc"))
+    fp <- forestploter::edit_plot(fp, col = col, which = "text", part = "header",
+                  hjust = grid::unit(0, "npc"), x = grid::unit(0, "npc"))
   }
   for (col in align_center) {
-    fp <- edit_plot(fp, col = col, which = "text", part = "body",
-                  hjust = unit(0.5, "npc"), x = unit(0.5, "npc"))
-    fp <- edit_plot(fp, col = col, which = "text", part = "header",
-                  hjust = unit(0.5, "npc"), x = unit(0.5, "npc"))
+    fp <- forestploter::edit_plot(fp, col = col, which = "text", part = "body",
+                  hjust = grid::unit(0.5, "npc"), x = grid::unit(0.5, "npc"))
+    fp <- forestploter::edit_plot(fp, col = col, which = "text", part = "header",
+                  hjust = grid::unit(0.5, "npc"), x = grid::unit(0.5, "npc"))
   }
   for (col in align_right) {
-    fp <- edit_plot(fp, col = col, which = "text", part = "body",
-                  hjust = unit(1, "npc"), x = unit(1, "npc"))
-    fp <- edit_plot(fp, col = col, which = "text", part = "header",
-                  hjust = unit(1, "npc"), x = unit(1, "npc"))
+    fp <- forestploter::edit_plot(fp, col = col, which = "text", part = "body",
+                  hjust = grid::unit(1, "npc"), x = grid::unit(1, "npc"))
+    fp <- forestploter::edit_plot(fp, col = col, which = "text", part = "header",
+                  hjust = grid::unit(1, "npc"), x = grid::unit(1, "npc"))
   }
 
   # ---- Return forestplot object ----
