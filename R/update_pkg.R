@@ -1,4 +1,4 @@
-#' 🔄 Update R Packages from CRAN, GitHub, or Bioconductor
+#' Update R Packages from CRAN, GitHub, or Bioconductor
 #'
 #' A unified function to update R packages by source. Supports full updates,
 #' source-specific updates, or targeted package updates. Automatically sets mirrors
@@ -7,36 +7,45 @@
 #'
 #' @param pkg Character vector. Name(s) of package(s) to update. For GitHub, use `"user/repo"` format.
 #'            Only required when `source` is specified.
-#' @param source Character. The source of the package(s): `"CRAN"`, `"GitHub"` (or `"gh"`), or `"Bioconductor"` (or `"bio"`).
+#' @param source Character. The source of the package(s): `"CRAN"`, `"GitHub"`, or `"Bioconductor"`.
 #'               Optional if updating all installed CRAN and Bioconductor packages.
 #'
-#' @return Invisible `NULL`. Outputs update progress and logs via `message()`.
+#' @return Invisible `NULL`. Outputs update progress and logs via `cli`.
 #' @export
 update_pkg <- function(pkg = NULL, source = NULL) {
-  # --- Normalize source argument
+  # ===========================================================================
+  # Parameter validation
+  # ===========================================================================
+  if (!is.null(pkg)) {
+    if (!is.character(pkg) || any(is.na(pkg)) || length(pkg) == 0) {
+      cli::cli_abort("'pkg' must be a character vector without NA values.")
+    }
+  }
+
+  # Normalize and validate source argument
   if (!is.null(source)) {
-    source_input <- tolower(source[1])
-    source_matched <- switch(
-      source_input,
-      "cran" = "CRAN",
-      "gh" = "GitHub", "github" = "GitHub",
-      "bio" = "Bioconductor", "bioc" = "Bioconductor", "bioconductor" = "Bioconductor",
-      stop("❌ Invalid source: ", source_input,
-           ". Valid options: CRAN, GitHub, Bioconductor", call. = FALSE)
-    )
-  } else {
-    source_matched <- NULL
+    source <- match.arg(source, c("CRAN", "GitHub", "Bioconductor"))
   }
 
-  # --- Check input logic
-  if (!is.null(pkg) && is.null(source_matched)) {
-    stop("❗ Must provide 'source' if 'pkg' is specified.", call. = FALSE)
+  # Check input logic
+  if (!is.null(pkg) && is.null(source)) {
+    cli::cli_abort("Must specify 'source' when providing 'pkg'.")
   }
-  if (is.null(pkg) && identical(source_matched, "GitHub")) {
-    stop("❗ Must provide 'pkg' when updating GitHub packages.", call. = FALSE)
+  if (is.null(pkg) && identical(source, "GitHub")) {
+    cli::cli_abort("Must provide 'pkg' when updating GitHub packages.")
   }
 
-  # --- Fetch R and expected Bioconductor version
+  # Validate GitHub package format
+  if (!is.null(source) && source == "GitHub") {
+    invalid_gh <- !grepl("^[^/]+/[^/]+$", pkg)
+    if (any(invalid_gh)) {
+      cli::cli_abort("GitHub packages must be in 'user/repo' format. Invalid: {.val {pkg[invalid_gh]}}")
+    }
+  }
+
+  # ===========================================================================
+  # Fetch R and expected Bioconductor version
+  # ===========================================================================
   r_version <- paste0(R.version$major, ".", R.version$minor)
   expected_bioc <- switch(
     r_version,
@@ -51,13 +60,14 @@ update_pkg <- function(pkg = NULL, source = NULL) {
   if (requireNamespace("BiocManager", quietly = TRUE)) {
     bioc_version <- as.character(BiocManager::version())
     if (!is.null(expected_bioc) && bioc_version != expected_bioc) {
-      message("⚠️ Bioconductor version (", bioc_version, ") may not match R ", r_version,
-              ". Recommended: ", expected_bioc)
-      message("ℹ You can run manually: BiocManager::install(version = '", expected_bioc, "')")
+      cli::cli_alert_warning("Bioconductor version ({bioc_version}) may not match R {r_version}. Recommended: {expected_bioc}")
+      cli::cli_alert_info("You can run manually: BiocManager::install(version = '{expected_bioc}')")
     }
   }
 
-  # --- Set mirrors (and restore after execution)
+  # ===========================================================================
+  # Set mirrors (and restore after execution)
+  # ===========================================================================
   old_repos <- getOption("repos")
   old_bioc <- getOption("BioC_mirror")
   options(
@@ -69,45 +79,50 @@ update_pkg <- function(pkg = NULL, source = NULL) {
     options(BioC_mirror = old_bioc)
   }, add = TRUE)
 
-  # --- Update all packages (CRAN + Bioc)
-  if (is.null(pkg) && is.null(source_matched)) {
-    message("🔄 Updating all CRAN + Bioconductor packages...")
+  # ===========================================================================
+  # Update all packages (CRAN + Bioc)
+  # ===========================================================================
+  if (is.null(pkg) && is.null(source)) {
+    cli::cli_alert_info("Updating all CRAN + Bioconductor packages...")
 
-    message("📦 Updating CRAN packages...")
+    cli::cli_alert_info("Updating CRAN packages...")
     update.packages(ask = FALSE)
 
     if (!requireNamespace("BiocManager", quietly = TRUE)) {
       install.packages("BiocManager")
     }
 
-    message("🧬 Updating Bioconductor packages...")
+    cli::cli_alert_info("Updating Bioconductor packages...")
     BiocManager::install(version = bioc_version, ask = FALSE)
 
   } else if (is.null(pkg)) {
-    # --- Source-specific full update
-    if (source_matched == "CRAN") {
-      message("📦 Updating all CRAN packages...")
+    # ===========================================================================
+    # Source-specific full update
+    # ===========================================================================
+    if (source == "CRAN") {
+      cli::cli_alert_info("Updating all CRAN packages...")
       update.packages(ask = FALSE)
 
-    } else if (source_matched == "Bioconductor") {
+    } else if (source == "Bioconductor") {
       if (!requireNamespace("BiocManager", quietly = TRUE)) {
         install.packages("BiocManager")
         bioc_version <- as.character(BiocManager::version())
       }
 
-      message("🧬 Updating all Bioconductor packages...")
+      cli::cli_alert_info("Updating all Bioconductor packages...")
       BiocManager::install(version = bioc_version, ask = FALSE)
     }
 
   } else {
-    # --- Specific package(s) update
-    message("📦 Updating package(s): ", paste(pkg, collapse = ", "),
-            " (source: ", source_matched, ")")
+    # ===========================================================================
+    # Specific package(s) update
+    # ===========================================================================
+    cli::cli_alert_info("Updating package(s): {.pkg {pkg}} (source: {source})")
 
-    if (source_matched == "CRAN") {
+    if (source == "CRAN") {
       install.packages(pkg, quiet = TRUE)
 
-    } else if (source_matched == "Bioconductor") {
+    } else if (source == "Bioconductor") {
       if (!requireNamespace("BiocManager", quietly = TRUE)) {
         install.packages("BiocManager")
         bioc_version <- as.character(BiocManager::version())
@@ -115,7 +130,7 @@ update_pkg <- function(pkg = NULL, source = NULL) {
 
       BiocManager::install(pkg, ask = FALSE, version = bioc_version)
 
-    } else if (source_matched == "GitHub") {
+    } else if (source == "GitHub") {
       if (!requireNamespace("devtools", quietly = TRUE)) {
         install.packages("devtools")
       }
@@ -123,6 +138,6 @@ update_pkg <- function(pkg = NULL, source = NULL) {
     }
   }
 
-  message("✅ Package update complete!")
+  cli::cli_alert_success("Package update complete!")
   invisible(NULL)
 }
