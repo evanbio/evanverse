@@ -19,52 +19,78 @@ inst_pkg <- function(pkg = NULL,
                      source = c("CRAN", "GitHub", "Bioconductor", "Local"),
                      path = NULL, ...) {
 
-  # -- 1. Normalize source argument
-  valid_sources <- c("CRAN", "GitHub", "Bioconductor", "Local")
-  source_matched <- match(source, valid_sources)
+  # ===========================================================================
+  # Parameter validation
+  # ===========================================================================
   
-  # -- 2. Check package argument
-  if (is.null(pkg) && source_matched != "Local") {
-    stop("Please provide a package name (or repo) for non-local installation.", call. = FALSE)
+  # Validate and normalize source argument
+  source <- match.arg(source, c("CRAN", "GitHub", "Bioconductor", "Local"))
+  
+  # Validate pkg parameter
+  if (!is.null(pkg)) {
+    if (!is.character(pkg) || any(is.na(pkg)) || length(pkg) == 0) {
+      cli::cli_abort("'pkg' must be a character vector without NA values.")
+    }
+  }
+  
+  # Check package argument logic
+  if (is.null(pkg) && source != "Local") {
+    cli::cli_abort("Must provide 'pkg' for non-local installation.")
+  }
+  
+  # Validate GitHub package format
+  if (source == "GitHub") {
+    invalid_gh <- !grepl("^[^/]+/[^/]+$", pkg)
+    if (any(invalid_gh)) {
+      cli::cli_abort("GitHub packages must be in 'user/repo' format. Invalid: {.val {pkg[invalid_gh]}}")
+    }
+  }
+  
+  # Validate local path
+  if (source == "Local" && is.null(path)) {
+    cli::cli_abort("Must provide 'path' for local installation.")
   }
 
-  # -- 3. Skip if already installed
-  if (!is.null(pkg) && source_matched != "Local") {
-    pkg_name <- if (source_matched == "GitHub") basename(pkg) else pkg
+  # ===========================================================================
+  # Skip if already installed
+  # ===========================================================================
+  if (!is.null(pkg) && source != "Local") {
+    pkg_name <- if (source == "GitHub") basename(pkg) else pkg
     if (requireNamespace(pkg_name, quietly = TRUE)) {
-      cli::cli_alert_info(sprintf("Package [%s] is already installed. Skipped.", pkg_name))
+      cli::cli_alert_info("Package {.pkg {pkg_name}} is already installed. Skipped.")
       return(invisible(NULL))
     }
   }
 
-  # -- 4. Install based on source
-  if (source_matched == "CRAN") {
-    cli::cli_alert_info(sprintf("Installing from CRAN: [%s]", paste(pkg, collapse = ", ")))
+  # ===========================================================================
+  # Install based on source
+  # ===========================================================================
+  if (source == "CRAN") {
+    cli::cli_alert_info("Installing from CRAN: {.pkg {pkg}}")
     install.packages(pkg,
                      repos = "https://mirrors.tuna.tsinghua.edu.cn/CRAN/",
                      ...
     )
 
-  } else if (source_matched == "GitHub") {
-    cli::cli_alert_info(sprintf("Installing from GitHub: [%s]", paste(pkg, collapse = ", ")))
+  } else if (source == "GitHub") {
+    cli::cli_alert_info("Installing from GitHub: {.pkg {pkg}}")
     if (!requireNamespace("devtools", quietly = TRUE)) {
       install.packages("devtools", repos = "https://mirrors.tuna.tsinghua.edu.cn/CRAN/")
     }
     for (p in pkg) devtools::install_github(p, ...)
 
-  } else if (source_matched == "Bioconductor") {
-    cli::cli_alert_info(sprintf("Installing from Bioconductor: [%s]", paste(pkg, collapse = ", ")))
+  } else if (source == "Bioconductor") {
+    cli::cli_alert_info("Installing from Bioconductor: {.pkg {pkg}}")
     if (!requireNamespace("BiocManager", quietly = TRUE)) {
       install.packages("BiocManager", repos = "https://mirrors.tuna.tsinghua.edu.cn/CRAN/")
     }
     old_mirror <- getOption("BioC_mirror")
-    options(BioC_mirror = "https://mirrors.westlake.edu.cn/bioconductor/")
+    options(BioC_mirror = "https://mirrors.tuna.tsinghua.edu.cn/bioconductor/")
     on.exit(options(BioC_mirror = old_mirror), add = TRUE)
     BiocManager::install(pkg, ...)
 
-  } else if (source_matched == "Local") {
-    if (is.null(path)) stop("Please provide a local path for installation.", call. = FALSE)
-    cli::cli_alert_info(sprintf("Installing from local path: [%s]", path))
+  } else if (source == "Local") {
+    cli::cli_alert_info("Installing from local path: {.file {path}}")
     install.packages(path, repos = NULL, type = "source", ...)
   }
 
