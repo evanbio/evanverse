@@ -68,7 +68,7 @@ plot_bar <- function(data, x, y, fill = NULL,
   # Handle fill (optional grouping)
   fill_levels <- NULL
   if (!is.null(fill)) {
-    if (!is.character(fill) || length(fill) != 1L || is.na(fill)) {
+    if (!is.character(fill) || length(fill) != 1L || is.na(fill) || fill == "") {
       cli::cli_abort("`fill` must be a single non-NA character string (column name).")
     }
     if (!fill %in% names(df)) {
