@@ -2,9 +2,14 @@ pandoc: '3.5'
 pkgdown: 2.1.1
 pkgdown_sha: ~
 articles:
+  bioinformatics-workflows: bioinformatics-workflows.html
+  color-palettes: color-palettes.html
+  comprehensive-guide: comprehensive-guide.html
+  data-processing: data-processing.html
   get-started: get-started.html
   package-management: package-management.html
-last_built: 2025-04-24T03:20Z
+  visualization-showcase: visualization-showcase.html
+last_built: 2025-09-16T11:15Z
 urls:
   reference: https://evanbio.github.io/evanverse/reference
   article: https://evanbio.github.io/evanverse/articles
