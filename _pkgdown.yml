@@ -3,53 +3,412 @@ url: https://evanbio.github.io/evanverse/
 template:
   bootstrap: 5
   bootswatch: sandstone
+  bslib:
+    primary: "#0D47A1"  # Professional deep blue
+    secondary: "#E3F2FD"  # Light blue background
+    success: "#2E7D32"  # Forest green
+    info: "#0288D1"  # Information blue
+    warning: "#F57C00"  # Amber orange
+    danger: "#C62828"  # Deep red
+    light: "#FAFAFA"
+    dark: "#1A237E"  # Deep indigo
+    bg-light: "#F8F9FA"
+    bg-dark: "#121212"  # True dark mode
+    border-radius: "0.5rem"
+    base_font: {google: "Inter"}
+    heading_font: {google: "Inter"}
+    code_font: {google: "JetBrains Mono"}
+    navbar-bg: "#FFFFFF"
+    navbar-light-color: "#424242"
+    navbar-light-hover-color: "#0D47A1"
+    link-color: "#0D47A1"
+    link-hover-color: "#1976D2"
+    btn-border-radius: "0.375rem"
+    card-border-radius: "0.5rem"
   params:
     path: /evanverse/
-  opengraph: {}
+    ganalytics: null
+    docsearch:
+      api_key: ~
+      index_name: ~
+  opengraph:
+    image:
+      src: man/figures/logo.png
+      alt: "evanverse: Comprehensive R utility toolkit for data analysis and bioinformatics"
+    twitter:
+      creator: "@evanbio"
+      card: summary_large_image
+      site: "@evanbio"
+  includes:
+    in_header: |
+      <meta name="keywords" content="R package, data analysis, bioinformatics, visualization, utilities, CRAN">
+      <meta name="description" content="evanverse: A comprehensive R utility package with 55+ functions for data analysis, visualization, and bioinformatics workflows">
+      <meta name="author" content="Evan Zhou">
+      <!-- Enhanced Favicon -->
+      <link rel="icon" type="image/png" sizes="32x32" href="man/figures/logo.png">
+      <link rel="icon" type="image/png" sizes="16x16" href="man/figures/logo.png">
+      <link rel="apple-touch-icon" sizes="180x180" href="man/figures/logo.png">
+      <!-- Enhanced CSS for professional appearance -->
+      <style>
+        /* Navigation styling */
+        .navbar-brand img { height: 32px; margin-right: 10px; filter: drop-shadow(0 2px 4px rgba(0,0,0,0.1)); }
+        .navbar { box-shadow: 0 2px 12px rgba(0,0,0,0.08); backdrop-filter: blur(10px); }
+        .navbar-nav .nav-link { color: #424242 !important; font-weight: 500; transition: all 0.3s ease; }
+        .navbar-nav .nav-link:hover { color: #0D47A1 !important; transform: translateY(-1px); }
+
+        /* Card and content styling */
+        .card {
+          box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+          border: none;
+          border-radius: 0.75rem;
+          transition: all 0.3s ease;
+        }
+        .card:hover { box-shadow: 0 8px 24px rgba(0,0,0,0.12); transform: translateY(-2px); }
+
+        /* Button enhancements */
+        .btn-primary {
+          background: linear-gradient(135deg, #0D47A1, #1976D2);
+          border: none;
+          box-shadow: 0 2px 8px rgba(13,71,161,0.3);
+          transition: all 0.3s ease;
+        }
+        .btn-primary:hover {
+          background: linear-gradient(135deg, #1976D2, #2196F3);
+          box-shadow: 0 4px 16px rgba(13,71,161,0.4);
+          transform: translateY(-1px);
+        }
+
+        /* Typography improvements */
+        h1, h2, h3 { color: #0D47A1; font-weight: 600; }
+        h1 { font-size: 2.5rem; margin-bottom: 1.5rem; }
+        h2 { font-size: 2rem; margin: 2rem 0 1rem 0; }
+        h3 { font-size: 1.5rem; margin: 1.5rem 0 1rem 0; }
+
+        /* Code blocks */
+        pre, code { border-radius: 0.5rem; }
+        pre { box-shadow: inset 0 2px 8px rgba(0,0,0,0.1); }
+
+        /* Reference page styling */
+        .ref-index h2 { border-bottom: 3px solid #E3F2FD; padding-bottom: 0.5rem; }
+        .ref-index .icon { color: #0D47A1; margin-right: 0.5rem; }
+
+        /* Footer */
+        .footer { background: linear-gradient(135deg, #F8F9FA, #E3F2FD); }
+
+        /* Mobile responsiveness */
+        @media (max-width: 768px) {
+          .navbar-brand img { height: 28px; }
+          h1 { font-size: 2rem; }
+          .card { margin-bottom: 1rem; }
+        }
+      </style>
 
 home:
   title: evanverse
-  tagline: Lightweight tools for data wrangling, visualization, and reproducible R coding
+  subtitle: "Comprehensive R Utilities for Data Science & Bioinformatics"
+  description: >
+    A feature-rich R utility package providing 55+ functions for data analysis,
+    visualization, and bioinformatics workflows. Streamlines package management,
+    data processing, color palettes, plotting, and workflow automation with a
+    focus on simplicity and reproducibility.
+  strip_header: false
+  sidebar:
+    structure: [links, toc, license, community, citation, authors, dev]
+  links:
+  - text: "🚀 Quick Start Guide"
+    href: articles/get-started.html
+    desc: "Get up and running with evanverse in minutes"
+  - text: "📚 Comprehensive Guide"
+    href: articles/comprehensive-guide.html
+    desc: "Complete package overview with detailed examples"
+  - text: "📊 Visualization Showcase"
+    href: articles/visualization-showcase.html
+    desc: "Advanced plotting techniques and publication graphics"
+  - text: "🎨 Color Palettes"
+    href: articles/color-palettes.html
+    desc: "Professional color management for data visualization"
+  - text: "🧬 Bioinformatics Workflows"
+    href: articles/bioinformatics-workflows.html
+    desc: "Domain-specific applications and tutorials"
+  - text: "📖 Function Reference"
+    href: reference/
+    desc: "Complete documentation for all 55+ functions"
+  - text: "💾 Install from CRAN"
+    href: https://cran.r-project.org/package=evanverse
+    desc: "Stable release on CRAN"
+  - text: "🔧 Development Version"
+    href: https://github.com/evanbio/evanverse
+    desc: "Latest features on GitHub"
 
 authors:
   Evan Zhou:
     href: https://github.com/evanbio
+    html: >
+      <img src="https://github.com/evanbio.png" height="32" style="border-radius: 50%;" />
+      Evan Zhou
     roles: [aut, cre]
     email: evanzhou.bio@gmail.com
 
 navbar:
+  title:
+    text: "evanverse"
+    icon: "man/figures/logo.png"
+  type: light
+  bg: light
   structure:
     left:
       - home
+      - intro
       - reference
       - articles
-      - projects
+      - news
     right:
-      - blog
-      - cv
+      - search
       - github
+      - cran
 
   components:
-    projects:
-      text: Projects
-      href: https://evanbio.github.io/projects/
+    intro:
+      text: "Get Started"
+      icon: "fas fa-rocket"
+      href: articles/get-started.html
 
-    blog:
-      icon: fas fa-blog
-      href: https://blog.evanzhou.org
+    reference:
+      text: "Reference"
+      icon: "fas fa-book-open"
+      menu:
+      - text: "📦 Package Management"
+        href: reference/index.html#package-management
+      - text: "📊 Visualization & Plotting"
+        href: reference/index.html#visualization-plotting
+      - text: "🎨 Color Palettes"
+        href: reference/index.html#color-palettes-management
+      - text: "💾 File & Data I/O"
+        href: reference/index.html#file-data-i-o
+      - text: "🧬 Bioinformatics"
+        href: reference/index.html#bioinformatics-utilities
+      - text: "🔄 Data Processing"
+        href: reference/index.html#data-processing-transformation
+      - text: "--------"
+      - text: "All Functions"
+        href: reference/
 
-    cv:
-      icon: fas fa-user
-      href: https://academic.evanzhou.org
+    articles:
+      text: "Guides"
+      icon: "fas fa-file-alt"
+      menu:
+      - text: "🚀 Getting Started"
+        href: articles/get-started.html
+        desc: "Quick introduction and basic usage"
+      - text: "📚 Comprehensive Guide"
+        href: articles/comprehensive-guide.html
+        desc: "Complete package overview with examples"
+      - text: "--------"
+      - text: "📦 Package Management"
+        href: articles/package-management.html
+        desc: "Advanced installation and management"
+      - text: "🎨 Color Palettes"
+        href: articles/color-palettes.html
+        desc: "Advanced color palette management"
+      - text: "🔄 Data Processing"
+        href: articles/data-processing.html
+        desc: "Data cleaning and transformation"
+      - text: "📊 Visualization Showcase"
+        href: articles/visualization-showcase.html
+        desc: "Advanced plotting and publication graphics"
+      - text: "🧬 Bioinformatics Workflows"
+        href: articles/bioinformatics-workflows.html
+        desc: "Domain-specific bioinformatics applications"
+      - text: "--------"
+      - text: "📚 All Articles"
+        href: articles/
+
+    news:
+      text: "News"
+      icon: "fas fa-newspaper"
+      href: news/
+
+    cran:
+      text: "CRAN"
+      icon: "fas fa-download"
+      href: https://cran.r-project.org/package=evanverse
+      aria-label: "Download from CRAN"
 
     github:
-      icon: fab fa-github
+      icon: "fab fa-github"
       href: https://github.com/evanbio/evanverse
+      aria-label: "View on GitHub"
 
+    search:
+      icon: "fas fa-search"
+      href: "#"
+      aria-label: "Search documentation"
 
 articles:
-- title: "\U0001F9ED Get Started"
-  contents: get-started
-- title: "\U0001F4E6 Package Management"
-  contents: package-management
+- title: "Getting Started"
+  navbar: "Getting Started"
+  desc: >
+    Quick start guides to help you begin using evanverse effectively
+  contents:
+  - get-started
+  - comprehensive-guide
+
+- title: "Specialized Guides"
+  navbar: "Specialized Guides"
+  desc: >
+    In-depth tutorials covering specific functionality and advanced workflows
+  contents:
+  - package-management
+  - color-palettes
+  - data-processing
+  - visualization-showcase
+  - bioinformatics-workflows
+
+
+reference:
+- title: "📦 Package Management"
+  desc: >
+    Functions for installing, checking, and managing R packages from
+    multiple sources (CRAN, GitHub, Bioconductor). Essential tools for
+    reproducible analysis environments.
+  contents:
+  - check_pkg
+  - inst_pkg
+  - update_pkg
+  - pkg_version
+  - pkg_functions
+  - set_mirror
+
+- title: "📊 Visualization & Plotting"
+  desc: >
+    High-level plotting functions with sensible defaults for common
+    chart types and publication-ready visualizations. Create professional
+    plots with minimal code.
+  contents:
+  - plot_venn
+  - plot_forest
+  - plot_bar
+  - plot_pie
+  - plot_density
+
+- title: "🎨 Color Palettes & Management"
+  desc: >
+    Bioinformatics-focused color palette system with creation,
+    management, and visualization tools. Build consistent, accessible
+    color schemes for your projects.
+  contents:
+  - get_palette
+  - list_palettes
+  - create_palette
+  - preview_palette
+  - bio_palette_gallery
+  - compile_palettes
+  - remove_palette
+  - hex2rgb
+  - rgb2hex
+
+- title: "💾 File & Data I/O"
+  desc: >
+    Flexible file reading/writing functions with enhanced error handling,
+    progress reporting, and format detection. Handle various data formats
+    with robust error recovery.
+  contents:
+  - read_table_flex
+  - read_excel_flex
+  - write_xlsx_flex
+  - download_url
+  - download_batch
+  - download_geo_data
+  - file_info
+  - file_tree
+  - get_ext
+  - view
+
+- title: "🧬 Bioinformatics Utilities"
+  desc: >
+    Specialized functions for bioinformatics workflows including
+    gene ID conversion and gene set analysis. Essential tools for
+    genomic data processing and analysis.
+  contents:
+  - convert_gene_id
+  - download_gene_ref
+  - gmt2df
+  - gmt2list
+
+- title: "🔄 Data Processing & Transformation"
+  desc: >
+    Functions for data manipulation, column mapping, and handling
+    missing or void values. Clean and transform data with comprehensive
+    void value handling.
+  contents:
+  - df2list
+  - map_column
+  - is_void
+  - any_void
+  - drop_void
+  - replace_void
+  - cols_with_void
+  - rows_with_void
+
+- title: "⚡ Operators & Logic"
+  desc: >
+    Custom infix operators and logical utility functions for
+    expressive and readable code. Enhance R syntax with powerful
+    shortcuts and combinatorial tools.
+  contents:
+  - "%p%"
+  - "%is%"
+  - "%nin%"
+  - "%map%"
+  - "%match%"
+  - combine_logic
+  - comb
+  - perm
+
+- title: "🛠️ Workflow & Development Tools"
+  desc: >
+    Helper functions for development workflow, timing, and
+    safe code execution. Streamline your development process with
+    productivity-enhancing utilities.
+  contents:
+  - with_timer
+  - remind
+  - safe_execute
+
+news:
+  releases:
+  - text: "🎉 Version 0.3.0 - CRAN Release"
+    href: https://github.com/evanbio/evanverse/releases/tag/v0.3.0
+  - text: "📦 Version 0.2.0 - Feature Update"
+    href: https://github.com/evanbio/evanverse/releases/tag/v0.2.0
+  - text: "View All Releases"
+    href: https://github.com/evanbio/evanverse/releases
+
+footer:
+  structure:
+    left: [developed_by, built_with, license]
+    right: [package_info, social_links]
+  components:
+    package_info: |
+      <div class="text-muted">
+        <strong>evanverse v0.3.0</strong><br>
+        <small>Last updated: September 2024</small>
+      </div>
+    social_links: |
+      <div class="footer-links">
+        <a href="https://github.com/evanbio/evanverse" class="text-muted me-3" aria-label="GitHub">
+          <i class="fab fa-github fa-lg"></i>
+        </a>
+        <a href="https://cran.r-project.org/package=evanverse" class="text-muted me-3" aria-label="CRAN">
+          <i class="fas fa-download fa-lg"></i>
+        </a>
+        <a href="https://blog.evanzhou.org" class="text-muted" aria-label="Blog">
+          <i class="fas fa-blog fa-lg"></i>
+        </a>
+      </div>
+    license: |
+      <div class="text-muted">
+        <i class="fas fa-balance-scale me-1"></i>
+        <a href="https://opensource.org/licenses/MIT" class="text-muted">MIT License</a>
+      </div>
 
