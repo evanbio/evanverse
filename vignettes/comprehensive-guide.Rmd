@@ -118,9 +118,14 @@ sets_list <- list(
 )
 
 # Create Venn diagram with custom colors
-venn_plot <- plot_venn(sets_list,
-                       colors = get_palette("vividset", type = "qualitative", n = 3),
-                       title = "Gene Set Overlaps")
+venn_plot <- plot_venn(
+  set1 = sets_list[[1]],
+  set2 = sets_list[[2]],
+  set3 = sets_list[[3]],
+  category.names = names(sets_list),
+  fill = get_palette("vividset", type = "qualitative", n = 3),
+  title = "Gene Set Overlaps"
+)
 print(venn_plot)
 ```
 

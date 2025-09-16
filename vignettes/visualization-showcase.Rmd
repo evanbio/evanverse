@@ -122,12 +122,12 @@ set.seed(456)
 dose_data <- data.frame(
   Dose = rep(c(0, 1, 5, 10, 25, 50, 100), each = 6),
   Response = c(
-    rnorm(6, 10, 2),   # 0 dose
+    rnorm(6, 10, 2),   # 0 dose                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         
     rnorm(6, 12, 2),   # 1 dose
     rnorm(6, 25, 4),   # 5 dose
     rnorm(6, 45, 6),   # 10 dose
     rnorm(6, 65, 8),   # 25 dose
-    rnorm(6, 80, 10),  # 50 dose
+    rnorm(6, 80, 10),  # 50 dose                                         
     rnorm(6, 85, 12)   # 100 dose
   ),
   Compound = rep(c("Drug A", "Drug B"), 21)
@@ -280,10 +280,13 @@ gene_sets <- list(
 venn_colors <- get_palette("softpastel", type = "qualitative", n = 4)
 
 venn_plot <- plot_venn(
-  gene_sets,
-  colors = venn_colors,
-  title = "Gene Set Overlap Analysis",
-  subtitle = "Intersection of upregulated genes, pathways, and drug targets"
+  set1 = gene_sets[[1]],
+  set2 = gene_sets[[2]],
+  set3 = gene_sets[[3]],
+  set4 = gene_sets[[4]],
+  category.names = names(gene_sets),
+  fill = venn_colors,
+  title = "Gene Set Overlap Analysis"
 )
 
 print(venn_plot)

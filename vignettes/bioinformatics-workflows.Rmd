@@ -199,10 +199,12 @@ pathway_genes <- mock_pathways[1:3]  # Use first 3 pathways for Venn diagram
 
 # Create Venn diagram for pathway overlaps
 venn_plot <- plot_venn(
-  pathway_genes,
-  colors = get_palette("vividset", type = "qualitative", n = 3),
-  title = "Metabolic Pathway Gene Overlaps",
-  subtitle = "Shared genes between glycolysis, citrate cycle, and fatty acid synthesis"
+  set1 = pathway_genes[[1]],
+  set2 = pathway_genes[[2]],
+  set3 = pathway_genes[[3]],
+  category.names = names(pathway_genes),
+  fill = get_palette("vividset", type = "qualitative", n = 3),
+  title = "Metabolic Pathway Gene Overlaps"
 )
 
 print(venn_plot)
