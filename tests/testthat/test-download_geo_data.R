@@ -58,9 +58,9 @@ test_that("download_geo_data() checks required packages", {
 # Directory and logging setup tests
 # ------------------------------------------------------------------------------
 test_that("download_geo_data() creates destination directory", {
-  skip("Network-heavy GEO download skipped.")
   skip_on_cran()
   skip_if_offline()
+  skip("Network-heavy GEO download skipped.")
 
   temp_dir <- tempfile("test_geo_")
 
@@ -77,9 +77,9 @@ test_that("download_geo_data() creates destination directory", {
 })
 
 test_that("download_geo_data() creates default log dir when log_file is NULL", {
-  skip("Network-heavy GEO download skipped.")
   skip_on_cran()
   skip_if_offline()
+  skip("Network-heavy GEO download skipped.")
 
   temp_dir <- tempfile("test_geo_default_")
   on.exit(unlink(temp_dir, recursive = TRUE), add = TRUE)
@@ -97,9 +97,10 @@ test_that("download_geo_data() creates default log dir when log_file is NULL", {
 # Basic functionality tests
 # ------------------------------------------------------------------------------
 test_that("download_geo_data() works with valid GSE ID", {
-  skip("Network-heavy GEO download skipped.")
+
   skip_on_cran()  # Don't run on CRAN
   skip_if_offline()  # Skip if no internet connection
+  skip("Network-heavy GEO download skipped.")
 
   # Use a small, reliable GSE dataset
   gse_id <- "GSE7305"
@@ -150,10 +151,11 @@ test_that("download_geo_data() works with valid GSE ID", {
 # Output structure tests
 # ------------------------------------------------------------------------------
 test_that("download_geo_data() returns correct output structure", {
-  skip("Network-heavy GEO download skipped.")
+
   skip_on_cran()
   skip_if_offline()
-
+  skip("Network-heavy GEO download skipped.")
+  
   result <- download_geo_data("GSE7305", log = FALSE, retries = 1, timeout = 60)
 
   # Check main components
@@ -172,9 +174,10 @@ test_that("download_geo_data() returns correct output structure", {
 # Logging functionality tests
 # ------------------------------------------------------------------------------
 test_that("download_geo_data() creates log files when requested", {
-  skip("Network-heavy GEO download skipped.")
+
   skip_on_cran()
   skip_if_offline()
+  skip("Network-heavy GEO download skipped.")
 
   temp_dir <- tempfile("test_geo_")
 
@@ -201,10 +204,11 @@ test_that("download_geo_data() creates log files when requested", {
 # Retry mechanism tests
 # ------------------------------------------------------------------------------
 test_that("download_geo_data() handles retry logic", {
-  skip("Network-heavy GEO download skipped.")
+
   skip_on_cran()
   skip_if_offline()
-
+  skip("Network-heavy GEO download skipped.")
+  
   # Test with retries
   result <- download_geo_data("GSE7305", log = FALSE, retries = 2, timeout = 60)
 

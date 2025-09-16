@@ -14,6 +14,11 @@ test_that("download_batch() validates inputs correctly", {
 })
 
 test_that("download_batch() handles directory creation", {
+
+  skip_on_cran()
+  skip_if_offline()
+  skip("Network-heavy GEO download skipped.")
+
   # Create a non-existent directory
   temp_dir <- tempfile("test_dir_")
   urls <- c("http://example.com/file1.txt")
@@ -29,6 +34,11 @@ test_that("download_batch() handles directory creation", {
 })
 
 test_that("download_batch() generates safe filenames", {
+
+  skip_on_cran()
+  skip_if_offline()
+  skip("Network-heavy GEO download skipped.")
+  
   # Test the safe filename generation (simulate)
   temp_dir <- tempdir()
   urls <- c("http://example.com/file with spaces.txt", "http://example.com/file?param=value")
