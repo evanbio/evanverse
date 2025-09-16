@@ -58,6 +58,7 @@ test_that("download_geo_data() checks required packages", {
 # Directory and logging setup tests
 # ------------------------------------------------------------------------------
 test_that("download_geo_data() creates destination directory", {
+  skip("Network-heavy GEO download skipped.")
   skip_on_cran()
   skip_if_offline()
 
@@ -76,6 +77,7 @@ test_that("download_geo_data() creates destination directory", {
 })
 
 test_that("download_geo_data() creates default log dir when log_file is NULL", {
+  skip("Network-heavy GEO download skipped.")
   skip_on_cran()
   skip_if_offline()
 
@@ -95,6 +97,7 @@ test_that("download_geo_data() creates default log dir when log_file is NULL", {
 # Basic functionality tests
 # ------------------------------------------------------------------------------
 test_that("download_geo_data() works with valid GSE ID", {
+  skip("Network-heavy GEO download skipped.")
   skip_on_cran()  # Don't run on CRAN
   skip_if_offline()  # Skip if no internet connection
 
@@ -147,6 +150,7 @@ test_that("download_geo_data() works with valid GSE ID", {
 # Output structure tests
 # ------------------------------------------------------------------------------
 test_that("download_geo_data() returns correct output structure", {
+  skip("Network-heavy GEO download skipped.")
   skip_on_cran()
   skip_if_offline()
 
@@ -168,6 +172,7 @@ test_that("download_geo_data() returns correct output structure", {
 # Logging functionality tests
 # ------------------------------------------------------------------------------
 test_that("download_geo_data() creates log files when requested", {
+  skip("Network-heavy GEO download skipped.")
   skip_on_cran()
   skip_if_offline()
 
@@ -196,6 +201,7 @@ test_that("download_geo_data() creates log files when requested", {
 # Retry mechanism tests
 # ------------------------------------------------------------------------------
 test_that("download_geo_data() handles retry logic", {
+  skip("Network-heavy GEO download skipped.")
   skip_on_cran()
   skip_if_offline()
 
