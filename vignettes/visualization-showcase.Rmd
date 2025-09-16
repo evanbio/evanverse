@@ -1,0 +1,801 @@
+---
+title: "Visualization Showcase: Advanced Plotting with evanverse"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Visualization Showcase: Advanced Plotting with evanverse}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.width = 12,
+  fig.height = 8,
+  dpi = 300,
+  out.width = "100%"
+)
+```
+
+```{r setup, message = FALSE}
+library(evanverse)
+library(ggplot2)
+library(dplyr)
+library(tidyr)
+library(gridExtra)
+library(patchwork)
+```
+
+# 📊 Visualization Showcase: Advanced Plotting with evanverse
+
+The `evanverse` package provides a comprehensive visualization toolkit designed for scientific data analysis and publication-ready graphics. This showcase demonstrates advanced plotting techniques, from basic charts to complex multi-panel scientific figures, all enhanced with evanverse's color palette system and specialized plot functions.
+
+## 🎯 Overview of Visualization Functions
+
+### Core Visualization Arsenal
+
+| Function | Type | Best Use Cases | Key Features |
+|----------|------|----------------|--------------|
+| `plot_venn()` | Set Analysis | Gene overlaps, group comparisons | 2-4 sets, gradient options |
+| `plot_forest()` | Statistical | Meta-analysis, risk factors | Confidence intervals, p-values |
+| `plot_bar()` | Categorical | Group comparisons, distributions | Custom colors, error bars |
+| `plot_pie()` | Proportional | Composition analysis | Labels, percentages |
+| `plot_density()` | Distributional | Data exploration, comparisons | Overlays, statistical tests |
+| `get_palette()` | Color System | Consistent theming | 15+ curated palettes |
+| `preview_palette()` | Color Preview | Palette selection | Visual swatches |
+
+## 🎨 Advanced Color Integration
+
+### Seamless Palette Integration
+
+```{r color-integration, fig.cap="Demonstration of seamless color palette integration across different plot types"}
+# Generate sample data for consistent theming
+set.seed(123)
+sample_data <- data.frame(
+  Category = rep(c("Group A", "Group B", "Group C", "Group D"), each = 25),
+  Value1 = c(rnorm(25, 10, 2), rnorm(25, 15, 3), rnorm(25, 12, 2.5), rnorm(25, 18, 4)),
+  Value2 = c(rnorm(25, 8, 1.5), rnorm(25, 12, 2), rnorm(25, 10, 2), rnorm(25, 14, 3)),
+  Condition = rep(c("Control", "Treatment"), 50),
+  Replicate = rep(1:10, 10)
+)
+
+# Define consistent color scheme
+main_colors <- get_palette("vividset", type = "qualitative", n = 4)
+condition_colors <- get_palette("vividset", type = "qualitative", n = 2)
+
+# Create multiple plots with consistent theming
+p1 <- ggplot(sample_data, aes(x = Category, y = Value1, fill = Category)) +
+  geom_boxplot(alpha = 0.8) +
+  scale_fill_manual(values = main_colors) +
+  labs(title = "Boxplot with Qualitative Palette",
+       y = "Measurement 1") +
+  theme_minimal() +
+  theme(legend.position = "none",
+        plot.title = element_text(size = 12, face = "bold"))
+
+p2 <- ggplot(sample_data, aes(x = Value1, fill = Condition)) +
+  geom_density(alpha = 0.7) +
+  scale_fill_manual(values = condition_colors) +
+  labs(title = "Density Plot with Consistent Colors",
+       x = "Measurement 1") +
+  theme_minimal() +
+  theme(plot.title = element_text(size = 12, face = "bold"))
+
+p3 <- sample_data %>%
+  group_by(Category) %>%
+  summarise(Mean = mean(Value1), .groups = 'drop') %>%
+  ggplot(aes(x = Category, y = Mean, fill = Category)) +
+  geom_col(alpha = 0.8) +
+  scale_fill_manual(values = main_colors) +
+  labs(title = "Bar Chart with Matching Theme",
+       y = "Mean Value") +
+  theme_minimal() +
+  theme(legend.position = "none",
+        plot.title = element_text(size = 12, face = "bold"))
+
+p4 <- ggplot(sample_data, aes(x = Value1, y = Value2, color = Category)) +
+  geom_point(alpha = 0.7, size = 2) +
+  scale_color_manual(values = main_colors) +
+  labs(title = "Scatter Plot Integration",
+       x = "Measurement 1", y = "Measurement 2") +
+  theme_minimal() +
+  theme(plot.title = element_text(size = 12, face = "bold"))
+
+# Combine plots
+combined_plot <- (p1 + p2) / (p3 + p4)
+combined_plot + plot_annotation(
+  title = "Consistent Color Theming Across Plot Types",
+  subtitle = "Using evanverse vividset palette for unified visual identity"
+)
+```
+
+## 🔬 Scientific Visualization Workflows
+
+### Multi-Panel Scientific Figures
+
+```{r scientific-figure, fig.cap="Publication-ready multi-panel scientific figure with evanverse enhancements", fig.height=10}
+# Generate realistic scientific data
+set.seed(456)
+
+# Panel A: Dose-response curve
+dose_data <- data.frame(
+  Dose = rep(c(0, 1, 5, 10, 25, 50, 100), each = 6),
+  Response = c(
+    rnorm(6, 10, 2),   # 0 dose
+    rnorm(6, 12, 2),   # 1 dose
+    rnorm(6, 25, 4),   # 5 dose
+    rnorm(6, 45, 6),   # 10 dose
+    rnorm(6, 65, 8),   # 25 dose
+    rnorm(6, 80, 10),  # 50 dose
+    rnorm(6, 85, 12)   # 100 dose
+  ),
+  Compound = rep(c("Drug A", "Drug B"), 21)
+)
+
+# Panel B: Time course data
+time_data <- data.frame(
+  Time = rep(c(0, 1, 2, 4, 8, 12, 24, 48), each = 8),
+  Expression = c(
+    rnorm(8, 1.0, 0.1),  # 0h
+    rnorm(8, 1.2, 0.15), # 1h
+    rnorm(8, 2.1, 0.3),  # 2h
+    rnorm(8, 3.5, 0.5),  # 4h
+    rnorm(8, 4.2, 0.6),  # 8h
+    rnorm(8, 3.8, 0.5),  # 12h
+    rnorm(8, 2.5, 0.4),  # 24h
+    rnorm(8, 1.8, 0.3)   # 48h
+  ),
+  Treatment = rep(c("Control", "Treated"), 32)
+)
+
+# Panel C: Pathway analysis results
+pathway_data <- data.frame(
+  Pathway = c("Cell Cycle", "Apoptosis", "DNA Repair", "Metabolism",
+              "Signaling", "Transport", "Development", "Immunity"),
+  LogFC = c(2.1, -1.8, 1.5, -2.3, 1.9, -1.2, 1.7, -2.0),
+  PValue = c(0.001, 0.003, 0.008, 0.0001, 0.002, 0.045, 0.012, 0.0008),
+  GeneCount = c(45, 38, 42, 52, 41, 28, 35, 48)
+)
+
+# Define scientific color palettes
+dose_colors <- get_palette("blues", type = "sequential", n = 2)
+time_colors <- get_palette("vividset", type = "qualitative", n = 2)
+pathway_colors <- get_palette("redblue", type = "diverging", n = 11)
+
+# Panel A: Dose-response curve
+panel_a <- ggplot(dose_data, aes(x = log10(Dose + 0.1), y = Response, color = Compound)) +
+  geom_point(alpha = 0.6, size = 2) +
+  geom_smooth(method = "loess", se = TRUE, alpha = 0.3) +
+  scale_color_manual(values = dose_colors) +
+  scale_x_continuous(
+    breaks = log10(c(0.1, 1, 10, 100) + 0.1),
+    labels = c("0", "1", "10", "100")
+  ) +
+  labs(
+    title = "A. Dose-Response Analysis",
+    x = "Dose (μM)",
+    y = "Response (%)",
+    color = "Compound"
+  ) +
+  theme_minimal() +
+  theme(
+    plot.title = element_text(size = 14, face = "bold", color = "#0D47A1"),
+    legend.position = c(0.2, 0.8),
+    legend.background = element_rect(fill = "white", alpha = 0.8)
+  )
+
+# Panel B: Time course
+time_summary <- time_data %>%
+  group_by(Time, Treatment) %>%
+  summarise(
+    Mean = mean(Expression),
+    SEM = sd(Expression) / sqrt(n()),
+    .groups = 'drop'
+  )
+
+panel_b <- ggplot(time_summary, aes(x = Time, y = Mean, color = Treatment)) +
+  geom_line(size = 1.2) +
+  geom_point(size = 3) +
+  geom_errorbar(aes(ymin = Mean - SEM, ymax = Mean + SEM),
+                width = 1, alpha = 0.7) +
+  scale_color_manual(values = time_colors) +
+  scale_x_continuous(breaks = c(0, 12, 24, 48)) +
+  labs(
+    title = "B. Time Course Expression Profile",
+    x = "Time (hours)",
+    y = "Relative Expression (fold change)",
+    color = "Treatment"
+  ) +
+  theme_minimal() +
+  theme(
+    plot.title = element_text(size = 14, face = "bold", color = "#0D47A1"),
+    legend.position = c(0.8, 0.8),
+    legend.background = element_rect(fill = "white", alpha = 0.8)
+  )
+
+# Panel C: Pathway analysis
+pathway_data$Significance <- ifelse(pathway_data$PValue < 0.001, "***",
+                           ifelse(pathway_data$PValue < 0.01, "**",
+                           ifelse(pathway_data$PValue < 0.05, "*", "ns")))
+
+panel_c <- ggplot(pathway_data, aes(x = reorder(Pathway, LogFC), y = LogFC)) +
+  geom_col(aes(fill = LogFC), alpha = 0.8) +
+  geom_text(aes(label = Significance, y = LogFC + sign(LogFC) * 0.1),
+            size = 4, fontface = "bold") +
+  scale_fill_gradientn(colors = pathway_colors, name = "Log₂ FC") +
+  coord_flip() +
+  labs(
+    title = "C. Pathway Enrichment Analysis",
+    x = "Biological Pathway",
+    y = "Log₂ Fold Change"
+  ) +
+  theme_minimal() +
+  theme(
+    plot.title = element_text(size = 14, face = "bold", color = "#0D47A1"),
+    axis.text.y = element_text(size = 10)
+  )
+
+# Panel D: Summary statistics
+summary_stats <- data.frame(
+  Metric = c("Total Genes", "Up-regulated", "Down-regulated", "Pathways", "Significance"),
+  Value = c("2,456", "1,234", "1,222", "8", "p < 0.001"),
+  Category = c("Data", "Expression", "Expression", "Analysis", "Statistics")
+)
+
+panel_d <- ggplot(summary_stats, aes(x = 1, y = 1)) +
+  geom_text(aes(label = paste(Metric, ":", Value)),
+            size = 4, hjust = 0,
+            y = seq(0.8, 0.2, length.out = 5)) +
+  xlim(0.5, 2) +
+  ylim(0, 1) +
+  labs(title = "D. Summary Statistics") +
+  theme_void() +
+  theme(
+    plot.title = element_text(size = 14, face = "bold", color = "#0D47A1"),
+    plot.margin = margin(20, 20, 20, 20)
+  )
+
+# Combine panels
+scientific_figure <- (panel_a | panel_b) / (panel_c | panel_d)
+scientific_figure + plot_annotation(
+  title = "Multi-omics Analysis of Drug Treatment Effects",
+  subtitle = "Comprehensive analysis showing dose-response, temporal dynamics, and pathway enrichment",
+  caption = "Figure 1. Statistical significance: *p < 0.05, **p < 0.01, ***p < 0.001"
+)
+```
+
+### Specialized Bioinformatics Visualizations
+
+```{r bio-viz, fig.cap="Advanced bioinformatics visualizations using evanverse specialized functions"}
+# Generate gene set overlap data
+gene_sets <- list(
+  "Upregulated_Genes" = paste0("Gene_", sample(1:200, 85)),
+  "Pathway_A" = paste0("Gene_", sample(1:200, 65)),
+  "Pathway_B" = paste0("Gene_", sample(1:200, 75)),
+  "Drug_Targets" = paste0("Gene_", sample(1:200, 45))
+)
+
+# Create Venn diagram with evanverse
+venn_colors <- get_palette("softpastel", type = "qualitative", n = 4)
+
+venn_plot <- plot_venn(
+  gene_sets,
+  colors = venn_colors,
+  title = "Gene Set Overlap Analysis",
+  subtitle = "Intersection of upregulated genes, pathways, and drug targets"
+)
+
+print(venn_plot)
+```
+
+```{r forest-plot, fig.cap="Forest plot visualization for meta-analysis results"}
+# Generate meta-analysis data
+meta_data <- data.frame(
+  Study = paste("Study", LETTERS[1:12]),
+  HazardRatio = c(1.23, 0.87, 1.45, 1.12, 0.92, 1.67, 1.34, 0.78, 1.56, 0.95, 1.28, 1.09),
+  CI_Lower = c(0.98, 0.71, 1.18, 0.89, 0.75, 1.32, 1.05, 0.61, 1.21, 0.78, 1.01, 0.85),
+  CI_Upper = c(1.55, 1.07, 1.78, 1.41, 1.13, 2.11, 1.71, 0.99, 2.01, 1.16, 1.62, 1.40),
+  PValue = c(0.067, 0.189, 0.001, 0.324, 0.445, 0.0001, 0.018, 0.041, 0.003, 0.612, 0.042, 0.287),
+  SampleSize = c(245, 189, 456, 332, 278, 398, 445, 234, 367, 298, 334, 412),
+  stringsAsFactors = FALSE
+)
+
+# Create forest plot
+forest_plot <- plot_forest(
+  data = meta_data,
+  gene_col = "Study",
+  hr_col = "HazardRatio",
+  ci_lower_col = "CI_Lower",
+  ci_upper_col = "CI_Upper",
+  pval_col = "PValue",
+  title = "Meta-analysis: Treatment Effect Across Studies",
+  subtitle = "Forest plot showing hazard ratios with 95% confidence intervals"
+)
+
+print(forest_plot)
+```
+
+## 📈 Interactive Dashboard-Style Layouts
+
+### Multi-Metric Dashboard
+
+```{r dashboard, fig.cap="Dashboard-style layout showing multiple key metrics and visualizations", fig.height=12}
+# Generate dashboard data
+set.seed(789)
+
+# KPI data
+kpi_data <- data.frame(
+  Metric = c("Total Samples", "Significant Genes", "Pathways Enriched", "Effect Size"),
+  Value = c(2456, 1834, 23, 1.67),
+  Change = c("+12%", "+8.5%", "+15%", "+0.3"),
+  Status = c("Good", "Good", "Excellent", "Moderate")
+)
+
+# Performance over time
+performance_data <- data.frame(
+  Week = 1:12,
+  Sensitivity = c(0.78, 0.82, 0.85, 0.83, 0.87, 0.89, 0.91, 0.88, 0.92, 0.94, 0.93, 0.95),
+  Specificity = c(0.82, 0.84, 0.81, 0.85, 0.88, 0.86, 0.89, 0.91, 0.90, 0.92, 0.94, 0.93),
+  Accuracy = c(0.80, 0.83, 0.83, 0.84, 0.875, 0.875, 0.90, 0.895, 0.91, 0.93, 0.935, 0.94)
+)
+
+# Group distribution
+group_data <- data.frame(
+  Group = c("Control", "Treatment A", "Treatment B", "Treatment C"),
+  Count = c(620, 580, 645, 611),
+  Success_Rate = c(0.65, 0.78, 0.82, 0.75)
+)
+
+# Color schemes for dashboard
+kpi_colors <- get_palette("vividset", type = "qualitative", n = 4)
+performance_colors <- get_palette("blues", type = "sequential", n = 3)
+group_colors <- get_palette("oranges", type = "sequential", n = 4)
+
+# KPI Panel
+kpi_panel <- ggplot(kpi_data, aes(x = Metric, y = Value, fill = Status)) +
+  geom_col(alpha = 0.8) +
+  geom_text(aes(label = paste(Value, Change, sep = "\n")),
+            vjust = -0.5, size = 3.5, fontface = "bold") +
+  scale_fill_manual(values = c("Good" = kpi_colors[1], "Excellent" = kpi_colors[2],
+                              "Moderate" = kpi_colors[3])) +
+  labs(title = "Key Performance Indicators", y = "Value") +
+  theme_minimal() +
+  theme(
+    axis.text.x = element_text(angle = 45, hjust = 1),
+    plot.title = element_text(size = 12, face = "bold"),
+    legend.position = "none"
+  )
+
+# Performance trends
+perf_long <- performance_data %>%
+  pivot_longer(cols = -Week, names_to = "Metric", values_to = "Score")
+
+performance_panel <- ggplot(perf_long, aes(x = Week, y = Score, color = Metric)) +
+  geom_line(size = 1.2) +
+  geom_point(size = 2.5) +
+  scale_color_manual(values = performance_colors) +
+  scale_y_continuous(limits = c(0.75, 1.0), labels = scales::percent) +
+  labs(title = "Model Performance Over Time",
+       x = "Week", y = "Performance Score") +
+  theme_minimal() +
+  theme(
+    plot.title = element_text(size = 12, face = "bold"),
+    legend.position = "bottom"
+  )
+
+# Group comparison
+group_comparison <- ggplot(group_data, aes(x = Count, y = Success_Rate,
+                                          size = Count, color = Group)) +
+  geom_point(alpha = 0.8) +
+  scale_size_continuous(range = c(5, 15), guide = "none") +
+  scale_color_manual(values = group_colors) +
+  scale_y_continuous(labels = scales::percent) +
+  labs(title = "Group Performance vs. Sample Size",
+       x = "Sample Count", y = "Success Rate") +
+  theme_minimal() +
+  theme(
+    plot.title = element_text(size = 12, face = "bold"),
+    legend.position = "right"
+  )
+
+# Summary heatmap
+set.seed(100)
+heatmap_data <- expand.grid(
+  Category = c("Sensitivity", "Specificity", "PPV", "NPV"),
+  Method = c("Method A", "Method B", "Method C", "Method D")
+)
+heatmap_data$Performance <- runif(16, 0.75, 0.95)
+
+heatmap_panel <- ggplot(heatmap_data, aes(x = Method, y = Category, fill = Performance)) +
+  geom_tile(color = "white", size = 0.5) +
+  geom_text(aes(label = paste0(round(Performance * 100, 1), "%")),
+            color = "white", fontface = "bold") +
+  scale_fill_gradientn(colors = get_palette("blues", type = "sequential", n = 9),
+                      name = "Score", labels = scales::percent) +
+  labs(title = "Method Comparison Matrix") +
+  theme_minimal() +
+  theme(
+    plot.title = element_text(size = 12, face = "bold"),
+    panel.grid = element_blank(),
+    axis.text.x = element_text(angle = 45, hjust = 1)
+  )
+
+# Combine dashboard panels
+dashboard_layout <- (kpi_panel | performance_panel) / (group_comparison | heatmap_panel)
+dashboard_layout + plot_annotation(
+  title = "Analytical Dashboard: Model Performance Overview",
+  subtitle = "Real-time monitoring of key metrics and comparative analysis"
+)
+```
+
+## 🎨 Publication-Ready Visualizations
+
+### High-Impact Journal Figures
+
+```{r publication-figure, fig.cap="Publication-ready figure with journal-quality formatting and statistics", fig.height=10}
+# Generate publication-quality data
+set.seed(321)
+
+# Main experimental data
+experimental_data <- data.frame(
+  Treatment = rep(c("Vehicle", "Low Dose", "Medium Dose", "High Dose"), each = 20),
+  Response = c(
+    rnorm(20, 25, 4),   # Vehicle
+    rnorm(20, 35, 5),   # Low
+    rnorm(20, 55, 8),   # Medium
+    rnorm(20, 75, 10)   # High
+  ),
+  Biomarker = c(
+    rnorm(20, 2.1, 0.3),  # Vehicle
+    rnorm(20, 3.2, 0.5),  # Low
+    rnorm(20, 5.1, 0.8),  # Medium
+    rnorm(20, 7.8, 1.2)   # High
+  ),
+  Subject = rep(1:20, 4)
+)
+
+# Statistical comparisons
+stat_comparisons <- list(
+  c("Vehicle", "Low Dose"),
+  c("Vehicle", "Medium Dose"),
+  c("Vehicle", "High Dose"),
+  c("Low Dose", "Medium Dose"),
+  c("Medium Dose", "High Dose")
+)
+
+# Color scheme for publication
+pub_colors <- get_palette("vividset", type = "qualitative", n = 4)
+names(pub_colors) <- c("Vehicle", "Low Dose", "Medium Dose", "High Dose")
+
+# Main dose-response plot with statistics
+main_plot <- ggplot(experimental_data, aes(x = Treatment, y = Response, fill = Treatment)) +
+  geom_boxplot(alpha = 0.7, outlier.alpha = 0.6) +
+  geom_jitter(width = 0.2, alpha = 0.4, size = 1.5) +
+  scale_fill_manual(values = pub_colors) +
+  stat_summary(fun = mean, geom = "point", shape = 23, size = 3,
+               fill = "white", color = "black") +
+  labs(
+    title = "A. Dose-Response Relationship",
+    x = "Treatment Group",
+    y = "Response (arbitrary units)",
+    fill = "Treatment"
+  ) +
+  theme_minimal() +
+  theme(
+    plot.title = element_text(size = 14, face = "bold"),
+    axis.text.x = element_text(angle = 45, hjust = 1),
+    legend.position = "none",
+    panel.grid.minor = element_blank(),
+    plot.margin = margin(10, 10, 10, 10)
+  ) +
+  annotate("text", x = 2, y = 90, label = "***", size = 6) +
+  annotate("text", x = 3, y = 95, label = "***", size = 6) +
+  annotate("text", x = 4, y = 100, label = "***", size = 6)
+
+# Correlation analysis
+correlation_plot <- ggplot(experimental_data, aes(x = Biomarker, y = Response, color = Treatment)) +
+  geom_point(alpha = 0.8, size = 2.5) +
+  geom_smooth(method = "lm", se = TRUE, alpha = 0.3) +
+  scale_color_manual(values = pub_colors) +
+  labs(
+    title = "B. Biomarker Correlation",
+    x = "Biomarker Level (log₂ fold change)",
+    y = "Response (arbitrary units)",
+    color = "Treatment"
+  ) +
+  theme_minimal() +
+  theme(
+    plot.title = element_text(size = 14, face = "bold"),
+    legend.position = c(0.2, 0.8),
+    legend.background = element_rect(fill = "white", alpha = 0.9),
+    panel.grid.minor = element_blank()
+  ) +
+  annotate("text", x = 6, y = 85,
+           label = expression(paste(r^2, " = 0.847, ", italic(p), " < 0.001")),
+           size = 4)
+
+# Summary statistics table
+summary_stats <- experimental_data %>%
+  group_by(Treatment) %>%
+  summarise(
+    N = n(),
+    Mean_Response = round(mean(Response), 1),
+    SD_Response = round(sd(Response), 1),
+    Mean_Biomarker = round(mean(Biomarker), 2),
+    SD_Biomarker = round(sd(Biomarker), 2),
+    .groups = 'drop'
+  )
+
+# Convert to long format for table visualization
+stats_long <- summary_stats %>%
+  mutate(
+    Response_Text = paste0(Mean_Response, " ± ", SD_Response),
+    Biomarker_Text = paste0(Mean_Biomarker, " ± ", SD_Biomarker)
+  ) %>%
+  select(Treatment, N, Response_Text, Biomarker_Text) %>%
+  pivot_longer(cols = c(N, Response_Text, Biomarker_Text),
+               names_to = "Measure", values_to = "Value")
+
+table_plot <- ggplot(stats_long, aes(x = Measure, y = Treatment, fill = Treatment)) +
+  geom_tile(alpha = 0.3, color = "white") +
+  geom_text(aes(label = Value), fontface = "bold", size = 3.5) +
+  scale_fill_manual(values = pub_colors) +
+  scale_x_discrete(labels = c("N", "Response\n(Mean ± SD)", "Biomarker\n(Mean ± SD)")) +
+  labs(title = "C. Summary Statistics") +
+  theme_minimal() +
+  theme(
+    plot.title = element_text(size = 14, face = "bold"),
+    axis.title = element_blank(),
+    legend.position = "none",
+    panel.grid = element_blank(),
+    axis.text.x = element_text(size = 10, face = "bold")
+  )
+
+# ANOVA results visualization
+anova_results <- data.frame(
+  Source = c("Treatment", "Error", "Total"),
+  DF = c(3, 76, 79),
+  SS = c(15420.5, 3876.2, 19296.7),
+  MS = c(5140.2, 51.0, NA),
+  F_Value = c(100.8, NA, NA),
+  P_Value = c("<0.001", NA, NA)
+)
+
+anova_plot <- ggplot(anova_results[1:2,], aes(x = Source, y = MS, fill = Source)) +
+  geom_col(alpha = 0.8) +
+  scale_fill_manual(values = c("Treatment" = pub_colors[1], "Error" = "grey70")) +
+  scale_y_log10() +
+  labs(
+    title = "D. ANOVA Results",
+    y = "Mean Square (log scale)",
+    caption = "F(3,76) = 100.8, p < 0.001"
+  ) +
+  theme_minimal() +
+  theme(
+    plot.title = element_text(size = 14, face = "bold"),
+    legend.position = "none",
+    panel.grid.minor = element_blank(),
+    plot.caption = element_text(size = 11, hjust = 0.5, face = "italic")
+  )
+
+# Combine publication figure
+pub_figure <- (main_plot | correlation_plot) / (table_plot | anova_plot)
+pub_figure + plot_annotation(
+  title = "Figure 2. Dose-Response Analysis and Biomarker Validation",
+  subtitle = "Statistical analysis of treatment effects across experimental groups",
+  caption = "Data presented as mean ± SD. Statistical significance: ***p < 0.001",
+  theme = theme(
+    plot.title = element_text(size = 16, face = "bold", hjust = 0.5),
+    plot.subtitle = element_text(size = 12, hjust = 0.5),
+    plot.caption = element_text(size = 10, hjust = 0.5, face = "italic")
+  )
+)
+```
+
+## 🎪 Creative and Advanced Techniques
+
+### Innovative Visualization Approaches
+
+```{r creative-viz, fig.cap="Creative visualization techniques using evanverse palette system"}
+# Generate data for creative visualizations
+set.seed(654)
+
+# Radar/Spider chart data
+radar_data <- data.frame(
+  Metric = rep(c("Sensitivity", "Specificity", "Precision", "Recall", "F1-Score", "Accuracy"), 3),
+  Score = c(
+    # Model A
+    0.85, 0.82, 0.78, 0.85, 0.81, 0.83,
+    # Model B
+    0.78, 0.88, 0.85, 0.78, 0.81, 0.83,
+    # Model C
+    0.92, 0.75, 0.73, 0.92, 0.81, 0.84
+  ),
+  Model = rep(c("Model A", "Model B", "Model C"), each = 6)
+)
+
+# Coordinate transformation for radar chart
+radar_coords <- radar_data %>%
+  group_by(Model) %>%
+  mutate(
+    angle = seq(0, 2*pi, length.out = n() + 1)[1:n()],
+    x = Score * cos(angle),
+    y = Score * sin(angle)
+  )
+
+# Create radar chart
+radar_colors <- get_palette("vividset", type = "qualitative", n = 3)
+
+radar_plot <- ggplot(radar_coords, aes(x = x, y = y, color = Model, fill = Model)) +
+  geom_polygon(alpha = 0.3, size = 1) +
+  geom_point(size = 3) +
+  scale_color_manual(values = radar_colors) +
+  scale_fill_manual(values = radar_colors) +
+  coord_fixed() +
+  labs(title = "Model Performance Radar Chart") +
+  theme_void() +
+  theme(
+    plot.title = element_text(size = 14, face = "bold", hjust = 0.5),
+    legend.position = "bottom"
+  )
+
+# Add metric labels manually
+metric_positions <- data.frame(
+  Metric = c("Sensitivity", "Specificity", "Precision", "Recall", "F1-Score", "Accuracy"),
+  angle = seq(0, 2*pi, length.out = 7)[1:6],
+  x = cos(seq(0, 2*pi, length.out = 7)[1:6]) * 1.1,
+  y = sin(seq(0, 2*pi, length.out = 7)[1:6]) * 1.1
+)
+
+radar_plot_final <- radar_plot +
+  geom_text(data = metric_positions, aes(x = x, y = y, label = Metric),
+            color = "black", size = 3.5, fontface = "bold", inherit.aes = FALSE)
+
+print(radar_plot_final)
+```
+
+```{r alluvial-style, fig.cap="Flow/alluvial-style visualization showing data transitions"}
+# Create data flow visualization
+flow_data <- data.frame(
+  Stage = rep(c("Input", "Processing", "Analysis", "Output"), each = 4),
+  Category = rep(c("Type A", "Type B", "Type C", "Type D"), 4),
+  Count = c(
+    # Input
+    150, 200, 175, 225,
+    # Processing (some loss/redistribution)
+    140, 180, 160, 200,
+    # Analysis (further processing)
+    120, 170, 145, 185,
+    # Output (final results)
+    110, 160, 135, 175
+  )
+)
+
+# Create flow visualization
+flow_colors <- get_palette("softpastel", type = "qualitative", n = 4)
+
+flow_plot <- ggplot(flow_data, aes(x = Stage, y = Count, fill = Category, group = Category)) +
+  geom_area(alpha = 0.7, position = "stack") +
+  scale_fill_manual(values = flow_colors) +
+  labs(
+    title = "Data Processing Flow Visualization",
+    subtitle = "Sample tracking through analytical pipeline",
+    x = "Processing Stage",
+    y = "Sample Count",
+    fill = "Sample Type"
+  ) +
+  theme_minimal() +
+  theme(
+    plot.title = element_text(size = 14, face = "bold"),
+    plot.subtitle = element_text(size = 11, color = "#666666"),
+    legend.position = "right"
+  )
+
+print(flow_plot)
+```
+
+## 📋 Best Practices and Guidelines
+
+### Publication Standards
+
+```{r publication-guidelines}
+cat("📊 PUBLICATION-READY VISUALIZATION GUIDELINES\n")
+cat("============================================\n\n")
+
+cat("🎨 Color Guidelines:\n")
+cat("  • Use colorblind-friendly palettes (evanverse defaults)\n")
+cat("  • Maintain consistency across figure panels\n")
+cat("  • Reserve bright colors for emphasis\n")
+cat("  • Test in grayscale for print compatibility\n\n")
+
+cat("📐 Layout and Design:\n")
+cat("  • Use consistent font sizes (10-14pt for labels)\n")
+cat("  • Maintain adequate white space\n")
+cat("  • Align elements across panels\n")
+cat("  • Use meaningful titles and subtitles\n\n")
+
+cat("📊 Data Representation:\n")
+cat("  • Show individual data points when possible\n")
+cat("  • Include error bars with clear definitions\n")
+cat("  • Report exact p-values or significance levels\n")
+cat("  • Use appropriate statistical tests\n\n")
+
+cat("🔤 Typography and Labels:\n")
+cat("  • Use sans-serif fonts for clarity\n")
+cat("  • Include units in axis labels\n")
+cat("  • Define abbreviations in captions\n")
+cat("  • Use consistent decimal places\n")
+```
+
+### Performance Optimization
+
+```{r performance-tips}
+cat("⚡ VISUALIZATION PERFORMANCE TIPS\n")
+cat("================================\n\n")
+
+cat("🚀 Code Optimization:\n")
+cat("  • Cache color palettes for repeated use\n")
+cat("  • Use vectorized operations for large datasets\n")
+cat("  • Pre-calculate summary statistics\n")
+cat("  • Optimize plot resolution for intended use\n\n")
+
+cat("💾 Memory Management:\n")
+cat("  • Filter data before plotting\n")
+cat("  • Use appropriate data types\n")
+cat("  • Clear unused variables\n")
+cat("  • Consider plotting subsets for exploration\n\n")
+
+# Demonstrate efficient palette caching
+cat("Example of efficient color usage:\n")
+cat("# Good: Cache and reuse palettes\n")
+cat("colors <- get_palette('vividset', type = 'qualitative', n = 4)\n")
+cat("plot1 + scale_fill_manual(values = colors)\n")
+cat("plot2 + scale_color_manual(values = colors)\n\n")
+
+cat("# Avoid: Repeated palette calls\n")
+cat("# plot1 + scale_fill_manual(values = get_palette(...))\n")
+cat("# plot2 + scale_color_manual(values = get_palette(...))\n")
+```
+
+## 🎯 Summary and Advanced Resources
+
+The evanverse visualization toolkit provides:
+
+✅ **Specialized plot functions** optimized for scientific data
+✅ **Professional color system** with 15+ curated palettes
+✅ **Publication-ready defaults** following scientific standards
+✅ **Flexible integration** with ggplot2 ecosystem
+✅ **Advanced layout tools** for complex multi-panel figures
+✅ **Performance optimization** for large datasets
+
+### Continue Learning:
+
+- 🎨 [Color Palette Guide](color-palettes.html) - Master the color system
+- 🧬 [Bioinformatics Workflows](bioinformatics-workflows.html) - Domain-specific visualizations
+- 🔄 [Data Processing Guide](data-processing.html) - Prepare data for visualization
+
+### Essential Visualization Functions:
+
+```{r viz-quick-ref, eval = FALSE}
+# Core plotting functions
+plot_venn(gene_sets, colors = get_palette("vividset"))      # Set overlaps
+plot_forest(meta_data, hr_col = "HR")                       # Meta-analysis
+plot_bar(data, x = "group", y = "value", fill = "category") # Bar charts
+plot_density(data, x = "values", fill = "group")            # Distributions
+
+# Color system
+get_palette("blues", type = "sequential", n = 8)            # Get colors
+preview_palette("vividset", type = "qualitative")           # Preview swatches
+bio_palette_gallery()                                       # Show all palettes
+
+# Advanced integration
+# Combine with ggplot2 for unlimited customization
+ggplot(data, aes(...)) +
+  geom_point() +
+  scale_color_manual(values = get_palette("vividset"))
+```
+
+---
+
+*📊 Create stunning, publication-ready visualizations with evanverse!*

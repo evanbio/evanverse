@@ -1,0 +1,770 @@
+---
+title: "Bioinformatics Workflows with evanverse"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Bioinformatics Workflows with evanverse}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.width = 10,
+  fig.height = 7,
+  dpi = 300,
+  out.width = "100%"
+)
+```
+
+```{r setup, message = FALSE}
+library(evanverse)
+library(dplyr)
+library(ggplot2)
+library(tidyr)
+```
+
+# 🧬 Bioinformatics Workflows with evanverse
+
+The `evanverse` package provides specialized tools for common bioinformatics workflows, including gene ID conversion, gene set analysis, pathway enrichment visualization, and biological data download utilities. This comprehensive guide demonstrates practical applications in genomics and systems biology.
+
+## 🎯 Overview of Bioinformatics Functions
+
+### Core Bioinformatics Tools
+
+| Function | Purpose | Common Use Cases |
+|----------|---------|------------------|
+| `convert_gene_id()` | Gene identifier conversion | Symbol ↔ Ensembl, Entrez ↔ Symbol |
+| `download_gene_ref()` | Reference genome downloads | Annotation files, gene models |
+| `gmt2df()` | GMT file to data frame | Pathway analysis, gene set processing |
+| `gmt2list()` | GMT file to named list | Enrichment analysis, functional annotation |
+| `download_geo_data()` | GEO data retrieval | Public dataset analysis |
+| `plot_venn()` | Venn diagram analysis | Gene set overlaps, differential expression |
+| `plot_forest()` | Forest plots | Meta-analysis, effect sizes |
+
+## 🔄 Gene Identifier Conversion
+
+### Basic Gene ID Conversion
+
+Gene identifier conversion is fundamental in bioinformatics for integrating datasets from different sources.
+
+```{r gene-conversion-demo, eval = FALSE}
+# Example gene symbols commonly used in cancer research
+cancer_genes <- c("BRCA1", "BRCA2", "TP53", "EGFR", "MYC", "RAS", "PIK3CA", "AKT1")
+
+# Convert gene symbols to Ensembl IDs
+ensembl_ids <- convert_gene_id(
+  genes = cancer_genes,
+  from = "symbol",
+  to = "ensembl",
+  species = "human"
+)
+
+# Display conversion results
+conversion_table <- data.frame(
+  Gene_Symbol = cancer_genes,
+  Ensembl_ID = ensembl_ids
+)
+
+print(conversion_table)
+```
+
+```{r gene-conversion-mock}
+# Mock example for demonstration (since biomaRt requires internet)
+cancer_genes <- c("BRCA1", "BRCA2", "TP53", "EGFR", "MYC", "KRAS", "PIK3CA", "AKT1")
+
+# Simulated conversion results
+mock_conversion <- data.frame(
+  Gene_Symbol = cancer_genes,
+  Ensembl_ID = c(
+    "ENSG00000012048", "ENSG00000139618", "ENSG00000141510",
+    "ENSG00000146648", "ENSG00000136997", "ENSG00000133703",
+    "ENSG00000171608", "ENSG00000142208"
+  ),
+  Entrez_ID = c(672, 675, 7157, 1956, 4609, 3845, 5290, 207),
+  stringsAsFactors = FALSE
+)
+
+cat("🧬 Gene ID Conversion Example\n")
+cat("=============================\n")
+print(mock_conversion)
+
+cat("\n📊 Conversion Summary:\n")
+cat("  • Input genes:", length(cancer_genes), "\n")
+cat("  • Successful conversions:", nrow(mock_conversion), "\n")
+cat("  • Success rate:", round(100 * nrow(mock_conversion) / length(cancer_genes), 1), "%\n")
+```
+
+### Advanced Conversion Workflows
+
+```{r conversion-workflow}
+# Simulate a real-world scenario with mixed identifier types
+mixed_identifiers <- c(
+  "BRCA1", "ENSG00000139618", "7157", "EGFR",
+  "ENSG00000136997", "3845", "PIK3CA", "207"
+)
+
+# Function to detect identifier type
+detect_id_type <- function(ids) {
+  sapply(ids, function(id) {
+    if (grepl("^ENSG", id)) return("ensembl")
+    if (grepl("^[0-9]+$", id)) return("entrez")
+    return("symbol")
+  })
+}
+
+id_types <- detect_id_type(mixed_identifiers)
+cat("🔍 Identifier Type Detection:\n")
+print(data.frame(
+  Identifier = mixed_identifiers,
+  Detected_Type = id_types
+))
+
+# Group by identifier type for batch conversion
+id_groups <- split(mixed_identifiers, id_types)
+cat("\n📦 Grouped Identifiers for Conversion:\n")
+str(id_groups)
+```
+
+## 📊 Gene Set Analysis with GMT Files
+
+### Processing GMT Files
+
+GMT (Gene Matrix Transposed) files are standard formats for gene set collections used in pathway analysis.
+
+```{r gmt-processing-demo, eval = FALSE}
+# Example: Process a pathway GMT file
+# pathway_df <- gmt2df("path/to/c2.cp.kegg.v7.4.symbols.gmt")
+# pathway_list <- gmt2list("path/to/c2.cp.kegg.v7.4.symbols.gmt")
+
+# Display structure
+# head(pathway_df, 10)
+# length(pathway_list)
+```
+
+```{r gmt-mock-demo}
+# Create mock GMT data to demonstrate structure
+mock_pathways <- list(
+  "KEGG_GLYCOLYSIS_GLUCONEOGENESIS" = c(
+    "HK1", "HK2", "GPI", "PFKL", "ALDOA", "TPI1", "GAPDH",
+    "PGK1", "PGAM1", "ENO1", "PKM", "LDHA", "PDK1"
+  ),
+  "KEGG_CITRATE_CYCLE" = c(
+    "CS", "ACO1", "IDH1", "OGDH", "SUCLA2", "SDHA",
+    "FH", "MDH1", "PCK1", "PDK1", "DLAT"
+  ),
+  "KEGG_FATTY_ACID_SYNTHESIS" = c(
+    "ACACA", "FASN", "ACLY", "ACC2", "ELOVL6", "SCD",
+    "FADS1", "FADS2", "ACSL1", "GPAM"
+  ),
+  "KEGG_DNA_REPAIR" = c(
+    "BRCA1", "BRCA2", "TP53", "ATM", "CHEK1", "CHEK2",
+    "RAD51", "XRCC1", "PARP1", "MSH2", "MLH1"
+  )
+)
+
+# Convert list to data frame format (simulating gmt2df output)
+mock_gmt_df <- do.call(rbind, lapply(names(mock_pathways), function(pathway) {
+  data.frame(
+    pathway = pathway,
+    gene = mock_pathways[[pathway]],
+    stringsAsFactors = FALSE
+  )
+}))
+
+cat("📋 GMT File Processing Results\n")
+cat("==============================\n")
+cat("Number of pathways:", length(mock_pathways), "\n")
+cat("Total gene-pathway associations:", nrow(mock_gmt_df), "\n")
+cat("Average genes per pathway:", round(mean(lengths(mock_pathways)), 1), "\n\n")
+
+cat("Sample pathway data frame:\n")
+print(head(mock_gmt_df, 12))
+
+# Pathway size distribution
+pathway_sizes <- lengths(mock_pathways)
+cat("\n📊 Pathway Size Distribution:\n")
+print(data.frame(
+  Pathway = names(pathway_sizes),
+  Gene_Count = pathway_sizes
+))
+```
+
+### Gene Set Overlap Analysis
+
+```{r gene-set-overlap, fig.cap="Gene set overlap analysis showing relationships between biological pathways"}
+# Analyze overlaps between pathways
+pathway_genes <- mock_pathways[1:3]  # Use first 3 pathways for Venn diagram
+
+# Create Venn diagram for pathway overlaps
+venn_plot <- plot_venn(
+  pathway_genes,
+  colors = get_palette("vividset", type = "qualitative", n = 3),
+  title = "Metabolic Pathway Gene Overlaps",
+  subtitle = "Shared genes between glycolysis, citrate cycle, and fatty acid synthesis"
+)
+
+print(venn_plot)
+
+# Calculate detailed overlap statistics
+all_genes <- unique(unlist(pathway_genes))
+cat("\n🔍 Detailed Overlap Analysis:\n")
+cat("===============================\n")
+cat("Total unique genes across pathways:", length(all_genes), "\n")
+
+# Pairwise overlaps
+pathway_names <- names(pathway_genes)
+for (i in 1:(length(pathway_names) - 1)) {
+  for (j in (i + 1):length(pathway_names)) {
+    overlap <- length(intersect(pathway_genes[[i]], pathway_genes[[j]]))
+    cat(sprintf("%s ∩ %s: %d genes\n",
+                gsub("KEGG_", "", pathway_names[i]),
+                gsub("KEGG_", "", pathway_names[j]),
+                overlap))
+  }
+}
+```
+
+## 🎯 Differential Expression Analysis Workflow
+
+### Simulated RNA-seq Analysis
+
+```{r rnaseq-workflow, fig.cap="Differential expression analysis visualization with volcano plot"}
+# Simulate RNA-seq differential expression results
+set.seed(123)
+n_genes <- 2000
+
+# Simulate log fold changes and p-values
+gene_results <- data.frame(
+  Gene = paste0("Gene_", 1:n_genes),
+  LogFC = rnorm(n_genes, mean = 0, sd = 1.2),
+  PValue = rbeta(n_genes, shape1 = 1, shape2 = 10),
+  stringsAsFactors = FALSE
+)
+
+# Add some significant genes
+significant_indices <- sample(1:n_genes, 200)
+gene_results$LogFC[significant_indices] <- gene_results$LogFC[significant_indices] +
+  sample(c(-2, 2), 200, replace = TRUE)
+gene_results$PValue[significant_indices] <- gene_results$PValue[significant_indices] * 0.01
+
+# Calculate adjusted p-values
+gene_results$FDR <- p.adjust(gene_results$PValue, method = "BH")
+
+# Classify genes
+gene_results$Regulation <- "Not Significant"
+gene_results$Regulation[gene_results$FDR < 0.05 & gene_results$LogFC > 1] <- "Up-regulated"
+gene_results$Regulation[gene_results$FDR < 0.05 & gene_results$LogFC < -1] <- "Down-regulated"
+
+# Create volcano plot
+volcano_colors <- c(
+  "Up-regulated" = get_palette("vividset", type = "qualitative", n = 3)[1],
+  "Down-regulated" = get_palette("vividset", type = "qualitative", n = 3)[2],
+  "Not Significant" = "#CCCCCC"
+)
+
+p1 <- ggplot(gene_results, aes(x = LogFC, y = -log10(FDR), color = Regulation)) +
+  geom_point(alpha = 0.6, size = 1.2) +
+  scale_color_manual(values = volcano_colors) +
+  geom_vline(xintercept = c(-1, 1), linetype = "dashed", color = "#666666") +
+  geom_hline(yintercept = -log10(0.05), linetype = "dashed", color = "#666666") +
+  labs(
+    title = "Differential Gene Expression Analysis",
+    subtitle = "Volcano plot showing treatment vs. control comparison",
+    x = "Log₂ Fold Change",
+    y = "-log₁₀(FDR-adjusted p-value)",
+    color = "Regulation"
+  ) +
+  theme_minimal() +
+  theme(
+    plot.title = element_text(size = 14, face = "bold", color = "#0D47A1"),
+    plot.subtitle = element_text(size = 11, color = "#666666"),
+    legend.position = "bottom"
+  )
+
+print(p1)
+
+# Summary statistics
+regulation_summary <- table(gene_results$Regulation)
+cat("\n📊 Differential Expression Summary:\n")
+cat("===================================\n")
+print(regulation_summary)
+
+cat("\nTop 10 up-regulated genes (by fold change):\n")
+top_up <- gene_results[gene_results$Regulation == "Up-regulated", ] %>%
+  arrange(desc(LogFC)) %>%
+  head(10)
+print(top_up[, c("Gene", "LogFC", "FDR")])
+```
+
+### Pathway Enrichment Analysis
+
+```{r pathway-enrichment, fig.cap="Pathway enrichment analysis showing biological processes affected by treatment"}
+# Simulate pathway enrichment analysis results
+enrichment_results <- data.frame(
+  Pathway = c(
+    "Cell Cycle", "Apoptosis", "DNA Repair", "Inflammation",
+    "Metabolism", "Signaling", "Transport", "Development"
+  ),
+  GeneRatio = c(0.15, 0.22, 0.18, 0.31, 0.09, 0.25, 0.12, 0.08),
+  FDR = c(0.001, 0.003, 0.008, 0.0001, 0.045, 0.002, 0.021, 0.089),
+  GeneCount = c(23, 34, 28, 48, 14, 39, 18, 12),
+  stringsAsFactors = FALSE
+)
+
+# Calculate enrichment score
+enrichment_results$EnrichmentScore <- -log10(enrichment_results$FDR)
+
+# Create enrichment plot
+p2 <- ggplot(enrichment_results, aes(x = GeneRatio, y = reorder(Pathway, EnrichmentScore))) +
+  geom_point(aes(color = EnrichmentScore, size = GeneCount), alpha = 0.8) +
+  scale_color_gradientn(
+    colors = get_palette("oranges", type = "sequential", n = 8),
+    name = "-log₁₀(FDR)"
+  ) +
+  scale_size_continuous(name = "Gene Count", range = c(3, 12)) +
+  geom_vline(xintercept = 0.1, linetype = "dashed", color = "#666666", alpha = 0.7) +
+  labs(
+    title = "Pathway Enrichment Analysis",
+    subtitle = "Biological processes enriched in differentially expressed genes",
+    x = "Gene Ratio (enriched genes / pathway total)",
+    y = "Biological Pathway"
+  ) +
+  theme_minimal() +
+  theme(
+    plot.title = element_text(size = 14, face = "bold", color = "#0D47A1"),
+    plot.subtitle = element_text(size = 11, color = "#666666"),
+    panel.grid.major.y = element_blank(),
+    legend.position = "right"
+  )
+
+print(p2)
+
+cat("\n🎯 Pathway Enrichment Summary:\n")
+cat("==============================\n")
+significant_pathways <- enrichment_results[enrichment_results$FDR < 0.05, ]
+cat("Significant pathways (FDR < 0.05):", nrow(significant_pathways), "\n")
+cat("Most enriched pathway:", significant_pathways$Pathway[which.max(significant_pathways$EnrichmentScore)], "\n")
+cat("Total genes in significant pathways:", sum(significant_pathways$GeneCount), "\n")
+```
+
+## 🌐 Multi-omics Integration
+
+### Combining Genomics and Transcriptomics
+
+```{r multiomics-integration, fig.cap="Multi-omics data integration showing genomic variants and expression changes"}
+# Simulate multi-omics data integration
+set.seed(456)
+selected_genes <- c("BRCA1", "TP53", "EGFR", "MYC", "KRAS", "PIK3CA", "AKT1", "PTEN")
+
+# Create integrated omics data
+omics_data <- data.frame(
+  Gene = rep(selected_genes, each = 3),
+  DataType = rep(c("Mutation", "CNV", "Expression"), length(selected_genes)),
+  Value = c(
+    # Mutation frequencies (0-1)
+    c(0.12, 0.34, 0.08, 0.15, 0.22, 0.09, 0.06, 0.18),
+    # Copy number variations (-2 to 2)
+    c(-0.5, -1.2, 1.8, 0.3, 0.8, -0.8, 1.1, -1.5),
+    # Expression fold changes (-3 to 3)
+    c(-1.5, -2.8, 2.1, 1.8, -1.2, 2.3, -0.8, -2.1)
+  ),
+  Patient_Group = rep(rep(c("Group_A", "Group_B", "Group_C"), length(selected_genes))
+)
+
+# Normalize values for visualization
+omics_data$Normalized_Value <- ave(omics_data$Value, omics_data$DataType,
+                                   FUN = function(x) scale(x)[,1])
+
+# Create heatmap
+p3 <- ggplot(omics_data, aes(x = DataType, y = Gene, fill = Normalized_Value)) +
+  geom_tile(color = "white", size = 0.5) +
+  scale_fill_gradientn(
+    colors = get_palette("redblue", type = "diverging", n = 11),
+    name = "Z-score",
+    limits = c(-2, 2),
+    breaks = c(-2, -1, 0, 1, 2)
+  ) +
+  labs(
+    title = "Multi-omics Cancer Gene Analysis",
+    subtitle = "Integrated view of mutations, copy number, and expression",
+    x = "Data Type",
+    y = "Cancer-related Genes"
+  ) +
+  theme_minimal() +
+  theme(
+    plot.title = element_text(size = 14, face = "bold", color = "#0D47A1"),
+    plot.subtitle = element_text(size = 11, color = "#666666"),
+    panel.grid = element_blank(),
+    axis.text.x = element_text(angle = 45, hjust = 1)
+  )
+
+print(p3)
+
+# Summary by data type
+cat("\n🧬 Multi-omics Data Summary:\n")
+cat("============================\n")
+summary_stats <- omics_data %>%
+  group_by(DataType) %>%
+  summarise(
+    Mean_Value = round(mean(Value), 3),
+    SD_Value = round(sd(Value), 3),
+    Min_Value = round(min(Value), 3),
+    Max_Value = round(max(Value), 3),
+    .groups = 'drop'
+  )
+print(summary_stats)
+```
+
+## 📈 Survival Analysis Visualization
+
+### Forest Plot for Hazard Ratios
+
+```{r survival-analysis, fig.cap="Forest plot showing hazard ratios for genetic markers in survival analysis"}
+# Simulate survival analysis results
+survival_data <- data.frame(
+  Gene = c("BRCA1", "BRCA2", "TP53", "EGFR", "MYC", "KRAS", "PIK3CA", "AKT1"),
+  HazardRatio = c(1.23, 0.87, 1.45, 1.12, 0.92, 1.67, 1.34, 0.78),
+  CI_Lower = c(0.98, 0.71, 1.18, 0.89, 0.75, 1.32, 1.05, 0.61),
+  CI_Upper = c(1.55, 1.07, 1.78, 1.41, 1.13, 2.11, 1.71, 0.99),
+  PValue = c(0.067, 0.189, 0.001, 0.324, 0.445, 0.0001, 0.018, 0.041),
+  stringsAsFactors = FALSE
+)
+
+# Add significance categories
+survival_data$Significance <- ifelse(survival_data$PValue < 0.001, "***",
+                            ifelse(survival_data$PValue < 0.01, "**",
+                            ifelse(survival_data$PValue < 0.05, "*", "ns")))
+
+# Create forest plot using evanverse plotting functions
+p4 <- plot_forest(
+  data = survival_data,
+  gene_col = "Gene",
+  hr_col = "HazardRatio",
+  ci_lower_col = "CI_Lower",
+  ci_upper_col = "CI_Upper",
+  pval_col = "PValue"
+)
+
+print(p4)
+
+cat("\n🎯 Survival Analysis Summary:\n")
+cat("=============================\n")
+significant_genes <- survival_data[survival_data$PValue < 0.05, ]
+cat("Significant prognostic markers:", nrow(significant_genes), "\n")
+cat("Risk factors (HR > 1):", sum(significant_genes$HazardRatio > 1), "\n")
+cat("Protective factors (HR < 1):", sum(significant_genes$HazardRatio < 1), "\n")
+
+print(significant_genes[, c("Gene", "HazardRatio", "PValue", "Significance")])
+```
+
+## 🔬 Clinical Data Integration
+
+### Biomarker Discovery Pipeline
+
+```{r biomarker-discovery, fig.cap="Biomarker discovery showing gene expression patterns across clinical subtypes"}
+# Simulate clinical biomarker data
+set.seed(789)
+n_patients <- 120
+n_biomarkers <- 20
+
+# Generate patient clinical data
+clinical_data <- data.frame(
+  Patient_ID = paste0("P", 1:n_patients),
+  Subtype = sample(c("Luminal_A", "Luminal_B", "HER2+", "TNBC"), n_patients,
+                   replace = TRUE, prob = c(0.4, 0.2, 0.15, 0.25)),
+  Stage = sample(c("I", "II", "III", "IV"), n_patients,
+                 replace = TRUE, prob = c(0.3, 0.35, 0.25, 0.1)),
+  Age = round(rnorm(n_patients, 55, 12)),
+  Survival_Months = round(rexp(n_patients, rate = 0.02)),
+  stringsAsFactors = FALSE
+)
+
+# Generate biomarker expression data
+biomarker_genes <- paste0("Biomarker_", 1:n_biomarkers)
+expression_data <- matrix(rnorm(n_patients * n_biomarkers, mean = 5, sd = 2),
+                         nrow = n_patients, ncol = n_biomarkers)
+colnames(expression_data) <- biomarker_genes
+rownames(expression_data) <- clinical_data$Patient_ID
+
+# Add subtype-specific expression patterns
+luminal_a_patients <- clinical_data$Patient_ID[clinical_data$Subtype == "Luminal_A"]
+her2_patients <- clinical_data$Patient_ID[clinical_data$Subtype == "HER2+"]
+tnbc_patients <- clinical_data$Patient_ID[clinical_data$Subtype == "TNBC"]
+
+# Simulate subtype-specific biomarkers
+expression_data[luminal_a_patients, "Biomarker_1"] <-
+  expression_data[luminal_a_patients, "Biomarker_1"] + 3
+
+expression_data[her2_patients, "Biomarker_5"] <-
+  expression_data[her2_patients, "Biomarker_5"] + 4
+
+expression_data[tnbc_patients, "Biomarker_12"] <-
+  expression_data[tnbc_patients, "Biomarker_12"] + 2.5
+
+# Convert to long format for visualization
+expression_long <- as.data.frame(expression_data) %>%
+  mutate(Patient_ID = rownames(.)) %>%
+  gather(Biomarker, Expression, -Patient_ID) %>%
+  left_join(clinical_data, by = "Patient_ID")
+
+# Select top biomarkers for visualization
+top_biomarkers <- c("Biomarker_1", "Biomarker_5", "Biomarker_12", "Biomarker_8")
+plot_data <- expression_long %>%
+  filter(Biomarker %in% top_biomarkers)
+
+# Create biomarker expression plot
+p5 <- ggplot(plot_data, aes(x = Subtype, y = Expression, fill = Subtype)) +
+  geom_boxplot(alpha = 0.7, outlier.alpha = 0.5) +
+  geom_jitter(alpha = 0.3, width = 0.2, size = 0.8) +
+  scale_fill_manual(
+    values = get_palette("vividset", type = "qualitative", n = 4)
+  ) +
+  facet_wrap(~Biomarker, scales = "free_y", ncol = 2) +
+  labs(
+    title = "Biomarker Expression Across Cancer Subtypes",
+    subtitle = "Potential subtype-specific biomarkers for precision medicine",
+    x = "Cancer Subtype",
+    y = "Expression Level (log2 normalized)",
+    fill = "Subtype"
+  ) +
+  theme_minimal() +
+  theme(
+    plot.title = element_text(size = 14, face = "bold", color = "#0D47A1"),
+    plot.subtitle = element_text(size = 11, color = "#666666"),
+    axis.text.x = element_text(angle = 45, hjust = 1),
+    legend.position = "bottom",
+    strip.background = element_rect(fill = "#E3F2FD", color = NA)
+  )
+
+print(p5)
+
+# Statistical summary
+cat("\n📊 Biomarker Analysis Summary:\n")
+cat("==============================\n")
+subtype_counts <- table(clinical_data$Subtype)
+print(subtype_counts)
+
+cat("\nMean expression by subtype for key biomarkers:\n")
+biomarker_summary <- plot_data %>%
+  group_by(Biomarker, Subtype) %>%
+  summarise(
+    Mean_Expression = round(mean(Expression), 2),
+    SD = round(sd(Expression), 2),
+    .groups = 'drop'
+  ) %>%
+  arrange(Biomarker, desc(Mean_Expression))
+
+print(biomarker_summary)
+```
+
+## 🛠️ Data Download and Management
+
+### Public Dataset Retrieval
+
+```{r data-management, eval = FALSE}
+# Example of downloading reference data
+# Note: These functions require internet connection and may take time
+
+# Download gene reference annotation
+gene_ref <- download_gene_ref(
+  species = "human",
+  build = "hg38",
+  feature_type = "gene"
+)
+
+# Download GEO dataset
+geo_data <- download_geo_data(
+  geo_id = "GSE123456",
+  destdir = "data/geo_downloads"
+)
+
+# Download pathway databases
+pathway_url <- "https://data.broadinstitute.org/gsea-msigdb/msigdb/release/7.4/c2.cp.kegg.v7.4.symbols.gmt"
+download_url(
+  url = pathway_url,
+  dest = "data/pathways/kegg_pathways.gmt"
+)
+```
+
+```{r data-management-demo}
+# Demonstrate file organization for bioinformatics projects
+cat("📁 Recommended Project Structure for Bioinformatics:\n")
+cat("==================================================\n")
+cat("project/\n")
+cat("├── data/\n")
+cat("│   ├── raw/                 # Original data files\n")
+cat("│   ├── processed/           # Cleaned/normalized data\n")
+cat("│   ├── reference/           # Genome annotations, databases\n")
+cat("│   └── results/             # Analysis outputs\n")
+cat("├── scripts/\n")
+cat("│   ├── preprocessing/       # Data cleaning scripts\n")
+cat("│   ├── analysis/            # Statistical analysis\n")
+cat("│   └── visualization/       # Plotting scripts\n")
+cat("├── docs/                    # Documentation, protocols\n")
+cat("└── reports/                 # Final reports, publications\n\n")
+
+# Demonstrate batch file handling
+file_extensions <- c("fastq.gz", "bam", "vcf", "gmt", "gff3", "bed")
+file_descriptions <- c(
+  "Raw sequencing reads",
+  "Aligned sequencing data",
+  "Variant calls",
+  "Gene set definitions",
+  "Gene annotations",
+  "Genomic intervals"
+)
+
+file_info <- data.frame(
+  Extension = file_extensions,
+  Description = file_descriptions,
+  stringsAsFactors = FALSE
+)
+
+cat("🗂️ Common Bioinformatics File Types:\n")
+print(file_info)
+```
+
+## 🎯 Best Practices for Bioinformatics Workflows
+
+### Reproducible Analysis Guidelines
+
+```{r best-practices}
+cat("🔬 BIOINFORMATICS BEST PRACTICES\n")
+cat("================================\n\n")
+
+cat("📋 Data Management:\n")
+cat("  • Use version control (Git) for all scripts\n")
+cat("  • Document data provenance and processing steps\n")
+cat("  • Implement checkpoints and intermediate file saves\n")
+cat("  • Use consistent file naming conventions\n\n")
+
+cat("🧬 Gene Identifier Handling:\n")
+cat("  • Always validate gene ID conversions\n")
+cat("  • Store original identifiers alongside converted ones\n")
+cat("  • Document the genome build and annotation version\n")
+cat("  • Handle missing/ambiguous identifiers gracefully\n\n")
+
+cat("📊 Statistical Analysis:\n")
+cat("  • Apply appropriate multiple testing corrections\n")
+cat("  • Set significance thresholds before analysis\n")
+cat("  • Report effect sizes along with p-values\n")
+cat("  • Validate results with independent datasets when possible\n\n")
+
+cat("🎨 Visualization Guidelines:\n")
+cat("  • Use color-blind friendly palettes\n")
+cat("  • Include appropriate scales and legends\n")
+cat("  • Provide clear titles and axis labels\n")
+cat("  • Consider publication requirements for figures\n")
+```
+
+### Quality Control Checklist
+
+```{r qc-checklist}
+cat("✅ QUALITY CONTROL CHECKLIST\n")
+cat("============================\n\n")
+
+cat("🔍 Data Quality:\n")
+cat("  [ ] Check for missing values and outliers\n")
+cat("  [ ] Verify sample sizes and statistical power\n")
+cat("  [ ] Validate gene identifier mappings\n")
+cat("  [ ] Assess data distribution and normalization\n\n")
+
+cat("📈 Analysis Validation:\n")
+cat("  [ ] Cross-validate results with different methods\n")
+cat("  [ ] Perform sensitivity analyses\n")
+cat("  [ ] Check for batch effects and confounders\n")
+cat("  [ ] Compare with known biological expectations\n\n")
+
+cat("📊 Results Reporting:\n")
+cat("  [ ] Include sample sizes and effect sizes\n")
+cat("  [ ] Report confidence intervals\n")
+cat("  [ ] Document software versions and parameters\n")
+cat("  [ ] Provide supplementary data and code\n")
+```
+
+## 🚀 Advanced Workflow Examples
+
+### Complete Analysis Pipeline
+
+```{r complete-pipeline}
+cat("🔄 COMPLETE BIOINFORMATICS PIPELINE EXAMPLE\n")
+cat("===========================================\n\n")
+
+# Simulate a complete analysis workflow
+pipeline_steps <- data.frame(
+  Step = 1:8,
+  Process = c(
+    "Data Import & Quality Control",
+    "Gene ID Conversion & Mapping",
+    "Differential Expression Analysis",
+    "Multiple Testing Correction",
+    "Pathway Enrichment Analysis",
+    "Gene Set Overlap Analysis",
+    "Visualization & Plotting",
+    "Results Export & Reporting"
+  ),
+  evanverse_Functions = c(
+    "read_table_flex(), file_info()",
+    "convert_gene_id(), replace_void()",
+    "User analysis + evanverse utilities",
+    "Built-in R functions",
+    "gmt2df(), gmt2list()",
+    "plot_venn(), combine_logic()",
+    "plot_forest(), get_palette()",
+    "write_xlsx_flex(), remind()"
+  ),
+  Estimated_Time = c("5-10 min", "10-15 min", "30-60 min", "5 min",
+                     "15-30 min", "10-20 min", "20-40 min", "10-15 min")
+)
+
+print(pipeline_steps)
+
+cat("\n⏱️ Total Estimated Pipeline Time: 2-4 hours\n")
+cat("🎯 Key Success Factors:\n")
+cat("  • Proper data validation at each step\n")
+cat("  • Consistent identifier handling\n")
+cat("  • Appropriate statistical methods\n")
+cat("  • Clear documentation and visualization\n")
+```
+
+## 🎯 Summary and Next Steps
+
+The evanverse bioinformatics toolkit provides:
+
+✅ **Gene identifier conversion** with species and build support
+✅ **Pathway analysis tools** for GMT file processing
+✅ **Visualization functions** optimized for biological data
+✅ **Data download utilities** for public repositories
+✅ **Multi-omics integration** capabilities
+✅ **Quality control helpers** for robust analysis
+
+### Continue Learning:
+
+- 📊 [Visualization Showcase](visualization-showcase.html) - Advanced plotting techniques
+- 🎨 [Color Palette Guide](color-palettes.html) - Bioinformatics color schemes
+- 📚 [Comprehensive Guide](comprehensive-guide.html) - Complete package overview
+
+### Essential Bioinformatics Functions:
+
+```{r bio-quick-ref, eval = FALSE}
+# Gene identifier conversion
+convert_gene_id(genes, from = "symbol", to = "ensembl", species = "human")
+
+# Pathway analysis
+pathways <- gmt2list("pathways.gmt")
+plot_venn(gene_sets, colors = get_palette("vividset"))
+
+# Data visualization
+plot_forest(survival_data, hr_col = "HazardRatio")
+get_palette("redblue", type = "diverging", n = 11)
+
+# Data management
+download_geo_data("GSE123456")
+read_table_flex("expression_data.txt")
+```
+
+---
+
+*🧬 Accelerate your bioinformatics research with evanverse!*
