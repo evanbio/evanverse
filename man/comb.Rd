@@ -9,7 +9,7 @@ comb(n, k)
 \arguments{
 \item{n}{Integer. Total number of items (non-negative integer).}
 
-\item{k}{Integer. Number of items to choose (non-negative integer, must be ≤ n).}
+\item{k}{Integer. Number of items to choose (non-negative integer, must be \\u2264 n).}
 }
 \value{
 Numeric. The combination count C(n, k) (returns Inf for very large n).

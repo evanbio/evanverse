@@ -96,7 +96,7 @@ list_palettes <- function(palette_rds = system.file("extdata", "palettes.rds", p
     })
 
     purrr::walk(seq_len(nrow(palette_df)), function(i) {
-      cli::cli_alert_info("• {palette_df$name[i]} ({palette_df$type[i]}) - {palette_df$n_color[i]} colors")
+      cli::cli_alert_info("\\u2022 {palette_df$name[i]} ({palette_df$type[i]}) - {palette_df$n_color[i]} colors")
     })
   }
 

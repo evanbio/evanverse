@@ -87,11 +87,11 @@
 #' Downloaded files are organized as follows:
 #' \preformatted{
 #' dest_dir/
-#' ├── GSE<id>_series_matrix.txt.gz    # GSEMatrix file
-#' ├── GPL<id>.annot.gz               # Platform annotation (if available)
-#' ├── <supplemental_files>           # Additional data files
-#' └── logs/geo/                      # Log files (if logging enabled)
-#'     └── GSE<id>_<date>.log
+#' \u251c\u2500\u2500 GSE<id>_series_matrix.txt.gz    # GSEMatrix file
+#' \u251c\u2500\u2500 GPL<id>.annot.gz               # Platform annotation (if available)
+#' \u251c\u2500\u2500 <supplemental_files>           # Additional data files
+#' \u2514\u2500\u2500 logs/geo/                      # Log files (if logging enabled)
+#'     \u2514\u2500\u2500 GSE<id>_<date>.log
 #' }
 #'
 #' @examples
@@ -197,14 +197,14 @@ download_geo_data <- function(gse_id,
   # Prepare log file
   if (log) {
     if (is.null(log_file)) {
-      # 默认日志目录在 dest_dir/logs/geo
+      # Default log directory at dest_dir/logs/geo
       log_dir <- file.path(dest_dir, "logs", "geo")
       dir.create(log_dir, showWarnings = FALSE, recursive = TRUE)
 
       date_tag <- format(Sys.Date(), "%Y%m%d")
       log_file <- file.path(log_dir, paste0(gse_id, "_", date_tag, ".log"))
     } else {
-      # 用户自定义的 log_file，只保证父目录存在
+      # User-defined log_file, ensure parent directory exists
       dir.create(dirname(log_file), showWarnings = FALSE, recursive = TRUE)
     }
 
@@ -368,7 +368,7 @@ download_geo_data <- function(gse_id,
   # Final summary
   cli::cli_h2("Download Summary")
   cli::cli_alert_info("Duration: {round(download_duration, 2)} seconds")
-  cli::cli_alert_info("GSEMatrix: {n_samples} samples × {n_features} features")
+  cli::cli_alert_info("GSEMatrix: {n_samples} samples \u00d7 {n_features} features")
   cli::cli_alert_info("Supplemental files: {length(supplemental_files)}")
   cli::cli_alert_info("Platform files: {length(platform_info$gpl_files)}")
   cli::cli_alert_info("Total files: {meta$total_files_downloaded}")

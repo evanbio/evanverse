@@ -27,8 +27,8 @@ NULL (invisibly)
 A unified installer for R packages from CRAN, GitHub, Bioconductor, or local source.
 }
 \examples{
-inst_pkg("dplyr", source = "cran")
-inst_pkg("hadley/emo", source = "gh")
-inst_pkg("scRNAseq", source = "bio")
+inst_pkg("dplyr", source = "CRAN")
+inst_pkg("hadley/emo", source = "GitHub")
+inst_pkg("scRNAseq", source = "Bioconductor")
 inst_pkg(source = "local", path = "mypackage.tar.gz")
 }

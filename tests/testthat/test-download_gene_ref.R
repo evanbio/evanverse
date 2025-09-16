@@ -18,6 +18,8 @@
 test_that("download_gene_ref returns valid data.frame for human", {
   skip_if_not_installed("biomaRt")
   skip_on_cran()
+  skip_if_offline()
+  skip("Network-heavy Ensembl request skipped.")
   df <- download_gene_ref(species = "human")
   expect_s3_class(df, "data.frame")
   expect_true(all(c("ensembl_id", "symbol", "chromosome", "start", "end") %in% colnames(df)))
@@ -27,6 +29,8 @@ test_that("download_gene_ref returns valid data.frame for human", {
 test_that("download_gene_ref filters out missing symbols", {
   skip_if_not_installed("biomaRt")
   skip_on_cran()
+  skip_if_offline()
+  skip("Network-heavy Ensembl request skipped.")
   df_all <- download_gene_ref(species = "human")
   df_filtered <- download_gene_ref(species = "human", remove_empty_symbol = TRUE)
   expect_lt(nrow(df_filtered), nrow(df_all))
@@ -36,6 +40,8 @@ test_that("download_gene_ref filters out missing symbols", {
 test_that("download_gene_ref can save file to default path", {
   skip_if_not_installed("biomaRt")
   skip_on_cran()
+  skip_if_offline()
+  skip("Network-heavy Ensembl request skipped.")
   filename <- paste0("gene_ref_human_", Sys.Date(), ".rds")
   if (file.exists(filename)) file.remove(filename)
   df <- download_gene_ref(species = "human", save = TRUE)
@@ -47,6 +53,8 @@ test_that("download_gene_ref can save file to default path", {
 test_that("download_gene_ref can save to custom path without .rds", {
   skip_if_not_installed("biomaRt")
   skip_on_cran()
+  skip_if_offline()
+  skip("Network-heavy Ensembl request skipped.")
   outfile <- "test_gene_ref_custom"
   full_path <- paste0(outfile, ".rds")
   if (file.exists(full_path)) unlink(full_path)

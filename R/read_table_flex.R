@@ -118,7 +118,7 @@ read_table_flex <- function(file_path,
     )
 
     if (verbose) {
-      cli::cli_alert_success("File loaded successfully ({nrow(dt)} rows × {ncol(dt)} cols)")
+      cli::cli_alert_success("File loaded successfully ({nrow(dt)} rows \\u00d7 {ncol(dt)} cols)")
     }
     dt
 

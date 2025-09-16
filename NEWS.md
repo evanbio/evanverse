@@ -1,4 +1,4 @@
-# evanverse 0.3.0
+# evanverse 0.3.0 (2025-09-16)
 
 A focused refactor release: unified CLI messaging, CRAN-safe startup, tighter parameter validation, stronger tests, and several new utilities.
 
@@ -72,42 +72,42 @@ A comprehensive upgrade with expanded tools for R developers and bioinformaticia
 
 ---
 
-### ✨ 新增函数（按功能分类）
+### ✨ New functions (by category)
 
-#### 📁 文件与数据管理
+#### 📁 File & Data Management
 - `file_info()`, `file_tree()`, `get_ext()`, `read_table_flex()`, `download_url()`
 
-#### 📦 包管理工具
+#### 📦 Package Management Tools
 - `check_pkg()`, `inst_pkg()`, `update_pkg()`, `pkg_version()`
 
-#### 🎨 生信色板管理
+#### 🎨 Bioinformatics Color Palettes
 - `compile_palettes()`, `get_palette()`, `list_palettes()`, `create_palette()`, `preview_palette()`, `bio_palette_gallery()`
 
-#### 🔁 数据处理工具
+#### 🔁 Data Processing Tools
 - `map_column()`, `df2list()`, `gmt2df()`, `gmt2list()`, `convert_gene_id()`, `download_gene_ref()`
 
-#### ⚙️ 辅助开发函数
+#### ⚙️ Development Helper Functions
 - `remind()`, `with_timer()`, `%map%`, `%match%`, `%is%`, `%nin%`, `%p%`
 
-#### 🧽 空值处理工具
+#### 🧽 Void Value Handling
 - `is_void()`, `any_void()`, `drop_void()`, `replace_void()`, `cols_with_void()`, `rows_with_void()`
 
-#### 🧮 向量/逻辑运算
+#### 🧮 Vector & Logic Operations
 - `combine_logic()`, `hex2rgb()`, `rgb2hex()`
 
-#### 📊 可视化工具
+#### 📊 Visualization Tools
 - `plot_venn()`, `plot_pie()`
 
 ---
 
-### 🧰 内部变更
-- 移除了 GitHub Actions 自动部署逻辑（`pkgdown.yaml`），统一改为本地构建并通过 `docs/` 部署 GitHub Pages。
-- 重构文档结构，提升包文档可读性。
+### 🧰 Internal changes
+- Removed GitHub Actions auto-deployment logic (`pkgdown.yaml`), switched to local builds with `docs/` deployment to GitHub Pages.
+- Refactored documentation structure to improve package documentation readability.
 
 ---
 
-### 🔗 文档链接
-- 📖 在线文档: [[evanbio.github.io/evanverse](https://evanbio.github.io/evanverse/)](https://evanbio.github.io/evanverse/)
+### 🔗 Documentation
+- 📖 Online docs: [evanbio.github.io/evanverse](https://evanbio.github.io/evanverse/)
 
 ---
 

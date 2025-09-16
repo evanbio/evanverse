@@ -37,8 +37,8 @@ remind <- function(keyword = NULL) {
     log          = "`log(x, base = exp(1))` natural log by default; set `base = 10` or `2` for others.",
     log10        = "`log10(x)` base-10 logarithm (orders of magnitude).",
     round        = "`round(x, digits = 0)` rounds; use `signif()` for significant digits.",
-    floor        = "`floor(x)` greatest integer ≤ x (e.g., `floor(2.8)` -> 2).",
-    ceiling      = "`ceiling(x)` smallest integer ≥ x (e.g., `ceiling(2.1)` -> 3).",
+    floor        = "`floor(x)` greatest integer \u2264 x (e.g., `floor(2.8)` -> 2).",
+    ceiling      = "`ceiling(x)` smallest integer \u2265 x (e.g., `ceiling(2.1)` -> 3).",
     cut          = "`cut(x, breaks)` bins numeric vector; `breaks = 3` or custom; `labels = FALSE` for group indices.",
     cumsum       = "`cumsum(x)` cumulative sum.",
     cumprod      = "`cumprod(x)` cumulative product.",
@@ -48,7 +48,7 @@ remind <- function(keyword = NULL) {
     min_rank     = "`min_rank(x)` ties get the same minimum rank.",
     dense_rank   = "`dense_rank(x)` like `min_rank()` but without gaps.",
     percent_rank = "`percent_rank(x)` relative rank in [0,1], normalized by n-1.",
-    cume_dist    = "`cume_dist(x)` cumulative proportion of values ≤ x.",
+    cume_dist    = "`cume_dist(x)` cumulative proportion of values \u2264 x.",
     str_view     = "`stringr::str_view(string, pattern)` highlights regex matches; `str_view_all()` for all.",
     str_c        = "`stringr::str_c(...)` concatenates; use `sep`/`collapse` as needed.",
     str_glue     = "`glue::glue(\"Hello, {name}!\")` inline expressions with `{}`.",
@@ -80,7 +80,7 @@ remind <- function(keyword = NULL) {
     cli::cli_h1("Usage Examples")
     for (k in names(dict)) {
       cli::cli_h3(k)
-      cli::cli_verbatim(dict[[k]])   # ← no glue evaluation
+      cli::cli_verbatim(dict[[k]])   # \u2190 no glue evaluation
     }
     cli::cli_rule("Available Keywords")
     cli::cli_text("{.code {paste(names(dict), collapse = ', ')}}")
@@ -95,7 +95,7 @@ remind <- function(keyword = NULL) {
 
   for (m in matches) {
     cli::cli_h3(m)
-    cli::cli_verbatim(dict[[m]])     # ← no glue evaluation
+    cli::cli_verbatim(dict[[m]])     # \u2190 no glue evaluation
   }
   invisible(matches)
 }

@@ -2,9 +2,11 @@ Package: evanverse
 Type: Package
 Title: Utility Functions for Data Analysis and Visualization
 Version: 0.3.0
-Authors@R: 
+Authors@R:
     person("Evan", "Zhou", email = "evanzhou.bio@gmail.com", role = c("aut", "cre"),
            comment = c(ORCID = "0009-0009-4600-8175"))
+Author: Evan Zhou [aut, cre] (<https://orcid.org/0009-0009-4600-8175>)
+Maintainer: Evan Zhou <evanzhou.bio@gmail.com>
 Description: A collection of utility functions to support data analysis
     and visualization in R. The package provides helpers for string
     manipulation, file handling, color palettes, bioinformatics data
@@ -13,16 +15,15 @@ License: MIT + file LICENSE
 License_is_FOSS: yes
 License_restricts_use: no
 Encoding: UTF-8
-LazyDataCompression: xz
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.3.2
 Config/testthat/edition: 3
 URL: https://github.com/evanbio/evanverse, https://evanbio.github.io/evanverse/
 BugReports: https://github.com/evanbio/evanverse/issues
 VignetteBuilder: knitr
-Depends: 
-    R (>= 3.5)
-Imports: 
+Depends:
+    R (>= 4.1)
+Imports:
     cli,
     tibble,
     tidyr,
@@ -39,7 +40,12 @@ Imports:
     Biobase,
     GEOquery,
     rlang,
-    withr
+    withr,
+    ggpubr,
+    utils,
+    tools,
+    stats,
+    grDevices
 Suggests:
     BiocManager,
     knitr,
@@ -50,7 +56,13 @@ Suggests:
     biomaRt,
     writexl,
     R.utils,
-    janitor
+    janitor,
+    RColorBrewer,
+    devtools,
+    digest,
+    forestploter,
+    purrr,
+    reactable
 
 
 

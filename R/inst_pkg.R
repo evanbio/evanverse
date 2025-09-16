@@ -11,9 +11,9 @@
 #' @export
 #'
 #' @examples
-#' inst_pkg("dplyr", source = "cran")
-#' inst_pkg("hadley/emo", source = "gh")
-#' inst_pkg("scRNAseq", source = "bio")
+#' inst_pkg("dplyr", source = "CRAN")
+#' inst_pkg("hadley/emo", source = "GitHub")
+#' inst_pkg("scRNAseq", source = "Bioconductor")
 #' inst_pkg(source = "local", path = "mypackage.tar.gz")
 inst_pkg <- function(pkg = NULL,
                      source = c("CRAN", "GitHub", "Bioconductor", "Local"),

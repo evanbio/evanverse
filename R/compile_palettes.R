@@ -21,7 +21,7 @@ compile_palettes <- function(palettes_dir = "inst/extdata/palettes",
     cli::cli_abort("Palettes directory does not exist: {.path {palettes_dir}}")
   }
 
-  cli::cli_h1("Compiling Color Palettes (JSON → RDS)")
+  cli::cli_h1("Compiling Color Palettes (JSON \\u2192 RDS)")
 
   # ===========================================================================
   # File Discovery Phase

@@ -57,3 +57,8 @@ resources/images/
 # Local notebooks and scratchpads (ignored for now)
 #-------------------------------------------------------
 notebooks/
+
+#-------------------------------------------------------
+# Claude Code specific files
+#-------------------------------------------------------
+CLAUDE.md

@@ -17,12 +17,17 @@ test_that("pkg_version() validates input parameters", {
 
 test_that("pkg_version() detects installed version", {
   skip_on_cran()
+  skip_if_offline()
+  skip("Network-heavy CRAN package database fetch skipped.")
   res <- suppressMessages(pkg_version("cli", preview = FALSE))
   expect_true(!is.na(res$version[1]))
 })
 
 test_that("pkg_version() detects CRAN source", {
   skip_on_cran()
+  skip_if_offline()
+  skip("Network-heavy CRAN package database fetch skipped.")
+
   res <- suppressMessages(pkg_version("ggplot2", preview = FALSE))
   expect_equal(res$source[1], "CRAN")
   expect_true(!is.na(res$latest[1]))

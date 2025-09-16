@@ -47,12 +47,12 @@ file_tree <- function(path = ".",
     for (i in seq_along(files)) {
       f <- files[i]
       name <- basename(f)
-      connector <- if (i == length(files)) "└── " else "├── "
+      connector <- if (i == length(files)) "\\u2514\\u2500\\u2500 " else "\\u251c\\u2500\\u2500 "
       line <- paste0(prefix, connector, name)
       lines <<- c(lines, line)
       
       if (dir.exists(f)) {
-        new_prefix <- paste0(prefix, if (i == length(files)) "    " else "│   ")
+        new_prefix <- paste0(prefix, if (i == length(files)) "    " else "\\u2502   ")
         traverse(f, depth + 1, new_prefix)
       }
     }
