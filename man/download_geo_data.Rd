@@ -111,11 +111,11 @@ Required R packages (automatically checked at runtime):
 Downloaded files are organized as follows:
 \preformatted{
 dest_dir/
-├── GSE<id>_series_matrix.txt.gz    # GSEMatrix file
-├── GPL<id>.annot.gz               # Platform annotation (if available)
-├── <supplemental_files>           # Additional data files
-└── logs/geo/                      # Log files (if logging enabled)
-    └── GSE<id>_<date>.log
+\u251c\u2500\u2500 GSE<id>_series_matrix.txt.gz    # GSEMatrix file
+\u251c\u2500\u2500 GPL<id>.annot.gz               # Platform annotation (if available)
+\u251c\u2500\u2500 <supplemental_files>           # Additional data files
+\u2514\u2500\u2500 logs/geo/                      # Log files (if logging enabled)
+    \u2514\u2500\u2500 GSE<id>_<date>.log
 }
 }
 

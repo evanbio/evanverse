@@ -75,12 +75,12 @@ cat("Vivid palette (default):\n")
 print(vivid_default)
 
 # Get specific number of colors from sequential palette
-blues_5 <- get_palette("blues", type = "sequential", n = 5)
-cat("\nBlues palette (5 colors):\n")
-print(blues_5)
+blues_3 <- get_palette("blues", type = "sequential", n = 3)
+cat("\nBlues palette (3 colors):\n")
+print(blues_3)
 
-# Get all available colors from a palette
-blues_all <- get_palette("blues", type = "sequential", n = "all")
+# Get all available colors from a palette (just omit n parameter)
+blues_all <- get_palette("blues", type = "sequential")
 cat("\nBlues palette (all", length(blues_all), "colors):\n")
 print(blues_all)
 ```
@@ -100,12 +100,12 @@ preview_palette("blues", type = "sequential")
 title("Sequential: Blues", cex.main = 1.2, col.main = "#0D47A1")
 
 # Another sequential palette
-preview_palette("oranges", type = "sequential")
-title("Sequential: Oranges", cex.main = 1.2, col.main = "#0D47A1")
+preview_palette("warm_blush", type = "sequential")
+title("Sequential: Warm Blush", cex.main = 1.2, col.main = "#0D47A1")
 
 # Diverging palette preview
-preview_palette("redblue", type = "diverging")
-title("Diverging: Red-Blue", cex.main = 1.2, col.main = "#0D47A1")
+preview_palette("gradient_rd_bu", type = "diverging")
+title("Diverging: Red-Blue Gradient", cex.main = 1.2, col.main = "#0D47A1")
 
 par(mfrow = c(1, 1))
 ```
@@ -206,7 +206,7 @@ cor_long <- expand.grid(X = vars, Y = vars)
 cor_long$Correlation <- as.vector(cor_matrix)
 
 # Use sequential palette
-seq_colors <- get_palette("blues", type = "sequential", n = 9)
+seq_colors <- get_palette("ggsci_locuszoom", type = "sequential", n = 7)
 
 p2 <- ggplot(cor_long, aes(x = X, y = Y, fill = Correlation)) +
   geom_tile(color = "white", size = 0.5) +
@@ -219,7 +219,7 @@ p2 <- ggplot(cor_long, aes(x = X, y = Y, fill = Correlation)) +
   ) +
   labs(
     title = "Sequential Palette: Correlation Heatmap",
-    subtitle = "Using blues palette for continuous correlation data",
+    subtitle = "Using ggsci_locuszoom palette for continuous correlation data",
     x = "Variables",
     y = "Variables"
   ) +
@@ -247,7 +247,7 @@ gene_data <- data.frame(
 )
 
 # Use diverging palette
-div_colors <- get_palette("redblue", type = "diverging", n = 11)
+div_colors <- get_palette("gradient_rd_bu", type = "diverging", n = 11)
 
 p3 <- ggplot(gene_data, aes(x = Sample, y = Gene, fill = LogFoldChange)) +
   geom_tile(color = "white", size = 0.3) +
@@ -285,7 +285,7 @@ cat("=====================================\n\n")
 
 cat("📊 For Gene Expression Data:\n")
 cat("  • Sequential: Use 'blues', 'greens', or 'oranges'\n")
-cat("  • Diverging: Use 'redgreen' or 'redblue' for fold changes\n\n")
+cat("  • Diverging: Use 'gradient_rd_bu' or 'earthy_diverge' for fold changes\n\n")
 
 cat("🔬 For Pathway Analysis:\n")
 cat("  • Qualitative: Use 'vividset' or 'softpastel' for pathways\n")

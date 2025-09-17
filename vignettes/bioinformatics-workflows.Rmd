@@ -322,7 +322,7 @@ enrichment_results$EnrichmentScore <- -log10(enrichment_results$FDR)
 p2 <- ggplot(enrichment_results, aes(x = GeneRatio, y = reorder(Pathway, EnrichmentScore))) +
   geom_point(aes(color = EnrichmentScore, size = GeneCount), alpha = 0.8) +
   scale_color_gradientn(
-    colors = get_palette("oranges", type = "sequential", n = 8),
+    colors = get_palette("warm_blush", type = "sequential", n = 4),
     name = "-log₁₀(FDR)"
   ) +
   scale_size_continuous(name = "Gene Count", range = c(3, 12)) +
@@ -372,7 +372,7 @@ omics_data <- data.frame(
     # Expression fold changes (-3 to 3)
     c(-1.5, -2.8, 2.1, 1.8, -1.2, 2.3, -0.8, -2.1)
   ),
-  Patient_Group = rep(rep(c("Group_A", "Group_B", "Group_C"), length(selected_genes))
+  Patient_Group = rep(c("Group_A", "Group_B", "Group_C"), length(selected_genes))
 )
 
 # Normalize values for visualization
@@ -383,7 +383,7 @@ omics_data$Normalized_Value <- ave(omics_data$Value, omics_data$DataType,
 p3 <- ggplot(omics_data, aes(x = DataType, y = Gene, fill = Normalized_Value)) +
   geom_tile(color = "white", size = 0.5) +
   scale_fill_gradientn(
-    colors = get_palette("redblue", type = "diverging", n = 11),
+    colors = get_palette("gradient_rd_bu", type = "diverging", n = 11),
     name = "Z-score",
     limits = c(-2, 2),
     breaks = c(-2, -1, 0, 1, 2)
@@ -442,11 +442,11 @@ survival_data$Significance <- ifelse(survival_data$PValue < 0.001, "***",
 # Create forest plot using evanverse plotting functions
 p4 <- plot_forest(
   data = survival_data,
-  gene_col = "Gene",
-  hr_col = "HazardRatio",
-  ci_lower_col = "CI_Lower",
-  ci_upper_col = "CI_Upper",
-  pval_col = "PValue"
+  label_col = "Gene",
+  estimate_col = "HazardRatio",
+  lower_col = "CI_Lower",
+  upper_col = "CI_Upper",
+  p_col = "PValue"
 )
 
 print(p4)
@@ -760,7 +760,7 @@ plot_venn(gene_sets, colors = get_palette("vividset"))
 
 # Data visualization
 plot_forest(survival_data, hr_col = "HazardRatio")
-get_palette("redblue", type = "diverging", n = 11)
+get_palette("gradient_rd_bu", type = "diverging", n = 11)
 
 # Data management
 download_geo_data("GSE123456")
