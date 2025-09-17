@@ -118,6 +118,12 @@ home:
   - text: "🚀 Quick Start Guide"
     href: articles/get-started.html
     desc: "Get up and running with evanverse in minutes"
+  - text: "📖 Comprehensive Guide"
+    href: articles/comprehensive-guide.html
+    desc: "Complete overview of all evanverse features"
+  - text: "🔄 Data Processing"
+    href: articles/data-processing.html
+    desc: "Data transformation and void value handling"
   - text: "📦 Package Management"
     href: articles/package-management.html
     desc: "Advanced installation and management"
@@ -197,9 +203,15 @@ navbar:
       - text: "🚀 Getting Started"
         href: articles/get-started.html
         desc: "Quick introduction and basic usage"
+      - text: "📖 Comprehensive Guide"
+        href: articles/comprehensive-guide.html
+        desc: "Complete overview of all evanverse features"
       - text: "📦 Package Management"
         href: articles/package-management.html
         desc: "Advanced installation and management"
+      - text: "🔄 Data Processing"
+        href: articles/data-processing.html
+        desc: "Data transformation and void value handling"
       - text: "🎨 Color Palettes"
         href: articles/color-palettes.html
         desc: "Advanced color palette management"
@@ -238,6 +250,7 @@ articles:
     Quick start guides to help you begin using evanverse effectively
   contents:
   - get-started
+  - comprehensive-guide
 
 - title: "Specialized Guides"
   navbar: "Specialized Guides"
@@ -245,6 +258,7 @@ articles:
     In-depth tutorials covering specific functionality and advanced workflows
   contents:
   - package-management
+  - data-processing
   - color-palettes
   - bioinformatics-workflows
 

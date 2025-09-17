@@ -1,0 +1,282 @@
+---
+title: "Comprehensive Guide to evanverse"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Comprehensive Guide to evanverse}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.width = 7,
+  fig.height = 5,
+  fig.align = "center",
+  warning = FALSE,
+  message = FALSE
+)
+```
+
+# 📖 Comprehensive Guide to evanverse
+
+Welcome to the comprehensive guide for **evanverse** - a feature-rich R utility package providing 55+ functions for data analysis, visualization, and bioinformatics workflows.
+
+## 🚀 Package Installation and Setup
+
+```{r package-install, eval=FALSE}
+# Install from CRAN
+install.packages("evanverse")
+
+# Or install development version from GitHub
+evanverse::inst_pkg("evanbio/evanverse")
+```
+
+```{r package-load}
+library(evanverse)
+```
+
+## 📦 Package Management
+
+The evanverse package provides robust package management utilities:
+
+```{r package-check}
+# Check if packages are installed
+required_packages <- c("dplyr", "ggplot2", "tidyr")
+check_pkg(required_packages)
+
+# Get package version
+pkg_version("evanverse")
+```
+
+## 🎨 Color Palette System
+
+### Available Palettes
+
+```{r palettes-list}
+# List all available palettes
+palettes_info <- list_palettes()
+print(palettes_info)
+```
+
+### Using Color Palettes
+
+```{r palettes-demo}
+# Get specific palettes
+vivid_colors <- get_palette("vividset", type = "qualitative")
+blues_gradient <- get_palette("blues", type = "sequential")
+
+cat("Vivid qualitative palette:\n")
+print(vivid_colors)
+
+cat("\nBlues sequential palette:\n")
+print(blues_gradient)
+```
+
+### Creating Custom Palettes
+
+```{r custom-palette}
+# Create a custom palette
+custom_colors <- c("#FF6B6B", "#4ECDC4", "#45B7D1", "#96CEB4")
+create_palette(
+  name = "custom_demo",
+  colors = custom_colors,
+  type = "qualitative"
+)
+
+# Preview the custom colors
+print("Custom palette colors:")
+print(custom_colors)
+```
+
+## 📊 Visualization Functions
+
+### Venn Diagrams
+
+```{r venn-demo, fig.cap="Venn diagram example"}
+# Create sample data for Venn diagram
+set1 <- c("A", "B", "C", "D", "E")
+set2 <- c("C", "D", "E", "F", "G")
+set3 <- c("E", "F", "G", "H", "I")
+
+# Create Venn diagram
+venn_plot <- plot_venn(
+  set1 = set1,
+  set2 = set2,
+  set3 = set3,
+  category.names = c("Set1", "Set2", "Set3"),
+  title = "Three-way Venn Diagram Example"
+)
+print(venn_plot)
+```
+
+### Bar Plots
+
+```{r bar-demo, fig.cap="Professional bar plot"}
+# Sample data
+sample_data <- data.frame(
+  Category = c("Type A", "Type B", "Type C"),
+  Count = c(25, 18, 12),
+  Group = c("High", "High", "Medium")
+)
+
+# Create bar plot with custom colors
+vivid_colors <- get_palette("vividset", type = "qualitative")
+bar_plot <- plot_bar(data = sample_data,
+                     x = "Category",
+                     y = "Count",
+                     fill = "Group") +
+  ggplot2::scale_fill_manual(values = vivid_colors) +
+  ggplot2::labs(title = "Sample Distribution by Category",
+                x = "Sample Type",
+                y = "Count")
+print(bar_plot)
+```
+
+## 🧬 Bioinformatics Utilities
+
+### Gene ID Conversion
+
+```{r gene-conversion, eval=FALSE}
+# Convert gene symbols to Ensembl IDs
+gene_symbols <- c("TP53", "BRCA1", "EGFR")
+ensembl_ids <- convert_gene_id(
+  ids = gene_symbols,
+  from = "SYMBOL",
+  to = "ENSEMBL",
+  species = "human"
+)
+print(ensembl_ids)
+```
+
+### GMT File Processing
+
+```{r gmt-processing, eval=FALSE}
+# Convert GMT file to data frame
+gmt_df <- gmt2df("path/to/geneset.gmt")
+head(gmt_df)
+
+# Convert GMT file to list
+gmt_list <- gmt2list("path/to/geneset.gmt")
+length(gmt_list)
+```
+
+## 🔄 Data Processing and Void Handling
+
+### Working with Void Values
+
+```{r void-handling}
+# Create sample vector with void values
+messy_vector <- c("A", "", "C", NA, "E")
+
+print("Original vector:")
+print(messy_vector)
+
+# Check for void values
+cat("\nAny void values:", any_void(messy_vector), "\n")
+
+# Replace void values
+clean_vector <- replace_void(messy_vector, value = "MISSING")
+print("After replacing voids:")
+print(clean_vector)
+```
+
+### Data Transformation
+
+```{r data-transform}
+# Convert data frame to grouped list by cylinder count
+grouped_data <- df2list(
+  data = mtcars[1:10, ],
+  key_col = "cyl",
+  value_col = "mpg"
+)
+
+print("Cars grouped by cylinder, showing MPG values:")
+str(grouped_data)
+```
+
+## ⚡ Custom Operators
+
+```{r operators-demo}
+# Demonstrate custom operators
+x <- c(1, 2, 3, 4, 5)
+y <- c(3, 4, 5, 6, 7)
+
+# Check what's NOT in another vector
+print(x %nin% y)
+
+# Paste operator
+result <- "Hello" %p% " " %p% "World"
+print(result)
+
+# Check identity
+print(5 %is% 5)
+```
+
+## 💾 File Operations
+
+### Flexible File Reading
+
+```{r file-operations, eval=FALSE}
+# Read various file formats flexibly
+data1 <- read_table_flex("data.csv")
+data2 <- read_excel_flex("data.xlsx", sheet = 1)
+
+# Get file information
+file_info("data.csv")
+
+# Display directory tree
+file_tree(".")
+```
+
+## 🛠️ Development Tools
+
+### Timing and Execution
+
+```{r timing-demo}
+# Time execution of code
+result <- with_timer(function() {
+  Sys.sleep(0.1)  # Simulate some work
+  sum(1:1000)
+}, name = "Sum calculation")
+
+print(result)
+```
+
+### Safe Execution
+
+```{r safe-execution}
+# Execute code safely
+safe_result <- safe_execute({
+  x <- 1:10
+  mean(x)
+})
+
+print(safe_result)
+```
+
+## 📈 Summary
+
+The evanverse package provides a comprehensive toolkit for:
+
+- **Package Management**: Multi-source installation and management
+- **Data Visualization**: Publication-ready plots with sensible defaults
+- **Color Management**: Professional palette system for consistent styling
+- **File Operations**: Robust I/O with enhanced error handling
+- **Bioinformatics**: Specialized tools for genomic data processing
+- **Data Processing**: Advanced transformation and void value handling
+- **Custom Operators**: Expressive syntax extensions for R
+- **Development Tools**: Productivity enhancing utilities
+
+With 55+ functions across 8 major categories, evanverse streamlines your data analysis workflow while maintaining flexibility and reliability.
+
+## 🔗 Next Steps
+
+- Explore the [Color Palettes guide](color-palettes.html) for advanced palette management
+- Check out [Bioinformatics Workflows](bioinformatics-workflows.html) for domain-specific applications
+- Visit the [Function Reference](../reference/) for detailed documentation
+
+---
+
+*For more information, visit the [evanverse website](https://evanbio.github.io/evanverse/) or the [GitHub repository](https://github.com/evanbio/evanverse).*
