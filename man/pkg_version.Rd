@@ -2,7 +2,7 @@
 % Please edit documentation in R/pkg_version.R
 \name{pkg_version}
 \alias{pkg_version}
-\title{🔍 pkg_version: Check Installed and Latest Versions of R Packages}
+\title{pkg_version: Check Installed and Latest Versions of R Packages}
 \usage{
 pkg_version(pkg, preview = TRUE)
 }

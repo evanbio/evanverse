@@ -1,4 +1,4 @@
-#' 🔍 pkg_version: Check Installed and Latest Versions of R Packages
+#' pkg_version: Check Installed and Latest Versions of R Packages
 #'
 #' This function checks the installed and latest available versions of
 #' R packages across CRAN, Bioconductor, and GitHub.
@@ -35,7 +35,7 @@ pkg_version <- function(pkg, preview = TRUE) {
   # Initialize installed package info
   cli::cli_h1("Fetching installed R packages...")
   installed <- tryCatch(
-    installed.packages(),
+    utils::installed.packages(),
     error = function(e) {
       cli::cli_abort("Failed to fetch installed packages: {e$message}")
     }
@@ -50,7 +50,7 @@ pkg_version <- function(pkg, preview = TRUE) {
       cli::cli_abort("Failed to fetch CRAN package database: {e$message}")
     }
   )
-  cran_latest <- setNames(cran_db$Version, tolower(cran_db$Package))
+  cran_latest <- stats::setNames(cran_db$Version, tolower(cran_db$Package))
 
   # Get Bioconductor package versions
   cli::cli_h1("Fetching Bioconductor package database...")
@@ -61,12 +61,12 @@ pkg_version <- function(pkg, preview = TRUE) {
     }
   )
   bioc_db <- tryCatch(
-    available.packages(repos = bioc_repo),
+    utils::available.packages(repos = bioc_repo),
     error = function(e) {
       cli::cli_abort("Failed to fetch Bioconductor package database: {e$message}")
     }
   )
-  bioc_latest <- setNames(bioc_db[, "Version"], tolower(bioc_db[, "Package"]))
+  bioc_latest <- stats::setNames(bioc_db[, "Version"], tolower(bioc_db[, "Package"]))
 
   # Prepare result table
   result <- data.frame(

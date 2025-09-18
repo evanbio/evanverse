@@ -9,7 +9,7 @@ perm(n, k)
 \arguments{
 \item{n}{Integer. Total number of items (non-negative integer).}
 
-\item{k}{Integer. Number of items selected for permutation (non-negative integer, must be ≤ n).}
+\item{k}{Integer. Number of items selected for permutation (non-negative integer, must be <= n).}
 }
 \value{
 Numeric. The permutation count A(n, k) (returns Inf for very large n).

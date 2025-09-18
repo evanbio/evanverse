@@ -86,10 +86,10 @@ update_pkg <- function(pkg = NULL, source = NULL) {
     cli::cli_alert_info("Updating all CRAN + Bioconductor packages...")
 
     cli::cli_alert_info("Updating CRAN packages...")
-    update.packages(ask = FALSE)
+    utils::update.packages(ask = FALSE)
 
     if (!requireNamespace("BiocManager", quietly = TRUE)) {
-      install.packages("BiocManager")
+      utils::install.packages("BiocManager")
     }
 
     cli::cli_alert_info("Updating Bioconductor packages...")
@@ -101,11 +101,11 @@ update_pkg <- function(pkg = NULL, source = NULL) {
     # ===========================================================================
     if (source == "CRAN") {
       cli::cli_alert_info("Updating all CRAN packages...")
-      update.packages(ask = FALSE)
+      utils::update.packages(ask = FALSE)
 
     } else if (source == "Bioconductor") {
       if (!requireNamespace("BiocManager", quietly = TRUE)) {
-        install.packages("BiocManager")
+        utils::install.packages("BiocManager")
         bioc_version <- as.character(BiocManager::version())
       }
 
@@ -120,11 +120,11 @@ update_pkg <- function(pkg = NULL, source = NULL) {
     cli::cli_alert_info("Updating package(s): {.pkg {pkg}} (source: {source})")
 
     if (source == "CRAN") {
-      install.packages(pkg, quiet = TRUE)
+      utils::install.packages(pkg, quiet = TRUE)
 
     } else if (source == "Bioconductor") {
       if (!requireNamespace("BiocManager", quietly = TRUE)) {
-        install.packages("BiocManager")
+        utils::install.packages("BiocManager")
         bioc_version <- as.character(BiocManager::version())
       }
 
@@ -132,7 +132,7 @@ update_pkg <- function(pkg = NULL, source = NULL) {
 
     } else if (source == "GitHub") {
       if (!requireNamespace("devtools", quietly = TRUE)) {
-        install.packages("devtools")
+        utils::install.packages("devtools")
       }
       for (p in pkg) devtools::install_github(p, quiet = TRUE)
     }

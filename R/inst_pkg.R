@@ -12,9 +12,12 @@
 #'
 #' @examples
 #' inst_pkg("dplyr", source = "CRAN")
-#' inst_pkg("hadley/emo", source = "GitHub")
-#' inst_pkg("scRNAseq", source = "Bioconductor")
-#' inst_pkg(source = "local", path = "mypackage.tar.gz")
+#' \dontrun{
+#'   # These examples require network access
+#'   inst_pkg("hadley/emo", source = "GitHub")
+#'   inst_pkg("scRNAseq", source = "Bioconductor")
+#'   inst_pkg(source = "local", path = "mypackage.tar.gz")
+#' }
 inst_pkg <- function(pkg = NULL,
                      source = c("CRAN", "GitHub", "Bioconductor", "Local"),
                      path = NULL, ...) {
@@ -67,7 +70,7 @@ inst_pkg <- function(pkg = NULL,
   # ===========================================================================
   if (source == "CRAN") {
     cli::cli_alert_info("Installing from CRAN: {.pkg {pkg}}")
-    install.packages(pkg,
+    utils::install.packages(pkg,
                      repos = "https://mirrors.tuna.tsinghua.edu.cn/CRAN/",
                      ...
     )
@@ -75,14 +78,14 @@ inst_pkg <- function(pkg = NULL,
   } else if (source == "GitHub") {
     cli::cli_alert_info("Installing from GitHub: {.pkg {pkg}}")
     if (!requireNamespace("devtools", quietly = TRUE)) {
-      install.packages("devtools", repos = "https://mirrors.tuna.tsinghua.edu.cn/CRAN/")
+      utils::install.packages("devtools", repos = "https://mirrors.tuna.tsinghua.edu.cn/CRAN/")
     }
     for (p in pkg) devtools::install_github(p, ...)
 
   } else if (source == "Bioconductor") {
     cli::cli_alert_info("Installing from Bioconductor: {.pkg {pkg}}")
     if (!requireNamespace("BiocManager", quietly = TRUE)) {
-      install.packages("BiocManager", repos = "https://mirrors.tuna.tsinghua.edu.cn/CRAN/")
+      utils::install.packages("BiocManager", repos = "https://mirrors.tuna.tsinghua.edu.cn/CRAN/")
     }
     old_mirror <- getOption("BioC_mirror")
     options(BioC_mirror = "https://mirrors.tuna.tsinghua.edu.cn/bioconductor/")
@@ -91,7 +94,7 @@ inst_pkg <- function(pkg = NULL,
 
   } else if (source == "Local") {
     cli::cli_alert_info("Installing from local path: {.file {path}}")
-    install.packages(path, repos = NULL, type = "source", ...)
+    utils::install.packages(path, repos = NULL, type = "source", ...)
   }
 
   cli::cli_alert_success("Installation complete!")

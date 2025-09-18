@@ -3,8 +3,7 @@
 #' A binary operator to test whether elements of the left-hand vector are **not**
 #' present in the right-hand vector. This is equivalent to `!(x %in% table)`.
 #'
-#' @param x A vector of values to test.
-#' @param table A vector to match against.
+#' @param ... Arguments passed to the negated function.
 #' @usage x \%nin\% table
 #'
 #' @return A logical vector where `TRUE` indicates the corresponding element of `x`

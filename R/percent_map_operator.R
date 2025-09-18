@@ -47,7 +47,7 @@
   # Construct result: keep only matched entries
   # ===========================================================================
   matched_names <- table[match_idx]
-  result <- setNames(x, matched_names)
+  result <- stats::setNames(x, matched_names)
   result <- result[!is.na(names(result))]
 
   return(result)

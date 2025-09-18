@@ -7,9 +7,7 @@
 x \%nin\% table
 }
 \arguments{
-\item{x}{A vector of values to test.}
-
-\item{table}{A vector to match against.}
+\item{...}{Arguments passed to the negated function.}
 }
 \value{
 A logical vector where \code{TRUE} indicates the corresponding element of \code{x}

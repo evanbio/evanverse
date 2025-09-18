@@ -5,7 +5,7 @@
 #' This function is intended for moderate n and k. For very large numbers, consider supporting the 'gmp' package.
 #'
 #' @param n Integer. Total number of items (non-negative integer).
-#' @param k Integer. Number of items selected for permutation (non-negative integer, must be ≤ n).
+#' @param k Integer. Number of items selected for permutation (non-negative integer, must be <= n).
 #'
 #' @return Numeric. The permutation count A(n, k) (returns Inf for very large n).
 #' @export

@@ -28,7 +28,10 @@ A unified installer for R packages from CRAN, GitHub, Bioconductor, or local sou
 }
 \examples{
 inst_pkg("dplyr", source = "CRAN")
-inst_pkg("hadley/emo", source = "GitHub")
-inst_pkg("scRNAseq", source = "Bioconductor")
-inst_pkg(source = "local", path = "mypackage.tar.gz")
+\dontrun{
+  # These examples require network access
+  inst_pkg("hadley/emo", source = "GitHub")
+  inst_pkg("scRNAseq", source = "Bioconductor")
+  inst_pkg(source = "local", path = "mypackage.tar.gz")
+}
 }

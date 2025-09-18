@@ -46,8 +46,10 @@ The evanverse package provides robust package management utilities:
 required_packages <- c("dplyr", "ggplot2", "tidyr")
 check_pkg(required_packages)
 
-# Get package version
-pkg_version("evanverse")
+# Get package version (skip on CRAN due to network dependency)
+if (!identical(Sys.getenv("NOT_CRAN"), "false")) {
+  try(pkg_version("evanverse"), silent = TRUE)
+}
 ```
 
 ## 🎨 Color Palette System

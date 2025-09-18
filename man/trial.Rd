@@ -5,7 +5,17 @@
 \alias{trial}
 \title{Clinical Trial Dataset}
 \format{
-A data frame with clinical trial variables and observations.
+A data frame with 200 rows and 8 columns:
+\describe{
+\item{trt}{Character vector of treatment assignments}
+\item{age}{Numeric vector of patient ages}
+\item{marker}{Numeric vector of biomarker levels}
+\item{stage}{Factor with tumor stage levels}
+\item{grade}{Factor with tumor grade levels}
+\item{response}{Integer vector indicating tumor response}
+\item{death}{Integer vector indicating patient death}
+\item{ttdeath}{Numeric vector of time to death/censoring}
+}
 }
 \source{
 Created for testing and demonstration purposes.

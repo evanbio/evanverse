@@ -114,7 +114,7 @@ convert_gene_id <- function(query,
   # ===========================================================================
 
   if (is.character(query)) {
-    input_df <- setNames(data.frame(query, stringsAsFactors = FALSE), from)
+    input_df <- stats::setNames(data.frame(query, stringsAsFactors = FALSE), from)
     result <- dplyr::left_join(input_df, full_mapping, by = from)
     
     matched <- sum(!is.na(result[[to[1]]]))
@@ -144,7 +144,7 @@ convert_gene_id <- function(query,
     result <- dplyr::left_join(
       query,
       full_mapping,
-      by = setNames(from, std_col)
+      by = stats::setNames(from, std_col)
     )
 
     matched <- sum(!is.na(result[[to[1]]]))

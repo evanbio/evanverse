@@ -217,7 +217,7 @@ plot_density <- function(
 
   # ---- Faceting ----
   if (!is.null(facet)) {
-    p <- p + ggplot2::facet_wrap(as.formula(paste("~", facet)))
+    p <- p + ggplot2::facet_wrap(stats::as.formula(paste("~", facet)))
   }
 
   # ---- Mean lines ----

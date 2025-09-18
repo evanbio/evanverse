@@ -3,63 +3,25 @@
 \docType{data}
 \name{df_forest_test}
 \alias{df_forest_test}
-\title{Human Gene Reference (All Genes)}
+\title{Test Dataset for Forest Plots}
 \format{
-A data frame with multiple rows (genes) and columns such as \code{symbol} and \code{entrez_id}.
-
-A data frame with multiple rows (filtered genes) and similar columns as the full set.
-
-A data frame with rows representing genes and columns including \code{symbol} and \code{entrez_id}.
-
-A data frame with multiple rows (filtered genes) and standard annotation columns.
-
-A tibble with three columns:
+A data frame with 12 rows and 5 columns:
 \describe{
-\item{term}{Name of the hallmark gene set}
-\item{description}{Brief description of the gene set}
-\item{gene}{Gene symbol associated with the term}
+\item{variable}{Character vector of variable names}
+\item{estimate}{Numeric vector of effect estimates}
+\item{conf.low}{Numeric vector of lower confidence limits}
+\item{conf.high}{Numeric vector of upper confidence limits}
+\item{p.value}{Numeric vector of p-values}
 }
-
-A data frame with columns representing study data for meta-analysis visualization.
 }
 \source{
-Downloaded and processed from Ensembl database (via \code{download_gene_ref()} function).
-Human Gene Reference (Filtered Genes)
-
-A data frame containing a filtered subset of human genes, retaining only entries with valid \code{symbol} and \code{entrez_id}.
-Used for cases requiring higher-quality gene identifiers, such as functional enrichment or ID mapping.
-
-Derived from the full human gene reference dataset after filtering missing or invalid entries.
-Mouse Gene Reference (All Genes)
-
-A data frame containing all annotated mouse genes, used for cross-species gene analysis and mapping.
-Includes both coding and non-coding genes.
-
-Downloaded and processed from Ensembl database (via \code{download_gene_ref()} function).
-Mouse Gene Reference (Filtered Genes)
-
-A filtered version of the mouse gene reference, keeping only genes with non-missing \code{symbol} and \code{entrez_id}.
-Suitable for downstream analyses that require reliable gene identifiers.
-
-Derived from the full mouse gene reference dataset after filtering missing or invalid entries.
-MSigDB Hallmark Gene Sets (Expanded Format)
-
-A long-format tibble representing the MSigDB Hallmark gene sets, where each row corresponds to a single gene-term association.
-Useful for gene set enrichment analysis and visualization.
-
-Extracted and parsed from the MSigDB v2024.1 (h.all.v2024.1.Hs.symbols.gmt).
-Test Dataset for Forest Plots
-
-A sample dataset used for demonstrating and testing forest plot functionality.
-Contains example effect sizes, confidence intervals, and study information.
-
 Created for testing and demonstration purposes.
 }
 \usage{
 df_forest_test
 }
 \description{
-A data frame containing all annotated human genes, including both protein-coding and non-coding types.
-This dataset is primarily used for gene ID conversion and enrichment analysis.
+A sample dataset used for demonstrating and testing forest plot functionality.
+Contains example effect sizes, confidence intervals, and study information.
 }
 \keyword{datasets}
