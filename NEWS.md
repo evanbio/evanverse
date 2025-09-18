@@ -1,3 +1,27 @@
+# evanverse 0.3.2
+
+A maintenance release focusing on CRAN check compliance and package quality improvements.
+
+---
+
+### CRAN Compliance Fixes
+
+* **Fixed namespace imports**: Added proper `package::function` prefixes for all base R functions
+  - Added `stats::setNames`, `utils::install.packages`, `utils::available.packages`, etc.
+  - Resolved "no visible global function definition" warnings
+* **Removed Unicode characters**: Cleaned up emoji characters from R code files for better compatibility
+* **Updated documentation**: Fixed argument mismatches in function documentation (e.g., `%nin%` operator)
+* **Network dependency handling**: Ensured all network-dependent code in vignettes uses `eval=FALSE`
+* **Enhanced examples**: Wrapped network-dependent examples in `\dontrun{}` blocks
+
+### Code Quality Improvements
+
+* Improved function documentation with accurate parameter descriptions
+* Standardized error messages and validation patterns
+* Enhanced CRAN submission readiness with better compliance checks
+* Updated package structure for optimal build and check processes
+
+---
 # evanverse 0.3.1
 
 A patch release focusing on CRAN submission preparation and cross-platform compatibility validation.
