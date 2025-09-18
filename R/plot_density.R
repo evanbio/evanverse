@@ -11,11 +11,17 @@
 #'        Default: c("#1b9e77", "#d95f02", "#7570b3")
 #' @param alpha Numeric. Fill transparency. Default: 0.7.
 #' @param base_size Numeric. Theme base font size. Default: 14.
-#' @param xlab,ylab,title,legend_pos See above. (Omitted for brevity)
+#' @param xlab Character. X-axis label. Default: NULL (uses variable name).
+#' @param ylab Character. Y-axis label. Default: "Density".
+#' @param title Character. Plot title. Default: NULL.
+#' @param legend_pos Character. Legend position. One of "right", "left", "top", "bottom", "none". Default: "right".
 #' @param adjust Numeric. Density bandwidth adjust. Default: 1.
 #' @param show_mean Logical. Whether to add mean line. Default: FALSE.
 #' @param mean_line_color Character. Mean line color. Default: "red".
-#' @param add_hist, hist_bins, add_rug, theme See above. (Omitted for brevity)
+#' @param add_hist Logical. Whether to add histogram layer. Default: FALSE.
+#' @param hist_bins Integer. Number of histogram bins. Default: NULL (auto).
+#' @param add_rug Logical. Whether to add rug marks at bottom. Default: FALSE.
+#' @param theme Character. ggplot2 theme style. One of "minimal", "classic", "bw", "light", "dark". Default: "minimal".
 #'
 #' @return ggplot object.
 #' @export

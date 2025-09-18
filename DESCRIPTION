@@ -7,10 +7,12 @@ Authors@R:
            comment = c(ORCID = "0009-0009-4600-8175"))
 Author: Evan Zhou [aut, cre] (<https://orcid.org/0009-0009-4600-8175>)
 Maintainer: Evan Zhou <evanzhou.bio@gmail.com>
-Description: A collection of utility functions to support data analysis
-    and visualization in R. The package provides helpers for string
-    manipulation, file handling, color palettes, bioinformatics data
-    conversion, and common plotting tasks.
+Description: A comprehensive collection of utility functions for data analysis
+    and visualization in R. The package provides 55+ functions for data
+    manipulation, file handling, color palette management, bioinformatics
+    workflows, plotting, and package management. Features include void value
+    handling, custom infix operators, flexible file I/O, and publication-ready
+    visualizations with sensible defaults.
 License: MIT + file LICENSE
 License_is_FOSS: yes
 License_restricts_use: no
@@ -63,8 +65,3 @@ Suggests:
     forestploter,
     purrr,
     reactable
-
-
-
-
-

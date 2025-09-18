@@ -5,6 +5,7 @@
 #'
 #' @param x A vector of values to test.
 #' @param table A vector to match against.
+#' @usage x \%nin\% table
 #'
 #' @return A logical vector where `TRUE` indicates the corresponding element of `x`
 #'   is not present in `table`. Results involving `NA` follow base R semantics:

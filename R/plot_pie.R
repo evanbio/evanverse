@@ -115,8 +115,8 @@ plot_pie <- function(data,
   df <- df[df$count > 0, , drop = FALSE]
   total <- sum(df$count)
 
-  df <- df %>%
-    dplyr::arrange(dplyr::desc(count)) %>%
+  df <- df |>
+    dplyr::arrange(dplyr::desc(count)) |>
     dplyr::mutate(
       percent = round(count / total * 100, 1),
       label_text = dplyr::case_when(

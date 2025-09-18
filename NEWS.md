@@ -1,4 +1,4 @@
-# evanverse 0.3.0 (2025-09-16)
+# evanverse 0.3.0
 
 A focused refactor release: unified CLI messaging, CRAN-safe startup, tighter parameter validation, stronger tests, and several new utilities.
 

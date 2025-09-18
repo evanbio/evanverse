@@ -42,3 +42,21 @@
 #'   \item{gene}{Gene symbol associated with the term}
 #' }
 #' @source Extracted and parsed from the MSigDB v2024.1 (h.all.v2024.1.Hs.symbols.gmt).
+
+#' Test Dataset for Forest Plots
+#'
+#' A sample dataset used for demonstrating and testing forest plot functionality.
+#' Contains example effect sizes, confidence intervals, and study information.
+#'
+#' @format A data frame with columns representing study data for meta-analysis visualization.
+#' @source Created for testing and demonstration purposes.
+"df_forest_test"
+
+#' Clinical Trial Dataset
+#'
+#' A sample clinical trial dataset used for testing and demonstration of data analysis functions.
+#' Contains typical clinical trial variables for testing various statistical and visualization functions.
+#'
+#' @format A data frame with clinical trial variables and observations.
+#' @source Created for testing and demonstration purposes.
+"trial"

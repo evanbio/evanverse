@@ -75,7 +75,7 @@ gmt2df <- function(file, verbose = TRUE) {
     term = names(gene_ids),
     description = descriptions,
     gene = unname(gene_ids)
-  ) %>%
+  ) |>
     tidyr::unnest_longer(gene)
 
   # ===========================================================================

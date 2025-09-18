@@ -42,7 +42,13 @@ Default: c("#1b9e77", "#d95f02", "#7570b3")}
 
 \item{base_size}{Numeric. Theme base font size. Default: 14.}
 
-\item{xlab, ylab, title, legend_pos}{See above. (Omitted for brevity)}
+\item{xlab}{Character. X-axis label. Default: NULL (uses variable name).}
+
+\item{ylab}{Character. Y-axis label. Default: "Density".}
+
+\item{title}{Character. Plot title. Default: NULL.}
+
+\item{legend_pos}{Character. Legend position. One of "right", "left", "top", "bottom", "none". Default: "right".}
 
 \item{adjust}{Numeric. Density bandwidth adjust. Default: 1.}
 
@@ -50,7 +56,13 @@ Default: c("#1b9e77", "#d95f02", "#7570b3")}
 
 \item{mean_line_color}{Character. Mean line color. Default: "red".}
 
-\item{add_hist, }{hist_bins, add_rug, theme See above. (Omitted for brevity)}
+\item{add_hist}{Logical. Whether to add histogram layer. Default: FALSE.}
+
+\item{hist_bins}{Integer. Number of histogram bins. Default: NULL (auto).}
+
+\item{add_rug}{Logical. Whether to add rug marks at bottom. Default: FALSE.}
+
+\item{theme}{Character. ggplot2 theme style. One of "minimal", "classic", "bw", "light", "dark". Default: "minimal".}
 }
 \value{
 ggplot object.

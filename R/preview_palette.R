@@ -96,30 +96,30 @@ preview_palette <- function(name,
   # Generate the appropriate plot based on plot_type
   switch(plot_type,
          "bar" = {
-           barplot(rep(1, num_colors), col = colors, border = NA, space = 0,
+           graphics::barplot(rep(1, num_colors), col = colors, border = NA, space = 0,
                    axes = FALSE, main = title, names.arg = colors, las = 2, cex.names = 0.8)
          },
          "pie" = {
-           pie(rep(1, num_colors), col = colors, labels = colors, border = "white",
+           graphics::pie(rep(1, num_colors), col = colors, labels = colors, border = "white",
                main = title, cex = 0.8)
          },
          "point" = {
            plot(seq_len(num_colors), rep(1, num_colors), pch = 19, cex = 5, col = colors,
                 axes = FALSE, xlab = "", ylab = "", main = title)
-           text(seq_len(num_colors), rep(1.2, num_colors), labels = colors, pos = 3, cex = 0.8)
+           graphics::text(seq_len(num_colors), rep(1.2, num_colors), labels = colors, pos = 3, cex = 0.8)
          },
          "rect" = {
            plot(0, 0, type = "n", xlim = c(0, num_colors), ylim = c(0, 1),
                 axes = FALSE, xlab = "", ylab = "", main = title)
-           rect(0:(num_colors-1), 0, 1:num_colors, 1, col = colors, border = NA)
-           text((0:(num_colors-1) + 1:num_colors) / 2, 0.5, labels = colors, col = "white", cex = 0.8)
+           graphics::rect(0:(num_colors-1), 0, 1:num_colors, 1, col = colors, border = NA)
+           graphics::text((0:(num_colors-1) + 1:num_colors) / 2, 0.5, labels = colors, col = "white", cex = 0.8)
          },
          "circle" = {
            plot(0, 0, type = "n", xlim = c(0, num_colors), ylim = c(0, 1),
                 axes = FALSE, xlab = "", ylab = "", main = title)
-           symbols(seq_len(num_colors) - 0.5, rep(0.5, num_colors), circles = rep(0.4, num_colors),
+           graphics::symbols(seq_len(num_colors) - 0.5, rep(0.5, num_colors), circles = rep(0.4, num_colors),
                    inches = FALSE, bg = colors, add = TRUE)
-           text(seq_len(num_colors) - 0.5, 0.5, labels = colors, col = "white", cex = 0.8)
+           graphics::text(seq_len(num_colors) - 0.5, 0.5, labels = colors, col = "white", cex = 0.8)
          }
   )
 

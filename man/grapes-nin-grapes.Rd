@@ -4,7 +4,7 @@
 \alias{\%nin\%}
 \title{\verb{\%nin\%}: Not-in operator (negation of \code{\%in\%})}
 \usage{
-... \%nin\% NA
+x \%nin\% table
 }
 \arguments{
 \item{x}{A vector of values to test.}
