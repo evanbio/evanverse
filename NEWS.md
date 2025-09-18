@@ -1,3 +1,26 @@
+# evanverse 0.3.1
+
+A patch release focusing on CRAN submission preparation and cross-platform compatibility validation.
+
+---
+
+### Documentation & Release Preparation
+
+* Added comprehensive **CRAN submission checklist** covering all policy requirements and compliance checks
+* Created **cran-comments.md** with detailed test environments and submission documentation
+* Generated **cross-platform compatibility report** validating Windows/macOS/Linux support
+* Updated package documentation with improved man pages and examples
+* Verified all 1336 tests pass with proper skip conditions for CRAN/CI environments
+
+### Internal Improvements
+
+* Enhanced file path handling validation across all platforms
+* Confirmed minimal platform-specific code with proper error handling
+* Validated all dependencies are cross-platform compatible
+* Cleaned up package structure by removing unnecessary `.here` file
+
+---
+
 # evanverse 0.3.0
 
 A focused refactor release: unified CLI messaging, CRAN-safe startup, tighter parameter validation, stronger tests, and several new utilities.
