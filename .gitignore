@@ -32,6 +32,14 @@ dev/
 .Rcheck/
 .Rbuildignore
 *.tar.gz
+*.o
+*.so
+*.dll
+src/*.o
+src/*.so
+src/*.dll
+.Rdata
+.Rhistory
 
 #-------------------------------------------------------
 # Temporary / Untracked Files
@@ -44,6 +52,15 @@ dev/
 inst/doc
 /Meta/
 /doc/
+docs/
+pkgdown/
+check/
+*.Rout
+*.Rout.save
+.Rproj.user*
+*.swp
+*.swo
+*~
 
 #-------------------------------------------------------
 # Resource files (non-code, non-binary data)
@@ -59,6 +76,23 @@ resources/images/
 notebooks/
 
 #-------------------------------------------------------
+# CI/CD and GitHub specific
+#-------------------------------------------------------
+.github/workflows/*.log
+coverage.xml
+test-results.xml
+
+#-------------------------------------------------------
 # Claude Code specific files
 #-------------------------------------------------------
 CLAUDE.md
+
+#-------------------------------------------------------
+# Package development
+#-------------------------------------------------------
+revdep/
+cran-comments.md.bak
+CRAN-*.md.bak
+*.Rcheck/
+vignettes/*.html
+vignettes/*.pdf
