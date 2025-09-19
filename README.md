@@ -5,6 +5,7 @@
 # evanverse
 
 <!-- badges: start -->
+[![CRAN status](https://img.shields.io/badge/CRAN-Under%20Review-orange)](https://cran.r-project.org/package=evanverse)
 [![GitHub version](https://img.shields.io/github/v/tag/evanbio/evanverse?label=version&color=success)](https://github.com/evanbio/evanverse/releases)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE.md)
 <!-- badges: end -->
@@ -22,12 +23,24 @@
 
 ## Installation
 
-You can install the development version of `evanverse` from GitHub with:
+### 🚀 CRAN (Recommended - Under Review)
+
+`evanverse` 0.3.3 is currently under CRAN review. Once approved, install with:
+
+```r
+install.packages("evanverse")
+```
+
+### 📦 Development Version
+
+You can install the latest development version from GitHub:
 
 ```r
 # install.packages("devtools")
-# devtools::install_github("evanbio/evanverse")
+devtools::install_github("evanbio/evanverse")
 ```
+
+> **Status Update**: Version 0.3.3 has passed CRAN automatic checks and is pending manual review. Expected approval within 10 working days.
 
 ## Usage
 
