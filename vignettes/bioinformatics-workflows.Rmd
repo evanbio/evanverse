@@ -744,7 +744,7 @@ The evanverse bioinformatics toolkit provides:
 
 ### Continue Learning:
 
-- 📊 [Visualization Showcase](visualization-showcase.html) - Advanced plotting techniques
+- 📊 [Package Management](package-management.html) - Advanced installation techniques
 - 🎨 [Color Palette Guide](color-palettes.html) - Bioinformatics color schemes
 - 📚 [Comprehensive Guide](comprehensive-guide.html) - Complete package overview
 

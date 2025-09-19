@@ -11,8 +11,10 @@
 #' @export
 #'
 #' @examples
+#' \dontrun{
 #' remove_palette("blues")
 #' remove_palette("vividset", type = "qualitative")
+#' }
 remove_palette <- function(name,
                             type = NULL,
                             color_dir = "inst/extdata/palettes",

@@ -27,6 +27,8 @@ Invisibly TRUE if removed successfully, FALSE otherwise.
 Remove a palette file by name, trying across types if necessary.
 }
 \examples{
+\dontrun{
 remove_palette("blues")
 remove_palette("vividset", type = "qualitative")
+}
 }

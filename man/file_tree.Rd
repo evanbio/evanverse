@@ -35,6 +35,8 @@ Optionally, save the result to a log file for record keeping or debugging.
 }
 \examples{
 file_tree()
+\dontrun{
 file_tree("data", max_depth = 3, log = TRUE)
+}
 
 }

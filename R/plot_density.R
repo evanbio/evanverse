@@ -24,6 +24,7 @@
 #' @param theme Character. ggplot2 theme style. One of "minimal", "classic", "bw", "light", "dark". Default: "minimal".
 #'
 #' @return ggplot object.
+#' @importFrom stats density
 #' @export
 plot_density <- function(
   data,

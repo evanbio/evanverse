@@ -13,8 +13,10 @@
 #' @export
 #'
 #' @examples
+#' \dontrun{
 #' create_palette("blues", "sequential", c("#deebf7", "#9ecae1", "#3182bd"))
 #' create_palette("vividset", "qualitative", c("#E64B35", "#4DBBD5", "#00A087"))
+#' }
 create_palette <- function(name,
                            type = c("sequential", "diverging", "qualitative"),
                            colors,

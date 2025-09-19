@@ -31,6 +31,8 @@ Save a named color palette (sequential, diverging, or qualitative) to a JSON fil
 Used for palette sharing, reuse, and future compilation.
 }
 \examples{
+\dontrun{
 create_palette("blues", "sequential", c("#deebf7", "#9ecae1", "#3182bd"))
 create_palette("vividset", "qualitative", c("#E64B35", "#4DBBD5", "#00A087"))
+}
 }

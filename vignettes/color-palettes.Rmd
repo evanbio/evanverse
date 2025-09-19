@@ -485,7 +485,7 @@ The evanverse color palette system provides:
 ### Continue Learning:
 
 - 📚 [Comprehensive Guide](comprehensive-guide.html) - Complete package overview
-- 📊 [Visualization Showcase](visualization-showcase.html) - Advanced plotting techniques
+- 📊 [Data Processing](data-processing.html) - Data manipulation techniques
 - 🧬 [Bioinformatics Workflows](bioinformatics-workflows.html) - Domain-specific applications
 
 ### Quick Reference:

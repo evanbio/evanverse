@@ -370,7 +370,7 @@ print(void_status)
 
 ## 🔗 Next Steps
 
-- Explore [Visualization Showcase](visualization-showcase.html) for plotting cleaned data
+- Explore [Color Palettes guide](color-palettes.html) for plotting cleaned data
 - Check out [Bioinformatics Workflows](bioinformatics-workflows.html) for domain-specific processing
 - Visit the [Color Palettes guide](color-palettes.html) for visualization styling
 

@@ -64,6 +64,12 @@ test_that("create_palette() reuses existing file", {
 test_that("create_palette() logs correctly when enabled", {
   tmp_dir <- tempfile("log_test_")
   dir.create(tmp_dir, recursive = TRUE)
+
+  # Change to temp directory to avoid creating logs in package directory
+  old_wd <- getwd()
+  on.exit(setwd(old_wd))
+  setwd(tmp_dir)
+
   log_file <- file.path("logs/palettes/create_palette.log")
 
   # Ensure clean start
@@ -80,5 +86,8 @@ test_that("create_palette() logs correctly when enabled", {
   expect_true(file.exists(log_file))
   log_content <- readLines(log_file)
   expect_true(any(grepl("logtest", log_content)))
+
+  # Clean up logs directory
+  unlink("logs", recursive = TRUE)
 })
 

@@ -12,7 +12,9 @@
 #' @export
 #'
 #' @examples
+#' \dontrun{
 #' pkg_version(c("ggplot2", "limma", "MRPRESSO", "nonexistentpackage123"))
+#' }
 pkg_version <- function(pkg, preview = TRUE) {
   # Parameter validation
   if (!is.character(pkg) || length(pkg) == 0) {

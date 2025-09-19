@@ -17,9 +17,6 @@ A data frame with 12 rows and 5 columns:
 \source{
 Created for testing and demonstration purposes.
 }
-\usage{
-df_forest_test
-}
 \description{
 A sample dataset used for demonstrating and testing forest plot functionality.
 Contains example effect sizes, confidence intervals, and study information.

@@ -20,9 +20,6 @@ A data frame with 200 rows and 8 columns:
 \source{
 Created for testing and demonstration purposes.
 }
-\usage{
-trial
-}
 \description{
 A sample clinical trial dataset used for testing and demonstration of data analysis functions.
 Contains typical clinical trial variables for testing various statistical and visualization functions.

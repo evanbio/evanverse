@@ -3,7 +3,8 @@
 #' A binary operator to test whether elements of the left-hand vector are **not**
 #' present in the right-hand vector. This is equivalent to `!(x %in% table)`.
 #'
-#' @param ... Arguments passed to the negated function.
+#' @param x vector or NULL: the values to be matched.
+#' @param table vector or NULL: the values to be matched against.
 #' @usage x \%nin\% table
 #'
 #' @return A logical vector where `TRUE` indicates the corresponding element of `x`
@@ -24,4 +25,6 @@
 # ===========================================================================
 # Definition
 # ===========================================================================
-`%nin%` <- Negate(`%in%`)
+`%nin%` <- function(x, table) {
+  !(x %in% table)
+}

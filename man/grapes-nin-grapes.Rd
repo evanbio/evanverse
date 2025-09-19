@@ -7,7 +7,9 @@
 x \%nin\% table
 }
 \arguments{
-\item{...}{Arguments passed to the negated function.}
+\item{x}{vector or NULL: the values to be matched.}
+
+\item{table}{vector or NULL: the values to be matched against.}
 }
 \value{
 A logical vector where \code{TRUE} indicates the corresponding element of \code{x}

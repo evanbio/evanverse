@@ -12,7 +12,10 @@
 #'   \item{p.value}{Numeric vector of p-values}
 #' }
 #' @source Created for testing and demonstration purposes.
-"df_forest_test"
+#' @name df_forest_test
+#' @docType data
+#' @keywords datasets
+NULL
 
 #' Clinical Trial Dataset
 #'
@@ -31,4 +34,7 @@
 #'   \item{ttdeath}{Numeric vector of time to death/censoring}
 #' }
 #' @source Created for testing and demonstration purposes.
-"trial"
+#' @name trial
+#' @docType data
+#' @keywords datasets
+NULL

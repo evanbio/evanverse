@@ -14,7 +14,9 @@
 #'
 #' @examples
 #' file_tree()
+#' \dontrun{
 #' file_tree("data", max_depth = 3, log = TRUE)
+#' }
 #'
 #' @export
 file_tree <- function(path = ".",

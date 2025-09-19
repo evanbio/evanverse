@@ -64,7 +64,7 @@ combine_logic(c(TRUE, FALSE), c(TRUE, TRUE))
 
 -   📄 [README on GitHub](https://github.com/evanbio/evanverse)
 
--   🌐 [Documentation site (coming soon)](#)
+-   🌐 [Documentation site](https://evanbio.github.io/evanverse/)
 
 -   ❔ View all functions: `?evanverse` or `help(package = "evanverse")`
 
