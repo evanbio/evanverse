@@ -68,7 +68,8 @@ A maintenance release focusing on CRAN check compliance and package quality impr
 ---
 # evanverse 0.3.1
 
-A patch release focusing on CRAN submission preparation and cross-platform compatibility validation.
+A patch release focusing on CRAN submission preparation and cross-platform
+compatibility validation.
 
 ---
 
