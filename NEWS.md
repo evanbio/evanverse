@@ -1,3 +1,47 @@
+# evanverse 0.3.3
+
+*Released: September 19, 2025*
+
+**CRAN Submission Ready** - Passed CRAN automatic checks; under manual review.
+
+---
+
+### CRAN Compliance Fixes
+
+* **Resolved all R CMD check issues**: Eliminated remaining warnings and notes for full CRAN compliance
+* **Enhanced documentation consistency**: Fixed all argument mismatches and improved parameter descriptions
+* **Optimized package dependencies**: Streamlined imports and resolved namespace conflicts
+* **Cross-platform validation**: Confirmed compatibility across Windows, macOS, and Linux environments
+* **Test suite refinement**: Updated test conditions and skip logic for CRAN environment compatibility
+
+### CRAN Check Results
+
+* **Windows (R-release)**: ✅ PASS - 0 errors, 0 warnings, 0 notes
+* **Debian (R-devel)**: ✅ PASS - 0 errors, 0 warnings, 0 notes
+* **All test environments**: Successfully validated across multiple R versions and platforms
+
+### What's New
+
+* Final CRAN submission preparations completed
+* Enhanced package robustness and reliability
+* Improved documentation quality and consistency
+* Streamlined codebase for production readiness
+
+### Technical Details
+
+* **R CMD check status**: All checks passing with clean results
+* **Test coverage**: 1336+ tests with appropriate CRAN skip conditions
+* **Documentation**: All man pages updated with proper formatting and examples
+* **Vignettes**: Network-dependent code properly handled with `eval=FALSE`
+
+### Next Steps
+
+* **CRAN manual review**: Package submitted and awaiting final approval
+* **Expected timeline**: Approval anticipated within 10 working days
+* **Installation**: Will be available via `install.packages("evanverse")` upon approval
+
+---
+
 # evanverse 0.3.2
 
 A maintenance release focusing on CRAN check compliance and package quality improvements.
