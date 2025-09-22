@@ -373,12 +373,21 @@ reference:
   - remind
   - safe_execute
 
+- title: "📊 Example Datasets"
+  desc: >
+    Sample datasets included with evanverse for testing and
+    demonstration purposes. Useful for learning functions and
+    exploring package capabilities.
+  contents:
+  - df_forest_test
+  - trial
+
 news:
   releases:
-  - text: "🎉 Version 0.3.0 - CRAN Release"
-    href: https://github.com/evanbio/evanverse/releases/tag/v0.3.0
-  - text: "📦 Version 0.2.0 - Feature Update"
-    href: https://github.com/evanbio/evanverse/releases/tag/v0.2.0
+  - text: "🎉 Version 0.3.3 - CRAN Submission Ready"
+    href: https://github.com/evanbio/evanverse/releases/tag/v0.3.3
+  - text: "📦 Version 0.3.2 - Maintenance Release"
+    href: https://github.com/evanbio/evanverse/releases/tag/v0.3.2
   - text: "View All Releases"
     href: https://github.com/evanbio/evanverse/releases
 
@@ -389,8 +398,8 @@ footer:
   components:
     package_info: |
       <div class="text-muted">
-        <strong>evanverse v0.3.0</strong><br>
-        <small>Last updated: September 2024</small>
+        <strong>evanverse v0.3.3</strong><br>
+        <small>Last updated: September 2025</small>
       </div>
     social_links: |
       <div class="footer-links">
