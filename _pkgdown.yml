@@ -225,7 +225,7 @@ navbar:
     news:
       text: "News"
       icon: "fas fa-newspaper"
-      href: news/
+      href: news/index.html
 
     cran:
       text: "CRAN"
