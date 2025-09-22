@@ -15,7 +15,7 @@
 
 ## ✅ LICENSE Compliance
 - [x] **LICENSE file**: Present and correctly formatted
-- [x] **LICENSE.md**: Complete MIT license text with correct year (2025) and copyright holder
+- [x] **LICENSE-FULL.md**: Complete MIT license text with correct year (2025) and copyright holder
 - [x] **FOSS compliance**: License_is_FOSS: yes, License_restricts_use: no
 
 ## ✅ NEWS.md Documentation

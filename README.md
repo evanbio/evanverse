@@ -1,7 +1,7 @@
 # evanverse: Utility Functions for Data Analysis and Visualization
 
 <!-- badges: start -->
-[![CRAN status](https://img.shields.io/badge/CRAN-Under%20Review-orange)](https://cran.r-project.org/package=evanverse) [![GitHub version](https://img.shields.io/badge/version-v0.3.3-success)](https://github.com/evanbio/evanverse/releases) [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE.md) <img src="man/figures/logo.png" align="right" width="105" style="vertical-align: middle;" />
+[![CRAN status](https://img.shields.io/badge/CRAN-Under%20Review-orange)](https://cran.r-project.org/package=evanverse) [![GitHub version](https://img.shields.io/badge/version-v0.3.3-success)](https://github.com/evanbio/evanverse/releases) [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE-FULL.md) <img src="man/figures/logo.png" align="right" width="105" style="vertical-align: middle;" />
 <!-- badges: end -->
 
 <br>
