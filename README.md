@@ -2,20 +2,9 @@
 
 ---
 
-<div style="display: flex; justify-content: space-between; align-items: center;">
-<div>
-
 <!-- badges: start -->
-[![CRAN status](https://img.shields.io/badge/CRAN-Under%20Review-orange)](https://cran.r-project.org/package=evanverse)
-[![GitHub version](https://img.shields.io/badge/version-v0.3.3-success)](https://github.com/evanbio/evanverse/releases)
-[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE.md)
+[![CRAN status](https://img.shields.io/badge/CRAN-Under%20Review-orange)](https://cran.r-project.org/package=evanverse) [![GitHub version](https://img.shields.io/badge/version-v0.3.3-success)](https://github.com/evanbio/evanverse/releases) [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE.md) <img src="man/figures/logo.png" align="right" width="120" />
 <!-- badges: end -->
-
-</div>
-<div>
-<img src="man/figures/logo.png" width="180" />
-</div>
-</div>
 
 **evanverse** is a comprehensive R utility package by Evan Zhou that provides a unified toolkit for data analysis, visualization, and bioinformatics workflows. It combines practical functions for package management, data processing, color palettes, plotting, and workflow automation.
 
