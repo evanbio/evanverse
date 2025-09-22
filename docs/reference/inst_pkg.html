@@ -59,7 +59,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">evanverse</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.3.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.3.3</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -82,12 +82,10 @@
 <li class="nav-item dropdown">
   <button class="nav-link dropdown-toggle" type="button" id="dropdown-guides" data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true"><span class="fa fas fa-file-alt"></span> Guides</button>
   <ul class="dropdown-menu" aria-labelledby="dropdown-guides"><li><a class="dropdown-item" href="../articles/get-started.html">🚀 Getting Started</a></li>
-    <li><a class="dropdown-item" href="../articles/comprehensive-guide.html">📚 Comprehensive Guide</a></li>
-    <li><hr class="dropdown-divider"></li>
+    <li><a class="dropdown-item" href="../articles/comprehensive-guide.html">📖 Comprehensive Guide</a></li>
     <li><a class="dropdown-item" href="../articles/package-management.html">📦 Package Management</a></li>
-    <li><a class="dropdown-item" href="../articles/color-palettes.html">🎨 Color Palettes</a></li>
     <li><a class="dropdown-item" href="../articles/data-processing.html">🔄 Data Processing</a></li>
-    <li><a class="dropdown-item" href="../articles/visualization-showcase.html">📊 Visualization Showcase</a></li>
+    <li><a class="dropdown-item" href="../articles/color-palettes.html">🎨 Color Palettes</a></li>
     <li><a class="dropdown-item" href="../articles/bioinformatics-workflows.html">🧬 Bioinformatics Workflows</a></li>
     <li><hr class="dropdown-divider"></li>
     <li><a class="dropdown-item" href="../articles/">📚 All Articles</a></li>
@@ -151,46 +149,12 @@
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu">inst_pkg</span><span class="op">(</span><span class="st">"dplyr"</span>, source <span class="op">=</span> <span class="st">"CRAN"</span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> Package <span style="color: #0000BB;">dplyr</span> is already installed. Skipped.</span>
-<span class="r-in"><span><span class="fu">inst_pkg</span><span class="op">(</span><span class="st">"hadley/emo"</span>, source <span class="op">=</span> <span class="st">"GitHub"</span><span class="op">)</span></span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> Installing from GitHub: <span style="color: #0000BB;">hadley/emo</span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Using GitHub PAT from the git credential store.</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Downloading GitHub repo hadley/emo@HEAD</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> cli      (3.6.4 -&gt; 3.6.5) [CRAN]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> magrittr (2.0.3 -&gt; 2.0.4) [CRAN]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> generics (0.1.3 -&gt; 0.1.4) [CRAN]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> purrr    (1.0.4 -&gt; 1.1.0) [CRAN]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> stringr  (1.5.1 -&gt; 1.5.2) [CRAN]</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Installing 5 packages: cli, magrittr, generics, purrr, stringr</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Installing packages into 'C:/Users/84241/AppData/Local/Temp/RtmpCOacJC/temp_libpath9eac747f1bc8'</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> (as 'lib' is unspecified)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   There is a binary version available but the source version is later:</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>          binary source needs_compilation</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> magrittr  2.0.3  2.0.4              TRUE</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> package 'cli' successfully unpacked and MD5 sums checked</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> package 'generics' successfully unpacked and MD5 sums checked</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> package 'purrr' successfully unpacked and MD5 sums checked</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> package 'stringr' successfully unpacked and MD5 sums checked</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> The downloaded binary packages are in</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 	C:\Users\84241\AppData\Local\Temp\RtmpcVt1gC\downloaded_packages</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> installing the source package 'magrittr'</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">──</span> <span style="color: #00BBBB;">R CMD build</span> <span style="color: #00BBBB;">─────────────────────────────────────────────────────────────────</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> * checking for file 'C:\Users\84241\AppData\Local\Temp\RtmpcVt1gC\remotes3aa826843f47\hadley-emo-3f03b11/DESCRIPTION' ... OK</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> * preparing 'emo':</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> * checking DESCRIPTION meta-information ... OK</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> * checking for LF line-endings in source and make files and shell scripts</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> * checking for empty or unneeded directories</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> * building 'emo_0.0.0.9000.tar.gz'</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Installing package into 'C:/Users/84241/AppData/Local/Temp/RtmpCOacJC/temp_libpath9eac747f1bc8'</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> (as 'lib' is unspecified)</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> Installation complete!</span>
-<span class="r-in"><span><span class="fu">inst_pkg</span><span class="op">(</span><span class="st">"scRNAseq"</span>, source <span class="op">=</span> <span class="st">"Bioconductor"</span><span class="op">)</span></span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> Package <span style="color: #0000BB;">scRNAseq</span> is already installed. Skipped.</span>
-<span class="r-in"><span><span class="fu">inst_pkg</span><span class="op">(</span>source <span class="op">=</span> <span class="st">"local"</span>, path <span class="op">=</span> <span class="st">"mypackage.tar.gz"</span><span class="op">)</span></span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in match.arg(source, c("CRAN", "GitHub", "Bioconductor", "Local")):</span> 'arg' should be one of "CRAN", "GitHub", "Bioconductor", "Local"</span>
+<span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span> <span class="co"># \dontrun{</span></span></span>
+<span class="r-in"><span>  <span class="co"># These examples require network access</span></span></span>
+<span class="r-in"><span>  <span class="fu">inst_pkg</span><span class="op">(</span><span class="st">"hadley/emo"</span>, source <span class="op">=</span> <span class="st">"GitHub"</span><span class="op">)</span></span></span>
+<span class="r-in"><span>  <span class="fu">inst_pkg</span><span class="op">(</span><span class="st">"scRNAseq"</span>, source <span class="op">=</span> <span class="st">"Bioconductor"</span><span class="op">)</span></span></span>
+<span class="r-in"><span>  <span class="fu">inst_pkg</span><span class="op">(</span>source <span class="op">=</span> <span class="st">"local"</span>, path <span class="op">=</span> <span class="st">"mypackage.tar.gz"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">}</span> <span class="co"># }</span></span></span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
@@ -207,7 +171,7 @@
 
 <div class="pkgdown-footer-right">
   <div class="text-muted">
-<p><strong>evanverse v0.3.0</strong><br><small>Last updated: September 2024</small></p>
+<p><strong>evanverse v0.3.3</strong><br><small>Last updated: September 2025</small></p>
 </div><div class="footer-links">
 <p><a href="https://github.com/evanbio/evanverse" class="external-link text-muted me-3" aria-label="GitHub"> <i class="fab fa-github fa-lg"></i> </a> <a href="https://cran.r-project.org/package=evanverse" class="external-link text-muted me-3" aria-label="CRAN"> <i class="fas fa-download fa-lg"></i> </a> <a href="https://blog.evanzhou.org" class="external-link text-muted" aria-label="Blog"> <i class="fas fa-blog fa-lg"></i> </a></p>
 </div>

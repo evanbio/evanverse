@@ -59,7 +59,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">evanverse</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.3.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.3.3</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -82,12 +82,10 @@
 <li class="nav-item dropdown">
   <button class="nav-link dropdown-toggle" type="button" id="dropdown-guides" data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true"><span class="fa fas fa-file-alt"></span> Guides</button>
   <ul class="dropdown-menu" aria-labelledby="dropdown-guides"><li><a class="dropdown-item" href="../articles/get-started.html">🚀 Getting Started</a></li>
-    <li><a class="dropdown-item" href="../articles/comprehensive-guide.html">📚 Comprehensive Guide</a></li>
-    <li><hr class="dropdown-divider"></li>
+    <li><a class="dropdown-item" href="../articles/comprehensive-guide.html">📖 Comprehensive Guide</a></li>
     <li><a class="dropdown-item" href="../articles/package-management.html">📦 Package Management</a></li>
-    <li><a class="dropdown-item" href="../articles/color-palettes.html">🎨 Color Palettes</a></li>
     <li><a class="dropdown-item" href="../articles/data-processing.html">🔄 Data Processing</a></li>
-    <li><a class="dropdown-item" href="../articles/visualization-showcase.html">📊 Visualization Showcase</a></li>
+    <li><a class="dropdown-item" href="../articles/color-palettes.html">🎨 Color Palettes</a></li>
     <li><a class="dropdown-item" href="../articles/bioinformatics-workflows.html">🧬 Bioinformatics Workflows</a></li>
     <li><hr class="dropdown-divider"></li>
     <li><a class="dropdown-item" href="../articles/">📚 All Articles</a></li>
@@ -170,8 +168,20 @@ Default: c("#1b9e77", "#d95f02", "#7570b3")</p></dd>
 <dd><p>Numeric. Theme base font size. Default: 14.</p></dd>
 
 
-<dt id="arg-xlab-ylab-title-legend-pos">xlab, ylab, title, legend_pos<a class="anchor" aria-label="anchor" href="#arg-xlab-ylab-title-legend-pos"></a></dt>
-<dd><p>See above. (Omitted for brevity)</p></dd>
+<dt id="arg-xlab">xlab<a class="anchor" aria-label="anchor" href="#arg-xlab"></a></dt>
+<dd><p>Character. X-axis label. Default: NULL (uses variable name).</p></dd>
+
+
+<dt id="arg-ylab">ylab<a class="anchor" aria-label="anchor" href="#arg-ylab"></a></dt>
+<dd><p>Character. Y-axis label. Default: "Density".</p></dd>
+
+
+<dt id="arg-title">title<a class="anchor" aria-label="anchor" href="#arg-title"></a></dt>
+<dd><p>Character. Plot title. Default: NULL.</p></dd>
+
+
+<dt id="arg-legend-pos">legend_pos<a class="anchor" aria-label="anchor" href="#arg-legend-pos"></a></dt>
+<dd><p>Character. Legend position. One of "right", "left", "top", "bottom", "none". Default: "right".</p></dd>
 
 
 <dt id="arg-adjust">adjust<a class="anchor" aria-label="anchor" href="#arg-adjust"></a></dt>
@@ -186,8 +196,20 @@ Default: c("#1b9e77", "#d95f02", "#7570b3")</p></dd>
 <dd><p>Character. Mean line color. Default: "red".</p></dd>
 
 
-<dt id="arg-add-hist-">add_hist, <a class="anchor" aria-label="anchor" href="#arg-add-hist-"></a></dt>
-<dd><p>hist_bins, add_rug, theme See above. (Omitted for brevity)</p></dd>
+<dt id="arg-add-hist">add_hist<a class="anchor" aria-label="anchor" href="#arg-add-hist"></a></dt>
+<dd><p>Logical. Whether to add histogram layer. Default: FALSE.</p></dd>
+
+
+<dt id="arg-hist-bins">hist_bins<a class="anchor" aria-label="anchor" href="#arg-hist-bins"></a></dt>
+<dd><p>Integer. Number of histogram bins. Default: NULL (auto).</p></dd>
+
+
+<dt id="arg-add-rug">add_rug<a class="anchor" aria-label="anchor" href="#arg-add-rug"></a></dt>
+<dd><p>Logical. Whether to add rug marks at bottom. Default: FALSE.</p></dd>
+
+
+<dt id="arg-theme">theme<a class="anchor" aria-label="anchor" href="#arg-theme"></a></dt>
+<dd><p>Character. ggplot2 theme style. One of "minimal", "classic", "bw", "light", "dark". Default: "minimal".</p></dd>
 
 </dl></div>
     <div class="section level2">
@@ -209,7 +231,7 @@ Default: c("#1b9e77", "#d95f02", "#7570b3")</p></dd>
 
 <div class="pkgdown-footer-right">
   <div class="text-muted">
-<p><strong>evanverse v0.3.0</strong><br><small>Last updated: September 2024</small></p>
+<p><strong>evanverse v0.3.3</strong><br><small>Last updated: September 2025</small></p>
 </div><div class="footer-links">
 <p><a href="https://github.com/evanbio/evanverse" class="external-link text-muted me-3" aria-label="GitHub"> <i class="fab fa-github fa-lg"></i> </a> <a href="https://cran.r-project.org/package=evanverse" class="external-link text-muted me-3" aria-label="CRAN"> <i class="fas fa-download fa-lg"></i> </a> <a href="https://blog.evanzhou.org" class="external-link text-muted" aria-label="Blog"> <i class="fas fa-blog fa-lg"></i> </a></p>
 </div>

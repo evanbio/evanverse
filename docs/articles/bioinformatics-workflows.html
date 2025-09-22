@@ -87,7 +87,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">evanverse</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.3.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.3.3</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -114,12 +114,10 @@
   <button class="nav-link dropdown-toggle" type="button" id="dropdown-guides" data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true"><span class="fa fas fa-file-alt"></span> Guides</button>
   <ul class="dropdown-menu" aria-labelledby="dropdown-guides">
 <li><a class="dropdown-item" href="../articles/get-started.html">🚀 Getting Started</a></li>
-    <li><a class="dropdown-item" href="../articles/comprehensive-guide.html">📚 Comprehensive Guide</a></li>
-    <li><hr class="dropdown-divider"></li>
+    <li><a class="dropdown-item" href="../articles/comprehensive-guide.html">📖 Comprehensive Guide</a></li>
     <li><a class="dropdown-item" href="../articles/package-management.html">📦 Package Management</a></li>
-    <li><a class="dropdown-item" href="../articles/color-palettes.html">🎨 Color Palettes</a></li>
     <li><a class="dropdown-item" href="../articles/data-processing.html">🔄 Data Processing</a></li>
-    <li><a class="dropdown-item" href="../articles/visualization-showcase.html">📊 Visualization Showcase</a></li>
+    <li><a class="dropdown-item" href="../articles/color-palettes.html">🎨 Color Palettes</a></li>
     <li><a class="dropdown-item" href="../articles/bioinformatics-workflows.html">🧬 Bioinformatics Workflows</a></li>
     <li><hr class="dropdown-divider"></li>
     <li><a class="dropdown-item" href="../articles/">📚 All Articles</a></li>
@@ -156,6 +154,7 @@
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/evanbio/evanverse" class="external-link">evanverse</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org" class="external-link">dplyr</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org" class="external-link">ggplot2</a></span><span class="op">)</span></span>
+<span><span class="co">#&gt; Warning: package 'ggplot2' was built under R version 4.5.1</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyr.tidyverse.org" class="external-link">tidyr</a></span><span class="op">)</span></span></code></pre></div>
 <div class="section level2">
 <h2 id="bioinformatics-workflows-with-evanverse">🧬 Bioinformatics Workflows with evanverse<a class="anchor" aria-label="anchor" href="#bioinformatics-workflows-with-evanverse"></a>
@@ -443,7 +442,14 @@ collections used in pathway analysis.</p>
 <span>  fill <span class="op">=</span> <span class="fu"><a href="../reference/get_palette.html">get_palette</a></span><span class="op">(</span><span class="st">"vividset"</span>, type <span class="op">=</span> <span class="st">"qualitative"</span>, n <span class="op">=</span> <span class="fl">3</span><span class="op">)</span>,</span>
 <span>  title <span class="op">=</span> <span class="st">"Metabolic Pathway Gene Overlaps"</span></span>
 <span><span class="op">)</span></span>
-<span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> Loaded palette <span style="color: #0000BB;">"vividset"</span> (<span style="color: #0000BB;">"qualitative"</span>), <span style="color: #0000BB;">9</span> colors</span></span></code></pre></div>
+<span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> Loaded palette <span style="color: #0000BB;">"vividset"</span> (<span style="color: #0000BB;">"qualitative"</span>), <span style="color: #0000BB;">9</span> colors</span></span>
+<span><span class="co">#&gt; Warning: Using `size` aesthetic for lines was deprecated in ggplot2 3.4.0.</span></span>
+<span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> Please use `linewidth` instead.</span></span>
+<span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> The deprecated feature was likely used in the <span style="color: #0000BB;">ggvenn</span> package.</span></span>
+<span><span class="co">#&gt;   Please report the issue to the authors.</span></span>
+<span><span class="co">#&gt; <span style="color: #555555;">This warning is displayed once every 8 hours.</span></span></span>
+<span><span class="co">#&gt; <span style="color: #555555;">Call `lifecycle::last_lifecycle_warnings()` to see where this warning was</span></span></span>
+<span><span class="co">#&gt; <span style="color: #555555;">generated.</span></span></span></code></pre></div>
 <div class="figure">
 <img src="bioinformatics-workflows_files/figure-html/gene-set-overlap-1.png" alt="Gene set overlap analysis showing relationships between biological pathways" width="100%"><p class="caption">
 Gene set overlap analysis showing relationships between biological
@@ -705,11 +711,6 @@ treatment
 <span>    panel.grid <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html" class="external-link">element_blank</a></span><span class="op">(</span><span class="op">)</span>,</span>
 <span>    axis.text.x <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html" class="external-link">element_text</a></span><span class="op">(</span>angle <span class="op">=</span> <span class="fl">45</span>, hjust <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span>
 <span>  <span class="op">)</span></span>
-<span><span class="co">#&gt; Warning: Using `size` aesthetic for lines was deprecated in ggplot2 3.4.0.</span></span>
-<span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> Please use `linewidth` instead.</span></span>
-<span><span class="co">#&gt; <span style="color: #555555;">This warning is displayed once every 8 hours.</span></span></span>
-<span><span class="co">#&gt; <span style="color: #555555;">Call `lifecycle::last_lifecycle_warnings()` to see where this warning was</span></span></span>
-<span><span class="co">#&gt; <span style="color: #555555;">generated.</span></span></span>
 <span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> Loaded palette <span style="color: #0000BB;">"gradient_rd_bu"</span> (<span style="color: #0000BB;">"diverging"</span>), <span style="color: #0000BB;">11</span> colors</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">p3</span><span class="op">)</span></span></code></pre></div>
@@ -1220,8 +1221,8 @@ repositories ✅ <strong>Multi-omics integration</strong> capabilities ✅
 <h4 id="continue-learning">Continue Learning:<a class="anchor" aria-label="anchor" href="#continue-learning"></a>
 </h4>
 <ul>
-<li>📊 <a href="visualization-showcase.html">Visualization Showcase</a>
-- Advanced plotting techniques</li>
+<li>📊 <a href="package-management.html">Package Management</a> -
+Advanced installation techniques</li>
 <li>🎨 <a href="color-palettes.html">Color Palette Guide</a> -
 Bioinformatics color schemes</li>
 <li>📚 <a href="comprehensive-guide.html">Comprehensive Guide</a> -
@@ -1268,7 +1269,7 @@ evanverse!</em></p>
 
 <div class="pkgdown-footer-right">
   <div class="text-muted">
-<p><strong>evanverse v0.3.0</strong><br><small>Last updated: September 2024</small></p>
+<p><strong>evanverse v0.3.3</strong><br><small>Last updated: September 2025</small></p>
 </div>
 <div class="footer-links">
 <p><a href="https://github.com/evanbio/evanverse" class="external-link text-muted me-3" aria-label="GitHub"> <i class="fab fa-github fa-lg"></i> </a> <a href="https://cran.r-project.org/package=evanverse" class="external-link text-muted me-3" aria-label="CRAN"> <i class="fas fa-download fa-lg"></i> </a> <a href="https://blog.evanzhou.org" class="external-link text-muted" aria-label="Blog"> <i class="fas fa-blog fa-lg"></i> </a></p>
