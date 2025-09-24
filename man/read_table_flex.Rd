@@ -9,6 +9,7 @@ read_table_flex(
   sep = NULL,
   encoding = "UTF-8",
   header = TRUE,
+  df = TRUE,
   verbose = FALSE
 )
 }
@@ -21,10 +22,12 @@ read_table_flex(
 
 \item{header}{Logical. Whether the file contains a header row. Default: \code{TRUE}.}
 
+\item{df}{Logical. Return data.frame instead of data.table. Default: \code{TRUE}.}
+
 \item{verbose}{Logical. Show progress and details. Default: \code{FALSE}.}
 }
 \value{
-A \code{data.table::data.table} with the parsed data.
+A \code{data.frame} (default) or \code{data.table} depending on \code{df} parameter.
 }
 \description{
 Robust table reader with auto delimiter detection for \code{.csv}, \code{.tsv}, \code{.txt},
