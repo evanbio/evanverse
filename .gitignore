@@ -89,6 +89,7 @@ CLAUDE.md
 .claude/
 .serena/
 PRPs/
+submit/
 
 #-------------------------------------------------------
 # Package development
