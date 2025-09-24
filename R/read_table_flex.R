@@ -8,14 +8,16 @@
 #' @param sep Optional. Field delimiter. If `NULL`, auto-detected by file extension.
 #' @param encoding Character. File encoding accepted by fread: "unknown", "UTF-8", or "Latin-1".
 #' @param header Logical. Whether the file contains a header row. Default: `TRUE`.
+#' @param df Logical. Return data.frame instead of data.table. Default: `TRUE`.
 #' @param verbose Logical. Show progress and details. Default: `FALSE`.
 #'
-#' @return A `data.table::data.table` with the parsed data.
+#' @return A `data.frame` (default) or `data.table` depending on `df` parameter.
 #' @export
 read_table_flex <- function(file_path,
                             sep = NULL,
                             encoding = "UTF-8",
                             header = TRUE,
+                            df = TRUE,
                             verbose = FALSE) {
 
   # ===========================================================================
@@ -30,6 +32,9 @@ read_table_flex <- function(file_path,
   }
   if (!is.logical(header) || length(header) != 1L || is.na(header)) {
     cli::cli_abort("'header' must be TRUE or FALSE.")
+  }
+  if (!is.logical(df) || length(df) != 1L || is.na(df)) {
+    cli::cli_abort("'df' must be TRUE or FALSE.")
   }
   if (!is.logical(verbose) || length(verbose) != 1L || is.na(verbose)) {
     cli::cli_abort("'verbose' must be TRUE or FALSE.")
@@ -113,6 +118,7 @@ read_table_flex <- function(file_path,
       sep          = sep,
       header       = header,
       encoding     = encoding,
+      data.table   = !df,
       verbose      = verbose,
       showProgress = verbose
     )
@@ -120,6 +126,7 @@ read_table_flex <- function(file_path,
     if (verbose) {
       cli::cli_alert_success("File loaded successfully ({nrow(dt)} rows \\u00d7 {ncol(dt)} cols)")
     }
+
     dt
 
   }, error = function(e) {
