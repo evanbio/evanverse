@@ -1,122 +1,46 @@
 #' Download GEO Data Resources
 #'
-#' Downloads comprehensive GEO (Gene Expression Omnibus) data resources including
-#' GSEMatrix (expression data), supplemental files, and GPL (platform) annotation files.
-#' Provides robust error handling, retry mechanisms, and detailed logging capabilities.
+#' Downloads GEO (Gene Expression Omnibus) datasets including expression data,
+#' supplemental files, and platform annotations with error handling and logging.
 #'
-#' @param gse_id Character string. GEO Series accession ID (e.g., "GSE12345").
-#'   Must follow the standard GEO accession format.
-#' @param dest_dir Character string. Destination directory for downloaded files.
-#'   Defaults to "data/raw". Directory will be created if it doesn't exist.
-#' @param overwrite Logical. Whether to overwrite existing files. Defaults to FALSE.
-#'   Note: This parameter is currently not used in the implementation.
-#' @param log Logical. Whether to record detailed log information. Defaults to TRUE.
-#' @param log_file Character string or NULL. Path to log file. If NULL (default),
-#'   automatically generates a timestamped log file in "logs/geo/" directory.
-#' @param retries Numeric. Number of retry attempts on download failure.
-#'   Defaults to 2. Must be a non-negative integer.
-#' @param timeout Numeric. Timeout in seconds for each download attempt.
-#'   Defaults to 300 (5 minutes). Must be positive.
+#' @param gse_id Character. GEO Series accession ID (e.g., "GSE12345").
+#' @param dest_dir Character. Destination directory for downloaded files.
+#' @param overwrite Logical. Whether to overwrite existing files (default: FALSE).
+#' @param log Logical. Whether to create log file (default: TRUE).
+#' @param log_file Character or NULL. Log file path (auto-generated if NULL).
+#' @param retries Numeric. Number of retry attempts (default: 2).
+#' @param timeout Numeric. Timeout in seconds (default: 300).
 #'
-#' @return A list with four components:
+#' @return A list with components:
 #' \describe{
-#'   \item{gse_object}{ExpressionSet object from GEOquery containing expression data,
-#'     sample annotations, and feature information.}
-#'   \item{supplemental_files}{Character vector of file paths to downloaded
-#'     supplemental files (e.g., raw data files, processed data).}
-#'   \item{platform_info}{List containing platform information with elements:
-#'     \describe{
-#'       \item{platform_id}{Character string. GPL accession ID of the platform used.}
-#'       \item{gpl_files}{Character vector of file paths to downloaded GPL annotation files.}
-#'     }}
-#'   \item{meta}{List containing comprehensive metadata about the download process:
-#'     \describe{
-#'       \item{gse_id}{GEO accession ID}
-#'       \item{dest_dir}{Destination directory path}
-#'       \item{downloaded_at}{POSIXct timestamp when download started}
-#'       \item{completed_at}{POSIXct timestamp when download completed}
-#'       \item{download_duration}{Numeric. Total download time in seconds}
-#'       \item{retries}{Number of retry attempts configured}
-#'       \item{timeout}{Timeout setting in seconds}
-#'       \item{status}{Character. Download status ("success")}
-#'       \item{gse_samples}{Integer. Number of samples in GSEMatrix}
-#'       \item{gse_features}{Integer. Number of features/genes in GSEMatrix}
-#'       \item{supplemental_files_count}{Integer. Number of supplemental files downloaded}
-#'       \item{platform_id}{Character. Platform annotation ID}
-#'       \item{gpl_files_count}{Integer. Number of GPL files downloaded}
-#'       \item{total_files_downloaded}{Integer. Total number of files downloaded}
-#'     }}
+#'   \item{gse_object}{ExpressionSet object with expression data and annotations}
+#'   \item{supplemental_files}{Paths to downloaded supplemental files}
+#'   \item{platform_info}{Platform information (platform_id, gpl_files)}
+#'   \item{meta}{Download metadata (timing, file counts, etc.)}
 #' }
 #'
 #' @details
-#' This function provides a comprehensive solution for downloading GEO data resources:
-#'
-#' \subsection{Data Types Downloaded}{
-#'   \enumerate{
-#'     \item \strong{GSEMatrix}: Expression data in ExpressionSet format containing
-#'       expression values, sample metadata, and feature annotations
-#'     \item \strong{Supplemental Files}: Additional data files associated with the
-#'       GEO series (raw data, processed data, etc.)
-#'     \item \strong{GPL Files}: Platform annotation files containing probe/gene mappings
-#'       and annotation information
-#'   }
-#' }
-#'
-#' \subsection{Robustness Features}{
-#'   \enumerate{
-#'     \item \strong{Retry Mechanism}: Automatic retry with exponential backoff
-#'       for failed downloads
-#'     \item \strong{Timeout Control}: Configurable timeout for each download attempt
-#'     \item \strong{Error Handling}: Comprehensive error handling with informative messages
-#'     \item \strong{Logging}: Detailed logging with timestamps and severity levels
-#'     \item \strong{Parameter Validation}: Thorough validation of all input parameters
-#'   }
-#' }
-#'
-#' \subsection{Dependencies}{
-#' Required R packages (automatically checked at runtime):
-#' \enumerate{
-#'   \item \strong{GEOquery}: For accessing GEO data (install with \code{BiocManager::install('GEOquery')})
-#'   \item \strong{Biobase}: For handling ExpressionSet objects (install with \code{BiocManager::install('Biobase')})
-#'   \item \strong{withr}: For timeout management (install with \code{install.packages('withr')})
-#'   \item \strong{cli}: For user-friendly console output (install with \code{install.packages('cli')})
-#' }
-#' }
-#'
-#' @section File Organization:
-#' Downloaded files are organized as follows:
-#' \preformatted{
-#' dest_dir/
-#' \u251c\u2500\u2500 GSE<id>_series_matrix.txt.gz    # GSEMatrix file
-#' \u251c\u2500\u2500 GPL<id>.annot.gz               # Platform annotation (if available)
-#' \u251c\u2500\u2500 <supplemental_files>           # Additional data files
-#' \u2514\u2500\u2500 logs/geo/                      # Log files (if logging enabled)
-#'     \u2514\u2500\u2500 GSE<id>_<date>.log
-#' }
+#' Downloads GSEMatrix files, supplemental files, and GPL annotations.
+#' Includes retry mechanism, timeout control, and logging.
+#' Requires: GEOquery, Biobase, withr, cli.
 #'
 #' @examples
-#' \dontrun{
-#' # Basic usage - download with default settings
-#' result <- download_geo_data("GSE12345")
+#' # Basic usage (commented to avoid network operations):
+#' # result <- download_geo_data("GSE12345", dest_dir = tempdir())
 #'
-#' # Advanced usage with custom settings
-#' result <- download_geo_data(
-#'   gse_id = "GSE7305",
-#'   dest_dir = "data/geo_downloads",
-#'   log = TRUE,
-#'   retries = 3,
-#'   timeout = 600
-#' )
+#' # Advanced usage with custom settings:
+#' # result <- download_geo_data(
+#' #   gse_id = "GSE7305",
+#' #   dest_dir = tempdir(),
+#' #   log = TRUE,
+#' #   retries = 3,
+#' #   timeout = 600
+#' # )
 #'
-#' # Access downloaded data
-#' expr_data <- Biobase::exprs(result$gse_object)
-#' sample_info <- Biobase::pData(result$gse_object)
-#' feature_info <- Biobase::fData(result$gse_object)
-#'
-#' # Check download metadata
-#' cat("Download took:", result$meta$download_duration, "seconds\n")
-#' cat("Downloaded", result$meta$total_files_downloaded, "files\n")
-#' }
+#' # Access downloaded data:
+#' # expr_data <- Biobase::exprs(result$gse_object)
+#' # sample_info <- Biobase::pData(result$gse_object)
+#' # feature_info <- Biobase::fData(result$gse_object)
 #'
 #' @references
 #' \url{https://www.ncbi.nlm.nih.gov/geo/}
@@ -129,7 +53,7 @@
 #'
 #' @export
 download_geo_data <- function(gse_id,
-                               dest_dir = "data/raw",
+                               dest_dir,
                                overwrite = FALSE,
                                log = TRUE,
                                log_file = NULL,
@@ -216,7 +140,7 @@ download_geo_data <- function(gse_id,
     if (log) {
       timestamp <- format(Sys.time(), "[%Y-%m-%d %H:%M:%S]")
       log_entry <- paste(timestamp, "[", level, "]", message_text)
-      cat(log_entry, "\n", file = log_file, append = TRUE)
+      writeLines(log_entry, con = log_file)
     }
   }
 

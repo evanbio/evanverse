@@ -5,16 +5,15 @@
 #' @param name Character. Palette name (without '.json' suffix).
 #' @param type Character. Optional. Preferred type ("sequential", "diverging", or "qualitative").
 #' @param color_dir Root folder where palettes are stored (default: "inst/extdata/palettes").
-#' @param log Logical. Whether to log palette removal in "logs/palettes/remove_palette.log".
+#' @param log Logical. Whether to log palette removal to a temporary log file.
 #'
 #' @return Invisibly TRUE if removed successfully, FALSE otherwise.
 #' @export
 #'
 #' @examples
-#' \dontrun{
-#' remove_palette("blues")
-#' remove_palette("vividset", type = "qualitative")
-#' }
+#' # Basic usage (commented to avoid file operations):
+#' # remove_palette("blues")
+#' # remove_palette("vividset", type = "qualitative")
 remove_palette <- function(name,
                             type = NULL,
                             color_dir = "inst/extdata/palettes",
@@ -78,7 +77,7 @@ remove_palette <- function(name,
 
         # Log the removal if requested
         if (log) {
-          log_path <- "logs/palettes/remove_palette.log"
+          log_path <- file.path(tempdir(), "logs", "palettes", "remove_palette.log")
           
           # Ensure log directory exists
           log_dir <- dirname(log_path)
@@ -93,7 +92,9 @@ remove_palette <- function(name,
           
           # Write to log file
           tryCatch({
-            cat(entry, "\n", file = log_path, append = TRUE)
+            con <- file(log_path, open = "a")
+            on.exit(close(con), add = TRUE)
+            writeLines(entry, con = con)
           }, error = function(e) {
             cli::cli_alert_warning("Failed to write to log file: {e$message}")
           })

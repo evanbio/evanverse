@@ -9,11 +9,10 @@
 #' @return A tibble with columns: term, description, and gene.
 #'
 #' @examples
-#' \dontrun{
-#' gmt_file <- system.file("extdata", "h.all.v2024.1.Hs.symbols.gmt", package = "evanverse")
-#' result <- gmt2df(gmt_file)
-#' head(result)
-#' }
+#' # Basic usage (commented to avoid file I/O):
+#' # gmt_file <- "path/to/geneset.gmt"
+#' # result <- gmt2df(gmt_file)
+#' # head(result, 10)
 #'
 #' @export
 gmt2df <- function(file, verbose = TRUE) {

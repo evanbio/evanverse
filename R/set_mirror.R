@@ -9,11 +9,10 @@
 #' @export
 #'
 #' @examples
-#' \dontrun{
-#' set_mirror()  # Use default: all repos with tuna mirror
-#' set_mirror("cran", "westlake")
-#' set_mirror("bioc", "ustc")
-#' }
+#' # Basic usage (commented to avoid configuration changes):
+#' # set_mirror()  # Use default: all repos with tuna mirror
+#' # set_mirror("cran", "westlake")
+#' # set_mirror("bioc", "ustc")
 set_mirror <- function(repo = c("all", "cran", "bioc"),
                        mirror = "tuna") {
   

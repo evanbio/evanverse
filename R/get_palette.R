@@ -11,12 +11,10 @@
 #' @return Character vector of HEX color codes.
 #'
 #' @examples
-#' \dontrun{
 #' get_palette("vividset", type = "qualitative")
 #' get_palette("softtrio", type = "qualitative", n = 2)
-#' get_palette("plasma", type = "sequential", n = 5)
-#' get_palette("RdYlBu", type = "diverging")
-#' }
+#' get_palette("blues", type = "sequential", n = 3)
+#' get_palette("contrast_duo", type = "diverging")
 #'
 #' @export
 get_palette <- function(name,

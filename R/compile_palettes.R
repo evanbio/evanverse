@@ -54,7 +54,7 @@ compile_palettes <- function(palettes_dir = "inst/extdata/palettes",
   )
 
   # Prepare logging
-  log_path <- "logs/palettes/compile_palettes.log"
+  log_path <- file.path(tempdir(), "logs", "palettes", "compile_palettes.log")
   if (log) dir.create(dirname(log_path), recursive = TRUE, showWarnings = FALSE)
   log_lines <- c(sprintf("\n=== [%s] Compilation started ===", Sys.time()))
 
@@ -148,7 +148,7 @@ compile_palettes <- function(palettes_dir = "inst/extdata/palettes",
 
   # Write log file
   if (log) {
-    cat(paste(log_lines, collapse = "\n"), file = log_path, append = TRUE, sep = "\n")
+    writeLines(log_lines, con = log_path)
     cli::cli_alert_info("Log written to: {log_path}")
   }
 

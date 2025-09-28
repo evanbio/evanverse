@@ -15,10 +15,9 @@
 #' @export
 #'
 #' @examples
-#' \dontrun{
-#' preview_palette("viridis", type = "sequential", plot_type = "bar")
-#' preview_palette("RdYlBu", type = "diverging", plot_type = "pie")
-#' }
+#' # Basic usage (commented to avoid graphics operations):
+#' # preview_palette("viridis", type = "sequential", plot_type = "bar")
+#' # preview_palette("RdYlBu", type = "diverging", plot_type = "pie")
 preview_palette <- function(name,
                             type = c("sequential", "diverging", "qualitative"),
                             n = NULL,

@@ -7,16 +7,15 @@
 #' @param type Character. One of "sequential", "diverging", or "qualitative".
 #' @param colors Character vector of HEX color values (e.g., "#E64B35" or "#E64B35B2").
 #' @param color_dir Root folder to store palettes (default: "inst/extdata/palettes").
-#' @param log Logical. Whether to log palette creation in "logs/palettes/create_palette.log".
+#' @param log Logical. Whether to log palette creation to a temporary log file.
 #'
 #' @return (Invisibly) A list with `path` and `info`.
 #' @export
 #'
 #' @examples
-#' \dontrun{
-#' create_palette("blues", "sequential", c("#deebf7", "#9ecae1", "#3182bd"))
-#' create_palette("vividset", "qualitative", c("#E64B35", "#4DBBD5", "#00A087"))
-#' }
+#' # Basic usage (commented to avoid file operations):
+#' # create_palette("blues", "sequential", c("#deebf7", "#9ecae1", "#3182bd"))
+#' # create_palette("vividset", "qualitative", c("#E64B35", "#4DBBD5", "#00A087"))
 create_palette <- function(name,
                            type = c("sequential", "diverging", "qualitative"),
                            colors,
@@ -87,7 +86,7 @@ create_palette <- function(name,
   # ===========================================================================
 
   if (log) {
-    log_path <- "logs/palettes/create_palette.log"
+    log_path <- file.path(tempdir(), "logs", "palettes", "create_palette.log")
     dir.create(dirname(log_path), recursive = TRUE, showWarnings = FALSE)
 
     entry <- paste(
@@ -97,7 +96,9 @@ create_palette <- function(name,
     )
 
     tryCatch({
-      cat(entry, "\n", file = log_path, append = TRUE)
+      con <- file(log_path, open = "a")
+      on.exit(close(con), add = TRUE)
+      writeLines(entry, con = con)
     }, error = function(e) {
       cli::cli_alert_danger("Failed to write log: {e$message}")
     })

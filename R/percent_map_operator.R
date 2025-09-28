@@ -15,15 +15,15 @@
 #' @examples
 #' # Basic matching (case-insensitive)
 #' c("tp53", "brca1", "egfr") %map% c("TP53", "EGFR", "MYC")
-#' # → Named vector: TP53 = "tp53", EGFR = "egfr"
+#' # returns: Named vector: TP53 = "tp53", EGFR = "egfr"
 #'
 #' # Values not in table are dropped
 #' c("akt1", "tp53") %map% c("TP53", "EGFR")
-#' # → TP53 = "tp53"
+#' # returns: TP53 = "tp53"
 #'
-#' # All unmatched values → empty result
+#' # All unmatched values returns: empty result
 #' c("none1", "none2") %map% c("TP53", "EGFR")
-#' # → character(0)
+#' # returns: character(0)
 `%map%` <- function(x, table) {
 
   # ===========================================================================

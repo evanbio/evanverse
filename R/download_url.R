@@ -30,62 +30,39 @@
 #' This function provides a comprehensive solution for downloading files with:
 #'
 #' \subsection{Supported Protocols}{
-#'   \enumerate{
-#'     \item \strong{HTTP/HTTPS}: Standard web downloads
-#'     \item \strong{FTP}: File Transfer Protocol
-#'     \item \strong{SFTP}: Secure File Transfer Protocol
-#'   }
+#' Supports HTTP/HTTPS, FTP, and SFTP protocols.
 #' }
 #'
-#' \subsection{Advanced Features}{
-#'   \enumerate{
-#'     \item \strong{Retry Mechanism}: Automatic retry with exponential backoff
-#'     \item \strong{Resume Support}: Continue interrupted downloads
-#'     \item \strong{Bandwidth Control}: Limit download speed
-#'     \item \strong{Auto-Extraction}: Automatic decompression of archives
-#'     \item \strong{Progress Tracking}: Real-time download progress
-#'     \item \strong{Custom Headers}: Support for authentication and custom headers
-#'   }
+#' \subsection{Features}{
+#' Includes retry mechanism, resume support, bandwidth control, auto-extraction, progress tracking, and custom headers.
 #' }
 #'
 #' \subsection{Compression Support}{
-#'   \enumerate{
-#'     \item \strong{.zip}: Extract to directory
-#'     \item \strong{.gz}: Decompress single file
-#'     \item \strong{.tar.gz}: Extract archive contents
-#'   }
+#' Supports .zip, .gz, and .tar.gz formats.
 #' }
 #'
 #' @section Dependencies:
-#' Required R packages (automatically checked at runtime):
-#' \enumerate{
-#'   \item \strong{curl}: For HTTP/FTP/SFTP downloads (install with \code{install.packages('curl')})
-#'   \item \strong{cli}: For user-friendly console output (install with \code{install.packages('cli')})
-#'   \item \strong{R.utils}: For .gz file handling (install with \code{install.packages('R.utils')})
-#' }
+#' Required packages: curl, cli, R.utils (automatically checked at runtime).
 #'
 #' @examples
-#' \dontrun{
-#' # Basic usage
-#' download_url("https://example.com/data.csv")
+#' # Basic usage (commented to avoid network operations):
+#' # download_url("https://example.com/data.csv")
 #'
-#' # Advanced usage with custom settings
-#' download_url(
-#'   url = "https://example.com/large-dataset.zip",
-#'   dest = "data/my-dataset.zip",
-#'   unzip = TRUE,
-#'   resume = TRUE,
-#'   speed_limit = 1000000,  # 1MB/s limit
-#'   retries = 5,
-#'   timeout = 1800  # 30 minutes
-#' )
+#' # Advanced usage with custom settings:
+#' # download_url(
+#' #   url = "https://example.com/dataset.zip",
+#' #   dest = file.path(tempdir(), "dataset.zip"),
+#' #   unzip = TRUE,
+#' #   resume = TRUE,
+#' #   speed_limit = 1000000,
+#' #   timeout = 1800
+#' # )
 #'
-#' # With authentication
-#' download_url(
-#'   url = "https://api.example.com/private/data.json",
-#'   headers = list(Authorization = "Bearer your-token-here")
-#' )
-#' }
+#' # With authentication:
+#' # download_url(
+#' #   url = "https://api.example.com/data.json",
+#' #   headers = list(Authorization = "Bearer token")
+#' # )
 #'
 #' @export
 download_url <- function(url,

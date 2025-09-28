@@ -11,13 +11,11 @@
 #' @export
 #'
 #' @examples
-#' inst_pkg("dplyr", source = "CRAN")
-#' \dontrun{
-#'   # These examples require network access
-#'   inst_pkg("hadley/emo", source = "GitHub")
-#'   inst_pkg("scRNAseq", source = "Bioconductor")
-#'   inst_pkg(source = "local", path = "mypackage.tar.gz")
-#' }
+#' # Basic usage (commented to avoid network operations):
+#' # inst_pkg("dplyr", source = "CRAN")
+#' # inst_pkg("hadley/emo", source = "GitHub")
+#' # inst_pkg("scRNAseq", source = "Bioconductor")
+#' # inst_pkg(source = "local", path = "mypackage.tar.gz")
 inst_pkg <- function(pkg = NULL,
                      source = c("CRAN", "GitHub", "Bioconductor", "Local"),
                      path = NULL, ...) {

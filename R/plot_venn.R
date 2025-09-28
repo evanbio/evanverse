@@ -1,4 +1,4 @@
-#' Draw Venn Diagrams (2–4 sets, classic or gradient style)
+#' Draw Venn Diagrams (2-4 sets, classic or gradient style)
 #'
 #' A flexible and unified Venn diagram plotting function supporting both `ggvenn`
 #' and `ggVennDiagram`. Automatically handles naming, de-duplication, and visualization.

@@ -12,9 +12,8 @@
 #' @export
 #'
 #' @examples
-#' \dontrun{
-#' pkg_version(c("ggplot2", "limma", "MRPRESSO", "nonexistentpackage123"))
-#' }
+#' # Basic usage (commented to avoid network operations):
+#' # pkg_version(c("ggplot2", "limma", "MRPRESSO", "nonexistentpackage123"))
 pkg_version <- function(pkg, preview = TRUE) {
   # Parameter validation
   if (!is.character(pkg) || length(pkg) == 0) {
@@ -35,14 +34,27 @@ pkg_version <- function(pkg, preview = TRUE) {
   }
 
   # Initialize installed package info
-  cli::cli_h1("Fetching installed R packages...")
-  installed <- tryCatch(
-    utils::installed.packages(),
-    error = function(e) {
-      cli::cli_abort("Failed to fetch installed packages: {e$message}")
+  cli::cli_h1("Checking installed packages...")
+  # Use find.package for specific packages instead of installed.packages()
+  installed_list <- list()
+  for (p in pkg) {
+    pkg_path <- tryCatch(find.package(p, quiet = TRUE), error = function(e) NULL)
+    if (!is.null(pkg_path) && length(pkg_path) > 0) {
+      desc_path <- file.path(pkg_path, "DESCRIPTION")
+      if (file.exists(desc_path)) {
+        desc <- tryCatch(read.dcf(desc_path), error = function(e) NULL)
+        if (!is.null(desc) && "Version" %in% colnames(desc)) {
+          installed_list[[tolower(p)]] <- list(
+            Version = desc[, "Version"],
+            LibPath = dirname(pkg_path),
+            Package = p
+          )
+        }
+      }
     }
-  )
-  installed_names_lower <- tolower(rownames(installed))
+  }
+
+  installed_names_lower <- names(installed_list)
 
   # Get CRAN package versions
   cli::cli_h1("Fetching CRAN package database...")
@@ -87,8 +99,7 @@ pkg_version <- function(pkg, preview = TRUE) {
 
     # Get installed version
     if (p_lower %in% installed_names_lower) {
-      idx <- match(p_lower, installed_names_lower)
-      result$version[i] <- installed[idx, "Version"]
+      result$version[i] <- installed_list[[p_lower]]$Version
     }
 
     # Check CRAN
@@ -109,9 +120,9 @@ pkg_version <- function(pkg, preview = TRUE) {
 
     # Check GitHub (only for installed packages)
     if (p_lower %in% installed_names_lower) {
-      idx <- match(p_lower, installed_names_lower)
-      desc_path <- file.path(installed[idx, "LibPath"],
-                             installed[idx, "Package"],
+      pkg_info <- installed_list[[p_lower]]
+      desc_path <- file.path(pkg_info$LibPath,
+                             pkg_info$Package,
                              "DESCRIPTION")
 
       desc <- tryCatch(
