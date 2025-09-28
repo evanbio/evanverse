@@ -7,8 +7,9 @@
 file_tree(
   path = ".",
   max_depth = 2,
+  verbose = TRUE,
   log = FALSE,
-  log_path = "logs/tree",
+  log_path = NULL,
   file_name = NULL,
   append = FALSE
 )
@@ -18,9 +19,11 @@ file_tree(
 
 \item{max_depth}{Integer. Maximum depth of recursion into subdirectories. Default is 2.}
 
+\item{verbose}{Logical. Whether to print the tree to console. Default is TRUE.}
+
 \item{log}{Logical. Whether to save the tree output as a log file. Default is FALSE.}
 
-\item{log_path}{Character. Directory path to save the log file if log = TRUE. Default is "logs/tree".}
+\item{log_path}{Character. Directory path to save the log file if log = TRUE. Default is tempdir().}
 
 \item{file_name}{Character. Custom file name for the log file. If NULL, a name like "file_tree_YYYYMMDD_HHMMSS.log" will be used.}
 
@@ -30,13 +33,19 @@ file_tree(
 Invisibly returns a character vector containing each line of the file tree.
 }
 \description{
-Print the directory structure of a given path in a tree-like format.
+Print the directory structure of a given path in a tree-like format using
+ASCII characters for maximum compatibility across different systems.
 Optionally, save the result to a log file for record keeping or debugging.
 }
 \examples{
-file_tree()
-\dontrun{
-file_tree("data", max_depth = 3, log = TRUE)
+# Basic usage:
+# file_tree()
+# file_tree("my_directory", max_depth = 3)
+
+\donttest{
+# Example with temporary directory
+temp_dir <- tempdir()
+file_tree(temp_dir, max_depth = 2, log = TRUE)
 }
 
 }

@@ -22,9 +22,9 @@ Performs case-insensitive matching, like \code{\link[base:match]{base::match()}}
 \examples{
 # Basic matching
 c("tp53", "BRCA1", "egfr") \%match\% c("TP53", "EGFR", "MYC")
-# → 1 NA 2
+# returns: 1 NA 2
 
-# No matches → all NA
+# No matches returns: all NA
 c("aaa", "bbb") \%match\% c("xxx", "yyy")
 
 # Empty input
@@ -32,5 +32,5 @@ character(0) \%match\% c("a", "b")
 
 # Order sensitivity (like match): first match is returned
 c("x") \%match\% c("X", "x", "x")
-# → 1
+# returns: 1
 }

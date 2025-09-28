@@ -22,7 +22,7 @@ Useful for benchmarking or logging time-consuming tasks.
 Requires the \code{tictoc} package (CLI messages are emitted via \code{cli}).
 }
 \examples{
-slow_fn <- function(n) { Sys.sleep(0.2); n^2 }
+slow_fn <- function(n) { Sys.sleep(0.01); n^2 }
 timed_fn <- with_timer(slow_fn, name = "Square Task")
 timed_fn(5)
 }

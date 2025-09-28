@@ -18,7 +18,7 @@ remove_palette(
 
 \item{color_dir}{Root folder where palettes are stored (default: "inst/extdata/palettes").}
 
-\item{log}{Logical. Whether to log palette removal in "logs/palettes/remove_palette.log".}
+\item{log}{Logical. Whether to log palette removal to a temporary log file.}
 }
 \value{
 Invisibly TRUE if removed successfully, FALSE otherwise.
@@ -27,8 +27,7 @@ Invisibly TRUE if removed successfully, FALSE otherwise.
 Remove a palette file by name, trying across types if necessary.
 }
 \examples{
-\dontrun{
-remove_palette("blues")
-remove_palette("vividset", type = "qualitative")
-}
+# Basic usage (commented to avoid file operations):
+# remove_palette("blues")
+# remove_palette("vividset", type = "qualitative")
 }

@@ -37,8 +37,7 @@ Preview the appearance of a palette from \code{data/palettes.rds} using various 
 This function provides multiple visualization options to help users evaluate color palettes.
 }
 \examples{
-\dontrun{
-preview_palette("viridis", type = "sequential", plot_type = "bar")
-preview_palette("RdYlBu", type = "diverging", plot_type = "pie")
-}
+# Basic usage (commented to avoid graphics operations):
+# preview_palette("viridis", type = "sequential", plot_type = "bar")
+# preview_palette("RdYlBu", type = "diverging", plot_type = "pie")
 }

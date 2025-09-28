@@ -21,7 +21,6 @@ R packages across CRAN, Bioconductor, and GitHub.
 It supports case-insensitive matching and smart console previews.
 }
 \examples{
-\dontrun{
-pkg_version(c("ggplot2", "limma", "MRPRESSO", "nonexistentpackage123"))
-}
+# Basic usage (commented to avoid network operations):
+# pkg_version(c("ggplot2", "limma", "MRPRESSO", "nonexistentpackage123"))
 }

@@ -2,7 +2,7 @@
 % Please edit documentation in R/plot_venn.R
 \name{plot_venn}
 \alias{plot_venn}
-\title{Draw Venn Diagrams (2–4 sets, classic or gradient style)}
+\title{Draw Venn Diagrams (2-4 sets, classic or gradient style)}
 \usage{
 plot_venn(
   set1,

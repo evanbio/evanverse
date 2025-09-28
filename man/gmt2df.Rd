@@ -19,10 +19,9 @@ Reads a .gmt gene set file and returns a long-format data frame with
 one row per gene, including the gene set name and optional description.
 }
 \examples{
-\dontrun{
-gmt_file <- system.file("extdata", "h.all.v2024.1.Hs.symbols.gmt", package = "evanverse")
-result <- gmt2df(gmt_file)
-head(result)
-}
+# Basic usage (commented to avoid file I/O):
+# gmt_file <- "path/to/geneset.gmt"
+# result <- gmt2df(gmt_file)
+# head(result, 10)
 
 }

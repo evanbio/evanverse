@@ -28,11 +28,9 @@ Load a named palette from data/palettes.rds, returning a vector of HEX colors.
 Automatically checks for type mismatch and provides smart suggestions.
 }
 \examples{
-\dontrun{
 get_palette("vividset", type = "qualitative")
 get_palette("softtrio", type = "qualitative", n = 2)
-get_palette("plasma", type = "sequential", n = 5)
-get_palette("RdYlBu", type = "diverging")
-}
+get_palette("blues", type = "sequential", n = 3)
+get_palette("contrast_duo", type = "diverging")
 
 }

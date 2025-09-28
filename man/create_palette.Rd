@@ -21,7 +21,7 @@ create_palette(
 
 \item{color_dir}{Root folder to store palettes (default: "inst/extdata/palettes").}
 
-\item{log}{Logical. Whether to log palette creation in "logs/palettes/create_palette.log".}
+\item{log}{Logical. Whether to log palette creation to a temporary log file.}
 }
 \value{
 (Invisibly) A list with \code{path} and \code{info}.
@@ -31,8 +31,7 @@ Save a named color palette (sequential, diverging, or qualitative) to a JSON fil
 Used for palette sharing, reuse, and future compilation.
 }
 \examples{
-\dontrun{
-create_palette("blues", "sequential", c("#deebf7", "#9ecae1", "#3182bd"))
-create_palette("vividset", "qualitative", c("#E64B35", "#4DBBD5", "#00A087"))
-}
+# Basic usage (commented to avoid file operations):
+# create_palette("blues", "sequential", c("#deebf7", "#9ecae1", "#3182bd"))
+# create_palette("vividset", "qualitative", c("#E64B35", "#4DBBD5", "#00A087"))
 }
