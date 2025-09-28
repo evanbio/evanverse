@@ -88,6 +88,9 @@ print(blues_all)
 ### Preview Individual Palettes
 
 ```{r palette-preview, fig.cap="Preview of different palette types with color swatches"}
+# Save current par settings
+oldpar <- par(no.readonly = TRUE)
+
 # Preview different palette types
 par(mfrow = c(2, 2), mar = c(3, 1, 2, 1))
 
@@ -107,7 +110,8 @@ title("Sequential: Warm Blush", cex.main = 1.2, col.main = "#0D47A1")
 preview_palette("gradient_rd_bu", type = "diverging")
 title("Diverging: Red-Blue Gradient", cex.main = 1.2, col.main = "#0D47A1")
 
-par(mfrow = c(1, 1))
+# Restore previous par settings
+par(oldpar)
 ```
 
 ## 🛠️ Creating Custom Palettes

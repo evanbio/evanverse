@@ -239,7 +239,7 @@ file_tree(".")
 ```{r timing-demo}
 # Time execution of code
 result <- with_timer(function() {
-  Sys.sleep(0.1)  # Simulate some work
+  Sys.sleep(0.01)  # Quick simulation
   sum(1:1000)
 }, name = "Sum calculation")
 
