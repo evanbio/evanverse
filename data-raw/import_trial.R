@@ -1,10 +1,10 @@
-# data‑raw/import‑trial.R
+# data-raw/import-trial.R
 
-# 1. 加载 gtsummary 包并取出示例数据
+# 1. Load gtsummary package and extract example data
 library(gtsummary)
 data(trial)
 
-# 2. 保存 trial 到 evanverse 包的 data/ 目录
-#    overwrite = TRUE 如果以后想更新也方便
+# 2. Save trial to evanverse package data/ directory
+#    overwrite = TRUE for future updates
 usethis::use_data(trial, overwrite = TRUE)
 

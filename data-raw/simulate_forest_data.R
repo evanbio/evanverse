@@ -12,7 +12,7 @@ library(usethis)
 # ---- Create simulated data ----
 df_forest_test <- tibble(
   variable = c(
-    "Age (≥60)", "Sex (Male)", "BMI (High)",
+    "Age (>=60)", "Sex (Male)", "BMI (High)",
     "Treatment A", "Treatment B", "Smoking",
     "Comorbidity", "Hypertension", "Diabetes",
     "CRP (Elevated)", "LDL-C (High)", "Physical Activity (Low)"
