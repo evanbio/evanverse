@@ -70,7 +70,7 @@ test_that("create_palette() logs correctly when enabled", {
   on.exit(setwd(old_wd))
   setwd(tmp_dir)
 
-  log_file <- file.path("logs/palettes/create_palette.log")
+  log_file <- file.path(tempdir(), "logs", "palettes", "create_palette.log")
 
   # Ensure clean start
   if (file.exists(log_file)) file.remove(log_file)

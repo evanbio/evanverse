@@ -121,8 +121,8 @@ test_that("file_tree() overwrites when append = FALSE", {
   dir.create(temp_dir)
   file.create(file.path(temp_dir, "file1.txt"))
   
-  # 关键修改：将日志目录放在外部
-  log_dir <- tempfile()  # 不要放在 temp_dir 内部
+  # Important: place log directory outside temp_dir
+  log_dir <- tempfile()  # do not place inside temp_dir
   dir.create(log_dir)
   log_file <- file.path(log_dir, "overwrite_test.log")
   
@@ -135,7 +135,7 @@ test_that("file_tree() overwrites when append = FALSE", {
   expect_equal(length(lines_first), length(lines_second))
   
   unlink(temp_dir, recursive = TRUE)
-  unlink(log_dir, recursive = TRUE)  # 记得清理日志目录
+  unlink(log_dir, recursive = TRUE)  # remember to clean up log directory
 })
 
 test_that("file_tree() appends when append = TRUE", {

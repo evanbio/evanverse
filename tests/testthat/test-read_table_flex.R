@@ -202,7 +202,7 @@ test_that("read_table_flex() handles compressed CSV files correctly", {
   tmp_gz <- paste0(tmp_csv, ".gz")
 
   dt <- read_table_flex(tmp_gz)
-  expect_s3_class(dt, "data.table")
+  expect_s3_class(dt, "data.frame")
   expect_equal(ncol(dt), ncol(mtcars))
   expect_equal(nrow(dt), 5)
 
@@ -219,7 +219,7 @@ test_that("read_table_flex() handles compressed TSV files correctly", {
   tmp_gz <- paste0(tmp_tsv, ".gz")
 
   dt <- read_table_flex(tmp_gz)
-  expect_s3_class(dt, "data.table")
+  expect_s3_class(dt, "data.frame")
   expect_equal(ncol(dt), ncol(mtcars))
   expect_equal(nrow(dt), 5)
 

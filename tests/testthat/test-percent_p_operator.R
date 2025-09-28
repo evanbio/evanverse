@@ -1,5 +1,5 @@
 # tests/testthat/test-percent_p_operator.R
-# Tests for `%p%` — String concatenation operator (with a space)
+# Tests for `%p%` - String concatenation operator (with a space)
 
 # ------------------------------------------------------------------------------
 # Basic functionality

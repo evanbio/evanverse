@@ -1,5 +1,5 @@
 # tests/testthat/test-with_timer.R
-# Tests for with_timer — function execution timer wrapper
+# Tests for with_timer - function execution timer wrapper
 
 # ------------------------------------------------------------------------------
 # Basic functionality

@@ -24,21 +24,21 @@ test_that("download_geo_data() validates parameters", {
   expect_error(download_geo_data("GSE12345", dest_dir = 123), "must be a single character string")
 
   # Test invalid overwrite
-  expect_error(download_geo_data("GSE12345", overwrite = "yes"), "must be a single logical value")
+  expect_error(download_geo_data("GSE12345", dest_dir = tempdir(), overwrite = "yes"), "must be a single logical value")
 
   # Test invalid log
-  expect_error(download_geo_data("GSE12345", log = "yes"), "must be a single logical value")
+  expect_error(download_geo_data("GSE12345", dest_dir = tempdir(), log = "yes"), "must be a single logical value")
 
   # Test invalid log_file
-  expect_error(download_geo_data("GSE12345", log_file = 123), "must be a single character string or NULL")
+  expect_error(download_geo_data("GSE12345", dest_dir = tempdir(), log_file = 123), "must be a single character string or NULL")
 
   # Test invalid retries
-  expect_error(download_geo_data("GSE12345", retries = -1), "must be a non-negative integer")
-  expect_error(download_geo_data("GSE12345", retries = 1.5), "must be a non-negative integer")
+  expect_error(download_geo_data("GSE12345", dest_dir = tempdir(), retries = -1), "must be a non-negative integer")
+  expect_error(download_geo_data("GSE12345", dest_dir = tempdir(), retries = 1.5), "must be a non-negative integer")
 
   # Test invalid timeout
-  expect_error(download_geo_data("GSE12345", timeout = 0), "must be a positive number")
-  expect_error(download_geo_data("GSE12345", timeout = -10), "must be a positive number")
+  expect_error(download_geo_data("GSE12345", dest_dir = tempdir(), timeout = 0), "must be a positive number")
+  expect_error(download_geo_data("GSE12345", dest_dir = tempdir(), timeout = -10), "must be a positive number")
 })
 
 # ------------------------------------------------------------------------------
@@ -84,7 +84,7 @@ test_that("download_geo_data() creates default log dir when log_file is NULL", {
   temp_dir <- tempfile("test_geo_default_")
   on.exit(unlink(temp_dir, recursive = TRUE), add = TRUE)
 
-  # 不传 log_file -> 应创建 dest_dir/logs/geo
+  # Without log_file -> should create dest_dir/logs/geo
   tryCatch({
     download_geo_data("GSE7305", dest_dir = temp_dir, log = TRUE, log_file = NULL,
                       retries = 1, timeout = 30)

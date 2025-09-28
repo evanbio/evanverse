@@ -1,7 +1,7 @@
 #===============================================================================
 # Test: percent_is_operator()
 # tests/testthat/test-percent_is_operator.R
-# Tests for `%is%` — Strict identity comparison with diagnostics
+# Tests for `%is%` - Strict identity comparison with diagnostics
 #===============================================================================
 
 # ------------------------------------------------------------------------------

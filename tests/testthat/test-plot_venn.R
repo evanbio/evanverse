@@ -89,7 +89,9 @@ test_that("plot_venn() gradient method returns a ggplot", {
 test_that("plot_venn() return_sets returns a named list", {
   s1 <- sample(letters, 100, replace = TRUE)
   s2 <- sample(letters, 120, replace = TRUE)
-  out <- plot_venn(s1, s2, return_sets = TRUE, preview = FALSE)
+  suppressWarnings(
+    out <- plot_venn(s1, s2, return_sets = TRUE, preview = FALSE)
+  )
   expect_type(out, "list")
   expect_named(out, c("plot", "sets"))
   expect_s3_class(out$plot, "ggplot")

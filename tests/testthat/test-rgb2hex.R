@@ -1,7 +1,7 @@
 #===============================================================================
 # Test: rgb2hex()
 # File: tests/testthat/test-rgb2hex.R
-# Description: Unit tests for RGB → HEX conversion utility
+# Description: Unit tests for RGB to HEX conversion utility
 # Dependencies: testthat
 #===============================================================================
 

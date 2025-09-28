@@ -48,7 +48,7 @@ test_that("pkg_version() detects GitHub package (if installed locally)", {
   skip_on_cran()
   # This test only works if MRPRESSO (or another GitHub package) is installed.
   # It will pass silently if not installed.
-  if ("MRPRESSO" %in% rownames(installed.packages())) {
+  if (length(find.package("MRPRESSO", quiet = TRUE)) > 0) {
     res <- suppressMessages(pkg_version("MRPRESSO", preview = FALSE))
     expect_true(grepl("^GitHub", res$source[1]))
   } else {
