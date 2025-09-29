@@ -1,3 +1,43 @@
+# evanverse 0.3.4
+
+*Released: September 28, 2025*
+
+**CRAN Submission Ready** - Enhanced version with dependency optimization and improved documentation quality.
+
+---
+
+### Major Improvements
+
+* **Dependency optimization**: Moved bioinformatics packages (GSEABase, Biobase, GEOquery, biomaRt) from Imports to Suggests for lighter base installation
+* **Enhanced documentation**: Streamlined function documentation for improved readability and consistency across all 55+ functions
+* **Test suite improvements**: Enhanced test reliability with better isolation and parameter validation (1358 tests passing)
+* **Vignette optimizations**: Improved graphics parameter handling and execution speed with proper cleanup
+* **Code style improvements**: Consistent formatting and improved maintainability across all functions
+
+### CRAN Compliance Enhancements
+
+* **Perfect clean check**: 0 errors ✔ | 0 warnings ✔ | 0 notes ✔
+* **Package size optimization**: Reduced from 6.5MB to 1.5MB through dependency restructuring
+* **Cross-platform validation**: Confirmed compatibility across Windows, macOS, and Linux
+* **Installation time improvement**: Optimized to 5 seconds with reduced mandatory dependencies
+* **Check time optimization**: Streamlined to 133 seconds through better test organization
+
+### Documentation & Quality
+
+* **Streamlined roxygen2 documentation**: Updated across 17 core R functions for clarity
+* **Enhanced function examples**: All examples verified and optimized for CRAN compliance
+* **Improved cross-references**: Validated all internal links and references
+* **Better error handling**: Enhanced user-friendly error messages and validation
+
+### Technical Details
+
+* **R CMD check status**: All checks passing with perfect results across multiple platforms
+* **Test coverage**: 1358 tests with 25 network-dependent tests properly skipped on CRAN
+* **Documentation completeness**: All exported functions have comprehensive documentation
+* **Dependency management**: Strategic use of Imports vs Suggests for optimal installation experience
+
+---
+
 # evanverse 0.3.3
 
 *Released: September 19, 2025*

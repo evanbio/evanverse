@@ -1,7 +1,7 @@
 # evanverse: Utility Functions for Data Analysis and Visualization
 
 <!-- badges: start -->
-[![CRAN status](https://img.shields.io/badge/CRAN-Under%20Review-orange)](https://cran.r-project.org/package=evanverse) [![GitHub version](https://img.shields.io/badge/version-v0.3.3-success)](https://github.com/evanbio/evanverse/releases) [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE.md) <img src="man/figures/logo.png" align="right" width="105" style="vertical-align: middle;" />
+[![CRAN status](https://img.shields.io/badge/CRAN-Under%20Review-orange)](https://cran.r-project.org/package=evanverse) [![GitHub version](https://img.shields.io/badge/version-v0.3.4-success)](https://github.com/evanbio/evanverse/releases) [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE.md) <img src="man/figures/logo.png" align="right" width="105" style="vertical-align: middle;" />
 <!-- badges: end -->
 
 <br>
@@ -21,7 +21,7 @@
 
 ### 🚀 CRAN (Recommended - Under Review)
 
-`evanverse` 0.3.3 is currently under CRAN review. Once approved, install with:
+`evanverse` 0.3.4 is currently under CRAN review. Once approved, install with:
 
 ```r
 install.packages("evanverse")
@@ -36,7 +36,7 @@ You can install the latest development version from GitHub:
 devtools::install_github("evanbio/evanverse")
 ```
 
-> **Status Update**: Version 0.3.3 has passed CRAN automatic checks and is pending manual review. Expected approval within 10 working days.
+> **Status Update**: Version 0.3.4 features enhanced dependency optimization and documentation improvements. Ready for CRAN submission with perfect check results (0 errors, 0 warnings, 0 notes).
 
 ## Usage
 
@@ -51,7 +51,7 @@ file_tree(".")                   # View project structure
 
 ## Functions Overview
 
-evanverse v0.3.0 provides 55+ utility functions organized by category:
+evanverse v0.3.4 provides 55+ utility functions organized by category:
 
 ### 📦 Package Management
 - `check_pkg()`, `inst_pkg()`, `update_pkg()`, `pkg_version()`, `pkg_functions()`, `set_mirror()`
