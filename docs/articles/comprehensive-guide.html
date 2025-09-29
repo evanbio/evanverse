@@ -6,12 +6,11 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <title>Comprehensive Guide to evanverse • evanverse</title>
-<!-- favicons --><link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
-<link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png">
-<link rel="apple-touch-icon" type="image/png" sizes="180x180" href="../apple-touch-icon.png">
-<link rel="apple-touch-icon" type="image/png" sizes="120x120" href="../apple-touch-icon-120x120.png">
-<link rel="apple-touch-icon" type="image/png" sizes="76x76" href="../apple-touch-icon-76x76.png">
-<link rel="apple-touch-icon" type="image/png" sizes="60x60" href="../apple-touch-icon-60x60.png">
+<!-- favicons --><link rel="icon" type="image/png" sizes="96x96" href="../favicon-96x96.png">
+<link rel="icon" type="”image/svg+xml”" href="../favicon.svg">
+<link rel="apple-touch-icon" sizes="180x180" href="../apple-touch-icon.png">
+<link rel="icon" sizes="any" href="../favicon.ico">
+<link rel="manifest" href="../site.webmanifest">
 <script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="../deps/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet">
 <script src="../deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="../deps/Inter-0.4.10/font.css" rel="stylesheet">
@@ -87,7 +86,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">evanverse</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.3.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.3.4</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -123,7 +122,7 @@
     <li><a class="dropdown-item" href="../articles/">📚 All Articles</a></li>
   </ul>
 </li>
-<li class="nav-item"><a class="nav-link" href="../news/"><span class="fa fas fa-newspaper"></span> News</a></li>
+<li class="nav-item"><a class="nav-link" href="../news/index.html"><span class="fa fas fa-newspaper"></span> News</a></li>
       </ul>
 <ul class="navbar-nav">
 <li class="nav-item"><a class="nav-link" href="../#" aria-label="Search documentation"><span class="fa fas fa-search"></span></a></li>
@@ -184,10 +183,12 @@ utilities:</p>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> ggplot2 ggplot2 TRUE      CRAN  </span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span> tidyr   tidyr   TRUE      CRAN</span></span>
 <span></span>
-<span><span class="co"># Get package version</span></span>
-<span><span class="fu"><a href="../reference/pkg_version.html">pkg_version</a></span><span class="op">(</span><span class="st">"evanverse"</span><span class="op">)</span></span>
+<span><span class="co"># Get package version (skip on CRAN due to network dependency)</span></span>
+<span><span class="kw">if</span> <span class="op">(</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/identical.html" class="external-link">identical</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Sys.getenv.html" class="external-link">Sys.getenv</a></span><span class="op">(</span><span class="st">"NOT_CRAN"</span><span class="op">)</span>, <span class="st">"false"</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span>
+<span>  <span class="kw"><a href="https://rdrr.io/r/base/try.html" class="external-link">try</a></span><span class="op">(</span><span class="fu"><a href="../reference/pkg_version.html">pkg_version</a></span><span class="op">(</span><span class="st">"evanverse"</span><span class="op">)</span>, silent <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span><span class="op">}</span></span>
 <span><span class="co">#&gt;     package version latest    source</span></span>
-<span><span class="co">#&gt; 1 evanverse   0.2.0   &lt;NA&gt; Not Found</span></span></code></pre></div>
+<span><span class="co">#&gt; 1 evanverse   0.3.4   &lt;NA&gt; Not Found</span></span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="color-palette-system">🎨 Color Palette System<a class="anchor" aria-label="anchor" href="#color-palette-system"></a>
@@ -199,20 +200,78 @@ utilities:</p>
 <code class="sourceCode R"><span><span class="co"># List all available palettes</span></span>
 <span><span class="va">palettes_info</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/list_palettes.html">list_palettes</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">palettes_info</span><span class="op">)</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 35 × 4</span></span></span>
-<span><span class="co">#&gt;    name           type        n_color colors    </span></span>
-<span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>          <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>         <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;list&gt;</span>    </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> contrast_duo   diverging         2 <span style="color: #949494;">&lt;chr [2]&gt;</span> </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> fire_ice_duo   diverging         2 <span style="color: #949494;">&lt;chr [2]&gt;</span> </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> polar_duo      diverging         2 <span style="color: #949494;">&lt;chr [2]&gt;</span> </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> sunset_sky     diverging         2 <span style="color: #949494;">&lt;chr [2]&gt;</span> </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> piyg           diverging         3 <span style="color: #949494;">&lt;chr [3]&gt;</span> </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> earthy_diverge diverging         5 <span style="color: #949494;">&lt;chr [5]&gt;</span> </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> gradient_rd_bu diverging        11 <span style="color: #949494;">&lt;chr [11]&gt;</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> earthy_triad   qualitative       3 <span style="color: #949494;">&lt;chr [3]&gt;</span> </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> primary_triad  qualitative       3 <span style="color: #949494;">&lt;chr [3]&gt;</span> </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> softtrio       qualitative       3 <span style="color: #949494;">&lt;chr [3]&gt;</span> </span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 25 more rows</span></span></span></code></pre></div>
+<span><span class="co">#&gt;                 name        type n_color</span></span>
+<span><span class="co">#&gt; 6       contrast_duo   diverging       2</span></span>
+<span><span class="co">#&gt; 8       fire_ice_duo   diverging       2</span></span>
+<span><span class="co">#&gt; 11         polar_duo   diverging       2</span></span>
+<span><span class="co">#&gt; 12        sunset_sky   diverging       2</span></span>
+<span><span class="co">#&gt; 10              piyg   diverging       3</span></span>
+<span><span class="co">#&gt; 7     earthy_diverge   diverging       5</span></span>
+<span><span class="co">#&gt; 9     gradient_rd_bu   diverging      11</span></span>
+<span><span class="co">#&gt; 14      earthy_triad qualitative       3</span></span>
+<span><span class="co">#&gt; 26     primary_triad qualitative       3</span></span>
+<span><span class="co">#&gt; 31          softtrio qualitative       3</span></span>
+<span><span class="co">#&gt; 33     vintage_triad qualitative       3</span></span>
+<span><span class="co">#&gt; 13  balanced_quartet qualitative       4</span></span>
+<span><span class="co">#&gt; 32           vibrant qualitative       5</span></span>
+<span><span class="co">#&gt; 34            violin qualitative       5</span></span>
+<span><span class="co">#&gt; 24        harmonysix qualitative       6</span></span>
+<span><span class="co">#&gt; 25    pastel_harmony qualitative       6</span></span>
+<span><span class="co">#&gt; 18        ggsci_jama qualitative       7</span></span>
+<span><span class="co">#&gt; 23 ggsci_tron_legacy qualitative       7</span></span>
+<span><span class="co">#&gt; 21        ggsci_nejm qualitative       8</span></span>
+<span><span class="co">#&gt; 28          rcb_set2 qualitative       8</span></span>
+<span><span class="co">#&gt; 20      ggsci_lancet qualitative       9</span></span>
+<span><span class="co">#&gt; 27          rcb_set1 qualitative       9</span></span>
+<span><span class="co">#&gt; 35          vividset qualitative       9</span></span>
+<span><span class="co">#&gt; 15      ggsci_cosmic qualitative      10</span></span>
+<span><span class="co">#&gt; 16      ggsci_flatui qualitative      10</span></span>
+<span><span class="co">#&gt; 19         ggsci_jco qualitative      10</span></span>
+<span><span class="co">#&gt; 22         ggsci_npg qualitative      10</span></span>
+<span><span class="co">#&gt; 17    ggsci_futurama qualitative      12</span></span>
+<span><span class="co">#&gt; 29          rcb_set3 qualitative      12</span></span>
+<span><span class="co">#&gt; 30           sc_pbmc qualitative      17</span></span>
+<span><span class="co">#&gt; 1              blues  sequential       3</span></span>
+<span><span class="co">#&gt; 2        forest_fade  sequential       4</span></span>
+<span><span class="co">#&gt; 4     muted_gradient  sequential       4</span></span>
+<span><span class="co">#&gt; 5         warm_blush  sequential       4</span></span>
+<span><span class="co">#&gt; 3    ggsci_locuszoom  sequential       7</span></span>
+<span><span class="co">#&gt;                                                                                                                                                     colors</span></span>
+<span><span class="co">#&gt; 6                                                                                                                                         #C64328, #56BBA5</span></span>
+<span><span class="co">#&gt; 8                                                                                                                                         #2AA6C6, #C64328</span></span>
+<span><span class="co">#&gt; 11                                                                                                                                        #8CB5D2, #E18E8F</span></span>
+<span><span class="co">#&gt; 12                                                                                                                                        #57A2FF, #FF8000</span></span>
+<span><span class="co">#&gt; 10                                                                                                                         #E64B35B2, #00A087B2, #3C5488B2</span></span>
+<span><span class="co">#&gt; 7                                                                                                              #283618, #606C38, #FEFAE0, #DDA15E, #BC6C25</span></span>
+<span><span class="co">#&gt; 9                                                        #67001f, #b2182b, #d6604d, #f4a582, #fddbc7, #f7f7f7, #d1e5f0, #92c5de, #4393c3, #2166ac, #053061</span></span>
+<span><span class="co">#&gt; 14                                                                                                                               #C64328, #56BBA5, #E3A727</span></span>
+<span><span class="co">#&gt; 26                                                                                                                               #C64328, #2AA6C6, #E3A727</span></span>
+<span><span class="co">#&gt; 31                                                                                                                         #E64B35B2, #00A087B2, #3C5488B2</span></span>
+<span><span class="co">#&gt; 33                                                                                                                               #96A0D9, #D9BDAD, #D9D5A0</span></span>
+<span><span class="co">#&gt; 13                                                                                                                      #5D83B4, #9FD0E8, #CDAE9D, #959683</span></span>
+<span><span class="co">#&gt; 32                                                                                                             #BF3F9D, #B3BCD7, #6DA6A0, #D98A29, #F2C894</span></span>
+<span><span class="co">#&gt; 34                                                                                                             #37848C, #F2935C, #F2A88D, #D95555, #A7CAE9</span></span>
+<span><span class="co">#&gt; 24                                                                                                    #BF3641, #836AA6, #377BA6, #448C42, #D96236, #B79290</span></span>
+<span><span class="co">#&gt; 25                                                                                                    #B2AA76, #8C91CF, #D7D79C, #DABFAC, #BCEDDB, #C380A0</span></span>
+<span><span class="co">#&gt; 18                                                                                           #374E55, #DF8F44, #00A1D5, #B24745, #79AF97, #6A6599, #80796B</span></span>
+<span><span class="co">#&gt; 23                                                                                           #FF410D, #6EE2FF, #F7C530, #95CC5E, #D0DFE6, #F79D1E, #748AA6</span></span>
+<span><span class="co">#&gt; 21                                                                                  #BC3C29, #0072B5, #E18727, #20854E, #7876B1, #6F99AD, #FFDC91, #EE4C97</span></span>
+<span><span class="co">#&gt; 28                                                                                  #66C2A5, #FC8D62, #8DA0CB, #E78AC3, #A6D854, #FFD92F, #E5C494, #B3B3B3</span></span>
+<span><span class="co">#&gt; 20                                                                         #00468B, #ED0000, #42B540, #0099B4, #925E9F, #FDAF91, #AD002A, #ADB6B6, #1B1919</span></span>
+<span><span class="co">#&gt; 27                                                                         #E41A1C, #377EB8, #4DAF4A, #984EA3, #FF7F00, #FFFF33, #A65628, #F781BF, #999999</span></span>
+<span><span class="co">#&gt; 35                                                                         #E64B35, #4DBBD5, #00A087, #3C5488, #F39B7F, #8491B4, #91D1C2, #DC0000, #7E6148</span></span>
+<span><span class="co">#&gt; 15                                                                #2E2A2B, #CF4E9C, #8C57A2, #358DB9, #82581F, #2F509E, #E5614C, #97A1A7, #3DA873, #DC9445</span></span>
+<span><span class="co">#&gt; 16                                                                #c0392b, #d35400, #f39c12, #27ae60, #16a085, #2980b9, #8e44ad, #2c3e50, #7f8c8d, #bdc3c7</span></span>
+<span><span class="co">#&gt; 19                                                                #0073C2, #EFC000, #868686, #CD534C, #7AA6DC, #003C67, #8F7700, #3B3B3B, #A73030, #4A6990</span></span>
+<span><span class="co">#&gt; 22                                                                #E64B35, #4DBBD5, #00A087, #3C5488, #F39B7F, #8491B4, #91D1C2, #DC0000, #7E6148, #B09C85</span></span>
+<span><span class="co">#&gt; 17                                              #FF6F00, #C71000, #008EA0, #8A4198, #5A9599, #FF6348, #84D7E1, #FF95A8, #3D3B25, #ADE2D0, #1A5354, #3F4041</span></span>
+<span><span class="co">#&gt; 29                                              #8DD3C7, #FFFFB3, #BEBADA, #FB8072, #80B1D3, #FDB462, #B3DE69, #FCCDE5, #D9D9D9, #BC80BD, #CCEBC5, #FFED6F</span></span>
+<span><span class="co">#&gt; 30 #a2d2e7, #67a8cd, #ffc17f, #cf9f88, #6fb3a8, #b3e19b, #50aa4b, #ff9d9f, #f36569, #3581b7, #cdb6da, #704ba3, #9a7fbd, #dba9a8, #e40300, #e99b78, #ff8831</span></span>
+<span><span class="co">#&gt; 1                                                                                                                                #deebf7, #9ecae1, #3182bd</span></span>
+<span><span class="co">#&gt; 2                                                                                                                       #B2C9AD, #91AC8F, #66785F, #4B5945</span></span>
+<span><span class="co">#&gt; 4                                                                                                                       #E2E0C8, #A7B49E, #818C78, #5C7285</span></span>
+<span><span class="co">#&gt; 5                                                                                                                       #FFCDB2, #FFB4A2, #E5989B, #B5828C</span></span>
+<span><span class="co">#&gt; 3                                                                                            #D43F3A, #EEA236, #5CB85C, #46B8DA, #357EBD, #9632B8, #B8B8B8</span></span></code></pre></div>
 </div>
 <div class="section level4">
 <h4 id="using-color-palettes">Using Color Palettes<a class="anchor" aria-label="anchor" href="#using-color-palettes"></a>
@@ -440,23 +499,23 @@ Professional bar plot
 <div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Time execution of code</span></span>
 <span><span class="va">result</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/with_timer.html">with_timer</a></span><span class="op">(</span><span class="kw">function</span><span class="op">(</span><span class="op">)</span> <span class="op">{</span></span>
-<span>  <span class="fu"><a href="https://rdrr.io/r/base/Sys.sleep.html" class="external-link">Sys.sleep</a></span><span class="op">(</span><span class="fl">0.1</span><span class="op">)</span>  <span class="co"># Simulate some work</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/Sys.sleep.html" class="external-link">Sys.sleep</a></span><span class="op">(</span><span class="fl">0.01</span><span class="op">)</span>  <span class="co"># Quick simulation</span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/base/sum.html" class="external-link">sum</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">1000</span><span class="op">)</span></span>
 <span><span class="op">}</span>, name <span class="op">=</span> <span class="st">"Sum calculation"</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">result</span><span class="op">)</span></span>
 <span><span class="co">#&gt; function (...) </span></span>
 <span><span class="co">#&gt; {</span></span>
-<span><span class="co">#&gt;     cli::cli_h1("{name} started at {Sys.time()}")</span></span>
+<span><span class="co">#&gt;     cli::cli_alert_info("{name} started at {format(Sys.time(), '%Y-%m-%d %H:%M:%S')}")</span></span>
 <span><span class="co">#&gt;     tictoc::tic()</span></span>
 <span><span class="co">#&gt;     result &lt;- fn(...)</span></span>
 <span><span class="co">#&gt;     timing &lt;- tictoc::toc(quiet = TRUE)</span></span>
 <span><span class="co">#&gt;     elapsed &lt;- as.numeric(timing$toc - timing$tic, units = "secs")</span></span>
-<span><span class="co">#&gt;     cli::cli_alert_success("{name} completed in {.val {sprintf('%.3f', elapsed)}} seconds")</span></span>
+<span><span class="co">#&gt;     cli::cli_alert_success("{name} completed in {sprintf('%.3f', elapsed)} seconds")</span></span>
 <span><span class="co">#&gt;     invisible(result)</span></span>
 <span><span class="co">#&gt; }</span></span>
-<span><span class="co">#&gt; &lt;bytecode: 0x0000020d57740510&gt;</span></span>
-<span><span class="co">#&gt; &lt;environment: 0x0000020d5773f690&gt;</span></span></code></pre></div>
+<span><span class="co">#&gt; &lt;bytecode: 0x0000020114069b68&gt;</span></span>
+<span><span class="co">#&gt; &lt;environment: 0x0000020114065c48&gt;</span></span></code></pre></div>
 </div>
 <div class="section level4">
 <h4 id="safe-execution">Safe Execution<a class="anchor" aria-label="anchor" href="#safe-execution"></a>
@@ -530,7 +589,7 @@ repository</a>.</em></p>
 
 
     <footer><div class="pkgdown-footer-left">
-  <p>Developed by <a href="https://github.com/evanbio" class="external-link"><img src="https://github.com/evanbio.png" height="32" style="border-radius: 50%;"> Evan Zhou</a>. Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.1.
+  <p>Developed by <a href="https://github.com/evanbio" class="external-link"><img src="https://github.com/evanbio.png" height="32" style="border-radius: 50%;"> Evan Zhou</a>. Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.3.
 </p>
 <div class="text-muted">
 <p><i class="fas fa-balance-scale me-1"></i> <a href="https://opensource.org/licenses/MIT" class="external-link text-muted">MIT License</a></p>
@@ -539,7 +598,7 @@ repository</a>.</em></p>
 
 <div class="pkgdown-footer-right">
   <div class="text-muted">
-<p><strong>evanverse v0.3.0</strong><br><small>Last updated: September 2024</small></p>
+<p><strong>evanverse v0.3.4</strong><br><small>Last updated: September 2025</small></p>
 </div>
 <div class="footer-links">
 <p><a href="https://github.com/evanbio/evanverse" class="external-link text-muted me-3" aria-label="GitHub"> <i class="fab fa-github fa-lg"></i> </a> <a href="https://cran.r-project.org/package=evanverse" class="external-link text-muted me-3" aria-label="CRAN"> <i class="fas fa-download fa-lg"></i> </a> <a href="https://blog.evanzhou.org" class="external-link text-muted" aria-label="Blog"> <i class="fas fa-blog fa-lg"></i> </a></p>

@@ -1,5 +1,5 @@
 pandoc: '3.5'
-pkgdown: 2.1.1
+pkgdown: 2.1.3
 pkgdown_sha: ~
 articles:
   bioinformatics-workflows: bioinformatics-workflows.html
@@ -8,7 +8,7 @@ articles:
   data-processing: data-processing.html
   get-started: get-started.html
   package-management: package-management.html
-last_built: 2025-09-22T02:33Z
+last_built: 2025-09-29T03:43Z
 urls:
   reference: https://evanbio.github.io/evanverse/reference
   article: https://evanbio.github.io/evanverse/articles

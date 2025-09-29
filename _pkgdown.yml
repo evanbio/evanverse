@@ -384,7 +384,9 @@ reference:
 
 news:
   releases:
-  - text: "🎉 Version 0.3.3 - CRAN Submission Ready"
+  - text: "🎉 Version 0.3.4 - Enhanced CRAN Submission"
+    href: https://github.com/evanbio/evanverse/releases/tag/v0.3.4
+  - text: "📦 Version 0.3.3 - CRAN Submission Ready"
     href: https://github.com/evanbio/evanverse/releases/tag/v0.3.3
   - text: "📦 Version 0.3.2 - Maintenance Release"
     href: https://github.com/evanbio/evanverse/releases/tag/v0.3.2
@@ -398,7 +400,7 @@ footer:
   components:
     package_info: |
       <div class="text-muted">
-        <strong>evanverse v0.3.3</strong><br>
+        <strong>evanverse v0.3.4</strong><br>
         <small>Last updated: September 2025</small>
       </div>
     social_links: |
