@@ -79,17 +79,21 @@ print(blues_gradient)
 ### Creating Custom Palettes
 
 ```{r custom-palette}
-# Create a custom palette
+# Create a custom palette (demonstration only - not executed to avoid file creation)
 custom_colors <- c("#FF6B6B", "#4ECDC4", "#45B7D1", "#96CEB4")
-create_palette(
-  name = "custom_demo",
-  colors = custom_colors,
-  type = "qualitative"
-)
+
+# Example of how to create a custom palette (using temp directory):
+# create_palette(
+#   name = "custom_demo",
+#   colors = custom_colors,
+#   type = "qualitative",
+#   color_dir = tempdir()  # Use temporary directory to avoid cluttering package
+# )
 
 # Preview the custom colors
 print("Custom palette colors:")
 print(custom_colors)
+cat("This would create a palette named 'custom_demo' with", length(custom_colors), "colors\n")
 ```
 
 ## 📊 Visualization Functions
