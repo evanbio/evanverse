@@ -12,8 +12,18 @@
 #' @export
 #'
 #' @examples
-#' # Basic usage (commented to avoid network operations):
-#' # pkg_version(c("ggplot2", "limma", "MRPRESSO", "nonexistentpackage123"))
+#' \dontrun{
+#' # Check versions of multiple packages (requires network):
+#' pkg_version(c("ggplot2", "dplyr"))
+#'
+#' # Check with preview disabled:
+#' result <- pkg_version(c("ggplot2", "limma"), preview = FALSE)
+#' }
+#'
+#' \donttest{
+#' # Quick demo with base R package:
+#' try(pkg_version("base", preview = FALSE))
+#' }
 pkg_version <- function(pkg, preview = TRUE) {
   # Parameter validation
   if (!is.character(pkg) || length(pkg) == 0) {

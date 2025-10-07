@@ -27,7 +27,11 @@ Invisibly TRUE if removed successfully, FALSE otherwise.
 Remove a palette file by name, trying across types if necessary.
 }
 \examples{
-# Basic usage (commented to avoid file operations):
-# remove_palette("blues")
-# remove_palette("vividset", type = "qualitative")
+\dontrun{
+# Remove a palette (requires write permissions):
+remove_palette("blues")
+
+# Remove with specific type:
+remove_palette("vividset", type = "qualitative")
+}
 }

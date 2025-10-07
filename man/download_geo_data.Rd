@@ -48,22 +48,24 @@ Includes retry mechanism, timeout control, and logging.
 Requires: GEOquery, Biobase, withr, cli.
 }
 \examples{
-# Basic usage (commented to avoid network operations):
-# result <- download_geo_data("GSE12345", dest_dir = tempdir())
+\dontrun{
+# Download GEO data (requires network connection):
+result <- download_geo_data("GSE12345", dest_dir = tempdir())
 
 # Advanced usage with custom settings:
-# result <- download_geo_data(
-#   gse_id = "GSE7305",
-#   dest_dir = tempdir(),
-#   log = TRUE,
-#   retries = 3,
-#   timeout = 600
-# )
+result <- download_geo_data(
+  gse_id = "GSE7305",
+  dest_dir = tempdir(),
+  log = TRUE,
+  retries = 3,
+  timeout = 600
+)
 
 # Access downloaded data:
-# expr_data <- Biobase::exprs(result$gse_object)
-# sample_info <- Biobase::pData(result$gse_object)
-# feature_info <- Biobase::fData(result$gse_object)
+expr_data <- Biobase::exprs(result$gse_object)
+sample_info <- Biobase::pData(result$gse_object)
+feature_info <- Biobase::fData(result$gse_object)
+}
 
 }
 \references{

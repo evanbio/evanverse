@@ -21,6 +21,16 @@ R packages across CRAN, Bioconductor, and GitHub.
 It supports case-insensitive matching and smart console previews.
 }
 \examples{
-# Basic usage (commented to avoid network operations):
-# pkg_version(c("ggplot2", "limma", "MRPRESSO", "nonexistentpackage123"))
+\dontrun{
+# Check versions of multiple packages (requires network):
+pkg_version(c("ggplot2", "dplyr"))
+
+# Check with preview disabled:
+result <- pkg_version(c("ggplot2", "limma"), preview = FALSE)
+}
+
+\donttest{
+# Quick demo with base R package:
+try(pkg_version("base", preview = FALSE))
+}
 }

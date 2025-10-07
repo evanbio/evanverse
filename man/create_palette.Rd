@@ -31,7 +31,22 @@ Save a named color palette (sequential, diverging, or qualitative) to a JSON fil
 Used for palette sharing, reuse, and future compilation.
 }
 \examples{
-# Basic usage (commented to avoid file operations):
-# create_palette("blues", "sequential", c("#deebf7", "#9ecae1", "#3182bd"))
-# create_palette("vividset", "qualitative", c("#E64B35", "#4DBBD5", "#00A087"))
+# Create palette in temporary directory:
+temp_dir <- file.path(tempdir(), "palettes")
+create_palette(
+  "blues",
+  "sequential",
+  c("#deebf7", "#9ecae1", "#3182bd"),
+  color_dir = temp_dir
+)
+
+create_palette(
+  "vividset",
+  "qualitative",
+  c("#E64B35", "#4DBBD5", "#00A087"),
+  color_dir = temp_dir
+)
+
+# Clean up
+unlink(temp_dir, recursive = TRUE)
 }

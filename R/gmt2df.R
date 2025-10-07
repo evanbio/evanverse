@@ -9,10 +9,12 @@
 #' @return A tibble with columns: term, description, and gene.
 #'
 #' @examples
-#' # Basic usage (commented to avoid file I/O):
-#' # gmt_file <- "path/to/geneset.gmt"
-#' # result <- gmt2df(gmt_file)
-#' # head(result, 10)
+#' \dontrun{
+#' # Requires a GMT file to run:
+#' gmt_file <- "path/to/geneset.gmt"
+#' result <- gmt2df(gmt_file)
+#' head(result, 10)
+#' }
 #'
 #' @export
 gmt2df <- function(file, verbose = TRUE) {

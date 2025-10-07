@@ -23,3 +23,13 @@ Invisibly returns RDS file path (character)
 \description{
 Read JSON files under \verb{palettes_dir/}, validate content, and compile into a structured RDS file.
 }
+\examples{
+\donttest{
+# Compile palettes using temporary directory:
+compile_palettes(
+  palettes_dir = system.file("extdata", "palettes", package = "evanverse"),
+  output_rds = file.path(tempdir(), "palettes.rds")
+)
+}
+
+}

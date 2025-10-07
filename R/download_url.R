@@ -45,24 +45,32 @@
 #' Required packages: curl, cli, R.utils (automatically checked at runtime).
 #'
 #' @examples
-#' # Basic usage (commented to avoid network operations):
-#' # download_url("https://example.com/data.csv")
+#' \dontrun{
+#' # Download a CSV file from GitHub:
+#' download_url(
+#'   url = "https://raw.githubusercontent.com/tidyverse/ggplot2/main/README.md",
+#'   dest = file.path(tempdir(), "ggplot2_readme.md"),
+#'   timeout = 30
+#' )
 #'
-#' # Advanced usage with custom settings:
-#' # download_url(
-#' #   url = "https://example.com/dataset.zip",
-#' #   dest = file.path(tempdir(), "dataset.zip"),
-#' #   unzip = TRUE,
-#' #   resume = TRUE,
-#' #   speed_limit = 1000000,
-#' #   timeout = 1800
-#' # )
+#' # Download and extract a zip file:
+#' download_url(
+#'   url = "https://cran.r-project.org/src/contrib/Archive/dplyr/dplyr_0.8.0.tar.gz",
+#'   dest = file.path(tempdir(), "dplyr.tar.gz"),
+#'   unzip = TRUE,
+#'   timeout = 60
+#' )
+#' }
 #'
-#' # With authentication:
-#' # download_url(
-#' #   url = "https://api.example.com/data.json",
-#' #   headers = list(Authorization = "Bearer token")
-#' # )
+#' \donttest{
+#' # Quick demo with a tiny file:
+#' download_url(
+#'   url = "https://httpbin.org/robots.txt",
+#'   dest = file.path(tempdir(), "robots.txt"),
+#'   timeout = 10,
+#'   verbose = FALSE
+#' )
+#' }
 #'
 #' @export
 download_url <- function(url,

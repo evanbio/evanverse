@@ -9,11 +9,13 @@
 #' @return A named list where each element is a character vector of gene symbols.
 #'
 #' @examples
-#' # Basic usage (commented to avoid file I/O):
-#' # gmt_file <- "path/to/geneset.gmt"
-#' # gene_sets <- gmt2list(gmt_file)
-#' # length(gene_sets)
-#' # names(gene_sets)[1:3]
+#' \dontrun{
+#' # Requires a GMT file to run:
+#' gmt_file <- "path/to/geneset.gmt"
+#' gene_sets <- gmt2list(gmt_file)
+#' length(gene_sets)
+#' names(gene_sets)[1:3]
+#' }
 #'
 #' @export
 gmt2list <- function(file, verbose = TRUE) {

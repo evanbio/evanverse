@@ -7,6 +7,16 @@
 #' @param log Whether to log compilation events. Default: TRUE
 #'
 #' @return Invisibly returns RDS file path (character)
+#'
+#' @examples
+#' \donttest{
+#' # Compile palettes using temporary directory:
+#' compile_palettes(
+#'   palettes_dir = system.file("extdata", "palettes", package = "evanverse"),
+#'   output_rds = file.path(tempdir(), "palettes.rds")
+#' )
+#' }
+#'
 #' @export
 compile_palettes <- function(palettes_dir = "inst/extdata/palettes",
                              output_rds = "inst/extdata/palettes.rds",

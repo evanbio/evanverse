@@ -11,9 +11,13 @@
 #' @export
 #'
 #' @examples
-#' # Basic usage (commented to avoid file operations):
-#' # remove_palette("blues")
-#' # remove_palette("vividset", type = "qualitative")
+#' \dontrun{
+#' # Remove a palette (requires write permissions):
+#' remove_palette("blues")
+#'
+#' # Remove with specific type:
+#' remove_palette("vividset", type = "qualitative")
+#' }
 remove_palette <- function(name,
                             type = NULL,
                             color_dir = "inst/extdata/palettes",

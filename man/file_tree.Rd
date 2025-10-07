@@ -38,14 +38,14 @@ ASCII characters for maximum compatibility across different systems.
 Optionally, save the result to a log file for record keeping or debugging.
 }
 \examples{
-# Basic usage:
-# file_tree()
-# file_tree("my_directory", max_depth = 3)
+# Basic usage with current directory:
+file_tree()
+file_tree(".", max_depth = 3)
 
 \donttest{
-# Example with temporary directory
+# Example with temporary directory and logging:
 temp_dir <- tempdir()
-file_tree(temp_dir, max_depth = 2, log = TRUE)
+file_tree(temp_dir, max_depth = 2, log = TRUE, log_path = tempdir())
 }
 
 }

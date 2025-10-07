@@ -18,8 +18,20 @@ Previous mirror settings (invisibly)
 Switch CRAN and/or Bioconductor mirrors for faster package installation.
 }
 \examples{
-# Basic usage (commented to avoid configuration changes):
-# set_mirror()  # Use default: all repos with tuna mirror
-# set_mirror("cran", "westlake")
-# set_mirror("bioc", "ustc")
+\dontrun{
+# Set all mirrors to tuna (default):
+set_mirror()
+
+# Set only CRAN mirror:
+set_mirror("cran", "westlake")
+
+# Set only Bioconductor mirror:
+set_mirror("bioc", "ustc")
+}
+
+\donttest{
+# Quick demo - view current mirror settings:
+getOption("repos")
+getOption("BioC_mirror")
+}
 }

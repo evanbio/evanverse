@@ -11,11 +11,24 @@
 #' @export
 #'
 #' @examples
-#' # Basic usage (commented to avoid network operations):
-#' # inst_pkg("dplyr", source = "CRAN")
-#' # inst_pkg("hadley/emo", source = "GitHub")
-#' # inst_pkg("scRNAseq", source = "Bioconductor")
-#' # inst_pkg(source = "local", path = "mypackage.tar.gz")
+#' \dontrun{
+#' # Install from CRAN:
+#' inst_pkg("dplyr", source = "CRAN")
+#'
+#' # Install from GitHub:
+#' inst_pkg("hadley/emo", source = "GitHub")
+#'
+#' # Install from Bioconductor:
+#' inst_pkg("scRNAseq", source = "Bioconductor")
+#'
+#' # Install from local file:
+#' inst_pkg(source = "local", path = "mypackage.tar.gz")
+#' }
+#'
+#' \donttest{
+#' # Quick demo - try to install a small package (will skip if already installed):
+#' try(inst_pkg("praise", source = "CRAN"))
+#' }
 inst_pkg <- function(pkg = NULL,
                      source = c("CRAN", "GitHub", "Bioconductor", "Local"),
                      path = NULL, ...) {
