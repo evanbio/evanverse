@@ -61,7 +61,7 @@ where each list element is a gene set."><meta property="og:image" content="https
 
     <a class="navbar-brand me-2" href="../index.html">evanverse</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.3.4</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.3.5</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -137,11 +137,13 @@ where each list element is a gene set.</p>
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># Basic usage (commented to avoid file I/O):</span></span></span>
-<span class="r-in"><span><span class="co"># gmt_file &lt;- "path/to/geneset.gmt"</span></span></span>
-<span class="r-in"><span><span class="co"># gene_sets &lt;- gmt2list(gmt_file)</span></span></span>
-<span class="r-in"><span><span class="co"># length(gene_sets)</span></span></span>
-<span class="r-in"><span><span class="co"># names(gene_sets)[1:3]</span></span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span> <span class="co"># \dontrun{</span></span></span>
+<span class="r-in"><span><span class="co"># Requires a GMT file to run:</span></span></span>
+<span class="r-in"><span><span class="va">gmt_file</span> <span class="op">&lt;-</span> <span class="st">"path/to/geneset.gmt"</span></span></span>
+<span class="r-in"><span><span class="va">gene_sets</span> <span class="op">&lt;-</span> <span class="fu">gmt2list</span><span class="op">(</span><span class="va">gmt_file</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="va">gene_sets</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/names.html" class="external-link">names</a></span><span class="op">(</span><span class="va">gene_sets</span><span class="op">)</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">3</span><span class="op">]</span></span></span>
+<span class="r-in"><span><span class="op">}</span> <span class="co"># }</span></span></span>
 <span class="r-in"><span></span></span>
 </code></pre></div>
     </div>
@@ -159,7 +161,7 @@ where each list element is a gene set.</p>
 
 <div class="pkgdown-footer-right">
   <div class="text-muted">
-<p><strong>evanverse v0.3.4</strong><br><small>Last updated: September 2025</small></p>
+<p><strong>evanverse v0.3.5</strong><br><small>Last updated: October 2025</small></p>
 </div><div class="footer-links">
 <p><a href="https://github.com/evanbio/evanverse" class="external-link text-muted me-3" aria-label="GitHub"> <i class="fab fa-github fa-lg"></i> </a> <a href="https://cran.r-project.org/package=evanverse" class="external-link text-muted me-3" aria-label="CRAN"> <i class="fas fa-download fa-lg"></i> </a> <a href="https://blog.evanzhou.org" class="external-link text-muted" aria-label="Blog"> <i class="fas fa-blog fa-lg"></i> </a></p>
 </div>

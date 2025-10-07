@@ -1,8 +1,8 @@
-# CRAN Submission Checklist for evanverse 0.3.4
+# CRAN Submission Checklist for evanverse 0.3.5
 
 ## ✅ DESCRIPTION File Compliance
 - [x] **Package name**: evanverse (valid CRAN name)
-- [x] **Version**: 0.3.4 (proper semantic versioning)
+- [x] **Version**: 0.3.5 (proper semantic versioning)
 - [x] **Title**: "Utility Functions for Data Analysis and Visualization" (under 65 characters)
 - [x] **Description**: Clear, detailed description of package functionality (55+ functions mentioned)
 - [x] **Authors@R**: Properly formatted with ORCID
@@ -19,10 +19,10 @@
 - [x] **FOSS compliance**: License_is_FOSS: yes, License_restricts_use: no
 
 ## ✅ NEWS.md Documentation
-- [x] **Version 0.3.4**: Comprehensive changelog with all new features and improvements
+- [x] **Version 0.3.5**: Comprehensive changelog with CRAN reviewer feedback fixes
 - [x] **Format**: Clean markdown with proper sections
-- [x] **Content**: Details documentation improvements, test enhancements, and dependency optimization
-- [x] **CRAN compliance notes**: Maintains all previous compliance measures
+- [x] **Content**: Details all fixes to function examples, file operations, and network handling
+- [x] **CRAN compliance notes**: Addresses all Benjamin Altmann reviewer feedback
 
 ## ✅ CRAN Comments
 - [x] **cran-comments.md**: Created with test environments and check results
@@ -84,7 +84,7 @@
 
 ## 🎯 Submission Summary
 
-**evanverse 0.3.4** is ready for CRAN submission with:
+**evanverse 0.3.5** is ready for CRAN resubmission with:
 - ✅ Complete CRAN policy compliance
 - ✅ Clean startup behavior (no emoji, interactive-only messages)
 - ✅ Proper system option handling with restoration

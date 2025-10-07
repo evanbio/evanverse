@@ -63,7 +63,7 @@ Optionally, save the result to a log file for record keeping or debugging."><met
 
     <a class="navbar-brand me-2" href="../index.html">evanverse</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.3.4</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.3.5</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -168,17 +168,191 @@ Optionally, save the result to a log file for record keeping or debugging.</p>
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># Basic usage:</span></span></span>
-<span class="r-in"><span><span class="co"># file_tree()</span></span></span>
-<span class="r-in"><span><span class="co"># file_tree("my_directory", max_depth = 3)</span></span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># Basic usage with current directory:</span></span></span>
+<span class="r-in"><span><span class="fu">file_tree</span><span class="op">(</span><span class="op">)</span></span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">──</span> <span style="font-weight: bold;">Directory Tree: F:\project\evanverse\docs\reference</span> <span style="color: #00BBBB;">─────────────────────────</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> +-- any_void.html</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> +-- bio_palette_gallery.html</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> +-- check_pkg.html</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> +-- cols_with_void.html</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> +-- comb.html</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> +-- combine_logic.html</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> +-- compile_palettes.html</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> +-- convert_gene_id.html</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> +-- create_palette.html</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> +-- df2list.html</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> +-- df_forest_test.html</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> +-- download_batch.html</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> +-- download_gene_ref.html</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> +-- download_geo_data.html</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> +-- download_url.html</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> +-- drop_void.html</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> +-- figures</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> |   +-- logo-input.png</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> |   +-- logo.png</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> +-- file_info.html</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> +-- file_tree.html</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> +-- get_ext.html</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> +-- get_palette.html</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> +-- gmt2df.html</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> +-- gmt2list.html</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> +-- grapes-is-grapes.html</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> +-- grapes-map-grapes.html</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> +-- grapes-match-grapes.html</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> +-- grapes-nin-grapes.html</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> +-- grapes-p-grapes.html</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> +-- hex2rgb.html</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> +-- index.html</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> +-- inst</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> |   +-- extdata</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> +-- inst_pkg.html</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> +-- is_void.html</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> +-- libs</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> |   +-- core-js-2.5.3</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> |   +-- htmlwidgets-1.6.4</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> |   +-- react-18.2.0</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> |   +-- reactable-0.4.4</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> |   +-- reactable-binding-0.4.4</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> |   +-- reactwidget-2.0.0</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> +-- list_palettes.html</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> +-- logs</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> |   +-- palettes</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> +-- map_column.html</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> +-- perm.html</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> +-- pkg_functions.html</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> +-- pkg_version.html</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> +-- plot_bar.html</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> +-- plot_density.html</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> +-- plot_forest.html</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> +-- plot_pie.html</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> +-- plot_venn-1.png</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> +-- plot_venn-2.png</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> +-- plot_venn-3.png</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> +-- plot_venn-4.png</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> +-- plot_venn-5.png</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> +-- plot_venn.html</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> +-- preview_palette.html</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> +-- read_excel_flex.html</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> +-- read_table_flex.html</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> +-- remind.html</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> +-- remove_palette.html</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> +-- replace_void.html</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> +-- rgb2hex.html</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> +-- rows_with_void.html</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> +-- safe_execute.html</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> +-- set_mirror.html</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> +-- trial.html</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> +-- update_pkg.html</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> +-- view.html</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> +-- with_timer.html</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> +-- write_xlsx_flex.html</span>
+<span class="r-in"><span><span class="fu">file_tree</span><span class="op">(</span><span class="st">"."</span>, max_depth <span class="op">=</span> <span class="fl">3</span><span class="op">)</span></span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">──</span> <span style="font-weight: bold;">Directory Tree: F:\project\evanverse\docs\reference</span> <span style="color: #00BBBB;">─────────────────────────</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> +-- any_void.html</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> +-- bio_palette_gallery.html</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> +-- check_pkg.html</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> +-- cols_with_void.html</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> +-- comb.html</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> +-- combine_logic.html</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> +-- compile_palettes.html</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> +-- convert_gene_id.html</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> +-- create_palette.html</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> +-- df2list.html</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> +-- df_forest_test.html</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> +-- download_batch.html</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> +-- download_gene_ref.html</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> +-- download_geo_data.html</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> +-- download_url.html</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> +-- drop_void.html</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> +-- figures</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> |   +-- logo-input.png</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> |   +-- logo.png</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> +-- file_info.html</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> +-- file_tree.html</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> +-- get_ext.html</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> +-- get_palette.html</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> +-- gmt2df.html</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> +-- gmt2list.html</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> +-- grapes-is-grapes.html</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> +-- grapes-map-grapes.html</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> +-- grapes-match-grapes.html</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> +-- grapes-nin-grapes.html</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> +-- grapes-p-grapes.html</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> +-- hex2rgb.html</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> +-- index.html</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> +-- inst</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> |   +-- extdata</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> |       +-- palettes</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> +-- inst_pkg.html</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> +-- is_void.html</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> +-- libs</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> |   +-- core-js-2.5.3</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> |   |   +-- LICENSE</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> |   |   +-- package.json</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> |   |   +-- shim.min.js</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> |   +-- htmlwidgets-1.6.4</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> |   |   +-- htmlwidgets.js</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> |   +-- react-18.2.0</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> |   |   +-- AUTHORS</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> |   |   +-- LICENSE.txt</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> |   |   +-- react-dom.min.js</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> |   |   +-- react.min.js</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> |   +-- reactable-0.4.4</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> |   |   +-- reactable.css</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> |   |   +-- reactable.js</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> |   |   +-- reactable.js.map</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> |   |   +-- reactable.server.js</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> |   |   +-- reactable.server.js.LICENSE.txt</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> |   |   +-- reactable.server.js.map</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> |   |   +-- reactable.yaml</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> |   +-- reactable-binding-0.4.4</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> |   |   +-- reactable.js</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> |   +-- reactwidget-2.0.0</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> |       +-- react-tools.js</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> +-- list_palettes.html</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> +-- logs</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> |   +-- palettes</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> |       +-- create_palette.log</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> |       +-- remove_palette.log</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> +-- map_column.html</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> +-- perm.html</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> +-- pkg_functions.html</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> +-- pkg_version.html</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> +-- plot_bar.html</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> +-- plot_density.html</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> +-- plot_forest.html</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> +-- plot_pie.html</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> +-- plot_venn-1.png</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> +-- plot_venn-2.png</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> +-- plot_venn-3.png</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> +-- plot_venn-4.png</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> +-- plot_venn-5.png</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> +-- plot_venn.html</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> +-- preview_palette.html</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> +-- read_excel_flex.html</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> +-- read_table_flex.html</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> +-- remind.html</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> +-- remove_palette.html</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> +-- replace_void.html</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> +-- rgb2hex.html</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> +-- rows_with_void.html</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> +-- safe_execute.html</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> +-- set_mirror.html</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> +-- trial.html</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> +-- update_pkg.html</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> +-- view.html</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> +-- with_timer.html</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> +-- write_xlsx_flex.html</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># \donttest{</span></span></span>
-<span class="r-in"><span><span class="co"># Example with temporary directory</span></span></span>
+<span class="r-in"><span><span class="co"># Example with temporary directory and logging:</span></span></span>
 <span class="r-in"><span><span class="va">temp_dir</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempdir</a></span><span class="op">(</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="fu">file_tree</span><span class="op">(</span><span class="va">temp_dir</span>, max_depth <span class="op">=</span> <span class="fl">2</span>, log <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">file_tree</span><span class="op">(</span><span class="va">temp_dir</span>, max_depth <span class="op">=</span> <span class="fl">2</span>, log <span class="op">=</span> <span class="cn">TRUE</span>, log_path <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempdir</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">──</span> <span style="font-weight: bold;">Directory Tree: C:\Users\84241\AppData\Local\Temp\Rtmp2JNh68</span> <span style="color: #00BBBB;">────────────────</span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> +-- Rf533429a2ec2</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">──</span> <span style="font-weight: bold;">Directory Tree: C:\Users\84241\AppData\Local\Temp\RtmpURWUud</span> <span style="color: #00BBBB;">────────────────</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> +-- Rf6ec83b211caf</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> +-- bslib-851fffe0abea530870c09a9e845717e1</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> |   +-- bootstrap.bundle.min.js</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> |   +-- bootstrap.bundle.min.js.map</span>
@@ -186,12 +360,12 @@ Optionally, save the result to a log file for record keeping or debugging.</p>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> |   +-- font.css</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> |   +-- fonts</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> +-- downlit</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> |   +-- Biobase</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> |   +-- base</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> |   +-- curl</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> |   +-- devtools</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> |   +-- remotes</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> |   +-- utils</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> +-- file5334227d12b5</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> +-- file6ec820fa26e1</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> |   +-- font.css</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> |   +-- tDbY2o-flEEny0FZhsfKu5WU4zr3E_BX0PnT8RD8yKxTN1OVgaY.woff2</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> |   +-- tDbY2o-flEEny0FZhsfKu5WU4zr3E_BX0PnT8RD8yKxTNFOVgaY.woff2</span>
@@ -199,8 +373,9 @@ Optionally, save the result to a log file for record keeping or debugging.</p>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> |   +-- tDbY2o-flEEny0FZhsfKu5WU4zr3E_BX0PnT8RD8yKxTOVOVgaY.woff2</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> |   +-- tDbY2o-flEEny0FZhsfKu5WU4zr3E_BX0PnT8RD8yKxTOlOV.woff2</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> |   +-- tDbY2o-flEEny0FZhsfKu5WU4zr3E_BX0PnT8RD8yKxTPlOVgaY.woff2</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> +-- file5334446e1a8b</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> +-- file53345bfd780f</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> +-- file6ec822f253bf</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> +-- file6ec82cbc2b1e</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> +-- file6ec865983c6e</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> |   +-- UcCO3FwrK3iLTeHuS_nVMrMxCp50SjIw2boKoduKmMEVuLyfAZ9hiA.woff2</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> |   +-- UcCO3FwrK3iLTeHuS_nVMrMxCp50SjIw2boKoduKmMEVuLyfAZBhiI2B.woff2</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> |   +-- UcCO3FwrK3iLTeHuS_nVMrMxCp50SjIw2boKoduKmMEVuLyfAZFhiI2B.woff2</span>
@@ -209,7 +384,7 @@ Optionally, save the result to a log file for record keeping or debugging.</p>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> |   +-- UcCO3FwrK3iLTeHuS_nVMrMxCp50SjIw2boKoduKmMEVuLyfAZthiI2B.woff2</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> |   +-- UcCO3FwrK3iLTeHuS_nVMrMxCp50SjIw2boKoduKmMEVuLyfAZxhiI2B.woff2</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> |   +-- font.css</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> +-- file53347134f37</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> +-- file6ec86e796ffe</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> |   +-- UcCO3FwrK3iLTeHuS_nVMrMxCp50SjIw2boKoduKmMEVuLyfAZ9hiA.woff2</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> |   +-- UcCO3FwrK3iLTeHuS_nVMrMxCp50SjIw2boKoduKmMEVuLyfAZBhiI2B.woff2</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> |   +-- UcCO3FwrK3iLTeHuS_nVMrMxCp50SjIw2boKoduKmMEVuLyfAZFhiI2B.woff2</span>
@@ -218,9 +393,11 @@ Optionally, save the result to a log file for record keeping or debugging.</p>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> |   +-- UcCO3FwrK3iLTeHuS_nVMrMxCp50SjIw2boKoduKmMEVuLyfAZthiI2B.woff2</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> |   +-- UcCO3FwrK3iLTeHuS_nVMrMxCp50SjIw2boKoduKmMEVuLyfAZxhiI2B.woff2</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> |   +-- font.css</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> +-- file5334783b1c5b</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> +-- file5334f304a5</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> File tree log saved to: C:\Users\84241\AppData\Local\Temp\Rtmp2JNh68\logs\tree\file_tree_20250929_114409.log</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> +-- logs</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> |   +-- palettes</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> +-- palettes.rds</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> +-- robots.txt</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> File tree log saved to: C:\Users\84241\AppData\Local\Temp\RtmpURWUud\file_tree_20251007_161044.log</span>
 <span class="r-in"><span><span class="co"># }</span></span></span>
 <span class="r-in"><span></span></span>
 </code></pre></div>
@@ -239,7 +416,7 @@ Optionally, save the result to a log file for record keeping or debugging.</p>
 
 <div class="pkgdown-footer-right">
   <div class="text-muted">
-<p><strong>evanverse v0.3.4</strong><br><small>Last updated: September 2025</small></p>
+<p><strong>evanverse v0.3.5</strong><br><small>Last updated: October 2025</small></p>
 </div><div class="footer-links">
 <p><a href="https://github.com/evanbio/evanverse" class="external-link text-muted me-3" aria-label="GitHub"> <i class="fab fa-github fa-lg"></i> </a> <a href="https://cran.r-project.org/package=evanverse" class="external-link text-muted me-3" aria-label="CRAN"> <i class="fas fa-download fa-lg"></i> </a> <a href="https://blog.evanzhou.org" class="external-link text-muted" aria-label="Blog"> <i class="fas fa-blog fa-lg"></i> </a></p>
 </div>

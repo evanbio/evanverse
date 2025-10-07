@@ -61,7 +61,7 @@ This function provides multiple visualization options to help users evaluate col
 
     <a class="navbar-brand me-2" href="../index.html">evanverse</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.3.4</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.3.5</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -165,9 +165,34 @@ This function provides multiple visualization options to help users evaluate col
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># Basic usage (commented to avoid graphics operations):</span></span></span>
-<span class="r-in"><span><span class="co"># preview_palette("viridis", type = "sequential", plot_type = "bar")</span></span></span>
-<span class="r-in"><span><span class="co"># preview_palette("RdYlBu", type = "diverging", plot_type = "pie")</span></span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># \donttest{</span></span></span>
+<span class="r-in"><span><span class="co"># Preview sequential palette:</span></span></span>
+<span class="r-in"><span><span class="fu">preview_palette</span><span class="op">(</span><span class="st">"blues"</span>, type <span class="op">=</span> <span class="st">"sequential"</span>, plot_type <span class="op">=</span> <span class="st">"bar"</span><span class="op">)</span></span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> Loaded palette <span style="color: #0000BB;">"blues"</span> (<span style="color: #0000BB;">"sequential"</span>), <span style="color: #0000BB;">3</span> colors</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> ── <span style="font-weight: bold;">Previewing palette: </span><span style="color: #0000BB; font-weight: bold;">"blues"</span> ──</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> Plot type: <span style="color: #0000BB;">"bar"</span>, colors: <span style="color: #0000BB;">3</span></span>
+<span class="r-plt img"><img src="preview_palette-1.png" alt="" width="700" height="433"></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Preview diverging palette:</span></span></span>
+<span class="r-in"><span><span class="fu">preview_palette</span><span class="op">(</span><span class="st">"fire_ice_duo"</span>, type <span class="op">=</span> <span class="st">"diverging"</span>, plot_type <span class="op">=</span> <span class="st">"pie"</span><span class="op">)</span></span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> Loaded palette <span style="color: #0000BB;">"fire_ice_duo"</span> (<span style="color: #0000BB;">"diverging"</span>), <span style="color: #0000BB;">2</span> colors</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> ── <span style="font-weight: bold;">Previewing palette: </span><span style="color: #0000BB; font-weight: bold;">"fire_ice_duo"</span> ──</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> Plot type: <span style="color: #0000BB;">"pie"</span>, colors: <span style="color: #0000BB;">2</span></span>
+<span class="r-plt img"><img src="preview_palette-2.png" alt="" width="700" height="433"></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Preview qualitative palette with custom colors:</span></span></span>
+<span class="r-in"><span><span class="fu">preview_palette</span><span class="op">(</span><span class="st">"balanced_quartet"</span>, type <span class="op">=</span> <span class="st">"qualitative"</span>, n <span class="op">=</span> <span class="fl">4</span>, plot_type <span class="op">=</span> <span class="st">"circle"</span><span class="op">)</span></span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> Loaded palette <span style="color: #0000BB;">"balanced_quartet"</span> (<span style="color: #0000BB;">"qualitative"</span>), <span style="color: #0000BB;">4</span> colors</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> ── <span style="font-weight: bold;">Previewing palette: </span><span style="color: #0000BB; font-weight: bold;">"balanced_quartet"</span> ──</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> Plot type: <span style="color: #0000BB;">"circle"</span>, colors: <span style="color: #0000BB;">4</span></span>
+<span class="r-plt img"><img src="preview_palette-3.png" alt="" width="700" height="433"></span>
+<span class="r-in"><span><span class="co"># }</span></span></span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
@@ -184,7 +209,7 @@ This function provides multiple visualization options to help users evaluate col
 
 <div class="pkgdown-footer-right">
   <div class="text-muted">
-<p><strong>evanverse v0.3.4</strong><br><small>Last updated: September 2025</small></p>
+<p><strong>evanverse v0.3.5</strong><br><small>Last updated: October 2025</small></p>
 </div><div class="footer-links">
 <p><a href="https://github.com/evanbio/evanverse" class="external-link text-muted me-3" aria-label="GitHub"> <i class="fab fa-github fa-lg"></i> </a> <a href="https://cran.r-project.org/package=evanverse" class="external-link text-muted me-3" aria-label="CRAN"> <i class="fas fa-download fa-lg"></i> </a> <a href="https://blog.evanzhou.org" class="external-link text-muted" aria-label="Blog"> <i class="fas fa-blog fa-lg"></i> </a></p>
 </div>

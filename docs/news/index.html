@@ -59,7 +59,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">evanverse</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.3.4</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.3.5</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -105,6 +105,47 @@
       <small>Source: <a href="https://github.com/evanbio/evanverse/blob/HEAD/NEWS.md" class="external-link"><code>NEWS.md</code></a></small>
     </div>
 
+    <div class="section level2">
+<h2 class="pkg-version" data-toc-text="0.3.5" id="evanverse-035">evanverse 0.3.5<a class="anchor" aria-label="anchor" href="#evanverse-035"></a></h2>
+<p><em>Released: October 7, 2025</em></p>
+<p><strong>CRAN Resubmission</strong> - Addressed all reviewer feedback with improved examples and file operation handling.</p>
+<hr><div class="section level4">
+<h4 id="cran-compliance-fixes-0-3-5">CRAN Compliance Fixes<a class="anchor" aria-label="anchor" href="#cran-compliance-fixes-0-3-5"></a></h4>
+<ul><li>
+<strong>Fixed function examples</strong>: Updated 10 functions with properly working examples per CRAN reviewer feedback
+<ul><li>Replaced <code>\donttest{}</code> with <code>\dontrun{}</code> for network-dependent operations</li>
+<li>Added <code>\donttest{}</code> with quick demos for appropriate functions</li>
+<li>Fixed all commented examples in <code>@examples</code> sections</li>
+</ul></li>
+<li>
+<strong>File operation improvements</strong>: All examples now use <code><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempdir()</a></code> for temporary file creation
+<ul><li>Enhanced <code><a href="../reference/create_palette.html">create_palette()</a></code> examples with proper cleanup code</li>
+<li>Updated <code><a href="../reference/file_tree.html">file_tree()</a></code> examples to use appropriate paths</li>
+<li>Fixed <code><a href="../reference/preview_palette.html">preview_palette()</a></code> to use existing palette names</li>
+</ul></li>
+<li>
+<strong>Network operation handling</strong>: Properly wrapped all network-dependent examples
+<ul><li>Functions updated: <code><a href="../reference/download_geo_data.html">download_geo_data()</a></code>, <code><a href="../reference/download_url.html">download_url()</a></code>, <code><a href="../reference/inst_pkg.html">inst_pkg()</a></code>, <code><a href="../reference/pkg_version.html">pkg_version()</a></code>, <code><a href="../reference/set_mirror.html">set_mirror()</a></code>
+</li>
+</ul></li>
+<li>
+<strong>GMT file examples</strong>: Enhanced examples for <code><a href="../reference/gmt2df.html">gmt2df()</a></code> and <code><a href="../reference/gmt2list.html">gmt2list()</a></code> functions</li>
+<li>
+<strong>Palette management</strong>: Fixed examples for <code><a href="../reference/compile_palettes.html">compile_palettes()</a></code> and <code><a href="../reference/remove_palette.html">remove_palette()</a></code>
+</li>
+</ul></div>
+<div class="section level4">
+<h4 id="technical-details-0-3-5">Technical Details<a class="anchor" aria-label="anchor" href="#technical-details-0-3-5"></a></h4>
+<ul><li>
+<strong>Reviewer</strong>: Addressed feedback from Benjamin Altmann (CRAN)</li>
+<li>
+<strong>Functions updated</strong>: 10 functions with improved examples and documentation</li>
+<li>
+<strong>Files modified</strong>: 24 R and man files for consistency</li>
+<li>
+<strong>Compliance</strong>: All examples now follow CRAN policies for file operations and network access</li>
+</ul><hr></div>
+</div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="0.3.4" id="evanverse-034">evanverse 0.3.4<a class="anchor" aria-label="anchor" href="#evanverse-034"></a></h2>
 <p><em>Released: September 28, 2025</em></p>
@@ -477,7 +518,7 @@
 
 <div class="pkgdown-footer-right">
   <div class="text-muted">
-<p><strong>evanverse v0.3.4</strong><br><small>Last updated: September 2025</small></p>
+<p><strong>evanverse v0.3.5</strong><br><small>Last updated: October 2025</small></p>
 </div><div class="footer-links">
 <p><a href="https://github.com/evanbio/evanverse" class="external-link text-muted me-3" aria-label="GitHub"> <i class="fab fa-github fa-lg"></i> </a> <a href="https://cran.r-project.org/package=evanverse" class="external-link text-muted me-3" aria-label="CRAN"> <i class="fas fa-download fa-lg"></i> </a> <a href="https://blog.evanzhou.org" class="external-link text-muted" aria-label="Blog"> <i class="fas fa-blog fa-lg"></i> </a></p>
 </div>

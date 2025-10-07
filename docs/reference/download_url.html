@@ -61,7 +61,7 @@ retry mechanisms, and advanced features like resume, bandwidth limiting, and aut
 
     <a class="navbar-brand me-2" href="../index.html">evanverse</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.3.4</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.3.5</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -217,24 +217,45 @@ if a partial file exists. Default: FALSE.</p></dd>
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># Basic usage (commented to avoid network operations):</span></span></span>
-<span class="r-in"><span><span class="co"># download_url("https://example.com/data.csv")</span></span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span> <span class="co"># \dontrun{</span></span></span>
+<span class="r-in"><span><span class="co"># Download a CSV file from GitHub:</span></span></span>
+<span class="r-in"><span><span class="fu">download_url</span><span class="op">(</span></span></span>
+<span class="r-in"><span>  url <span class="op">=</span> <span class="st">"https://raw.githubusercontent.com/tidyverse/ggplot2/main/README.md"</span>,</span></span>
+<span class="r-in"><span>  dest <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempdir</a></span><span class="op">(</span><span class="op">)</span>, <span class="st">"ggplot2_readme.md"</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>  timeout <span class="op">=</span> <span class="fl">30</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="co"># Advanced usage with custom settings:</span></span></span>
-<span class="r-in"><span><span class="co"># download_url(</span></span></span>
-<span class="r-in"><span><span class="co">#   url = "https://example.com/dataset.zip",</span></span></span>
-<span class="r-in"><span><span class="co">#   dest = file.path(tempdir(), "dataset.zip"),</span></span></span>
-<span class="r-in"><span><span class="co">#   unzip = TRUE,</span></span></span>
-<span class="r-in"><span><span class="co">#   resume = TRUE,</span></span></span>
-<span class="r-in"><span><span class="co">#   speed_limit = 1000000,</span></span></span>
-<span class="r-in"><span><span class="co">#   timeout = 1800</span></span></span>
-<span class="r-in"><span><span class="co"># )</span></span></span>
+<span class="r-in"><span><span class="co"># Download and extract a zip file:</span></span></span>
+<span class="r-in"><span><span class="fu">download_url</span><span class="op">(</span></span></span>
+<span class="r-in"><span>  url <span class="op">=</span> <span class="st">"https://cran.r-project.org/src/contrib/Archive/dplyr/dplyr_0.8.0.tar.gz"</span>,</span></span>
+<span class="r-in"><span>  dest <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempdir</a></span><span class="op">(</span><span class="op">)</span>, <span class="st">"dplyr.tar.gz"</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>  unzip <span class="op">=</span> <span class="cn">TRUE</span>,</span></span>
+<span class="r-in"><span>  timeout <span class="op">=</span> <span class="fl">60</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">}</span> <span class="co"># }</span></span></span>
 <span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="co"># With authentication:</span></span></span>
-<span class="r-in"><span><span class="co"># download_url(</span></span></span>
-<span class="r-in"><span><span class="co">#   url = "https://api.example.com/data.json",</span></span></span>
-<span class="r-in"><span><span class="co">#   headers = list(Authorization = "Bearer token")</span></span></span>
-<span class="r-in"><span><span class="co"># )</span></span></span>
+<span class="r-in"><span><span class="co"># \donttest{</span></span></span>
+<span class="r-in"><span><span class="co"># Quick demo with a tiny file:</span></span></span>
+<span class="r-in"><span><span class="fu">download_url</span><span class="op">(</span></span></span>
+<span class="r-in"><span>  url <span class="op">=</span> <span class="st">"https://httpbin.org/robots.txt"</span>,</span></span>
+<span class="r-in"><span>  dest <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempdir</a></span><span class="op">(</span><span class="op">)</span>, <span class="st">"robots.txt"</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>  timeout <span class="op">=</span> <span class="fl">10</span>,</span></span>
+<span class="r-in"><span>  verbose <span class="op">=</span> <span class="cn">FALSE</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">──</span> <span style="font-weight: bold;">Starting File Download</span> <span style="color: #00BBBB;">──────────────────────────────────────────────────────</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> URL: <span style="color: #0000BB; font-style: italic;">&lt;https://httpbin.org/robots.txt&gt;</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> Destination: <span style="color: #0000BB;">C:\Users\84241\AppData\Local\Temp\RtmpURWUud/robots.txt</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> ── <span style="font-weight: bold;">Download Attempt 1/3</span> ──</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> Download completed successfully</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> File size: 0 MB</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> Download time: 3.1 seconds</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">──</span> <span style="font-weight: bold;">Download Process Completed</span> <span style="color: #00BBBB;">──────────────────────────────────────────────────</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> Final file: <span style="color: #0000BB;">C:\Users\84241\AppData\Local\Temp\RtmpURWUud/robots.txt</span></span>
+<span class="r-in"><span><span class="co"># }</span></span></span>
 <span class="r-in"><span></span></span>
 </code></pre></div>
     </div>
@@ -252,7 +273,7 @@ if a partial file exists. Default: FALSE.</p></dd>
 
 <div class="pkgdown-footer-right">
   <div class="text-muted">
-<p><strong>evanverse v0.3.4</strong><br><small>Last updated: September 2025</small></p>
+<p><strong>evanverse v0.3.5</strong><br><small>Last updated: October 2025</small></p>
 </div><div class="footer-links">
 <p><a href="https://github.com/evanbio/evanverse" class="external-link text-muted me-3" aria-label="GitHub"> <i class="fab fa-github fa-lg"></i> </a> <a href="https://cran.r-project.org/package=evanverse" class="external-link text-muted me-3" aria-label="CRAN"> <i class="fas fa-download fa-lg"></i> </a> <a href="https://blog.evanzhou.org" class="external-link text-muted" aria-label="Blog"> <i class="fas fa-blog fa-lg"></i> </a></p>
 </div>

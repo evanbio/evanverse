@@ -61,7 +61,7 @@ supplemental files, and platform annotations with error handling and logging."><
 
     <a class="navbar-brand me-2" href="../index.html">evanverse</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.3.4</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.3.5</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -192,22 +192,24 @@ for functional genomics data sets–update. Nucleic Acids Res. 2013 Jan;
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># Basic usage (commented to avoid network operations):</span></span></span>
-<span class="r-in"><span><span class="co"># result &lt;- download_geo_data("GSE12345", dest_dir = tempdir())</span></span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span> <span class="co"># \dontrun{</span></span></span>
+<span class="r-in"><span><span class="co"># Download GEO data (requires network connection):</span></span></span>
+<span class="r-in"><span><span class="va">result</span> <span class="op">&lt;-</span> <span class="fu">download_geo_data</span><span class="op">(</span><span class="st">"GSE12345"</span>, dest_dir <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempdir</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Advanced usage with custom settings:</span></span></span>
-<span class="r-in"><span><span class="co"># result &lt;- download_geo_data(</span></span></span>
-<span class="r-in"><span><span class="co">#   gse_id = "GSE7305",</span></span></span>
-<span class="r-in"><span><span class="co">#   dest_dir = tempdir(),</span></span></span>
-<span class="r-in"><span><span class="co">#   log = TRUE,</span></span></span>
-<span class="r-in"><span><span class="co">#   retries = 3,</span></span></span>
-<span class="r-in"><span><span class="co">#   timeout = 600</span></span></span>
-<span class="r-in"><span><span class="co"># )</span></span></span>
+<span class="r-in"><span><span class="va">result</span> <span class="op">&lt;-</span> <span class="fu">download_geo_data</span><span class="op">(</span></span></span>
+<span class="r-in"><span>  gse_id <span class="op">=</span> <span class="st">"GSE7305"</span>,</span></span>
+<span class="r-in"><span>  dest_dir <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempdir</a></span><span class="op">(</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>  log <span class="op">=</span> <span class="cn">TRUE</span>,</span></span>
+<span class="r-in"><span>  retries <span class="op">=</span> <span class="fl">3</span>,</span></span>
+<span class="r-in"><span>  timeout <span class="op">=</span> <span class="fl">600</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Access downloaded data:</span></span></span>
-<span class="r-in"><span><span class="co"># expr_data &lt;- Biobase::exprs(result$gse_object)</span></span></span>
-<span class="r-in"><span><span class="co"># sample_info &lt;- Biobase::pData(result$gse_object)</span></span></span>
-<span class="r-in"><span><span class="co"># feature_info &lt;- Biobase::fData(result$gse_object)</span></span></span>
+<span class="r-in"><span><span class="va">expr_data</span> <span class="op">&lt;-</span> <span class="fu">Biobase</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/Biobase/man/exprs.html" class="external-link">exprs</a></span><span class="op">(</span><span class="va">result</span><span class="op">$</span><span class="va">gse_object</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">sample_info</span> <span class="op">&lt;-</span> <span class="fu">Biobase</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/Biobase/man/phenoData.html" class="external-link">pData</a></span><span class="op">(</span><span class="va">result</span><span class="op">$</span><span class="va">gse_object</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">feature_info</span> <span class="op">&lt;-</span> <span class="fu">Biobase</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/Biobase/man/featureData.html" class="external-link">fData</a></span><span class="op">(</span><span class="va">result</span><span class="op">$</span><span class="va">gse_object</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">}</span> <span class="co"># }</span></span></span>
 <span class="r-in"><span></span></span>
 </code></pre></div>
     </div>
@@ -225,7 +227,7 @@ for functional genomics data sets–update. Nucleic Acids Res. 2013 Jan;
 
 <div class="pkgdown-footer-right">
   <div class="text-muted">
-<p><strong>evanverse v0.3.4</strong><br><small>Last updated: September 2025</small></p>
+<p><strong>evanverse v0.3.5</strong><br><small>Last updated: October 2025</small></p>
 </div><div class="footer-links">
 <p><a href="https://github.com/evanbio/evanverse" class="external-link text-muted me-3" aria-label="GitHub"> <i class="fab fa-github fa-lg"></i> </a> <a href="https://cran.r-project.org/package=evanverse" class="external-link text-muted me-3" aria-label="CRAN"> <i class="fas fa-download fa-lg"></i> </a> <a href="https://blog.evanzhou.org" class="external-link text-muted" aria-label="Blog"> <i class="fas fa-blog fa-lg"></i> </a></p>
 </div>

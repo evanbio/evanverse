@@ -1,3 +1,35 @@
+# evanverse 0.3.5
+
+*Released: October 7, 2025*
+
+**CRAN Resubmission** - Addressed all reviewer feedback with improved examples and file operation handling.
+
+---
+
+### CRAN Compliance Fixes
+
+* **Fixed function examples**: Updated 10 functions with properly working examples per CRAN reviewer feedback
+  - Replaced `\donttest{}` with `\dontrun{}` for network-dependent operations
+  - Added `\donttest{}` with quick demos for appropriate functions
+  - Fixed all commented examples in `@examples` sections
+* **File operation improvements**: All examples now use `tempdir()` for temporary file creation
+  - Enhanced `create_palette()` examples with proper cleanup code
+  - Updated `file_tree()` examples to use appropriate paths
+  - Fixed `preview_palette()` to use existing palette names
+* **Network operation handling**: Properly wrapped all network-dependent examples
+  - Functions updated: `download_geo_data()`, `download_url()`, `inst_pkg()`, `pkg_version()`, `set_mirror()`
+* **GMT file examples**: Enhanced examples for `gmt2df()` and `gmt2list()` functions
+* **Palette management**: Fixed examples for `compile_palettes()` and `remove_palette()`
+
+### Technical Details
+
+* **Reviewer**: Addressed feedback from Benjamin Altmann (CRAN)
+* **Functions updated**: 10 functions with improved examples and documentation
+* **Files modified**: 24 R and man files for consistency
+* **Compliance**: All examples now follow CRAN policies for file operations and network access
+
+---
+
 # evanverse 0.3.4
 
 *Released: September 28, 2025*
