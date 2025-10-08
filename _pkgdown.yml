@@ -400,7 +400,7 @@ footer:
   components:
     package_info: |
       <div class="text-muted">
-        <strong>evanverse v0.3.5</strong><br>
+        <strong>evanverse v0.3.6</strong><br>
         <small>Last updated: October 2025</small>
       </div>
     social_links: |

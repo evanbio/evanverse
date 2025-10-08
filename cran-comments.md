@@ -1,36 +1,20 @@
-# CRAN Comments for evanverse 0.3.5
+# CRAN Comments for evanverse 0.3.6
 
-## Resubmission
+## Patch Release
 
-This is a resubmission addressing all feedback from CRAN reviewer Benjamin Altmann on the previous submission (v0.3.4).
+This is a patch release (v0.3.6) with minor bug fixes and improvements.
 
-### Changes Made in Response to Reviewer Feedback
+### Changes in v0.3.6
 
-**Reviewer**: Benjamin Altmann
-**Date**: October 2025
+1. **Bug Fixes**:
+   - Fixed plot_venn function to properly handle void values in list inputs
+   - Improved namespace consistency across package functions
+   - Minor documentation updates for clarity
 
-All issues identified in the review have been addressed:
-
-1. **Fixed commented examples** (10 functions updated):
-   - Replaced `\donttest{}` with `\dontrun{}` for network-dependent operations
-   - Added `\donttest{}` with quick demos for appropriate functions
-   - Removed comments from all `@examples` sections to provide working demonstrations
-
-2. **File operation improvements**:
-   - All examples now use `tempdir()` for temporary file creation
-   - Added proper cleanup code in `create_palette()` examples
-   - Updated `file_tree()` examples to use appropriate paths
-   - Fixed `preview_palette()` to use existing palette names instead of non-existent ones
-
-3. **Functions with improved examples**:
-   - `compile_palettes()`, `create_palette()`, `remove_palette()`
-   - `download_geo_data()`, `download_url()`
-   - `file_tree()`, `gmt2df()`, `gmt2list()`
-   - `inst_pkg()`, `pkg_version()`, `set_mirror()`
-
-4. **Documentation consistency**:
-   - Updated 24 R and man files for consistency
-   - All examples now follow CRAN policies for file operations and network access
+2. **Maintenance**:
+   - Updated package version to 0.3.6
+   - All R CMD check tests passing (0 errors, 0 warnings, 0 notes)
+   - Maintained CRAN compliance standards
 
 ## Test environments
 * Local Windows install, R 4.5.0 (2025-04-11)
@@ -58,13 +42,12 @@ All previously fixed issues remain resolved from v0.3.3 and v0.3.4:
 
 There are currently no downstream dependencies for this package.
 
-## Changes since v0.3.4
+## Changes since v0.3.5
 
-* **Fixed function examples**: Updated 10 functions with properly working examples
-* **File operations**: All examples use `tempdir()` for temporary files
-* **Network operations**: Properly wrapped all network-dependent code
-* **Documentation**: Enhanced clarity and compliance across 24 files
-* **Compliance**: All examples now follow CRAN policies exactly
+* **Bug fixes**: Fixed plot_venn void value handling
+* **Namespace**: Improved consistency across package functions
+* **Documentation**: Minor clarity improvements
+* **Compliance**: Maintained all CRAN standards from v0.3.5
 
 ### Quality Assurance
 

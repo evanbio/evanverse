@@ -1,3 +1,25 @@
+# evanverse 0.3.6
+
+*Released: October 8, 2025*
+
+**Maintenance Release** - Minor improvements and bug fixes.
+
+---
+
+### Bug Fixes
+
+* Fixed plot_venn function to properly handle void values in list inputs
+* Improved namespace consistency across package functions
+* Minor documentation updates for clarity
+
+### Technical Details
+
+* Updated package version to 0.3.6
+* All R CMD check tests passing (0 errors, 0 warnings, 0 notes)
+* Maintained CRAN compliance standards
+
+---
+
 # evanverse 0.3.5
 
 *Released: October 7, 2025*

@@ -33,6 +33,7 @@
 #'
 #' @return A ggplot object (and optionally a list of processed sets if `return_sets = TRUE`).
 #' @export
+#' @importFrom rlang syms
 #'
 #' @examples
 #' set.seed(123)
