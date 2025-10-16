@@ -4,7 +4,7 @@
 #'
 #' @param name Character. Palette name (without '.json' suffix).
 #' @param type Character. Optional. Preferred type ("sequential", "diverging", or "qualitative").
-#' @param color_dir Root folder where palettes are stored (default: "inst/extdata/palettes").
+#' @param color_dir Character. Root folder where palettes are stored (required). Use tempdir() for examples/tests.
 #' @param log Logical. Whether to log palette removal to a temporary log file.
 #'
 #' @return Invisibly TRUE if removed successfully, FALSE otherwise.
@@ -20,7 +20,7 @@
 #' }
 remove_palette <- function(name,
                             type = NULL,
-                            color_dir = "inst/extdata/palettes",
+                            color_dir,
                             log = TRUE) {
 
   # ===========================================================================
@@ -32,9 +32,9 @@ remove_palette <- function(name,
     cli::cli_abort("'name' must be a non-empty character string.")
   }
 
-  # Validate color_dir parameter
-  if (!is.character(color_dir) || length(color_dir) != 1 || is.na(color_dir)) {
-    cli::cli_abort("'color_dir' must be a character string.")
+  # Validate color_dir parameter (required)
+  if (missing(color_dir) || is.null(color_dir) || !is.character(color_dir) || length(color_dir) != 1 || is.na(color_dir)) {
+    cli::cli_abort("'color_dir' must be specified. Use tempdir() for examples/tests.")
   }
 
   # Validate log parameter

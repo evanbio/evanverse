@@ -6,7 +6,7 @@
 \usage{
 download_url(
   url,
-  dest = basename(url),
+  dest,
   overwrite = FALSE,
   unzip = FALSE,
   verbose = TRUE,
@@ -21,8 +21,7 @@ download_url(
 \item{url}{Character string. Full URL to the file to download.
 Supports HTTP, HTTPS, FTP, and SFTP protocols.}
 
-\item{dest}{Character string. Destination file path. If not specified,
-uses the basename of the URL. Default: basename(url).}
+\item{dest}{Character string. Destination file path (required). Use file.path(tempdir(), basename(url)) for examples/tests.}
 
 \item{overwrite}{Logical. Whether to overwrite existing files. Default: FALSE.}
 

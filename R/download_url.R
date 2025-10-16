@@ -5,8 +5,7 @@
 #'
 #' @param url Character string. Full URL to the file to download.
 #'   Supports HTTP, HTTPS, FTP, and SFTP protocols.
-#' @param dest Character string. Destination file path. If not specified,
-#'   uses the basename of the URL. Default: basename(url).
+#' @param dest Character string. Destination file path (required). Use file.path(tempdir(), basename(url)) for examples/tests.
 #' @param overwrite Logical. Whether to overwrite existing files. Default: FALSE.
 #' @param unzip Logical. Whether to automatically extract compressed files
 #'   after download. Supports .zip, .gz, .tar.gz formats. Default: FALSE.
@@ -74,7 +73,7 @@
 #'
 #' @export
 download_url <- function(url,
-                         dest = basename(url),
+                         dest,
                          overwrite = FALSE,
                          unzip = FALSE,
                          verbose = TRUE,
@@ -100,8 +99,10 @@ download_url <- function(url,
   if (!is.character(url) || length(url) != 1 || is.na(url) || url == "") {
     cli::cli_abort("url must be a single non-empty character string")
   }
-  if (!is.character(dest) || length(dest) != 1 || is.na(dest) || dest == "") {
-    cli::cli_abort("dest must be a single non-empty character string")
+
+  # Validate dest (required parameter)
+  if (missing(dest) || is.null(dest) || !is.character(dest) || length(dest) != 1 || is.na(dest) || dest == "") {
+    cli::cli_abort("'dest' must be specified. Use file.path(tempdir(), basename(url)) for examples/tests.")
   }
   if (!is.logical(overwrite) || length(overwrite) != 1) {
     cli::cli_abort("overwrite must be a single logical value")

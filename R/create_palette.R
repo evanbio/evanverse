@@ -6,7 +6,7 @@
 #' @param name Character. Palette name (e.g., "Blues").
 #' @param type Character. One of "sequential", "diverging", or "qualitative".
 #' @param colors Character vector of HEX color values (e.g., "#E64B35" or "#E64B35B2").
-#' @param color_dir Root folder to store palettes (default: "inst/extdata/palettes").
+#' @param color_dir Character. Root folder to store palettes (required). Use tempdir() for examples/tests.
 #' @param log Logical. Whether to log palette creation to a temporary log file.
 #'
 #' @return (Invisibly) A list with `path` and `info`.
@@ -34,7 +34,7 @@
 create_palette <- function(name,
                            type = c("sequential", "diverging", "qualitative"),
                            colors,
-                           color_dir = "inst/extdata/palettes",
+                           color_dir,
                            log = TRUE) {
 
   # ===========================================================================
@@ -61,6 +61,11 @@ create_palette <- function(name,
   # Validate name
   if (!is.character(name) || length(name) != 1) {
     cli::cli_abort("Palette name must be a single string.")
+  }
+
+  # Validate color_dir (required parameter)
+  if (missing(color_dir) || is.null(color_dir) || !is.character(color_dir) || length(color_dir) != 1) {
+    cli::cli_abort("'color_dir' must be specified. Use tempdir() for examples/tests.")
   }
 
   # ===========================================================================

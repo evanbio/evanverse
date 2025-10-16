@@ -4,7 +4,7 @@
 #' Built on top of `curl::multi_download()` for parallelism.
 #'
 #' @param urls Character vector. List of URLs to download.
-#' @param dest_dir Character. Destination directory. Default: current working directory.
+#' @param dest_dir Character. Destination directory (required). Use tempdir() for examples/tests.
 #' @param overwrite Logical. Whether to overwrite existing files. Default: FALSE.
 #' @param unzip Logical. Whether to unzip after download (for supported formats). Default: FALSE.
 #' @param workers Integer. Number of parallel workers. Default: 4.
@@ -17,7 +17,7 @@
 #' @return Invisibly returns a list of downloaded (and optionally unzipped) file paths.
 #' @export
 download_batch <- function(urls,
-                           dest_dir = ".",
+                           dest_dir,
                            overwrite = FALSE,
                            unzip = FALSE,
                            workers = 4,
@@ -34,6 +34,12 @@ download_batch <- function(urls,
   if (!requireNamespace("curl", quietly = TRUE)) {
     cli::cli_abort("Please install curl")
   }
+
+  # Validate dest_dir (required parameter)
+  if (missing(dest_dir) || is.null(dest_dir) || !is.character(dest_dir) || length(dest_dir) != 1) {
+    cli::cli_abort("'dest_dir' must be specified. Use tempdir() for examples/tests.")
+  }
+
   if (!is.character(urls)) {
     cli::cli_abort("urls must be a character vector")
   }

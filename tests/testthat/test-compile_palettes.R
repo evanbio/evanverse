@@ -48,7 +48,8 @@ test_that("compile_palettes() compiles valid palettes and returns path", {
 # Error handling tests
 # ------------------------------------------------------------------------------
 test_that("compile_palettes() fails for non-existent directory", {
-  expect_error(compile_palettes("nonexistent_directory", log = FALSE),
+  out_rds <- tempfile(fileext = ".rds")
+  expect_error(compile_palettes("nonexistent_directory", output_rds = out_rds, log = FALSE),
                "Palettes directory does not exist")
 })
 

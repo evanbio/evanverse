@@ -4,18 +4,14 @@
 \alias{compile_palettes}
 \title{compile_palettes(): Compile JSON palettes into RDS}
 \usage{
-compile_palettes(
-  palettes_dir = "inst/extdata/palettes",
-  output_rds = "inst/extdata/palettes.rds",
-  log = TRUE
-)
+compile_palettes(palettes_dir, output_rds, log = TRUE)
 }
 \arguments{
-\item{palettes_dir}{Folder containing subdirs: sequential/, diverging/, qualitative/}
+\item{palettes_dir}{Character. Folder containing subdirs: sequential/, diverging/, qualitative/ (required)}
 
-\item{output_rds}{Path to save compiled RDS file. Default: "data/palettes.rds"}
+\item{output_rds}{Character. Path to save compiled RDS file (required). Use tempdir() for examples/tests.}
 
-\item{log}{Whether to log compilation events. Default: TRUE}
+\item{log}{Logical. Whether to log compilation events. Default: TRUE}
 }
 \value{
 Invisibly returns RDS file path (character)

@@ -9,8 +9,9 @@
 # ------------------------------------------------------------------------------
 test_that("download_batch() validates inputs correctly", {
   # Test invalid inputs
-  expect_error(download_batch(123), "must be a character vector")
-  expect_error(download_batch(character(0)), "No URLs provided")
+  temp_dir <- tempdir()
+  expect_error(download_batch(123, dest_dir = temp_dir), "must be a character vector")
+  expect_error(download_batch(character(0), dest_dir = temp_dir), "No URLs provided")
 })
 
 test_that("download_batch() handles directory creation", {
@@ -61,5 +62,6 @@ test_that("download_batch() generates safe filenames", {
 # Error handling tests
 # ------------------------------------------------------------------------------
 test_that("download_batch() handles empty URL list", {
-  expect_error(download_batch(character(0)), "No URLs provided")
+  temp_dir <- tempdir()
+  expect_error(download_batch(character(0), dest_dir = temp_dir), "No URLs provided")
 })

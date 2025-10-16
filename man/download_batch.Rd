@@ -6,7 +6,7 @@
 \usage{
 download_batch(
   urls,
-  dest_dir = ".",
+  dest_dir,
   overwrite = FALSE,
   unzip = FALSE,
   workers = 4,
@@ -20,7 +20,7 @@ download_batch(
 \arguments{
 \item{urls}{Character vector. List of URLs to download.}
 
-\item{dest_dir}{Character. Destination directory. Default: current working directory.}
+\item{dest_dir}{Character. Destination directory (required). Use tempdir() for examples/tests.}
 
 \item{overwrite}{Logical. Whether to overwrite existing files. Default: FALSE.}
 

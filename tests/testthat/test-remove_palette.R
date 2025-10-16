@@ -38,48 +38,54 @@ test_that("remove_palette() validates name parameter correctly", {
 })
 
 test_that("remove_palette() validates color_dir parameter correctly", {
+  # Note: color_dir is now a required parameter, so these tests check the validation
+  # after the parameter is provided
   expect_error(
     remove_palette(name = "test", color_dir = c("dir1", "dir2")),
-    "'color_dir' must be a character string"
+    "'color_dir' must be specified"
   )
-  
+
   expect_error(
     remove_palette(name = "test", color_dir = NA_character_),
-    "'color_dir' must be a character string"
+    "'color_dir' must be specified"
   )
-  
+
   expect_error(
     remove_palette(name = "test", color_dir = 123),
-    "'color_dir' must be a character string"
+    "'color_dir' must be specified"
   )
 })
 
 test_that("remove_palette() validates log parameter correctly", {
+  temp_dir <- tempdir()
+
   expect_error(
-    remove_palette(name = "test", log = "TRUE"),
+    remove_palette(name = "test", color_dir = temp_dir, log = "TRUE"),
     "'log' must be TRUE or FALSE"
   )
-  
+
   expect_error(
-    remove_palette(name = "test", log = c(TRUE, FALSE)),
+    remove_palette(name = "test", color_dir = temp_dir, log = c(TRUE, FALSE)),
     "'log' must be TRUE or FALSE"
   )
-  
+
   expect_error(
-    remove_palette(name = "test", log = NA),
+    remove_palette(name = "test", color_dir = temp_dir, log = NA),
     "'log' must be TRUE or FALSE"
   )
 })
 
 test_that("remove_palette() validates type parameter correctly", {
+  temp_dir <- tempdir()
+
   expect_error(
-    remove_palette(name = "test", type = "invalid"),
+    remove_palette(name = "test", color_dir = temp_dir, type = "invalid"),
     "'arg' should be one of"
   )
-  
+
   # Valid types should work (but will show message about missing file)
   expect_message({
-    result <- remove_palette(name = "nonexistent", type = "sequential")
+    result <- remove_palette(name = "nonexistent", type = "sequential", color_dir = temp_dir, log = FALSE)
     expect_false(result)
   }, "Palette not found")
 })

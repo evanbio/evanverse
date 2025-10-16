@@ -2,9 +2,9 @@
 #'
 #' Read JSON files under `palettes_dir/`, validate content, and compile into a structured RDS file.
 #'
-#' @param palettes_dir Folder containing subdirs: sequential/, diverging/, qualitative/
-#' @param output_rds Path to save compiled RDS file. Default: "data/palettes.rds"
-#' @param log Whether to log compilation events. Default: TRUE
+#' @param palettes_dir Character. Folder containing subdirs: sequential/, diverging/, qualitative/ (required)
+#' @param output_rds Character. Path to save compiled RDS file (required). Use tempdir() for examples/tests.
+#' @param log Logical. Whether to log compilation events. Default: TRUE
 #'
 #' @return Invisibly returns RDS file path (character)
 #'
@@ -18,13 +18,23 @@
 #' }
 #'
 #' @export
-compile_palettes <- function(palettes_dir = "inst/extdata/palettes",
-                             output_rds = "inst/extdata/palettes.rds",
+compile_palettes <- function(palettes_dir,
+                             output_rds,
                              log = TRUE) {
 
   # ===========================================================================
   # Dependency and Parameter Validation Phase
   # ===========================================================================
+
+  # Validate palettes_dir (required parameter)
+  if (missing(palettes_dir) || is.null(palettes_dir) || !is.character(palettes_dir) || length(palettes_dir) != 1) {
+    cli::cli_abort("'palettes_dir' must be specified. Use tempdir() for examples/tests.")
+  }
+
+  # Validate output_rds (required parameter)
+  if (missing(output_rds) || is.null(output_rds) || !is.character(output_rds) || length(output_rds) != 1) {
+    cli::cli_abort("'output_rds' must be specified. Use tempdir() for examples/tests.")
+  }
 
   # Check if palettes_dir exists
   if (!dir.exists(palettes_dir)) {

@@ -8,7 +8,7 @@ create_palette(
   name,
   type = c("sequential", "diverging", "qualitative"),
   colors,
-  color_dir = "inst/extdata/palettes",
+  color_dir,
   log = TRUE
 )
 }
@@ -19,7 +19,7 @@ create_palette(
 
 \item{colors}{Character vector of HEX color values (e.g., "#E64B35" or "#E64B35B2").}
 
-\item{color_dir}{Root folder to store palettes (default: "inst/extdata/palettes").}
+\item{color_dir}{Character. Root folder to store palettes (required). Use tempdir() for examples/tests.}
 
 \item{log}{Logical. Whether to log palette creation to a temporary log file.}
 }

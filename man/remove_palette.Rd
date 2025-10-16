@@ -4,19 +4,14 @@
 \alias{remove_palette}
 \title{Remove a Saved Palette JSON}
 \usage{
-remove_palette(
-  name,
-  type = NULL,
-  color_dir = "inst/extdata/palettes",
-  log = TRUE
-)
+remove_palette(name, type = NULL, color_dir, log = TRUE)
 }
 \arguments{
 \item{name}{Character. Palette name (without '.json' suffix).}
 
 \item{type}{Character. Optional. Preferred type ("sequential", "diverging", or "qualitative").}
 
-\item{color_dir}{Root folder where palettes are stored (default: "inst/extdata/palettes").}
+\item{color_dir}{Character. Root folder where palettes are stored (required). Use tempdir() for examples/tests.}
 
 \item{log}{Logical. Whether to log palette removal to a temporary log file.}
 }
