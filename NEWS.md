@@ -1,3 +1,56 @@
+# evanverse 0.3.7
+
+*Released: October 16, 2025*
+
+**CRAN Compliance Release** - Fixed file system operation policy violations.
+
+---
+
+### CRAN Compliance Fixes
+
+* **File operation policy compliance**: Removed all default file paths that write to user's home directory or working directory
+  - Fixed 9 functions to require explicit path parameters instead of defaults
+  - Functions updated: `create_palette()`, `remove_palette()`, `compile_palettes()`, `download_batch()`, `download_url()`, `download_geo_data()`
+  - All examples and tests now use `tempdir()` for file operations
+
+* **Updated function signatures** (Breaking Changes - Path Parameters Now Required):
+  - `create_palette()`: `color_dir` parameter now required (no default)
+  - `remove_palette()`: `color_dir` parameter now required (no default)
+  - `compile_palettes()`: Both `palettes_dir` and `output_rds` parameters now required
+  - `download_batch()`: `dest_dir` parameter now required (no default)
+  - `download_url()`: `dest` parameter now required (no default)
+
+* **Enhanced parameter validation**: All affected functions now provide clear error messages when required paths are missing
+  - Error messages guide users to use `tempdir()` for examples and tests
+  - Documentation updated to reflect required parameters
+
+### Migration Guide
+
+For users upgrading from 0.3.6:
+
+```r
+# OLD (0.3.6) - No longer works in 0.3.7
+create_palette("my_palette", "sequential", colors)
+
+# NEW (0.3.7) - Explicit path required
+temp_dir <- file.path(tempdir(), "palettes")
+create_palette("my_palette", "sequential", colors, color_dir = temp_dir)
+
+# For production use, specify your desired directory
+create_palette("my_palette", "sequential", colors,
+               color_dir = "path/to/your/palette/directory")
+```
+
+### Technical Details
+
+* **Reviewer**: Addressed feedback from Benjamin Altmann (CRAN)
+* **Policy Reference**: [CRAN File Writing Policy](https://contributor.r-project.org/cran-cookbook/code_issues.html#writing-files-and-directories-to-the-home-filespace)
+* **Functions modified**: 9 functions updated for CRAN compliance
+* **Documentation**: All man pages regenerated with updated parameter descriptions
+* **Backward compatibility**: This is a breaking change for functions that previously had default file paths
+
+---
+
 # evanverse 0.3.6
 
 *Released: October 8, 2025*

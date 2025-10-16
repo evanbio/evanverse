@@ -59,7 +59,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">evanverse</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.3.6</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.3.7</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -112,11 +112,7 @@
 
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">compile_palettes</span><span class="op">(</span></span>
-<span>  palettes_dir <span class="op">=</span> <span class="st">"inst/extdata/palettes"</span>,</span>
-<span>  output_rds <span class="op">=</span> <span class="st">"inst/extdata/palettes.rds"</span>,</span>
-<span>  log <span class="op">=</span> <span class="cn">TRUE</span></span>
-<span><span class="op">)</span></span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">compile_palettes</span><span class="op">(</span><span class="va">palettes_dir</span>, <span class="va">output_rds</span>, log <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div class="section level2">
@@ -124,15 +120,15 @@
 
 
 <dl><dt id="arg-palettes-dir">palettes_dir<a class="anchor" aria-label="anchor" href="#arg-palettes-dir"></a></dt>
-<dd><p>Folder containing subdirs: sequential/, diverging/, qualitative/</p></dd>
+<dd><p>Character. Folder containing subdirs: sequential/, diverging/, qualitative/ (required)</p></dd>
 
 
 <dt id="arg-output-rds">output_rds<a class="anchor" aria-label="anchor" href="#arg-output-rds"></a></dt>
-<dd><p>Path to save compiled RDS file. Default: "data/palettes.rds"</p></dd>
+<dd><p>Character. Path to save compiled RDS file (required). Use tempdir() for examples/tests.</p></dd>
 
 
 <dt id="arg-log">log<a class="anchor" aria-label="anchor" href="#arg-log"></a></dt>
-<dd><p>Whether to log compilation events. Default: TRUE</p></dd>
+<dd><p>Logical. Whether to log compilation events. Default: TRUE</p></dd>
 
 </dl></div>
     <div class="section level2">
@@ -185,14 +181,14 @@
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> Added 'vintage_triad' (Type: qualitative, 3 colors)</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> Added 'violin' (Type: qualitative, 5 colors)</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> Added 'vividset' (Type: qualitative, 9 colors)</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> Saved RDS: C:\Users\84241\AppData\Local\Temp\RtmpgVahgH/palettes.rds</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> Saved RDS: C:\Users\84241\AppData\Local\Temp\Rtmpkbsd1O/palettes.rds</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> ── <span style="font-weight: bold;">Compilation Summary</span> ──</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> Sequential:   5</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> Diverging:    7</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> Qualitative:  23</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> Log written to: C:\Users\84241\AppData\Local\Temp\RtmpgVahgH/logs/palettes/compile_palettes.log</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> Log written to: C:\Users\84241\AppData\Local\Temp\Rtmpkbsd1O/logs/palettes/compile_palettes.log</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> All palettes compiled successfully!</span>
 <span class="r-in"><span><span class="co"># }</span></span></span>
 <span class="r-in"><span></span></span>
@@ -212,7 +208,7 @@
 
 <div class="pkgdown-footer-right">
   <div class="text-muted">
-<p><strong>evanverse v0.3.6</strong><br><small>Last updated: October 2025</small></p>
+<p><strong>evanverse v0.3.7</strong><br><small>Last updated: October 2025</small></p>
 </div><div class="footer-links">
 <p><a href="https://github.com/evanbio/evanverse" class="external-link text-muted me-3" aria-label="GitHub"> <i class="fab fa-github fa-lg"></i> </a> <a href="https://cran.r-project.org/package=evanverse" class="external-link text-muted me-3" aria-label="CRAN"> <i class="fas fa-download fa-lg"></i> </a> <a href="https://blog.evanzhou.org" class="external-link text-muted" aria-label="Blog"> <i class="fas fa-blog fa-lg"></i> </a></p>
 </div>

@@ -59,7 +59,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">evanverse</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.3.6</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.3.7</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -105,6 +105,68 @@
       <small>Source: <a href="https://github.com/evanbio/evanverse/blob/HEAD/NEWS.md" class="external-link"><code>NEWS.md</code></a></small>
     </div>
 
+    <div class="section level2">
+<h2 class="pkg-version" data-toc-text="0.3.7" id="evanverse-037">evanverse 0.3.7<a class="anchor" aria-label="anchor" href="#evanverse-037"></a></h2>
+<p><em>Released: October 16, 2025</em></p>
+<p><strong>CRAN Compliance Release</strong> - Fixed file system operation policy violations.</p>
+<hr><div class="section level4">
+<h4 id="cran-compliance-fixes-0-3-7">CRAN Compliance Fixes<a class="anchor" aria-label="anchor" href="#cran-compliance-fixes-0-3-7"></a></h4>
+<ul><li>
+<strong>File operation policy compliance</strong>: Removed all default file paths that write to user’s home directory or working directory
+<ul><li>Fixed 9 functions to require explicit path parameters instead of defaults</li>
+<li>Functions updated: <code><a href="../reference/create_palette.html">create_palette()</a></code>, <code><a href="../reference/remove_palette.html">remove_palette()</a></code>, <code><a href="../reference/compile_palettes.html">compile_palettes()</a></code>, <code><a href="../reference/download_batch.html">download_batch()</a></code>, <code><a href="../reference/download_url.html">download_url()</a></code>, <code><a href="../reference/download_geo_data.html">download_geo_data()</a></code>
+</li>
+<li>All examples and tests now use <code><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempdir()</a></code> for file operations</li>
+</ul></li>
+<li>
+<strong>Updated function signatures</strong> (Breaking Changes - Path Parameters Now Required):
+<ul><li>
+<code><a href="../reference/create_palette.html">create_palette()</a></code>: <code>color_dir</code> parameter now required (no default)</li>
+<li>
+<code><a href="../reference/remove_palette.html">remove_palette()</a></code>: <code>color_dir</code> parameter now required (no default)</li>
+<li>
+<code><a href="../reference/compile_palettes.html">compile_palettes()</a></code>: Both <code>palettes_dir</code> and <code>output_rds</code> parameters now required</li>
+<li>
+<code><a href="../reference/download_batch.html">download_batch()</a></code>: <code>dest_dir</code> parameter now required (no default)</li>
+<li>
+<code><a href="../reference/download_url.html">download_url()</a></code>: <code>dest</code> parameter now required (no default)</li>
+</ul></li>
+<li>
+<strong>Enhanced parameter validation</strong>: All affected functions now provide clear error messages when required paths are missing
+<ul><li>Error messages guide users to use <code><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempdir()</a></code> for examples and tests</li>
+<li>Documentation updated to reflect required parameters</li>
+</ul></li>
+</ul></div>
+<div class="section level4">
+<h4 id="migration-guide-0-3-7">Migration Guide<a class="anchor" aria-label="anchor" href="#migration-guide-0-3-7"></a></h4>
+<p>For users upgrading from 0.3.6:</p>
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># OLD (0.3.6) - No longer works in 0.3.7</span></span>
+<span><span class="fu"><a href="../reference/create_palette.html">create_palette</a></span><span class="op">(</span><span class="st">"my_palette"</span>, <span class="st">"sequential"</span>, <span class="va">colors</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># NEW (0.3.7) - Explicit path required</span></span>
+<span><span class="va">temp_dir</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempdir</a></span><span class="op">(</span><span class="op">)</span>, <span class="st">"palettes"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="../reference/create_palette.html">create_palette</a></span><span class="op">(</span><span class="st">"my_palette"</span>, <span class="st">"sequential"</span>, <span class="va">colors</span>, color_dir <span class="op">=</span> <span class="va">temp_dir</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># For production use, specify your desired directory</span></span>
+<span><span class="fu"><a href="../reference/create_palette.html">create_palette</a></span><span class="op">(</span><span class="st">"my_palette"</span>, <span class="st">"sequential"</span>, <span class="va">colors</span>,</span>
+<span>               color_dir <span class="op">=</span> <span class="st">"path/to/your/palette/directory"</span><span class="op">)</span></span></code></pre></div>
+</div>
+<div class="section level4">
+<h4 id="technical-details-0-3-7">Technical Details<a class="anchor" aria-label="anchor" href="#technical-details-0-3-7"></a></h4>
+<ul><li>
+<strong>Reviewer</strong>: Addressed feedback from Benjamin Altmann (CRAN)</li>
+<li>
+<strong>Policy Reference</strong>: <a href="https://contributor.r-project.org/cran-cookbook/code_issues.html#writing-files-and-directories-to-the-home-filespace" class="external-link">CRAN File Writing Policy</a>
+</li>
+<li>
+<strong>Functions modified</strong>: 9 functions updated for CRAN compliance</li>
+<li>
+<strong>Documentation</strong>: All man pages regenerated with updated parameter descriptions</li>
+<li>
+<strong>Backward compatibility</strong>: This is a breaking change for functions that previously had default file paths</li>
+</ul><hr></div>
+</div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="0.3.6" id="evanverse-036">evanverse 0.3.6<a class="anchor" aria-label="anchor" href="#evanverse-036"></a></h2>
 <p><em>Released: October 8, 2025</em></p>
@@ -535,7 +597,7 @@
 
 <div class="pkgdown-footer-right">
   <div class="text-muted">
-<p><strong>evanverse v0.3.6</strong><br><small>Last updated: October 2025</small></p>
+<p><strong>evanverse v0.3.7</strong><br><small>Last updated: October 2025</small></p>
 </div><div class="footer-links">
 <p><a href="https://github.com/evanbio/evanverse" class="external-link text-muted me-3" aria-label="GitHub"> <i class="fab fa-github fa-lg"></i> </a> <a href="https://cran.r-project.org/package=evanverse" class="external-link text-muted me-3" aria-label="CRAN"> <i class="fas fa-download fa-lg"></i> </a> <a href="https://blog.evanzhou.org" class="external-link text-muted" aria-label="Blog"> <i class="fas fa-blog fa-lg"></i> </a></p>
 </div>

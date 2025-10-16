@@ -59,7 +59,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">evanverse</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.3.6</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.3.7</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -112,12 +112,7 @@
 
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">remove_palette</span><span class="op">(</span></span>
-<span>  <span class="va">name</span>,</span>
-<span>  type <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  color_dir <span class="op">=</span> <span class="st">"inst/extdata/palettes"</span>,</span>
-<span>  log <span class="op">=</span> <span class="cn">TRUE</span></span>
-<span><span class="op">)</span></span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">remove_palette</span><span class="op">(</span><span class="va">name</span>, type <span class="op">=</span> <span class="cn">NULL</span>, <span class="va">color_dir</span>, log <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div class="section level2">
@@ -133,7 +128,7 @@
 
 
 <dt id="arg-color-dir">color_dir<a class="anchor" aria-label="anchor" href="#arg-color-dir"></a></dt>
-<dd><p>Root folder where palettes are stored (default: "inst/extdata/palettes").</p></dd>
+<dd><p>Character. Root folder where palettes are stored (required). Use tempdir() for examples/tests.</p></dd>
 
 
 <dt id="arg-log">log<a class="anchor" aria-label="anchor" href="#arg-log"></a></dt>
@@ -170,7 +165,7 @@
 
 <div class="pkgdown-footer-right">
   <div class="text-muted">
-<p><strong>evanverse v0.3.6</strong><br><small>Last updated: October 2025</small></p>
+<p><strong>evanverse v0.3.7</strong><br><small>Last updated: October 2025</small></p>
 </div><div class="footer-links">
 <p><a href="https://github.com/evanbio/evanverse" class="external-link text-muted me-3" aria-label="GitHub"> <i class="fab fa-github fa-lg"></i> </a> <a href="https://cran.r-project.org/package=evanverse" class="external-link text-muted me-3" aria-label="CRAN"> <i class="fas fa-download fa-lg"></i> </a> <a href="https://blog.evanzhou.org" class="external-link text-muted" aria-label="Blog"> <i class="fas fa-blog fa-lg"></i> </a></p>
 </div>
