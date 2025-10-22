@@ -6,6 +6,7 @@
 [![CRAN downloads (monthly)](https://cranlogs.r-pkg.org/badges/evanverse)](https://CRAN.R-project.org/package=evanverse)
 [![CRAN checks](https://badges.cranchecks.info/worst/evanverse.svg)](https://cran.r-project.org/web/checks/check_results_evanverse.html)
 [![R-CMD-check](https://github.com/evanbio/evanverse/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/evanbio/evanverse/actions/workflows/R-CMD-check.yaml)
+[![Codecov test coverage](https://codecov.io/gh/evanbio/evanverse/branch/main/graph/badge.svg)](https://codecov.io/gh/evanbio/evanverse?branch=main)
 [![Lifecycle: stable](https://img.shields.io/badge/lifecycle-stable-brightgreen.svg)](https://lifecycle.r-lib.org/articles/stages.html#stable)
 [![GitHub last commit](https://img.shields.io/github/last-commit/evanbio/evanverse)](https://github.com/evanbio/evanverse/commits/main)
 [![GitHub issues](https://img.shields.io/github/issues/evanbio/evanverse)](https://github.com/evanbio/evanverse/issues)

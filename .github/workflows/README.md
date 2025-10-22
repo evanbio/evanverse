@@ -4,7 +4,7 @@ This directory contains CI/CD workflows for the evanverse package.
 
 ## 📋 Active Workflows
 
-### R-CMD-check.yaml
+### 1. R-CMD-check.yaml
 
 **Purpose**: Automated R package checking across multiple platforms and R versions.
 
@@ -40,6 +40,56 @@ This directory contains CI/CD workflows for the evanverse package.
 [![R-CMD-check](https://github.com/evanbio/evanverse/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/evanbio/evanverse/actions/workflows/R-CMD-check.yaml)
 ```
 
+---
+
+### 2. test-coverage.yaml
+
+**Purpose**: Automated test coverage reporting using covr and Codecov.
+
+**Triggers**:
+- Push to `main` or `dev` branches
+- Pull requests to `main` or `dev` branches
+
+**Test Platform**:
+| Platform | R Version | Purpose |
+|----------|-----------|---------|
+| Ubuntu (latest) | release | Coverage analysis on primary platform |
+
+**Features**:
+- ✅ Uses `covr` package for coverage calculation
+- ✅ Uploads results to Codecov for visualization
+- ✅ Generates Cobertura XML format reports
+- ✅ Shows testthat output on failures
+- ✅ Uploads test artifacts on failure
+
+**Coverage Configuration**:
+- Target: Auto (maintains current coverage level)
+- Threshold: 1% (allows minor variations)
+- Range: 70-100% (acceptable coverage range)
+- Ignores: tests/, man/, data/, vignettes/, docs/
+
+**CRAN Compliance**:
+- Coverage analysis runs on Ubuntu only
+- Does not affect package build or installation
+- Configuration file (`codecov.yml`) excluded via `.Rbuildignore`
+- Uses official r-lib/actions workflow templates
+
+**Badge**:
+```markdown
+[![Codecov test coverage](https://codecov.io/gh/evanbio/evanverse/branch/main/graph/badge.svg)](https://codecov.io/gh/evanbio/evanverse)
+```
+
+**Setup Requirements**:
+1. Sign up for Codecov: https://codecov.io/
+2. Add repository to Codecov
+3. Add `CODECOV_TOKEN` to GitHub repository secrets
+4. Token available at: https://codecov.io/gh/evanbio/evanverse/settings
+
+**Viewing Coverage Reports**:
+- Dashboard: https://codecov.io/gh/evanbio/evanverse
+- PR comments show coverage changes automatically
+- Sunburst and tree visualizations available
+
 ## 🔧 Maintenance
 
 ### Updating Workflows
@@ -69,7 +119,7 @@ Check workflow runs at: https://github.com/evanbio/evanverse/actions
 
 ## 🚀 Future Workflows (Planned)
 
-- [ ] Test coverage reporting (codecov)
+- [x] Test coverage reporting (codecov) - **Implemented**
 - [ ] Automatic pkgdown site deployment
 - [ ] Code style checking (lintr)
 - [ ] Release automation
