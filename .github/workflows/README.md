@@ -90,6 +90,68 @@ This directory contains CI/CD workflows for the evanverse package.
 - PR comments show coverage changes automatically
 - Sunburst and tree visualizations available
 
+---
+
+### 3. pkgdown.yaml
+
+**Purpose**: Automated package documentation website building and deployment using pkgdown.
+
+**Triggers**:
+- Push to `main` or `dev` branches
+- Pull requests to `main` or `dev` branches
+- Release publication
+- Manual workflow dispatch
+
+**Deployment Platform**:
+| Platform | R Version | Purpose |
+|----------|-----------|---------|
+| Ubuntu (latest) | release | Build and deploy documentation site |
+
+**Features**:
+- ✅ Automatic site generation from roxygen2 documentation
+- ✅ Builds vignettes and articles
+- ✅ Deploys to GitHub Pages (gh-pages branch)
+- ✅ Custom theme with professional styling
+- ✅ Search functionality and navigation
+- ✅ Responsive design for mobile devices
+
+**Deployment Strategy**:
+- **Branch**: Deploys to `gh-pages` branch automatically
+- **URL**: https://evanbio.github.io/evanverse/
+- **On PRs**: Builds site but does not deploy (validation only)
+- **On Push**: Builds and deploys to GitHub Pages
+- **On Release**: Rebuilds with latest version info
+
+**CRAN Compliance**:
+- Documentation site is external to package
+- Does not modify package source code
+- Configuration file (`_pkgdown.yml`) excluded via `.Rbuildignore`
+- Uses official r-lib/actions workflow templates
+- Site generation uses standard pkgdown package
+
+**Configuration**:
+- Theme: Bootstrap 5 with Sandstone bootswatch
+- Custom CSS: Professional styling with brand colors
+- Navigation: Organized by function categories
+- Articles: Multiple vignettes with progressive complexity
+- Reference: Functions grouped by domain (visualization, data processing, bioinformatics)
+
+**Setup Requirements**:
+1. Enable GitHub Pages in repository settings
+2. Set source to `gh-pages` branch
+3. Ensure `_pkgdown.yml` is properly configured
+4. Grant workflow write permissions (Settings → Actions → General → Workflow permissions)
+
+**Viewing Documentation**:
+- Production site: https://evanbio.github.io/evanverse/
+- Local preview: Run `pkgdown::build_site()` in R console
+- Development: Use `pkgdown::preview_site()` for live preview
+
+**Badge**:
+```markdown
+[![pkgdown](https://github.com/evanbio/evanverse/actions/workflows/pkgdown.yaml/badge.svg)](https://github.com/evanbio/evanverse/actions/workflows/pkgdown.yaml)
+```
+
 ## 🔧 Maintenance
 
 ### Updating Workflows
@@ -99,7 +161,9 @@ Workflows are based on [r-lib/actions](https://github.com/r-lib/actions) templat
 To update to the latest version:
 ```r
 # In R console
-usethis::use_github_action("check-standard")
+usethis::use_github_action("check-standard")  # Update R-CMD-check
+usethis::use_github_action("test-coverage")   # Update test coverage
+usethis::use_github_action("pkgdown")         # Update pkgdown
 ```
 
 ### Local Testing
@@ -108,6 +172,12 @@ Before pushing, test locally:
 ```r
 # Run R CMD check
 devtools::check()
+
+# Test coverage locally
+covr::package_coverage()
+
+# Build pkgdown site locally
+pkgdown::build_site()
 
 # Test on different R versions with Docker
 docker run -v $(pwd):/pkg r-base:latest R CMD check /pkg
@@ -120,7 +190,7 @@ Check workflow runs at: https://github.com/evanbio/evanverse/actions
 ## 🚀 Future Workflows (Planned)
 
 - [x] Test coverage reporting (codecov) - **Implemented**
-- [ ] Automatic pkgdown site deployment
+- [x] Automatic pkgdown site deployment - **Implemented**
 - [ ] Code style checking (lintr)
 - [ ] Release automation
 - [ ] Dependency vulnerability scanning
