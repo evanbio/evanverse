@@ -144,164 +144,395 @@
   </div>
 </nav><div class="container template-home">
 <div class="row">
-  <main id="main" class="col-md-9"><div class="section level1">
+  <main id="main" class="col-md-9"><div align="center">
+<p><img src="reference/figures/logo.png" width="180" alt="evanverse logo"></p>
+<div class="section level1">
 <div class="page-header">
-<img src="logo.png" class="logo" alt=""><h1 id="evanverse-utility-functions-for-data-analysis-and-visualization">evanverse: Utility Functions for Data Analysis and Visualization<a class="anchor" aria-label="anchor" href="#evanverse-utility-functions-for-data-analysis-and-visualization"></a>
+<img src="logo.png" class="logo" alt=""><h1 id="evanverse">evanverse<a class="anchor" aria-label="anchor" href="#evanverse"></a>
 </h1>
 </div>
-<!-- badges: start -->
-
-<p><br></p>
-<p><strong>evanverse</strong> is a comprehensive R utility package by Evan Zhou that provides a unified toolkit for data analysis, visualization, and bioinformatics workflows. It combines practical functions for package management, data processing, color palettes, plotting, and workflow automation.</p>
+<div class="section level3">
+<h3 id="a-modern-r-toolkit-for-data-science--bioinformatics">
+<em>A Modern R Toolkit for Data Science &amp; Bioinformatics</em><a class="anchor" aria-label="anchor" href="#a-modern-r-toolkit-for-data-science--bioinformatics"></a>
+</h3>
+<p><a href="https://CRAN.R-project.org/package=evanverse" class="external-link"><img src="https://www.r-pkg.org/badges/version/evanverse" alt="CRAN"></a> <a href="https://github.com/evanbio/evanverse/actions/workflows/R-CMD-check.yaml" class="external-link"><img src="https://github.com/evanbio/evanverse/actions/workflows/R-CMD-check.yaml/badge.svg" alt="R-CMD-check"></a> <a href="https://codecov.io/gh/evanbio/evanverse?branch=main" class="external-link"><img src="https://codecov.io/gh/evanbio/evanverse/branch/main/graph/badge.svg" alt="Codecov"></a> <a href="https://lifecycle.r-lib.org/articles/stages.html#stable" class="external-link"><img src="https://img.shields.io/badge/lifecycle-stable-brightgreen.svg" alt="Lifecycle"></a> <a href="LICENSE.html"><img src="https://img.shields.io/badge/License-MIT-blue.svg" alt="License"></a></p>
+<p><a href="https://evanbio.github.io/evanverse/">📚 Documentation</a> • <a href="#installation">🚀 Getting Started</a> • <a href="https://github.com/evanbio/evanverse/issues" class="external-link">💬 Issues</a> • <a href="CONTRIBUTING.html">🤝 Contributing</a></p>
+</div>
+</div>
+</div>
+<hr>
 <div class="section level2">
-<h2 id="features">Features<a class="anchor" aria-label="anchor" href="#features"></a>
+<h2 id="id_-overview">✨ Overview<a class="anchor" aria-label="anchor" href="#id_-overview"></a>
 </h2>
-<ul>
-<li>📦 <strong>Package Management</strong>: Multi-source installation (CRAN, GitHub, Bioconductor), version checking, and updates</li>
-<li>🎨 <strong>Color &amp; Visualization</strong>: Bioinformatics color palettes, plotting functions (Venn, forest, bar, pie, density)</li>
-<li>🔧 <strong>Data Processing</strong>: Flexible file I/O, gene ID conversion, void value handling, column mapping</li>
-<li>🧮 <strong>Operators &amp; Logic</strong>: Custom infix operators (%p%, %is%, %nin%, %map%, %match%), logical utilities</li>
-<li>🌐 <strong>Download &amp; Network</strong>: URL downloading with retry, GEO data fetching, batch operations</li>
-<li>⚙️ <strong>Workflow Tools</strong>: Timing, reminders, safe execution, interactive viewing</li>
-</ul>
+<p><strong>evanverse</strong> is a comprehensive utility package designed to streamline your R workflows. Built by <a href="mailto:evanzhou.bio@gmail.com">Evan Zhou</a>, it combines 55+ carefully crafted functions for data analysis, visualization, and bioinformatics into a single, coherent toolkit.</p>
+<div class="section level3">
+<h3 id="why-evanverse">Why evanverse?<a class="anchor" aria-label="anchor" href="#why-evanverse"></a>
+</h3>
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># 🎯 Intuitive operators</span></span>
+<span><span class="st">"Hello"</span> <span class="op"><a href="reference/grapes-p-grapes.html">%p%</a></span> <span class="st">"World"</span>                    <span class="co"># → "Hello World"</span></span>
+<span></span>
+<span><span class="co"># 🎨 Beautiful visualizations</span></span>
+<span><span class="fu"><a href="reference/plot_venn.html">plot_venn</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>A <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">5</span>, B <span class="op">=</span> <span class="fl">3</span><span class="op">:</span><span class="fl">8</span><span class="op">)</span><span class="op">)</span>     <span class="co"># Instant Venn diagrams</span></span>
+<span></span>
+<span><span class="co"># 📦 Smart package management</span></span>
+<span><span class="fu"><a href="reference/inst_pkg.html">inst_pkg</a></span><span class="op">(</span><span class="st">"dplyr"</span>, source <span class="op">=</span> <span class="st">"CRAN"</span><span class="op">)</span>     <span class="co"># Multi-source installation</span></span>
+<span></span>
+<span><span class="co"># 🧬 Bioinformatics made easy</span></span>
+<span><span class="fu"><a href="reference/convert_gene_id.html">convert_gene_id</a></span><span class="op">(</span><span class="va">genes</span>, from <span class="op">=</span> <span class="st">"SYMBOL"</span>, to <span class="op">=</span> <span class="st">"ENSEMBL"</span><span class="op">)</span></span></code></pre></div>
+<hr>
+</div>
 </div>
 <div class="section level2">
-<h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
+<h2 id="id_-installation">🚀 Installation<a class="anchor" aria-label="anchor" href="#id_-installation"></a>
 </h2>
 <div class="section level3">
-<h3 id="id_-cran-recommended">🚀 CRAN (Recommended)<a class="anchor" aria-label="anchor" href="#id_-cran-recommended"></a>
+<h3 id="stable-release-cran">Stable Release (CRAN)<a class="anchor" aria-label="anchor" href="#stable-release-cran"></a>
 </h3>
-<p><code>evanverse</code> is now available on CRAN! Install the stable release with:</p>
-<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"evanverse"</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level3">
-<h3 id="id_-development-version">📦 Development Version<a class="anchor" aria-label="anchor" href="#id_-development-version"></a>
+<h3 id="development-version">Development Version<a class="anchor" aria-label="anchor" href="#development-version"></a>
 </h3>
-<p>You can install the latest development version from GitHub:</p>
-<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># install.packages("devtools")</span></span>
 <span><span class="fu">devtools</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html" class="external-link">install_github</a></span><span class="op">(</span><span class="st">"evanbio/evanverse"</span><span class="op">)</span></span></code></pre></div>
-<blockquote>
-<p><strong>CRAN Release</strong>: Version 0.3.7 is now published on CRAN (Windows support confirmed). This release ensures full CRAN compliance with file operation policies and maintains perfect check results (0 errors, 0 warnings, 0 notes).</p>
-</blockquote>
+<p><strong>Requirements:</strong> R ≥ 4.1.0</p>
+<hr>
 </div>
 </div>
 <div class="section level2">
-<h2 id="usage">Usage<a class="anchor" aria-label="anchor" href="#usage"></a>
+<h2 id="id_-core-features">🎯 Core Features<a class="anchor" aria-label="anchor" href="#id_-core-features"></a>
 </h2>
-<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/evanbio/evanverse" class="external-link">evanverse</a></span><span class="op">)</span></span>
-<span></span>
-<span><span class="co"># Quick examples</span></span>
-<span><span class="st">"Hello"</span> <span class="op"><a href="reference/grapes-p-grapes.html">%p%</a></span> <span class="st">"world"</span>              <span class="co"># String concatenation</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">2</span>, <span class="cn">NA</span><span class="op">)</span> <span class="op"><a href="reference/grapes-is-grapes.html">%is%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">2</span>, <span class="cn">NA</span><span class="op">)</span>     <span class="co"># Identity comparison</span></span>
-<span><span class="fu"><a href="reference/file_tree.html">file_tree</a></span><span class="op">(</span><span class="st">"."</span><span class="op">)</span>                   <span class="co"># View project structure</span></span></code></pre></div>
-</div>
-<div class="section level2">
-<h2 id="functions-overview">Functions Overview<a class="anchor" aria-label="anchor" href="#functions-overview"></a>
-</h2>
-<p>evanverse v0.3.7 provides 55+ utility functions organized by category:</p>
+<table class="table">
+<tr>
+<td width="50%">
 <div class="section level3">
 <h3 id="id_-package-management">📦 Package Management<a class="anchor" aria-label="anchor" href="#id_-package-management"></a>
 </h3>
 <ul>
-<li>
-<code><a href="reference/check_pkg.html">check_pkg()</a></code>, <code><a href="reference/inst_pkg.html">inst_pkg()</a></code>, <code><a href="reference/update_pkg.html">update_pkg()</a></code>, <code><a href="reference/pkg_version.html">pkg_version()</a></code>, <code><a href="reference/pkg_functions.html">pkg_functions()</a></code>, <code><a href="reference/set_mirror.html">set_mirror()</a></code>
-</li>
+<li>Multi-source installation (CRAN, GitHub, Bioconductor)</li>
+<li>Version checking &amp; updates</li>
+<li>Package function exploration</li>
+<li>Mirror configuration</li>
 </ul>
 </div>
+</td>
+<td width="50%">
+
 <div class="section level3">
-<h3 id="id_-visualization--plotting">🎨 Visualization &amp; Plotting<a class="anchor" aria-label="anchor" href="#id_-visualization--plotting"></a>
+<h3 id="id_-visualization">🎨 Visualization<a class="anchor" aria-label="anchor" href="#id_-visualization"></a>
 </h3>
 <ul>
-<li>
-<code><a href="reference/plot_venn.html">plot_venn()</a></code>, <code><a href="reference/plot_forest.html">plot_forest()</a></code>, <code><a href="reference/plot_bar.html">plot_bar()</a></code>, <code><a href="reference/plot_pie.html">plot_pie()</a></code>, <code><a href="reference/plot_density.html">plot_density()</a></code>
-</li>
+<li>Ready-to-use plotting functions</li>
+<li>Bioinformatics color palettes</li>
+<li>Venn diagrams, forest plots</li>
+<li>Bar, pie, density plots</li>
 </ul>
 </div>
-<div class="section level3">
-<h3 id="id_-color-palettes">🌈 Color Palettes<a class="anchor" aria-label="anchor" href="#id_-color-palettes"></a>
-</h3>
-<ul>
-<li>
-<code><a href="reference/get_palette.html">get_palette()</a></code>, <code><a href="reference/list_palettes.html">list_palettes()</a></code>, <code><a href="reference/create_palette.html">create_palette()</a></code>, <code><a href="reference/preview_palette.html">preview_palette()</a></code>, <code><a href="reference/bio_palette_gallery.html">bio_palette_gallery()</a></code>, <code><a href="reference/compile_palettes.html">compile_palettes()</a></code>, <code><a href="reference/remove_palette.html">remove_palette()</a></code>
-</li>
-<li>
-<code><a href="reference/hex2rgb.html">hex2rgb()</a></code>, <code><a href="reference/rgb2hex.html">rgb2hex()</a></code>
-</li>
-</ul>
-</div>
-<div class="section level3">
-<h3 id="id_-file--data-io">📁 File &amp; Data I/O<a class="anchor" aria-label="anchor" href="#id_-file--data-io"></a>
-</h3>
-<ul>
-<li>
-<code><a href="reference/read_table_flex.html">read_table_flex()</a></code>, <code><a href="reference/read_excel_flex.html">read_excel_flex()</a></code>, <code><a href="reference/write_xlsx_flex.html">write_xlsx_flex()</a></code>, <code><a href="reference/download_url.html">download_url()</a></code>, <code><a href="reference/download_batch.html">download_batch()</a></code>, <code><a href="reference/download_geo_data.html">download_geo_data()</a></code>
-</li>
-<li>
-<code><a href="reference/file_info.html">file_info()</a></code>, <code><a href="reference/file_tree.html">file_tree()</a></code>, <code><a href="reference/get_ext.html">get_ext()</a></code>, <code><a href="reference/view.html">view()</a></code>
-</li>
-</ul>
-</div>
+</td>
+</tr>
+<tr>
+<td width="50%">
+
 <div class="section level3">
 <h3 id="id_-bioinformatics">🧬 Bioinformatics<a class="anchor" aria-label="anchor" href="#id_-bioinformatics"></a>
 </h3>
 <ul>
-<li>
-<code><a href="reference/convert_gene_id.html">convert_gene_id()</a></code>, <code><a href="reference/download_gene_ref.html">download_gene_ref()</a></code>, <code><a href="reference/gmt2df.html">gmt2df()</a></code>, <code><a href="reference/gmt2list.html">gmt2list()</a></code>
-</li>
+<li>Gene ID conversion</li>
+<li>GMT file handling</li>
+<li>GEO data downloading</li>
+<li>Reference data management</li>
 </ul>
 </div>
+</td>
+<td width="50%">
+
 <div class="section level3">
 <h3 id="id_-data-processing">🔧 Data Processing<a class="anchor" aria-label="anchor" href="#id_-data-processing"></a>
 </h3>
 <ul>
-<li>
-<code><a href="reference/df2list.html">df2list()</a></code>, <code><a href="reference/map_column.html">map_column()</a></code>, <code><a href="reference/is_void.html">is_void()</a></code>, <code><a href="reference/any_void.html">any_void()</a></code>, <code><a href="reference/drop_void.html">drop_void()</a></code>, <code><a href="reference/replace_void.html">replace_void()</a></code>, <code><a href="reference/cols_with_void.html">cols_with_void()</a></code>, <code><a href="reference/rows_with_void.html">rows_with_void()</a></code>
-</li>
+<li>Flexible file I/O</li>
+<li>Column mapping utilities</li>
+<li>Void value handling</li>
+<li>Data transformations</li>
 </ul>
 </div>
+</td>
+</tr>
+<tr>
+<td width="50%">
+
 <div class="section level3">
-<h3 id="id_-operators--logic">🧮 Operators &amp; Logic<a class="anchor" aria-label="anchor" href="#id_-operators--logic"></a>
+<h3 id="id_-custom-operators">🧮 Custom Operators<a class="anchor" aria-label="anchor" href="#id_-custom-operators"></a>
 </h3>
 <ul>
 <li>
-<code>%p%</code>, <code>%is%</code>, <code>%nin%</code>, <code>%map%</code>, <code>%match%</code>
-</li>
+<code>%p%</code> - String concatenation</li>
 <li>
-<code><a href="reference/combine_logic.html">combine_logic()</a></code>, <code><a href="reference/comb.html">comb()</a></code>, <code><a href="reference/perm.html">perm()</a></code>
-</li>
+<code>%is%</code> - Identity comparison</li>
+<li>
+<code>%nin%</code> - Not in</li>
+<li>
+<code>%map%</code>, <code>%match%</code> - Mapping tools</li>
 </ul>
 </div>
+</td>
+<td width="50%">
+
 <div class="section level3">
 <h3 id="id_️-workflow-tools">⚙️ Workflow Tools<a class="anchor" aria-label="anchor" href="#id_%EF%B8%8F-workflow-tools"></a>
 </h3>
 <ul>
-<li>
-<code><a href="reference/with_timer.html">with_timer()</a></code>, <code><a href="reference/remind.html">remind()</a></code>, <code><a href="reference/safe_execute.html">safe_execute()</a></code>
-</li>
+<li>Timer wrappers</li>
+<li>Safe execution</li>
+<li>Reminder system</li>
+<li>Interactive viewing</li>
 </ul>
 </div>
+</td>
+</tr>
+</table>
+<hr>
 </div>
+
 <div class="section level2">
-<h2 id="documentation">Documentation<a class="anchor" aria-label="anchor" href="#documentation"></a>
+<h2 id="id_-quick-examples">💡 Quick Examples<a class="anchor" aria-label="anchor" href="#id_-quick-examples"></a>
 </h2>
-<p>Full documentation and vignettes available at: 👉 <a href="https://evanbio.github.io/evanverse/" class="uri">https://evanbio.github.io/evanverse/</a></p>
+<div class="section level3">
+<h3 id="string-operations">String Operations<a class="anchor" aria-label="anchor" href="#string-operations"></a>
+</h3>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/evanbio/evanverse" class="external-link">evanverse</a></span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Concatenate with %p%</span></span>
+<span><span class="va">first_name</span> <span class="op"><a href="reference/grapes-p-grapes.html">%p%</a></span> <span class="st">" "</span> <span class="op"><a href="reference/grapes-p-grapes.html">%p%</a></span> <span class="va">last_name</span></span>
+<span></span>
+<span><span class="co"># Check if NOT in set</span></span>
+<span><span class="fl">5</span> <span class="op"><a href="reference/grapes-nin-grapes.html">%nin%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">2</span>, <span class="fl">3</span>, <span class="fl">4</span><span class="op">)</span>  <span class="co"># TRUE</span></span></code></pre></div>
 </div>
-<div class="section level2">
-<h2 id="contributing">Contributing<a class="anchor" aria-label="anchor" href="#contributing"></a>
-</h2>
-<p>This project is in active development and currently designed for personal use.<br>
-Feedback and pull requests are welcome in future versions.</p>
+<div class="section level3">
+<h3 id="color-palettes">Color Palettes<a class="anchor" aria-label="anchor" href="#color-palettes"></a>
+</h3>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># List available palettes</span></span>
+<span><span class="fu"><a href="reference/list_palettes.html">list_palettes</a></span><span class="op">(</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Get a palette</span></span>
+<span><span class="va">colors</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/get_palette.html">get_palette</a></span><span class="op">(</span><span class="st">"celltype"</span>, n <span class="op">=</span> <span class="fl">5</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Preview palette</span></span>
+<span><span class="fu"><a href="reference/preview_palette.html">preview_palette</a></span><span class="op">(</span><span class="st">"celltype"</span><span class="op">)</span></span></code></pre></div>
 </div>
-<div class="section level2">
-<h2 id="license">License<a class="anchor" aria-label="anchor" href="#license"></a>
-</h2>
-<p>MIT License © 2025 Evan Zhou</p>
+<div class="section level3">
+<h3 id="file-operations">File Operations<a class="anchor" aria-label="anchor" href="#file-operations"></a>
+</h3>
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Flexible table reading</span></span>
+<span><span class="va">data</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/read_table_flex.html">read_table_flex</a></span><span class="op">(</span><span class="st">"data.csv"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Directory tree visualization</span></span>
+<span><span class="fu"><a href="reference/file_tree.html">file_tree</a></span><span class="op">(</span><span class="st">"."</span>, max_depth <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span></code></pre></div>
+</div>
+<div class="section level3">
+<h3 id="bioinformatics-workflows">Bioinformatics Workflows<a class="anchor" aria-label="anchor" href="#bioinformatics-workflows"></a>
+</h3>
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Convert gene IDs</span></span>
+<span><span class="va">genes</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"TP53"</span>, <span class="st">"BRCA1"</span>, <span class="st">"EGFR"</span><span class="op">)</span></span>
+<span><span class="va">ensembl_ids</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/convert_gene_id.html">convert_gene_id</a></span><span class="op">(</span><span class="va">genes</span>, from <span class="op">=</span> <span class="st">"SYMBOL"</span>, to <span class="op">=</span> <span class="st">"ENSEMBL"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Parse GMT files</span></span>
+<span><span class="va">pathways</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/gmt2list.html">gmt2list</a></span><span class="op">(</span><span class="st">"pathway.gmt"</span><span class="op">)</span></span></code></pre></div>
+</div>
+<div class="section level3">
+<h3 id="package-management">Package Management<a class="anchor" aria-label="anchor" href="#package-management"></a>
+</h3>
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Install from multiple sources</span></span>
+<span><span class="fu"><a href="reference/inst_pkg.html">inst_pkg</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"dplyr"</span>, <span class="st">"ggplot2"</span><span class="op">)</span>, source <span class="op">=</span> <span class="st">"CRAN"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="reference/inst_pkg.html">inst_pkg</a></span><span class="op">(</span><span class="st">"limma"</span>, source <span class="op">=</span> <span class="st">"Bioconductor"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="reference/inst_pkg.html">inst_pkg</a></span><span class="op">(</span><span class="st">"user/repo"</span>, source <span class="op">=</span> <span class="st">"GitHub"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Check versions</span></span>
+<span><span class="fu"><a href="reference/pkg_version.html">pkg_version</a></span><span class="op">(</span><span class="st">"evanverse"</span><span class="op">)</span></span></code></pre></div>
 <hr>
 </div>
 </div>
+<div class="section level2">
+<h2 id="id_-function-categories">📖 Function Categories<a class="anchor" aria-label="anchor" href="#id_-function-categories"></a>
+</h2>
+<details><summary><b>📦 Package Management</b> (6 functions)
+</summary><ul>
+<li>
+<code><a href="reference/check_pkg.html">check_pkg()</a></code> - Check if packages are installed</li>
+<li>
+<code><a href="reference/inst_pkg.html">inst_pkg()</a></code> - Install packages from multiple sources</li>
+<li>
+<code><a href="reference/update_pkg.html">update_pkg()</a></code> - Update installed packages</li>
+<li>
+<code><a href="reference/pkg_version.html">pkg_version()</a></code> - Get package version</li>
+<li>
+<code><a href="reference/pkg_functions.html">pkg_functions()</a></code> - List package functions</li>
+<li>
+<code><a href="reference/set_mirror.html">set_mirror()</a></code> - Configure CRAN mirror</li>
+</ul></details><details><summary><b>🎨 Visualization &amp; Plotting</b> (5 functions)
+</summary><ul>
+<li>
+<code><a href="reference/plot_venn.html">plot_venn()</a></code> - Venn diagrams</li>
+<li>
+<code><a href="reference/plot_forest.html">plot_forest()</a></code> - Forest plots</li>
+<li>
+<code><a href="reference/plot_bar.html">plot_bar()</a></code> - Bar charts</li>
+<li>
+<code><a href="reference/plot_pie.html">plot_pie()</a></code> - Pie charts</li>
+<li>
+<code><a href="reference/plot_density.html">plot_density()</a></code> - Density plots</li>
+</ul></details><details><summary><b>🌈 Color Palettes</b> (9 functions)
+</summary><ul>
+<li>
+<code><a href="reference/get_palette.html">get_palette()</a></code> - Retrieve color palette</li>
+<li>
+<code><a href="reference/list_palettes.html">list_palettes()</a></code> - List available palettes</li>
+<li>
+<code><a href="reference/create_palette.html">create_palette()</a></code> - Create custom palette</li>
+<li>
+<code><a href="reference/preview_palette.html">preview_palette()</a></code> - Preview palette colors</li>
+<li>
+<code><a href="reference/bio_palette_gallery.html">bio_palette_gallery()</a></code> - Browse bio palettes</li>
+<li>
+<code><a href="reference/compile_palettes.html">compile_palettes()</a></code> - Compile palette data</li>
+<li>
+<code><a href="reference/remove_palette.html">remove_palette()</a></code> - Remove palette</li>
+<li>
+<code><a href="reference/hex2rgb.html">hex2rgb()</a></code> - Convert hex to RGB</li>
+<li>
+<code><a href="reference/rgb2hex.html">rgb2hex()</a></code> - Convert RGB to hex</li>
+</ul></details><details><summary><b>📁 File &amp; Data I/O</b> (10 functions)
+</summary><ul>
+<li>
+<code><a href="reference/read_table_flex.html">read_table_flex()</a></code> - Flexible table reading</li>
+<li>
+<code><a href="reference/read_excel_flex.html">read_excel_flex()</a></code> - Flexible Excel reading</li>
+<li>
+<code><a href="reference/write_xlsx_flex.html">write_xlsx_flex()</a></code> - Flexible Excel writing</li>
+<li>
+<code><a href="reference/download_url.html">download_url()</a></code> - Download from URL</li>
+<li>
+<code><a href="reference/download_batch.html">download_batch()</a></code> - Batch downloads</li>
+<li>
+<code><a href="reference/download_geo_data.html">download_geo_data()</a></code> - Download GEO datasets</li>
+<li>
+<code><a href="reference/file_info.html">file_info()</a></code> - File information</li>
+<li>
+<code><a href="reference/file_tree.html">file_tree()</a></code> - Directory tree</li>
+<li>
+<code><a href="reference/get_ext.html">get_ext()</a></code> - Get file extension</li>
+<li>
+<code><a href="reference/view.html">view()</a></code> - Interactive data viewer</li>
+</ul></details><details><summary><b>🧬 Bioinformatics</b> (4 functions)
+</summary><ul>
+<li>
+<code><a href="reference/convert_gene_id.html">convert_gene_id()</a></code> - Gene ID conversion</li>
+<li>
+<code><a href="reference/download_gene_ref.html">download_gene_ref()</a></code> - Download gene references</li>
+<li>
+<code><a href="reference/gmt2df.html">gmt2df()</a></code> - GMT to data frame</li>
+<li>
+<code><a href="reference/gmt2list.html">gmt2list()</a></code> - GMT to list</li>
+</ul></details><details><summary><b>🔧 Data Processing</b> (10 functions)
+</summary><ul>
+<li>
+<code><a href="reference/df2list.html">df2list()</a></code> - Data frame to list</li>
+<li>
+<code><a href="reference/map_column.html">map_column()</a></code> - Map column values</li>
+<li>
+<code><a href="reference/is_void.html">is_void()</a></code> - Check for void values</li>
+<li>
+<code><a href="reference/any_void.html">any_void()</a></code> - Any void values</li>
+<li>
+<code><a href="reference/drop_void.html">drop_void()</a></code> - Remove void values</li>
+<li>
+<code><a href="reference/replace_void.html">replace_void()</a></code> - Replace void values</li>
+<li>
+<code><a href="reference/cols_with_void.html">cols_with_void()</a></code> - Columns with voids</li>
+<li>
+<code><a href="reference/rows_with_void.html">rows_with_void()</a></code> - Rows with voids</li>
+</ul></details><details><summary><b>🧮 Operators &amp; Logic</b> (8 functions)
+</summary><ul>
+<li>
+<code>%p%</code> - String concatenation operator</li>
+<li>
+<code>%is%</code> - Identity comparison</li>
+<li>
+<code>%nin%</code> - Not in operator</li>
+<li>
+<code>%map%</code> - Mapping operator</li>
+<li>
+<code>%match%</code> - Match operator</li>
+<li>
+<code><a href="reference/combine_logic.html">combine_logic()</a></code> - Combine logical vectors</li>
+<li>
+<code><a href="reference/comb.html">comb()</a></code> - Combinations</li>
+<li>
+<code><a href="reference/perm.html">perm()</a></code> - Permutations</li>
+</ul></details><details><summary><b>⚙️ Workflow Tools</b> (3 functions)
+</summary><ul>
+<li>
+<code><a href="reference/with_timer.html">with_timer()</a></code> - Execute with timing</li>
+<li>
+<code><a href="reference/remind.html">remind()</a></code> - Set reminders</li>
+<li>
+<code><a href="reference/safe_execute.html">safe_execute()</a></code> - Safe function execution</li>
+</ul></details><hr>
+</div>
+<div class="section level2">
+<h2 id="id_-documentation">📚 Documentation<a class="anchor" aria-label="anchor" href="#id_-documentation"></a>
+</h2>
+<p>Complete documentation with examples and vignettes:</p>
+<p>👉 <strong><a href="https://evanbio.github.io/evanverse/">https://evanbio.github.io/evanverse/</a></strong></p>
+<hr>
+</div>
+<div class="section level2">
+<h2 id="id_-contributing">🤝 Contributing<a class="anchor" aria-label="anchor" href="#id_-contributing"></a>
+</h2>
+<p>We welcome contributions! Please see our <a href="CONTRIBUTING.html">Contributing Guide</a> for details.</p>
+<ul>
+<li>🐛 <a href="https://github.com/evanbio/evanverse/issues/new?template=bug_report.yml" class="external-link">Report bugs</a>
+</li>
+<li>💡 <a href="https://github.com/evanbio/evanverse/issues/new?template=feature_request.yml" class="external-link">Request features</a>
+</li>
+<li>📖 <a href="https://github.com/evanbio/evanverse/issues/new?template=documentation.yml" class="external-link">Improve docs</a>
+</li>
+<li>❓ <a href="https://github.com/evanbio/evanverse/issues/new?template=question.yml" class="external-link">Ask questions</a>
+</li>
+</ul>
+<hr>
+</div>
+<div class="section level2">
+<h2 id="id_-license">📜 License<a class="anchor" aria-label="anchor" href="#id_-license"></a>
+</h2>
+<p>MIT License © 2025 <a href="mailto:evanzhou.bio@gmail.com">Evan Zhou</a></p>
+<p>See <a href="LICENSE.html">LICENSE.md</a> for details.</p>
+<hr>
+</div>
+<div class="section level2">
+<h2 id="id_-project-status">📊 Project Status<a class="anchor" aria-label="anchor" href="#id_-project-status"></a>
+</h2>
+<ul>
+<li>✅ <strong>CRAN Published</strong> - Version 0.3.7</li>
+<li>✅ <strong>Stable Lifecycle</strong> - Production ready</li>
+<li>✅ <strong>Full Test Coverage</strong> - Comprehensive test suite</li>
+<li>✅ <strong>Active Maintenance</strong> - Regular updates</li>
+</ul>
+<hr>
+<div align="center">
+<p><strong>Made with ❤️ by <a href="https://github.com/evanbio" class="external-link">Evan Zhou</a></strong></p>
+<p><a href="#evanverse">⬆ Back to Top</a></p>
+</div>
+</div>
+
   </main><aside class="col-md-3"><div class="links">
 <h2 data-toc-skip>Links</h2>
 <ul class="list-unstyled">
@@ -358,23 +589,7 @@ Feedback and pull requests are welcome in future versions.</p>
 </ul>
 </div>
 
-<div class="dev-status">
-<h2 data-toc-skip>Dev status</h2>
-<ul class="list-unstyled">
-<li><a href="https://CRAN.R-project.org/package=evanverse" class="external-link"><img src="https://www.r-pkg.org/badges/version/evanverse" alt="CRAN status"></a></li>
-<li><a href="https://CRAN.R-project.org/package=evanverse" class="external-link"><img src="https://cranlogs.r-pkg.org/badges/grand-total/evanverse" alt="CRAN downloads"></a></li>
-<li><a href="https://CRAN.R-project.org/package=evanverse" class="external-link"><img src="https://cranlogs.r-pkg.org/badges/evanverse" alt="CRAN downloads (monthly)"></a></li>
-<li><a href="https://cran.r-project.org/web/checks/check_results_evanverse.html" class="external-link"><img src="https://badges.cranchecks.info/worst/evanverse.svg" alt="CRAN checks"></a></li>
-<li><a href="https://github.com/evanbio/evanverse/actions/workflows/R-CMD-check.yaml" class="external-link"><img src="https://github.com/evanbio/evanverse/actions/workflows/R-CMD-check.yaml/badge.svg" alt="R-CMD-check"></a></li>
-<li><a href="https://codecov.io/gh/evanbio/evanverse?branch=main" class="external-link"><img src="https://codecov.io/gh/evanbio/evanverse/branch/main/graph/badge.svg" alt="Codecov test coverage"></a></li>
-<li><a href="https://lifecycle.r-lib.org/articles/stages.html#stable" class="external-link"><img src="https://img.shields.io/badge/lifecycle-stable-brightgreen.svg" alt="Lifecycle: stable"></a></li>
-<li><a href="https://github.com/evanbio/evanverse/commits/main" class="external-link"><img src="https://img.shields.io/github/last-commit/evanbio/evanverse" alt="GitHub last commit"></a></li>
-<li><a href="https://github.com/evanbio/evanverse/issues" class="external-link"><img src="https://img.shields.io/github/issues/evanbio/evanverse" alt="GitHub issues"></a></li>
-<li><a href="https://CRAN.R-project.org/package=evanverse" class="external-link"><img src="https://img.shields.io/badge/dependencies-10%20imports%20%7C%2015%20suggests-blue" alt="Dependencies"></a></li>
-<li><a href="LICENSE.html"><img src="https://img.shields.io/badge/License-MIT-blue.svg" alt="License: MIT"></a></li>
-<li><a href="https://www.r-project.org/" class="external-link"><img src="https://img.shields.io/badge/R-%E2%89%A5%204.1.0-blue" alt="R version"></a></li>
-</ul>
-</div>
+
 
   </aside>
 </div>
