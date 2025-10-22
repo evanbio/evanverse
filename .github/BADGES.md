@@ -1,268 +1,247 @@
-# evanverse Badges Guide
+# Badge Guidelines for evanverse
 
-This document explains all the badges displayed in the README and what they represent.
-
-## 📊 Badge Overview
-
-The evanverse README displays 11 badges organized into 4 categories:
-
-### 1. CRAN Status & Distribution (4 badges)
-
-| Badge | Description | Link |
-|-------|-------------|------|
-| ![CRAN status](https://www.r-pkg.org/badges/version/evanverse) | Current version on CRAN | https://CRAN.R-project.org/package=evanverse |
-| ![CRAN downloads](https://cranlogs.r-pkg.org/badges/grand-total/evanverse) | Total downloads since first CRAN release | https://CRAN.R-project.org/package=evanverse |
-| ![CRAN monthly](https://cranlogs.r-pkg.org/badges/evanverse) | Downloads in the last month | https://CRAN.R-project.org/package=evanverse |
-| ![CRAN checks](https://badges.cranchecks.info/worst/evanverse.svg) | CRAN's automated checks across platforms | https://cran.r-project.org/web/checks/check_results_evanverse.html |
-
-**Interpretation:**
-- **CRAN status**: Shows the current CRAN version (e.g., 0.3.7)
-- **Total downloads**: Cumulative downloads since CRAN publication
-- **Monthly downloads**: Recent popularity indicator
-- **CRAN checks**: Shows worst status across all CRAN platforms
-  - `OK` (green) = All checks pass
-  - `NOTE` (yellow) = Minor issues
-  - `WARN` (orange) = Warnings present
-  - `ERROR` (red) = Errors detected
-
-### 2. Build & Quality Status (2 badges)
-
-| Badge | Description | Link |
-|-------|-------------|------|
-| ![R-CMD-check](https://github.com/evanbio/evanverse/actions/workflows/R-CMD-check.yaml/badge.svg) | GitHub Actions CI/CD status | https://github.com/evanbio/evanverse/actions |
-| ![Lifecycle](https://img.shields.io/badge/lifecycle-stable-brightgreen.svg) | Development stage indicator | https://lifecycle.r-lib.org/articles/stages.html |
-
-**Interpretation:**
-- **R-CMD-check**: Real-time build status across 5 platforms
-  - ✅ Green = All checks passing
-  - 🟡 Yellow = Running
-  - ❌ Red = Build failed
-- **Lifecycle**: Package maturity stage
-  - `experimental` (orange) = Early development
-  - `stable` (green) = Production-ready
-  - `superseded` (blue) = Maintained but superseded
-  - `deprecated` (red) = Use discouraged
-
-### 3. Development Activity (2 badges)
-
-| Badge | Description | Link |
-|-------|-------------|------|
-| ![Last commit](https://img.shields.io/github/last-commit/evanbio/evanverse) | Date of most recent commit | https://github.com/evanbio/evanverse/commits |
-| ![GitHub issues](https://img.shields.io/github/issues/evanbio/evanverse) | Number of open issues | https://github.com/evanbio/evanverse/issues |
-
-**Interpretation:**
-- **Last commit**: Shows how actively maintained the package is
-  - Recent (green) = Active development
-  - Older (yellow/red) = Less frequent updates
-- **Open issues**: Indicator of known problems or feature requests
-  - Low number = Well-maintained
-  - High number = Active community or backlog
-
-### 4. Technical Specifications (3 badges)
-
-| Badge | Description | Link |
-|-------|-------------|------|
-| ![Dependencies](https://img.shields.io/badge/dependencies-10%20imports%20|%2015%20suggests-blue) | Dependency counts | https://CRAN.R-project.org/package=evanverse |
-| ![License](https://img.shields.io/badge/License-MIT-blue.svg) | Open source license type | LICENSE.md |
-| ![R version](https://img.shields.io/badge/R-%E2%89%A5%204.1.0-blue) | Minimum R version required | https://www.r-project.org/ |
-
-**Interpretation:**
-- **Dependencies**:
-  - Imports = Required packages (always installed)
-  - Suggests = Optional packages (for specific features)
-- **License**: MIT = Permissive open source license
-- **R version**: Minimum R version needed to use the package
+This document explains the badge strategy for the evanverse package, including which badges are displayed in the README and which are available as optional references.
 
 ---
 
-## 🎯 Badge Best Practices
+## 🎯 Philosophy: Less is More
 
-### When to Update Badges
-
-1. **Version bumps**: Badges auto-update from CRAN/GitHub
-2. **Lifecycle changes**: Manually update when package status changes
-3. **Dependency changes**: Update badge text in README when DESCRIPTION changes
-4. **Logo size**: Adjusted logo width from 105px to 120px for better visibility
-
-### Badge Ordering Logic
-
-Badges are ordered by importance to users:
-1. **CRAN status first**: Primary distribution channel
-2. **Build status**: Quality assurance
-3. **Activity metrics**: Maintenance confidence
-4. **Technical specs**: System requirements
-
-### Lifecycle Badge Guidelines
-
-**When to use each stage:**
-
-- **Experimental** (🟠):
-  - Initial development
-  - API may change significantly
-  - Not recommended for production
-
-- **Stable** (🟢): **[Current]**
-  - API is stable
-  - Thoroughly tested
-  - Production-ready
-  - CRAN published
-
-- **Superseded** (🔵):
-  - Still maintained
-  - Better alternatives exist
-  - No new features planned
-
-- **Deprecated** (🔴):
-  - Use strongly discouraged
-  - Will be removed in future
-  - Migration guide provided
+The README displays **only 5 essential badges** to maintain a clean, modern appearance while conveying critical information. Additional metrics are available here for reference.
 
 ---
 
-## 📈 Badge Performance Tracking
+## ✅ Active Badges (Displayed in README)
 
-### CRAN Downloads Milestones
+These 5 badges appear in the main README, chosen for maximum signal and minimal noise:
 
-Track and celebrate download milestones:
-- 🎯 1,000 downloads
-- 🎯 5,000 downloads
-- 🎯 10,000 downloads
-- 🎯 50,000 downloads
-- 🎯 100,000 downloads
+| Badge | Purpose | Why Essential |
+|-------|---------|---------------|
+| ![CRAN](https://www.r-pkg.org/badges/version/evanverse) | CRAN version | Shows current release version - primary indicator of package availability |
+| ![R-CMD-check](https://github.com/evanbio/evanverse/actions/workflows/R-CMD-check.yaml/badge.svg) | Build status | Real-time quality assurance across 5 platforms - critical for user confidence |
+| ![Codecov](https://codecov.io/gh/evanbio/evanverse/branch/main/graph/badge.svg) | Test coverage | Code quality indicator - shows how well-tested the package is |
+| ![Lifecycle](https://img.shields.io/badge/lifecycle-stable-brightgreen.svg) | Maturity stage | Indicates production readiness - crucial for enterprise adoption |
+| ![License](https://img.shields.io/badge/License-MIT-blue.svg) | Open source license | Legal clarity - essential for commercial use decisions |
 
-### CRAN Check Quality Goals
+### Badge Markdown
 
-Maintain perfect CRAN check status:
-- ✅ All platforms: OK (green)
-- ✅ 0 errors
-- ✅ 0 warnings
-- ✅ 0 notes
-
-### GitHub Actions Success Rate
-
-Target: 100% pass rate for R-CMD-check across all platforms
+```markdown
+[![CRAN](https://www.r-pkg.org/badges/version/evanverse)](https://CRAN.R-project.org/package=evanverse)
+[![R-CMD-check](https://github.com/evanbio/evanverse/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/evanbio/evanverse/actions/workflows/R-CMD-check.yaml)
+[![Codecov](https://codecov.io/gh/evanbio/evanverse/branch/main/graph/badge.svg)](https://codecov.io/gh/evanbio/evanverse?branch=main)
+[![Lifecycle](https://img.shields.io/badge/lifecycle-stable-brightgreen.svg)](https://lifecycle.r-lib.org/articles/stages.html#stable)
+[![License](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE.md)
+```
 
 ---
 
-## 🔧 Maintaining Badges
+## 📊 Optional Reference Badges
+
+These badges are available but **NOT displayed in README** to reduce clutter. They're useful for tracking but don't convey essential information to new users.
+
+### Download Metrics
+
+| Badge | Description |
+|-------|-------------|
+| ![Total downloads](https://cranlogs.r-pkg.org/badges/grand-total/evanverse) | Total downloads since CRAN publication |
+| ![Monthly downloads](https://cranlogs.r-pkg.org/badges/evanverse) | Downloads in the last month |
+
+**Why not in README:** Vanity metrics that don't indicate package quality or functionality. New packages have low numbers regardless of quality.
+
+```markdown
+[![Downloads](https://cranlogs.r-pkg.org/badges/grand-total/evanverse)](https://CRAN.R-project.org/package=evanverse)
+[![Monthly](https://cranlogs.r-pkg.org/badges/evanverse)](https://CRAN.R-project.org/package=evanverse)
+```
+
+### CRAN Platform Checks
+
+| Badge | Description |
+|-------|-------------|
+| ![CRAN checks](https://badges.cranchecks.info/worst/evanverse.svg) | CRAN automated checks across platforms |
+
+**Why not in README:** Redundant with R-CMD-check badge. Both verify builds, but GitHub Actions provides more granular control and transparency.
+
+```markdown
+[![CRAN checks](https://badges.cranchecks.info/worst/evanverse.svg)](https://cran.r-project.org/web/checks/check_results_evanverse.html)
+```
+
+### Development Activity
+
+| Badge | Description |
+|-------|-------------|
+| ![Last commit](https://img.shields.io/github/last-commit/evanbio/evanverse) | Date of most recent commit |
+| ![GitHub issues](https://img.shields.io/github/issues/evanbio/evanverse) | Number of open issues |
+
+**Why not in README:** Activity metrics are misleading. Mature packages may have infrequent commits (stability), and issue count depends on project popularity, not quality.
+
+```markdown
+[![Last commit](https://img.shields.io/github/last-commit/evanbio/evanverse)](https://github.com/evanbio/evanverse/commits/main)
+[![Issues](https://img.shields.io/github/issues/evanbio/evanverse)](https://github.com/evanbio/evanverse/issues)
+```
+
+### Technical Specifications
+
+| Badge | Description |
+|-------|-------------|
+| ![Dependencies](https://img.shields.io/badge/dependencies-10%20imports%20|%2015%20suggests-blue) | Dependency counts |
+| ![R version](https://img.shields.io/badge/R-%E2%89%A5%204.1.0-blue) | Minimum R version |
+
+**Why not in README:** Technical details better placed in documentation. R version requirement is mentioned in Installation section; dependency info is in DESCRIPTION file.
+
+```markdown
+[![Dependencies](https://img.shields.io/badge/dependencies-10%20imports%20|%2015%20suggests-blue)](https://CRAN.R-project.org/package=evanverse)
+[![R version](https://img.shields.io/badge/R-%E2%89%A5%204.1.0-blue)](https://www.r-project.org/)
+```
+
+---
+
+## 🎨 Design Principles
+
+### Why This Badge Selection?
+
+1. **User-Centric Focus**
+   - Show what matters to package adopters (version, reliability, stability, license)
+   - Hide metrics that matter only to maintainers (download stats, commit frequency)
+
+2. **Signal vs. Noise**
+   - Each badge must answer a key user question:
+     - ✅ "Is it available?" → CRAN badge
+     - ✅ "Does it work?" → R-CMD-check badge
+     - ✅ "Is it well-tested?" → Codecov badge
+     - ✅ "Is it production-ready?" → Lifecycle badge
+     - ✅ "Can I use it commercially?" → License badge
+
+3. **Visual Hierarchy**
+   - 5 badges: Clean, scannable, professional
+   - 11+ badges: Cluttered, intimidating, amateur
+   - Centered layout with quick-links creates modern aesthetic
+
+4. **Trust Through Transparency**
+   - All displayed badges link to verifiable external sources
+   - No static/fake badges
+   - Auto-updating metrics ensure accuracy
+
+---
+
+## 🔄 Badge Update Policy
 
 ### Automatic Updates
-
-These badges update automatically:
-- ✅ CRAN status (via r-pkg.org)
-- ✅ CRAN downloads (via cranlogs.r-pkg.org)
-- ✅ CRAN checks (via cranchecks.info)
-- ✅ R-CMD-check (via GitHub Actions)
-- ✅ Last commit (via GitHub)
-- ✅ Open issues (via GitHub)
+These badges update automatically via external services:
+- ✅ CRAN version (updates when new version published)
+- ✅ R-CMD-check (updates on every push/PR)
+- ✅ Codecov (updates after test runs)
 
 ### Manual Updates Required
+These need manual editing in README.md:
 
-These need manual updates in README.md:
-- ⚠️ Lifecycle badge (when package stage changes)
-- ⚠️ Dependencies badge (when DESCRIPTION changes)
-- ⚠️ R version badge (if minimum version changes)
-
-### How to Update Manual Badges
-
-1. **Lifecycle badge:**
+1. **Lifecycle Badge** - Update when package status changes
    ```markdown
-   [![Lifecycle: stable](https://img.shields.io/badge/lifecycle-stable-brightgreen.svg)](...)
-   ```
-   Change `stable` to: `experimental`, `superseded`, or `deprecated`
+   # Stable (current)
+   [![Lifecycle](https://img.shields.io/badge/lifecycle-stable-brightgreen.svg)](https://lifecycle.r-lib.org/articles/stages.html#stable)
 
-2. **Dependencies badge:**
-   ```markdown
-   [![Dependencies](https://img.shields.io/badge/dependencies-X%20imports%20|%20Y%20suggests-blue)](...)
+   # Other stages
+   [![Lifecycle](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](...)
+   [![Lifecycle](https://img.shields.io/badge/lifecycle-superseded-blue.svg)](...)
+   [![Lifecycle](https://img.shields.io/badge/lifecycle-deprecated-red.svg)](...)
    ```
-   Update X and Y to match DESCRIPTION file counts
 
-3. **R version badge:**
+2. **License Badge** - Only if license changes (rare)
    ```markdown
-   [![R version](https://img.shields.io/badge/R-%E2%89%A5%204.1.0-blue)](...)
+   [![License](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE.md)
    ```
-   Update version to match DESCRIPTION `Depends: R (>= X.Y.Z)`
 
 ---
 
-## 🌐 Badge Services Used
+## 📏 Lifecycle Stage Guidelines
 
-| Service | Purpose | URL |
-|---------|---------|-----|
-| r-pkg.org | CRAN version badge | https://www.r-pkg.org/services |
-| cranlogs.r-pkg.org | Download statistics | https://r-hub.github.io/cranlogs/ |
-| cranchecks.info | CRAN check results | https://cran-checks.info/ |
-| shields.io | Custom badge generation | https://shields.io/ |
-| GitHub | Repository metrics | https://github.com |
-| lifecycle.r-lib.org | Lifecycle stages | https://lifecycle.r-lib.org/ |
+| Stage | When to Use | Color | Badge Status |
+|-------|-------------|-------|--------------|
+| **Experimental** 🧪 | Initial development, API unstable, breaking changes expected | Orange | Not recommended for production |
+| **Stable** ✅ | API stable, CRAN published, thoroughly tested, production-ready | Green | **[Current]** |
+| **Superseded** 🔵 | Still maintained, but better alternatives exist, no new features | Blue | Stable but not recommended for new projects |
+| **Deprecated** ⛔ | Use strongly discouraged, will be removed, migration guide available | Red | Do not use |
+
+**Current Status:** evanverse is **Stable** (green badge)
 
 ---
 
-## 📚 Additional Badge Options
+## 🚀 Future Badge Considerations
 
-### Future Badges to Consider
+### Badges to Add Later (When Applicable)
 
-When implementing additional CI/CD features:
-
-1. **Code Coverage** (after implementing codecov):
-   ```markdown
-   [![Codecov](https://codecov.io/gh/evanbio/evanverse/branch/main/graph/badge.svg)](https://codecov.io/gh/evanbio/evanverse)
-   ```
-
-2. **pkgdown Site Status**:
-   ```markdown
-   [![pkgdown](https://github.com/evanbio/evanverse/actions/workflows/pkgdown.yaml/badge.svg)](https://evanbio.github.io/evanverse/)
-   ```
-
-3. **DOI Badge** (if archived on Zenodo):
+1. **DOI Badge** - If package is archived on Zenodo for academic citations
    ```markdown
    [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.XXXXX.svg)](https://doi.org/10.5281/zenodo.XXXXX)
    ```
 
-4. **Contributor Count**:
+2. **JOSS Badge** - If published in Journal of Open Source Software
    ```markdown
-   [![Contributors](https://img.shields.io/github/contributors/evanbio/evanverse)](https://github.com/evanbio/evanverse/graphs/contributors)
+   [![JOSS](https://joss.theoj.org/papers/10.21105/joss.XXXXX/status.svg)](https://joss.theoj.org/papers/10.21105/joss.XXXXX)
    ```
 
-### Badges NOT Recommended
+3. **pkgdown Badge** - If auto-deployment becomes critical
+   ```markdown
+   [![pkgdown](https://github.com/evanbio/evanverse/actions/workflows/pkgdown.yaml/badge.svg)](https://evanbio.github.io/evanverse/)
+   ```
 
-Avoid these to prevent clutter:
-- ❌ Multiple duplicate metrics
-- ❌ Vanity metrics (stars, forks) for utility packages
-- ❌ Too many CI badges (stick to comprehensive one)
-- ❌ Outdated or unmaintained badge services
+### Badges to Avoid
 
----
-
-## 🎨 Badge Styling Guidelines
-
-### Current Style
-- **Layout**: Vertical list (one per line) for readability
-- **Order**: Importance-based (CRAN → CI → Activity → Technical)
-- **Logo**: Right-aligned, 120px width
-- **Links**: All badges link to relevant pages
-
-### Alternative Layouts
-
-If horizontal layout is preferred:
-```markdown
-[![Badge1](url)](link) [![Badge2](url)](link) [![Badge3](url)](link)
-```
-
-**Current vertical layout is recommended for:**
-- ✅ Better mobile viewing
-- ✅ Easier to scan
-- ✅ Clear visual hierarchy
-- ✅ Professional appearance
+- ❌ GitHub stars/forks (vanity metrics)
+- ❌ Multiple overlapping CI badges
+- ❌ Social media badges
+- ❌ "Made with R" or similar obvious badges
+- ❌ Too many shield.io custom badges
 
 ---
 
-## 📞 Support
+## 🎓 Badge Interpretation Guide
 
-For questions about badges or to report broken badges:
-- Open an issue: https://github.com/evanbio/evanverse/issues
-- Email: evanzhou.bio@gmail.com
+### For Users
+
+**Before installing evanverse, check:**
+1. **CRAN badge** - Is it the version you need?
+2. **R-CMD-check** - Is it currently building successfully?
+3. **Lifecycle** - Is it production-ready?
+
+**Green badges = Safe to use ✅**
+
+### For Contributors
+
+**Before contributing, check:**
+1. **R-CMD-check** - Are tests passing?
+2. **Codecov** - Where can test coverage improve?
+3. **GitHub issues** (not in README, but on repo)
+
+### For Maintainers
+
+**Regular checks:**
+- Weekly: R-CMD-check status
+- After commits: Codecov changes
+- Before CRAN submission: All badges green
+- Quarterly: Lifecycle appropriateness
+
+---
+
+## 📦 Service Providers
+
+| Service | What It Does | Badge Type | Update Frequency |
+|---------|--------------|------------|------------------|
+| [r-pkg.org](https://www.r-pkg.org/) | CRAN version tracking | CRAN version | On CRAN publish |
+| [GitHub Actions](https://github.com/features/actions) | CI/CD pipelines | R-CMD-check | Every push/PR |
+| [Codecov](https://codecov.io/) | Test coverage reporting | Coverage % | After test runs |
+| [shields.io](https://shields.io/) | Custom badge generation | Lifecycle, License | Manual update |
+| [lifecycle.r-lib.org](https://lifecycle.r-lib.org/) | Package maturity framework | Lifecycle stage | Manual update |
+
+---
+
+## 📞 Questions?
+
+For badge-related questions:
+- 📧 Email: [evanzhou.bio@gmail.com](mailto:evanzhou.bio@gmail.com)
+- 🐛 Issues: [GitHub Issues](https://github.com/evanbio/evanverse/issues)
+- 📚 Docs: [Package Website](https://evanbio.github.io/evanverse/)
 
 ---
 
 **Last Updated:** 2025-10-22
+**Badge Count:** 5 active (down from 11) ✅
+**Design Philosophy:** Modern, minimal, meaningful

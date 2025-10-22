@@ -1,112 +1,336 @@
-# evanverse: Utility Functions for Data Analysis and Visualization
+<div align="center">
 
-<!-- badges: start -->
-[![CRAN status](https://www.r-pkg.org/badges/version/evanverse)](https://CRAN.R-project.org/package=evanverse)
-[![CRAN downloads](https://cranlogs.r-pkg.org/badges/grand-total/evanverse)](https://CRAN.R-project.org/package=evanverse)
-[![CRAN downloads (monthly)](https://cranlogs.r-pkg.org/badges/evanverse)](https://CRAN.R-project.org/package=evanverse)
-[![CRAN checks](https://badges.cranchecks.info/worst/evanverse.svg)](https://cran.r-project.org/web/checks/check_results_evanverse.html)
+<img src="man/figures/logo.png" width="180" alt="evanverse logo" />
+
+# evanverse
+
+### *A Modern R Toolkit for Data Science & Bioinformatics*
+
+[![CRAN](https://www.r-pkg.org/badges/version/evanverse)](https://CRAN.R-project.org/package=evanverse)
 [![R-CMD-check](https://github.com/evanbio/evanverse/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/evanbio/evanverse/actions/workflows/R-CMD-check.yaml)
-[![Codecov test coverage](https://codecov.io/gh/evanbio/evanverse/branch/main/graph/badge.svg)](https://codecov.io/gh/evanbio/evanverse?branch=main)
-[![Lifecycle: stable](https://img.shields.io/badge/lifecycle-stable-brightgreen.svg)](https://lifecycle.r-lib.org/articles/stages.html#stable)
-[![GitHub last commit](https://img.shields.io/github/last-commit/evanbio/evanverse)](https://github.com/evanbio/evanverse/commits/main)
-[![GitHub issues](https://img.shields.io/github/issues/evanbio/evanverse)](https://github.com/evanbio/evanverse/issues)
-[![Dependencies](https://img.shields.io/badge/dependencies-10%20imports%20|%2015%20suggests-blue)](https://CRAN.R-project.org/package=evanverse)
-[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE.md)
-[![R version](https://img.shields.io/badge/R-%E2%89%A5%204.1.0-blue)](https://www.r-project.org/)
-<img src="man/figures/logo.png" align="right" width="120" />
-<!-- badges: end -->
+[![Codecov](https://codecov.io/gh/evanbio/evanverse/branch/main/graph/badge.svg)](https://codecov.io/gh/evanbio/evanverse?branch=main)
+[![Lifecycle](https://img.shields.io/badge/lifecycle-stable-brightgreen.svg)](https://lifecycle.r-lib.org/articles/stages.html#stable)
+[![License](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE.md)
 
-<br>
+[📚 Documentation](https://evanbio.github.io/evanverse/) •
+[🚀 Getting Started](#installation) •
+[💬 Issues](https://github.com/evanbio/evanverse/issues) •
+[🤝 Contributing](CONTRIBUTING.md)
 
-**evanverse** is a comprehensive R utility package by Evan Zhou that provides a unified toolkit for data analysis, visualization, and bioinformatics workflows. It combines practical functions for package management, data processing, color palettes, plotting, and workflow automation.
+</div>
 
-## Features
+---
 
-- 📦 **Package Management**: Multi-source installation (CRAN, GitHub, Bioconductor), version checking, and updates
-- 🎨 **Color & Visualization**: Bioinformatics color palettes, plotting functions (Venn, forest, bar, pie, density)
-- 🔧 **Data Processing**: Flexible file I/O, gene ID conversion, void value handling, column mapping
-- 🧮 **Operators & Logic**: Custom infix operators (%p%, %is%, %nin%, %map%, %match%), logical utilities
-- 🌐 **Download & Network**: URL downloading with retry, GEO data fetching, batch operations
-- ⚙️ **Workflow Tools**: Timing, reminders, safe execution, interactive viewing
+## ✨ Overview
 
-## Installation
+**evanverse** is a comprehensive utility package designed to streamline your R workflows. Built by [Evan Zhou](mailto:evanzhou.bio@gmail.com), it combines 55+ carefully crafted functions for data analysis, visualization, and bioinformatics into a single, coherent toolkit.
 
-### 🚀 CRAN (Recommended)
+### Why evanverse?
 
-`evanverse` is now available on CRAN! Install the stable release with:
+```r
+# 🎯 Intuitive operators
+"Hello" %p% "World"                    # → "Hello World"
+
+# 🎨 Beautiful visualizations
+plot_venn(list(A = 1:5, B = 3:8))     # Instant Venn diagrams
+
+# 📦 Smart package management
+inst_pkg("dplyr", source = "CRAN")     # Multi-source installation
+
+# 🧬 Bioinformatics made easy
+convert_gene_id(genes, from = "SYMBOL", to = "ENSEMBL")
+```
+
+---
+
+## 🚀 Installation
+
+### Stable Release (CRAN)
 
 ```r
 install.packages("evanverse")
 ```
 
-### 📦 Development Version
-
-You can install the latest development version from GitHub:
+### Development Version
 
 ```r
 # install.packages("devtools")
 devtools::install_github("evanbio/evanverse")
 ```
 
-> **CRAN Release**: Version 0.3.7 is now published on CRAN (Windows support confirmed). This release ensures full CRAN compliance with file operation policies and maintains perfect check results (0 errors, 0 warnings, 0 notes).
-
-## Usage
-
-```r
-library(evanverse)
-
-# Quick examples
-"Hello" %p% "world"              # String concatenation
-c(1, 2, NA) %is% c(1, 2, NA)     # Identity comparison
-file_tree(".")                   # View project structure
-```
-
-## Functions Overview
-
-evanverse v0.3.7 provides 55+ utility functions organized by category:
-
-### 📦 Package Management
-- `check_pkg()`, `inst_pkg()`, `update_pkg()`, `pkg_version()`, `pkg_functions()`, `set_mirror()`
-
-### 🎨 Visualization & Plotting
-- `plot_venn()`, `plot_forest()`, `plot_bar()`, `plot_pie()`, `plot_density()`
-
-### 🌈 Color Palettes
-- `get_palette()`, `list_palettes()`, `create_palette()`, `preview_palette()`, `bio_palette_gallery()`, `compile_palettes()`, `remove_palette()`
-- `hex2rgb()`, `rgb2hex()`
-
-### 📁 File & Data I/O
-- `read_table_flex()`, `read_excel_flex()`, `write_xlsx_flex()`, `download_url()`, `download_batch()`, `download_geo_data()`
-- `file_info()`, `file_tree()`, `get_ext()`, `view()`
-
-### 🧬 Bioinformatics
-- `convert_gene_id()`, `download_gene_ref()`, `gmt2df()`, `gmt2list()`
-
-### 🔧 Data Processing
-- `df2list()`, `map_column()`, `is_void()`, `any_void()`, `drop_void()`, `replace_void()`, `cols_with_void()`, `rows_with_void()`
-
-### 🧮 Operators & Logic
-- `%p%`, `%is%`, `%nin%`, `%map%`, `%match%`
-- `combine_logic()`, `comb()`, `perm()`
-
-### ⚙️ Workflow Tools
-- `with_timer()`, `remind()`, `safe_execute()`
-
-## Documentation
-
-Full documentation and vignettes available at:
-👉 https://evanbio.github.io/evanverse/
-
-## Contributing
-
-This project is in active development and currently designed for personal use.  
-Feedback and pull requests are welcome in future versions.
-
-## License
-
-MIT License © 2025 Evan Zhou
+**Requirements:** R ≥ 4.1.0
 
 ---
 
+## 🎯 Core Features
 
+<table>
+<tr>
+<td width="50%">
 
+### 📦 Package Management
+- Multi-source installation (CRAN, GitHub, Bioconductor)
+- Version checking & updates
+- Package function exploration
+- Mirror configuration
+
+</td>
+<td width="50%">
+
+### 🎨 Visualization
+- Ready-to-use plotting functions
+- Bioinformatics color palettes
+- Venn diagrams, forest plots
+- Bar, pie, density plots
+
+</td>
+</tr>
+<tr>
+<td width="50%">
+
+### 🧬 Bioinformatics
+- Gene ID conversion
+- GMT file handling
+- GEO data downloading
+- Reference data management
+
+</td>
+<td width="50%">
+
+### 🔧 Data Processing
+- Flexible file I/O
+- Column mapping utilities
+- Void value handling
+- Data transformations
+
+</td>
+</tr>
+<tr>
+<td width="50%">
+
+### 🧮 Custom Operators
+- `%p%` - String concatenation
+- `%is%` - Identity comparison
+- `%nin%` - Not in
+- `%map%`, `%match%` - Mapping tools
+
+</td>
+<td width="50%">
+
+### ⚙️ Workflow Tools
+- Timer wrappers
+- Safe execution
+- Reminder system
+- Interactive viewing
+
+</td>
+</tr>
+</table>
+
+---
+
+## 💡 Quick Examples
+
+### String Operations
+```r
+library(evanverse)
+
+# Concatenate with %p%
+first_name %p% " " %p% last_name
+
+# Check if NOT in set
+5 %nin% c(1, 2, 3, 4)  # TRUE
+```
+
+### Color Palettes
+```r
+# List available palettes
+list_palettes()
+
+# Get a palette
+colors <- get_palette("celltype", n = 5)
+
+# Preview palette
+preview_palette("celltype")
+```
+
+### File Operations
+```r
+# Flexible table reading
+data <- read_table_flex("data.csv")
+
+# Directory tree visualization
+file_tree(".", max_depth = 2)
+```
+
+### Bioinformatics Workflows
+```r
+# Convert gene IDs
+genes <- c("TP53", "BRCA1", "EGFR")
+ensembl_ids <- convert_gene_id(genes, from = "SYMBOL", to = "ENSEMBL")
+
+# Parse GMT files
+pathways <- gmt2list("pathway.gmt")
+```
+
+### Package Management
+```r
+# Install from multiple sources
+inst_pkg(c("dplyr", "ggplot2"), source = "CRAN")
+inst_pkg("limma", source = "Bioconductor")
+inst_pkg("user/repo", source = "GitHub")
+
+# Check versions
+pkg_version("evanverse")
+```
+
+---
+
+## 📖 Function Categories
+
+<details>
+<summary><b>📦 Package Management</b> (6 functions)</summary>
+
+- `check_pkg()` - Check if packages are installed
+- `inst_pkg()` - Install packages from multiple sources
+- `update_pkg()` - Update installed packages
+- `pkg_version()` - Get package version
+- `pkg_functions()` - List package functions
+- `set_mirror()` - Configure CRAN mirror
+
+</details>
+
+<details>
+<summary><b>🎨 Visualization & Plotting</b> (5 functions)</summary>
+
+- `plot_venn()` - Venn diagrams
+- `plot_forest()` - Forest plots
+- `plot_bar()` - Bar charts
+- `plot_pie()` - Pie charts
+- `plot_density()` - Density plots
+
+</details>
+
+<details>
+<summary><b>🌈 Color Palettes</b> (9 functions)</summary>
+
+- `get_palette()` - Retrieve color palette
+- `list_palettes()` - List available palettes
+- `create_palette()` - Create custom palette
+- `preview_palette()` - Preview palette colors
+- `bio_palette_gallery()` - Browse bio palettes
+- `compile_palettes()` - Compile palette data
+- `remove_palette()` - Remove palette
+- `hex2rgb()` - Convert hex to RGB
+- `rgb2hex()` - Convert RGB to hex
+
+</details>
+
+<details>
+<summary><b>📁 File & Data I/O</b> (10 functions)</summary>
+
+- `read_table_flex()` - Flexible table reading
+- `read_excel_flex()` - Flexible Excel reading
+- `write_xlsx_flex()` - Flexible Excel writing
+- `download_url()` - Download from URL
+- `download_batch()` - Batch downloads
+- `download_geo_data()` - Download GEO datasets
+- `file_info()` - File information
+- `file_tree()` - Directory tree
+- `get_ext()` - Get file extension
+- `view()` - Interactive data viewer
+
+</details>
+
+<details>
+<summary><b>🧬 Bioinformatics</b> (4 functions)</summary>
+
+- `convert_gene_id()` - Gene ID conversion
+- `download_gene_ref()` - Download gene references
+- `gmt2df()` - GMT to data frame
+- `gmt2list()` - GMT to list
+
+</details>
+
+<details>
+<summary><b>🔧 Data Processing</b> (10 functions)</summary>
+
+- `df2list()` - Data frame to list
+- `map_column()` - Map column values
+- `is_void()` - Check for void values
+- `any_void()` - Any void values
+- `drop_void()` - Remove void values
+- `replace_void()` - Replace void values
+- `cols_with_void()` - Columns with voids
+- `rows_with_void()` - Rows with voids
+
+</details>
+
+<details>
+<summary><b>🧮 Operators & Logic</b> (8 functions)</summary>
+
+- `%p%` - String concatenation operator
+- `%is%` - Identity comparison
+- `%nin%` - Not in operator
+- `%map%` - Mapping operator
+- `%match%` - Match operator
+- `combine_logic()` - Combine logical vectors
+- `comb()` - Combinations
+- `perm()` - Permutations
+
+</details>
+
+<details>
+<summary><b>⚙️ Workflow Tools</b> (3 functions)</summary>
+
+- `with_timer()` - Execute with timing
+- `remind()` - Set reminders
+- `safe_execute()` - Safe function execution
+
+</details>
+
+---
+
+## 📚 Documentation
+
+Complete documentation with examples and vignettes:
+
+👉 **[https://evanbio.github.io/evanverse/](https://evanbio.github.io/evanverse/)**
+
+---
+
+## 🤝 Contributing
+
+We welcome contributions! Please see our [Contributing Guide](CONTRIBUTING.md) for details.
+
+- 🐛 [Report bugs](https://github.com/evanbio/evanverse/issues/new?template=bug_report.yml)
+- 💡 [Request features](https://github.com/evanbio/evanverse/issues/new?template=feature_request.yml)
+- 📖 [Improve docs](https://github.com/evanbio/evanverse/issues/new?template=documentation.yml)
+- ❓ [Ask questions](https://github.com/evanbio/evanverse/issues/new?template=question.yml)
+
+---
+
+## 📜 License
+
+MIT License © 2025 [Evan Zhou](mailto:evanzhou.bio@gmail.com)
+
+See [LICENSE.md](LICENSE.md) for details.
+
+---
+
+## 📊 Project Status
+
+- ✅ **CRAN Published** - Version 0.3.7
+- ✅ **Stable Lifecycle** - Production ready
+- ✅ **Full Test Coverage** - Comprehensive test suite
+- ✅ **Active Maintenance** - Regular updates
+
+---
+
+<div align="center">
+
+**Made with ❤️ by [Evan Zhou](https://github.com/evanbio)**
+
+[⬆ Back to Top](#evanverse)
+
+</div>
