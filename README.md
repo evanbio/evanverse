@@ -1,7 +1,7 @@
 # evanverse: Utility Functions for Data Analysis and Visualization
 
 <!-- badges: start -->
-[![CRAN status](https://www.r-pkg.org/badges/version/evanverse)](https://CRAN.R-project.org/package=evanverse) [![CRAN downloads](https://cranlogs.r-pkg.org/badges/grand-total/evanverse)](https://CRAN.R-project.org/package=evanverse) [![GitHub version](https://img.shields.io/badge/version-v0.3.7-success)](https://github.com/evanbio/evanverse/releases) [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE.md) <img src="man/figures/logo.png" align="right" width="105" style="vertical-align: middle;" />
+[![CRAN status](https://www.r-pkg.org/badges/version/evanverse)](https://CRAN.R-project.org/package=evanverse) [![CRAN downloads](https://cranlogs.r-pkg.org/badges/grand-total/evanverse)](https://CRAN.R-project.org/package=evanverse) [![R-CMD-check](https://github.com/evanbio/evanverse/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/evanbio/evanverse/actions/workflows/R-CMD-check.yaml) [![GitHub version](https://img.shields.io/badge/version-v0.3.7-success)](https://github.com/evanbio/evanverse/releases) [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE.md) <img src="man/figures/logo.png" align="right" width="105" style="vertical-align: middle;" />
 <!-- badges: end -->
 
 <br>
