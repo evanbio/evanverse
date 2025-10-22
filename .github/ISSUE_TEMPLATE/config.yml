@@ -1,0 +1,14 @@
+blank_issues_enabled: false
+contact_links:
+  - name: 📚 Package Documentation
+    url: https://evanbio.github.io/evanverse/
+    about: Check the full documentation and function reference
+  - name: 💬 Discussions
+    url: https://github.com/evanbio/evanverse/discussions
+    about: Ask questions and discuss ideas with the community
+  - name: 📖 CRAN Page
+    url: https://CRAN.R-project.org/package=evanverse
+    about: View the official CRAN package page
+  - name: 📧 Contact Maintainer
+    url: mailto:evanzhou.bio@gmail.com
+    about: Email the package maintainer for sensitive issues

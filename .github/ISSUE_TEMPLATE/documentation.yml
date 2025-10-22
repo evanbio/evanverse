@@ -1,0 +1,81 @@
+name: 📝 Documentation Improvement
+description: Suggest improvements to documentation, examples, or vignettes
+title: "[Docs]: "
+labels: ["documentation", "needs-triage"]
+assignees: []
+
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thank you for helping improve evanverse documentation!
+
+  - type: dropdown
+    id: doc-type
+    attributes:
+      label: Documentation Type
+      description: What type of documentation needs improvement?
+      options:
+        - Function documentation (help pages)
+        - README
+        - Vignettes
+        - Package website (pkgdown)
+        - Code examples
+        - CONTRIBUTING guidelines
+        - Other
+    validations:
+      required: true
+
+  - type: input
+    id: location
+    attributes:
+      label: Documentation Location
+      description: Which file or function documentation needs improvement?
+      placeholder: "e.g., ?plot_venn, README.md, vignettes/get-started.Rmd"
+    validations:
+      required: true
+
+  - type: textarea
+    id: issue
+    attributes:
+      label: Current Issue
+      description: What is unclear, missing, or incorrect in the current documentation?
+      placeholder: "The documentation for X doesn't explain..."
+    validations:
+      required: true
+
+  - type: textarea
+    id: suggestion
+    attributes:
+      label: Suggested Improvement
+      description: How could the documentation be improved?
+      placeholder: "It would be clearer if..."
+    validations:
+      required: true
+
+  - type: textarea
+    id: example
+    attributes:
+      label: Proposed Example (Optional)
+      description: If applicable, provide an example you'd like to see added
+      placeholder: |
+        ```r
+        # Example code that would improve the documentation
+        ```
+      render: R
+
+  - type: textarea
+    id: context
+    attributes:
+      label: Additional Context
+      description: Any other information that would help improve the documentation
+
+  - type: checkboxes
+    id: checklist
+    attributes:
+      label: Checklist
+      options:
+        - label: I have checked the latest documentation on the pkgdown site
+          required: true
+        - label: I have searched for similar documentation issues
+          required: true

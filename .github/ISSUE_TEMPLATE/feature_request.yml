@@ -1,0 +1,118 @@
+name: ✨ Feature Request
+description: Suggest a new feature or enhancement for evanverse
+title: "[Feature]: "
+labels: ["enhancement", "needs-triage"]
+assignees: []
+
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thank you for suggesting a new feature! Please provide as much detail as possible to help us understand your proposal.
+
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem Statement
+      description: |
+        What problem does this feature solve? Is your feature request related to a problem?
+        A clear description of the problem helps us understand the use case.
+      placeholder: "I'm frustrated when... / It would be helpful if..."
+    validations:
+      required: true
+
+  - type: textarea
+    id: solution
+    attributes:
+      label: Proposed Solution
+      description: |
+        Describe the solution you'd like. How should this feature work?
+      placeholder: "I would like evanverse to..."
+    validations:
+      required: true
+
+  - type: textarea
+    id: api-design
+    attributes:
+      label: Proposed API Design
+      description: |
+        If applicable, show how you envision the API/function signature would look.
+      placeholder: |
+        ```r
+        # Example usage
+        new_function(data, param1 = "default", param2 = TRUE)
+        ```
+      render: R
+
+  - type: textarea
+    id: example
+    attributes:
+      label: Example Use Case
+      description: |
+        Provide a concrete example of how this feature would be used in practice.
+      placeholder: |
+        ```r
+        library(evanverse)
+
+        # Example workflow with the new feature
+        result <- new_function(my_data)
+        ```
+      render: R
+
+  - type: dropdown
+    id: category
+    attributes:
+      label: Feature Category
+      description: Which category does this feature belong to?
+      options:
+        - Package Management
+        - Visualization & Plotting
+        - Color Palettes
+        - File & Data I/O
+        - Bioinformatics
+        - Data Processing
+        - Operators & Logic
+        - Workflow Tools
+        - Other
+    validations:
+      required: true
+
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternatives Considered
+      description: |
+        Have you considered any alternative solutions or workarounds?
+        Are there existing functions that partially address this need?
+      placeholder: "I've tried... but it doesn't..."
+
+  - type: textarea
+    id: context
+    attributes:
+      label: Additional Context
+      description: |
+        Add any other context, screenshots, or examples about the feature request.
+        Links to similar implementations in other packages are helpful.
+
+  - type: dropdown
+    id: contribution
+    attributes:
+      label: Are you willing to contribute?
+      description: Would you be willing to submit a PR for this feature?
+      options:
+        - "Yes, I can submit a PR"
+        - "I can help with testing"
+        - "No, but I can provide feedback"
+        - "Not sure"
+
+  - type: checkboxes
+    id: checklist
+    attributes:
+      label: Checklist
+      options:
+        - label: I have searched existing issues and discussions
+          required: true
+        - label: This feature aligns with evanverse's scope (data analysis utilities)
+          required: true
+        - label: I have provided a clear use case
+          required: true

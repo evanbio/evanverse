@@ -1,0 +1,88 @@
+name: ❓ Question / Help Wanted
+description: Ask a question about using evanverse
+title: "[Question]: "
+labels: ["question"]
+assignees: []
+
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Have a question about using evanverse? We're here to help!
+
+        **Note:** For general R programming questions unrelated to evanverse, consider:
+        - [Stack Overflow](https://stackoverflow.com/questions/tagged/r)
+        - [RStudio Community](https://community.rstudio.com/)
+
+  - type: textarea
+    id: question
+    attributes:
+      label: Your Question
+      description: What would you like to know?
+      placeholder: "How do I..."
+    validations:
+      required: true
+
+  - type: textarea
+    id: context
+    attributes:
+      label: Context
+      description: |
+        What are you trying to accomplish? Providing context helps us give better answers.
+      placeholder: "I'm trying to... because..."
+    validations:
+      required: true
+
+  - type: textarea
+    id: attempted
+    attributes:
+      label: What Have You Tried?
+      description: |
+        What approaches have you already attempted? Include code if relevant.
+      placeholder: |
+        ```r
+        # Code you've tried
+        ```
+      render: R
+
+  - type: dropdown
+    id: topic
+    attributes:
+      label: Topic Area
+      description: Which area of evanverse does your question relate to?
+      options:
+        - Package Management
+        - Visualization & Plotting
+        - Color Palettes
+        - File & Data I/O
+        - Bioinformatics
+        - Data Processing
+        - Operators & Utilities
+        - Installation
+        - General Usage
+        - Other
+    validations:
+      required: true
+
+  - type: textarea
+    id: session-info
+    attributes:
+      label: Session Info (Optional)
+      description: If your question is about unexpected behavior, please include session info
+      placeholder: |
+        ```r
+        sessionInfo()
+        ```
+      render: R
+
+  - type: checkboxes
+    id: checklist
+    attributes:
+      label: Checklist
+      options:
+        - label: I have searched existing issues and discussions
+          required: true
+        - label: I have checked the package documentation
+          required: true
+        - label: This question is specific to evanverse
+          required: true

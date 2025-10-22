@@ -1,0 +1,119 @@
+name: 🐛 Bug Report
+description: Report a bug or unexpected behavior in evanverse
+title: "[Bug]: "
+labels: ["bug", "needs-triage"]
+assignees: []
+
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thank you for taking the time to report a bug! Please fill out the sections below to help us understand and fix the issue.
+
+  - type: textarea
+    id: description
+    attributes:
+      label: Bug Description
+      description: A clear and concise description of what the bug is.
+      placeholder: What happened?
+    validations:
+      required: true
+
+  - type: textarea
+    id: reprex
+    attributes:
+      label: Reproducible Example
+      description: |
+        Please provide a minimal reproducible example (reprex).
+        Use `reprex::reprex()` to create one. See https://reprex.tidyverse.org/ for help.
+      placeholder: |
+        ```r
+        library(evanverse)
+
+        # Your reproducible code here
+        ```
+      render: R
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected Behavior
+      description: What did you expect to happen?
+      placeholder: I expected...
+    validations:
+      required: true
+
+  - type: textarea
+    id: actual
+    attributes:
+      label: Actual Behavior
+      description: What actually happened? Include any error messages.
+      placeholder: |
+        Instead, I got...
+
+        Error message (if any):
+        ```
+        Error in ...
+        ```
+    validations:
+      required: true
+
+  - type: textarea
+    id: session-info
+    attributes:
+      label: Session Info
+      description: |
+        Please run `sessionInfo()` or `devtools::session_info()` in R and paste the output below.
+        This helps us understand your environment.
+      placeholder: |
+        ```r
+        sessionInfo()
+        ```
+      render: R
+    validations:
+      required: true
+
+  - type: input
+    id: version
+    attributes:
+      label: evanverse Version
+      description: Which version of evanverse are you using?
+      placeholder: "e.g., 0.3.7 (check with packageVersion('evanverse'))"
+    validations:
+      required: true
+
+  - type: dropdown
+    id: installation
+    attributes:
+      label: Installation Source
+      description: Where did you install evanverse from?
+      options:
+        - CRAN
+        - GitHub (development version)
+        - Other (please specify in additional context)
+    validations:
+      required: true
+
+  - type: textarea
+    id: context
+    attributes:
+      label: Additional Context
+      description: Add any other context about the problem here (screenshots, related issues, etc.)
+      placeholder: Any additional information that might help...
+
+  - type: checkboxes
+    id: checklist
+    attributes:
+      label: Checklist
+      description: Please confirm the following before submitting
+      options:
+        - label: I have searched existing issues to avoid duplicates
+          required: true
+        - label: I have provided a reproducible example
+          required: true
+        - label: I have included my session info
+          required: true
+        - label: I am using the latest version from CRAN (or have noted the version)
+          required: false
