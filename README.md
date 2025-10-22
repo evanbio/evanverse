@@ -1,7 +1,7 @@
 # evanverse: Utility Functions for Data Analysis and Visualization
 
 <!-- badges: start -->
-[![CRAN status](https://img.shields.io/badge/CRAN-Under%20Review-orange)](https://cran.r-project.org/package=evanverse) [![GitHub version](https://img.shields.io/badge/version-v0.3.7-success)](https://github.com/evanbio/evanverse/releases) [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE.md) <img src="man/figures/logo.png" align="right" width="105" style="vertical-align: middle;" />
+[![CRAN status](https://www.r-pkg.org/badges/version/evanverse)](https://CRAN.R-project.org/package=evanverse) [![CRAN downloads](https://cranlogs.r-pkg.org/badges/grand-total/evanverse)](https://CRAN.R-project.org/package=evanverse) [![GitHub version](https://img.shields.io/badge/version-v0.3.7-success)](https://github.com/evanbio/evanverse/releases) [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE.md) <img src="man/figures/logo.png" align="right" width="105" style="vertical-align: middle;" />
 <!-- badges: end -->
 
 <br>
@@ -19,9 +19,9 @@
 
 ## Installation
 
-### 🚀 CRAN (Recommended - Under Review)
+### 🚀 CRAN (Recommended)
 
-`evanverse` 0.3.7 is ready for CRAN submission. Once approved, install with:
+`evanverse` is now available on CRAN! Install the stable release with:
 
 ```r
 install.packages("evanverse")
@@ -36,7 +36,7 @@ You can install the latest development version from GitHub:
 devtools::install_github("evanbio/evanverse")
 ```
 
-> **Status Update**: Version 0.3.7 is a CRAN compliance release fixing file operation policy violations. Package maintains perfect check results (0 errors, 0 warnings, 0 notes).
+> **CRAN Release**: Version 0.3.7 is now published on CRAN (Windows support confirmed). This release ensures full CRAN compliance with file operation policies and maintains perfect check results (0 errors, 0 warnings, 0 notes).
 
 ## Usage
 

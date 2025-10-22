@@ -1,8 +1,16 @@
 # evanverse 0.3.7
 
 *Released: October 16, 2025*
+**Published on CRAN: October 21, 2025** 🎉
 
 **CRAN Compliance Release** - Fixed file system operation policy violations.
+
+### CRAN Publication
+
+* **Status**: Successfully published on CRAN (October 21, 2025)
+* **Platform**: Windows support confirmed
+* **Installation**: `install.packages("evanverse")`
+* **CRAN Page**: https://CRAN.R-project.org/package=evanverse
 
 ---
 
