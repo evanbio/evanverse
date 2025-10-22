@@ -1,7 +1,18 @@
 # evanverse: Utility Functions for Data Analysis and Visualization
 
 <!-- badges: start -->
-[![CRAN status](https://www.r-pkg.org/badges/version/evanverse)](https://CRAN.R-project.org/package=evanverse) [![CRAN downloads](https://cranlogs.r-pkg.org/badges/grand-total/evanverse)](https://CRAN.R-project.org/package=evanverse) [![R-CMD-check](https://github.com/evanbio/evanverse/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/evanbio/evanverse/actions/workflows/R-CMD-check.yaml) [![GitHub version](https://img.shields.io/badge/version-v0.3.7-success)](https://github.com/evanbio/evanverse/releases) [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE.md) <img src="man/figures/logo.png" align="right" width="105" style="vertical-align: middle;" />
+[![CRAN status](https://www.r-pkg.org/badges/version/evanverse)](https://CRAN.R-project.org/package=evanverse)
+[![CRAN downloads](https://cranlogs.r-pkg.org/badges/grand-total/evanverse)](https://CRAN.R-project.org/package=evanverse)
+[![CRAN downloads (monthly)](https://cranlogs.r-pkg.org/badges/evanverse)](https://CRAN.R-project.org/package=evanverse)
+[![CRAN checks](https://badges.cranchecks.info/worst/evanverse.svg)](https://cran.r-project.org/web/checks/check_results_evanverse.html)
+[![R-CMD-check](https://github.com/evanbio/evanverse/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/evanbio/evanverse/actions/workflows/R-CMD-check.yaml)
+[![Lifecycle: stable](https://img.shields.io/badge/lifecycle-stable-brightgreen.svg)](https://lifecycle.r-lib.org/articles/stages.html#stable)
+[![GitHub last commit](https://img.shields.io/github/last-commit/evanbio/evanverse)](https://github.com/evanbio/evanverse/commits/main)
+[![GitHub issues](https://img.shields.io/github/issues/evanbio/evanverse)](https://github.com/evanbio/evanverse/issues)
+[![Dependencies](https://img.shields.io/badge/dependencies-10%20imports%20|%2015%20suggests-blue)](https://CRAN.R-project.org/package=evanverse)
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE.md)
+[![R version](https://img.shields.io/badge/R-%E2%89%A5%204.1.0-blue)](https://www.r-project.org/)
+<img src="man/figures/logo.png" align="right" width="120" />
 <!-- badges: end -->
 
 <br>
