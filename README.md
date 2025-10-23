@@ -17,6 +17,10 @@
 [💬 Issues](https://github.com/evanbio/evanverse/issues) •
 [🤝 Contributing](CONTRIBUTING.md)
 
+---
+
+**Languages:** English | [简体中文](README_zh.md)
+
 </div>
 
 ---
