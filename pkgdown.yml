@@ -7,8 +7,9 @@ articles:
   comprehensive-guide: comprehensive-guide.html
   data-processing: data-processing.html
   get-started: get-started.html
+  install: install.html
   package-management: package-management.html
-last_built: 2025-10-23T06:34Z
+last_built: 2025-10-24T03:08Z
 urls:
   reference: https://evanbio.github.io/evanverse/reference
   article: https://evanbio.github.io/evanverse/articles

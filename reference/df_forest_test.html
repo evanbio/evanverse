@@ -3,10 +3,12 @@
 Contains example effect sizes, confidence intervals, and study information."><meta property="og:description" content="A sample dataset used for demonstrating and testing forest plot functionality.
 Contains example effect sizes, confidence intervals, and study information."><meta property="og:image" content="https://evanbio.github.io/evanverse/reference/figures/logo.png"><meta property="og:image:alt" content="evanverse: Comprehensive R utility toolkit for data analysis and bioinformatics"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:creator" content="@evanbio"><meta name="twitter:site" content="@evanbio"><meta name="keywords" content="R package, data analysis, bioinformatics, visualization, utilities, CRAN"><meta name="description" content="evanverse: A comprehensive R utility package with 55+ functions for data analysis, visualization, and bioinformatics workflows"><meta name="author" content="Evan Zhou"><!-- Enhanced Favicon --><link rel="icon" type="image/png" sizes="32x32" href="man/figures/logo.png"><link rel="icon" type="image/png" sizes="16x16" href="man/figures/logo.png"><link rel="apple-touch-icon" sizes="180x180" href="man/figures/logo.png"><!-- Enhanced CSS for professional appearance --><style>
   /* Navigation styling */
-  .navbar-brand img { height: 32px; margin-right: 10px; filter: drop-shadow(0 2px 4px rgba(0,0,0,0.1)); }
+  .navbar-brand { font-size: 1.5rem; font-weight: 600; }
+  .navbar-brand img { height: 36px; margin-right: 10px; filter: drop-shadow(0 2px 4px rgba(0,0,0,0.1)); }
   .navbar { box-shadow: 0 2px 12px rgba(0,0,0,0.08); backdrop-filter: blur(10px); }
-  .navbar-nav .nav-link { color: #424242 !important; font-weight: 500; transition: all 0.3s ease; }
+  .navbar-nav .nav-link { color: #424242 !important; font-weight: 500; font-size: 1.05rem; transition: all 0.3s ease; }
   .navbar-nav .nav-link:hover { color: #0D47A1 !important; transform: translateY(-1px); }
+  .navbar-nav .dropdown-item { font-size: 1rem; }
 
   /* Card and content styling */
   .card {
@@ -49,7 +51,9 @@ Contains example effect sizes, confidence intervals, and study information."><me
 
   /* Mobile responsiveness */
   @media (max-width: 768px) {
-    .navbar-brand img { height: 28px; }
+    .navbar-brand { font-size: 1.25rem; }
+    .navbar-brand img { height: 32px; }
+    .navbar-nav .nav-link { font-size: 1rem; }
     h1 { font-size: 2rem; }
     .card { margin-bottom: 1rem; }
   }
@@ -69,33 +73,22 @@ Contains example effect sizes, confidence intervals, and study information."><me
     </button>
 
     <div id="navbar" class="collapse navbar-collapse ms-3">
-      <ul class="navbar-nav me-auto"><li class="nav-item"><a class="nav-link" href="../articles/get-started.html"><span class="fa fas fa-rocket"></span> Get Started</a></li>
-<li class="active nav-item dropdown">
-  <button class="nav-link dropdown-toggle" type="button" id="dropdown-reference" data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true"><span class="fa fas fa-book-open"></span> Reference</button>
-  <ul class="dropdown-menu" aria-labelledby="dropdown-reference"><li><a class="dropdown-item" href="../reference/index.html#package-management">📦 Package Management</a></li>
-    <li><a class="dropdown-item" href="../reference/index.html#visualization-plotting">📊 Visualization &amp; Plotting</a></li>
-    <li><a class="dropdown-item" href="../reference/index.html#color-palettes-management">🎨 Color Palettes</a></li>
-    <li><a class="dropdown-item" href="../reference/index.html#file-data-i-o">💾 File &amp; Data I/O</a></li>
-    <li><a class="dropdown-item" href="../reference/index.html#bioinformatics-utilities">🧬 Bioinformatics</a></li>
-    <li><a class="dropdown-item" href="../reference/index.html#data-processing-transformation">🔄 Data Processing</a></li>
-    <li><hr class="dropdown-divider"></li>
-    <li><a class="dropdown-item" href="../reference/">All Functions</a></li>
-  </ul></li>
+      <ul class="navbar-nav me-auto"><li class="nav-item"><a class="nav-link" href="../articles/install.html">Install</a></li>
+<li class="nav-item"><a class="nav-link" href="../articles/get-started.html">Get Started</a></li>
 <li class="nav-item dropdown">
-  <button class="nav-link dropdown-toggle" type="button" id="dropdown-guides" data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true"><span class="fa fas fa-file-alt"></span> Guides</button>
-  <ul class="dropdown-menu" aria-labelledby="dropdown-guides"><li><a class="dropdown-item" href="../articles/get-started.html">🚀 Getting Started</a></li>
-    <li><a class="dropdown-item" href="../articles/comprehensive-guide.html">📖 Comprehensive Guide</a></li>
-    <li><a class="dropdown-item" href="../articles/package-management.html">📦 Package Management</a></li>
-    <li><a class="dropdown-item" href="../articles/data-processing.html">🔄 Data Processing</a></li>
-    <li><a class="dropdown-item" href="../articles/color-palettes.html">🎨 Color Palettes</a></li>
-    <li><a class="dropdown-item" href="../articles/bioinformatics-workflows.html">🧬 Bioinformatics Workflows</a></li>
+  <button class="nav-link dropdown-toggle" type="button" id="dropdown-vignettes" data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true">Vignettes</button>
+  <ul class="dropdown-menu" aria-labelledby="dropdown-vignettes"><li><a class="dropdown-item" href="../articles/comprehensive-guide.html">Comprehensive Guide</a></li>
+    <li><a class="dropdown-item" href="../articles/package-management.html">Package Management</a></li>
+    <li><a class="dropdown-item" href="../articles/data-processing.html">Data Processing</a></li>
+    <li><a class="dropdown-item" href="../articles/color-palettes.html">Color Palettes</a></li>
+    <li><a class="dropdown-item" href="../articles/bioinformatics-workflows.html">Bioinformatics Workflows</a></li>
     <li><hr class="dropdown-divider"></li>
-    <li><a class="dropdown-item" href="../articles/">📚 All Articles</a></li>
+    <li><a class="dropdown-item" href="../articles/">All Articles</a></li>
   </ul></li>
-<li class="nav-item"><a class="nav-link" href="../news/index.html"><span class="fa fas fa-newspaper"></span> News</a></li>
-      </ul><ul class="navbar-nav"><li class="nav-item"><a class="nav-link" href="../#" aria-label="Search documentation"><span class="fa fas fa-search"></span></a></li>
-<li class="nav-item"><a class="external-link nav-link" href="https://github.com/evanbio/evanverse" aria-label="View on GitHub"><span class="fa fab fa-github"></span></a></li>
-<li class="nav-item"><a class="external-link nav-link" href="https://cran.r-project.org/package=evanverse" aria-label="Download from CRAN"><span class="fa fas fa-download"></span> CRAN</a></li>
+<li class="active nav-item"><a class="nav-link" href="../reference/index.html">Reference</a></li>
+<li class="nav-item"><a class="nav-link" href="../news/index.html">News</a></li>
+      </ul><ul class="navbar-nav"><li class="nav-item"><a class="external-link nav-link" href="https://github.com/evanbio/evanverse" aria-label="GitHub"><span class="fa fab fa-github"></span></a></li>
+<li class="nav-item"><a class="external-link nav-link" href="https://cran.r-project.org/package=evanverse" aria-label="CRAN"><span class="fa fas fa-download"></span></a></li>
       </ul></div>
 
 
