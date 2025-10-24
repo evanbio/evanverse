@@ -13,7 +13,7 @@
 [![License](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE.md)
 
 [📚 Documentation](https://evanbio.github.io/evanverse/) •
-[🚀 Getting Started](#installation) •
+[🚀 Getting Started](https://evanbio.github.io/evanverse/articles/get-started.html) •
 [💬 Issues](https://github.com/evanbio/evanverse/issues) •
 [🤝 Contributing](CONTRIBUTING.md)
 
