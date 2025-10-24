@@ -1,0 +1,246 @@
+---
+title: "Installation Guide"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Installation Guide}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  eval = FALSE
+)
+```
+
+## Overview
+
+This guide covers all installation methods for **evanverse**, including system requirements, dependencies, and troubleshooting.
+
+---
+
+## Quick Install
+
+### From CRAN (Recommended)
+
+The stable release is available on CRAN:
+
+```{r cran-install}
+install.packages("evanverse")
+```
+
+### From GitHub (Development Version)
+
+For the latest features and bug fixes:
+
+```{r github-install}
+# Install devtools if needed
+install.packages("devtools")
+
+# Install evanverse
+devtools::install_github("evanbio/evanverse")
+```
+
+---
+
+## System Requirements
+
+- **R Version**: ≥ 4.1.0
+- **Operating Systems**: Windows, macOS, Linux
+- **Internet Connection**: Required for initial installation and some functions
+
+---
+
+## Dependencies
+
+evanverse depends on several packages that will be automatically installed:
+
+### Core Dependencies
+
+- **tidyverse** — Data manipulation and visualization
+- **data.table** — Fast data processing
+- **jsonlite** — JSON handling for color palettes
+
+### Bioinformatics Dependencies
+
+- **Biobase** — Bioconductor infrastructure
+- **GSEABase** — Gene set analysis
+- **biomaRt** — Gene ID conversion
+
+### Visualization Dependencies
+
+- **ggplot2** — Plotting framework
+- **VennDiagram** — Venn diagram generation
+- **ggVennDiagram** — Modern Venn diagrams
+
+### Utility Dependencies
+
+- **cli** — Command-line interface
+- **fs** — File system operations
+- **curl** — URL downloads
+- **openxlsx** — Excel file handling
+
+---
+
+## Installation Options
+
+### Minimal Installation
+
+Install without suggested packages:
+
+```{r minimal-install}
+install.packages("evanverse", dependencies = c("Depends", "Imports"))
+```
+
+### Full Installation
+
+Install with all suggested packages for complete functionality:
+
+```{r full-install}
+install.packages("evanverse", dependencies = TRUE)
+```
+
+### Install Specific Version
+
+```{r version-install}
+# Install a specific version from CRAN
+devtools::install_version("evanverse", version = "0.3.7")
+
+# Install from a specific GitHub release
+devtools::install_github("evanbio/evanverse@v0.3.7")
+```
+
+---
+
+## Bioconductor Dependencies
+
+Some bioinformatics functions require Bioconductor packages. Install them separately:
+
+```{r bioc-install}
+# Install BiocManager if needed
+if (!requireNamespace("BiocManager", quietly = TRUE))
+    install.packages("BiocManager")
+
+# Install Bioconductor dependencies
+BiocManager::install(c("Biobase", "GSEABase", "biomaRt", "GEOquery"))
+```
+
+---
+
+## Verify Installation
+
+After installation, verify that evanverse is working correctly:
+
+```{r verify-install, eval = TRUE}
+# Load the package
+library(evanverse)
+
+# Check version
+packageVersion("evanverse")
+
+# List available functions
+pkg_functions("evanverse")
+
+# Test basic functionality
+"Hello" %p% " " %p% "World"
+```
+
+---
+
+## Update evanverse
+
+### Update from CRAN
+
+```{r update-cran}
+update.packages("evanverse")
+```
+
+### Update from GitHub
+
+```{r update-github}
+devtools::install_github("evanbio/evanverse", force = TRUE)
+```
+
+### Using evanverse's Built-in Updater
+
+```{r update-builtin}
+library(evanverse)
+update_pkg("evanverse")
+```
+
+---
+
+## Troubleshooting
+
+### Installation Fails with "package not available"
+
+**Solution**: Ensure you're using R ≥ 4.1.0
+
+```{r check-r-version}
+R.version.string
+```
+
+### Bioconductor Packages Not Installing
+
+**Solution**: Install BiocManager first, then retry:
+
+```{r bioc-troubleshoot}
+install.packages("BiocManager")
+BiocManager::install(c("Biobase", "GSEABase"))
+```
+
+### Permission Errors on Linux/macOS
+
+**Solution**: Install to user library:
+
+```{r user-lib-install}
+install.packages("evanverse", lib = Sys.getenv("R_LIBS_USER"))
+```
+
+### Network/Firewall Issues
+
+**Solution**: Configure proxy if behind a firewall:
+
+```{r proxy-setup}
+Sys.setenv(http_proxy = "http://your-proxy:port")
+Sys.setenv(https_proxy = "https://your-proxy:port")
+```
+
+### Compilation Issues on Windows
+
+**Solution**: Install Rtools from [CRAN](https://cran.r-project.org/bin/windows/Rtools/)
+
+---
+
+## Uninstall
+
+To remove evanverse:
+
+```{r uninstall}
+remove.packages("evanverse")
+```
+
+---
+
+## Getting Help
+
+- **Documentation**: [https://evanbio.github.io/evanverse/](https://evanbio.github.io/evanverse/)
+- **Issues**: [GitHub Issues](https://github.com/evanbio/evanverse/issues)
+- **CRAN**: [CRAN Package Page](https://cran.r-project.org/package=evanverse)
+
+---
+
+## Next Steps
+
+After installation:
+
+1. Read the [Getting Started Guide](get-started.html)
+2. Explore the [Comprehensive Guide](comprehensive-guide.html)
+3. Browse the [Function Reference](../reference/index.html)
+4. Try domain-specific vignettes:
+   - [Package Management](package-management.html)
+   - [Data Processing](data-processing.html)
+   - [Color Palettes](color-palettes.html)
+   - [Bioinformatics Workflows](bioinformatics-workflows.html)

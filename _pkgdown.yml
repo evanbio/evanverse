@@ -1,36 +1,51 @@
+# ==============================================================================
+# pkgdown Configuration for evanverse
+# ==============================================================================
+
 url: https://evanbio.github.io/evanverse/
+
+# ==============================================================================
+# Template & Theme Configuration
+# ==============================================================================
 
 template:
   bootstrap: 5
-  bootswatch: sandstone
+
   bslib:
-    primary: "#0D47A1"  # Professional deep blue
-    secondary: "#E3F2FD"  # Light blue background
-    success: "#2E7D32"  # Forest green
-    info: "#0288D1"  # Information blue
-    warning: "#F57C00"  # Amber orange
-    danger: "#C62828"  # Deep red
+    # Color Palette
+    primary: "#0D47A1"
+    secondary: "#E3F2FD"
+    success: "#2E7D32"
+    info: "#0288D1"
+    warning: "#F57C00"
+    danger: "#C62828"
     light: "#FAFAFA"
-    dark: "#1A237E"  # Deep indigo
+    dark: "#1A237E"
     bg-light: "#F8F9FA"
-    bg-dark: "#121212"  # True dark mode
+    bg-dark: "#121212"
+
+    # Border Radius
     border-radius: "0.5rem"
+    btn-border-radius: "0.375rem"
+    card-border-radius: "0.5rem"
+
+    # Typography
     base_font: {google: "Inter"}
     heading_font: {google: "Inter"}
     code_font: {google: "JetBrains Mono"}
+
+    # Navbar Colors
     navbar-bg: "#FFFFFF"
     navbar-light-color: "#424242"
     navbar-light-hover-color: "#0D47A1"
+
+    # Link Colors
     link-color: "#0D47A1"
     link-hover-color: "#1976D2"
-    btn-border-radius: "0.375rem"
-    card-border-radius: "0.5rem"
+
   params:
     path: /evanverse/
-    ganalytics: null
-    docsearch:
-      api_key: ~
-      index_name: ~
+
   opengraph:
     image:
       src: man/figures/logo.png
@@ -39,22 +54,27 @@ template:
       creator: "@evanbio"
       card: summary_large_image
       site: "@evanbio"
+
   includes:
     in_header: |
       <meta name="keywords" content="R package, data analysis, bioinformatics, visualization, utilities, CRAN">
       <meta name="description" content="evanverse: A comprehensive R utility package with 55+ functions for data analysis, visualization, and bioinformatics workflows">
       <meta name="author" content="Evan Zhou">
+
       <!-- Enhanced Favicon -->
       <link rel="icon" type="image/png" sizes="32x32" href="man/figures/logo.png">
       <link rel="icon" type="image/png" sizes="16x16" href="man/figures/logo.png">
       <link rel="apple-touch-icon" sizes="180x180" href="man/figures/logo.png">
+
       <!-- Enhanced CSS for professional appearance -->
       <style>
         /* Navigation styling */
-        .navbar-brand img { height: 32px; margin-right: 10px; filter: drop-shadow(0 2px 4px rgba(0,0,0,0.1)); }
+        .navbar-brand { font-size: 1.5rem; font-weight: 600; }
+        .navbar-brand img { height: 36px; margin-right: 10px; filter: drop-shadow(0 2px 4px rgba(0,0,0,0.1)); }
         .navbar { box-shadow: 0 2px 12px rgba(0,0,0,0.08); backdrop-filter: blur(10px); }
-        .navbar-nav .nav-link { color: #424242 !important; font-weight: 500; transition: all 0.3s ease; }
+        .navbar-nav .nav-link { color: #424242 !important; font-weight: 500; font-size: 1.05rem; transition: all 0.3s ease; }
         .navbar-nav .nav-link:hover { color: #0D47A1 !important; transform: translateY(-1px); }
+        .navbar-nav .dropdown-item { font-size: 1rem; }
 
         /* Card and content styling */
         .card {
@@ -97,11 +117,17 @@ template:
 
         /* Mobile responsiveness */
         @media (max-width: 768px) {
-          .navbar-brand img { height: 28px; }
+          .navbar-brand { font-size: 1.25rem; }
+          .navbar-brand img { height: 32px; }
+          .navbar-nav .nav-link { font-size: 1rem; }
           h1 { font-size: 2rem; }
           .card { margin-bottom: 1rem; }
         }
       </style>
+
+# ==============================================================================
+# Home Page Configuration
+# ==============================================================================
 
 home:
   title: evanverse
@@ -112,36 +138,42 @@ home:
     data processing, color palettes, plotting, and workflow automation with a
     focus on simplicity and reproducibility.
   strip_header: false
+
   sidebar:
     structure: [links, toc, license, community, citation, authors, dev]
+
   links:
-  - text: "🚀 Quick Start Guide"
+  - text: "Quick Start Guide"
     href: articles/get-started.html
     desc: "Get up and running with evanverse in minutes"
-  - text: "📖 Comprehensive Guide"
+  - text: "Comprehensive Guide"
     href: articles/comprehensive-guide.html
     desc: "Complete overview of all evanverse features"
-  - text: "🔄 Data Processing"
+  - text: "Data Processing"
     href: articles/data-processing.html
     desc: "Data transformation and void value handling"
-  - text: "📦 Package Management"
+  - text: "Package Management"
     href: articles/package-management.html
     desc: "Advanced installation and management"
-  - text: "🎨 Color Palettes"
+  - text: "Color Palettes"
     href: articles/color-palettes.html
     desc: "Professional color management for data visualization"
-  - text: "🧬 Bioinformatics Workflows"
+  - text: "Bioinformatics Workflows"
     href: articles/bioinformatics-workflows.html
     desc: "Domain-specific applications and tutorials"
-  - text: "📖 Function Reference"
+  - text: "Function Reference"
     href: reference/
     desc: "Complete documentation for all 55+ functions"
-  - text: "💾 Install from CRAN"
+  - text: "Install from CRAN"
     href: https://cran.r-project.org/package=evanverse
     desc: "Stable release on CRAN"
-  - text: "🔧 Development Version"
+  - text: "Development Version"
     href: https://github.com/evanbio/evanverse
     desc: "Latest features on GitHub"
+
+# ==============================================================================
+# Authors Configuration
+# ==============================================================================
 
 authors:
   Evan Zhou:
@@ -152,119 +184,83 @@ authors:
     roles: [aut, cre]
     email: evanzhou.bio@gmail.com
 
+# ==============================================================================
+# Navigation Bar Configuration
+# ==============================================================================
+
 navbar:
   title:
     text: "evanverse"
     icon: "man/figures/logo.png"
   type: light
   bg: light
+
   structure:
     left:
       - home
+      - install
       - intro
+      - vignettes
       - reference
-      - articles
       - news
     right:
-      - search
       - github
       - cran
 
   components:
+    version:
+      text: "0.3.7"
+      href: news/index.html
+
+    install:
+      text: "Install"
+      href: articles/install.html
+
     intro:
       text: "Get Started"
-      icon: "fas fa-rocket"
       href: articles/get-started.html
+
+    vignettes:
+      text: "Vignettes"
+      menu:
+      - text: "Comprehensive Guide"
+        href: articles/comprehensive-guide.html
+      - text: "Package Management"
+        href: articles/package-management.html
+      - text: "Data Processing"
+        href: articles/data-processing.html
+      - text: "Color Palettes"
+        href: articles/color-palettes.html
+      - text: "Bioinformatics Workflows"
+        href: articles/bioinformatics-workflows.html
+      - text: "--------"
+      - text: "All Articles"
+        href: articles/
 
     reference:
       text: "Reference"
-      icon: "fas fa-book-open"
-      menu:
-      - text: "📦 Package Management"
-        href: reference/index.html#package-management
-      - text: "📊 Visualization & Plotting"
-        href: reference/index.html#visualization-plotting
-      - text: "🎨 Color Palettes"
-        href: reference/index.html#color-palettes-management
-      - text: "💾 File & Data I/O"
-        href: reference/index.html#file-data-i-o
-      - text: "🧬 Bioinformatics"
-        href: reference/index.html#bioinformatics-utilities
-      - text: "🔄 Data Processing"
-        href: reference/index.html#data-processing-transformation
-      - text: "--------"
-      - text: "All Functions"
-        href: reference/
-
-    articles:
-      text: "Guides"
-      icon: "fas fa-file-alt"
-      menu:
-      - text: "🚀 Getting Started"
-        href: articles/get-started.html
-        desc: "Quick introduction and basic usage"
-      - text: "📖 Comprehensive Guide"
-        href: articles/comprehensive-guide.html
-        desc: "Complete overview of all evanverse features"
-      - text: "📦 Package Management"
-        href: articles/package-management.html
-        desc: "Advanced installation and management"
-      - text: "🔄 Data Processing"
-        href: articles/data-processing.html
-        desc: "Data transformation and void value handling"
-      - text: "🎨 Color Palettes"
-        href: articles/color-palettes.html
-        desc: "Advanced color palette management"
-      - text: "🧬 Bioinformatics Workflows"
-        href: articles/bioinformatics-workflows.html
-        desc: "Domain-specific bioinformatics applications"
-      - text: "--------"
-      - text: "📚 All Articles"
-        href: articles/
+      href: reference/index.html
 
     news:
       text: "News"
-      icon: "fas fa-newspaper"
       href: news/index.html
-
-    cran:
-      text: "CRAN"
-      icon: "fas fa-download"
-      href: https://cran.r-project.org/package=evanverse
-      aria-label: "Download from CRAN"
 
     github:
       icon: "fab fa-github"
       href: https://github.com/evanbio/evanverse
-      aria-label: "View on GitHub"
+      aria-label: "GitHub"
 
-    search:
-      icon: "fas fa-search"
-      href: "#"
-      aria-label: "Search documentation"
+    cran:
+      icon: "fas fa-download"
+      href: https://cran.r-project.org/package=evanverse
+      aria-label: "CRAN"
 
-articles:
-- title: "Getting Started"
-  navbar: "Getting Started"
-  desc: >
-    Quick start guides to help you begin using evanverse effectively
-  contents:
-  - get-started
-  - comprehensive-guide
-
-- title: "Specialized Guides"
-  navbar: "Specialized Guides"
-  desc: >
-    In-depth tutorials covering specific functionality and advanced workflows
-  contents:
-  - package-management
-  - data-processing
-  - color-palettes
-  - bioinformatics-workflows
-
+# ==============================================================================
+# Function Reference Organization
+# ==============================================================================
 
 reference:
-- title: "📦 Package Management"
+- title: "Package Management"
   desc: >
     Functions for installing, checking, and managing R packages from
     multiple sources (CRAN, GitHub, Bioconductor). Essential tools for
@@ -277,7 +273,7 @@ reference:
   - pkg_functions
   - set_mirror
 
-- title: "📊 Visualization & Plotting"
+- title: "Visualization & Plotting"
   desc: >
     High-level plotting functions with sensible defaults for common
     chart types and publication-ready visualizations. Create professional
@@ -289,7 +285,7 @@ reference:
   - plot_pie
   - plot_density
 
-- title: "🎨 Color Palettes & Management"
+- title: "Color Palettes & Management"
   desc: >
     Bioinformatics-focused color palette system with creation,
     management, and visualization tools. Build consistent, accessible
@@ -305,7 +301,7 @@ reference:
   - hex2rgb
   - rgb2hex
 
-- title: "💾 File & Data I/O"
+- title: "File & Data I/O"
   desc: >
     Flexible file reading/writing functions with enhanced error handling,
     progress reporting, and format detection. Handle various data formats
@@ -322,7 +318,7 @@ reference:
   - get_ext
   - view
 
-- title: "🧬 Bioinformatics Utilities"
+- title: "Bioinformatics Utilities"
   desc: >
     Specialized functions for bioinformatics workflows including
     gene ID conversion and gene set analysis. Essential tools for
@@ -333,7 +329,7 @@ reference:
   - gmt2df
   - gmt2list
 
-- title: "🔄 Data Processing & Transformation"
+- title: "Data Processing & Transformation"
   desc: >
     Functions for data manipulation, column mapping, and handling
     missing or void values. Clean and transform data with comprehensive
@@ -348,7 +344,7 @@ reference:
   - cols_with_void
   - rows_with_void
 
-- title: "⚡ Operators & Logic"
+- title: "Operators & Logic"
   desc: >
     Custom infix operators and logical utility functions for
     expressive and readable code. Enhance R syntax with powerful
@@ -363,7 +359,7 @@ reference:
   - comb
   - perm
 
-- title: "🛠️ Workflow & Development Tools"
+- title: "Workflow & Development Tools"
   desc: >
     Helper functions for development workflow, timing, and
     safe code execution. Streamline your development process with
@@ -373,7 +369,7 @@ reference:
   - remind
   - safe_execute
 
-- title: "📊 Example Datasets"
+- title: "Example Datasets"
   desc: >
     Sample datasets included with evanverse for testing and
     demonstration purposes. Useful for learning functions and
@@ -382,27 +378,49 @@ reference:
   - df_forest_test
   - trial
 
+# ==============================================================================
+# News & Release Configuration
+# ==============================================================================
+
 news:
   releases:
-  - text: "🎉 Version 0.3.5 - CRAN Resubmission"
+  - text: "Version 0.3.7 - CRAN Published (October 2025)"
+    href: https://github.com/evanbio/evanverse/releases/tag/v0.3.7
+  - text: "Version 0.3.6 - Maintenance Release"
+    href: https://github.com/evanbio/evanverse/releases/tag/v0.3.6
+  - text: "Version 0.3.5 - CRAN Resubmission"
     href: https://github.com/evanbio/evanverse/releases/tag/v0.3.5
-  - text: "📦 Version 0.3.4 - Enhanced CRAN Submission"
+  - text: "Version 0.3.4 - Enhanced CRAN Submission"
     href: https://github.com/evanbio/evanverse/releases/tag/v0.3.4
-  - text: "📦 Version 0.3.3 - CRAN Submission Ready"
+  - text: "Version 0.3.3 - CRAN Submission Ready"
     href: https://github.com/evanbio/evanverse/releases/tag/v0.3.3
+  - text: "Version 0.3.2 - Maintenance Release"
+    href: https://github.com/evanbio/evanverse/releases/tag/v0.3.2
+  - text: "Version 0.3.1 - CRAN Preparation"
+    href: https://github.com/evanbio/evanverse/releases/tag/v0.3.1
+  - text: "Version 0.3.0 - Major Refactor"
+    href: https://github.com/evanbio/evanverse/releases/tag/v0.3.0
+  - text: "Version 0.2.0 - Comprehensive Upgrade"
+    href: https://github.com/evanbio/evanverse/releases/tag/v0.2.0
   - text: "View All Releases"
     href: https://github.com/evanbio/evanverse/releases
+
+# ==============================================================================
+# Footer Configuration
+# ==============================================================================
 
 footer:
   structure:
     left: [developed_by, built_with, license]
     right: [package_info, social_links]
+
   components:
     package_info: |
       <div class="text-muted">
         <strong>evanverse v0.3.7</strong><br>
         <small>Last updated: October 2025</small>
       </div>
+
     social_links: |
       <div class="footer-links">
         <a href="https://github.com/evanbio/evanverse" class="text-muted me-3" aria-label="GitHub">
@@ -415,9 +433,9 @@ footer:
           <i class="fas fa-blog fa-lg"></i>
         </a>
       </div>
+
     license: |
       <div class="text-muted">
         <i class="fas fa-balance-scale me-1"></i>
         <a href="https://opensource.org/licenses/MIT" class="text-muted">MIT License</a>
       </div>
-

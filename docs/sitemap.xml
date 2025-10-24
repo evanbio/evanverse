@@ -6,9 +6,14 @@
 <url><loc>https://evanbio.github.io/evanverse/articles/data-processing.html</loc></url>
 <url><loc>https://evanbio.github.io/evanverse/articles/get-started.html</loc></url>
 <url><loc>https://evanbio.github.io/evanverse/articles/index.html</loc></url>
+<url><loc>https://evanbio.github.io/evanverse/articles/install.html</loc></url>
 <url><loc>https://evanbio.github.io/evanverse/articles/package-management.html</loc></url>
 <url><loc>https://evanbio.github.io/evanverse/authors.html</loc></url>
+<url><loc>https://evanbio.github.io/evanverse/BADGES.html</loc></url>
 <url><loc>https://evanbio.github.io/evanverse/CLAUDE.html</loc></url>
+<url><loc>https://evanbio.github.io/evanverse/CODECOV_SETUP.html</loc></url>
+<url><loc>https://evanbio.github.io/evanverse/CODE_OF_CONDUCT.html</loc></url>
+<url><loc>https://evanbio.github.io/evanverse/CONTRIBUTING.html</loc></url>
 <url><loc>https://evanbio.github.io/evanverse/CRAN-submission-checklist.html</loc></url>
 <url><loc>https://evanbio.github.io/evanverse/cross-platform-compatibility-report.html</loc></url>
 <url><loc>https://evanbio.github.io/evanverse/index.html</loc></url>
@@ -16,7 +21,9 @@
 <url><loc>https://evanbio.github.io/evanverse/LICENSE-text.html</loc></url>
 <url><loc>https://evanbio.github.io/evanverse/LICENSE.html</loc></url>
 <url><loc>https://evanbio.github.io/evanverse/news/index.html</loc></url>
+<url><loc>https://evanbio.github.io/evanverse/PLANNING.html</loc></url>
 <url><loc>https://evanbio.github.io/evanverse/PULL_REQUEST_TEMPLATE.html</loc></url>
+<url><loc>https://evanbio.github.io/evanverse/README_zh.html</loc></url>
 <url><loc>https://evanbio.github.io/evanverse/reference/any_void.html</loc></url>
 <url><loc>https://evanbio.github.io/evanverse/reference/bio_palette_gallery.html</loc></url>
 <url><loc>https://evanbio.github.io/evanverse/reference/check_pkg.html</loc></url>
@@ -73,5 +80,6 @@
 <url><loc>https://evanbio.github.io/evanverse/reference/view.html</loc></url>
 <url><loc>https://evanbio.github.io/evanverse/reference/with_timer.html</loc></url>
 <url><loc>https://evanbio.github.io/evanverse/reference/write_xlsx_flex.html</loc></url>
+<url><loc>https://evanbio.github.io/evanverse/TASK.html</loc></url>
 </urlset>
 
