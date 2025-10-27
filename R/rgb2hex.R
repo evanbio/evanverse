@@ -55,14 +55,14 @@ rgb2hex <- function(rgb) {
 
     cli::cli_alert_success("Converted {length(hex)} RGB value{?s} to HEX.")
     for (i in seq_along(hex)) {
-      cli::cli_alert_info("RGB: c({paste(rgb[[i]], collapse = ', ')}) \u2192 HEX: {hex[i]}")
+      cli::cli_alert_info("RGB: c({paste(rgb[[i]], collapse = ', ')}) -> HEX: {hex[i]}")
     }
     return(hex)
 
   } else {
     rgb <- round(rgb)
     hex <- grDevices::rgb(rgb[1], rgb[2], rgb[3], maxColorValue = 255)
-    cli::cli_alert_success("RGB: c({paste(rgb, collapse = ', ')}) \u2192 HEX: {hex}")
+    cli::cli_alert_success("RGB: c({paste(rgb, collapse = ', ')}) -> HEX: {hex}")
     return(hex)
   }
 }

@@ -5,7 +5,7 @@
 #' This function is intended for moderate n and k. For very large values, consider the 'gmp' package.
 #'
 #' @param n Integer. Total number of items (non-negative integer).
-#' @param k Integer. Number of items to choose (non-negative integer, must be \\u2264 n).
+#' @param k Integer. Number of items to choose (non-negative integer, must be <= n).
 #'
 #' @return Numeric. The combination count C(n, k) (returns Inf for very large n).
 #' @export

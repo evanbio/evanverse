@@ -95,9 +95,12 @@ list_palettes <- function(palette_rds = system.file("extdata", "palettes.rds", p
       cli::cli_alert_info("Type {.strong {.val {.x}}}: {type_counts[.x]} palettes")
     })
 
+    cli::cli_text("")  # 空行分隔
+    cli::cli_ul()
     purrr::walk(seq_len(nrow(palette_df)), function(i) {
-      cli::cli_alert_info("\\u2022 {palette_df$name[i]} ({palette_df$type[i]}) - {palette_df$n_color[i]} colors")
+      cli::cli_li("{.strong {palette_df$name[i]}} ({palette_df$type[i]}) - {palette_df$n_color[i]} colors")
     })
+    cli::cli_end()
   }
 
   return(palette_df)

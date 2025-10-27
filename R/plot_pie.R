@@ -157,7 +157,7 @@ plot_pie <- function(data,
   # -- Save to file
   if (!is.null(save)) {
     ggplot2::ggsave(filename = save, plot = p, width = 6, height = 6)
-    cli::cli_alert_success("\\u2705 Pie chart saved to {save}")
+    cli::cli_alert_success("Pie chart saved to {save}")
   }
 
   # -- Output

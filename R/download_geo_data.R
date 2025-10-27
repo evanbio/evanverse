@@ -294,7 +294,7 @@ download_geo_data <- function(gse_id,
   # Final summary
   cli::cli_h2("Download Summary")
   cli::cli_alert_info("Duration: {round(download_duration, 2)} seconds")
-  cli::cli_alert_info("GSEMatrix: {n_samples} samples \u00d7 {n_features} features")
+  cli::cli_alert_info("GSEMatrix: {n_samples} samples x {n_features} features")
   cli::cli_alert_info("Supplemental files: {length(supplemental_files)}")
   cli::cli_alert_info("Platform files: {length(platform_info$gpl_files)}")
   cli::cli_alert_info("Total files: {meta$total_files_downloaded}")

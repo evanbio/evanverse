@@ -64,7 +64,7 @@ plot_forest <- function(data,
   df$.upper <- df[[upper_col]]
   df$.label <- as.character(df[[label_col]])
   df$.pvalue <- df[[p_col]]
-  df[["OR (95% CI)"]] <- sprintf("%.3f (%.3f\\u2013%.3f)", df$.estimate, df$.lower, df$.upper)
+  df[["OR (95% CI)"]] <- sprintf("%.3f (%.3f-%.3f)", df$.estimate, df$.lower, df$.upper)
   df[[" "]] <- rep(paste(rep(" ", gap_width), collapse = ""), nrow(df))
 
   plot_df <- df[, c(label_col, "OR (95% CI)", " ", p_col)]

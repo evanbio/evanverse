@@ -68,7 +68,7 @@ bio_palette_gallery <- function(palette_rds = NULL,
     total <- nrow(pal_info)
     pages <- ceiling(total / max_palettes)
     if (verbose) {
-      cli::cli_alert_info("Type {.strong {type_val}}: {total} palettes \\u2192 {pages} page(s)")
+      cli::cli_alert_info("Type {.strong {type_val}}: {total} palettes -> {pages} page(s)")
     }
 
     # =========================================================================
