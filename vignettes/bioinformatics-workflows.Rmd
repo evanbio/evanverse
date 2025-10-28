@@ -203,7 +203,7 @@ venn_plot <- plot_venn(
   set2 = pathway_genes[[2]],
   set3 = pathway_genes[[3]],
   category.names = names(pathway_genes),
-  fill = get_palette("vividset", type = "qualitative", n = 3),
+  fill = get_palette("qual_vivid", type = "qualitative", n = 3),
   title = "Metabolic Pathway Gene Overlaps"
 )
 
@@ -261,8 +261,8 @@ gene_results$Regulation[gene_results$FDR < 0.05 & gene_results$LogFC < -1] <- "D
 
 # Create volcano plot
 volcano_colors <- c(
-  "Up-regulated" = get_palette("vividset", type = "qualitative", n = 3)[1],
-  "Down-regulated" = get_palette("vividset", type = "qualitative", n = 3)[2],
+  "Up-regulated" = get_palette("qual_vivid", type = "qualitative", n = 3)[1],
+  "Down-regulated" = get_palette("qual_vivid", type = "qualitative", n = 3)[2],
   "Not Significant" = "#CCCCCC"
 )
 
@@ -521,7 +521,7 @@ p5 <- ggplot(plot_data, aes(x = Subtype, y = Expression, fill = Subtype)) +
   geom_boxplot(alpha = 0.7, outlier.alpha = 0.5) +
   geom_jitter(alpha = 0.3, width = 0.2, size = 0.8) +
   scale_fill_manual(
-    values = get_palette("vividset", type = "qualitative", n = 4)
+    values = get_palette("qual_vivid", type = "qualitative", n = 4)
   ) +
   facet_wrap(~Biomarker, scales = "free_y", ncol = 2) +
   labs(
@@ -756,7 +756,7 @@ convert_gene_id(genes, from = "symbol", to = "ensembl", species = "human")
 
 # Pathway analysis
 pathways <- gmt2list("pathways.gmt")
-plot_venn(gene_sets, colors = get_palette("vividset"))
+plot_venn(gene_sets, colors = get_palette("qual_vivid"))
 
 # Data visualization
 plot_forest(survival_data, hr_col = "HazardRatio")
