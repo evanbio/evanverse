@@ -1,0 +1,516 @@
+
+---
+title: "Color Palette Naming Convention"
+subtitle: "Official Naming Standards for evanverse Palette System"
+author: "evanverse package"
+date: "`r Sys.Date()`"
+output:
+  html_document:
+    toc: true
+    toc_depth: 3
+    toc_float: true
+    theme: flatly
+    highlight: tango
+    code_folding: show
+vignette: >
+  %\VignetteIndexEntry{Color Palette Naming Convention}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(
+  echo = TRUE,
+  warning = FALSE,
+  message = FALSE,
+  fig.width = 10,
+  fig.height = 6,
+  collapse = TRUE,
+  comment = "#>"
+)
+
+library(evanverse)
+```
+
+# Overview
+
+This document defines the **official naming convention** for color palettes in the evanverse package. Following these standards ensures:
+
+- **Self-documenting names** - Instantly understand palette type and purpose
+- **Consistency** - Predictable patterns across all palettes
+- **Easy discovery** - Find the right palette quickly
+- **Scalability** - Clear structure for future additions
+
+**Core Principle**: `type_name_source` structure with lowercase and underscores.
+
+---
+
+# Naming Structure
+
+## Format
+
+All palette names follow this structure:
+
+```
+[type]_[name]_[source]
+  │      │       │
+  │      │       └─ Optional: Source identifier
+  │      └───────── Required: Descriptive name
+  └──────────────── Required: Type prefix
+```
+
+## Components
+
+### 1. Type Prefix (Required)
+
+Use **3-letter abbreviations** to indicate palette type:
+
+| Prefix | Type | Use Case | Example Scenario |
+|--------|------|----------|------------------|
+| `seq_` | Sequential | Continuous values, one direction | Heatmaps, gene expression levels |
+| `div_` | Diverging | Values with meaningful midpoint | Fold change, up/down regulation |
+| `qual_` | Qualitative | Categorical data, no inherent order | Cell types, sample groups |
+
+**Examples**:
+```r
+seq_blues      # Sequential palette
+div_redblue    # Diverging palette
+qual_vivid     # Qualitative palette
+```
+
+**Why required?**
+
+- Enables automatic type inference in `get_palette()`
+- Makes filtering with `list_palettes()` intuitive
+- Eliminates ambiguity about palette purpose
+
+### 2. Name (Required)
+
+Describes the palette's **visual characteristics** or **intended use**:
+
+**Naming strategies**:
+
+```r
+# By color characteristics
+qual_vivid        # Bright, saturated colors
+seq_muted         # Soft, low-saturation colors
+div_warm          # Warm color tones
+
+# By color description
+div_redblue       # Red to blue gradient
+seq_sunset        # Sunset-inspired colors
+qual_earthy       # Earth tone palette
+
+# By application domain
+qual_pbmc         # PBMC (peripheral blood) data
+seq_heatmap       # Optimized for heatmaps
+
+# By journal/standard
+qual_nejm         # New England Journal of Medicine style
+qual_lancet       # The Lancet journal style
+```
+
+**Guidelines**:
+
+- **Short**: 1-2 words maximum
+- **Intuitive**: Reflects actual colors or application
+- **Unique**: No duplicates within the same type
+
+### 3. Source Identifier (Optional)
+
+**Only use for adapted palettes** from other packages or standards:
+
+| Suffix | Source | Usage |
+|--------|--------|-------|
+| `_g` | ggsci | Adapted from ggsci package |
+| `_rb` | RColorBrewer | Adapted from RColorBrewer |
+| `_v` | viridis | Adapted from viridis package |
+| `_sc` | single-cell | Single-cell data specific |
+| `_bio` | bioinformatics | Bioinformatics standard |
+
+**Examples**:
+```r
+qual_nejm_g       # NEJM palette from ggsci
+qual_set1_rb      # Set1 from RColorBrewer
+seq_viridis_v     # Viridis palette
+qual_pbmc_sc      # PBMC-specific palette
+```
+
+**Important**: Custom palettes should **NOT** have source suffixes.
+
+---
+
+# The 5 Golden Rules
+
+1. **All lowercase** - No capital letters
+2. **Underscore separators** - Use `_`, not camelCase or dots
+3. **No number suffixes** - Color count belongs in metadata
+4. **Type prefix required** - Must start with `seq_`, `div_`, or `qual_`
+5. **Remove redundant words** - Simplify descriptions
+
+---
+
+# Examples
+
+## ✅ Good Names
+
+```r
+# Clear and concise
+qual_vivid           # Type + descriptive characteristic
+div_redblue          # Intuitive color pair
+seq_sunset           # Evocative name
+
+# Proper source attribution
+qual_nejm_g          # Journal style from ggsci
+qual_set1_rb         # RColorBrewer Set1
+qual_pbmc_sc         # Single-cell specific
+
+# Domain-specific
+seq_heatmap          # Application-focused
+qual_cosmic_g        # Theme-based (Cosmic)
+```
+
+## ❌ Bad Names
+
+```r
+vividset             # Missing type prefix
+harmonySix           # Mixed case + number suffix
+NEJM_Colors          # Capital letters
+my.palette           # Dot separator
+beautiful-colors     # Dash separator
+palette_12_colors    # Number in name
+nice_colors          # Too vague
+gradient_rd_bu       # Unclear abbreviations
+```
+
+---
+
+# Usage
+
+## Getting Palettes
+
+```{r eval=FALSE}
+library(evanverse)
+
+# Type is inferred from prefix
+get_palette("seq_sunset")    # Automatically knows type = "sequential"
+get_palette("div_redblue")   # Automatically knows type = "diverging"
+get_palette("qual_vivid")    # Automatically knows type = "qualitative"
+
+# Can still specify type explicitly
+get_palette("seq_sunset", type = "sequential")
+
+# Wrong type will error with helpful message
+get_palette("seq_sunset", type = "diverging")
+#> Error: Palette 'seq_sunset' is sequential, not diverging
+```
+
+## Listing Palettes
+
+```{r eval=FALSE}
+# List all palettes
+list_palettes()
+
+# Filter by type
+list_palettes(type = "sequential")
+list_palettes(type = c("diverging", "qualitative"))
+```
+
+## In ggplot2
+
+```{r eval=FALSE}
+library(ggplot2)
+
+# Sequential - continuous values
+ggplot(data, aes(x, y, fill = expression)) +
+  geom_tile() +
+  scale_fill_gradientn(colors = get_palette("seq_sunset"))
+
+# Diverging - fold change
+ggplot(data, aes(x, y, color = log2FC)) +
+  geom_point() +
+  scale_color_gradientn(colors = get_palette("div_redblue"))
+
+# Qualitative - categories
+ggplot(iris, aes(Sepal.Length, Sepal.Width, color = Species)) +
+  geom_point() +
+  scale_color_manual(values = get_palette("qual_vivid"))
+```
+
+---
+
+# Adding New Palettes
+
+## Workflow
+
+### Step 1: Determine Type
+
+```r
+# What does your data represent?
+
+# Continuous values (magnitude)?
+type <- "sequential"     # Use seq_ prefix
+
+# Values with midpoint (diverging)?
+type <- "diverging"      # Use div_ prefix
+
+# Unordered categories?
+type <- "qualitative"    # Use qual_ prefix
+```
+
+### Step 2: Choose Name
+
+```r
+# For custom palette
+name <- "qual_ocean"              # type + descriptive name
+
+# For adapted palette
+name <- "qual_nature_g"           # type + name + source
+name <- "seq_thermal_v"           # viridis-based
+```
+
+### Step 3: Create
+
+```{r eval=FALSE}
+create_palette(
+  name = "qual_ocean",
+  type = "qualitative",
+  colors = c("#006BA4", "#FF7F0E", "#2CA02C", "#D62728", "#9467BD"),
+  color_dir = system.file("extdata", "palettes", package = "evanverse")
+)
+```
+
+### Step 4: Validate
+
+**Checklist**:
+
+```r
+# ✓ Has type prefix? (seq_/div_/qual_)
+# ✓ All lowercase?
+# ✓ Uses underscores?
+# ✓ No number suffixes?
+# ✓ Source suffix only if adapted?
+# ✓ Unique within its type?
+```
+
+### Step 5: Compile
+
+```{r eval=FALSE}
+# Recompile palettes.rds
+compile_palettes(
+  palettes_dir = system.file("extdata", "palettes", package = "evanverse"),
+  output_rds = system.file("extdata", "palettes.rds", package = "evanverse")
+)
+
+# Test
+get_palette("qual_ocean")
+preview_palette("qual_ocean", type = "qualitative")
+```
+
+---
+
+# Best Practices
+
+## Naming Strategies
+
+### By Visual Characteristics
+
+```r
+# Color intensity
+qual_vivid          # High saturation
+seq_muted           # Low saturation
+qual_pastel         # Pastel colors
+
+# Color temperature
+div_warm            # Warm tones
+seq_cool            # Cool tones
+
+# Color composition
+qual_earthy         # Earth tones
+seq_blues           # Blue gradient
+div_redblue         # Red-blue diverging
+```
+
+### By Application
+
+```r
+# Data type
+qual_pbmc           # PBMC cell types
+seq_heatmap         # Heat map optimized
+div_volcano         # Volcano plot
+
+# Domain
+qual_clinical       # Clinical data
+seq_genomic         # Genomic data
+```
+
+### By Source
+
+```r
+# Journals
+qual_nejm_g         # NEJM from ggsci
+qual_lancet_g       # Lancet from ggsci
+qual_jama_g         # JAMA from ggsci
+
+# Standard palettes
+qual_set1_rb        # RColorBrewer Set1
+seq_viridis_v       # Viridis
+```
+
+## Do's
+
+```r
+# ✅ Use clear, descriptive names
+seq_sunset          # Immediately understandable
+qual_vivid          # Describes the style
+div_fireice         # Evocative metaphor
+
+# ✅ Keep it short
+qual_ocean          # Concise
+seq_warm            # Direct
+
+# ✅ Credit sources
+qual_nejm_g         # Acknowledges ggsci
+qual_set1_rb        # Acknowledges RColorBrewer
+
+# ✅ Be consistent in series
+qual_earth_light    # Clear series
+qual_earth_medium   # pattern
+qual_earth_dark     #
+```
+
+## Don'ts
+
+```r
+# ❌ Don't use mixed case
+MyPalette           # Use: qual_mypalette
+qualVivid           # Use: qual_vivid
+
+# ❌ Don't use other separators
+my.palette          # Use: qual_mypalette
+custom-colors       # Use: qual_custom
+
+# ❌ Don't include numbers
+palette_12          # Use metadata instead
+colors_v2           # Use: qual_colors (version in docs)
+
+# ❌ Don't omit type
+beautiful           # Use: qual_beautiful
+sunset              # Use: seq_sunset
+
+# ❌ Don't be vague
+nice_colors         # Too generic
+palette1            # Not descriptive
+good_palette        # Meaningless
+```
+
+## Series Naming
+
+For related palettes:
+
+```r
+# ✅ GOOD - Consistent pattern
+seq_warm_light
+seq_warm_medium
+seq_warm_dark
+
+# Or with explicit color counts
+qual_earth_3        # 3-color version
+qual_earth_6        # 6-color version
+qual_earth_12       # 12-color version
+
+# ❌ BAD - Inconsistent
+seq_warm_light
+seq_warm            # Missing variant identifier
+warm_dark           # Missing type prefix
+seq_warm2           # Number without underscore
+```
+
+---
+
+# Quick Reference
+
+## Type Prefixes
+
+```
+seq_   →  Sequential    (one-direction gradients)
+div_   →  Diverging     (two-direction from center)
+qual_  →  Qualitative   (discrete categories)
+```
+
+## Source Suffixes
+
+```
+_g     →  ggsci package
+_rb    →  RColorBrewer package
+_v     →  viridis package
+_sc    →  single-cell specific
+_bio   →  bioinformatics standard
+```
+
+## Templates
+
+```r
+# Custom palettes
+[type]_[descriptive_name]
+seq_sunset           # Example
+qual_vivid           # Example
+div_warm             # Example
+
+# Adapted palettes
+[type]_[original_name]_[source]
+qual_nejm_g          # Example
+seq_viridis_v        # Example
+qual_set1_rb         # Example
+```
+
+## Validation Checklist
+
+```
+□ Starts with seq_, div_, or qual_
+□ All lowercase letters
+□ Uses underscores for separation
+□ No numbers in the name
+□ Descriptive and intuitive
+□ Source suffix only if adapted
+□ Unique within its type
+```
+
+---
+
+# Summary
+
+## Core Principles
+
+1. **Type identification** - Prefix clearly indicates palette purpose
+2. **Descriptive naming** - Names reflect colors or application
+3. **Source attribution** - Credit adapted palettes appropriately
+4. **Consistency** - Follow uniform standards
+5. **Simplicity** - Keep names concise and clear
+
+## The Golden Rule
+
+> **`type_name_source`** structure
+> All lowercase + underscores only
+
+## Benefits
+
+- ✅ **Instant recognition** - Know palette type at a glance
+- ✅ **Automatic inference** - Functions detect type from name
+- ✅ **Easy filtering** - Find palettes by type quickly
+- ✅ **Clear attribution** - Proper credit to sources
+- ✅ **Scalable system** - Easy to add new palettes
+
+---
+
+## Resources
+
+- Main documentation: `?evanverse`
+- Color system guide: `vignette("get-started", package = "evanverse")`
+- Package website: [evanverse documentation](https://github.com/yourusername/evanverse)
+
+---
+
+**Document Version**: 1.0
+**Last Updated**: `r Sys.Date()`
+**Status**: Official Standard
