@@ -13,11 +13,11 @@ test_that("preview_palette generates plots for different types", {
   skip_if_not(file.exists(f), "Compiled palette RDS not found.")
 
   # Test different plot types
-  expect_invisible(preview_palette("vividset", type = "qualitative", plot_type = "bar", palette_rds = f, preview = FALSE))
-  expect_invisible(preview_palette("vividset", type = "qualitative", plot_type = "pie", palette_rds = f, preview = FALSE))
-  expect_invisible(preview_palette("vividset", type = "qualitative", plot_type = "point", palette_rds = f, preview = FALSE))
-  expect_invisible(preview_palette("vividset", type = "qualitative", plot_type = "rect", palette_rds = f, preview = FALSE))
-  expect_invisible(preview_palette("vividset", type = "qualitative", plot_type = "circle", palette_rds = f, preview = FALSE))
+  expect_invisible(preview_palette("qual_vivid", type = "qualitative", plot_type = "bar", palette_rds = f, preview = FALSE))
+  expect_invisible(preview_palette("qual_vivid", type = "qualitative", plot_type = "pie", palette_rds = f, preview = FALSE))
+  expect_invisible(preview_palette("qual_vivid", type = "qualitative", plot_type = "point", palette_rds = f, preview = FALSE))
+  expect_invisible(preview_palette("qual_vivid", type = "qualitative", plot_type = "rect", palette_rds = f, preview = FALSE))
+  expect_invisible(preview_palette("qual_vivid", type = "qualitative", plot_type = "circle", palette_rds = f, preview = FALSE))
 })
 
 #------------------------------------------------------------------------------
@@ -88,5 +88,5 @@ test_that("preview_palette respects preview parameter", {
   skip_if_not(file.exists(f), "Compiled palette RDS not found.")
 
   # Test preview = FALSE returns invisible NULL
-  expect_invisible(preview_palette("vividset", type = "qualitative", preview = FALSE, palette_rds = f))
+  expect_invisible(preview_palette("qual_vivid", type = "qualitative", preview = FALSE, palette_rds = f))
 })
