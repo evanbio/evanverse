@@ -13,10 +13,10 @@
 #' @examples
 #' \dontrun{
 #' # Remove a palette (requires write permissions):
-#' remove_palette("blues")
+#' remove_palette("seq_blues")
 #'
 #' # Remove with specific type:
-#' remove_palette("vividset", type = "qualitative")
+#' remove_palette("qual_vivid", type = "qualitative")
 #' }
 remove_palette <- function(name,
                             type = NULL,

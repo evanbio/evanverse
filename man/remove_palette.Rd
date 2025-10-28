@@ -24,9 +24,9 @@ Remove a palette file by name, trying across types if necessary.
 \examples{
 \dontrun{
 # Remove a palette (requires write permissions):
-remove_palette("blues")
+remove_palette("seq_blues")
 
 # Remove with specific type:
-remove_palette("vividset", type = "qualitative")
+remove_palette("qual_vivid", type = "qualitative")
 }
 }

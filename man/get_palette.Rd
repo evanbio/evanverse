@@ -12,7 +12,7 @@ get_palette(
 )
 }
 \arguments{
-\item{name}{Character. Name of the palette (e.g. "vividset").}
+\item{name}{Character. Name of the palette (e.g. "qual_vivid").}
 
 \item{type}{Character. One of "sequential", "diverging", "qualitative".}
 
@@ -28,9 +28,9 @@ Load a named palette from data/palettes.rds, returning a vector of HEX colors.
 Automatically checks for type mismatch and provides smart suggestions.
 }
 \examples{
-get_palette("vividset", type = "qualitative")
-get_palette("softtrio", type = "qualitative", n = 2)
-get_palette("blues", type = "sequential", n = 3)
-get_palette("contrast_duo", type = "diverging")
+get_palette("qual_vivid", type = "qualitative")
+get_palette("qual_softtrio", type = "qualitative", n = 2)
+get_palette("seq_blues", type = "sequential", n = 3)
+get_palette("div_contrast", type = "diverging")
 
 }

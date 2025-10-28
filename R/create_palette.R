@@ -23,7 +23,7 @@
 #' )
 #'
 #' create_palette(
-#'   "vividset",
+#'   "qual_vivid",
 #'   "qualitative",
 #'   c("#E64B35", "#4DBBD5", "#00A087"),
 #'   color_dir = temp_dir
