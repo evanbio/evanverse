@@ -55,16 +55,23 @@ get_palette <- function(name,
   }
 
   # ===========================================================================
-  # File loading
+  # Palette Data Loading (with caching)
   # ===========================================================================
 
-  # Check if file exists
-  if (!file.exists(palette_rds)) {
-    cli::cli_abort("Palette file not found: {.file {palette_rds}}. Please compile palettes first via {.fn compile_palettes}.")
+  # Try to get palettes from cache first
+  palettes <- .get_cached_palettes()
+
+  # If cache failed or returned NULL, fall back to direct file reading
+  if (is.null(palettes)) {
+    # Check if file exists
+    if (!file.exists(palette_rds)) {
+      cli::cli_abort("Palette file not found: {.file {palette_rds}}. Please compile palettes first via {.fn compile_palettes}.")
+    }
+
+    # Load palette data from file (fallback)
+    palettes <- readRDS(palette_rds)
   }
 
-  # Load palette data
-  palettes <- readRDS(palette_rds)
   valid_types <- names(palettes)
 
   # ===========================================================================
