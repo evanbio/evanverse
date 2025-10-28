@@ -12,8 +12,8 @@ test_that("get_palette() loads full palette correctly", {
   palette_file <- system.file("extdata", "palettes.rds", package = "evanverse")
   skip_if_not(file.exists(palette_file), "Compiled palette RDS not found")
 
-  result <- get_palette("vividset", type = "qualitative")
-  
+  result <- get_palette("qual_vivid", type = "qualitative")
+
   expect_type(result, "character")
   expect_true(length(result) > 0)
   expect_true(all(grepl("^#[0-9A-Fa-f]{6}$", result)))
@@ -23,8 +23,8 @@ test_that("get_palette() loads subset of colors correctly", {
   palette_file <- system.file("extdata", "palettes.rds", package = "evanverse")
   skip_if_not(file.exists(palette_file), "Compiled palette RDS not found")
 
-  result <- get_palette("vividset", type = "qualitative", n = 3)
-  
+  result <- get_palette("qual_vivid", type = "qualitative", n = 3)
+
   expect_length(result, 3)
   expect_type(result, "character")
   expect_true(all(grepl("^#[0-9A-Fa-f]{6}$", result)))
@@ -48,18 +48,18 @@ test_that("get_palette() validates n parameter correctly", {
   palette_file <- system.file("extdata", "palettes.rds", package = "evanverse")
   skip_if_not(file.exists(palette_file), "Compiled palette RDS not found")
 
-  expect_error(get_palette("vividset", type = "qualitative", n = 1.5), "'n' must be a single positive integer")
-  expect_error(get_palette("vividset", type = "qualitative", n = -2), "'n' must be a single positive integer")
-  expect_error(get_palette("vividset", type = "qualitative", n = 0), "'n' must be a single positive integer")
-  expect_error(get_palette("vividset", type = "qualitative", n = "a"), "'n' must be a single positive integer")
-  expect_error(get_palette("vividset", type = "qualitative", n = c(1, 2)), "'n' must be a single positive integer")
+  expect_error(get_palette("qual_vivid", type = "qualitative", n = 1.5), "'n' must be a single positive integer")
+  expect_error(get_palette("qual_vivid", type = "qualitative", n = -2), "'n' must be a single positive integer")
+  expect_error(get_palette("qual_vivid", type = "qualitative", n = 0), "'n' must be a single positive integer")
+  expect_error(get_palette("qual_vivid", type = "qualitative", n = "a"), "'n' must be a single positive integer")
+  expect_error(get_palette("qual_vivid", type = "qualitative", n = c(1, 2)), "'n' must be a single positive integer")
 })
 
 test_that("get_palette() validates type parameter correctly", {
   palette_file <- system.file("extdata", "palettes.rds", package = "evanverse")
   skip_if_not(file.exists(palette_file), "Compiled palette RDS not found")
 
-  expect_error(get_palette("vividset", type = "invalid"), "'arg' should be one of")
+  expect_error(get_palette("qual_vivid", type = "invalid"), "'arg' should be one of")
 })
 
 #------------------------------------------------------------------------------
@@ -80,26 +80,26 @@ test_that("get_palette() handles requests for too many colors", {
   skip_if_not(file.exists(palette_file), "Compiled palette RDS not found")
 
   expect_error(
-    get_palette("vividset", type = "qualitative", n = 9999),
+    get_palette("qual_vivid", type = "qualitative", n = 9999),
     "only has .* colors, but requested"
   )
 })
 
 test_that("get_palette() handles missing palette file", {
   expect_error(
-    get_palette("vividset", type = "qualitative", palette_rds = "nonexistent.rds"),
+    get_palette("qual_vivid", type = "qualitative", palette_rds = "nonexistent.rds"),
     "Please compile palettes first"
   )
 })
 
 test_that("get_palette() validates palette_rds parameter", {
   expect_error(
-    get_palette("vividset", type = "qualitative", palette_rds = 123),
+    get_palette("qual_vivid", type = "qualitative", palette_rds = 123),
     "'palette_rds' must be a single character string"
   )
-  
+
   expect_error(
-    get_palette("vividset", type = "qualitative", palette_rds = c("a", "b")),
+    get_palette("qual_vivid", type = "qualitative", palette_rds = c("a", "b")),
     "'palette_rds' must be a single character string"
   )
 })
