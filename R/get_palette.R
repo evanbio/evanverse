@@ -58,10 +58,20 @@ get_palette <- function(name,
   # Palette Data Loading (with caching)
   # ===========================================================================
 
-  # Try to get palettes from cache first
-  palettes <- .get_cached_palettes()
+  # Get default palette path
+  default_palette_rds <- system.file("extdata", "palettes.rds", package = "evanverse")
 
-  # If cache failed or returned NULL, fall back to direct file reading
+  # Initialize palettes variable
+  palettes <- NULL
+
+  # Only use cache if using default path
+  # Reason: Cache only stores data for default path, not custom paths
+  if (palette_rds == default_palette_rds) {
+    # Try to get palettes from cache first
+    palettes <- .get_cached_palettes()
+  }
+
+  # If cache not used or returned NULL, fall back to direct file reading
   if (is.null(palettes)) {
     # Check if file exists
     if (!file.exists(palette_rds)) {
