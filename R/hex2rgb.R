@@ -22,19 +22,19 @@ hex2rgb <- function(hex) {
   # Parameter validation
   # ==========================================================================
   if (!is.character(hex)) {
-    stop("'hex' must be a character vector of HEX color codes.", call. = FALSE)
+    cli::cli_abort("'hex' must be a character vector of HEX color codes.")
   }
   if (length(hex) == 0) return(list())
-  if (any(is.na(hex))) stop("NA values are not allowed in 'hex'.", call. = FALSE)
-  
+  if (any(is.na(hex))) cli::cli_abort("NA values are not allowed in 'hex'.")
+
   # Remove leading '#' if present and validate length/content
   hex_clean <- gsub("^#", "", hex)
   bad_len <- nchar(hex_clean) != 6
   if (any(bad_len)) {
-    stop("Each HEX value must be 6 hex digits (optionally prefixed with '#').", call. = FALSE)
+    cli::cli_abort("Each HEX value must be 6 hex digits (optionally prefixed with '#').")
   }
   if (!all(grepl("^[0-9A-Fa-f]{6}$", hex_clean))) {
-    stop("HEX values must be valid 6-digit hexadecimal codes.", call. = FALSE)
+    cli::cli_abort("HEX values must be valid 6-digit hexadecimal codes.")
   }
   
   # ==========================================================================
@@ -51,14 +51,10 @@ hex2rgb <- function(hex) {
     )
     # Convert to double while preserving names
     storage.mode(rgb) <- "double"
-    
+
     # Messaging
-    if (requireNamespace("cli", quietly = TRUE)) {
-      cli::cli_alert_success(paste0(hex, " -> RGB: c(", paste(rgb, collapse = ", "), ")"))
-    } else {
-      message(paste0(hex, " -> RGB: c(", paste(rgb, collapse = ", "), ")"))
-    }
-    
+    cli::cli_alert_success(paste0(hex, " -> RGB: c(", paste(rgb, collapse = ", "), ")"))
+
     return(rgb)
   }
   
@@ -78,17 +74,10 @@ hex2rgb <- function(hex) {
   }
   
   # Messaging for multiple colors
-  if (requireNamespace("cli", quietly = TRUE)) {
-    cli::cli_alert_success(paste0("Converted ", length(hex), " HEX values to RGB."))
-    for (i in seq_along(hex)) {
-      cli::cli_alert_info(paste0(hex[i], " -> RGB: c(", paste(rgb_list[[i]], collapse = ", "), ")"))
-    }
-  } else {
-    message(paste0("Converted ", length(hex), " HEX values to RGB."))
-    for (i in seq_along(hex)) {
-      message(paste0(hex[i], " -> RGB: c(", paste(rgb_list[[i]], collapse = ", "), ")"))
-    }
+  cli::cli_alert_success(paste0("Converted ", length(hex), " HEX values to RGB."))
+  for (i in seq_along(hex)) {
+    cli::cli_alert_info(paste0(hex[i], " -> RGB: c(", paste(rgb_list[[i]], collapse = ", "), ")"))
   }
-  
+
   return(rgb_list)
 }

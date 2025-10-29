@@ -33,7 +33,7 @@ check_pkg <- function(pkg = NULL,
 
   # Check if pkg is provided
   if (is.null(pkg)) {
-    stop("Please provide at least one package name.", call. = FALSE)
+    cli::cli_abort("Please provide at least one package name.")
   }
 
   # ===========================================================================

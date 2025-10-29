@@ -35,41 +35,41 @@ read_excel_flex <- function(
   # Dependency check
   # ===========================================================================
   if (!requireNamespace("readxl", quietly = TRUE)) {
-    stop("Please install the 'readxl' package.", call. = FALSE)
+    cli::cli_abort("Please install the {.pkg readxl} package.")
   }
   if (isTRUE(clean_names) && !requireNamespace("janitor", quietly = TRUE)) {
-    stop("Please install the 'janitor' package (or set clean_names = FALSE).", call. = FALSE)
+    cli::cli_abort("Please install the {.pkg janitor} package (or set clean_names = FALSE).")
   }
 
   # ===========================================================================
   # Parameter validation
   # ===========================================================================
   if (!is.character(file_path) || length(file_path) != 1L || is.na(file_path) || nzchar(file_path) == FALSE) {
-    stop("'file_path' must be a non-empty character string.", call. = FALSE)
+    cli::cli_abort("'file_path' must be a non-empty character string.")
   }
   if (!file.exists(file_path)) {
     cli::cli_abort("File not found: {.path {file_path}}")
   }
   if (!is.logical(header) || length(header) != 1L || is.na(header)) {
-    stop("'header' must be a single logical.", call. = FALSE)
+    cli::cli_abort("'header' must be a single logical.")
   }
   if (!is.logical(trim_ws) || length(trim_ws) != 1L || is.na(trim_ws)) {
-    stop("'trim_ws' must be a single logical.", call. = FALSE)
+    cli::cli_abort("'trim_ws' must be a single logical.")
   }
   if (!is.logical(clean_names) || length(clean_names) != 1L || is.na(clean_names)) {
-    stop("'clean_names' must be a single logical.", call. = FALSE)
+    cli::cli_abort("'clean_names' must be a single logical.")
   }
   if (!is.logical(verbose) || length(verbose) != 1L || is.na(verbose)) {
-    stop("'verbose' must be a single logical.", call. = FALSE)
+    cli::cli_abort("'verbose' must be a single logical.")
   }
   if (!is.numeric(skip) || length(skip) != 1L || is.na(skip) || skip < 0) {
-    stop("'skip' must be a single non-negative number.", call. = FALSE)
+    cli::cli_abort("'skip' must be a single non-negative number.")
   }
   if (!is.numeric(guess_max) || length(guess_max) != 1L || is.na(guess_max) || guess_max < 1) {
-    stop("'guess_max' must be a single positive number.", call. = FALSE)
+    cli::cli_abort("'guess_max' must be a single positive number.")
   }
   if (!is.null(range) && !(is.character(range) && length(range) == 1L)) {
-    stop("'range' must be a single character like \"B2:D100\" or NULL.", call. = FALSE)
+    cli::cli_abort("'range' must be a single character like \"B2:D100\" or NULL.")
   }
 
   # ===========================================================================

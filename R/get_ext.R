@@ -29,7 +29,7 @@ get_ext <- function(paths,
   # ===========================================================================
 
   if (!is.character(paths)) {
-    stop("'paths' must be a character vector.", call. = FALSE)
+    cli::cli_abort("'paths' must be a character vector.")
   }
 
   if (length(paths) == 0) {

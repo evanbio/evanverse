@@ -25,17 +25,17 @@ gmt2df <- function(file, verbose = TRUE) {
 
   # Validate file parameter
   if (!is.character(file) || length(file) != 1 || is.na(file) || file == "") {
-    stop("'file' must be a single non-empty character string.", call. = FALSE)
+    cli::cli_abort("'file' must be a single non-empty character string.")
   }
 
   # Check if file exists
   if (!file.exists(file)) {
-    stop("GMT file not found: ", file, call. = FALSE)
+    cli::cli_abort("GMT file not found: {file}")
   }
 
   # Validate verbose parameter
   if (!is.logical(verbose) || length(verbose) != 1 || is.na(verbose)) {
-    stop("'verbose' must be a single logical value.", call. = FALSE)
+    cli::cli_abort("'verbose' must be a single logical value.")
   }
 
   # ===========================================================================
@@ -44,7 +44,7 @@ gmt2df <- function(file, verbose = TRUE) {
 
   # Check required package
   if (!requireNamespace("GSEABase", quietly = TRUE)) {
-    stop("Package 'GSEABase' required. Please install it to use gmt2df().", call. = FALSE)
+    cli::cli_abort("Package {.pkg GSEABase} required. Please install it to use gmt2df().")
   }
 
   # ===========================================================================
@@ -55,12 +55,12 @@ gmt2df <- function(file, verbose = TRUE) {
   gmt_obj <- tryCatch({
     GSEABase::getGmt(file)
   }, error = function(e) {
-    stop("Failed to parse GMT file: ", e$message, call. = FALSE)
+    cli::cli_abort("Failed to parse GMT file: {e$message}")
   })
 
   # Validate GMT object
   if (length(gmt_obj) == 0) {
-    stop("GMT file contains no gene sets.", call. = FALSE)
+    cli::cli_abort("GMT file contains no gene sets.")
   }
 
   # ===========================================================================
