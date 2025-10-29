@@ -2,7 +2,83 @@
 % Please edit documentation in R/void.R
 \name{void}
 \alias{void}
+\alias{is_void}
+\alias{any_void}
+\alias{drop_void}
+\alias{replace_void}
+\alias{cols_with_void}
+\alias{rows_with_void}
 \title{Void Value Utilities}
+\usage{
+is_void(x, include_na = TRUE, include_null = TRUE, include_empty_str = TRUE)
+
+any_void(x, include_na = TRUE, include_null = TRUE, include_empty_str = TRUE)
+
+drop_void(x, include_na = TRUE, include_null = TRUE, include_empty_str = TRUE)
+
+replace_void(
+  x,
+  value = NA,
+  include_na = TRUE,
+  include_null = TRUE,
+  include_empty_str = TRUE
+)
+
+cols_with_void(
+  data,
+  include_na = TRUE,
+  include_null = TRUE,
+  include_empty_str = TRUE,
+  return_names = TRUE
+)
+
+rows_with_void(
+  data,
+  include_na = TRUE,
+  include_null = TRUE,
+  include_empty_str = TRUE
+)
+}
+\arguments{
+\item{x}{A vector or list.}
+
+\item{include_na}{Logical. Detect \code{NA} if TRUE. Default: TRUE.}
+
+\item{include_null}{Logical. Detect \code{NULL} if TRUE. Default: TRUE.}
+
+\item{include_empty_str}{Logical. Detect empty strings \code{""} if TRUE. Default: TRUE.}
+
+\item{value}{The replacement value to use for voids. Default: \code{NA}.}
+
+\item{data}{A data.frame or tibble.}
+
+\item{return_names}{Logical. If TRUE (default), return column names; else logical vector.}
+}
+\value{
+A logical vector indicating which elements are void.
+\itemize{
+\item If \code{x} is \code{NULL}, returns a single \code{TRUE} (if include_null=TRUE) or \code{FALSE}.
+\item If \code{x} is an empty vector, returns \code{logical(0)}.
+\item If \code{x} is a list, evaluates each element recursively and returns a flattened logical vector.
+\item For atomic vectors, returns a logical vector of the same length.
+}
+
+A single logical value:
+\itemize{
+\item \code{TRUE} if any void values are present.
+\item \code{FALSE} otherwise.
+\item For \code{NULL} input, returns \code{TRUE} if \code{include_null = TRUE}, else \code{FALSE}.
+}
+
+A cleaned vector or list of the same type as input, with void values removed.
+
+A cleaned vector or list with void values replaced.
+
+A character vector (column names) or logical vector indicating void presence per column.
+
+A logical vector of length \code{nrow(data)} indicating whether each row
+contains at least one void value.
+}
 \description{
 A comprehensive suite of functions for detecting, removing, and managing
 "void" values (NA, NULL, and empty strings) in R objects.
@@ -24,4 +100,71 @@ All functions support customizable void detection through three parameters:
 \item \code{include_null}: Consider \code{NULL} as void (default: TRUE)
 \item \code{include_empty_str}: Consider \code{""} as void (default: TRUE)
 }
+}
+\section{is_void()}{
+ Check for Null / NA / Blank ("") Values
+
+Determine whether input values are considered "void": \code{NULL}, \code{NA}, or \code{""}.
+Each condition is controlled by a dedicated argument.
+}
+
+\section{any_void()}{
+ Check if Any Value is Void (NA / NULL / "")
+
+Test whether any element in a vector or list is considered "void".
+Void values include \code{NA}, \code{NULL}, and empty strings (\code{""}), and
+you can customize which ones to consider.
+}
+
+\section{drop_void}{
+ Remove Void Values from a Vector or List
+
+Removes elements from a vector or list that are considered "void":
+\code{NA}, \code{NULL}, and empty strings (\code{""}). Each can be toggled via parameters.
+}
+
+\section{replace_void}{
+ Replace void values (NA / NULL / "")
+
+Replace elements in a vector or list considered "void" with a specified value.
+Void values include \code{NA}, \code{NULL}, and empty strings \code{""} (toggle via flags).
+}
+
+\section{cols_with_void()}{
+ Detect Columns Containing Void Values
+
+Scan a data.frame or tibble and identify columns that contain any "void" values.
+Void values include \code{NA}, \code{NULL}, and \code{""}, which can be toggled via parameters.
+}
+
+\section{rows_with_void}{
+ Detect rows containing void values (NA / NULL / "")
+
+Scan a data.frame or tibble and identify rows that contain any "void" values.
+Void values include \code{NA}, \code{NULL}, and empty strings \code{""} (toggle via flags).
+}
+
+\examples{
+is_void(c(NA, "", "text"))                  # TRUE TRUE FALSE
+is_void(list(NA, "", NULL, "a"))            # TRUE TRUE TRUE FALSE
+is_void("NA", include_na = FALSE)           # FALSE
+is_void(NULL)                               # TRUE
+any_void(c("a", "", NA))                # TRUE
+any_void(list("x", NULL, "y"))          # TRUE
+any_void(c("a", "b", "c"))              # FALSE
+any_void(NULL)                          # TRUE
+any_void("", include_empty_str = FALSE) # FALSE
+drop_void(c("apple", "", NA, "banana"))
+drop_void(list("A", NA, "", NULL, "B"))
+drop_void(c("", NA), include_na = FALSE)
+replace_void(c(NA, "", "a"), value = "N/A")
+replace_void(list("A", "", NULL, NA), value = "missing")
+replace_void(c("", "b"), value = 0, include_empty_str = TRUE)
+df <- data.frame(name = c("A", "", "C"), score = c(1, NA, 3), id = 1:3)
+cols_with_void(df)
+cols_with_void(df, return_names = FALSE)
+cols_with_void(df, include_na = FALSE)
+df <- data.frame(id = 1:3, name = c("A", "", "C"), score = c(10, NA, 20))
+rows_with_void(df)
+df[rows_with_void(df), ]
 }

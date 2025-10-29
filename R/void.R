@@ -28,8 +28,8 @@ NULL
 # Core Detection Function
 # =============================================================================
 
-#' is_void(): Check for Null / NA / Blank ("") Values
 #' @rdname void
+#' @section is_void(): Check for Null / NA / Blank ("") Values
 #'
 #' Determine whether input values are considered "void": `NULL`, `NA`, or `""`.
 #' Each condition is controlled by a dedicated argument.
@@ -95,8 +95,8 @@ is_void <- function(x,
 # Vector/List Operations
 # =============================================================================
 
-#' any_void(): Check if Any Value is Void (NA / NULL / "")
 #' @rdname void
+#' @section any_void(): Check if Any Value is Void (NA / NULL / "")
 #'
 #' Test whether any element in a vector or list is considered "void".
 #' Void values include `NA`, `NULL`, and empty strings (`""`), and
@@ -139,8 +139,8 @@ any_void <- function(x,
   any(result)
 }
 
-#' drop_void: Remove Void Values from a Vector or List
 #' @rdname void
+#' @section drop_void: Remove Void Values from a Vector or List
 #'
 #' Removes elements from a vector or list that are considered "void":
 #' `NA`, `NULL`, and empty strings (`""`). Each can be toggled via parameters.
@@ -174,8 +174,8 @@ drop_void <- function(x,
   x[!void]
 }
 
-#' Replace void values (NA / NULL / "")
 #' @rdname void
+#' @section replace_void: Replace void values (NA / NULL / "")
 #'
 #' Replace elements in a vector or list considered "void" with a specified value.
 #' Void values include `NA`, `NULL`, and empty strings `""` (toggle via flags).
@@ -233,8 +233,8 @@ replace_void <- function(x,
 # Data Frame Operations
 # =============================================================================
 
-#' cols_with_void(): Detect Columns Containing Void Values
 #' @rdname void
+#' @section cols_with_void(): Detect Columns Containing Void Values
 #'
 #' Scan a data.frame or tibble and identify columns that contain any "void" values.
 #' Void values include `NA`, `NULL`, and `""`, which can be toggled via parameters.
@@ -307,8 +307,8 @@ cols_with_void <- function(data,
   }
 }
 
-#' rows_with_void: Detect rows containing void values (NA / NULL / "")
 #' @rdname void
+#' @section rows_with_void: Detect rows containing void values (NA / NULL / "")
 #'
 #' Scan a data.frame or tibble and identify rows that contain any "void" values.
 #' Void values include `NA`, `NULL`, and empty strings `""` (toggle via flags).
