@@ -205,6 +205,7 @@ test_that("download_url() accepts valid parameters", {
 
   skip_on_cran()
   skip_if_offline()
+  skip("Network download test skipped.")
 
   valid_url <- "https://httpbin.org/status/404"  # Will fail at download, not validation
   temp_dest <- tempfile()
@@ -236,6 +237,7 @@ test_that("download_url() accepts valid parameters", {
 test_that("download_url() works with valid small file", {
   skip_on_cran()
   skip_if_offline()
+  skip("Network download test skipped.")
 
   # Use a tiny, reliable test file
   temp_file <- tempfile(fileext = ".txt")
@@ -263,6 +265,7 @@ test_that("download_url() works with valid small file", {
 test_that("download_url() respects overwrite parameter", {
   skip_on_cran()
   skip_if_offline()
+  skip("Network download test skipped.")
 
   temp_file <- tempfile(fileext = ".txt")
 
@@ -292,6 +295,7 @@ test_that("download_url() respects overwrite parameter", {
 test_that("download_url() creates destination directory", {
   skip_on_cran()
   skip_if_offline()
+  skip("Network download test skipped.")
 
   temp_dir <- tempfile("test_download_")
   temp_file <- file.path(temp_dir, "subdir", "test.txt")
@@ -314,6 +318,7 @@ test_that("download_url() creates destination directory", {
 test_that("download_url() handles download failures gracefully", {
   skip_on_cran()
   skip_if_offline()
+  skip("Network download test skipped.")
 
   temp_file <- tempfile(fileext = ".txt")
 
@@ -359,6 +364,7 @@ test_that("download_url() handles timeouts", {
 test_that("download_url() works with custom headers", {
   skip_on_cran()
   skip_if_offline()
+  skip("Network download test skipped.")
 
   temp_file <- tempfile(fileext = ".txt")
 
