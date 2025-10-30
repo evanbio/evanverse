@@ -63,6 +63,9 @@ test_that("download_gene_ref() validates logical parameters", {
   # Safe to run on CRAN (fast, no network)
 
   skip_if_not_installed("biomaRt")
+  skip_on_cran()
+  skip_if_offline()
+  skip("Network-heavy Ensembl request skipped.")
 
   # remove_empty_symbol with invalid types
   expect_error(
@@ -103,6 +106,9 @@ test_that("download_gene_ref() validates save_path parameter", {
   # Safe to run on CRAN (fast, no network)
 
   skip_if_not_installed("biomaRt")
+  skip_on_cran()
+  skip_if_offline()
+  skip("Network-heavy Ensembl request skipped.")
 
   # save_path with vector (causes condition length > 1 error)
   expect_error(
