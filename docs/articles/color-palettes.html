@@ -5,7 +5,7 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>Advanced Color Palette Management • evanverse</title>
+<title>Color Palette System • evanverse</title>
 <!-- favicons --><link rel="icon" type="image/png" sizes="96x96" href="../favicon-96x96.png">
 <link rel="icon" type="”image/svg+xml”" href="../favicon.svg">
 <link rel="apple-touch-icon" sizes="180x180" href="../apple-touch-icon.png">
@@ -17,7 +17,7 @@
 <link href="../deps/JetBrains_Mono-0.4.10/font.css" rel="stylesheet">
 <link href="../deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet">
 <link href="../deps/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet">
-<script src="../deps/headroom-0.11.0/headroom.min.js"></script><script src="../deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="../deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="../deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="../deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="../deps/search-1.0.0/fuse.min.js"></script><script src="../deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="Advanced Color Palette Management">
+<script src="../deps/headroom-0.11.0/headroom.min.js"></script><script src="../deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="../deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="../deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="../deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="../deps/search-1.0.0/fuse.min.js"></script><script src="../deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="Color Palette System">
 <meta name="keywords" content="R package, data analysis, bioinformatics, visualization, utilities, CRAN">
 <meta name="description" content="evanverse: A comprehensive R utility package with 55+ functions for data analysis, visualization, and bioinformatics workflows">
 <meta name="author" content="Evan Zhou">
@@ -131,8 +131,13 @@
 
 <div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
-      <img src="../logo.png" class="logo" alt=""><h1>Advanced Color Palette Management</h1>
+      <img src="../logo.png" class="logo" alt=""><h1>Color Palette System</h1>
+            <h3 data-toc-skip class="subtitle">Comprehensive Guide to
+the evanverse Palette Ecosystem</h3>
+                        <h4 data-toc-skip class="author">evanverse
+package</h4>
             
+            <h4 data-toc-skip class="date">2025-10-30</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/evanbio/evanverse/blob/HEAD/vignettes/color-palettes.Rmd" class="external-link"><code>vignettes/color-palettes.Rmd</code></a></small>
       <div class="d-none name"><code>color-palettes.Rmd</code></div>
@@ -140,273 +145,326 @@
 
     
     
-<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/evanbio/evanverse" class="external-link">evanverse</a></span><span class="op">)</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org" class="external-link">ggplot2</a></span><span class="op">)</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org" class="external-link">dplyr</a></span><span class="op">)</span></span></code></pre></div>
 <div class="section level2">
-<h2 id="mastering-color-palettes-in-evanverse">🎨 Mastering Color Palettes in evanverse<a class="anchor" aria-label="anchor" href="#mastering-color-palettes-in-evanverse"></a>
+<h2 id="overview">Overview<a class="anchor" aria-label="anchor" href="#overview"></a>
 </h2>
-<p>The <code>evanverse</code> package provides a sophisticated color
-palette system designed specifically for data visualization and
-bioinformatics applications. This guide explores the complete palette
-ecosystem, from basic usage to advanced customization.</p>
+<p>The <strong>evanverse color palette system</strong> provides a
+professional-grade collection of scientifically-designed color palettes
+optimized for data visualization and bioinformatics applications. This
+comprehensive guide covers the complete workflow from palette discovery
+to advanced customization.</p>
 <div class="section level3">
-<h3 id="overview-of-the-palette-system">🎯 Overview of the Palette System<a class="anchor" aria-label="anchor" href="#overview-of-the-palette-system"></a>
+<h3 id="what-youll-learn">What You’ll Learn<a class="anchor" aria-label="anchor" href="#what-youll-learn"></a>
 </h3>
-<p>The evanverse palette system includes:</p>
 <ul>
 <li>
-<strong>Sequential palettes</strong>: Perfect for continuous data
-(heatmaps, gradients)</li>
+<strong>Palette Architecture</strong> - Understand the type-based
+organization system</li>
 <li>
-<strong>Qualitative palettes</strong>: Ideal for categorical data
-(groups, factors)</li>
+<strong>Naming Convention</strong> - Master the standardized naming
+structure</li>
 <li>
-<strong>Diverging palettes</strong>: Best for data with meaningful
-midpoints</li>
+<strong>Complete Workflow</strong> - From creation to compilation to
+usage</li>
 <li>
-<strong>Bio-focused palettes</strong>: Specially designed for
-biological data visualization</li>
+<strong>Practical Applications</strong> - Real-world visualization
+examples</li>
+<li>
+<strong>Best Practices</strong> - Professional tips for
+publication-quality figures</li>
 </ul>
+<hr>
+</div>
+</div>
+<div class="section level2">
+<h2 id="system-architecture">System Architecture<a class="anchor" aria-label="anchor" href="#system-architecture"></a>
+</h2>
+<div class="section level3">
+<h3 id="palette-organization">Palette Organization<a class="anchor" aria-label="anchor" href="#palette-organization"></a>
+</h3>
+<p>The palette system is organized hierarchically:</p>
+<pre><code>inst/extdata/palettes/
+├── sequential/         # One-directional gradients
+│   ├── seq_blues.json
+│   ├── seq_forest.json
+│   └── ...
+├── qualitative/        # Discrete categories
+│   ├── qual_vivid.json
+│   ├── qual_nejm_g.json
+│   └── ...
+└── diverging/          # Two-directional from center
+    ├── div_fireice.json
+    ├── div_sunset.json
+    └── ...</code></pre>
+<p><strong>Storage Format</strong>: Individual JSON files compiled into
+<code>palettes.rds</code> for fast loading.</p>
 </div>
 <div class="section level3">
-<h3 id="discovering-available-palettes">📋 Discovering Available Palettes<a class="anchor" aria-label="anchor" href="#discovering-available-palettes"></a>
+<h3 id="palette-types">Palette Types<a class="anchor" aria-label="anchor" href="#palette-types"></a>
 </h3>
 <div class="section level4">
-<h4 id="list-all-palettes-by-type">List All Palettes by Type<a class="anchor" aria-label="anchor" href="#list-all-palettes-by-type"></a>
+<h4 id="sequential-palettes-seq_">Sequential Palettes (<code>seq_*</code>)<a class="anchor" aria-label="anchor" href="#sequential-palettes-seq_"></a>
 </h4>
-<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># Get all available palettes by type</span></span>
-<span><span class="va">seq_palettes</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/list_palettes.html">list_palettes</a></span><span class="op">(</span>type <span class="op">=</span> <span class="st">"sequential"</span><span class="op">)</span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; <span style="color: #00BBBB;">──</span> <span style="font-weight: bold;">Available Color Palettes</span> <span style="color: #00BBBB;">────────────────────────────────────────────────────</span></span></span>
-<span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> Total palettes: 5</span></span>
-<span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> Type <span style="color: #0000BB; font-weight: bold;">"sequential"</span>: 5 palettes</span></span>
-<span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> \u2022 blues (sequential) - 3 colors</span></span>
-<span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> \u2022 forest_fade (sequential) - 4 colors</span></span>
-<span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> \u2022 muted_gradient (sequential) - 4 colors</span></span>
-<span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> \u2022 warm_blush (sequential) - 4 colors</span></span>
-<span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> \u2022 ggsci_locuszoom (sequential) - 7 colors</span></span>
-<span><span class="va">qual_palettes</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/list_palettes.html">list_palettes</a></span><span class="op">(</span>type <span class="op">=</span> <span class="st">"qualitative"</span><span class="op">)</span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; <span style="color: #00BBBB;">──</span> <span style="font-weight: bold;">Available Color Palettes</span> <span style="color: #00BBBB;">────────────────────────────────────────────────────</span></span></span>
-<span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> Total palettes: 23</span></span>
-<span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> Type <span style="color: #0000BB; font-weight: bold;">"qualitative"</span>: 23 palettes</span></span>
-<span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> \u2022 earthy_triad (qualitative) - 3 colors</span></span>
-<span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> \u2022 primary_triad (qualitative) - 3 colors</span></span>
-<span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> \u2022 softtrio (qualitative) - 3 colors</span></span>
-<span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> \u2022 vintage_triad (qualitative) - 3 colors</span></span>
-<span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> \u2022 balanced_quartet (qualitative) - 4 colors</span></span>
-<span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> \u2022 vibrant (qualitative) - 5 colors</span></span>
-<span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> \u2022 violin (qualitative) - 5 colors</span></span>
-<span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> \u2022 harmonysix (qualitative) - 6 colors</span></span>
-<span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> \u2022 pastel_harmony (qualitative) - 6 colors</span></span>
-<span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> \u2022 ggsci_jama (qualitative) - 7 colors</span></span>
-<span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> \u2022 ggsci_tron_legacy (qualitative) - 7 colors</span></span>
-<span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> \u2022 ggsci_nejm (qualitative) - 8 colors</span></span>
-<span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> \u2022 rcb_set2 (qualitative) - 8 colors</span></span>
-<span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> \u2022 ggsci_lancet (qualitative) - 9 colors</span></span>
-<span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> \u2022 rcb_set1 (qualitative) - 9 colors</span></span>
-<span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> \u2022 vividset (qualitative) - 9 colors</span></span>
-<span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> \u2022 ggsci_cosmic (qualitative) - 10 colors</span></span>
-<span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> \u2022 ggsci_flatui (qualitative) - 10 colors</span></span>
-<span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> \u2022 ggsci_jco (qualitative) - 10 colors</span></span>
-<span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> \u2022 ggsci_npg (qualitative) - 10 colors</span></span>
-<span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> \u2022 ggsci_futurama (qualitative) - 12 colors</span></span>
-<span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> \u2022 rcb_set3 (qualitative) - 12 colors</span></span>
-<span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> \u2022 sc_pbmc (qualitative) - 17 colors</span></span>
-<span><span class="va">div_palettes</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/list_palettes.html">list_palettes</a></span><span class="op">(</span>type <span class="op">=</span> <span class="st">"diverging"</span><span class="op">)</span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; <span style="color: #00BBBB;">──</span> <span style="font-weight: bold;">Available Color Palettes</span> <span style="color: #00BBBB;">────────────────────────────────────────────────────</span></span></span>
-<span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> Total palettes: 7</span></span>
-<span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> Type <span style="color: #0000BB; font-weight: bold;">"diverging"</span>: 7 palettes</span></span>
-<span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> \u2022 contrast_duo (diverging) - 2 colors</span></span>
-<span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> \u2022 fire_ice_duo (diverging) - 2 colors</span></span>
-<span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> \u2022 polar_duo (diverging) - 2 colors</span></span>
-<span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> \u2022 sunset_sky (diverging) - 2 colors</span></span>
-<span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> \u2022 piyg (diverging) - 3 colors</span></span>
-<span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> \u2022 earthy_diverge (diverging) - 5 colors</span></span>
-<span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> \u2022 gradient_rd_bu (diverging) - 11 colors</span></span>
-<span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="st">"📈 Sequential Palettes ("</span>, <span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="va">seq_palettes</span><span class="op">)</span>, <span class="st">"):\n"</span><span class="op">)</span></span>
-<span><span class="co">#&gt; 📈 Sequential Palettes ( 4 ):</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste</a></span><span class="op">(</span><span class="va">seq_palettes</span>, collapse <span class="op">=</span> <span class="st">", "</span><span class="op">)</span>, <span class="st">"\n\n"</span><span class="op">)</span></span>
-<span><span class="co">#&gt; c("blues", "forest_fade", "muted_gradient", "warm_blush", "ggsci_locuszoom"), c("sequential", "sequential", "sequential", "sequential", "sequential"), c(3, 4, 4, 4, 7), list(c("#deebf7", "#9ecae1", "#3182bd"), c("#B2C9AD", "#91AC8F", "#66785F", "#4B5945"), c("#E2E0C8", "#A7B49E", "#818C78", "#5C7285"), c("#FFCDB2", "#FFB4A2", "#E5989B", "#B5828C"), c("#D43F3A", "#EEA236", "#5CB85C", "#46B8DA", "#357EBD", "#9632B8", "#B8B8B8"))</span></span>
-<span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="st">"🏷️ Qualitative Palettes ("</span>, <span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="va">qual_palettes</span><span class="op">)</span>, <span class="st">"):\n"</span><span class="op">)</span></span>
-<span><span class="co">#&gt; 🏷️ Qualitative Palettes ( 4 ):</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste</a></span><span class="op">(</span><span class="va">qual_palettes</span>, collapse <span class="op">=</span> <span class="st">", "</span><span class="op">)</span>, <span class="st">"\n\n"</span><span class="op">)</span></span>
-<span><span class="co">#&gt; c("earthy_triad", "primary_triad", "softtrio", "vintage_triad", "balanced_quartet", "vibrant", "violin", "harmonysix", "pastel_harmony", "ggsci_jama", "ggsci_tron_legacy", "ggsci_nejm", "rcb_set2", "ggsci_lancet", "rcb_set1", "vividset", "ggsci_cosmic", "ggsci_flatui", "ggsci_jco", "ggsci_npg", "ggsci_futurama", "rcb_set3", "sc_pbmc"), c("qualitative", "qualitative", "qualitative", "qualitative", "qualitative", "qualitative", "qualitative", "qualitative", "qualitative", "qualitative", "qualitative", "qualitative", "qualitative", "qualitative", "qualitative", "qualitative", "qualitative", "qualitative", "qualitative", "qualitative", "qualitative", "qualitative", "qualitative"), c(3, 3, 3, 3, 4, 5, 5, 6, 6, 7, 7, 8, 8, 9, 9, 9, 10, 10, 10, 10, 12, 12, 17), list(c("#C64328", "#56BBA5", "#E3A727"), c("#C64328", "#2AA6C6", "#E3A727"), c("#E64B35B2", "#00A087B2", "#3C5488B2"), c("#96A0D9", "#D9BDAD", "#D9D5A0"), c("#5D83B4", "#9FD0E8", "#CDAE9D", "#959683"), c("#BF3F9D", "#B3BCD7", "#6DA6A0", "#D98A29", "#F2C894"), c("#37848C", "#F2935C", "#F2A88D", "#D95555", "#A7CAE9"), c("#BF3641", "#836AA6", "#377BA6", "#448C42", "#D96236", "#B79290"), c("#B2AA76", "#8C91CF", "#D7D79C", "#DABFAC", "#BCEDDB", "#C380A0"), c("#374E55", "#DF8F44", "#00A1D5", "#B24745", </span></span>
-<span><span class="co">#&gt; "#79AF97", "#6A6599", "#80796B"), c("#FF410D", "#6EE2FF", "#F7C530", "#95CC5E", "#D0DFE6", "#F79D1E", "#748AA6"), c("#BC3C29", "#0072B5", "#E18727", "#20854E", "#7876B1", "#6F99AD", "#FFDC91", "#EE4C97"), c("#66C2A5", "#FC8D62", "#8DA0CB", "#E78AC3", "#A6D854", "#FFD92F", "#E5C494", "#B3B3B3"), c("#00468B", "#ED0000", "#42B540", "#0099B4", "#925E9F", "#FDAF91", "#AD002A", "#ADB6B6", "#1B1919"), c("#E41A1C", "#377EB8", "#4DAF4A", "#984EA3", "#FF7F00", "#FFFF33", "#A65628", "#F781BF", "#999999"), c("#E64B35", </span></span>
-<span><span class="co">#&gt; "#4DBBD5", "#00A087", "#3C5488", "#F39B7F", "#8491B4", "#91D1C2", "#DC0000", "#7E6148"), c("#2E2A2B", "#CF4E9C", "#8C57A2", "#358DB9", "#82581F", "#2F509E", "#E5614C", "#97A1A7", "#3DA873", "#DC9445"), c("#c0392b", "#d35400", "#f39c12", "#27ae60", "#16a085", "#2980b9", "#8e44ad", "#2c3e50", "#7f8c8d", "#bdc3c7"), c("#0073C2", "#EFC000", "#868686", "#CD534C", "#7AA6DC", "#003C67", "#8F7700", "#3B3B3B", "#A73030", "#4A6990"), c("#E64B35", "#4DBBD5", "#00A087", "#3C5488", "#F39B7F", "#8491B4", "#91D1C2", </span></span>
-<span><span class="co">#&gt; "#DC0000", "#7E6148", "#B09C85"), c("#FF6F00", "#C71000", "#008EA0", "#8A4198", "#5A9599", "#FF6348", "#84D7E1", "#FF95A8", "#3D3B25", "#ADE2D0", "#1A5354", "#3F4041"), c("#8DD3C7", "#FFFFB3", "#BEBADA", "#FB8072", "#80B1D3", "#FDB462", "#B3DE69", "#FCCDE5", "#D9D9D9", "#BC80BD", "#CCEBC5", "#FFED6F"), c("#a2d2e7", "#67a8cd", "#ffc17f", "#cf9f88", "#6fb3a8", "#b3e19b", "#50aa4b", "#ff9d9f", "#f36569", "#3581b7", "#cdb6da", "#704ba3", "#9a7fbd", "#dba9a8", "#e40300", "#e99b78", "#ff8831"))</span></span>
-<span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="st">"↔️ Diverging Palettes ("</span>, <span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="va">div_palettes</span><span class="op">)</span>, <span class="st">"):\n"</span><span class="op">)</span></span>
-<span><span class="co">#&gt; ↔️ Diverging Palettes ( 4 ):</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste</a></span><span class="op">(</span><span class="va">div_palettes</span>, collapse <span class="op">=</span> <span class="st">", "</span><span class="op">)</span>, <span class="st">"\n"</span><span class="op">)</span></span>
-<span><span class="co">#&gt; c("contrast_duo", "fire_ice_duo", "polar_duo", "sunset_sky", "piyg", "earthy_diverge", "gradient_rd_bu"), c("diverging", "diverging", "diverging", "diverging", "diverging", "diverging", "diverging"), c(2, 2, 2, 2, 3, 5, 11), list(c("#C64328", "#56BBA5"), c("#2AA6C6", "#C64328"), c("#8CB5D2", "#E18E8F"), c("#57A2FF", "#FF8000"), c("#E64B35B2", "#00A087B2", "#3C5488B2"), c("#283618", "#606C38", "#FEFAE0", "#DDA15E", "#BC6C25"), c("#67001f", "#b2182b", "#d6604d", "#f4a582", "#fddbc7", "#f7f7f7", "#d1e5f0", "#92c5de", "#4393c3", "#2166ac", "#053061"))</span></span></code></pre></div>
+<p><strong>Purpose</strong>: Continuous data with one direction of
+change</p>
+<p><strong>Use Cases</strong>: - Heatmaps (gene expression) - Intensity
+gradients - Probability/density maps - Single-direction scales</p>
+<p><strong>Examples</strong>: <code>seq_blues</code>,
+<code>seq_forest</code>, <code>seq_muted</code></p>
 </div>
 <div class="section level4">
-<h4 id="interactive-palette-gallery">Interactive Palette Gallery<a class="anchor" aria-label="anchor" href="#interactive-palette-gallery"></a>
+<h4 id="qualitative-palettes-qual_">Qualitative Palettes (<code>qual_*</code>)<a class="anchor" aria-label="anchor" href="#qualitative-palettes-qual_"></a>
 </h4>
+<p><strong>Purpose</strong>: Categorical data without inherent order</p>
+<p><strong>Use Cases</strong>: - Cell types or tissue groups - Sample
+categories - Treatment groups - Pathway classifications</p>
+<p><strong>Examples</strong>: <code>qual_vivid</code>,
+<code>qual_nejm_g</code>, <code>qual_pbmc_sc</code></p>
+</div>
+<div class="section level4">
+<h4 id="diverging-palettes-div_">Diverging Palettes (<code>div_*</code>)<a class="anchor" aria-label="anchor" href="#diverging-palettes-div_"></a>
+</h4>
+<p><strong>Purpose</strong>: Data with meaningful midpoint (usually
+zero)</p>
+<p><strong>Use Cases</strong>: - Fold changes (up/down regulation) -
+Correlation matrices - Differential expression - Volcano plots</p>
+<p><strong>Examples</strong>: <code>div_fireice</code>,
+<code>div_sunset</code>, <code>div_polar</code></p>
+<hr>
+</div>
+</div>
+</div>
+<div class="section level2">
+<h2 id="naming-convention">Naming Convention<a class="anchor" aria-label="anchor" href="#naming-convention"></a>
+</h2>
+<div class="section level3">
+<h3 id="standard-format">Standard Format<a class="anchor" aria-label="anchor" href="#standard-format"></a>
+</h3>
+<p>All palettes follow the
+<strong><code>type_name_source</code></strong> structure:</p>
+<pre><code>[type]_[name]_[source]
+  │      │       │
+  │      │       └─ Optional: Source identifier (_g, _rb, _met, _sc)
+  │      └───────── Required: Descriptive name
+  └──────────────── Required: Type prefix (seq_, qual_, div_)</code></pre>
+</div>
+<div class="section level3">
+<h3 id="the-5-golden-rules">The 5 Golden Rules<a class="anchor" aria-label="anchor" href="#the-5-golden-rules"></a>
+</h3>
+<ol style="list-style-type: decimal">
+<li>
+<strong>All lowercase</strong> - No capital letters</li>
+<li>
+<strong>Underscore separators</strong> - Use <code>_</code>, not
+camelCase or dots</li>
+<li>
+<strong>Type prefix required</strong> - Must start with
+<code>seq_</code>, <code>div_</code>, or <code>qual_</code>
+</li>
+<li>
+<strong>No number suffixes</strong> - Color count belongs in
+metadata</li>
+<li>
+<strong>Source suffix only for adapted palettes</strong> - Credit
+external sources</li>
+</ol>
+<p><strong>See Also</strong>:
+<code><a href="../articles/palette-naming-convention.html">vignette("palette-naming-convention")</a></code> for complete
+specification</p>
+</div>
+<div class="section level3">
+<h3 id="examples">Examples<a class="anchor" aria-label="anchor" href="#examples"></a>
+</h3>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># ✅ GOOD</span></span>
+<span><span class="va">seq_blues</span>           <span class="co"># Sequential blue gradient</span></span>
+<span><span class="va">qual_vivid</span>          <span class="co"># Vivid qualitative palette</span></span>
+<span><span class="va">div_fireice</span>         <span class="co"># Fire-ice diverging palette</span></span>
+<span><span class="va">qual_nejm_g</span>         <span class="co"># NEJM palette from ggsci</span></span>
+<span><span class="va">seq_locuszoom</span>       <span class="co"># LocusZoom-style sequential</span></span>
+<span></span>
+<span><span class="co"># ❌ BAD</span></span>
+<span><span class="va">blues</span>               <span class="co"># Missing type prefix</span></span>
+<span><span class="va">VividSet</span>            <span class="co"># Capital letters</span></span>
+<span><span class="va">my.palette</span>          <span class="co"># Dot separator</span></span>
+<span><span class="va">palette_12</span>          <span class="co"># Number in name</span></span></code></pre></div>
+<hr>
+</div>
+</div>
+<div class="section level2">
+<h2 id="complete-workflow">Complete Workflow<a class="anchor" aria-label="anchor" href="#complete-workflow"></a>
+</h2>
+<div class="section level3">
+<h3 id="discover-palettes">1. Discover Palettes<a class="anchor" aria-label="anchor" href="#discover-palettes"></a>
+</h3>
+<div class="section level4">
+<h4 id="list-available-palettes">List Available Palettes<a class="anchor" aria-label="anchor" href="#list-available-palettes"></a>
+</h4>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># List all palettes by type</span></span>
+<span><span class="va">seq_palettes</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/list_palettes.html">list_palettes</a></span><span class="op">(</span>type <span class="op">=</span> <span class="st">"sequential"</span><span class="op">)</span></span>
+<span><span class="va">qual_palettes</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/list_palettes.html">list_palettes</a></span><span class="op">(</span>type <span class="op">=</span> <span class="st">"qualitative"</span><span class="op">)</span></span>
+<span><span class="va">div_palettes</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/list_palettes.html">list_palettes</a></span><span class="op">(</span>type <span class="op">=</span> <span class="st">"diverging"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="st">"Sequential Palettes ("</span>, <span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="va">seq_palettes</span><span class="op">)</span>, <span class="st">"):\n"</span>, sep <span class="op">=</span> <span class="st">""</span><span class="op">)</span></span>
+<span><span class="co">#&gt; Sequential Palettes (4):</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="st">"  "</span>, <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">seq_palettes</span>, <span class="fl">5</span><span class="op">)</span>, collapse <span class="op">=</span> <span class="st">", "</span><span class="op">)</span>, <span class="st">"...\n\n"</span>, sep <span class="op">=</span> <span class="st">""</span><span class="op">)</span></span>
+<span><span class="co">#&gt;   c("seq_blues", "seq_blush", "seq_forest", "seq_muted", "seq_hokusai2"), c("sequential", "sequential", "sequential", "sequential", "sequential"), c(3, 4, 4, 4, 6), list(c("#deebf7", "#9ecae1", "#3182bd"), c("#FFCDB2", "#FFB4A2", "#E5989B", "#B5828C"), c("#B2C9AD", "#91AC8F", "#66785F", "#4B5945"), c("#E2E0C8", "#A7B49E", "#818C78", "#5C7285"), c("#abc9c8", "#72aeb6", "#4692b0", "#2f70a1", "#134b73", "#0a3351"))...</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="st">"Qualitative Palettes ("</span>, <span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="va">qual_palettes</span><span class="op">)</span>, <span class="st">"):\n"</span>, sep <span class="op">=</span> <span class="st">""</span><span class="op">)</span></span>
+<span><span class="co">#&gt; Qualitative Palettes (4):</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="st">"  "</span>, <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">qual_palettes</span>, <span class="fl">5</span><span class="op">)</span>, collapse <span class="op">=</span> <span class="st">", "</span><span class="op">)</span>, <span class="st">"...\n\n"</span>, sep <span class="op">=</span> <span class="st">""</span><span class="op">)</span></span>
+<span><span class="co">#&gt;   c("qual_earthy", "qual_primary", "qual_softtrio", "qual_vintage", "qual_balanced"), c("qualitative", "qualitative", "qualitative", "qualitative", "qualitative"), c(3, 3, 3, 3, 4), list(c("#C64328", "#56BBA5", "#E3A727"), c("#C64328", "#2AA6C6", "#E3A727"), c("#E64B35B2", "#00A087B2", "#3C5488B2"), c("#96A0D9", "#D9BDAD", "#D9D5A0"), c("#5D83B4", "#9FD0E8", "#CDAE9D", "#959683"))...</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="st">"Diverging Palettes ("</span>, <span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="va">div_palettes</span><span class="op">)</span>, <span class="st">"):\n"</span>, sep <span class="op">=</span> <span class="st">""</span><span class="op">)</span></span>
+<span><span class="co">#&gt; Diverging Palettes (4):</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="st">"  "</span>, <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste</a></span><span class="op">(</span><span class="va">div_palettes</span>, collapse <span class="op">=</span> <span class="st">", "</span><span class="op">)</span>, <span class="st">"\n"</span>, sep <span class="op">=</span> <span class="st">""</span><span class="op">)</span></span>
+<span><span class="co">#&gt;   c("div_contrast", "div_fireice", "div_polar", "div_sunset", "div_pinkgreen_rb", "div_earthy", "div_sage"), c("diverging", "diverging", "diverging", "diverging", "diverging", "diverging", "diverging"), c(2, 2, 2, 2, 3, 5, 7), list(c("#C64328", "#56BBA5"), c("#2AA6C6", "#C64328"), c("#8CB5D2", "#E18E8F"), c("#57A2FF", "#FF8000"), c("#E64B35B2", "#00A087B2", "#3C5488B2"), c("#283618", "#606C38", "#FEFAE0", "#DDA15E", "#BC6C25"), c("#EDEAE7", "#B1CABA", "#BBCDD7", "#BBAAB6", "#6D8092", "#504B54", "#0E0F0F"))</span></span></code></pre></div>
+</div>
+<div class="section level4">
+<h4 id="view-complete-gallery">View Complete Gallery<a class="anchor" aria-label="anchor" href="#view-complete-gallery"></a>
+</h4>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Display the complete palette gallery</span></span>
-<span><span class="fu"><a href="../reference/bio_palette_gallery.html">bio_palette_gallery</a></span><span class="op">(</span><span class="op">)</span></span>
-<span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> Type <span style="font-weight: bold;">sequential</span>: 5 palettes \u2192 1 page(s)</span></span></code></pre></div>
+<span><span class="fu"><a href="../reference/bio_palette_gallery.html">bio_palette_gallery</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <div class="figure">
 <img src="color-palettes_files/figure-html/palette-gallery-1.png" alt="Complete gallery of all available palettes organized by type" width="100%"><p class="caption">
 Complete gallery of all available palettes organized by type
 </p>
 </div>
-<pre><code><span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> Rendered 'sequential' page 1 of 1</span></span>
-<span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> Type <span style="font-weight: bold;">diverging</span>: 7 palettes \u2192 1 page(s)</span></span></code></pre>
 <div class="figure">
 <img src="color-palettes_files/figure-html/palette-gallery-2.png" alt="Complete gallery of all available palettes organized by type" width="100%"><p class="caption">
 Complete gallery of all available palettes organized by type
 </p>
 </div>
-<pre><code><span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> Rendered 'diverging' page 1 of 1</span></span>
-<span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> Type <span style="font-weight: bold;">qualitative</span>: 23 palettes \u2192 1 page(s)</span></span></code></pre>
 <div class="figure">
 <img src="color-palettes_files/figure-html/palette-gallery-3.png" alt="Complete gallery of all available palettes organized by type" width="100%"><p class="caption">
 Complete gallery of all available palettes organized by type
 </p>
 </div>
-<pre><code><span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> Rendered 'qualitative' page 1 of 1</span></span></code></pre>
 </div>
 </div>
 <div class="section level3">
-<h3 id="working-with-individual-palettes">🔍 Working with Individual Palettes<a class="anchor" aria-label="anchor" href="#working-with-individual-palettes"></a>
+<h3 id="retrieve-palettes">2. Retrieve Palettes<a class="anchor" aria-label="anchor" href="#retrieve-palettes"></a>
 </h3>
 <div class="section level4">
-<h4 id="getting-specific-palettes">Getting Specific Palettes<a class="anchor" aria-label="anchor" href="#getting-specific-palettes"></a>
+<h4 id="basic-retrieval">Basic Retrieval<a class="anchor" aria-label="anchor" href="#basic-retrieval"></a>
 </h4>
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># Get qualitative palette with default number of colors</span></span>
-<span><span class="va">vivid_default</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_palette.html">get_palette</a></span><span class="op">(</span><span class="st">"vividset"</span>, type <span class="op">=</span> <span class="st">"qualitative"</span><span class="op">)</span></span>
-<span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> Loaded palette <span style="color: #0000BB;">"vividset"</span> (<span style="color: #0000BB;">"qualitative"</span>), <span style="color: #0000BB;">9</span> colors</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="st">"Vivid palette (default):\n"</span><span class="op">)</span></span>
-<span><span class="co">#&gt; Vivid palette (default):</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">vivid_default</span><span class="op">)</span></span>
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Specify type explicitly for clarity</span></span>
+<span><span class="va">vivid_colors</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_palette.html">get_palette</a></span><span class="op">(</span><span class="st">"qual_vivid"</span>, type <span class="op">=</span> <span class="st">"qualitative"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="st">"qual_vivid palette:\n"</span><span class="op">)</span></span>
+<span><span class="co">#&gt; qual_vivid palette:</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">vivid_colors</span><span class="op">)</span></span>
 <span><span class="co">#&gt; [1] "#E64B35" "#4DBBD5" "#00A087" "#3C5488" "#F39B7F" "#8491B4" "#91D1C2"</span></span>
 <span><span class="co">#&gt; [8] "#DC0000" "#7E6148"</span></span>
 <span></span>
-<span><span class="co"># Get specific number of colors from sequential palette</span></span>
-<span><span class="va">blues_3</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_palette.html">get_palette</a></span><span class="op">(</span><span class="st">"blues"</span>, type <span class="op">=</span> <span class="st">"sequential"</span>, n <span class="op">=</span> <span class="fl">3</span><span class="op">)</span></span>
-<span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> Loaded palette <span style="color: #0000BB;">"blues"</span> (<span style="color: #0000BB;">"sequential"</span>), <span style="color: #0000BB;">3</span> colors</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="st">"\nBlues palette (3 colors):\n"</span><span class="op">)</span></span>
+<span><span class="co"># Get specific number of colors</span></span>
+<span><span class="va">blues_3</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_palette.html">get_palette</a></span><span class="op">(</span><span class="st">"seq_blues"</span>, type <span class="op">=</span> <span class="st">"sequential"</span>, n <span class="op">=</span> <span class="fl">3</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="st">"\nseq_blues (3 colors):\n"</span><span class="op">)</span></span>
 <span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; Blues palette (3 colors):</span></span>
+<span><span class="co">#&gt; seq_blues (3 colors):</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">blues_3</span><span class="op">)</span></span>
 <span><span class="co">#&gt; [1] "#deebf7" "#9ecae1" "#3182bd"</span></span>
 <span></span>
-<span><span class="co"># Get all available colors from a palette (just omit n parameter)</span></span>
-<span><span class="va">blues_all</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_palette.html">get_palette</a></span><span class="op">(</span><span class="st">"blues"</span>, type <span class="op">=</span> <span class="st">"sequential"</span><span class="op">)</span></span>
-<span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> Loaded palette <span style="color: #0000BB;">"blues"</span> (<span style="color: #0000BB;">"sequential"</span>), <span style="color: #0000BB;">3</span> colors</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="st">"\nBlues palette (all"</span>, <span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="va">blues_all</span><span class="op">)</span>, <span class="st">"colors):\n"</span><span class="op">)</span></span>
+<span><span class="co"># Get all available colors (omit n parameter)</span></span>
+<span><span class="va">blues_all</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_palette.html">get_palette</a></span><span class="op">(</span><span class="st">"seq_blues"</span>, type <span class="op">=</span> <span class="st">"sequential"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="st">"\nseq_blues (all"</span>, <span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="va">blues_all</span><span class="op">)</span>, <span class="st">"colors):\n"</span><span class="op">)</span></span>
 <span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; Blues palette (all 3 colors):</span></span>
+<span><span class="co">#&gt; seq_blues (all 3 colors):</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">blues_all</span><span class="op">)</span></span>
 <span><span class="co">#&gt; [1] "#deebf7" "#9ecae1" "#3182bd"</span></span></code></pre></div>
 </div>
 <div class="section level4">
-<h4 id="preview-individual-palettes">Preview Individual Palettes<a class="anchor" aria-label="anchor" href="#preview-individual-palettes"></a>
+<h4 id="preview-palettes">Preview Palettes<a class="anchor" aria-label="anchor" href="#preview-palettes"></a>
 </h4>
-<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Save current par settings</span></span>
 <span><span class="va">oldpar</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/graphics/par.html" class="external-link">par</a></span><span class="op">(</span>no.readonly <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Preview different palette types</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/par.html" class="external-link">par</a></span><span class="op">(</span>mfrow <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fl">2</span><span class="op">)</span>, mar <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">3</span>, <span class="fl">1</span>, <span class="fl">2</span>, <span class="fl">1</span><span class="op">)</span><span class="op">)</span></span>
 <span></span>
-<span><span class="co"># Qualitative palette preview</span></span>
-<span><span class="fu"><a href="../reference/preview_palette.html">preview_palette</a></span><span class="op">(</span><span class="st">"vividset"</span>, type <span class="op">=</span> <span class="st">"qualitative"</span><span class="op">)</span></span>
-<span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> Loaded palette <span style="color: #0000BB;">"vividset"</span> (<span style="color: #0000BB;">"qualitative"</span>), <span style="color: #0000BB;">9</span> colors</span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; ── <span style="font-weight: bold;">Previewing palette: </span><span style="color: #0000BB; font-weight: bold;">"vividset"</span> ──</span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> Plot type: <span style="color: #0000BB;">"bar"</span>, colors: <span style="color: #0000BB;">9</span></span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/graphics/title.html" class="external-link">title</a></span><span class="op">(</span><span class="st">"Qualitative: VividSet"</span>, cex.main <span class="op">=</span> <span class="fl">1.2</span>, col.main <span class="op">=</span> <span class="st">"#0D47A1"</span><span class="op">)</span></span>
+<span><span class="co"># Qualitative</span></span>
+<span><span class="fu"><a href="../reference/preview_palette.html">preview_palette</a></span><span class="op">(</span><span class="st">"qual_vivid"</span>, type <span class="op">=</span> <span class="st">"qualitative"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/title.html" class="external-link">title</a></span><span class="op">(</span><span class="st">"Qualitative: qual_vivid"</span>, cex.main <span class="op">=</span> <span class="fl">1</span>, font.main <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span>
 <span></span>
-<span><span class="co"># Sequential palette preview</span></span>
-<span><span class="fu"><a href="../reference/preview_palette.html">preview_palette</a></span><span class="op">(</span><span class="st">"blues"</span>, type <span class="op">=</span> <span class="st">"sequential"</span><span class="op">)</span></span>
-<span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> Loaded palette <span style="color: #0000BB;">"blues"</span> (<span style="color: #0000BB;">"sequential"</span>), <span style="color: #0000BB;">3</span> colors</span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; ── <span style="font-weight: bold;">Previewing palette: </span><span style="color: #0000BB; font-weight: bold;">"blues"</span> ──</span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> Plot type: <span style="color: #0000BB;">"bar"</span>, colors: <span style="color: #0000BB;">3</span></span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/graphics/title.html" class="external-link">title</a></span><span class="op">(</span><span class="st">"Sequential: Blues"</span>, cex.main <span class="op">=</span> <span class="fl">1.2</span>, col.main <span class="op">=</span> <span class="st">"#0D47A1"</span><span class="op">)</span></span>
+<span><span class="co"># Sequential</span></span>
+<span><span class="fu"><a href="../reference/preview_palette.html">preview_palette</a></span><span class="op">(</span><span class="st">"seq_blues"</span>, type <span class="op">=</span> <span class="st">"sequential"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/title.html" class="external-link">title</a></span><span class="op">(</span><span class="st">"Sequential: seq_blues"</span>, cex.main <span class="op">=</span> <span class="fl">1</span>, font.main <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span>
 <span></span>
-<span><span class="co"># Another sequential palette</span></span>
-<span><span class="fu"><a href="../reference/preview_palette.html">preview_palette</a></span><span class="op">(</span><span class="st">"warm_blush"</span>, type <span class="op">=</span> <span class="st">"sequential"</span><span class="op">)</span></span>
-<span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> Loaded palette <span style="color: #0000BB;">"warm_blush"</span> (<span style="color: #0000BB;">"sequential"</span>), <span style="color: #0000BB;">4</span> colors</span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; ── <span style="font-weight: bold;">Previewing palette: </span><span style="color: #0000BB; font-weight: bold;">"warm_blush"</span> ──</span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> Plot type: <span style="color: #0000BB;">"bar"</span>, colors: <span style="color: #0000BB;">4</span></span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/graphics/title.html" class="external-link">title</a></span><span class="op">(</span><span class="st">"Sequential: Warm Blush"</span>, cex.main <span class="op">=</span> <span class="fl">1.2</span>, col.main <span class="op">=</span> <span class="st">"#0D47A1"</span><span class="op">)</span></span>
+<span><span class="co"># Sequential - Another</span></span>
+<span><span class="fu"><a href="../reference/preview_palette.html">preview_palette</a></span><span class="op">(</span><span class="st">"seq_forest"</span>, type <span class="op">=</span> <span class="st">"sequential"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/title.html" class="external-link">title</a></span><span class="op">(</span><span class="st">"Sequential: seq_forest"</span>, cex.main <span class="op">=</span> <span class="fl">1</span>, font.main <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span>
 <span></span>
-<span><span class="co"># Diverging palette preview</span></span>
-<span><span class="fu"><a href="../reference/preview_palette.html">preview_palette</a></span><span class="op">(</span><span class="st">"gradient_rd_bu"</span>, type <span class="op">=</span> <span class="st">"diverging"</span><span class="op">)</span></span>
-<span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> Loaded palette <span style="color: #0000BB;">"gradient_rd_bu"</span> (<span style="color: #0000BB;">"diverging"</span>), <span style="color: #0000BB;">11</span> colors</span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; ── <span style="font-weight: bold;">Previewing palette: </span><span style="color: #0000BB; font-weight: bold;">"gradient_rd_bu"</span> ──</span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> Plot type: <span style="color: #0000BB;">"bar"</span>, colors: <span style="color: #0000BB;">11</span></span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/graphics/title.html" class="external-link">title</a></span><span class="op">(</span><span class="st">"Diverging: Red-Blue Gradient"</span>, cex.main <span class="op">=</span> <span class="fl">1.2</span>, col.main <span class="op">=</span> <span class="st">"#0D47A1"</span><span class="op">)</span></span></code></pre></div>
+<span><span class="co"># Diverging</span></span>
+<span><span class="fu"><a href="../reference/preview_palette.html">preview_palette</a></span><span class="op">(</span><span class="st">"div_fireice"</span>, type <span class="op">=</span> <span class="st">"diverging"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/title.html" class="external-link">title</a></span><span class="op">(</span><span class="st">"Diverging: div_fireice"</span>, cex.main <span class="op">=</span> <span class="fl">1</span>, font.main <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span></code></pre></div>
 <div class="figure">
-<img src="color-palettes_files/figure-html/palette-preview-1.png" alt="Preview of different palette types with color swatches" width="100%"><p class="caption">
+<img src="color-palettes_files/figure-html/preview-palettes-1.png" alt="Preview of different palette types with color swatches" width="100%"><p class="caption">
 Preview of different palette types with color swatches
 </p>
 </div>
-<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span></span>
-<span><span class="co"># Restore previous par settings</span></span>
+<span><span class="co"># Restore par settings</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/par.html" class="external-link">par</a></span><span class="op">(</span><span class="va">oldpar</span><span class="op">)</span></span></code></pre></div>
 </div>
 </div>
 <div class="section level3">
-<h3 id="creating-custom-palettes">🛠️ Creating Custom Palettes<a class="anchor" aria-label="anchor" href="#creating-custom-palettes"></a>
+<h3 id="create-custom-palettes">3. Create Custom Palettes<a class="anchor" aria-label="anchor" href="#create-custom-palettes"></a>
 </h3>
 <div class="section level4">
-<h4 id="basic-custom-palette-creation">Basic Custom Palette Creation<a class="anchor" aria-label="anchor" href="#basic-custom-palette-creation"></a>
+<h4 id="step-by-step-creation">Step-by-Step Creation<a class="anchor" aria-label="anchor" href="#step-by-step-creation"></a>
 </h4>
-<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># Define custom color schemes</span></span>
-<span><span class="va">modern_colors</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"#FF6B6B"</span>, <span class="st">"#4ECDC4"</span>, <span class="st">"#45B7D1"</span>, <span class="st">"#96CEB4"</span>, <span class="st">"#FFEAA7"</span><span class="op">)</span></span>
-<span><span class="va">nature_colors</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"#2E7D32"</span>, <span class="st">"#66BB6A"</span>, <span class="st">"#A5D6A7"</span>, <span class="st">"#E8F5E8"</span><span class="op">)</span></span>
-<span><span class="va">corporate_colors</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"#0D47A1"</span>, <span class="st">"#1976D2"</span>, <span class="st">"#42A5F5"</span>, <span class="st">"#90CAF9"</span>, <span class="st">"#E3F2FD"</span><span class="op">)</span></span>
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Step 1: Determine palette type</span></span>
+<span><span class="co"># Is your data continuous (sequential),</span></span>
+<span><span class="co"># categorical (qualitative), or centered (diverging)?</span></span>
 <span></span>
-<span><span class="co"># Create custom palettes (Note: this would save to package directory)</span></span>
-<span><span class="co"># create_palette("modern_vivid", type = "qualitative", colors = modern_colors)</span></span>
-<span><span class="co"># create_palette("nature_gradient", type = "sequential", colors = nature_colors)</span></span>
-<span><span class="co"># create_palette("corporate_blue", type = "sequential", colors = corporate_colors)</span></span>
+<span><span class="co"># Step 2: Define colors</span></span>
+<span><span class="va">ocean_colors</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"#006BA4"</span>, <span class="st">"#FF7F0E"</span>, <span class="st">"#2CA02C"</span>, <span class="st">"#D62728"</span>, <span class="st">"#9467BD"</span><span class="op">)</span></span>
 <span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="st">"Custom palette examples:\n"</span><span class="op">)</span></span>
-<span><span class="co">#&gt; Custom palette examples:</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="st">"Modern vivid:"</span>, <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste</a></span><span class="op">(</span><span class="va">modern_colors</span>, collapse <span class="op">=</span> <span class="st">", "</span><span class="op">)</span>, <span class="st">"\n"</span><span class="op">)</span></span>
-<span><span class="co">#&gt; Modern vivid: #FF6B6B, #4ECDC4, #45B7D1, #96CEB4, #FFEAA7</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="st">"Nature gradient:"</span>, <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste</a></span><span class="op">(</span><span class="va">nature_colors</span>, collapse <span class="op">=</span> <span class="st">", "</span><span class="op">)</span>, <span class="st">"\n"</span><span class="op">)</span></span>
-<span><span class="co">#&gt; Nature gradient: #2E7D32, #66BB6A, #A5D6A7, #E8F5E8</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="st">"Corporate blue:"</span>, <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste</a></span><span class="op">(</span><span class="va">corporate_colors</span>, collapse <span class="op">=</span> <span class="st">", "</span><span class="op">)</span>, <span class="st">"\n"</span><span class="op">)</span></span>
-<span><span class="co">#&gt; Corporate blue: #0D47A1, #1976D2, #42A5F5, #90CAF9, #E3F2FD</span></span></code></pre></div>
+<span><span class="co"># Step 3: Create palette with proper naming</span></span>
+<span><span class="fu"><a href="../reference/create_palette.html">create_palette</a></span><span class="op">(</span></span>
+<span>  name <span class="op">=</span> <span class="st">"qual_ocean"</span>,  <span class="co"># Follow type_name_source convention</span></span>
+<span>  type <span class="op">=</span> <span class="st">"qualitative"</span>,</span>
+<span>  colors <span class="op">=</span> <span class="va">ocean_colors</span>,</span>
+<span>  color_dir <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"extdata"</span>, <span class="st">"palettes"</span>, package <span class="op">=</span> <span class="st">"evanverse"</span><span class="op">)</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Step 4: Compile palettes.rds (see next section)</span></span></code></pre></div>
 </div>
 <div class="section level4">
-<h4 id="color-space-utilities">Color Space Utilities<a class="anchor" aria-label="anchor" href="#color-space-utilities"></a>
+<h4 id="naming-your-custom-palette">Naming Your Custom Palette<a class="anchor" aria-label="anchor" href="#naming-your-custom-palette"></a>
+</h4>
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># ✅ CORRECT naming</span></span>
+<span><span class="fu"><a href="../reference/create_palette.html">create_palette</a></span><span class="op">(</span></span>
+<span>  name <span class="op">=</span> <span class="st">"qual_custom"</span>,      <span class="co"># type_name</span></span>
+<span>  name <span class="op">=</span> <span class="st">"seq_thermal"</span>,      <span class="co"># for sequential</span></span>
+<span>  name <span class="op">=</span> <span class="st">"div_warmcool"</span>,     <span class="co"># for diverging</span></span>
+<span>  name <span class="op">=</span> <span class="st">"qual_nejm_g"</span>       <span class="co"># if adapted from ggsci</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># ❌ INCORRECT naming</span></span>
+<span><span class="fu"><a href="../reference/create_palette.html">create_palette</a></span><span class="op">(</span></span>
+<span>  name <span class="op">=</span> <span class="st">"MyPalette"</span>,        <span class="co"># Missing type, capital letters</span></span>
+<span>  name <span class="op">=</span> <span class="st">"custom.colors"</span>,    <span class="co"># Dot separator</span></span>
+<span>  name <span class="op">=</span> <span class="st">"palette_12"</span>        <span class="co"># Number suffix</span></span>
+<span><span class="op">)</span></span></code></pre></div>
+</div>
+<div class="section level4">
+<h4 id="color-utilities">Color Utilities<a class="anchor" aria-label="anchor" href="#color-utilities"></a>
 </h4>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># Convert between HEX and RGB formats</span></span>
+<code class="sourceCode R"><span><span class="co"># Convert between HEX and RGB</span></span>
 <span><span class="va">hex_colors</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"#FF6B6B"</span>, <span class="st">"#4ECDC4"</span>, <span class="st">"#45B7D1"</span><span class="op">)</span></span>
 <span></span>
-<span><span class="co"># HEX to RGB conversion</span></span>
+<span><span class="co"># HEX to RGB</span></span>
 <span><span class="va">rgb_matrix</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/hex2rgb.html">hex2rgb</a></span><span class="op">(</span><span class="va">hex_colors</span><span class="op">)</span></span>
-<span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> Converted 3 HEX values to RGB.</span></span>
-<span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> #FF6B6B -&gt; RGB: c(255, 107, 107)</span></span>
-<span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> #4ECDC4 -&gt; RGB: c(78, 205, 196)</span></span>
-<span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> #45B7D1 -&gt; RGB: c(69, 183, 209)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="st">"HEX to RGB conversion:\n"</span><span class="op">)</span></span>
-<span><span class="co">#&gt; HEX to RGB conversion:</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="st">"HEX to RGB:\n"</span><span class="op">)</span></span>
+<span><span class="co">#&gt; HEX to RGB:</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">rgb_matrix</span><span class="op">)</span></span>
 <span><span class="co">#&gt; $`#FF6B6B`</span></span>
 <span><span class="co">#&gt;   r   g   b </span></span>
@@ -420,491 +478,399 @@ Preview of different palette types with color swatches
 <span><span class="co">#&gt;   r   g   b </span></span>
 <span><span class="co">#&gt;  69 183 209</span></span>
 <span></span>
-<span><span class="co"># RGB back to HEX conversion</span></span>
+<span><span class="co"># RGB to HEX</span></span>
 <span><span class="va">hex_back</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/rgb2hex.html">rgb2hex</a></span><span class="op">(</span><span class="va">rgb_matrix</span><span class="op">)</span></span>
-<span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> Converted 3 RGB values to HEX.</span></span>
-<span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> RGB: c(255, 107, 107) → HEX: #FF6B6B</span></span>
-<span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> RGB: c(78, 205, 196) → HEX: #4ECDC4</span></span>
-<span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> RGB: c(69, 183, 209) → HEX: #45B7D1</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="st">"\nRGB back to HEX:\n"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="st">"\nRGB to HEX:\n"</span><span class="op">)</span></span>
 <span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; RGB back to HEX:</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">hex_back</span><span class="op">)</span></span>
-<span><span class="co">#&gt;   #FF6B6B   #4ECDC4   #45B7D1 </span></span>
-<span><span class="co">#&gt; "#FF6B6B" "#4ECDC4" "#45B7D1"</span></span>
-<span></span>
-<span><span class="co"># Verify round-trip conversion</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="st">"\nRound-trip verification:\n"</span><span class="op">)</span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; Round-trip verification:</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span></span>
-<span>  Original <span class="op">=</span> <span class="va">hex_colors</span>,</span>
-<span>  Converted <span class="op">=</span> <span class="va">hex_back</span>,</span>
-<span>  Match <span class="op">=</span> <span class="va">hex_colors</span> <span class="op">==</span> <span class="va">hex_back</span></span>
-<span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="co">#&gt;         Original Converted Match</span></span>
-<span><span class="co">#&gt; #FF6B6B  #FF6B6B   #FF6B6B  TRUE</span></span>
-<span><span class="co">#&gt; #4ECDC4  #4ECDC4   #4ECDC4  TRUE</span></span>
-<span><span class="co">#&gt; #45B7D1  #45B7D1   #45B7D1  TRUE</span></span></code></pre></div>
+<span><span class="co">#&gt; RGB to HEX:</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste</a></span><span class="op">(</span><span class="va">hex_back</span>, collapse <span class="op">=</span> <span class="st">", "</span><span class="op">)</span>, <span class="st">"\n"</span><span class="op">)</span></span>
+<span><span class="co">#&gt; #FF6B6B, #4ECDC4, #45B7D1</span></span></code></pre></div>
 </div>
 </div>
 <div class="section level3">
-<h3 id="practical-applications-in-visualization">📊 Practical Applications in Visualization<a class="anchor" aria-label="anchor" href="#practical-applications-in-visualization"></a>
+<h3 id="compile-palettes">4. Compile Palettes<a class="anchor" aria-label="anchor" href="#compile-palettes"></a>
 </h3>
-<div class="section level4">
-<h4 id="qualitative-palettes-for-categorical-data">Qualitative Palettes for Categorical Data<a class="anchor" aria-label="anchor" href="#qualitative-palettes-for-categorical-data"></a>
-</h4>
+<p>After creating or modifying palette JSON files, compile them into the
+fast-loading RDS format:</p>
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Compile all palettes from JSON to palettes.rds</span></span>
+<span><span class="fu"><a href="../reference/compile_palettes.html">compile_palettes</a></span><span class="op">(</span></span>
+<span>  palettes_dir <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"extdata"</span>, <span class="st">"palettes"</span>, package <span class="op">=</span> <span class="st">"evanverse"</span><span class="op">)</span>,</span>
+<span>  output_rds <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"extdata"</span>, <span class="st">"palettes.rds"</span>, package <span class="op">=</span> <span class="st">"evanverse"</span><span class="op">)</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Test the new palette</span></span>
+<span><span class="fu"><a href="../reference/get_palette.html">get_palette</a></span><span class="op">(</span><span class="st">"qual_ocean"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="../reference/preview_palette.html">preview_palette</a></span><span class="op">(</span><span class="st">"qual_ocean"</span>, type <span class="op">=</span> <span class="st">"qualitative"</span><span class="op">)</span></span></code></pre></div>
+<div class="section level4">
+<h4 id="workflow-summary">Workflow Summary<a class="anchor" aria-label="anchor" href="#workflow-summary"></a>
+</h4>
+<pre><code>1. CREATE     → create_palette() saves JSON file
+                ↓
+2. COMPILE    → compile_palettes() builds palettes.rds
+                ↓
+3. USE        → get_palette() loads from palettes.rds</code></pre>
+<hr>
+</div>
+</div>
+</div>
+<div class="section level2">
+<h2 id="practical-applications">Practical Applications<a class="anchor" aria-label="anchor" href="#practical-applications"></a>
+</h2>
+<div class="section level3">
+<h3 id="qualitative-categorical-data">Qualitative: Categorical Data<a class="anchor" aria-label="anchor" href="#qualitative-categorical-data"></a>
+</h3>
+<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Sample categorical data</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed</a></span><span class="op">(</span><span class="fl">123</span><span class="op">)</span></span>
 <span><span class="va">category_data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span></span>
 <span>  Group <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="va">LETTERS</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">5</span><span class="op">]</span>, each <span class="op">=</span> <span class="fl">20</span><span class="op">)</span>,</span>
 <span>  Value <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Normal.html" class="external-link">rnorm</a></span><span class="op">(</span><span class="fl">20</span>, <span class="fl">10</span>, <span class="fl">2</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html" class="external-link">rnorm</a></span><span class="op">(</span><span class="fl">20</span>, <span class="fl">15</span>, <span class="fl">3</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html" class="external-link">rnorm</a></span><span class="op">(</span><span class="fl">20</span>, <span class="fl">12</span>, <span class="fl">2.5</span><span class="op">)</span>,</span>
-<span>            <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html" class="external-link">rnorm</a></span><span class="op">(</span><span class="fl">20</span>, <span class="fl">18</span>, <span class="fl">4</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html" class="external-link">rnorm</a></span><span class="op">(</span><span class="fl">20</span>, <span class="fl">8</span>, <span class="fl">1.5</span><span class="op">)</span><span class="op">)</span>,</span>
-<span>  Type <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sample.html" class="external-link">sample</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Control"</span>, <span class="st">"Treatment"</span><span class="op">)</span>, <span class="fl">100</span>, replace <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span>            <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html" class="external-link">rnorm</a></span><span class="op">(</span><span class="fl">20</span>, <span class="fl">18</span>, <span class="fl">4</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html" class="external-link">rnorm</a></span><span class="op">(</span><span class="fl">20</span>, <span class="fl">8</span>, <span class="fl">1.5</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="op">)</span></span>
 <span></span>
-<span><span class="co"># Use qualitative palette for groups</span></span>
-<span><span class="va">qual_colors</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_palette.html">get_palette</a></span><span class="op">(</span><span class="st">"vividset"</span>, type <span class="op">=</span> <span class="st">"qualitative"</span>, n <span class="op">=</span> <span class="fl">5</span><span class="op">)</span></span>
-<span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> Loaded palette <span style="color: #0000BB;">"vividset"</span> (<span style="color: #0000BB;">"qualitative"</span>), <span style="color: #0000BB;">9</span> colors</span></span>
+<span><span class="co"># Use qualitative palette</span></span>
+<span><span class="va">qual_colors</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_palette.html">get_palette</a></span><span class="op">(</span><span class="st">"qual_vivid"</span>, type <span class="op">=</span> <span class="st">"qualitative"</span>, n <span class="op">=</span> <span class="fl">5</span><span class="op">)</span></span>
 <span></span>
-<span><span class="va">p1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="va">category_data</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">Group</span>, y <span class="op">=</span> <span class="va">Value</span>, fill <span class="op">=</span> <span class="va">Group</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="va">category_data</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">Group</span>, y <span class="op">=</span> <span class="va">Value</span>, fill <span class="op">=</span> <span class="va">Group</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_boxplot.html" class="external-link">geom_boxplot</a></span><span class="op">(</span>alpha <span class="op">=</span> <span class="fl">0.8</span>, outlier.alpha <span class="op">=</span> <span class="fl">0.6</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_manual.html" class="external-link">scale_fill_manual</a></span><span class="op">(</span>values <span class="op">=</span> <span class="va">qual_colors</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">labs</a></span><span class="op">(</span></span>
 <span>    title <span class="op">=</span> <span class="st">"Qualitative Palette: Group Comparison"</span>,</span>
-<span>    subtitle <span class="op">=</span> <span class="st">"Using vividset palette for categorical data"</span>,</span>
+<span>    subtitle <span class="op">=</span> <span class="st">"Using qual_vivid for categorical groups"</span>,</span>
 <span>    x <span class="op">=</span> <span class="st">"Experimental Group"</span>,</span>
 <span>    y <span class="op">=</span> <span class="st">"Measured Value"</span></span>
 <span>  <span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html" class="external-link">theme_minimal</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html" class="external-link">theme</a></span><span class="op">(</span></span>
-<span>    legend.position <span class="op">=</span> <span class="st">"none"</span>,</span>
-<span>    plot.title <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html" class="external-link">element_text</a></span><span class="op">(</span>size <span class="op">=</span> <span class="fl">14</span>, face <span class="op">=</span> <span class="st">"bold"</span>, color <span class="op">=</span> <span class="st">"#0D47A1"</span><span class="op">)</span>,</span>
-<span>    plot.subtitle <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html" class="external-link">element_text</a></span><span class="op">(</span>size <span class="op">=</span> <span class="fl">11</span>, color <span class="op">=</span> <span class="st">"#666666"</span><span class="op">)</span></span>
-<span>  <span class="op">)</span></span>
-<span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">p1</span><span class="op">)</span></span></code></pre></div>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html" class="external-link">theme</a></span><span class="op">(</span>legend.position <span class="op">=</span> <span class="st">"none"</span><span class="op">)</span></span></code></pre></div>
 <div class="figure">
-<img src="color-palettes_files/figure-html/qual-demo-1.png" alt="Demonstration of qualitative palettes for categorical data visualization" width="100%"><p class="caption">
-Demonstration of qualitative palettes for categorical data visualization
+<img src="color-palettes_files/figure-html/qual-example-1.png" alt="Qualitative palette for categorical group comparison" width="100%"><p class="caption">
+Qualitative palette for categorical group comparison
 </p>
-</div>
-</div>
-<div class="section level4">
-<h4 id="sequential-palettes-for-continuous-data">Sequential Palettes for Continuous Data<a class="anchor" aria-label="anchor" href="#sequential-palettes-for-continuous-data"></a>
-</h4>
-<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># Generate correlation matrix data</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed</a></span><span class="op">(</span><span class="fl">456</span><span class="op">)</span></span>
-<span><span class="va">vars</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="st">"Var"</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">8</span><span class="op">)</span></span>
-<span><span class="va">cor_matrix</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/cor.html" class="external-link">cor</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Normal.html" class="external-link">rnorm</a></span><span class="op">(</span><span class="fl">8</span> <span class="op">*</span> <span class="fl">50</span><span class="op">)</span>, ncol <span class="op">=</span> <span class="fl">8</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/colnames.html" class="external-link">colnames</a></span><span class="op">(</span><span class="va">cor_matrix</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/colnames.html" class="external-link">rownames</a></span><span class="op">(</span><span class="va">cor_matrix</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="va">vars</span></span>
-<span></span>
-<span><span class="co"># Convert to long format for ggplot</span></span>
-<span><span class="va">cor_long</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/expand.grid.html" class="external-link">expand.grid</a></span><span class="op">(</span>X <span class="op">=</span> <span class="va">vars</span>, Y <span class="op">=</span> <span class="va">vars</span><span class="op">)</span></span>
-<span><span class="va">cor_long</span><span class="op">$</span><span class="va">Correlation</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/vector.html" class="external-link">as.vector</a></span><span class="op">(</span><span class="va">cor_matrix</span><span class="op">)</span></span>
-<span></span>
-<span><span class="co"># Use sequential palette</span></span>
-<span><span class="va">seq_colors</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_palette.html">get_palette</a></span><span class="op">(</span><span class="st">"ggsci_locuszoom"</span>, type <span class="op">=</span> <span class="st">"sequential"</span>, n <span class="op">=</span> <span class="fl">7</span><span class="op">)</span></span>
-<span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> Loaded palette <span style="color: #0000BB;">"ggsci_locuszoom"</span> (<span style="color: #0000BB;">"sequential"</span>), <span style="color: #0000BB;">7</span> colors</span></span>
-<span></span>
-<span><span class="va">p2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="va">cor_long</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">X</span>, y <span class="op">=</span> <span class="va">Y</span>, fill <span class="op">=</span> <span class="va">Correlation</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_tile.html" class="external-link">geom_tile</a></span><span class="op">(</span>color <span class="op">=</span> <span class="st">"white"</span>, size <span class="op">=</span> <span class="fl">0.5</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_gradient.html" class="external-link">scale_fill_gradientn</a></span><span class="op">(</span></span>
-<span>    colors <span class="op">=</span> <span class="va">seq_colors</span>,</span>
-<span>    name <span class="op">=</span> <span class="st">"Correlation"</span>,</span>
-<span>    limits <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="op">-</span><span class="fl">1</span>, <span class="fl">1</span><span class="op">)</span>,</span>
-<span>    breaks <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq</a></span><span class="op">(</span><span class="op">-</span><span class="fl">1</span>, <span class="fl">1</span>, <span class="fl">0.5</span><span class="op">)</span>,</span>
-<span>    labels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"-1.0"</span>, <span class="st">"-0.5"</span>, <span class="st">"0.0"</span>, <span class="st">"0.5"</span>, <span class="st">"1.0"</span><span class="op">)</span></span>
-<span>  <span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">labs</a></span><span class="op">(</span></span>
-<span>    title <span class="op">=</span> <span class="st">"Sequential Palette: Correlation Heatmap"</span>,</span>
-<span>    subtitle <span class="op">=</span> <span class="st">"Using ggsci_locuszoom palette for continuous correlation data"</span>,</span>
-<span>    x <span class="op">=</span> <span class="st">"Variables"</span>,</span>
-<span>    y <span class="op">=</span> <span class="st">"Variables"</span></span>
-<span>  <span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html" class="external-link">theme_minimal</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html" class="external-link">theme</a></span><span class="op">(</span></span>
-<span>    axis.text.x <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html" class="external-link">element_text</a></span><span class="op">(</span>angle <span class="op">=</span> <span class="fl">45</span>, hjust <span class="op">=</span> <span class="fl">1</span><span class="op">)</span>,</span>
-<span>    plot.title <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html" class="external-link">element_text</a></span><span class="op">(</span>size <span class="op">=</span> <span class="fl">14</span>, face <span class="op">=</span> <span class="st">"bold"</span>, color <span class="op">=</span> <span class="st">"#0D47A1"</span><span class="op">)</span>,</span>
-<span>    plot.subtitle <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html" class="external-link">element_text</a></span><span class="op">(</span>size <span class="op">=</span> <span class="fl">11</span>, color <span class="op">=</span> <span class="st">"#666666"</span><span class="op">)</span>,</span>
-<span>    panel.grid <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html" class="external-link">element_blank</a></span><span class="op">(</span><span class="op">)</span></span>
-<span>  <span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/coord_fixed.html" class="external-link">coord_fixed</a></span><span class="op">(</span><span class="op">)</span></span>
-<span><span class="co">#&gt; Warning: Using `size` aesthetic for lines was deprecated in ggplot2 3.4.0.</span></span>
-<span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> Please use `linewidth` instead.</span></span>
-<span><span class="co">#&gt; <span style="color: #555555;">This warning is displayed once every 8 hours.</span></span></span>
-<span><span class="co">#&gt; <span style="color: #555555;">Call `lifecycle::last_lifecycle_warnings()` to see where this warning was</span></span></span>
-<span><span class="co">#&gt; <span style="color: #555555;">generated.</span></span></span>
-<span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">p2</span><span class="op">)</span></span></code></pre></div>
-<div class="figure">
-<img src="color-palettes_files/figure-html/seq-demo-1.png" alt="Sequential palette demonstration with heatmap-style visualization" width="100%"><p class="caption">
-Sequential palette demonstration with heatmap-style visualization
-</p>
-</div>
-</div>
-<div class="section level4">
-<h4 id="diverging-palettes-for-centered-data">Diverging Palettes for Centered Data<a class="anchor" aria-label="anchor" href="#diverging-palettes-for-centered-data"></a>
-</h4>
-<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># Generate data with meaningful center (e.g., fold changes)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed</a></span><span class="op">(</span><span class="fl">789</span><span class="op">)</span></span>
-<span><span class="va">gene_data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span></span>
-<span>  Gene <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="st">"Gene_"</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">25</span><span class="op">)</span>,</span>
-<span>  LogFoldChange <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html" class="external-link">rnorm</a></span><span class="op">(</span><span class="fl">25</span>, <span class="fl">0</span>, <span class="fl">1.5</span><span class="op">)</span>,</span>
-<span>  Sample <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="st">"Sample_"</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">5</span><span class="op">)</span>, each <span class="op">=</span> <span class="fl">5</span><span class="op">)</span></span>
-<span><span class="op">)</span></span>
-<span></span>
-<span><span class="co"># Use diverging palette</span></span>
-<span><span class="va">div_colors</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_palette.html">get_palette</a></span><span class="op">(</span><span class="st">"gradient_rd_bu"</span>, type <span class="op">=</span> <span class="st">"diverging"</span>, n <span class="op">=</span> <span class="fl">11</span><span class="op">)</span></span>
-<span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> Loaded palette <span style="color: #0000BB;">"gradient_rd_bu"</span> (<span style="color: #0000BB;">"diverging"</span>), <span style="color: #0000BB;">11</span> colors</span></span>
-<span></span>
-<span><span class="va">p3</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="va">gene_data</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">Sample</span>, y <span class="op">=</span> <span class="va">Gene</span>, fill <span class="op">=</span> <span class="va">LogFoldChange</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_tile.html" class="external-link">geom_tile</a></span><span class="op">(</span>color <span class="op">=</span> <span class="st">"white"</span>, size <span class="op">=</span> <span class="fl">0.3</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_gradient.html" class="external-link">scale_fill_gradientn</a></span><span class="op">(</span></span>
-<span>    colors <span class="op">=</span> <span class="va">div_colors</span>,</span>
-<span>    name <span class="op">=</span> <span class="st">"Log2 FC"</span>,</span>
-<span>    limits <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="op">-</span><span class="fl">3</span>, <span class="fl">3</span><span class="op">)</span>,</span>
-<span>    breaks <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq</a></span><span class="op">(</span><span class="op">-</span><span class="fl">3</span>, <span class="fl">3</span>, <span class="fl">1.5</span><span class="op">)</span>,</span>
-<span>    labels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"-3"</span>, <span class="st">"-1.5"</span>, <span class="st">"0"</span>, <span class="st">"+1.5"</span>, <span class="st">"+3"</span><span class="op">)</span></span>
-<span>  <span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">labs</a></span><span class="op">(</span></span>
-<span>    title <span class="op">=</span> <span class="st">"Diverging Palette: Gene Expression Changes"</span>,</span>
-<span>    subtitle <span class="op">=</span> <span class="st">"Using red-blue palette for fold change data (centered at 0)"</span>,</span>
-<span>    x <span class="op">=</span> <span class="st">"Sample"</span>,</span>
-<span>    y <span class="op">=</span> <span class="st">"Gene"</span></span>
-<span>  <span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html" class="external-link">theme_minimal</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html" class="external-link">theme</a></span><span class="op">(</span></span>
-<span>    plot.title <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html" class="external-link">element_text</a></span><span class="op">(</span>size <span class="op">=</span> <span class="fl">14</span>, face <span class="op">=</span> <span class="st">"bold"</span>, color <span class="op">=</span> <span class="st">"#0D47A1"</span><span class="op">)</span>,</span>
-<span>    plot.subtitle <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html" class="external-link">element_text</a></span><span class="op">(</span>size <span class="op">=</span> <span class="fl">11</span>, color <span class="op">=</span> <span class="st">"#666666"</span><span class="op">)</span>,</span>
-<span>    panel.grid <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html" class="external-link">element_blank</a></span><span class="op">(</span><span class="op">)</span>,</span>
-<span>    axis.text.y <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html" class="external-link">element_text</a></span><span class="op">(</span>size <span class="op">=</span> <span class="fl">8</span><span class="op">)</span></span>
-<span>  <span class="op">)</span></span>
-<span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">p3</span><span class="op">)</span></span></code></pre></div>
-<div class="figure">
-<img src="color-palettes_files/figure-html/div-demo-1.png" alt="Diverging palette showing data with meaningful center point" width="100%"><p class="caption">
-Diverging palette showing data with meaningful center point
-</p>
-</div>
 </div>
 </div>
 <div class="section level3">
-<h3 id="bioinformatics-specific-applications">🔬 Bioinformatics-Specific Applications<a class="anchor" aria-label="anchor" href="#bioinformatics-specific-applications"></a>
+<h3 id="sequential-continuous-data">Sequential: Continuous Data<a class="anchor" aria-label="anchor" href="#sequential-continuous-data"></a>
 </h3>
-<div class="section level4">
-<h4 id="palette-selection-guidelines">Palette Selection Guidelines<a class="anchor" aria-label="anchor" href="#palette-selection-guidelines"></a>
-</h4>
 <div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="st">"🧬 BIOINFORMATICS PALETTE GUIDELINES\n"</span><span class="op">)</span></span>
-<span><span class="co">#&gt; 🧬 BIOINFORMATICS PALETTE GUIDELINES</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="st">"=====================================\n\n"</span><span class="op">)</span></span>
-<span><span class="co">#&gt; =====================================</span></span>
+<code class="sourceCode R"><span><span class="co"># Generate expression matrix</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed</a></span><span class="op">(</span><span class="fl">456</span><span class="op">)</span></span>
+<span><span class="va">genes</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="st">"Gene"</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">10</span><span class="op">)</span></span>
+<span><span class="va">samples</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="st">"S"</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">8</span><span class="op">)</span></span>
+<span><span class="va">expr_matrix</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Normal.html" class="external-link">rnorm</a></span><span class="op">(</span><span class="fl">80</span>, mean <span class="op">=</span> <span class="fl">5</span>, sd <span class="op">=</span> <span class="fl">2</span><span class="op">)</span>, nrow <span class="op">=</span> <span class="fl">10</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/colnames.html" class="external-link">rownames</a></span><span class="op">(</span><span class="va">expr_matrix</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="va">genes</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/colnames.html" class="external-link">colnames</a></span><span class="op">(</span><span class="va">expr_matrix</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="va">samples</span></span>
 <span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="st">"📊 For Gene Expression Data:\n"</span><span class="op">)</span></span>
-<span><span class="co">#&gt; 📊 For Gene Expression Data:</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="st">"  • Sequential: Use 'blues', 'greens', or 'oranges'\n"</span><span class="op">)</span></span>
-<span><span class="co">#&gt;   • Sequential: Use 'blues', 'greens', or 'oranges'</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="st">"  • Diverging: Use 'gradient_rd_bu' or 'earthy_diverge' for fold changes\n\n"</span><span class="op">)</span></span>
-<span><span class="co">#&gt;   • Diverging: Use 'gradient_rd_bu' or 'earthy_diverge' for fold changes</span></span>
+<span><span class="co"># Convert to long format</span></span>
+<span><span class="va">expr_long</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/expand.grid.html" class="external-link">expand.grid</a></span><span class="op">(</span>Gene <span class="op">=</span> <span class="va">genes</span>, Sample <span class="op">=</span> <span class="va">samples</span><span class="op">)</span></span>
+<span><span class="va">expr_long</span><span class="op">$</span><span class="va">Expression</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/vector.html" class="external-link">as.vector</a></span><span class="op">(</span><span class="va">expr_matrix</span><span class="op">)</span></span>
 <span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="st">"🔬 For Pathway Analysis:\n"</span><span class="op">)</span></span>
-<span><span class="co">#&gt; 🔬 For Pathway Analysis:</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="st">"  • Qualitative: Use 'vividset' or 'softpastel' for pathways\n"</span><span class="op">)</span></span>
-<span><span class="co">#&gt;   • Qualitative: Use 'vividset' or 'softpastel' for pathways</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="st">"  • Sequential: Use 'purples' for p-value gradients\n\n"</span><span class="op">)</span></span>
-<span><span class="co">#&gt;   • Sequential: Use 'purples' for p-value gradients</span></span>
+<span><span class="co"># Use sequential palette</span></span>
+<span><span class="va">seq_colors</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_palette.html">get_palette</a></span><span class="op">(</span><span class="st">"seq_mobility"</span>, type <span class="op">=</span> <span class="st">"sequential"</span><span class="op">)</span></span>
 <span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="st">"🎯 For Multi-omics Data:\n"</span><span class="op">)</span></span>
-<span><span class="co">#&gt; 🎯 For Multi-omics Data:</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="st">"  • Qualitative: Use 'brightcontrast' for distinct data types\n"</span><span class="op">)</span></span>
-<span><span class="co">#&gt;   • Qualitative: Use 'brightcontrast' for distinct data types</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="st">"  • Avoid red/green combinations for colorblind accessibility\n\n"</span><span class="op">)</span></span>
-<span><span class="co">#&gt;   • Avoid red/green combinations for colorblind accessibility</span></span>
-<span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="st">"📈 For Time Course Data:\n"</span><span class="op">)</span></span>
-<span><span class="co">#&gt; 📈 For Time Course Data:</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="st">"  • Sequential: Use 'blues' or 'teals' for temporal progression\n"</span><span class="op">)</span></span>
-<span><span class="co">#&gt;   • Sequential: Use 'blues' or 'teals' for temporal progression</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="st">"  • Qualitative: Use 'vividset' for treatment groups\n"</span><span class="op">)</span></span>
-<span><span class="co">#&gt;   • Qualitative: Use 'vividset' for treatment groups</span></span></code></pre></div>
+<span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="va">expr_long</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">Sample</span>, y <span class="op">=</span> <span class="va">Gene</span>, fill <span class="op">=</span> <span class="va">Expression</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_tile.html" class="external-link">geom_tile</a></span><span class="op">(</span>color <span class="op">=</span> <span class="st">"white"</span>, linewidth <span class="op">=</span> <span class="fl">0.5</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_gradient.html" class="external-link">scale_fill_gradientn</a></span><span class="op">(</span></span>
+<span>    colors <span class="op">=</span> <span class="va">seq_colors</span>,</span>
+<span>    name <span class="op">=</span> <span class="st">"Expression"</span></span>
+<span>  <span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">labs</a></span><span class="op">(</span></span>
+<span>    title <span class="op">=</span> <span class="st">"Sequential Palette: Gene Expression Heatmap"</span>,</span>
+<span>    subtitle <span class="op">=</span> <span class="st">"Using seq_blues for continuous expression data"</span></span>
+<span>  <span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html" class="external-link">theme_minimal</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html" class="external-link">theme</a></span><span class="op">(</span>panel.grid <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html" class="external-link">element_blank</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<div class="figure">
+<img src="color-palettes_files/figure-html/seq-example-1.png" alt="Sequential palette for continuous heatmap data" width="100%"><p class="caption">
+Sequential palette for continuous heatmap data
+</p>
 </div>
-<div class="section level4">
-<h4 id="example-multi-omics-visualization">Example: Multi-omics Visualization<a class="anchor" aria-label="anchor" href="#example-multi-omics-visualization"></a>
-</h4>
+</div>
+<div class="section level3">
+<h3 id="diverging-centered-data">Diverging: Centered Data<a class="anchor" aria-label="anchor" href="#diverging-centered-data"></a>
+</h3>
 <div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># Simulate multi-omics data</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed</a></span><span class="op">(</span><span class="fl">321</span><span class="op">)</span></span>
-<span><span class="va">multiomics_data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span></span>
-<span>  Sample <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="st">"Patient_"</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">12</span><span class="op">)</span>, each <span class="op">=</span> <span class="fl">4</span><span class="op">)</span>,</span>
-<span>  DataType <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"RNA-seq"</span>, <span class="st">"Proteomics"</span>, <span class="st">"Metabolomics"</span>, <span class="st">"Methylation"</span><span class="op">)</span>, <span class="fl">12</span><span class="op">)</span>,</span>
-<span>  Intensity <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span></span>
-<span>    <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html" class="external-link">rnorm</a></span><span class="op">(</span><span class="fl">12</span>, <span class="fl">100</span>, <span class="fl">20</span><span class="op">)</span>,  <span class="co"># RNA-seq</span></span>
-<span>    <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html" class="external-link">rnorm</a></span><span class="op">(</span><span class="fl">12</span>, <span class="fl">50</span>, <span class="fl">15</span><span class="op">)</span>,   <span class="co"># Proteomics</span></span>
-<span>    <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html" class="external-link">rnorm</a></span><span class="op">(</span><span class="fl">12</span>, <span class="fl">25</span>, <span class="fl">8</span><span class="op">)</span>,    <span class="co"># Metabolomics</span></span>
-<span>    <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html" class="external-link">rnorm</a></span><span class="op">(</span><span class="fl">12</span>, <span class="fl">75</span>, <span class="fl">12</span><span class="op">)</span>    <span class="co"># Methylation</span></span>
-<span>  <span class="op">)</span>,</span>
-<span>  Condition <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Control"</span>, <span class="st">"Disease"</span><span class="op">)</span>, each <span class="op">=</span> <span class="fl">6</span><span class="op">)</span>, <span class="fl">4</span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="co"># Generate fold change data</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed</a></span><span class="op">(</span><span class="fl">789</span><span class="op">)</span></span>
+<span><span class="va">fc_data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span></span>
+<span>  Gene <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="st">"Gene_"</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">20</span><span class="op">)</span>,</span>
+<span>  LogFC <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html" class="external-link">rnorm</a></span><span class="op">(</span><span class="fl">20</span>, <span class="fl">0</span>, <span class="fl">1.2</span><span class="op">)</span>,</span>
+<span>  Sample <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="st">"Sample_"</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">4</span><span class="op">)</span>, each <span class="op">=</span> <span class="fl">5</span><span class="op">)</span></span>
 <span><span class="op">)</span></span>
 <span></span>
-<span><span class="co"># Use distinct qualitative palette for data types</span></span>
-<span><span class="va">omics_colors</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_palette.html">get_palette</a></span><span class="op">(</span><span class="st">"vividset"</span>, type <span class="op">=</span> <span class="st">"qualitative"</span>, n <span class="op">=</span> <span class="fl">4</span><span class="op">)</span></span>
-<span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> Loaded palette <span style="color: #0000BB;">"vividset"</span> (<span style="color: #0000BB;">"qualitative"</span>), <span style="color: #0000BB;">9</span> colors</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/names.html" class="external-link">names</a></span><span class="op">(</span><span class="va">omics_colors</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"RNA-seq"</span>, <span class="st">"Proteomics"</span>, <span class="st">"Metabolomics"</span>, <span class="st">"Methylation"</span><span class="op">)</span></span>
+<span><span class="co"># Use diverging palette</span></span>
+<span><span class="va">div_colors</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_palette.html">get_palette</a></span><span class="op">(</span><span class="st">"div_fireice"</span>, type <span class="op">=</span> <span class="st">"diverging"</span><span class="op">)</span></span>
 <span></span>
-<span><span class="va">p4</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="va">multiomics_data</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">Sample</span>, y <span class="op">=</span> <span class="va">Intensity</span>, fill <span class="op">=</span> <span class="va">DataType</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_bar.html" class="external-link">geom_bar</a></span><span class="op">(</span>stat <span class="op">=</span> <span class="st">"identity"</span>, position <span class="op">=</span> <span class="st">"dodge"</span>, alpha <span class="op">=</span> <span class="fl">0.8</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_manual.html" class="external-link">scale_fill_manual</a></span><span class="op">(</span>values <span class="op">=</span> <span class="va">omics_colors</span>, name <span class="op">=</span> <span class="st">"Data Type"</span><span class="op">)</span> <span class="op">+</span></span>
+<span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="va">fc_data</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">Sample</span>, y <span class="op">=</span> <span class="va">Gene</span>, fill <span class="op">=</span> <span class="va">LogFC</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_tile.html" class="external-link">geom_tile</a></span><span class="op">(</span>color <span class="op">=</span> <span class="st">"white"</span>, linewidth <span class="op">=</span> <span class="fl">0.3</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_gradient.html" class="external-link">scale_fill_gradientn</a></span><span class="op">(</span></span>
+<span>    colors <span class="op">=</span> <span class="va">div_colors</span>,</span>
+<span>    name <span class="op">=</span> <span class="st">"Log2 FC"</span>,</span>
+<span>    limits <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="op">-</span><span class="fl">3</span>, <span class="fl">3</span><span class="op">)</span></span>
+<span>  <span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">labs</a></span><span class="op">(</span></span>
+<span>    title <span class="op">=</span> <span class="st">"Diverging Palette: Fold Changes"</span>,</span>
+<span>    subtitle <span class="op">=</span> <span class="st">"Using div_fireice for centered data (zero midpoint)"</span></span>
+<span>  <span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html" class="external-link">theme_minimal</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html" class="external-link">theme</a></span><span class="op">(</span>panel.grid <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html" class="external-link">element_blank</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<div class="figure">
+<img src="color-palettes_files/figure-html/div-example-1.png" alt="Diverging palette for fold change data" width="100%"><p class="caption">
+Diverging palette for fold change data
+</p>
+</div>
+<hr>
+</div>
+</div>
+<div class="section level2">
+<h2 id="bioinformatics-applications">Bioinformatics Applications<a class="anchor" aria-label="anchor" href="#bioinformatics-applications"></a>
+</h2>
+<div class="section level3">
+<h3 id="palette-selection-guide">Palette Selection Guide<a class="anchor" aria-label="anchor" href="#palette-selection-guide"></a>
+</h3>
+<div class="section level4">
+<h4 id="by-data-type">By Data Type<a class="anchor" aria-label="anchor" href="#by-data-type"></a>
+</h4>
+<p><strong>Gene Expression</strong> - Sequential:
+<code>seq_blues</code>, <code>seq_forest</code> for one-directional
+intensity - Diverging: <code>div_fireice</code>, <code>div_sunset</code>
+for fold changes</p>
+<p><strong>Single-Cell Data</strong> - Qualitative:
+<code>qual_pbmc_sc</code> for cell types - Sequential:
+<code>seq_muted</code> for UMAP/tSNE features</p>
+<p><strong>Pathway Analysis</strong> - Qualitative:
+<code>qual_vivid</code>, <code>qual_pastel</code> for pathways -
+Sequential: <code>seq_blues</code> for p-value gradients</p>
+<p><strong>Multi-omics</strong> - Qualitative: <code>qual_vivid</code>
+for distinct data types - Avoid red/green for colorblind
+accessibility</p>
+</div>
+</div>
+<div class="section level3">
+<h3 id="multi-omics-example">Multi-omics Example<a class="anchor" aria-label="anchor" href="#multi-omics-example"></a>
+</h3>
+<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Simulate multi-omics data</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed</a></span><span class="op">(</span><span class="fl">321</span><span class="op">)</span></span>
+<span><span class="va">omics_data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span></span>
+<span>  Sample <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="st">"P"</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">8</span><span class="op">)</span>, each <span class="op">=</span> <span class="fl">3</span><span class="op">)</span>,</span>
+<span>  DataType <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Transcriptome"</span>, <span class="st">"Proteome"</span>, <span class="st">"Metabolome"</span><span class="op">)</span>, <span class="fl">8</span><span class="op">)</span>,</span>
+<span>  Intensity <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span></span>
+<span>    <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html" class="external-link">rnorm</a></span><span class="op">(</span><span class="fl">8</span>, <span class="fl">100</span>, <span class="fl">20</span><span class="op">)</span>,  <span class="co"># Transcriptome</span></span>
+<span>    <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html" class="external-link">rnorm</a></span><span class="op">(</span><span class="fl">8</span>, <span class="fl">50</span>, <span class="fl">15</span><span class="op">)</span>,   <span class="co"># Proteome</span></span>
+<span>    <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html" class="external-link">rnorm</a></span><span class="op">(</span><span class="fl">8</span>, <span class="fl">25</span>, <span class="fl">8</span><span class="op">)</span>     <span class="co"># Metabolome</span></span>
+<span>  <span class="op">)</span>,</span>
+<span>  Condition <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Control"</span>, <span class="st">"Treatment"</span><span class="op">)</span>, each <span class="op">=</span> <span class="fl">4</span><span class="op">)</span>, <span class="fl">3</span><span class="op">)</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Use qualitative palette for data types</span></span>
+<span><span class="va">omics_colors</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_palette.html">get_palette</a></span><span class="op">(</span><span class="st">"qual_vivid"</span>, type <span class="op">=</span> <span class="st">"qualitative"</span>, n <span class="op">=</span> <span class="fl">3</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/names.html" class="external-link">names</a></span><span class="op">(</span><span class="va">omics_colors</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Transcriptome"</span>, <span class="st">"Proteome"</span>, <span class="st">"Metabolome"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="va">omics_data</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">Sample</span>, y <span class="op">=</span> <span class="va">Intensity</span>, fill <span class="op">=</span> <span class="va">DataType</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_bar.html" class="external-link">geom_bar</a></span><span class="op">(</span>stat <span class="op">=</span> <span class="st">"identity"</span>, position <span class="op">=</span> <span class="st">"dodge"</span>, alpha <span class="op">=</span> <span class="fl">0.85</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_manual.html" class="external-link">scale_fill_manual</a></span><span class="op">(</span>values <span class="op">=</span> <span class="va">omics_colors</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/facet_wrap.html" class="external-link">facet_wrap</a></span><span class="op">(</span><span class="op">~</span><span class="va">Condition</span>, scales <span class="op">=</span> <span class="st">"free_x"</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">labs</a></span><span class="op">(</span></span>
 <span>    title <span class="op">=</span> <span class="st">"Multi-omics Data Integration"</span>,</span>
-<span>    subtitle <span class="op">=</span> <span class="st">"Using qualitative palette to distinguish data types"</span>,</span>
+<span>    subtitle <span class="op">=</span> <span class="st">"Using qual_vivid to distinguish omics layers"</span>,</span>
 <span>    x <span class="op">=</span> <span class="st">"Patient Samples"</span>,</span>
 <span>    y <span class="op">=</span> <span class="st">"Normalized Intensity"</span></span>
 <span>  <span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html" class="external-link">theme_minimal</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html" class="external-link">theme</a></span><span class="op">(</span></span>
-<span>    axis.text.x <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html" class="external-link">element_text</a></span><span class="op">(</span>angle <span class="op">=</span> <span class="fl">45</span>, hjust <span class="op">=</span> <span class="fl">1</span>, size <span class="op">=</span> <span class="fl">8</span><span class="op">)</span>,</span>
-<span>    plot.title <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html" class="external-link">element_text</a></span><span class="op">(</span>size <span class="op">=</span> <span class="fl">14</span>, face <span class="op">=</span> <span class="st">"bold"</span>, color <span class="op">=</span> <span class="st">"#0D47A1"</span><span class="op">)</span>,</span>
-<span>    plot.subtitle <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html" class="external-link">element_text</a></span><span class="op">(</span>size <span class="op">=</span> <span class="fl">11</span>, color <span class="op">=</span> <span class="st">"#666666"</span><span class="op">)</span>,</span>
-<span>    legend.position <span class="op">=</span> <span class="st">"bottom"</span>,</span>
-<span>    strip.background <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html" class="external-link">element_rect</a></span><span class="op">(</span>fill <span class="op">=</span> <span class="st">"#E3F2FD"</span>, color <span class="op">=</span> <span class="cn">NA</span><span class="op">)</span></span>
-<span>  <span class="op">)</span></span>
-<span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">p4</span><span class="op">)</span></span></code></pre></div>
+<span>    axis.text.x <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html" class="external-link">element_text</a></span><span class="op">(</span>angle <span class="op">=</span> <span class="fl">45</span>, hjust <span class="op">=</span> <span class="fl">1</span>, size <span class="op">=</span> <span class="fl">9</span><span class="op">)</span>,</span>
+<span>    legend.position <span class="op">=</span> <span class="st">"bottom"</span></span>
+<span>  <span class="op">)</span></span></code></pre></div>
 <div class="figure">
-<img src="color-palettes_files/figure-html/multiomics-demo-1.png" alt="Multi-omics data visualization using appropriate color palettes" width="100%"><p class="caption">
-Multi-omics data visualization using appropriate color palettes
+<img src="color-palettes_files/figure-html/multiomics-example-1.png" alt="Multi-omics visualization with appropriate palette selection" width="100%"><p class="caption">
+Multi-omics visualization with appropriate palette selection
 </p>
 </div>
+<hr>
 </div>
 </div>
+<div class="section level2">
+<h2 id="advanced-techniques">Advanced Techniques<a class="anchor" aria-label="anchor" href="#advanced-techniques"></a>
+</h2>
 <div class="section level3">
-<h3 id="advanced-palette-techniques">🎨 Advanced Palette Techniques<a class="anchor" aria-label="anchor" href="#advanced-palette-techniques"></a>
+<h3 id="color-interpolation">Color Interpolation<a class="anchor" aria-label="anchor" href="#color-interpolation"></a>
 </h3>
-<div class="section level4">
-<h4 id="palette-interpolation-and-blending">Palette Interpolation and Blending<a class="anchor" aria-label="anchor" href="#palette-interpolation-and-blending"></a>
-</h4>
-<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># Create custom gradient using palette interpolation</span></span>
-<span><span class="va">base_colors</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_palette.html">get_palette</a></span><span class="op">(</span><span class="st">"vividset"</span>, type <span class="op">=</span> <span class="st">"qualitative"</span>, n <span class="op">=</span> <span class="fl">3</span><span class="op">)</span></span>
-<span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> Loaded palette <span style="color: #0000BB;">"vividset"</span> (<span style="color: #0000BB;">"qualitative"</span>), <span style="color: #0000BB;">9</span> colors</span></span>
+<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Get base colors from qualitative palette</span></span>
+<span><span class="va">base_colors</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_palette.html">get_palette</a></span><span class="op">(</span><span class="st">"qual_vivid"</span>, type <span class="op">=</span> <span class="st">"qualitative"</span>, n <span class="op">=</span> <span class="fl">3</span><span class="op">)</span></span>
 <span></span>
-<span><span class="co"># Manual interpolation demonstration</span></span>
+<span><span class="co"># Interpolate to create smooth gradient</span></span>
 <span><span class="va">custom_gradient</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/grDevices/colorRamp.html" class="external-link">colorRampPalette</a></span><span class="op">(</span><span class="va">base_colors</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">2</span><span class="op">]</span><span class="op">)</span><span class="op">(</span><span class="fl">10</span><span class="op">)</span></span>
 <span></span>
-<span><span class="co"># Create visualization showing interpolation</span></span>
-<span><span class="va">gradient_demo</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span></span>
+<span><span class="co"># Visualize the gradient</span></span>
+<span><span class="va">gradient_df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span></span>
 <span>  x <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">10</span>,</span>
 <span>  y <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">10</span><span class="op">)</span>,</span>
 <span>  color <span class="op">=</span> <span class="va">custom_gradient</span></span>
 <span><span class="op">)</span></span>
 <span></span>
-<span><span class="va">p5</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="va">gradient_demo</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">x</span>, y <span class="op">=</span> <span class="va">y</span>, fill <span class="op">=</span> <span class="va">color</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="va">gradient_df</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">x</span>, y <span class="op">=</span> <span class="va">y</span>, fill <span class="op">=</span> <span class="va">color</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_tile.html" class="external-link">geom_tile</a></span><span class="op">(</span>height <span class="op">=</span> <span class="fl">0.5</span>, width <span class="op">=</span> <span class="fl">0.9</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_identity.html" class="external-link">scale_fill_identity</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">labs</a></span><span class="op">(</span></span>
 <span>    title <span class="op">=</span> <span class="st">"Custom Color Interpolation"</span>,</span>
-<span>    subtitle <span class="op">=</span> <span class="st">"Creating gradients from qualitative palette colors"</span>,</span>
-<span>    x <span class="op">=</span> <span class="st">"Gradient Position"</span>,</span>
-<span>    y <span class="op">=</span> <span class="st">""</span></span>
+<span>    subtitle <span class="op">=</span> <span class="st">"Creating gradients from qualitative palette colors"</span></span>
 <span>  <span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html" class="external-link">theme_minimal</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html" class="external-link">theme</a></span><span class="op">(</span></span>
-<span>    axis.text.y <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html" class="external-link">element_blank</a></span><span class="op">(</span><span class="op">)</span>,</span>
-<span>    axis.ticks.y <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html" class="external-link">element_blank</a></span><span class="op">(</span><span class="op">)</span>,</span>
-<span>    panel.grid <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html" class="external-link">element_blank</a></span><span class="op">(</span><span class="op">)</span>,</span>
-<span>    plot.title <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html" class="external-link">element_text</a></span><span class="op">(</span>size <span class="op">=</span> <span class="fl">14</span>, face <span class="op">=</span> <span class="st">"bold"</span>, color <span class="op">=</span> <span class="st">"#0D47A1"</span><span class="op">)</span>,</span>
-<span>    plot.subtitle <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html" class="external-link">element_text</a></span><span class="op">(</span>size <span class="op">=</span> <span class="fl">11</span>, color <span class="op">=</span> <span class="st">"#666666"</span><span class="op">)</span></span>
-<span>  <span class="op">)</span></span>
-<span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">p5</span><span class="op">)</span></span></code></pre></div>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html" class="external-link">theme_void</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html" class="external-link">theme</a></span><span class="op">(</span>plot.title <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html" class="external-link">element_text</a></span><span class="op">(</span>hjust <span class="op">=</span> <span class="fl">0.5</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <div class="figure">
-<img src="color-palettes_files/figure-html/advanced-techniques-1.png" alt="Advanced color techniques: interpolation and custom gradients" width="100%"><p class="caption">
-Advanced color techniques: interpolation and custom gradients
+<img src="color-palettes_files/figure-html/interpolation-1.png" alt="Creating custom gradients through color interpolation" width="100%"><p class="caption">
+Creating custom gradients through color interpolation
 </p>
 </div>
-<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span></span>
-<span><span class="co"># Display the gradient colors</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="st">"Custom gradient colors:\n"</span><span class="op">)</span></span>
-<span><span class="co">#&gt; Custom gradient colors:</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">custom_gradient</span><span class="op">)</span></span>
-<span><span class="co">#&gt;  [1] "#E64B35" "#D55746" "#C36358" "#B3706A" "#A27C7C" "#91898D" "#80959F"</span></span>
-<span><span class="co">#&gt;  [8] "#6FA2B1" "#5DAEC3" "#4DBBD5"</span></span></code></pre></div>
-</div>
 </div>
 <div class="section level3">
-<h3 id="best-practices-and-recommendations">📋 Best Practices and Recommendations<a class="anchor" aria-label="anchor" href="#best-practices-and-recommendations"></a>
+<h3 id="palette-combinations">Palette Combinations<a class="anchor" aria-label="anchor" href="#palette-combinations"></a>
 </h3>
-<div class="section level4">
-<h4 id="accessibility-considerations">Accessibility Considerations<a class="anchor" aria-label="anchor" href="#accessibility-considerations"></a>
-</h4>
 <div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="st">"♿ ACCESSIBILITY &amp; BEST PRACTICES\n"</span><span class="op">)</span></span>
-<span><span class="co">#&gt; ♿ ACCESSIBILITY &amp; BEST PRACTICES</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="st">"================================\n\n"</span><span class="op">)</span></span>
-<span><span class="co">#&gt; ================================</span></span>
+<code class="sourceCode R"><span><span class="co"># Combine palettes for complex visualizations</span></span>
+<span><span class="va">main_colors</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_palette.html">get_palette</a></span><span class="op">(</span><span class="st">"qual_vivid"</span>, n <span class="op">=</span> <span class="fl">4</span><span class="op">)</span></span>
+<span><span class="va">accent_color</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_palette.html">get_palette</a></span><span class="op">(</span><span class="st">"div_fireice"</span>, n <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span>
 <span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="st">"🌈 Color Vision Considerations:\n"</span><span class="op">)</span></span>
-<span><span class="co">#&gt; 🌈 Color Vision Considerations:</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="st">"  • Test palettes with colorblind simulators\n"</span><span class="op">)</span></span>
-<span><span class="co">#&gt;   • Test palettes with colorblind simulators</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="st">"  • Avoid relying solely on red/green distinctions\n"</span><span class="op">)</span></span>
-<span><span class="co">#&gt;   • Avoid relying solely on red/green distinctions</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="st">"  • Use high contrast ratios (minimum 3:1)\n"</span><span class="op">)</span></span>
-<span><span class="co">#&gt;   • Use high contrast ratios (minimum 3:1)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="st">"  • Consider texture/pattern alternatives\n\n"</span><span class="op">)</span></span>
-<span><span class="co">#&gt;   • Consider texture/pattern alternatives</span></span>
-<span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="st">"📱 Multi-Platform Compatibility:\n"</span><span class="op">)</span></span>
-<span><span class="co">#&gt; 📱 Multi-Platform Compatibility:</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="st">"  • Test on different displays (mobile, print, projector)\n"</span><span class="op">)</span></span>
-<span><span class="co">#&gt;   • Test on different displays (mobile, print, projector)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="st">"  • Use sufficient color separation for small elements\n"</span><span class="op">)</span></span>
-<span><span class="co">#&gt;   • Use sufficient color separation for small elements</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="st">"  • Consider grayscale conversion compatibility\n\n"</span><span class="op">)</span></span>
-<span><span class="co">#&gt;   • Consider grayscale conversion compatibility</span></span>
-<span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="st">"📊 Data Visualization Guidelines:\n"</span><span class="op">)</span></span>
-<span><span class="co">#&gt; 📊 Data Visualization Guidelines:</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="st">"  • Match palette type to data type (sequential/categorical)\n"</span><span class="op">)</span></span>
-<span><span class="co">#&gt;   • Match palette type to data type (sequential/categorical)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="st">"  • Limit qualitative palettes to 8-10 distinct categories\n"</span><span class="op">)</span></span>
-<span><span class="co">#&gt;   • Limit qualitative palettes to 8-10 distinct categories</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="st">"  • Use consistent color meaning across related plots\n"</span><span class="op">)</span></span>
-<span><span class="co">#&gt;   • Use consistent color meaning across related plots</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="st">"  • Reserve bright colors for important data points\n"</span><span class="op">)</span></span>
-<span><span class="co">#&gt;   • Reserve bright colors for important data points</span></span></code></pre></div>
+<span><span class="co"># Use in multi-layer plots</span></span>
+<span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="va">data</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html" class="external-link">geom_point</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>color <span class="op">=</span> <span class="va">group</span><span class="op">)</span>, size <span class="op">=</span> <span class="fl">3</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_smooth.html" class="external-link">geom_smooth</a></span><span class="op">(</span>color <span class="op">=</span> <span class="va">accent_color</span>, linewidth <span class="op">=</span> <span class="fl">1.5</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_manual.html" class="external-link">scale_color_manual</a></span><span class="op">(</span>values <span class="op">=</span> <span class="va">main_colors</span><span class="op">)</span></span></code></pre></div>
+<hr>
 </div>
-<div class="section level4">
-<h4 id="performance-optimization">Performance Optimization<a class="anchor" aria-label="anchor" href="#performance-optimization"></a>
-</h4>
+</div>
+<div class="section level2">
+<h2 id="best-practices">Best Practices<a class="anchor" aria-label="anchor" href="#best-practices"></a>
+</h2>
+<div class="section level3">
+<h3 id="accessibility-guidelines">Accessibility Guidelines<a class="anchor" aria-label="anchor" href="#accessibility-guidelines"></a>
+</h3>
+<p><strong>Color Vision Deficiency</strong> - Test with colorblind
+simulators - Avoid red/green combinations alone - Use high contrast
+ratios (minimum 3:1) - Add texture/shape variations</p>
+<p><strong>Multi-Platform Compatibility</strong> - Test on different
+displays (mobile, print, projector) - Ensure sufficient color separation
+- Check grayscale conversion</p>
+<p><strong>Data Visualization</strong> - Match palette type to data type
+- Limit qualitative palettes to 8-10 categories - Use consistent colors
+across related plots - Reserve bright colors for emphasis</p>
+</div>
+<div class="section level3">
+<h3 id="performance-tips">Performance Tips<a class="anchor" aria-label="anchor" href="#performance-tips"></a>
+</h3>
 <div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="st">"⚡ PERFORMANCE OPTIMIZATION TIPS\n"</span><span class="op">)</span></span>
-<span><span class="co">#&gt; ⚡ PERFORMANCE OPTIMIZATION TIPS</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="st">"===============================\n\n"</span><span class="op">)</span></span>
-<span><span class="co">#&gt; ===============================</span></span>
+<code class="sourceCode R"><span><span class="co"># ✅ GOOD: Cache palette once</span></span>
+<span><span class="va">my_colors</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_palette.html">get_palette</a></span><span class="op">(</span><span class="st">"qual_vivid"</span>, n <span class="op">=</span> <span class="fl">5</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="va">data</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_manual.html" class="external-link">scale_fill_manual</a></span><span class="op">(</span>values <span class="op">=</span> <span class="va">my_colors</span><span class="op">)</span></span>
 <span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="st">"🚀 Efficient Palette Usage:\n"</span><span class="op">)</span></span>
-<span><span class="co">#&gt; 🚀 Efficient Palette Usage:</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="st">"  • Cache frequently used palettes in variables\n"</span><span class="op">)</span></span>
-<span><span class="co">#&gt;   • Cache frequently used palettes in variables</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="st">"  • Use specific n= parameter to avoid unused colors\n"</span><span class="op">)</span></span>
-<span><span class="co">#&gt;   • Use specific n= parameter to avoid unused colors</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="st">"  • Pre-compile custom palettes for repeated use\n\n"</span><span class="op">)</span></span>
-<span><span class="co">#&gt;   • Pre-compile custom palettes for repeated use</span></span>
-<span></span>
-<span><span class="co"># Demonstrate efficient palette caching</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="st">"Example of efficient palette caching:\n"</span><span class="op">)</span></span>
-<span><span class="co">#&gt; Example of efficient palette caching:</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="st">"# Good: Cache palette once\n"</span><span class="op">)</span></span>
-<span><span class="co">#&gt; # Good: Cache palette once</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="st">"my_colors &lt;- get_palette('vividset', type = 'qualitative', n = 5)\n"</span><span class="op">)</span></span>
-<span><span class="co">#&gt; my_colors &lt;- get_palette('vividset', type = 'qualitative', n = 5)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="st">"# Then reuse: scale_fill_manual(values = my_colors)\n\n"</span><span class="op">)</span></span>
-<span><span class="co">#&gt; # Then reuse: scale_fill_manual(values = my_colors)</span></span>
-<span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="st">"# Avoid: Repeated palette calls\n"</span><span class="op">)</span></span>
-<span><span class="co">#&gt; # Avoid: Repeated palette calls</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="st">"# scale_fill_manual(values = get_palette('vividset', ...))\n"</span><span class="op">)</span></span>
-<span><span class="co">#&gt; # scale_fill_manual(values = get_palette('vividset', ...))</span></span></code></pre></div>
+<span><span class="co"># ❌ AVOID: Repeated calls</span></span>
+<span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="va">data</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_manual.html" class="external-link">scale_fill_manual</a></span><span class="op">(</span>values <span class="op">=</span> <span class="fu"><a href="../reference/get_palette.html">get_palette</a></span><span class="op">(</span><span class="st">"qual_vivid"</span>, n <span class="op">=</span> <span class="fl">5</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<hr>
 </div>
 </div>
+<div class="section level2">
+<h2 id="troubleshooting">Troubleshooting<a class="anchor" aria-label="anchor" href="#troubleshooting"></a>
+</h2>
 <div class="section level3">
-<h3 id="troubleshooting-common-issues">🔧 Troubleshooting Common Issues<a class="anchor" aria-label="anchor" href="#troubleshooting-common-issues"></a>
+<h3 id="common-issues">Common Issues<a class="anchor" aria-label="anchor" href="#common-issues"></a>
 </h3>
-<div class="section level4">
-<h4 id="common-problems-and-solutions">Common Problems and Solutions<a class="anchor" aria-label="anchor" href="#common-problems-and-solutions"></a>
-</h4>
+<p><strong>Palette not found</strong></p>
 <div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="st">"🛠️ TROUBLESHOOTING GUIDE\n"</span><span class="op">)</span></span>
-<span><span class="co">#&gt; 🛠️ TROUBLESHOOTING GUIDE</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="st">"=======================\n\n"</span><span class="op">)</span></span>
-<span><span class="co">#&gt; =======================</span></span>
+<code class="sourceCode R"><span><span class="co"># Check available palettes</span></span>
+<span><span class="fu"><a href="../reference/list_palettes.html">list_palettes</a></span><span class="op">(</span>type <span class="op">=</span> <span class="st">"qualitative"</span><span class="op">)</span></span></code></pre></div>
+<p><strong>Not enough colors</strong></p>
+<div class="sourceCode" id="cb22"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Check palette size</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="fu"><a href="../reference/get_palette.html">get_palette</a></span><span class="op">(</span><span class="st">"qual_vivid"</span><span class="op">)</span><span class="op">)</span></span>
 <span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="st">"❌ Issue: 'Palette not found' error\n"</span><span class="op">)</span></span>
-<span><span class="co">#&gt; ❌ Issue: 'Palette not found' error</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="st">"✅ Solution: Check available palettes with list_palettes()\n\n"</span><span class="op">)</span></span>
-<span><span class="co">#&gt; ✅ Solution: Check available palettes with list_palettes()</span></span>
-<span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="st">"❌ Issue: Not enough colors in palette\n"</span><span class="op">)</span></span>
-<span><span class="co">#&gt; ❌ Issue: Not enough colors in palette</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="st">"✅ Solution: Use n='all' or choose different palette\n\n"</span><span class="op">)</span></span>
-<span><span class="co">#&gt; ✅ Solution: Use n='all' or choose different palette</span></span>
-<span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="st">"❌ Issue: Colors don't match expected output\n"</span><span class="op">)</span></span>
-<span><span class="co">#&gt; ❌ Issue: Colors don't match expected output</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="st">"✅ Solution: Verify palette type (sequential/qualitative/diverging)\n\n"</span><span class="op">)</span></span>
-<span><span class="co">#&gt; ✅ Solution: Verify palette type (sequential/qualitative/diverging)</span></span>
-<span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="st">"❌ Issue: Custom palette not saving\n"</span><span class="op">)</span></span>
-<span><span class="co">#&gt; ❌ Issue: Custom palette not saving</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="st">"✅ Solution: Check write permissions and file paths\n\n"</span><span class="op">)</span></span>
-<span><span class="co">#&gt; ✅ Solution: Check write permissions and file paths</span></span>
-<span></span>
-<span><span class="co"># Demonstrate error handling</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/conditions.html" class="external-link">tryCatch</a></span><span class="op">(</span><span class="op">{</span></span>
-<span>  <span class="co"># This will work</span></span>
-<span>  <span class="va">valid_palette</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_palette.html">get_palette</a></span><span class="op">(</span><span class="st">"vividset"</span>, type <span class="op">=</span> <span class="st">"qualitative"</span>, n <span class="op">=</span> <span class="fl">3</span><span class="op">)</span></span>
-<span>  <span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="st">"✅ Successfully retrieved vividset palette\n"</span><span class="op">)</span></span>
-<span><span class="op">}</span>, error <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">e</span><span class="op">)</span> <span class="op">{</span></span>
-<span>  <span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="st">"❌ Error:"</span>, <span class="va">e</span><span class="op">$</span><span class="va">message</span>, <span class="st">"\n"</span><span class="op">)</span></span>
-<span><span class="op">}</span><span class="op">)</span></span>
-<span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> Loaded palette <span style="color: #0000BB;">"vividset"</span> (<span style="color: #0000BB;">"qualitative"</span>), <span style="color: #0000BB;">9</span> colors</span></span>
-<span><span class="co">#&gt; ✅ Successfully retrieved vividset palette</span></span>
-<span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/conditions.html" class="external-link">tryCatch</a></span><span class="op">(</span><span class="op">{</span></span>
-<span>  <span class="co"># This might fail if palette doesn't exist</span></span>
-<span>  <span class="va">invalid_palette</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_palette.html">get_palette</a></span><span class="op">(</span><span class="st">"nonexistent"</span>, type <span class="op">=</span> <span class="st">"qualitative"</span><span class="op">)</span></span>
-<span>  <span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="st">"✅ Retrieved nonexistent palette\n"</span><span class="op">)</span></span>
-<span><span class="op">}</span>, error <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">e</span><span class="op">)</span> <span class="op">{</span></span>
-<span>  <span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="st">"❌ Expected error for nonexistent palette:"</span>, <span class="va">e</span><span class="op">$</span><span class="va">message</span>, <span class="st">"\n"</span><span class="op">)</span></span>
-<span><span class="op">}</span><span class="op">)</span></span>
-<span><span class="co">#&gt; ❌ Expected error for nonexistent palette: Palette <span style="color: #0000BB;">"nonexistent"</span> not found in any type.</span></span></code></pre></div>
+<span><span class="co"># Or use interpolation</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/grDevices/colorRamp.html" class="external-link">colorRampPalette</a></span><span class="op">(</span><span class="fu"><a href="../reference/get_palette.html">get_palette</a></span><span class="op">(</span><span class="st">"qual_vivid"</span><span class="op">)</span><span class="op">)</span><span class="op">(</span><span class="fl">20</span><span class="op">)</span></span></code></pre></div>
+<p><strong>Colors don’t match</strong></p>
+<div class="sourceCode" id="cb23"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Verify palette type</span></span>
+<span><span class="co"># Type is inferred from name prefix</span></span>
+<span><span class="fu"><a href="../reference/get_palette.html">get_palette</a></span><span class="op">(</span><span class="st">"seq_blues"</span><span class="op">)</span>  <span class="co"># Automatically knows it's sequential</span></span></code></pre></div>
+<p><strong>Custom palette not working</strong></p>
+<div class="sourceCode" id="cb24"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Ensure you compiled after creation</span></span>
+<span><span class="fu"><a href="../reference/compile_palettes.html">compile_palettes</a></span><span class="op">(</span></span>
+<span>  palettes_dir <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"extdata"</span>, <span class="st">"palettes"</span>, package <span class="op">=</span> <span class="st">"evanverse"</span><span class="op">)</span>,</span>
+<span>  output_rds <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"extdata"</span>, <span class="st">"palettes.rds"</span>, package <span class="op">=</span> <span class="st">"evanverse"</span><span class="op">)</span></span>
+<span><span class="op">)</span></span></code></pre></div>
+<hr>
 </div>
 </div>
+<div class="section level2">
+<h2 id="summary">Summary<a class="anchor" aria-label="anchor" href="#summary"></a>
+</h2>
 <div class="section level3">
-<h3 id="summary-and-next-steps">🎯 Summary and Next Steps<a class="anchor" aria-label="anchor" href="#summary-and-next-steps"></a>
+<h3 id="key-features">Key Features<a class="anchor" aria-label="anchor" href="#key-features"></a>
 </h3>
-<p>The evanverse color palette system provides:</p>
-<p>✅ <strong>Comprehensive palette collection</strong> with 15+
-carefully curated palettes ✅ <strong>Type-specific
-organization</strong> (sequential, qualitative, diverging) ✅
-<strong>Flexible color extraction</strong> with custom counts and
-interpolation ✅ <strong>Bio-focused design</strong> optimized for
-scientific visualization ✅ <strong>Easy customization</strong> with
-palette creation and modification tools ✅ <strong>Professional
-quality</strong> suitable for publications and presentations</p>
-<div class="section level4">
-<h4 id="continue-learning">Continue Learning:<a class="anchor" aria-label="anchor" href="#continue-learning"></a>
-</h4>
 <ul>
-<li>📚 <a href="comprehensive-guide.html">Comprehensive Guide</a> -
-Complete package overview</li>
-<li>📊 <a href="data-processing.html">Data Processing</a> - Data
-manipulation techniques</li>
-<li>🧬 <a href="bioinformatics-workflows.html">Bioinformatics
-Workflows</a> - Domain-specific applications</li>
+<li>
+<strong>80+ curated palettes</strong> organized by type</li>
+<li>
+<strong>Standardized naming</strong> (<code>type_name_source</code>
+convention)</li>
+<li>
+<strong>Flexible workflow</strong> from creation to compilation to
+usage</li>
+<li>
+<strong>Scientific focus</strong> optimized for bioinformatics</li>
+<li>
+<strong>Publication-ready</strong> professional quality</li>
 </ul>
 </div>
-<div class="section level4">
-<h4 id="quick-reference">Quick Reference:<a class="anchor" aria-label="anchor" href="#quick-reference"></a>
-</h4>
-<div class="sourceCode" id="cb22"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># Essential color palette functions</span></span>
-<span><span class="fu"><a href="../reference/list_palettes.html">list_palettes</a></span><span class="op">(</span>type <span class="op">=</span> <span class="st">"sequential"</span><span class="op">)</span>          <span class="co"># List available palettes</span></span>
-<span><span class="fu"><a href="../reference/get_palette.html">get_palette</a></span><span class="op">(</span><span class="st">"blues"</span>, type <span class="op">=</span> <span class="st">"sequential"</span><span class="op">)</span>   <span class="co"># Get specific palette</span></span>
-<span><span class="fu"><a href="../reference/preview_palette.html">preview_palette</a></span><span class="op">(</span><span class="st">"vividset"</span>, <span class="st">"qualitative"</span><span class="op">)</span>  <span class="co"># Preview colors</span></span>
-<span><span class="fu"><a href="../reference/bio_palette_gallery.html">bio_palette_gallery</a></span><span class="op">(</span><span class="op">)</span>                       <span class="co"># Show all palettes</span></span>
-<span><span class="fu"><a href="../reference/hex2rgb.html">hex2rgb</a></span><span class="op">(</span><span class="st">"#FF6B6B"</span><span class="op">)</span>                         <span class="co"># Convert colors</span></span>
-<span><span class="fu"><a href="../reference/create_palette.html">create_palette</a></span><span class="op">(</span><span class="st">"custom"</span>, colors <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">...</span><span class="op">)</span><span class="op">)</span>   <span class="co"># Create custom palette</span></span></code></pre></div>
-<hr>
-<p><em>🎨 Master the art of color with evanverse palettes!</em></p>
+<div class="section level3">
+<h3 id="quick-reference">Quick Reference<a class="anchor" aria-label="anchor" href="#quick-reference"></a>
+</h3>
+<div class="sourceCode" id="cb25"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Discover</span></span>
+<span><span class="fu"><a href="../reference/list_palettes.html">list_palettes</a></span><span class="op">(</span>type <span class="op">=</span> <span class="st">"sequential"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="../reference/bio_palette_gallery.html">bio_palette_gallery</a></span><span class="op">(</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Retrieve</span></span>
+<span><span class="fu"><a href="../reference/get_palette.html">get_palette</a></span><span class="op">(</span><span class="st">"seq_blues"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="../reference/preview_palette.html">preview_palette</a></span><span class="op">(</span><span class="st">"qual_vivid"</span>, type <span class="op">=</span> <span class="st">"qualitative"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Create</span></span>
+<span><span class="fu"><a href="../reference/create_palette.html">create_palette</a></span><span class="op">(</span></span>
+<span>  name <span class="op">=</span> <span class="st">"qual_custom"</span>,</span>
+<span>  type <span class="op">=</span> <span class="st">"qualitative"</span>,</span>
+<span>  colors <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"#E64B35"</span>, <span class="st">"#4DBBD5"</span>, <span class="st">"#00A087"</span><span class="op">)</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Compile</span></span>
+<span><span class="fu"><a href="../reference/compile_palettes.html">compile_palettes</a></span><span class="op">(</span></span>
+<span>  palettes_dir <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"extdata"</span>, <span class="st">"palettes"</span>, package <span class="op">=</span> <span class="st">"evanverse"</span><span class="op">)</span>,</span>
+<span>  output_rds <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"extdata"</span>, <span class="st">"palettes.rds"</span>, package <span class="op">=</span> <span class="st">"evanverse"</span><span class="op">)</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Utilities</span></span>
+<span><span class="fu"><a href="../reference/hex2rgb.html">hex2rgb</a></span><span class="op">(</span><span class="st">"#FF6B6B"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="../reference/rgb2hex.html">rgb2hex</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">255</span>, <span class="fl">107</span>, <span class="fl">107</span><span class="op">)</span>, nrow <span class="op">=</span> <span class="fl">1</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 </div>
+<div class="section level3">
+<h3 id="related-documentation">Related Documentation<a class="anchor" aria-label="anchor" href="#related-documentation"></a>
+</h3>
+<ul>
+<li>
+<strong>Naming Convention</strong>:
+<code><a href="../articles/palette-naming-convention.html">vignette("palette-naming-convention")</a></code> - Complete naming
+standards</li>
+<li>
+<strong>Package Guide</strong>: <code><a href="../articles/get-started.html">vignette("get-started")</a></code>
+- General evanverse overview</li>
+<li>
+<strong>Function Reference</strong>: <code><a href="../reference/get_palette.html">?get_palette</a></code>,
+<code><a href="../reference/create_palette.html">?create_palette</a></code>, <code><a href="../reference/compile_palettes.html">?compile_palettes</a></code>
+</li>
+</ul>
+<hr>
+<p><strong>Document Version</strong>: 2.0 <strong>Last Updated</strong>:
+2025-10-30 <strong>Status</strong>: Official Documentation</p>
 </div>
 </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>

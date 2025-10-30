@@ -110,10 +110,16 @@
 
       <dl><dt>
 
+          <code><a href="pkg_management.html">pkg_management</a></code>
+
+        </dt>
+        <dd>Package Management</dd>
+      </dl><dl><dt>
+
           <code><a href="check_pkg.html">check_pkg()</a></code>
 
         </dt>
-        <dd>check_pkg(): Check if packages are installed and optionally install them</dd>
+        <dd>Check Package Installation Status</dd>
       </dl><dl><dt>
 
           <code><a href="inst_pkg.html">inst_pkg()</a></code>
@@ -125,19 +131,19 @@
           <code><a href="update_pkg.html">update_pkg()</a></code>
 
         </dt>
-        <dd>Update R Packages from CRAN, GitHub, or Bioconductor</dd>
+        <dd>Update R Packages</dd>
       </dl><dl><dt>
 
           <code><a href="pkg_version.html">pkg_version()</a></code>
 
         </dt>
-        <dd>pkg_version: Check Installed and Latest Versions of R Packages</dd>
+        <dd>Check Package Versions</dd>
       </dl><dl><dt>
 
           <code><a href="pkg_functions.html">pkg_functions()</a></code>
 
         </dt>
-        <dd>pkg_functions: List exported functions from a package</dd>
+        <dd>List Package Functions</dd>
       </dl><dl><dt>
 
           <code><a href="set_mirror.html">set_mirror()</a></code>
@@ -240,6 +246,24 @@
         <dd>Remove a Saved Palette JSON</dd>
       </dl><dl><dt>
 
+          <code><a href="clear_palette_cache.html">clear_palette_cache()</a></code>
+
+        </dt>
+        <dd>Clear Palette Cache</dd>
+      </dl><dl><dt>
+
+          <code><a href="palette_cache_info.html">palette_cache_info()</a></code>
+
+        </dt>
+        <dd>Get Palette Cache Information</dd>
+      </dl><dl><dt>
+
+          <code><a href="reload_palette_cache.html">reload_palette_cache()</a></code>
+
+        </dt>
+        <dd>Reload Palette Cache</dd>
+      </dl><dl><dt>
+
           <code><a href="hex2rgb.html">hex2rgb()</a></code>
 
         </dt>
@@ -250,6 +274,23 @@
 
         </dt>
         <dd>Convert RGB values to HEX color codes</dd>
+      </dl></div><div class="section level2">
+      <h2 id="ggplot-integration">ggplot2 Integration<a class="anchor" aria-label="anchor" href="#ggplot-integration"></a></h2>
+
+      <div class="section-desc"><p>Seamless ggplot2 integration for evanverse color palettes. Apply palettes directly to ggplot2 color and fill scales.</p></div>
+
+
+    </div><div class="section level2">
+
+
+
+
+      <dl><dt>
+
+          <code><a href="scale_evanverse.html">scale_color_evanverse()</a></code> <code><a href="scale_evanverse.html">scale_fill_evanverse()</a></code> <code><a href="scale_evanverse.html">scale_colour_evanverse()</a></code>
+
+        </dt>
+        <dd>Discrete Color and Fill Scales for evanverse Palettes</dd>
       </dl></div><div class="section level2">
       <h2 id="file-data-i-o">File &amp; Data I/O<a class="anchor" aria-label="anchor" href="#file-data-i-o"></a></h2>
 
@@ -381,40 +422,10 @@
         <dd>map_column(): Map values in a column using named vector or list</dd>
       </dl><dl><dt>
 
-          <code><a href="is_void.html">is_void()</a></code>
+          <code><a href="void.html">is_void()</a></code> <code><a href="void.html">any_void()</a></code> <code><a href="void.html">drop_void()</a></code> <code><a href="void.html">replace_void()</a></code> <code><a href="void.html">cols_with_void()</a></code> <code><a href="void.html">rows_with_void()</a></code>
 
         </dt>
-        <dd>is_void(): Check for Null / NA / Blank ("") Values</dd>
-      </dl><dl><dt>
-
-          <code><a href="any_void.html">any_void()</a></code>
-
-        </dt>
-        <dd>any_void(): Check if Any Value is Void (NA / NULL / "")</dd>
-      </dl><dl><dt>
-
-          <code><a href="drop_void.html">drop_void()</a></code>
-
-        </dt>
-        <dd>drop_void: Remove Void Values from a Vector or List</dd>
-      </dl><dl><dt>
-
-          <code><a href="replace_void.html">replace_void()</a></code>
-
-        </dt>
-        <dd>Replace void values (NA / NULL / "")</dd>
-      </dl><dl><dt>
-
-          <code><a href="cols_with_void.html">cols_with_void()</a></code>
-
-        </dt>
-        <dd>cols_with_void(): Detect Columns Containing Void Values</dd>
-      </dl><dl><dt>
-
-          <code><a href="rows_with_void.html">rows_with_void()</a></code>
-
-        </dt>
-        <dd>rows_with_void: Detect rows containing void values (NA / NULL / "")</dd>
+        <dd>Void Value Utilities</dd>
       </dl></div><div class="section level2">
       <h2 id="operators-logic">Operators &amp; Logic<a class="anchor" aria-label="anchor" href="#operators-logic"></a></h2>
 

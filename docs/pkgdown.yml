@@ -9,7 +9,8 @@ articles:
   get-started: get-started.html
   install: install.html
   package-management: package-management.html
-last_built: 2025-10-24T02:28Z
+  palette-naming-convention: palette-naming-convention.html
+last_built: 2025-10-30T10:13Z
 urls:
   reference: https://evanbio.github.io/evanverse/reference
   article: https://evanbio.github.io/evanverse/articles

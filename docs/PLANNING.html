@@ -119,27 +119,139 @@
 <div class="section level2">
 <h2 id="dart-计划开发">🎯 计划开发<a class="anchor" aria-label="anchor" href="#dart-%E8%AE%A1%E5%88%92%E5%BC%80%E5%8F%91"></a></h2>
 <div class="section level3">
-<h3 id="短期计划准备开发">短期计划（准备开发）<a class="anchor" aria-label="anchor" href="#%E7%9F%AD%E6%9C%9F%E8%AE%A1%E5%88%92%E5%87%86%E5%A4%87%E5%BC%80%E5%8F%91"></a></h3>
+<h3 id="短期计划1-2-个月">短期计划（1-2 个月）<a class="anchor" aria-label="anchor" href="#%E7%9F%AD%E6%9C%9F%E8%AE%A1%E5%88%921-2-%E4%B8%AA%E6%9C%88"></a></h3>
+<div class="section level4">
+<h4 id="wrench-基础优化">🔧 基础优化<a class="anchor" aria-label="anchor" href="#wrench-%E5%9F%BA%E7%A1%80%E4%BC%98%E5%8C%96"></a></h4>
 <ul class="task-list"><li><label><input type="checkbox">提升测试覆盖率到 90%+</label></li>
-<li><label><input type="checkbox">为长时间下载添加进度条（<code><a href="reference/download_batch.html">download_batch()</a></code>）</label></li>
 <li><label><input type="checkbox">改进错误消息（使用 cli 样式）</label></li>
 <li><label><input type="checkbox">添加更多生物信息学配色方案（组织特异性、单细胞）</label></li>
 </ul></div>
-<div class="section level3">
-<h3 id="中期计划考虑中">中期计划（考虑中）<a class="anchor" aria-label="anchor" href="#%E4%B8%AD%E6%9C%9F%E8%AE%A1%E5%88%92%E8%80%83%E8%99%91%E4%B8%AD"></a></h3>
-<ul class="task-list"><li><label><input type="checkbox">统计检验包装函数（t-test、ANOVA、correlation）</label></li>
-<li><label><input type="checkbox"><code><a href="reference/download_gene_ref.html">download_gene_ref()</a></code> 和 <code><a href="reference/convert_gene_id.html">convert_gene_id()</a></code> 添加缓存</label></li>
-<li><label><input type="checkbox">交互式图表支持（plotly 后端）</label></li>
-<li><label><input type="checkbox">数据验证工具</label></li>
-<li><label><input type="checkbox">批量操作的并行处理</label></li>
+<div class="section level4">
+<h4 id="bar_chart-统计分析模块优先">📊 统计分析模块（优先）<a class="anchor" aria-label="anchor" href="#bar_chart-%E7%BB%9F%E8%AE%A1%E5%88%86%E6%9E%90%E6%A8%A1%E5%9D%97%E4%BC%98%E5%85%88"></a></h4>
+<ul class="task-list"><li><label><input type="checkbox"><code>quick_ttest()</code> - 快速 t 检验并可视化</label></li>
+<li><label><input type="checkbox"><code>quick_anova()</code> - 快速方差分析</label></li>
+<li><label><input type="checkbox"><code>quick_cor()</code> - 相关性分析矩阵 + 热图</label></li>
+<li><label><input type="checkbox"><code><a href="https://ggplot2.tidyverse.org/reference/stat_summary.html" class="external-link">stat_summary()</a></code> - 生成统计摘要表格</label></li>
 </ul></div>
+<div class="section level4">
+<h4 id="books-文档改进优先">📚 文档改进（优先）<a class="anchor" aria-label="anchor" href="#books-%E6%96%87%E6%A1%A3%E6%94%B9%E8%BF%9B%E4%BC%98%E5%85%88"></a></h4>
+<ul class="task-list"><li><label><input type="checkbox">创建 Cheatsheet（一页纸快速参考）</label></li>
+<li><label><input type="checkbox">编写”5分钟入门 evanverse”教程</label></li>
+<li><label><input type="checkbox">添加真实案例文档（转录组分析、临床数据）</label></li>
+<li><label><input type="checkbox">改进 pkgdown 网站导航</label></li>
+</ul></div>
+<div class="section level4">
+<h4 id="art-可视化增强">🎨 可视化增强<a class="anchor" aria-label="anchor" href="#art-%E5%8F%AF%E8%A7%86%E5%8C%96%E5%A2%9E%E5%BC%BA"></a></h4>
+<ul class="task-list"><li><label><input type="checkbox"><code>theme_publication()</code> - 适合论文的主题</label></li>
+<li><label><input type="checkbox"><code>theme_presentation()</code> - 适合 PPT 的主题</label></li>
+<li><label><input type="checkbox"><code>add_statistics()</code> - 自动添加统计标注到图表</label></li>
+<li><label><input type="checkbox"><code>save_publication()</code> - 保存多格式（PDF/PNG/SVG）</label></li>
+</ul></div>
+</div>
 <div class="section level3">
-<h3 id="长期计划未来版本">长期计划（未来版本）<a class="anchor" aria-label="anchor" href="#%E9%95%BF%E6%9C%9F%E8%AE%A1%E5%88%92%E6%9C%AA%E6%9D%A5%E7%89%88%E6%9C%AC"></a></h3>
+<h3 id="中期计划3-6-个月">中期计划（3-6 个月）<a class="anchor" aria-label="anchor" href="#%E4%B8%AD%E6%9C%9F%E8%AE%A1%E5%88%923-6-%E4%B8%AA%E6%9C%88"></a></h3>
+<div class="section level4">
+<h4 id="dna-生物信息学功能扩展">🧬 生物信息学功能扩展<a class="anchor" aria-label="anchor" href="#dna-%E7%94%9F%E7%89%A9%E4%BF%A1%E6%81%AF%E5%AD%A6%E5%8A%9F%E8%83%BD%E6%89%A9%E5%B1%95"></a></h4>
+<ul class="task-list"><li><label><input type="checkbox"><code>plot_volcano()</code> - 火山图</label></li>
+<li><label><input type="checkbox"><code>plot_heatmap_cluster()</code> - 聚类热图</label></li>
+<li><label><input type="checkbox"><code>enrich_analysis()</code> - GO/KEGG 富集分析包装</label></li>
+<li><label><input type="checkbox"><code>gsea_quick()</code> - GSEA 快速分析</label></li>
+<li><label><input type="checkbox"><code>survival_plot()</code> - 生存分析曲线</label></li>
+<li><label><input type="checkbox"><code>integrate_omics()</code> - 整合转录组/蛋白组数据</label></li>
+</ul></div>
+<div class="section level4">
+<h4 id="broom-数据清洗与质量">🧹 数据清洗与质量<a class="anchor" aria-label="anchor" href="#broom-%E6%95%B0%E6%8D%AE%E6%B8%85%E6%B4%97%E4%B8%8E%E8%B4%A8%E9%87%8F"></a></h4>
+<ul class="task-list"><li><label><input type="checkbox"><code>clean_names()</code> - 标准化列名</label></li>
+<li><label><input type="checkbox"><code>detect_outliers()</code> - 异常值检测</label></li>
+<li><label><input type="checkbox"><code>impute_missing()</code> - 缺失值填充</label></li>
+<li><label><input type="checkbox"><code>normalize_columns()</code> - 数据标准化</label></li>
+<li><label><input type="checkbox"><code>data_quality_report()</code> - 生成数据质量 HTML 报告</label></li>
+</ul></div>
+<div class="section level4">
+<h4 id="rocket-项目模板系统">🚀 项目模板系统<a class="anchor" aria-label="anchor" href="#rocket-%E9%A1%B9%E7%9B%AE%E6%A8%A1%E6%9D%BF%E7%B3%BB%E7%BB%9F"></a></h4>
+<ul class="task-list"><li><label><input type="checkbox"><code>create_project()</code> - 创建标准项目结构</label></li>
+<li><label><input type="checkbox"><code>create_analysis_template()</code> - 生成分析脚本模板</label></li>
+<li><label><input type="checkbox"><code>create_report_template()</code> - 生成 RMarkdown 报告模板</label></li>
+</ul></div>
+<div class="section level4">
+<h4 id="zap-批量处理工具">⚡ 批量处理工具<a class="anchor" aria-label="anchor" href="#zap-%E6%89%B9%E9%87%8F%E5%A4%84%E7%90%86%E5%B7%A5%E5%85%B7"></a></h4>
+<ul class="task-list"><li><label><input type="checkbox"><code>batch_analyze()</code> - 对多个数据集执行相同分析</label></li>
+<li><label><input type="checkbox"><code>parallel_map()</code> - 并行处理数据</label></li>
+<li><label><input type="checkbox"><code>progress_map()</code> - 带进度条的映射函数</label></li>
+<li><label><input type="checkbox"><code>collect_results()</code> - 收集多个分析结果</label></li>
+<li><label><input type="checkbox"><code>merge_plots()</code> - 合并多个图表</label></li>
+</ul></div>
+<div class="section level4">
+<h4 id="arrows_counterclockwise-性能优化">🔄 性能优化<a class="anchor" aria-label="anchor" href="#arrows_counterclockwise-%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96"></a></h4>
+<ul class="task-list"><li><label><input type="checkbox">使用 <code>Rcpp</code> 重写耗时函数（如 void 检测、大数据转换）</label></li>
+<li><label><input type="checkbox">添加缓存机制（<code><a href="reference/download_gene_ref.html">download_gene_ref()</a></code>、<code><a href="reference/convert_gene_id.html">convert_gene_id()</a></code>）</label></li>
+<li><label><input type="checkbox">并行计算支持（<code>future</code> 包集成）</label></li>
+<li><label><input type="checkbox">内存优化（<code>data.table</code> 替换部分 dplyr 操作）</label></li>
+</ul></div>
+<div class="section level4">
+<h4 id="open_book-文档进阶">📖 文档进阶<a class="anchor" aria-label="anchor" href="#open_book-%E6%96%87%E6%A1%A3%E8%BF%9B%E9%98%B6"></a></h4>
+<ul class="task-list"><li><label><input type="checkbox">“生物信息学分析完整流程”教程</label></li>
+<li><label><input type="checkbox">“数据可视化最佳实践”教程</label></li>
+<li><label><input type="checkbox">创建真实案例库（GitHub 仓库）</label></li>
+<li><label><input type="checkbox">投稿到 R-bloggers</label></li>
+</ul></div>
+</div>
+<div class="section level3">
+<h3 id="长期计划6-12-个月">长期计划（6-12 个月）<a class="anchor" aria-label="anchor" href="#%E9%95%BF%E6%9C%9F%E8%AE%A1%E5%88%926-12-%E4%B8%AA%E6%9C%88"></a></h3>
+<div class="section level4">
+<h4 id="robot-机器学习模块">🤖 机器学习模块<a class="anchor" aria-label="anchor" href="#robot-%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E6%A8%A1%E5%9D%97"></a></h4>
+<ul class="task-list"><li><label><input type="checkbox"><code>quick_ml()</code> - 一键测试多种 ML 模型</label></li>
+<li><label><input type="checkbox"><code>feature_importance()</code> - 特征重要性分析</label></li>
+<li><label><input type="checkbox"><code>cv_tune()</code> - 交叉验证调参</label></li>
+<li><label><input type="checkbox"><code>model_compare()</code> - 模型性能对比可视化</label></li>
+</ul></div>
+<div class="section level4">
+<h4 id="bar_chart-交互式可视化">📊 交互式可视化<a class="anchor" aria-label="anchor" href="#bar_chart-%E4%BA%A4%E4%BA%92%E5%BC%8F%E5%8F%AF%E8%A7%86%E5%8C%96"></a></h4>
+<ul class="task-list"><li><label><input type="checkbox"><code>iplot_*()</code> - 所有 plot_* 函数的交互版本（plotly）</label></li>
+<li><label><input type="checkbox"><code>plot_explorer()</code> - 数据探索式交互图表</label></li>
+<li><label><input type="checkbox">集成 echarts4r 支持</label></li>
+</ul></div>
+<div class="section level4">
+<h4 id="electric_plug-插件系统">🔌 插件系统<a class="anchor" aria-label="anchor" href="#electric_plug-%E6%8F%92%E4%BB%B6%E7%B3%BB%E7%BB%9F"></a></h4>
+<ul class="task-list"><li><label><input type="checkbox"><code>register_function()</code> - 注册自定义函数到 evanverse</label></li>
+<li><label><input type="checkbox"><code>list_extensions()</code> - 列出已安装的扩展</label></li>
+<li><label><input type="checkbox"><code>install_extension()</code> - 从 GitHub 安装扩展包</label></li>
+</ul></div>
+<div class="section level4">
+<h4 id="globe_with_meridians-生态整合">🌐 生态整合<a class="anchor" aria-label="anchor" href="#globe_with_meridians-%E7%94%9F%E6%80%81%E6%95%B4%E5%90%88"></a></h4>
+<ul class="task-list"><li><label><input type="checkbox"><code>to_seurat()</code> / <code>from_seurat()</code> - Seurat 对象转换</label></li>
+<li><label><input type="checkbox"><code>to_sce()</code> / <code>from_sce()</code> - SingleCellExperiment 转换</label></li>
+<li><label><input type="checkbox"><code>as_tibble_flex()</code> - 灵活的 tibble 转换</label></li>
+<li><label><input type="checkbox">确保与 <code>%&gt;%</code> 和 <code>|&gt;</code> 兼容性</label></li>
+</ul></div>
+<div class="section level4">
+<h4 id="cloud-云端功能探索">☁️ 云端功能（探索）<a class="anchor" aria-label="anchor" href="#cloud-%E4%BA%91%E7%AB%AF%E5%8A%9F%E8%83%BD%E6%8E%A2%E7%B4%A2"></a></h4>
+<ul class="task-list"><li><label><input type="checkbox"><code>save_to_cloud()</code> - 保存到 Google Drive/Dropbox</label></li>
+<li><label><input type="checkbox"><code>load_from_cloud()</code> - 从云端读取</label></li>
+<li><label><input type="checkbox"><code>fetch_pubmed()</code> - 获取 PubMed 文献</label></li>
+<li><label><input type="checkbox"><code>fetch_uniprot()</code> - 获取 UniProt 蛋白信息</label></li>
+</ul></div>
+<div class="section level4">
+<h4 id="building_construction-架构演进">🏗️ 架构演进<a class="anchor" aria-label="anchor" href="#building_construction-%E6%9E%B6%E6%9E%84%E6%BC%94%E8%BF%9B"></a></h4>
+<ul class="task-list"><li>
+<label><input type="checkbox">考虑创建子包系统：</label>
+<ul><li>
+<code>evanverse.bio</code> - 生物信息学功能</li>
+<li>
+<code>evanverse.viz</code> - 可视化功能</li>
+<li>
+<code>evanverse.ml</code> - 机器学习功能</li>
+</ul></li>
+</ul></div>
+<div class="section level4">
+<h4 id="earth_africa-社区建设">🌍 社区建设<a class="anchor" aria-label="anchor" href="#earth_africa-%E7%A4%BE%E5%8C%BA%E5%BB%BA%E8%AE%BE"></a></h4>
 <ul class="task-list"><li><label><input type="checkbox">提交到 CRAN（需要 v1.0）</label></li>
+<li><label><input type="checkbox">在 GitHub 开 Discussions</label></li>
+<li><label><input type="checkbox">创建 Discord/Slack 群组</label></li>
+<li><label><input type="checkbox">定期发布 Twitter/小红书教程</label></li>
 <li><label><input type="checkbox">创建配套的 Shiny 应用</label></li>
-<li><label><input type="checkbox">机器学习工具包装</label></li>
-<li><label><input type="checkbox">多组学整合工具</label></li>
 </ul><hr></div>
+</div>
 </div>
 <div class="section level2">
 <h2 id="construction-暂无计划">🚧 暂无计划<a class="anchor" aria-label="anchor" href="#construction-%E6%9A%82%E6%97%A0%E8%AE%A1%E5%88%92"></a></h2>
@@ -200,9 +312,9 @@
 </ul></div>
 <div class="section level4">
 <h4 id="arrows_counterclockwise-数据处理-8-个函数">🔄 数据处理 (8 个函数)<a class="anchor" aria-label="anchor" href="#arrows_counterclockwise-%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86-8-%E4%B8%AA%E5%87%BD%E6%95%B0"></a></h4>
-<ul><li>✅ <code><a href="reference/is_void.html">is_void()</a></code> / <code><a href="reference/any_void.html">any_void()</a></code> - 检查空值</li>
-<li>✅ <code><a href="reference/drop_void.html">drop_void()</a></code> / <code><a href="reference/replace_void.html">replace_void()</a></code> - 处理空值</li>
-<li>✅ <code><a href="reference/cols_with_void.html">cols_with_void()</a></code> / <code><a href="reference/rows_with_void.html">rows_with_void()</a></code> - 定位空值</li>
+<ul><li>✅ <code><a href="reference/void.html">is_void()</a></code> / <code><a href="reference/void.html">any_void()</a></code> - 检查空值</li>
+<li>✅ <code><a href="reference/void.html">drop_void()</a></code> / <code><a href="reference/void.html">replace_void()</a></code> - 处理空值</li>
+<li>✅ <code><a href="reference/void.html">cols_with_void()</a></code> / <code><a href="reference/void.html">rows_with_void()</a></code> - 定位空值</li>
 <li>✅ <code><a href="reference/df2list.html">df2list()</a></code> - 数据框转列表</li>
 <li>✅ <code><a href="reference/map_column.html">map_column()</a></code> - 列映射</li>
 </ul></div>
@@ -359,11 +471,52 @@
 <div class="section level2">
 <h2 id="bulb-功能想法池">💡 功能想法池<a class="anchor" aria-label="anchor" href="#bulb-%E5%8A%9F%E8%83%BD%E6%83%B3%E6%B3%95%E6%B1%A0"></a></h2>
 <p>临时记录功能想法（未决定是否开发）：</p>
+<div class="section level3">
+<h3 id="已有想法">已有想法<a class="anchor" aria-label="anchor" href="#%E5%B7%B2%E6%9C%89%E6%83%B3%E6%B3%95"></a></h3>
 <ul><li>基因集富集分析包装</li>
 <li>RMarkdown 报告模板</li>
 <li>PostgreSQL/SQLite 辅助函数</li>
 <li>云存储支持（S3/Google Cloud）</li>
-</ul><hr><p><strong>最后更新</strong>: 2025-01-23 <strong>维护者</strong>: Evan Zhou</p>
+</ul></div>
+<div class="section level3">
+<h3 id="新增想法2025-01">新增想法（2025-01）<a class="anchor" aria-label="anchor" href="#%E6%96%B0%E5%A2%9E%E6%83%B3%E6%B3%952025-01"></a></h3>
+<ul><li>
+<strong>管道式数据清洗</strong>: 链式调用的数据清洗操作符</li>
+<li>
+<strong>出版级图表组合</strong>: <code>plot_grid_smart()</code> 智能排列多图</li>
+<li>
+<strong>配色主题系统</strong>: 预设不同场景的完整主题（论文/PPT/海报）</li>
+<li>
+<strong>实验设计工具</strong>: 样本量计算、随机化分组</li>
+<li>
+<strong>数据探索式报告</strong>: 自动生成 EDA 报告（类似 DataExplorer）</li>
+<li>
+<strong>API 包装集合</strong>: 常用生物信息学 API 的简易接口</li>
+<li>
+<strong>工作流记录器</strong>: 自动记录分析步骤，生成可重复脚本</li>
+<li>
+<strong>包扩展框架</strong>: 允许用户贡献和安装社区扩展</li>
+</ul><hr></div>
+</div>
+<div class="section level2">
+<h2 id="pencil-开发优先级说明">📝 开发优先级说明<a class="anchor" aria-label="anchor" href="#pencil-%E5%BC%80%E5%8F%91%E4%BC%98%E5%85%88%E7%BA%A7%E8%AF%B4%E6%98%8E"></a></h2>
+<div class="section level3">
+<h3 id="为什么这样排优先级">为什么这样排优先级？<a class="anchor" aria-label="anchor" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E8%BF%99%E6%A0%B7%E6%8E%92%E4%BC%98%E5%85%88%E7%BA%A7"></a></h3>
+<p><strong>短期（1-2月）</strong> 聚焦： 1. <strong>统计分析模块</strong> - 很多 R 用户的痛点，函数简单但实用 2. <strong>文档改进</strong> - 降低学习门槛，增加用户粘性 3. <strong>可视化增强</strong> - 小成本高回报，论文常用</p>
+<p><strong>中期（3-6月）</strong> 聚焦： 1. <strong>生物信息学扩展</strong> - 目标用户核心需求 2. <strong>项目模板</strong> - 提升工作流效率 3. <strong>性能优化</strong> - 随着用户增加，性能变得重要</p>
+<p><strong>长期（6-12月）</strong> 聚焦： 1. <strong>机器学习</strong> - 差异化竞争力 2. <strong>交互式可视化</strong> - 现代化体验 3. <strong>社区生态</strong> - 可持续发展</p>
+</div>
+<div class="section level3">
+<h3 id="建议的第一步行动">建议的第一步行动<a class="anchor" aria-label="anchor" href="#%E5%BB%BA%E8%AE%AE%E7%9A%84%E7%AC%AC%E4%B8%80%E6%AD%A5%E8%A1%8C%E5%8A%A8"></a></h3>
+<p>如果你现在想开始开发，推荐从以下任一开始：</p>
+<ol style="list-style-type: decimal"><li>
+<strong>快速见效</strong>: 开发 <code>quick_ttest()</code> + <code>quick_cor()</code> （1-2 天）</li>
+<li>
+<strong>文档优先</strong>: 制作 Cheatsheet（1 天）</li>
+<li>
+<strong>基础设施</strong>: 提升测试覆盖率到 90%（3-5 天）</li>
+</ol><hr><p><strong>最后更新</strong>: 2025-10-24 <strong>维护者</strong>: Evan Zhou</p>
+</div>
 </div>
 </div>
 
