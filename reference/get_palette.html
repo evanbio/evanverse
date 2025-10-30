@@ -121,7 +121,7 @@ Automatically checks for type mismatch and provides smart suggestions.</p>
 
 
 <dl><dt id="arg-name">name<a class="anchor" aria-label="anchor" href="#arg-name"></a></dt>
-<dd><p>Character. Name of the palette (e.g. "vividset").</p></dd>
+<dd><p>Character. Name of the palette (e.g. "qual_vivid").</p></dd>
 
 
 <dt id="arg-type">type<a class="anchor" aria-label="anchor" href="#arg-type"></a></dt>
@@ -143,18 +143,18 @@ Automatically checks for type mismatch and provides smart suggestions.</p>
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu">get_palette</span><span class="op">(</span><span class="st">"vividset"</span>, type <span class="op">=</span> <span class="st">"qualitative"</span><span class="op">)</span></span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> Loaded palette <span style="color: #0000BB;">"vividset"</span> (<span style="color: #0000BB;">"qualitative"</span>), <span style="color: #0000BB;">9</span> colors</span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu">get_palette</span><span class="op">(</span><span class="st">"qual_vivid"</span>, type <span class="op">=</span> <span class="st">"qualitative"</span><span class="op">)</span></span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> Loaded palette <span style="color: #0000BB;">"qual_vivid"</span> (<span style="color: #0000BB;">"qualitative"</span>), <span style="color: #0000BB;">9</span> colors</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "#E64B35" "#4DBBD5" "#00A087" "#3C5488" "#F39B7F" "#8491B4" "#91D1C2"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [8] "#DC0000" "#7E6148"</span>
-<span class="r-in"><span><span class="fu">get_palette</span><span class="op">(</span><span class="st">"softtrio"</span>, type <span class="op">=</span> <span class="st">"qualitative"</span>, n <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> Loaded palette <span style="color: #0000BB;">"softtrio"</span> (<span style="color: #0000BB;">"qualitative"</span>), <span style="color: #0000BB;">3</span> colors</span>
+<span class="r-in"><span><span class="fu">get_palette</span><span class="op">(</span><span class="st">"qual_softtrio"</span>, type <span class="op">=</span> <span class="st">"qualitative"</span>, n <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> Loaded palette <span style="color: #0000BB;">"qual_softtrio"</span> (<span style="color: #0000BB;">"qualitative"</span>), <span style="color: #0000BB;">3</span> colors</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "#E64B35B2" "#00A087B2"</span>
-<span class="r-in"><span><span class="fu">get_palette</span><span class="op">(</span><span class="st">"blues"</span>, type <span class="op">=</span> <span class="st">"sequential"</span>, n <span class="op">=</span> <span class="fl">3</span><span class="op">)</span></span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> Loaded palette <span style="color: #0000BB;">"blues"</span> (<span style="color: #0000BB;">"sequential"</span>), <span style="color: #0000BB;">3</span> colors</span>
+<span class="r-in"><span><span class="fu">get_palette</span><span class="op">(</span><span class="st">"seq_blues"</span>, type <span class="op">=</span> <span class="st">"sequential"</span>, n <span class="op">=</span> <span class="fl">3</span><span class="op">)</span></span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> Loaded palette <span style="color: #0000BB;">"seq_blues"</span> (<span style="color: #0000BB;">"sequential"</span>), <span style="color: #0000BB;">3</span> colors</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "#deebf7" "#9ecae1" "#3182bd"</span>
-<span class="r-in"><span><span class="fu">get_palette</span><span class="op">(</span><span class="st">"contrast_duo"</span>, type <span class="op">=</span> <span class="st">"diverging"</span><span class="op">)</span></span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> Loaded palette <span style="color: #0000BB;">"contrast_duo"</span> (<span style="color: #0000BB;">"diverging"</span>), <span style="color: #0000BB;">2</span> colors</span>
+<span class="r-in"><span><span class="fu">get_palette</span><span class="op">(</span><span class="st">"div_contrast"</span>, type <span class="op">=</span> <span class="st">"diverging"</span><span class="op">)</span></span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> Loaded palette <span style="color: #0000BB;">"div_contrast"</span> (<span style="color: #0000BB;">"diverging"</span>), <span style="color: #0000BB;">2</span> colors</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "#C64328" "#56BBA5"</span>
 <span class="r-in"><span></span></span>
 </code></pre></div>

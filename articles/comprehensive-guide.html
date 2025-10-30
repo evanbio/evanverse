@@ -191,86 +191,202 @@ utilities:</p>
 <code class="sourceCode R"><span><span class="co"># List all available palettes</span></span>
 <span><span class="va">palettes_info</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/list_palettes.html">list_palettes</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">palettes_info</span><span class="op">)</span></span>
-<span><span class="co">#&gt;                 name        type n_color</span></span>
-<span><span class="co">#&gt; 6       contrast_duo   diverging       2</span></span>
-<span><span class="co">#&gt; 8       fire_ice_duo   diverging       2</span></span>
-<span><span class="co">#&gt; 11         polar_duo   diverging       2</span></span>
-<span><span class="co">#&gt; 12        sunset_sky   diverging       2</span></span>
-<span><span class="co">#&gt; 10              piyg   diverging       3</span></span>
-<span><span class="co">#&gt; 7     earthy_diverge   diverging       5</span></span>
-<span><span class="co">#&gt; 9     gradient_rd_bu   diverging      11</span></span>
-<span><span class="co">#&gt; 14      earthy_triad qualitative       3</span></span>
-<span><span class="co">#&gt; 26     primary_triad qualitative       3</span></span>
-<span><span class="co">#&gt; 31          softtrio qualitative       3</span></span>
-<span><span class="co">#&gt; 33     vintage_triad qualitative       3</span></span>
-<span><span class="co">#&gt; 13  balanced_quartet qualitative       4</span></span>
-<span><span class="co">#&gt; 32           vibrant qualitative       5</span></span>
-<span><span class="co">#&gt; 34            violin qualitative       5</span></span>
-<span><span class="co">#&gt; 24        harmonysix qualitative       6</span></span>
-<span><span class="co">#&gt; 25    pastel_harmony qualitative       6</span></span>
-<span><span class="co">#&gt; 18        ggsci_jama qualitative       7</span></span>
-<span><span class="co">#&gt; 23 ggsci_tron_legacy qualitative       7</span></span>
-<span><span class="co">#&gt; 21        ggsci_nejm qualitative       8</span></span>
-<span><span class="co">#&gt; 28          rcb_set2 qualitative       8</span></span>
-<span><span class="co">#&gt; 20      ggsci_lancet qualitative       9</span></span>
-<span><span class="co">#&gt; 27          rcb_set1 qualitative       9</span></span>
-<span><span class="co">#&gt; 35          vividset qualitative       9</span></span>
-<span><span class="co">#&gt; 15      ggsci_cosmic qualitative      10</span></span>
-<span><span class="co">#&gt; 16      ggsci_flatui qualitative      10</span></span>
-<span><span class="co">#&gt; 19         ggsci_jco qualitative      10</span></span>
-<span><span class="co">#&gt; 22         ggsci_npg qualitative      10</span></span>
-<span><span class="co">#&gt; 17    ggsci_futurama qualitative      12</span></span>
-<span><span class="co">#&gt; 29          rcb_set3 qualitative      12</span></span>
-<span><span class="co">#&gt; 30           sc_pbmc qualitative      17</span></span>
-<span><span class="co">#&gt; 1              blues  sequential       3</span></span>
-<span><span class="co">#&gt; 2        forest_fade  sequential       4</span></span>
-<span><span class="co">#&gt; 4     muted_gradient  sequential       4</span></span>
-<span><span class="co">#&gt; 5         warm_blush  sequential       4</span></span>
-<span><span class="co">#&gt; 3    ggsci_locuszoom  sequential       7</span></span>
+<span><span class="co">#&gt;                    name        type n_color</span></span>
+<span><span class="co">#&gt; 12         div_contrast   diverging       2</span></span>
+<span><span class="co">#&gt; 14          div_fireice   diverging       2</span></span>
+<span><span class="co">#&gt; 16            div_polar   diverging       2</span></span>
+<span><span class="co">#&gt; 18           div_sunset   diverging       2</span></span>
+<span><span class="co">#&gt; 15     div_pinkgreen_rb   diverging       3</span></span>
+<span><span class="co">#&gt; 13           div_earthy   diverging       5</span></span>
+<span><span class="co">#&gt; 17             div_sage   diverging       7</span></span>
+<span><span class="co">#&gt; 29          qual_earthy qualitative       3</span></span>
+<span><span class="co">#&gt; 70         qual_primary qualitative       3</span></span>
+<span><span class="co">#&gt; 77        qual_softtrio qualitative       3</span></span>
+<span><span class="co">#&gt; 90         qual_vintage qualitative       3</span></span>
+<span><span class="co">#&gt; 21        qual_balanced qualitative       4</span></span>
+<span><span class="co">#&gt; 30       qual_egypt_met qualitative       4</span></span>
+<span><span class="co">#&gt; 46   qual_kandinsky_met qualitative       4</span></span>
+<span><span class="co">#&gt; 34       qual_greek_met qualitative       5</span></span>
+<span><span class="co">#&gt; 40    qual_isfahan2_met qualitative       5</span></span>
+<span><span class="co">#&gt; 42        qual_java_met qualitative       5</span></span>
+<span><span class="co">#&gt; 44     qual_johnson_met qualitative       5</span></span>
+<span><span class="co">#&gt; 56      qual_navajo_met qualitative       5</span></span>
+<span><span class="co">#&gt; 58  qual_newkingdom_met qualitative       5</span></span>
+<span><span class="co">#&gt; 79        qual_tara_met qualitative       5</span></span>
+<span><span class="co">#&gt; 89         qual_vibrant qualitative       5</span></span>
+<span><span class="co">#&gt; 91          qual_violin qualitative       5</span></span>
+<span><span class="co">#&gt; 93     qual_wissing_met qualitative       5</span></span>
+<span><span class="co">#&gt; 33     qual_gauguin_met qualitative       6</span></span>
+<span><span class="co">#&gt; 35         qual_harmony qualitative       6</span></span>
+<span><span class="co">#&gt; 38      qual_homer2_met qualitative       6</span></span>
+<span><span class="co">#&gt; 45      qual_juarez_met qualitative       6</span></span>
+<span><span class="co">#&gt; 47       qual_klimt_met qualitative       6</span></span>
+<span><span class="co">#&gt; 48      qual_lakota_met qualitative       6</span></span>
+<span><span class="co">#&gt; 64          qual_pastel qualitative       6</span></span>
+<span><span class="co">#&gt; 66       qual_peru1_met qualitative       6</span></span>
+<span><span class="co">#&gt; 67       qual_peru2_met qualitative       6</span></span>
+<span><span class="co">#&gt; 68   qual_pillement_met qualitative       6</span></span>
+<span><span class="co">#&gt; 19 qual_archambault_met qualitative       7</span></span>
+<span><span class="co">#&gt; 20     qual_austria_met qualitative       7</span></span>
+<span><span class="co">#&gt; 26       qual_degas_met qualitative       7</span></span>
+<span><span class="co">#&gt; 28      qual_derain_met qualitative       7</span></span>
+<span><span class="co">#&gt; 36    qual_hokusai1_met qualitative       7</span></span>
+<span><span class="co">#&gt; 41          qual_jama_g qualitative       7</span></span>
+<span><span class="co">#&gt; 53      qual_moreau_met qualitative       7</span></span>
+<span><span class="co">#&gt; 55     qual_nattier_met qualitative       7</span></span>
+<span><span class="co">#&gt; 62    qual_okeeffe2_met qualitative       7</span></span>
+<span><span class="co">#&gt; 69     qual_pissaro_met qualitative       7</span></span>
+<span><span class="co">#&gt; 82          qual_tron_g qualitative       7</span></span>
+<span><span class="co">#&gt; 84   qual_tsimshian_met qualitative       7</span></span>
+<span><span class="co">#&gt; 85    qual_vangogh1_met qualitative       7</span></span>
+<span><span class="co">#&gt; 88    qual_veronese_met qualitative       7</span></span>
+<span><span class="co">#&gt; 22    qual_cassatt1_met qualitative       8</span></span>
+<span><span class="co">#&gt; 37      qual_homer1_met qualitative       8</span></span>
+<span><span class="co">#&gt; 39      qual_ingres_met qualitative       8</span></span>
+<span><span class="co">#&gt; 54 qual_morgenstern_met qualitative       8</span></span>
+<span><span class="co">#&gt; 57          qual_nejm_g qualitative       8</span></span>
+<span><span class="co">#&gt; 59      qual_nizami_met qualitative       8</span></span>
+<span><span class="co">#&gt; 74         qual_set2_rb qualitative       8</span></span>
+<span><span class="co">#&gt; 78         qual_tam_met qualitative       8</span></span>
+<span><span class="co">#&gt; 80      qual_thomas_met qualitative       8</span></span>
+<span><span class="co">#&gt; 81     qual_tiepolo_met qualitative       8</span></span>
+<span><span class="co">#&gt; 83        qual_troy_met qualitative       8</span></span>
+<span><span class="co">#&gt; 86    qual_vangogh2_met qualitative       8</span></span>
+<span><span class="co">#&gt; 87    qual_vangogh3_met qualitative       8</span></span>
+<span><span class="co">#&gt; 25       qual_cross_met qualitative       9</span></span>
+<span><span class="co">#&gt; 49        qual_lancet_g qualitative       9</span></span>
+<span><span class="co">#&gt; 52       qual_monet_met qualitative       9</span></span>
+<span><span class="co">#&gt; 73         qual_set1_rb qualitative       9</span></span>
+<span><span class="co">#&gt; 92           qual_vivid qualitative       9</span></span>
+<span><span class="co">#&gt; 23    qual_cassatt2_met qualitative      10</span></span>
+<span><span class="co">#&gt; 24        qual_cosmic_g qualitative      10</span></span>
+<span><span class="co">#&gt; 27      qual_demuth_met qualitative      10</span></span>
+<span><span class="co">#&gt; 31        qual_flatui_g qualitative      10</span></span>
+<span><span class="co">#&gt; 43           qual_jco_g qualitative      10</span></span>
+<span><span class="co">#&gt; 51        qual_mobility qualitative      10</span></span>
+<span><span class="co">#&gt; 60           qual_npg_g qualitative      10</span></span>
+<span><span class="co">#&gt; 50       qual_manet_met qualitative      11</span></span>
+<span><span class="co">#&gt; 61    qual_okeeffe1_met qualitative      11</span></span>
+<span><span class="co">#&gt; 63      qual_paquin_met qualitative      11</span></span>
+<span><span class="co">#&gt; 32      qual_futurama_g qualitative      12</span></span>
+<span><span class="co">#&gt; 71       qual_redon_met qualitative      12</span></span>
+<span><span class="co">#&gt; 72      qual_renoir_met qualitative      12</span></span>
+<span><span class="co">#&gt; 75         qual_set3_rb qualitative      12</span></span>
+<span><span class="co">#&gt; 76      qual_signac_met qualitative      14</span></span>
+<span><span class="co">#&gt; 65         qual_pbmc_sc qualitative      17</span></span>
+<span><span class="co">#&gt; 2             seq_blues  sequential       3</span></span>
+<span><span class="co">#&gt; 3             seq_blush  sequential       4</span></span>
+<span><span class="co">#&gt; 4            seq_forest  sequential       4</span></span>
+<span><span class="co">#&gt; 11            seq_muted  sequential       4</span></span>
+<span><span class="co">#&gt; 6          seq_hokusai2  sequential       6</span></span>
+<span><span class="co">#&gt; 7          seq_hokusai3  sequential       6</span></span>
+<span><span class="co">#&gt; 9         seq_locuszoom  sequential       7</span></span>
+<span><span class="co">#&gt; 8           seq_isfahan  sequential       8</span></span>
+<span><span class="co">#&gt; 10         seq_mobility  sequential       9</span></span>
+<span><span class="co">#&gt; 5         seq_hiroshige  sequential      10</span></span>
+<span><span class="co">#&gt; 1        seq_benedictus  sequential      13</span></span>
 <span><span class="co">#&gt;                                                                                                                                                     colors</span></span>
-<span><span class="co">#&gt; 6                                                                                                                                         #C64328, #56BBA5</span></span>
-<span><span class="co">#&gt; 8                                                                                                                                         #2AA6C6, #C64328</span></span>
-<span><span class="co">#&gt; 11                                                                                                                                        #8CB5D2, #E18E8F</span></span>
-<span><span class="co">#&gt; 12                                                                                                                                        #57A2FF, #FF8000</span></span>
-<span><span class="co">#&gt; 10                                                                                                                         #E64B35B2, #00A087B2, #3C5488B2</span></span>
-<span><span class="co">#&gt; 7                                                                                                              #283618, #606C38, #FEFAE0, #DDA15E, #BC6C25</span></span>
-<span><span class="co">#&gt; 9                                                        #67001f, #b2182b, #d6604d, #f4a582, #fddbc7, #f7f7f7, #d1e5f0, #92c5de, #4393c3, #2166ac, #053061</span></span>
-<span><span class="co">#&gt; 14                                                                                                                               #C64328, #56BBA5, #E3A727</span></span>
-<span><span class="co">#&gt; 26                                                                                                                               #C64328, #2AA6C6, #E3A727</span></span>
-<span><span class="co">#&gt; 31                                                                                                                         #E64B35B2, #00A087B2, #3C5488B2</span></span>
-<span><span class="co">#&gt; 33                                                                                                                               #96A0D9, #D9BDAD, #D9D5A0</span></span>
-<span><span class="co">#&gt; 13                                                                                                                      #5D83B4, #9FD0E8, #CDAE9D, #959683</span></span>
-<span><span class="co">#&gt; 32                                                                                                             #BF3F9D, #B3BCD7, #6DA6A0, #D98A29, #F2C894</span></span>
-<span><span class="co">#&gt; 34                                                                                                             #37848C, #F2935C, #F2A88D, #D95555, #A7CAE9</span></span>
-<span><span class="co">#&gt; 24                                                                                                    #BF3641, #836AA6, #377BA6, #448C42, #D96236, #B79290</span></span>
-<span><span class="co">#&gt; 25                                                                                                    #B2AA76, #8C91CF, #D7D79C, #DABFAC, #BCEDDB, #C380A0</span></span>
-<span><span class="co">#&gt; 18                                                                                           #374E55, #DF8F44, #00A1D5, #B24745, #79AF97, #6A6599, #80796B</span></span>
-<span><span class="co">#&gt; 23                                                                                           #FF410D, #6EE2FF, #F7C530, #95CC5E, #D0DFE6, #F79D1E, #748AA6</span></span>
-<span><span class="co">#&gt; 21                                                                                  #BC3C29, #0072B5, #E18727, #20854E, #7876B1, #6F99AD, #FFDC91, #EE4C97</span></span>
-<span><span class="co">#&gt; 28                                                                                  #66C2A5, #FC8D62, #8DA0CB, #E78AC3, #A6D854, #FFD92F, #E5C494, #B3B3B3</span></span>
-<span><span class="co">#&gt; 20                                                                         #00468B, #ED0000, #42B540, #0099B4, #925E9F, #FDAF91, #AD002A, #ADB6B6, #1B1919</span></span>
-<span><span class="co">#&gt; 27                                                                         #E41A1C, #377EB8, #4DAF4A, #984EA3, #FF7F00, #FFFF33, #A65628, #F781BF, #999999</span></span>
-<span><span class="co">#&gt; 35                                                                         #E64B35, #4DBBD5, #00A087, #3C5488, #F39B7F, #8491B4, #91D1C2, #DC0000, #7E6148</span></span>
-<span><span class="co">#&gt; 15                                                                #2E2A2B, #CF4E9C, #8C57A2, #358DB9, #82581F, #2F509E, #E5614C, #97A1A7, #3DA873, #DC9445</span></span>
-<span><span class="co">#&gt; 16                                                                #c0392b, #d35400, #f39c12, #27ae60, #16a085, #2980b9, #8e44ad, #2c3e50, #7f8c8d, #bdc3c7</span></span>
-<span><span class="co">#&gt; 19                                                                #0073C2, #EFC000, #868686, #CD534C, #7AA6DC, #003C67, #8F7700, #3B3B3B, #A73030, #4A6990</span></span>
-<span><span class="co">#&gt; 22                                                                #E64B35, #4DBBD5, #00A087, #3C5488, #F39B7F, #8491B4, #91D1C2, #DC0000, #7E6148, #B09C85</span></span>
-<span><span class="co">#&gt; 17                                              #FF6F00, #C71000, #008EA0, #8A4198, #5A9599, #FF6348, #84D7E1, #FF95A8, #3D3B25, #ADE2D0, #1A5354, #3F4041</span></span>
-<span><span class="co">#&gt; 29                                              #8DD3C7, #FFFFB3, #BEBADA, #FB8072, #80B1D3, #FDB462, #B3DE69, #FCCDE5, #D9D9D9, #BC80BD, #CCEBC5, #FFED6F</span></span>
-<span><span class="co">#&gt; 30 #a2d2e7, #67a8cd, #ffc17f, #cf9f88, #6fb3a8, #b3e19b, #50aa4b, #ff9d9f, #f36569, #3581b7, #cdb6da, #704ba3, #9a7fbd, #dba9a8, #e40300, #e99b78, #ff8831</span></span>
-<span><span class="co">#&gt; 1                                                                                                                                #deebf7, #9ecae1, #3182bd</span></span>
-<span><span class="co">#&gt; 2                                                                                                                       #B2C9AD, #91AC8F, #66785F, #4B5945</span></span>
-<span><span class="co">#&gt; 4                                                                                                                       #E2E0C8, #A7B49E, #818C78, #5C7285</span></span>
-<span><span class="co">#&gt; 5                                                                                                                       #FFCDB2, #FFB4A2, #E5989B, #B5828C</span></span>
-<span><span class="co">#&gt; 3                                                                                            #D43F3A, #EEA236, #5CB85C, #46B8DA, #357EBD, #9632B8, #B8B8B8</span></span></code></pre></div>
+<span><span class="co">#&gt; 12                                                                                                                                        #C64328, #56BBA5</span></span>
+<span><span class="co">#&gt; 14                                                                                                                                        #2AA6C6, #C64328</span></span>
+<span><span class="co">#&gt; 16                                                                                                                                        #8CB5D2, #E18E8F</span></span>
+<span><span class="co">#&gt; 18                                                                                                                                        #57A2FF, #FF8000</span></span>
+<span><span class="co">#&gt; 15                                                                                                                         #E64B35B2, #00A087B2, #3C5488B2</span></span>
+<span><span class="co">#&gt; 13                                                                                                             #283618, #606C38, #FEFAE0, #DDA15E, #BC6C25</span></span>
+<span><span class="co">#&gt; 17                                                                                           #EDEAE7, #B1CABA, #BBCDD7, #BBAAB6, #6D8092, #504B54, #0E0F0F</span></span>
+<span><span class="co">#&gt; 29                                                                                                                               #C64328, #56BBA5, #E3A727</span></span>
+<span><span class="co">#&gt; 70                                                                                                                               #C64328, #2AA6C6, #E3A727</span></span>
+<span><span class="co">#&gt; 77                                                                                                                         #E64B35B2, #00A087B2, #3C5488B2</span></span>
+<span><span class="co">#&gt; 90                                                                                                                               #96A0D9, #D9BDAD, #D9D5A0</span></span>
+<span><span class="co">#&gt; 21                                                                                                                      #5D83B4, #9FD0E8, #CDAE9D, #959683</span></span>
+<span><span class="co">#&gt; 30                                                                                                                      #dd5129, #0f7ba2, #43b284, #fab255</span></span>
+<span><span class="co">#&gt; 46                                                                                                                      #3b7c70, #ce9642, #898e9f, #3b3a3e</span></span>
+<span><span class="co">#&gt; 34                                                                                                             #3c0d03, #8d1c06, #e67424, #ed9b49, #f5c34d</span></span>
+<span><span class="co">#&gt; 40                                                                                                             #d7aca1, #ddc000, #79ad41, #34b6c6, #4063a3</span></span>
+<span><span class="co">#&gt; 42                                                                                                             #663171, #cf3a36, #ea7428, #e2998a, #0c7156</span></span>
+<span><span class="co">#&gt; 44                                                                                                             #a00e00, #d04e00, #f6c200, #0086a8, #132b69</span></span>
+<span><span class="co">#&gt; 56                                                                                                             #660d20, #e59a52, #edce79, #094568, #e1c59a</span></span>
+<span><span class="co">#&gt; 58                                                                                                             #e1846c, #9eb4e0, #e6bb9e, #9c6849, #735852</span></span>
+<span><span class="co">#&gt; 79                                                                                                             #eab1c6, #d35e17, #e18a1f, #e9b109, #829d44</span></span>
+<span><span class="co">#&gt; 89                                                                                                             #BF3F9D, #B3BCD7, #6DA6A0, #D98A29, #F2C894</span></span>
+<span><span class="co">#&gt; 91                                                                                                             #37848C, #F2935C, #F2A88D, #D95555, #A7CAE9</span></span>
+<span><span class="co">#&gt; 93                                                                                                             #4b1d0d, #7c291e, #ba7233, #3a4421, #2d5380</span></span>
+<span><span class="co">#&gt; 33                                                                                                    #b04948, #811e18, #9e4013, #c88a2c, #4c6216, #1a472a</span></span>
+<span><span class="co">#&gt; 35                                                                                                    #BF3641, #836AA6, #377BA6, #448C42, #D96236, #B79290</span></span>
+<span><span class="co">#&gt; 38                                                                                                    #bf3626, #e9851d, #f9c53b, #aeac4c, #788f33, #165d43</span></span>
+<span><span class="co">#&gt; 45                                                                                                    #a82203, #208cc0, #f1af3a, #cf5e4e, #637b31, #003967</span></span>
+<span><span class="co">#&gt; 47                                                                                                    #df9ed4, #c93f55, #eacc62, #469d76, #3c4b99, #924099</span></span>
+<span><span class="co">#&gt; 48                                                                                                    #04a3bd, #f0be3d, #931e18, #da7901, #247d3f, #20235b</span></span>
+<span><span class="co">#&gt; 64                                                                                                    #B2AA76, #8C91CF, #D7D79C, #DABFAC, #BCEDDB, #C380A0</span></span>
+<span><span class="co">#&gt; 66                                                                                                    #b5361c, #e35e28, #1c9d7c, #31c7ba, #369cc9, #3a507f</span></span>
+<span><span class="co">#&gt; 67                                                                                                    #65150b, #961f1f, #c0431f, #f19425, #c59349, #533d14</span></span>
+<span><span class="co">#&gt; 68                                                                                                    #a9845b, #697852, #738e8e, #44636f, #2b4655, #0f252f</span></span>
+<span><span class="co">#&gt; 19                                                                                           #88a0dc, #381a61, #7c4b73, #ed968c, #ab3329, #e78429, #f9d14a</span></span>
+<span><span class="co">#&gt; 20                                                                                           #a40000, #16317d, #007e2f, #ffcd12, #b86092, #721b3e, #00b7a7</span></span>
+<span><span class="co">#&gt; 26                                                                                           #591d06, #96410e, #e5a335, #556219, #418979, #2b614e, #053c29</span></span>
+<span><span class="co">#&gt; 28                                                                                           #efc86e, #97c684, #6f9969, #aab5d5, #808fe1, #5c66a8, #454a74</span></span>
+<span><span class="co">#&gt; 36                                                                                           #6d2f20, #b75347, #df7e66, #e09351, #edc775, #94b594, #224b5e</span></span>
+<span><span class="co">#&gt; 41                                                                                           #374E55, #DF8F44, #00A1D5, #B24745, #79AF97, #6A6599, #80796B</span></span>
+<span><span class="co">#&gt; 53                                                                                           #421600, #792504, #bc7524, #8dadca, #527baa, #104839, #082844</span></span>
+<span><span class="co">#&gt; 55                                                                                           #52271c, #944839, #c08e39, #7f793c, #565c33, #184948, #022a2a</span></span>
+<span><span class="co">#&gt; 62                                                                                           #fbe3c2, #f2c88f, #ecb27d, #e69c6b, #d37750, #b9563f, #92351e</span></span>
+<span><span class="co">#&gt; 69                                                                                           #134130, #4c825d, #8cae9e, #8dc7dc, #508ca7, #1a5270, #0e2a4d</span></span>
+<span><span class="co">#&gt; 82                                                                                           #FF410D, #6EE2FF, #F7C530, #95CC5E, #D0DFE6, #F79D1E, #748AA6</span></span>
+<span><span class="co">#&gt; 84                                                                                           #582310, #aa361d, #82c45f, #318f49, #0cb4bb, #2673a3, #473d7d</span></span>
+<span><span class="co">#&gt; 85                                                                                           #2c2d54, #434475, #6b6ca3, #969bc7, #87bcbd, #89ab7c, #6f9954</span></span>
+<span><span class="co">#&gt; 88                                                                                           #67322e, #99610a, #c38f16, #6e948c, #2c6b67, #175449, #122c43</span></span>
+<span><span class="co">#&gt; 22                                                                                  #b1615c, #d88782, #e3aba7, #edd7d9, #c9c9dd, #9d9dc7, #8282aa, #5a5a83</span></span>
+<span><span class="co">#&gt; 37                                                                                  #551f00, #a62f00, #df7700, #f5b642, #fff179, #c3f4f6, #6ad5e8, #32b2da</span></span>
+<span><span class="co">#&gt; 39                                                                                  #041d2c, #06314e, #18527e, #2e77ab, #d1b252, #a97f2f, #7e5522, #472c0b</span></span>
+<span><span class="co">#&gt; 54                                                                                  #98768e, #b08ba5, #c7a2b6, #dfbbc8, #ffc680, #ffb178, #db8872, #a56457</span></span>
+<span><span class="co">#&gt; 57                                                                                  #BC3C29, #0072B5, #E18727, #20854E, #7876B1, #6F99AD, #FFDC91, #EE4C97</span></span>
+<span><span class="co">#&gt; 59                                                                                  #dd7867, #b83326, #c8570d, #edb144, #8cc8bc, #7da7ea, #5773c0, #1d4497</span></span>
+<span><span class="co">#&gt; 74                                                                                  #66C2A5, #FC8D62, #8DA0CB, #E78AC3, #A6D854, #FFD92F, #E5C494, #B3B3B3</span></span>
+<span><span class="co">#&gt; 78                                                                                  #ffd353, #ffb242, #ef8737, #de4f33, #bb292c, #9f2d55, #62205f, #341648</span></span>
+<span><span class="co">#&gt; 80                                                                                  #b24422, #c44d76, #4457a5, #13315f, #b1a1cc, #59386c, #447861, #7caf5c</span></span>
+<span><span class="co">#&gt; 81                                                                                  #802417, #c06636, #ce9344, #e8b960, #646e3b, #2b5851, #508ea2, #17486f</span></span>
+<span><span class="co">#&gt; 83                                                                                  #421401, #6c1d0e, #8b3a2b, #c27668, #7ba0b4, #44728c, #235070, #0a2d46</span></span>
+<span><span class="co">#&gt; 86                                                                                  #bd3106, #d9700e, #e9a00e, #eebe04, #5b7314, #c3d6ce, #89a6bb, #454b87</span></span>
+<span><span class="co">#&gt; 87                                                                                  #e7e5cc, #c2d6a4, #9cc184, #669d62, #3c7c3d, #1f5b25, #1e3d14, #192813</span></span>
+<span><span class="co">#&gt; 25                                                                         #c969a1, #ce4441, #ee8577, #eb7926, #ffbb44, #859b6c, #62929a, #004f63, #122451</span></span>
+<span><span class="co">#&gt; 49                                                                         #00468B, #ED0000, #42B540, #0099B4, #925E9F, #FDAF91, #AD002A, #ADB6B6, #1B1919</span></span>
+<span><span class="co">#&gt; 52                                                                         #4e6d58, #749e89, #abccbe, #e3cacf, #c399a2, #9f6e71, #41507b, #7d87b2, #c2cae3</span></span>
+<span><span class="co">#&gt; 73                                                                         #E41A1C, #377EB8, #4DAF4A, #984EA3, #FF7F00, #FFFF33, #A65628, #F781BF, #999999</span></span>
+<span><span class="co">#&gt; 92                                                                         #E64B35, #4DBBD5, #00A087, #3C5488, #F39B7F, #8491B4, #91D1C2, #DC0000, #7E6148</span></span>
+<span><span class="co">#&gt; 23                                                                #2d223c, #574571, #90719f, #b695bc, #dec5da, #c1d1aa, #7fa074, #466c4b, #2c4b27, #0e2810</span></span>
+<span><span class="co">#&gt; 24                                                                #2E2A2B, #CF4E9C, #8C57A2, #358DB9, #82581F, #2F509E, #E5614C, #97A1A7, #3DA873, #DC9445</span></span>
+<span><span class="co">#&gt; 27                                                                #591c19, #9b332b, #b64f32, #d39a2d, #f7c267, #b9b9b8, #8b8b99, #5d6174, #41485f, #262d42</span></span>
+<span><span class="co">#&gt; 31                                                                #c0392b, #d35400, #f39c12, #27ae60, #16a085, #2980b9, #8e44ad, #2c3e50, #7f8c8d, #bdc3c7</span></span>
+<span><span class="co">#&gt; 43                                                                #0073C2, #EFC000, #868686, #CD534C, #7AA6DC, #003C67, #8F7700, #3B3B3B, #A73030, #4A6990</span></span>
+<span><span class="co">#&gt; 51                                                                #f7fbff, #deebf7, #c6dbef, #9ecae1, #6baed6, #4292c6, #2171b5, #08519c, #08306b, #fdbf6f</span></span>
+<span><span class="co">#&gt; 60                                                                #E64B35, #4DBBD5, #00A087, #3C5488, #F39B7F, #8491B4, #91D1C2, #DC0000, #7E6148, #B09C85</span></span>
+<span><span class="co">#&gt; 50                                                       #3b2319, #80521c, #d29c44, #ebc174, #ede2cc, #7ec5f4, #4585b7, #225e92, #183571, #43429b, #5e65be</span></span>
+<span><span class="co">#&gt; 61                                                       #6b200c, #973d21, #da6c42, #ee956a, #fbc2a9, #f6f2ee, #bad6f9, #7db0ea, #447fdd, #225bb2, #133e7e</span></span>
+<span><span class="co">#&gt; 63                                                       #831818, #c62320, #f05b43, #f78462, #feac81, #f7dea3, #ced1af, #98ab76, #748f46, #47632a, #275024</span></span>
+<span><span class="co">#&gt; 32                                              #FF6F00, #C71000, #008EA0, #8A4198, #5A9599, #FF6348, #84D7E1, #FF95A8, #3D3B25, #ADE2D0, #1A5354, #3F4041</span></span>
+<span><span class="co">#&gt; 71                                              #5b859e, #1e395f, #75884b, #1e5a46, #df8d71, #af4f2f, #d48f90, #732f30, #ab84a5, #59385c, #d8b847, #b38711</span></span>
+<span><span class="co">#&gt; 72                                              #17154f, #2f357c, #6c5d9e, #9d9cd5, #b0799a, #f6b3b0, #e48171, #bf3729, #e69b00, #f5bb50, #ada43b, #355828</span></span>
+<span><span class="co">#&gt; 75                                              #8DD3C7, #FFFFB3, #BEBADA, #FB8072, #80B1D3, #FDB462, #B3DE69, #FCCDE5, #D9D9D9, #BC80BD, #CCEBC5, #FFED6F</span></span>
+<span><span class="co">#&gt; 76                            #fbe183, #f4c40f, #fe9b00, #d8443c, #9b3441, #de597c, #e87b89, #e6a2a6, #aa7aa1, #9f5691, #633372, #1f6e9c, #2b9b81, #92c051</span></span>
+<span><span class="co">#&gt; 65 #a2d2e7, #67a8cd, #ffc17f, #cf9f88, #6fb3a8, #b3e19b, #50aa4b, #ff9d9f, #f36569, #3581b7, #cdb6da, #704ba3, #9a7fbd, #dba9a8, #e40300, #e99b78, #ff8831</span></span>
+<span><span class="co">#&gt; 2                                                                                                                                #deebf7, #9ecae1, #3182bd</span></span>
+<span><span class="co">#&gt; 3                                                                                                                       #FFCDB2, #FFB4A2, #E5989B, #B5828C</span></span>
+<span><span class="co">#&gt; 4                                                                                                                       #B2C9AD, #91AC8F, #66785F, #4B5945</span></span>
+<span><span class="co">#&gt; 11                                                                                                                      #E2E0C8, #A7B49E, #818C78, #5C7285</span></span>
+<span><span class="co">#&gt; 6                                                                                                     #abc9c8, #72aeb6, #4692b0, #2f70a1, #134b73, #0a3351</span></span>
+<span><span class="co">#&gt; 7                                                                                                     #d8d97a, #95c36e, #74c8c3, #5a97c1, #295384, #0a2e57</span></span>
+<span><span class="co">#&gt; 9                                                                                            #D43F3A, #EEA236, #5CB85C, #46B8DA, #357EBD, #9632B8, #B8B8B8</span></span>
+<span><span class="co">#&gt; 8                                                                                   #4e3910, #845d29, #ae8548, #e3c28b, #4fb6ca, #178f92, #175f5d, #054544</span></span>
+<span><span class="co">#&gt; 10                                                                         #f7fbff, #deebf7, #c6dbef, #9ecae1, #6baed6, #4292c6, #2171b5, #08519c, #08306b</span></span>
+<span><span class="co">#&gt; 5                                                                 #e76254, #ef8a47, #f7aa58, #ffd06f, #ffe6b7, #aadce0, #72bcd5, #528fad, #376795, #1e466e</span></span>
+<span><span class="co">#&gt; 1                                      #9a133d, #b93961, #d8527c, #f28aaa, #f9b4c9, #f9e0e8, #ffffff, #eaf3ff, #c5daf6, #a1c2ed, #6996e3, #4060c8, #1a318b</span></span></code></pre></div>
 </div>
 <div class="section level4">
 <h4 id="using-color-palettes">Using Color Palettes<a class="anchor" aria-label="anchor" href="#using-color-palettes"></a>
 </h4>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Get specific palettes</span></span>
-<span><span class="va">vivid_colors</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_palette.html">get_palette</a></span><span class="op">(</span><span class="st">"vividset"</span>, type <span class="op">=</span> <span class="st">"qualitative"</span><span class="op">)</span></span>
-<span><span class="va">blues_gradient</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_palette.html">get_palette</a></span><span class="op">(</span><span class="st">"blues"</span>, type <span class="op">=</span> <span class="st">"sequential"</span><span class="op">)</span></span>
+<span><span class="va">vivid_colors</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_palette.html">get_palette</a></span><span class="op">(</span><span class="st">"qual_vivid"</span>, type <span class="op">=</span> <span class="st">"qualitative"</span><span class="op">)</span></span>
+<span><span class="va">blues_gradient</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_palette.html">get_palette</a></span><span class="op">(</span><span class="st">"seq_blues"</span>, type <span class="op">=</span> <span class="st">"sequential"</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="st">"Vivid qualitative palette:\n"</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Vivid qualitative palette:</span></span>
@@ -353,7 +469,7 @@ Venn diagram example
 <span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Create bar plot with custom colors</span></span>
-<span><span class="va">vivid_colors</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_palette.html">get_palette</a></span><span class="op">(</span><span class="st">"vividset"</span>, type <span class="op">=</span> <span class="st">"qualitative"</span><span class="op">)</span></span>
+<span><span class="va">vivid_colors</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_palette.html">get_palette</a></span><span class="op">(</span><span class="st">"qual_vivid"</span>, type <span class="op">=</span> <span class="st">"qualitative"</span><span class="op">)</span></span>
 <span><span class="va">bar_plot</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/plot_bar.html">plot_bar</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">sample_data</span>,</span>
 <span>                     x <span class="op">=</span> <span class="st">"Category"</span>,</span>
 <span>                     y <span class="op">=</span> <span class="st">"Count"</span>,</span>
@@ -416,12 +532,12 @@ Professional bar plot
 <span><span class="co">#&gt; [1] "A" ""  "C" NA  "E"</span></span>
 <span></span>
 <span><span class="co"># Check for void values</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="st">"\nAny void values:"</span>, <span class="fu"><a href="../reference/any_void.html">any_void</a></span><span class="op">(</span><span class="va">messy_vector</span><span class="op">)</span>, <span class="st">"\n"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="st">"\nAny void values:"</span>, <span class="fu"><a href="../reference/void.html">any_void</a></span><span class="op">(</span><span class="va">messy_vector</span><span class="op">)</span>, <span class="st">"\n"</span><span class="op">)</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; Any void values: TRUE</span></span>
 <span></span>
 <span><span class="co"># Replace void values</span></span>
-<span><span class="va">clean_vector</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/replace_void.html">replace_void</a></span><span class="op">(</span><span class="va">messy_vector</span>, value <span class="op">=</span> <span class="st">"MISSING"</span><span class="op">)</span></span>
+<span><span class="va">clean_vector</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/void.html">replace_void</a></span><span class="op">(</span><span class="va">messy_vector</span>, value <span class="op">=</span> <span class="st">"MISSING"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="st">"After replacing voids:"</span><span class="op">)</span></span>
 <span><span class="co">#&gt; [1] "After replacing voids:"</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">clean_vector</span><span class="op">)</span></span>
@@ -510,8 +626,8 @@ Professional bar plot
 <span><span class="co">#&gt;     cli::cli_alert_success("{name} completed in {sprintf('%.3f', elapsed)} seconds")</span></span>
 <span><span class="co">#&gt;     invisible(result)</span></span>
 <span><span class="co">#&gt; }</span></span>
-<span><span class="co">#&gt; &lt;bytecode: 0x55a8695e6e38&gt;</span></span>
-<span><span class="co">#&gt; &lt;environment: 0x55a8695e9fd8&gt;</span></span></code></pre></div>
+<span><span class="co">#&gt; &lt;bytecode: 0x56300e276320&gt;</span></span>
+<span><span class="co">#&gt; &lt;environment: 0x56300e26a3c8&gt;</span></span></code></pre></div>
 </div>
 <div class="section level4">
 <h4 id="safe-execution">Safe Execution<a class="anchor" aria-label="anchor" href="#safe-execution"></a>
