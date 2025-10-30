@@ -17,7 +17,7 @@
 #'
 #' Recommended workflow:
 #' \enumerate{
-#'   \item [Optional] Configure mirrors: \code{set_mirror()}
+#'   \item (Optional) Configure mirrors: \code{set_mirror()}
 #'   \item Install packages: \code{inst_pkg()}
 #'   \item Check status: \code{check_pkg()}
 #'   \item Update packages: \code{update_pkg()}
@@ -492,36 +492,28 @@ update_pkg <- function(pkg = NULL, source = NULL, ...) {
   }
 
   # ===========================================================================
-  # Step 2: Check and Auto-upgrade Bioconductor Version
+  # Step 2: Update BiocManager and Upgrade Bioconductor
   # ===========================================================================
 
   # Only check for Bioconductor-related operations
   if (is.null(source) || source == "Bioconductor") {
     .ensure_biocmanager()
 
-    # Get expected Bioc version for current R
-    r_version <- paste0(R.version$major, ".", R.version$minor)
-    bioc_expected <- .get_expected_bioc_version()
-    bioc_current <- as.character(BiocManager::version())
+    # Step 1: Update BiocManager package itself (CRAN package)
+    cli::cli_alert_info("Checking for BiocManager package updates from CRAN...")
+    utils::update.packages("BiocManager", ask = FALSE)
 
-    if (!is.null(bioc_expected) && bioc_current != bioc_expected) {
-      cli::cli_alert_warning(
-        "Bioconductor version mismatch detected"
-      )
-      cli::cli_alert_info(
-        "Current: {.val {bioc_current}} | Expected for R {r_version}: {.val {bioc_expected}}"
-      )
+    # Step 2: Get expected Bioconductor version from updated BiocManager
+    # Reason: Latest BiocManager knows the correct version for current R
+    bioc_expected_version <- as.character(BiocManager::version())
 
-      # Step 1: Update BiocManager package itself (CRAN package)
-      cli::cli_alert_info("Updating BiocManager package from CRAN...")
-      utils::update.packages("BiocManager", ask = FALSE)
+    # Step 3: Upgrade Bioconductor packages to the expected version
+    cli::cli_alert_info("Upgrading Bioconductor packages to version {bioc_expected_version}...")
+    BiocManager::install(ask = FALSE)
 
-      # Step 2: Upgrade Bioconductor version
-      cli::cli_alert_info("Upgrading Bioconductor to version {bioc_expected}...")
-      BiocManager::install(version = bioc_expected, ask = FALSE)
-
-      cli::cli_alert_success("Bioconductor upgraded: {bioc_current} \u2192 {bioc_expected}")
-    }
+    cli::cli_alert_success(
+      "Bioconductor packages upgraded to version {bioc_expected_version}."
+    )
   }
 
   # ===========================================================================
@@ -892,44 +884,4 @@ pkg_functions <- function(pkg, key = NULL) {
     )
   }
   invisible(NULL)
-}
-
-
-#' @title Get Expected Bioconductor Version
-#' @description
-#' Internal function to determine the expected Bioconductor version
-#' for the current R version using BiocManager's version map.
-#' If multiple versions exist for one R version, returns the latest.
-#'
-#' @return Character or NULL. Bioconductor version string.
-#'
-#' @keywords internal
-#' @noRd
-.get_expected_bioc_version <- function() {
-  # Get current R version
-  r_version <- paste0(R.version$major, ".", R.version$minor)
-
-  # Get version mapping from BiocManager
-  version_map <- tryCatch(
-    BiocManager:::.version_map(),
-    error = function(e) NULL
-  )
-
-  if (is.null(version_map)) {
-    return(NULL)
-  }
-
-  # Find all Bioc versions matching current R version
-  matched <- version_map[version_map$R == r_version, ]
-
-  if (nrow(matched) == 0) {
-    return(NULL)
-  }
-
-  # Select the latest Bioc version (highest version number)
-  # Reason: For R 4.4, there might be 3.19 and 3.20, we want 3.20
-  bioc_versions <- as.numeric_version(matched$Bioc)
-  latest_idx <- which.max(bioc_versions)
-
-  return(as.character(matched$Bioc[latest_idx]))
 }
