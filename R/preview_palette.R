@@ -17,13 +17,13 @@
 #' @examples
 #' \donttest{
 #' # Preview sequential palette:
-#' preview_palette("blues", type = "sequential", plot_type = "bar")
+#' preview_palette("seq_blues", type = "sequential", plot_type = "bar")
 #'
 #' # Preview diverging palette:
-#' preview_palette("fire_ice_duo", type = "diverging", plot_type = "pie")
+#' preview_palette("div_fireice", type = "diverging", plot_type = "pie")
 #'
 #' # Preview qualitative palette with custom colors:
-#' preview_palette("balanced_quartet", type = "qualitative", n = 4, plot_type = "circle")
+#' preview_palette("qual_vivid", type = "qualitative", n = 4, plot_type = "circle")
 #' }
 preview_palette <- function(name,
                             type = c("sequential", "diverging", "qualitative"),

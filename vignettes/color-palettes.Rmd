@@ -190,18 +190,18 @@ bio_palette_gallery()
 ### Basic Retrieval
 
 ```{r retrieve-palettes}
-# Type is automatically inferred from name prefix
-vivid_colors <- get_palette("qual_vivid")
+# Specify type explicitly for clarity
+vivid_colors <- get_palette("qual_vivid", type = "qualitative")
 cat("qual_vivid palette:\n")
 print(vivid_colors)
 
 # Get specific number of colors
-blues_5 <- get_palette("seq_blues", n = 5)
-cat("\nseq_blues (5 colors):\n")
-print(blues_5)
+blues_3 <- get_palette("seq_blues", type = "sequential", n = 3)
+cat("\nseq_blues (3 colors):\n")
+print(blues_3)
 
 # Get all available colors (omit n parameter)
-blues_all <- get_palette("seq_blues")
+blues_all <- get_palette("seq_blues", type = "sequential")
 cat("\nseq_blues (all", length(blues_all), "colors):\n")
 print(blues_all)
 ```
@@ -336,7 +336,7 @@ category_data <- data.frame(
 )
 
 # Use qualitative palette
-qual_colors <- get_palette("qual_vivid", n = 5)
+qual_colors <- get_palette("qual_vivid", type = "qualitative", n = 5)
 
 ggplot(category_data, aes(x = Group, y = Value, fill = Group)) +
   geom_boxplot(alpha = 0.8, outlier.alpha = 0.6) +
@@ -367,7 +367,7 @@ expr_long <- expand.grid(Gene = genes, Sample = samples)
 expr_long$Expression <- as.vector(expr_matrix)
 
 # Use sequential palette
-seq_colors <- get_palette("seq_blues", n = 9)
+seq_colors <- get_palette("seq_mobility", type = "sequential")
 
 ggplot(expr_long, aes(x = Sample, y = Gene, fill = Expression)) +
   geom_tile(color = "white", linewidth = 0.5) +
@@ -395,7 +395,7 @@ fc_data <- data.frame(
 )
 
 # Use diverging palette
-div_colors <- get_palette("div_fireice", n = 11)
+div_colors <- get_palette("div_fireice", type = "diverging")
 
 ggplot(fc_data, aes(x = Sample, y = Gene, fill = LogFC)) +
   geom_tile(color = "white", linewidth = 0.3) +
@@ -453,7 +453,7 @@ omics_data <- data.frame(
 )
 
 # Use qualitative palette for data types
-omics_colors <- get_palette("qual_vivid", n = 3)
+omics_colors <- get_palette("qual_vivid", type = "qualitative", n = 3)
 names(omics_colors) <- c("Transcriptome", "Proteome", "Metabolome")
 
 ggplot(omics_data, aes(x = Sample, y = Intensity, fill = DataType)) +
@@ -481,7 +481,7 @@ ggplot(omics_data, aes(x = Sample, y = Intensity, fill = DataType)) +
 
 ```{r interpolation, fig.cap="Creating custom gradients through color interpolation"}
 # Get base colors from qualitative palette
-base_colors <- get_palette("qual_vivid", n = 3)
+base_colors <- get_palette("qual_vivid", type = "qualitative", n = 3)
 
 # Interpolate to create smooth gradient
 custom_gradient <- colorRampPalette(base_colors[1:2])(10)
