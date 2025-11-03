@@ -54,6 +54,7 @@ Suggests:
     Biobase,
     GEOquery,
     biomaRt,
+    car,
     knitr,
     rmarkdown,
     testthat (>= 3.0.0),
