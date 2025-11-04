@@ -286,6 +286,16 @@ reference:
   - plot_pie
   - plot_density
 
+- title: "Statistical Analysis"
+  desc: >
+    Intelligent statistical testing functions with automatic method selection,
+    assumption checking, and publication-ready visualizations. Streamline
+    your statistical workflows with smart defaults.
+  contents:
+  - quick_ttest
+  - print.quick_ttest_result
+  - summary.quick_ttest_result
+
 - title: "Color Palettes & Management"
   desc: >
     Bioinformatics-focused color palette system with creation,
