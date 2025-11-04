@@ -88,8 +88,7 @@ An object of class \code{quick_ttest_result} containing:
 \description{
 Perform t-test or Wilcoxon test (automatically selected based on data
 characteristics and sample size) with publication-ready visualization.
-Designed for comparing \strong{two groups only}. For multiple group comparisons,
-use \code{quick_anova()} instead.
+Designed for comparing \strong{two groups only}.
 }
 \details{
 \strong{"Quick" means easy to use, not simplified or inaccurate.}
@@ -135,8 +134,7 @@ The plot includes:
 
 \itemize{
 \item \strong{Two groups only}: This function requires exactly 2 levels in
-the grouping variable. For multiple group comparisons, use
-\code{quick_anova()} instead.
+the grouping variable.
 \item \strong{Sample size warnings}: The function will warn if sample sizes
 are very small (< 5) or highly unbalanced (ratio > 3:1).
 \item \strong{Missing values}: Automatically removed with a warning.
@@ -194,6 +192,5 @@ summary(result)          # Detailed summary
 
 }
 \seealso{
-\code{\link[stats]{t.test}}, \code{\link[stats]{wilcox.test}},
-\code{\link{quick_anova}} for multiple group comparisons
+\code{\link[stats]{t.test}}, \code{\link[stats]{wilcox.test}}
 }

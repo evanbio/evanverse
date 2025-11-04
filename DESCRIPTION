@@ -44,6 +44,7 @@ Imports:
     rlang,
     withr,
     ggpubr,
+    magrittr,
     utils,
     tools,
     stats,

@@ -2,8 +2,7 @@
 #'
 #' Perform t-test or Wilcoxon test (automatically selected based on data
 #' characteristics and sample size) with publication-ready visualization.
-#' Designed for comparing **two groups only**. For multiple group comparisons,
-#' use \code{quick_anova()} instead.
+#' Designed for comparing **two groups only**.
 #'
 #' @param data A data frame containing the variables.
 #' @param group Column name for the grouping variable (must have exactly 2 levels).
@@ -89,8 +88,7 @@
 #'
 #' \itemize{
 #'   \item \strong{Two groups only}: This function requires exactly 2 levels in
-#'     the grouping variable. For multiple group comparisons, use
-#'     \code{quick_anova()} instead.
+#'     the grouping variable.
 #'   \item \strong{Sample size warnings}: The function will warn if sample sizes
 #'     are very small (< 5) or highly unbalanced (ratio > 3:1).
 #'   \item \strong{Missing values}: Automatically removed with a warning.
@@ -145,10 +143,12 @@
 #' result$test_result       # htest object
 #' summary(result)          # Detailed summary
 #'
+#' @importFrom magrittr %>%
+#' @importFrom rlang .data
+#' @importFrom stats complete.cases median sd
 #' @export
 #' @seealso
-#' \code{\link[stats]{t.test}}, \code{\link[stats]{wilcox.test}},
-#' \code{\link{quick_anova}} for multiple group comparisons
+#' \code{\link[stats]{t.test}}, \code{\link[stats]{wilcox.test}}
 quick_ttest <- function(data,
                         group,
                         value,
@@ -271,8 +271,7 @@ quick_ttest <- function(data,
     cli::cli_abort(
       c(
         "{.fn quick_ttest} requires exactly 2 groups.",
-        "i" = "Found {n_groups} group{?s}: {.val {group_levels}}",
-        "i" = "For multiple group comparisons, use {.fn quick_anova} instead."
+        "i" = "Found {n_groups} group{?s}: {.val {group_levels}}"
       )
     )
   }
@@ -281,12 +280,12 @@ quick_ttest <- function(data,
   if (paired) {
     # Check each ID appears exactly once in each group
     id_counts <- df %>%
-      dplyr::group_by(id, group) %>%
+      dplyr::group_by(.data$id, .data$group) %>%
       dplyr::summarise(n = dplyr::n(), .groups = "drop")
 
     # Check for IDs appearing more than once per group
     duplicated_ids <- id_counts %>%
-      dplyr::filter(n > 1)
+      dplyr::filter(.data$n > 1)
 
     if (nrow(duplicated_ids) > 0) {
       cli::cli_abort(
@@ -299,11 +298,11 @@ quick_ttest <- function(data,
 
     # Check for IDs not appearing in both groups
     id_group_counts <- df %>%
-      dplyr::group_by(id) %>%
-      dplyr::summarise(n_groups = dplyr::n_distinct(group), .groups = "drop")
+      dplyr::group_by(.data$id) %>%
+      dplyr::summarise(n_groups = dplyr::n_distinct(.data$group), .groups = "drop")
 
     unpaired_ids <- id_group_counts %>%
-      dplyr::filter(n_groups != 2)
+      dplyr::filter(.data$n_groups != 2)
 
     if (nrow(unpaired_ids) > 0) {
       cli::cli_abort(
@@ -316,7 +315,7 @@ quick_ttest <- function(data,
 
     # Sort data by id and group to ensure proper pairing
     df <- df %>%
-      dplyr::arrange(id, group)
+      dplyr::arrange(.data$id, .data$group)
 
     if (verbose) {
       cli::cli_alert_success(
@@ -330,14 +329,14 @@ quick_ttest <- function(data,
   # ===========================================================================
 
   desc_stats <- df %>%
-    dplyr::group_by(group) %>%
+    dplyr::group_by(.data$group) %>%
     dplyr::summarise(
       n = dplyr::n(),
-      mean = mean(value, na.rm = TRUE),
-      sd = sd(value, na.rm = TRUE),
-      median = median(value, na.rm = TRUE),
-      min = min(value, na.rm = TRUE),
-      max = max(value, na.rm = TRUE),
+      mean = mean(.data$value, na.rm = TRUE),
+      sd = sd(.data$value, na.rm = TRUE),
+      median = median(.data$value, na.rm = TRUE),
+      min = min(.data$value, na.rm = TRUE),
+      max = max(.data$value, na.rm = TRUE),
       .groups = "drop"
     )
 
@@ -453,8 +452,8 @@ quick_ttest <- function(data,
 
       # Match pairs using ID (data is already sorted by id and group)
       df_wide <- df %>%
-        dplyr::select(id, group, value) %>%
-        tidyr::pivot_wider(names_from = group, values_from = value)
+        dplyr::select("id", "group", "value") %>%
+        tidyr::pivot_wider(names_from = "group", values_from = "value")
 
       x <- df_wide[[as.character(group_levels[1])]]
       y <- df_wide[[as.character(group_levels[2])]]
@@ -483,8 +482,8 @@ quick_ttest <- function(data,
 
       # Match pairs using ID (data is already sorted by id and group)
       df_wide <- df %>%
-        dplyr::select(id, group, value) %>%
-        tidyr::pivot_wider(names_from = group, values_from = value)
+        dplyr::select("id", "group", "value") %>%
+        tidyr::pivot_wider(names_from = "group", values_from = "value")
 
       x <- df_wide[[as.character(group_levels[1])]]
       y <- df_wide[[as.character(group_levels[2])]]
@@ -614,8 +613,8 @@ quick_ttest <- function(data,
     # Calculate differences using ID matching (safe approach)
     # Data is already sorted by id and group from validation step
     df_wide <- df %>%
-      dplyr::select(id, group, value) %>%
-      tidyr::pivot_wider(names_from = group, values_from = value)
+      dplyr::select("id", "group", "value") %>%
+      tidyr::pivot_wider(names_from = "group", values_from = "value")
 
     group1_col <- as.character(groups[1])
     group2_col <- as.character(groups[2])
@@ -962,7 +961,7 @@ quick_ttest <- function(data,
   }
 
   # Base plot
-  p <- ggplot2::ggplot(data, ggplot2::aes(x = group, y = value, fill = group))
+  p <- ggplot2::ggplot(data, ggplot2::aes(x = .data$group, y = .data$value, fill = .data$group))
 
   # Add plot layers based on type
   if (plot_type == "boxplot") {
@@ -988,8 +987,8 @@ quick_ttest <- function(data,
   # Add statistical comparison using the already-computed p-value
   if (show_p_value) {
     # Calculate y position for p-value label (slightly above the highest data point)
-    y_max <- max(data$value, na.rm = TRUE)
-    y_min <- min(data$value, na.rm = TRUE)
+    y_max <- max(data[["value"]], na.rm = TRUE)
+    y_min <- min(data[["value"]], na.rm = TRUE)
     y_range <- y_max - y_min
     y_position <- y_max + y_range * 0.15
 
