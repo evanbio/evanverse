@@ -20,7 +20,7 @@ These 5 badges appear in the main README, chosen for maximum signal and minimal 
 | ![R-CMD-check](https://github.com/evanbio/evanverse/actions/workflows/R-CMD-check.yaml/badge.svg) | Build status | Real-time quality assurance across 5 platforms - critical for user confidence |
 | ![Codecov](https://codecov.io/gh/evanbio/evanverse/branch/main/graph/badge.svg) | Test coverage | Code quality indicator - shows how well-tested the package is |
 | ![Lifecycle](https://img.shields.io/badge/lifecycle-stable-brightgreen.svg) | Maturity stage | Indicates production readiness - crucial for enterprise adoption |
-| ![License](https://img.shields.io/badge/License-MIT-blue.svg) | Open source license | Legal clarity - essential for commercial use decisions |
+| ![Downloads](https://cranlogs.r-pkg.org/badges/grand-total/evanverse) | Total downloads | Shows package adoption and community usage - indicator of reliability and trustworthiness |
 
 ### Badge Markdown
 
@@ -29,7 +29,7 @@ These 5 badges appear in the main README, chosen for maximum signal and minimal 
 [![R-CMD-check](https://github.com/evanbio/evanverse/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/evanbio/evanverse/actions/workflows/R-CMD-check.yaml)
 [![Codecov](https://codecov.io/gh/evanbio/evanverse/branch/main/graph/badge.svg)](https://codecov.io/gh/evanbio/evanverse?branch=main)
 [![Lifecycle](https://img.shields.io/badge/lifecycle-stable-brightgreen.svg)](https://lifecycle.r-lib.org/articles/stages.html#stable)
-[![License](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE.md)
+[![Downloads](https://cranlogs.r-pkg.org/badges/grand-total/evanverse)](https://CRAN.R-project.org/package=evanverse)
 ```
 
 ---
@@ -38,17 +38,27 @@ These 5 badges appear in the main README, chosen for maximum signal and minimal 
 
 These badges are available but **NOT displayed in README** to reduce clutter. They're useful for tracking but don't convey essential information to new users.
 
+### License Information
+
+| Badge | Description |
+|-------|-------------|
+| ![License](https://img.shields.io/badge/License-MIT-blue.svg) | MIT License - open source |
+
+**Why not in README:** License information is already clearly stated in the License section of README and LICENSE.md file. The badge provides no additional value to users.
+
+```markdown
+[![License](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE.md)
+```
+
 ### Download Metrics
 
 | Badge | Description |
 |-------|-------------|
-| ![Total downloads](https://cranlogs.r-pkg.org/badges/grand-total/evanverse) | Total downloads since CRAN publication |
 | ![Monthly downloads](https://cranlogs.r-pkg.org/badges/evanverse) | Downloads in the last month |
 
-**Why not in README:** Vanity metrics that don't indicate package quality or functionality. New packages have low numbers regardless of quality.
+**Why not in README:** Monthly download metrics are more volatile and less representative of overall package adoption than total downloads.
 
 ```markdown
-[![Downloads](https://cranlogs.r-pkg.org/badges/grand-total/evanverse)](https://CRAN.R-project.org/package=evanverse)
 [![Monthly](https://cranlogs.r-pkg.org/badges/evanverse)](https://CRAN.R-project.org/package=evanverse)
 ```
 
@@ -99,8 +109,8 @@ These badges are available but **NOT displayed in README** to reduce clutter. Th
 ### Why This Badge Selection?
 
 1. **User-Centric Focus**
-   - Show what matters to package adopters (version, reliability, stability, license)
-   - Hide metrics that matter only to maintainers (download stats, commit frequency)
+   - Show what matters to package adopters (version, reliability, stability, popularity)
+   - Hide metrics that matter only to maintainers (monthly downloads, commit frequency)
 
 2. **Signal vs. Noise**
    - Each badge must answer a key user question:
@@ -108,7 +118,7 @@ These badges are available but **NOT displayed in README** to reduce clutter. Th
      - ✅ "Does it work?" → R-CMD-check badge
      - ✅ "Is it well-tested?" → Codecov badge
      - ✅ "Is it production-ready?" → Lifecycle badge
-     - ✅ "Can I use it commercially?" → License badge
+     - ✅ "Is it widely used?" → Downloads badge
 
 3. **Visual Hierarchy**
    - 5 badges: Clean, scannable, professional
@@ -142,11 +152,6 @@ These need manual editing in README.md:
    [![Lifecycle](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](...)
    [![Lifecycle](https://img.shields.io/badge/lifecycle-superseded-blue.svg)](...)
    [![Lifecycle](https://img.shields.io/badge/lifecycle-deprecated-red.svg)](...)
-   ```
-
-2. **License Badge** - Only if license changes (rare)
-   ```markdown
-   [![License](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE.md)
    ```
 
 ---
