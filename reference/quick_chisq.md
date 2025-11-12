@@ -15,7 +15,7 @@ quick_chisq(
   method = c("auto", "chisq", "fisher", "mcnemar"),
   correct = NULL,
   conf.level = 0.95,
-  plot_type = c("mosaic", "bar_grouped", "bar_stacked", "heatmap"),
+  plot_type = c("bar_grouped", "bar_stacked", "heatmap"),
   show_p_value = TRUE,
   p_label = c("p.format", "p.signif"),
   palette = "qual_vivid",
@@ -62,8 +62,8 @@ quick_chisq(
 
 - plot_type:
 
-  Character. Type of plot: "mosaic" (default), "bar_grouped",
-  "bar_stacked", or "heatmap".
+  Character. Type of plot: "bar_grouped" (default), "bar_stacked", or
+  "heatmap".
 
 - show_p_value:
 
@@ -176,13 +176,11 @@ Pearson residuals are calculated for each cell as (observed - expected)
 
 ### Visualization Options
 
-- **mosaic**: Mosaic plot showing proportions (default)
-
-- **bar_grouped**: Grouped bar chart
+- **bar_grouped**: Grouped bar chart (default)
 
 - **bar_stacked**: Stacked bar chart (100\\
 
-- **heatmap**: Heatmap of standardized residuals
+- **heatmap**: Heatmap of Pearson residuals
 
 ## Important Notes
 
@@ -219,7 +217,6 @@ result <- quick_chisq(data, var1 = treatment, var2 = response)
 #> ℹ treatment converted to factor with 3 levels.
 #> ℹ response converted to factor with 2 levels.
 #> ! Failed to load palette 'qual_vivid': Palette "qual_vivid" not found under "sequential", but exists under "qualitative". Try: `get_palette("qual_vivid", type = "qualitative")`. Using default colors.
-#> ! ggmosaic package not available. Using grouped bar chart instead.
 print(result)
 
 #> 
@@ -243,7 +240,7 @@ print(result)
 #> 
 #> Decision: All expected frequencies adequate: using standard chi-square test 
 #> 
-#> Timestamp: 2025-11-12 10:21:20 
+#> Timestamp: 2025-11-12 11:17:47 
 #> ===========================================================
 
 # Example 2: 2x2 table
@@ -256,7 +253,6 @@ result <- quick_chisq(data_2x2, var1 = gender, var2 = disease)
 #> ℹ gender converted to factor with 2 levels.
 #> ℹ disease converted to factor with 2 levels.
 #> ! Failed to load palette 'qual_vivid': Palette "qual_vivid" not found under "sequential", but exists under "qualitative". Try: `get_palette("qual_vivid", type = "qualitative")`. Using default colors.
-#> ! ggmosaic package not available. Using grouped bar chart instead.
 
 # Example 3: Customize visualization
 result <- quick_chisq(data,
@@ -277,7 +273,6 @@ result <- quick_chisq(data,
 #> ℹ treatment converted to factor with 3 levels.
 #> ℹ response converted to factor with 2 levels.
 #> ! Failed to load palette 'qual_vivid': Palette "qual_vivid" not found under "sequential", but exists under "qualitative". Try: `get_palette("qual_vivid", type = "qualitative")`. Using default colors.
-#> ! ggmosaic package not available. Using grouped bar chart instead.
 
 # Access components
 result$plot                      # ggplot object
@@ -307,7 +302,7 @@ summary(result)                  # Detailed summary
 #> ===========================================================
 #> 
 #> Method: Chi-square test 
-#> Timestamp: 2025-11-12 10:21:20 
+#> Timestamp: 2025-11-12 11:17:47 
 #> 
 #> -----------------------------------------------------------
 #> Test Results:
