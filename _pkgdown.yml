@@ -293,8 +293,7 @@ reference:
     your statistical workflows with smart defaults.
   contents:
   - quick_ttest
-  - print.quick_ttest_result
-  - summary.quick_ttest_result
+  - quick_anova
 
 - title: "Color Palettes & Management"
   desc: >
