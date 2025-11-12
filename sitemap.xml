@@ -61,7 +61,10 @@
 <url><loc>https://evanbio.github.io/evanverse/reference/plot_pie.html</loc></url>
 <url><loc>https://evanbio.github.io/evanverse/reference/plot_venn.html</loc></url>
 <url><loc>https://evanbio.github.io/evanverse/reference/preview_palette.html</loc></url>
+<url><loc>https://evanbio.github.io/evanverse/reference/print.quick_chisq_result.html</loc></url>
 <url><loc>https://evanbio.github.io/evanverse/reference/print.quick_ttest_result.html</loc></url>
+<url><loc>https://evanbio.github.io/evanverse/reference/quick_anova.html</loc></url>
+<url><loc>https://evanbio.github.io/evanverse/reference/quick_chisq.html</loc></url>
 <url><loc>https://evanbio.github.io/evanverse/reference/quick_ttest.html</loc></url>
 <url><loc>https://evanbio.github.io/evanverse/reference/read_excel_flex.html</loc></url>
 <url><loc>https://evanbio.github.io/evanverse/reference/read_table_flex.html</loc></url>
@@ -72,6 +75,7 @@
 <url><loc>https://evanbio.github.io/evanverse/reference/safe_execute.html</loc></url>
 <url><loc>https://evanbio.github.io/evanverse/reference/scale_evanverse.html</loc></url>
 <url><loc>https://evanbio.github.io/evanverse/reference/set_mirror.html</loc></url>
+<url><loc>https://evanbio.github.io/evanverse/reference/summary.quick_chisq_result.html</loc></url>
 <url><loc>https://evanbio.github.io/evanverse/reference/summary.quick_ttest_result.html</loc></url>
 <url><loc>https://evanbio.github.io/evanverse/reference/trial.html</loc></url>
 <url><loc>https://evanbio.github.io/evanverse/reference/update_pkg.html</loc></url>
