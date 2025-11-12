@@ -65,7 +65,9 @@ remind <- function(keyword = NULL) {
     windowsFonts = "`windowsFonts()` register system fonts (Windows).",
     sign         = "`sign(x)` returns -1/0/1 for negative/zero/positive.",
     reactable    = "`reactable::reactable(data)` modern interactive table.",
-    trimws       = "`trimws(x)` removes leading and trailing whitespace."
+    trimws       = "`trimws(x)` removes leading and trailing whitespace.",
+    cranlogs     = "`cranlogs::cran_downloads('pkgname', from = 'last-month')` gets CRAN download stats; use `'last-week'`, `'last-day'`, or specific dates.",
+    dlstats      = "`dlstats::cran_stats('pkgname')` shows CRAN download trends with plots; supports Bioconductor via `source = 'bioc'`."
   )
 
   # Validation
