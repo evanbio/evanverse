@@ -17,7 +17,7 @@
 #' @param correct Logical or \code{NULL}. Apply Yates' continuity correction?
 #'   If \code{NULL} (default), automatically applied for 2x2 tables with expected frequencies < 10.
 #' @param conf.level Numeric. Confidence level for the interval. Default is 0.95.
-#' @param plot_type Character. Type of plot: "mosaic" (default), "bar_grouped",
+#' @param plot_type Character. Type of plot: "bar_grouped" (default),
 #'   "bar_stacked", or "heatmap".
 #' @param show_p_value Logical. Display p-value on the plot? Default is \code{TRUE}.
 #' @param p_label Character. P-value label format: "p.format" (numeric p-value, default) or
@@ -76,10 +76,9 @@
 #'
 #' \subsection{Visualization Options}{
 #'   \itemize{
-#'     \item \strong{mosaic}: Mosaic plot showing proportions (default)
-#'     \item \strong{bar_grouped}: Grouped bar chart
+#'     \item \strong{bar_grouped}: Grouped bar chart (default)
 #'     \item \strong{bar_stacked}: Stacked bar chart (100\% stacked)
-#'     \item \strong{heatmap}: Heatmap of standardized residuals
+#'     \item \strong{heatmap}: Heatmap of Pearson residuals
 #'   }
 #' }
 #'
@@ -144,7 +143,7 @@ quick_chisq <- function(data,
                         method = c("auto", "chisq", "fisher", "mcnemar"),
                         correct = NULL,
                         conf.level = 0.95,
-                        plot_type = c("mosaic", "bar_grouped", "bar_stacked", "heatmap"),
+                        plot_type = c("bar_grouped", "bar_stacked", "heatmap"),
                         show_p_value = TRUE,
                         p_label = c("p.format", "p.signif"),
                         palette = "qual_vivid",
@@ -428,31 +427,6 @@ quick_chisq <- function(data,
   }
 
   # Create base plot based on plot_type
-  if (plot_type == "mosaic") {
-    # Mosaic plot using ggmosaic if available, otherwise grouped bars
-    if (requireNamespace("ggmosaic", quietly = TRUE)) {
-      p <- ggplot2::ggplot(data = df) +
-        ggmosaic::geom_mosaic(ggplot2::aes(x = ggmosaic::product(.data$var2, .data$var1), fill = .data$var2)) +
-        ggplot2::labs(
-          x = var1_name,
-          y = "Proportion",
-          fill = var2_name
-        ) +
-        ggplot2::theme_minimal(base_size = 12) +
-        ggplot2::theme(
-          legend.position = "right",
-          panel.grid.major = ggplot2::element_blank(),
-          panel.grid.minor = ggplot2::element_blank()
-        )
-    } else {
-      # Fallback to grouped bar chart
-      plot_type <- "bar_grouped"
-      if (verbose) {
-        cli::cli_alert_warning("ggmosaic package not available. Using grouped bar chart instead.")
-      }
-    }
-  }
-
   if (plot_type == "bar_grouped") {
     p <- ggplot2::ggplot(plot_data, ggplot2::aes(x = .data$var1, y = .data$Count, fill = .data$var2)) +
       ggplot2::geom_bar(stat = "identity", position = "dodge", width = 0.7) +

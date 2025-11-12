@@ -11,7 +11,7 @@ quick_chisq(
   method = c("auto", "chisq", "fisher", "mcnemar"),
   correct = NULL,
   conf.level = 0.95,
-  plot_type = c("mosaic", "bar_grouped", "bar_stacked", "heatmap"),
+  plot_type = c("bar_grouped", "bar_stacked", "heatmap"),
   show_p_value = TRUE,
   p_label = c("p.format", "p.signif"),
   palette = "qual_vivid",
@@ -39,7 +39,7 @@ If \code{NULL} (default), automatically applied for 2x2 tables with expected fre
 
 \item{conf.level}{Numeric. Confidence level for the interval. Default is 0.95.}
 
-\item{plot_type}{Character. Type of plot: "mosaic" (default), "bar_grouped",
+\item{plot_type}{Character. Type of plot: "bar_grouped" (default),
 "bar_stacked", or "heatmap".}
 
 \item{show_p_value}{Logical. Display p-value on the plot? Default is \code{TRUE}.}
@@ -109,10 +109,9 @@ Pearson residuals are calculated for each cell as (observed - expected) / sqrt(e
 
 \subsection{Visualization Options}{
 \itemize{
-\item \strong{mosaic}: Mosaic plot showing proportions (default)
-\item \strong{bar_grouped}: Grouped bar chart
+\item \strong{bar_grouped}: Grouped bar chart (default)
 \item \strong{bar_stacked}: Stacked bar chart (100\\% stacked)
-\item \strong{heatmap}: Heatmap of standardized residuals
+\item \strong{heatmap}: Heatmap of Pearson residuals
 }
 }
 }

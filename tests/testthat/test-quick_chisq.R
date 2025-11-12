@@ -361,13 +361,6 @@ test_that("quick_chisq() applies Yates' correction for McNemar's test", {
 #------------------------------------------------------------------------------
 
 test_that("quick_chisq() creates different plot types", {
-  result_mosaic <- quick_chisq(test_data_standard,
-                                var1 = treatment,
-                                var2 = response,
-                                plot_type = "mosaic",
-                                verbose = FALSE)
-  expect_s3_class(result_mosaic$plot, "ggplot")
-
   result_grouped <- quick_chisq(test_data_standard,
                                  var1 = treatment,
                                  var2 = response,
@@ -650,7 +643,7 @@ test_that("quick_chisq() end-to-end workflow for Fisher's test", {
     var1 = group,
     var2 = outcome,
     method = "auto",
-    plot_type = "mosaic",
+    plot_type = "bar_grouped",
     show_p_value = TRUE,
     p_label = "p.format",
     verbose = FALSE
