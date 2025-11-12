@@ -1061,8 +1061,14 @@ quick_ttest <- function(data,
 #' @param ... Additional arguments (unused)
 #' @export
 print.quick_ttest_result <- function(x, ...) {
-  # Display the plot
-  print(x$plot)
+  # Print the plot safely
+  if (!is.null(x$plot)) {
+    tryCatch({
+      print(x$plot)
+    }, error = function(e) {
+      warning("Could not print plot: ", e$message)
+    })
+  }
 
   # Print statistical summary
   cat("\n")
