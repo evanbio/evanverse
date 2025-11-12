@@ -58,7 +58,7 @@ template:
   includes:
     in_header: |
       <meta name="keywords" content="R package, data analysis, bioinformatics, visualization, utilities, CRAN">
-      <meta name="description" content="evanverse: A comprehensive R utility package with 55+ functions for data analysis, visualization, and bioinformatics workflows">
+      <meta name="description" content="evanverse: A comprehensive R utility package with 56+ functions for data analysis, visualization, and bioinformatics workflows">
       <meta name="author" content="Evan Zhou">
 
       <!-- Enhanced Favicon -->
@@ -133,7 +133,7 @@ home:
   title: evanverse
   subtitle: "Comprehensive R Utilities for Data Science & Bioinformatics"
   description: >
-    A feature-rich R utility package providing 55+ functions for data analysis,
+    A feature-rich R utility package providing 56+ functions for data analysis,
     visualization, and bioinformatics workflows. Streamlines package management,
     data processing, color palettes, plotting, and workflow automation with a
     focus on simplicity and reproducibility.
@@ -163,7 +163,7 @@ home:
     desc: "Domain-specific applications and tutorials"
   - text: "Function Reference"
     href: reference/
-    desc: "Complete documentation for all 55+ functions"
+    desc: "Complete documentation for all 56+ functions"
   - text: "Install from CRAN"
     href: https://cran.r-project.org/package=evanverse
     desc: "Stable release on CRAN"
@@ -293,7 +293,12 @@ reference:
     your statistical workflows with smart defaults.
   contents:
   - quick_ttest
+  - print.quick_ttest_result
+  - summary.quick_ttest_result
   - quick_anova
+  - quick_chisq
+  - print.quick_chisq_result
+  - summary.quick_chisq_result
 
 - title: "Color Palettes & Management"
   desc: >

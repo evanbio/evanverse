@@ -61,6 +61,8 @@ Suggests:
     testthat (>= 3.0.0),
     ggvenn,
     ggVennDiagram,
+    ggmosaic,
+    scales,
     writexl,
     R.utils,
     janitor,
