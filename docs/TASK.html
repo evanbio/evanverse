@@ -101,9 +101,94 @@
 <div id="taskmd" class="section level1">
 
 <!-- This file is for local task tracking and is excluded from git and R package builds -->
+<div class="section level2">
+<h2 id="construction-当前任务">🚧 当前任务<a class="anchor" aria-label="anchor" href="#construction-%E5%BD%93%E5%89%8D%E4%BB%BB%E5%8A%A1"></a></h2>
+<div class="section level3">
+<h3 id="开发-quick_cor-函数---相关性分析矩阵--热图">开发 <code>quick_cor()</code> 函数 - 相关性分析矩阵 + 热图<a class="anchor" aria-label="anchor" href="#%E5%BC%80%E5%8F%91-quick_cor-%E5%87%BD%E6%95%B0---%E7%9B%B8%E5%85%B3%E6%80%A7%E5%88%86%E6%9E%90%E7%9F%A9%E9%98%B5--%E7%83%AD%E5%9B%BE"></a></h3>
+<p><strong>开始日期</strong>: 2025-11-17</p>
+<p><strong>功能描述</strong>: 快速进行相关性分析并生成专业的可视化，整合现有脚本（corrplot.R、ggcorrplot.R）的优点</p>
+<p><strong>核心功能</strong>: 1. <strong>相关性计算</strong> - 支持三种相关系数：Pearson（默认）、Spearman、Kendall - 自动处理缺失值（pairwise.complete.obs） - 自动计算 p 值矩阵（使用 <code><a href="https://rdrr.io/pkg/psych/man/corr.test.html" class="external-link">psych::corr.test()</a></code> 或自实现） - 可选多重检验校正（Bonferroni, Holm, FDR 等）</p>
+<ol start="2" style="list-style-type: decimal"><li>
+<strong>热图可视化</strong>（基于 ggplot2 + ggcorrplot 风格）
+<ul><li>支持热图类型：full（默认）、upper、lower</li>
+<li>颜色方案：使用 evanverse 配色系统（支持发散色板，负-零-正）</li>
+<li>显著性标注：星号叠加（<em><strong>, </strong>, </em>）或数值显示</li>
+<li>相关系数标签：可选在格子内显示数值</li>
+<li>聚类排序：支持层次聚类（hclust）重排变量顺序</li>
+<li>轴标签控制：支持自定义标签、角度、显示/隐藏</li>
+</ul></li>
+<li>
+<strong>返回对象</strong>（S3 class: <code>quick_cor_result</code>）
+<ul><li>
+<code>plot</code>: ggplot2 热图对象</li>
+<li>
+<code>cor_matrix</code>: 相关系数矩阵</li>
+<li>
+<code>p_matrix</code>: p 值矩阵</li>
+<li>
+<code>p_adjusted</code>: 校正后的 p 值矩阵（如果使用）</li>
+<li>
+<code>method_used</code>: 使用的相关系数类型</li>
+<li>
+<code>significant_pairs</code>: 显著相关对（data.frame）</li>
+<li>
+<code>descriptive_stats</code>: 各变量的描述性统计</li>
+<li>
+<code>timestamp</code>: 分析时间戳</li>
+</ul></li>
+<li>
+<strong>参数设计</strong>（参考 quick_ttest 风格）
+<ul><li>
+<code>data</code>: 数据框（自动提取数值列）</li>
+<li>
+<code>vars</code>: 可选，指定变量名向量（默认使用所有数值列）</li>
+<li>
+<code>method</code>: “pearson”（默认）、“spearman”、“kendall”</li>
+<li>
+<code>use</code>: 缺失值处理，默认 “pairwise.complete.obs”</li>
+<li>
+<code>p_adjust_method</code>: p 值校正方法，默认 “none”</li>
+<li>
+<code>sig_level</code>: 显著性阈值，默认 c(0.001, 0.01, 0.05)</li>
+<li>
+<code>type</code>: 热图类型，“full”、“upper”、“lower”</li>
+<li>
+<code>show_coef</code>: 是否显示系数数值，默认 FALSE</li>
+<li>
+<code>show_sig</code>: 是否显示显著性星号，默认 TRUE</li>
+<li>
+<code>hc_order</code>: 是否使用层次聚类排序，默认 TRUE</li>
+<li>
+<code>hc_method</code>: 聚类方法，默认 “complete”</li>
+<li>
+<code>palette</code>: evanverse 配色名称，默认 “div_RdBu”（发散色板）</li>
+<li>
+<code>lab_size</code>: 标签大小，默认 3</li>
+<li>
+<code>title</code>: 图表标题</li>
+<li>
+<code>verbose</code>: 是否打印诊断信息，默认 TRUE</li>
+</ul></li>
+<li>
+<strong>特色功能</strong>
+<ul><li>自动检测并移除常数列（方差为 0 的变量）</li>
+<li>样本量警告（n &lt; 5 或缺失值过多）</li>
+<li>智能提示高相关对（|r| &gt; 0.7 或 0.9）</li>
+<li>兼容 tidyverse 管道操作</li>
+</ul></li>
+</ol><p><strong>实现参考</strong>: - 热图基础：借鉴 <code>ggcorrplot.R</code> 的实现（ggcorrplot + 星号叠加） - 显著性计算：参考 <code>corrplot.R</code> 的 p 值处理 - 代码结构：遵循 <code>quick_ttest.R</code> 的模块化设计 - S3 方法：实现 print、summary、plot 方法</p>
+<p><strong>技术依赖</strong>: - <code>ggplot2</code>: 核心绘图 - <code>ggcorrplot</code>: 热图布局（或自实现 geom_tile） - <code>psych</code>: 相关性 p 值计算（或使用 cor.test） - <code>dplyr</code>、<code>tidyr</code>: 数据处理 - <code>cli</code>: 用户友好的消息提示</p>
+<p><strong>子任务</strong>: - [ ] 创建 <code>R/quick_cor.R</code> 文件 - [ ] 实现相关性计算逻辑（cor_matrix + p_matrix） - [ ] 实现热图绘制函数（.create_cor_heatmap） - [ ] 实现显著性标注叠加 - [ ] 实现 S3 类和方法（print、summary、plot） - [ ] 编写完整的 roxygen2 文档（含丰富示例） - [ ] 创建测试文件 <code>tests/testthat/test-quick_cor.R</code> - [ ] 编写单元测试： - 正常使用（3 种相关系数） - 边界情况（单列、缺失值、常数列） - 错误处理（非数值列、空数据） - [ ] 运行 <code><a href="https://devtools.r-lib.org/reference/document.html" class="external-link">devtools::document()</a></code> - [ ] 运行 <code><a href="https://devtools.r-lib.org/reference/test.html" class="external-link">devtools::test()</a></code> - [ ] 运行 <code><a href="https://devtools.r-lib.org/reference/check.html" class="external-link">devtools::check()</a></code> - [ ] 创建示例（vignette 或 README 更新）</p>
+<hr></div>
+</div>
+<div class="section level2">
+<h2 id="white_check_mark-已完成任务">✅ 已完成任务<a class="anchor" aria-label="anchor" href="#white_check_mark-%E5%B7%B2%E5%AE%8C%E6%88%90%E4%BB%BB%E5%8A%A1"></a></h2>
+<p><em>暂无</em></p>
+</div>
 </div>
 
-  </main></div>
+  </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
+    </nav></aside></div>
 
 
     <footer><div class="pkgdown-footer-left">

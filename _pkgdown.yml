@@ -299,6 +299,9 @@ reference:
   - quick_chisq
   - print.quick_chisq_result
   - summary.quick_chisq_result
+  - quick_cor
+  - print.quick_cor_result
+  - summary.quick_cor_result
 
 - title: "Color Palettes & Management"
   desc: >
