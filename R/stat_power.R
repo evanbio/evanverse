@@ -107,8 +107,6 @@
 #' )
 #' }
 #'
-#' @seealso
-#' \code{\link{stat_samplesize}} for calculating required sample size.
 #'
 #' @export
 stat_power <- function(n,
@@ -123,13 +121,6 @@ stat_power <- function(n,
                        plot_range = NULL,
                        palette = "qual_vivid",
                        verbose = TRUE) {
-
-  # ===========================================================================
-  # Dependency checks
-  # ===========================================================================
-  if (!requireNamespace("pwr", quietly = TRUE)) {
-    cli::cli_abort("Package {.pkg pwr} is required for stat_power().")
-  }
 
   # ===========================================================================
   # Parameter validation and matching

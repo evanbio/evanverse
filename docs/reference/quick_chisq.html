@@ -285,34 +285,9 @@ Default is "qual_vivid". Set to <code>NULL</code> to use ggplot2 defaults.</p></
 <span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="va">result</span> <span class="op">&lt;-</span> <span class="fu">quick_chisq</span><span class="op">(</span><span class="va">data</span>, var1 <span class="op">=</span> <span class="va">treatment</span>, var2 <span class="op">=</span> <span class="va">response</span><span class="op">)</span></span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> <span style="color: #00BB00;">treatment</span> converted to factor with 3 levels.</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> <span style="color: #00BB00;">response</span> converted to factor with 2 levels.</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #BBBB00;">!</span> Failed to load palette 'qual_vivid': Palette <span style="color: #0000BB;">"qual_vivid"</span> not found under <span style="color: #0000BB;">"sequential"</span>, but exists under <span style="color: #0000BB;">"qualitative"</span>. Try: `get_palette("qual_vivid", type = "qualitative")`. Using default colors.</span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in quick_chisq(data, var1 = treatment, var2 = response):</span> could not find function "quick_chisq"</span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">result</span><span class="op">)</span></span></span>
-<span class="r-plt img"><img src="quick_chisq-1.png" alt="" width="700" height="433"></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> ===========================================================</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   Quick Chi-Square Test Result</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> ===========================================================</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Method: Chi-square test </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Test statistic: 0.088 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Degrees of freedom: 2 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> P-value: 0.9568 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Effect Size (Cramer's V): 0.03 ( negligible )</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Contingency Table:</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     Failure Success</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   A      13      20</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   B      13      19</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   C      13      22</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Decision: All expected frequencies adequate: using standard chi-square test </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Timestamp: 2025-11-17 15:38:41 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> ===========================================================</span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error:</span> object 'result' not found</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Example 2: 2x2 table</span></span></span>
 <span class="r-in"><span><span class="va">data_2x2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span></span></span>
@@ -321,9 +296,7 @@ Default is "qual_vivid". Set to <code>NULL</code> to use ggplot2 defaults.</p></
 <span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="va">result</span> <span class="op">&lt;-</span> <span class="fu">quick_chisq</span><span class="op">(</span><span class="va">data_2x2</span>, var1 <span class="op">=</span> <span class="va">gender</span>, var2 <span class="op">=</span> <span class="va">disease</span><span class="op">)</span></span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> <span style="color: #00BB00;">gender</span> converted to factor with 2 levels.</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> <span style="color: #00BB00;">disease</span> converted to factor with 2 levels.</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #BBBB00;">!</span> Failed to load palette 'qual_vivid': Palette <span style="color: #0000BB;">"qual_vivid"</span> not found under <span style="color: #0000BB;">"sequential"</span>, but exists under <span style="color: #0000BB;">"qualitative"</span>. Try: `get_palette("qual_vivid", type = "qualitative")`. Using default colors.</span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in quick_chisq(data_2x2, var1 = gender, var2 = disease):</span> could not find function "quick_chisq"</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Example 3: Customize visualization</span></span></span>
 <span class="r-in"><span><span class="va">result</span> <span class="op">&lt;-</span> <span class="fu">quick_chisq</span><span class="op">(</span><span class="va">data</span>,</span></span>
@@ -331,9 +304,7 @@ Default is "qual_vivid". Set to <code>NULL</code> to use ggplot2 defaults.</p></
 <span class="r-in"><span>                      var2 <span class="op">=</span> <span class="va">response</span>,</span></span>
 <span class="r-in"><span>                      plot_type <span class="op">=</span> <span class="st">"bar_grouped"</span>,</span></span>
 <span class="r-in"><span>                      palette <span class="op">=</span> <span class="st">"qual_balanced"</span><span class="op">)</span></span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> <span style="color: #00BB00;">treatment</span> converted to factor with 3 levels.</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> <span style="color: #00BB00;">response</span> converted to factor with 2 levels.</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #BBBB00;">!</span> Failed to load palette 'qual_balanced': Palette <span style="color: #0000BB;">"qual_balanced"</span> not found under <span style="color: #0000BB;">"sequential"</span>, but exists under <span style="color: #0000BB;">"qualitative"</span>. Try: `get_palette("qual_balanced", type = "qualitative")`. Using default colors.</span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in quick_chisq(data, var1 = treatment, var2 = response, plot_type = "bar_grouped",     palette = "qual_balanced"):</span> could not find function "quick_chisq"</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Example 4: Manual method selection</span></span></span>
 <span class="r-in"><span><span class="va">result</span> <span class="op">&lt;-</span> <span class="fu">quick_chisq</span><span class="op">(</span><span class="va">data</span>,</span></span>
@@ -341,106 +312,19 @@ Default is "qual_vivid". Set to <code>NULL</code> to use ggplot2 defaults.</p></
 <span class="r-in"><span>                      var2 <span class="op">=</span> <span class="va">response</span>,</span></span>
 <span class="r-in"><span>                      method <span class="op">=</span> <span class="st">"chisq"</span>,</span></span>
 <span class="r-in"><span>                      correct <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> <span style="color: #00BB00;">treatment</span> converted to factor with 3 levels.</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> <span style="color: #00BB00;">response</span> converted to factor with 2 levels.</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #BBBB00;">!</span> Failed to load palette 'qual_vivid': Palette <span style="color: #0000BB;">"qual_vivid"</span> not found under <span style="color: #0000BB;">"sequential"</span>, but exists under <span style="color: #0000BB;">"qualitative"</span>. Try: `get_palette("qual_vivid", type = "qualitative")`. Using default colors.</span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in quick_chisq(data, var1 = treatment, var2 = response, method = "chisq",     correct = FALSE):</span> could not find function "quick_chisq"</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Access components</span></span></span>
 <span class="r-in"><span><span class="va">result</span><span class="op">$</span><span class="va">plot</span>                      <span class="co"># ggplot object</span></span></span>
-<span class="r-plt img"><img src="quick_chisq-2.png" alt="" width="700" height="433"></span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error:</span> object 'result' not found</span>
 <span class="r-in"><span><span class="va">result</span><span class="op">$</span><span class="va">test_result</span>               <span class="co"># htest object</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 	Pearson's Chi-squared test</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> data:  cont_table</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> X-squared = 0.088413, df = 2, p-value = 0.9568</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error:</span> object 'result' not found</span>
 <span class="r-in"><span><span class="va">result</span><span class="op">$</span><span class="va">contingency_table</span>         <span class="co"># Contingency table</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     Failure Success</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   A      13      20</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   B      13      19</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   C      13      22</span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error:</span> object 'result' not found</span>
 <span class="r-in"><span><span class="va">result</span><span class="op">$</span><span class="va">pearson_residuals</span>         <span class="co"># Pearson residuals</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>         Failure     Success</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   A  0.03623715 -0.02897487</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   B  0.14719601 -0.11769647</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   C -0.17593289  0.14067419</span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error:</span> object 'result' not found</span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">result</span><span class="op">)</span>                  <span class="co"># Detailed summary</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> ===========================================================</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   Quick Chi-Square Test - Detailed Summary</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> ===========================================================</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Method: Chi-square test </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Timestamp: 2025-11-17 15:38:42 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> -----------------------------------------------------------</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Test Results:</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> -----------------------------------------------------------</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 	Pearson's Chi-squared test</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> data:  cont_table</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> X-squared = 0.088413, df = 2, p-value = 0.9568</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> -----------------------------------------------------------</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Effect Size:</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> -----------------------------------------------------------</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Cramer's V: 0.03 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Interpretation: negligible </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> -----------------------------------------------------------</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Observed Frequencies:</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> -----------------------------------------------------------</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     Failure Success</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   A      13      20</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   B      13      19</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   C      13      22</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> -----------------------------------------------------------</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Expected Frequencies:</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> -----------------------------------------------------------</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   Failure Success</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> A   12.87   20.13</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> B   12.48   19.52</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> C   13.65   21.35</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> -----------------------------------------------------------</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Pearson Residuals:</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> -----------------------------------------------------------</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     Failure Success</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   A    0.04   -0.03</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   B    0.15   -0.12</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   C   -0.18    0.14</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Note: Values &gt; |2| indicate significant deviation from independence</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> -----------------------------------------------------------</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Descriptive Statistics:</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> -----------------------------------------------------------</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   treatment response Count Proportion Percent</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1         A  Failure    13       0.13      13</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2         B  Failure    13       0.13      13</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3         C  Failure    13       0.13      13</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 4         A  Success    20       0.20      20</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 5         B  Success    19       0.19      19</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 6         C  Success    22       0.22      22</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> -----------------------------------------------------------</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Method Selection Details:</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> -----------------------------------------------------------</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Table size: 3x2 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Total N: 100 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Minimum expected frequency: 12.48 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Cells with expected freq &lt; 5: 0 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Proportion of cells &lt; 5: 0 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Reason: User-specified method: chisq </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> ===========================================================</span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error:</span> object 'result' not found</span>
 <span class="r-in"><span></span></span>
 </code></pre></div>
     </div>

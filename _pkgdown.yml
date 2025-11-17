@@ -302,6 +302,7 @@ reference:
   - quick_cor
   - print.quick_cor_result
   - summary.quick_cor_result
+  - stat_power
 
 - title: "Color Palettes & Management"
   desc: >

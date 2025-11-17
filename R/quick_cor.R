@@ -762,7 +762,7 @@ quick_cor <- function(data,
     # Convert to data frame
     star_df <- as.data.frame(as.table(star_mat), stringsAsFactors = FALSE)
     names(star_df) <- c("Var1", "Var2", "stars")
-    star_df <- subset(star_df, nzchar(stars))
+    star_df <- star_df[nzchar(star_df$stars), ]
 
     # Align factor levels with plot
     star_df$Var1 <- factor(star_df$Var1, levels = var_levels)
@@ -770,9 +770,9 @@ quick_cor <- function(data,
 
     # Filter based on type
     if (type == "upper") {
-      star_df <- subset(star_df, as.numeric(Var1) < as.numeric(Var2))
+      star_df <- star_df[as.numeric(star_df$Var1) < as.numeric(star_df$Var2), ]
     } else if (type == "lower") {
-      star_df <- subset(star_df, as.numeric(Var1) > as.numeric(Var2))
+      star_df <- star_df[as.numeric(star_df$Var1) > as.numeric(star_df$Var2), ]
     }
 
     # Add stars to plot

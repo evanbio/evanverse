@@ -48,7 +48,8 @@ Imports:
     utils,
     tools,
     stats,
-    grDevices
+    grDevices,
+    pwr
 Suggests:
     BiocManager,
     GSEABase,
