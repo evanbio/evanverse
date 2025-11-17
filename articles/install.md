@@ -135,7 +135,7 @@ pkg_functions("evanverse")
 #> 
 #> ── Package: evanverse ──
 #> 
-#> ℹ Matched exported names: 62
+#> ℹ Matched exported names: 63
 #> %is%
 #> %map%
 #> %match%
@@ -180,6 +180,7 @@ pkg_functions("evanverse")
 #> preview_palette
 #> quick_anova
 #> quick_chisq
+#> quick_cor
 #> quick_ttest
 #> read_excel_flex
 #> read_table_flex

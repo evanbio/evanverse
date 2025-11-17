@@ -481,5 +481,5 @@ qual_set1_rb         # Example
 
 ------------------------------------------------------------------------
 
-**Document Version**: 1.0 **Last Updated**: 2025-11-12 **Status**:
+**Document Version**: 1.0 **Last Updated**: 2025-11-17 **Status**:
 Official Standard

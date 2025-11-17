@@ -60,6 +60,12 @@ Streamline your statistical workflows with smart defaults.
   : Print Method for quick_chisq_result
 - [`summary(`*`<quick_chisq_result>`*`)`](https://evanbio.github.io/evanverse/reference/summary.quick_chisq_result.md)
   : Summary Method for quick_chisq_result
+- [`quick_cor()`](https://evanbio.github.io/evanverse/reference/quick_cor.md)
+  : Quick Correlation Analysis with Heatmap Visualization
+- [`print(`*`<quick_cor_result>`*`)`](https://evanbio.github.io/evanverse/reference/print.quick_cor_result.md)
+  : Print method for quick_cor_result
+- [`summary(`*`<quick_cor_result>`*`)`](https://evanbio.github.io/evanverse/reference/summary.quick_cor_result.md)
+  : Summary method for quick_cor_result
 
 ## Color Palettes & Management
 
