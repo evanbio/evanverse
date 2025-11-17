@@ -32,7 +32,7 @@ pkg_functions("evanverse")
 #> 
 #> ── Package: evanverse ──
 #> 
-#> ℹ Matched exported names: 63
+#> ℹ Matched exported names: 64
 #> %is%
 #> %map%
 #> %match%
@@ -92,6 +92,7 @@ pkg_functions("evanverse")
 #> scale_colour_evanverse
 #> scale_fill_evanverse
 #> set_mirror
+#> stat_power
 #> update_pkg
 #> view
 #> with_timer
