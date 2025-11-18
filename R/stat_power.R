@@ -350,7 +350,7 @@ print.stat_power_result <- function(x, ...) {
     sprintf("Sample size: %d (total)", x$n)
   }
   cli::cli_alert_info(n_label)
-  cli::cli_alert_info("Significance level (\u03b1): {sprintf('%.3f', x$alpha)}")
+  cli::cli_alert_info("Significance level (alpha): {sprintf('%.3f', x$alpha)}")
   cli::cli_alert_info("Alternative: {x$alternative}")
 
   cli::cli_text("")
@@ -403,11 +403,11 @@ summary.stat_power_result <- function(object, ...) {
   # Sample size with clarification
   n_unit <- if (object$test_type %in% c("t.test", "anova")) "(per group)" else "(total)"
   cat(sprintf("  Sample size:       %d %s\n", object$n, n_unit))
-  cat(sprintf("  Significance (\u03b1):  %.4f\n", object$alpha))
+  cat(sprintf("  Significance (alpha):  %.4f\n", object$alpha))
   cat("\n")
 
   cat("Result:\n")
-  cat(sprintf("  Power (1-\u03b2):       %.4f (%.2f%%)\n", object$power, object$power * 100))
+  cat(sprintf("  Power (1-beta):       %.4f (%.2f%%)\n", object$power, object$power * 100))
   cat("\n")
 
   cat("Interpretation:\n")
@@ -570,9 +570,9 @@ plot.stat_power_result <- function(x, y, ...) {
                         color = colors[2], size = 3) +
     ggplot2::labs(
       title = "Statistical Power Curve",
-      subtitle = sprintf("Effect size = %.3f, \u03b1 = %.3f", effect_size, alpha),
+      subtitle = sprintf("Effect size = %.3f, alpha = %.3f", effect_size, alpha),
       x = if (test %in% c("t.test", "anova")) "Sample Size (per group)" else "Sample Size",
-      y = "Statistical Power (1 - \u03b2)"
+      y = "Statistical Power (1 - beta)"
     ) +
     ggplot2::scale_y_continuous(limits = c(0, 1), breaks = seq(0, 1, 0.1)) +
     ggplot2::theme_minimal(base_size = 12) +
