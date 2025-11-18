@@ -104,71 +104,11 @@
 <div class="section level2">
 <h2 id="construction-当前任务">🚧 当前任务<a class="anchor" aria-label="anchor" href="#construction-%E5%BD%93%E5%89%8D%E4%BB%BB%E5%8A%A1"></a></h2>
 <div class="section level3">
-<h3 id="开发统计功效和样本量计算函数---stat_power-和-stat_samplesize">开发统计功效和样本量计算函数 - <code>stat_power()</code> 和 <code>stat_samplesize()</code>
-<a class="anchor" aria-label="anchor" href="#%E5%BC%80%E5%8F%91%E7%BB%9F%E8%AE%A1%E5%8A%9F%E6%95%88%E5%92%8C%E6%A0%B7%E6%9C%AC%E9%87%8F%E8%AE%A1%E7%AE%97%E5%87%BD%E6%95%B0---stat_power-%E5%92%8C-stat_samplesize"></a></h3>
-<p><strong>开始日期</strong>: 2025-11-17</p>
+<h3 id="开发样本量计算函数---stat_samplesize">开发样本量计算函数 - <code>stat_samplesize()</code>
+<a class="anchor" aria-label="anchor" href="#%E5%BC%80%E5%8F%91%E6%A0%B7%E6%9C%AC%E9%87%8F%E8%AE%A1%E7%AE%97%E5%87%BD%E6%95%B0---stat_samplesize"></a></h3>
+<p><strong>开始日期</strong>: 2025-11-18（待开始）</p>
 <hr><div class="section level4">
-<h4 id="函数1-stat_power---统计功效计算">函数1: <code>stat_power()</code> - 统计功效计算<a class="anchor" aria-label="anchor" href="#%E5%87%BD%E6%95%B01-stat_power---%E7%BB%9F%E8%AE%A1%E5%8A%9F%E6%95%88%E8%AE%A1%E7%AE%97"></a></h4>
-<p><strong>功能描述</strong>: 计算给定样本量、效应量和显著性水平下的统计功效（statistical power），支持多种常见统计检验类型。</p>
-<p><strong>核心功能</strong>: 1. <strong>支持的检验类型</strong> - t检验（单样本、双样本独立、配对） - 方差分析（ANOVA） - 比例检验（proportion test） - 相关性检验（correlation test） - 卡方检验（chi-square test）</p>
-<ol start="2" style="list-style-type: decimal"><li>
-<strong>参数配置</strong>
-<ul><li>样本量（n）</li>
-<li>效应量（effect size：Cohen’s d, f, w, r 等）</li>
-<li>显著性水平（alpha，默认 0.05）</li>
-<li>检验类型（单侧/双侧）</li>
-<li>组数（对于 ANOVA）</li>
-<li>自由度配置</li>
-</ul></li>
-<li>
-<strong>可视化输出</strong>
-<ul><li>Power curve：展示样本量-功效关系曲线</li>
-<li>当前功效点标注</li>
-<li>参考线（0.8 功效线）</li>
-<li>支持多条曲线比较（不同效应量）</li>
-</ul></li>
-<li>
-<strong>返回对象</strong>（S3 class: <code>stat_power_result</code>）
-<ul><li>
-<code>power</code>: 计算得到的统计功效值</li>
-<li>
-<code>n</code>: 样本量</li>
-<li>
-<code>effect_size</code>: 效应量</li>
-<li>
-<code>alpha</code>: 显著性水平</li>
-<li>
-<code>test_type</code>: 检验类型</li>
-<li>
-<code>alternative</code>: 单侧/双侧</li>
-<li>
-<code>plot</code>: ggplot2 功效曲线图（可选）</li>
-<li>
-<code>details</code>: 详细计算信息</li>
-<li>
-<code>timestamp</code>: 分析时间戳</li>
-</ul></li>
-</ol><p><strong>参数设计</strong>:</p>
-<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="reference/stat_power.html">stat_power</a></span><span class="op">(</span></span>
-<span>  <span class="va">n</span>,                              <span class="co"># 样本量（必需）</span></span>
-<span>  <span class="va">effect_size</span>,                    <span class="co"># 效应量（必需）</span></span>
-<span>  test <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"t.test"</span>, <span class="st">"anova"</span>, <span class="st">"proportion"</span>, <span class="st">"correlation"</span>, <span class="st">"chisq"</span><span class="op">)</span>,</span>
-<span>  type <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"two.sample"</span>, <span class="st">"one.sample"</span>, <span class="st">"paired"</span><span class="op">)</span>,  <span class="co"># t检验类型</span></span>
-<span>  alternative <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"two.sided"</span>, <span class="st">"less"</span>, <span class="st">"greater"</span><span class="op">)</span>,</span>
-<span>  alpha <span class="op">=</span> <span class="fl">0.05</span>,                   <span class="co"># 显著性水平</span></span>
-<span>  k <span class="op">=</span> <span class="cn">NULL</span>,                       <span class="co"># 组数（ANOVA用）</span></span>
-<span>  df <span class="op">=</span> <span class="cn">NULL</span>,                      <span class="co"># 自由度（手动指定）</span></span>
-<span>  plot <span class="op">=</span> <span class="cn">TRUE</span>,                    <span class="co"># 是否生成功效曲线</span></span>
-<span>  plot_range <span class="op">=</span> <span class="cn">NULL</span>,              <span class="co"># 样本量范围（用于曲线）</span></span>
-<span>  palette <span class="op">=</span> <span class="st">"qual_vivid"</span>,         <span class="co"># 配色</span></span>
-<span>  verbose <span class="op">=</span> <span class="cn">TRUE</span>                  <span class="co"># 是否打印详细信息</span></span>
-<span><span class="op">)</span></span></code></pre></div>
-<p><strong>技术依赖</strong>: - <code>pwr</code>: 统计功效计算核心包 - <code>ggplot2</code>: 可视化 - <code>cli</code>: 友好的消息输出</p>
-<p><strong>实现要点</strong>: - 根据 <code>test</code> 参数调用 <code>pwr</code> 包对应函数： - <code>pwr.t.test()</code> - t检验 - <code>pwr.anova.test()</code> - ANOVA - <code>pwr.p.test()</code> - 比例检验 - <code>pwr.r.test()</code> - 相关性检验 - <code>pwr.chisq.test()</code> - 卡方检验 - 功效曲线：在给定效应量下，计算一系列样本量对应的功效值 - S3 方法：<code>print.stat_power_result()</code>, <code>summary.stat_power_result()</code>, <code>plot.stat_power_result()</code></p>
-<hr></div>
-<div class="section level4">
-<h4 id="函数2-stat_samplesize---样本量估算">函数2: <code>stat_samplesize()</code> - 样本量估算<a class="anchor" aria-label="anchor" href="#%E5%87%BD%E6%95%B02-stat_samplesize---%E6%A0%B7%E6%9C%AC%E9%87%8F%E4%BC%B0%E7%AE%97"></a></h4>
+<h4 id="函数-stat_samplesize---样本量估算">函数: <code>stat_samplesize()</code> - 样本量估算<a class="anchor" aria-label="anchor" href="#%E5%87%BD%E6%95%B0-stat_samplesize---%E6%A0%B7%E6%9C%AC%E9%87%8F%E4%BC%B0%E7%AE%97"></a></h4>
 <p><strong>功能描述</strong>: 计算达到指定统计功效所需的最小样本量，用于研究设计阶段的样本量规划。</p>
 <p><strong>核心功能</strong>: 1. <strong>支持的检验类型</strong>（与 <code><a href="reference/stat_power.html">stat_power()</a></code> 一致） - t检验（单样本、双样本独立、配对） - 方差分析（ANOVA） - 比例检验 - 相关性检验 - 卡方检验</p>
 <ol start="2" style="list-style-type: decimal"><li>
@@ -209,8 +149,8 @@
 <code>timestamp</code>: 分析时间戳</li>
 </ul></li>
 </ol><p><strong>参数设计</strong>:</p>
-<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu">stat_samplesize</span><span class="op">(</span></span>
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="reference/stat_samplesize.html">stat_samplesize</a></span><span class="op">(</span></span>
 <span>  power <span class="op">=</span> <span class="fl">0.8</span>,                    <span class="co"># 目标功效（必需）</span></span>
 <span>  <span class="va">effect_size</span>,                    <span class="co"># 效应量（必需）</span></span>
 <span>  test <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"t.test"</span>, <span class="st">"anova"</span>, <span class="st">"proportion"</span>, <span class="st">"correlation"</span>, <span class="st">"chisq"</span><span class="op">)</span>,</span>
@@ -227,51 +167,16 @@
 <p><strong>技术依赖</strong>: - <code>pwr</code>: 样本量计算核心包 - <code>ggplot2</code>: 可视化 - <code>cli</code>: 友好的消息输出</p>
 <p><strong>实现要点</strong>: - 与 <code><a href="reference/stat_power.html">stat_power()</a></code> 类似，但调用 <code>pwr</code> 函数时求解 <code>n</code> 参数 - 样本量曲线：在给定功效下，计算一系列效应量对应的样本量 - 向上取整（样本量必须是整数） - 智能建议：如果计算出的样本量过大（如 &gt;1000），给出警告和建议 - S3 方法：<code>print.stat_samplesize_result()</code>, <code>summary.stat_samplesize_result()</code>, <code>plot.stat_samplesize_result()</code></p>
 <hr></div>
-<div class="section level4">
-<h4 id="辅助功能">辅助功能<a class="anchor" aria-label="anchor" href="#%E8%BE%85%E5%8A%A9%E5%8A%9F%E8%83%BD"></a></h4>
-<p><strong>效应量计算辅助函数</strong>（可选）:</p>
-<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># 从数据计算效应量</span></span>
-<span><span class="fu">effect_size_from_data</span><span class="op">(</span></span>
-<span>  <span class="va">data</span>,</span>
-<span>  <span class="va">x</span>,</span>
-<span>  y <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  group <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  type <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"cohens_d"</span>, <span class="st">"cohens_f"</span>, <span class="st">"cohens_w"</span>, <span class="st">"r"</span><span class="op">)</span></span>
-<span><span class="op">)</span></span>
-<span></span>
-<span><span class="co"># 标准化效应量</span></span>
-<span><span class="co"># Cohen's d: small = 0.2, medium = 0.5, large = 0.8</span></span>
-<span><span class="co"># Cohen's f: small = 0.1, medium = 0.25, large = 0.4</span></span>
-<span><span class="fu">effect_size_reference</span><span class="op">(</span>type <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"d"</span>, <span class="st">"f"</span>, <span class="st">"w"</span>, <span class="st">"r"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<hr></div>
-<div class="section level4">
-<h4 id="实现参考">实现参考<a class="anchor" aria-label="anchor" href="#%E5%AE%9E%E7%8E%B0%E5%8F%82%E8%80%83"></a></h4>
-<p><strong>设计风格</strong>: - 参考 <code><a href="reference/quick_ttest.html">quick_ttest()</a></code> 的 S3 类设计 - 参考 <code><a href="reference/quick_cor.html">quick_cor()</a></code> 的可视化风格 - 使用 <code>pwr</code> 包作为计算引擎</p>
-<p><strong>代码结构</strong>:</p>
-<pre><code>R/
-├── stat_power.R              # 主函数
-├── stat_samplesize.R         # 主函数
-├── stat_helpers.R            # 辅助函数（效应量计算等）
-└── stat_plot.R               # 可视化辅助函数（可选）
-
-tests/testthat/
-├── test-stat_power.R
-├── test-stat_samplesize.R
-└── test-stat_helpers.R</code></pre>
-<hr></div>
-<div class="section level4">
-<h4 id="子任务清单">子任务清单<a class="anchor" aria-label="anchor" href="#%E5%AD%90%E4%BB%BB%E5%8A%A1%E6%B8%85%E5%8D%95"></a></h4>
-<p><strong>Phase 1: 核心功能实现</strong> - [ ] 创建 <code>R/stat_power.R</code> 文件 - [ ] 实现 t检验功效计算 - [ ] 实现 ANOVA 功效计算 - [ ] 实现其他检验类型功效计算 - [ ] 创建 <code>R/stat_samplesize.R</code> 文件 - [ ] 实现样本量估算（对应所有检验类型） - [ ] 创建 S3 类 <code>stat_power_result</code> 和 <code>stat_samplesize_result</code> - [ ] 实现 <code><a href="https://rdrr.io/r/base/print.html" class="external-link">print()</a></code> 和 <code><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary()</a></code> 方法</p>
-<p><strong>Phase 2: 可视化功能</strong> - [ ] 实现功效曲线绘制（.plot_power_curve） - [ ] 实现样本量曲线绘制（.plot_samplesize_curve） - [ ] 实现 <code><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot()</a></code> S3 方法 - [ ] 集成 evanverse 配色系统</p>
-<p><strong>Phase 3: 辅助功能</strong> - [ ] 创建 <code>R/stat_helpers.R</code> - [ ] 实现效应量计算辅助函数 - [ ] 实现效应量参考值函数 - [ ] 添加智能建议和警告</p>
-<p><strong>Phase 4: 文档和测试</strong> - [ ] 编写完整的 roxygen2 文档（含丰富示例） - [ ] 创建测试文件 <code>tests/testthat/test-stat_power.R</code> - [ ] 创建测试文件 <code>tests/testthat/test-stat_samplesize.R</code> - [ ] 编写单元测试： - 正常使用（所有检验类型） - 边界情况（极小/极大效应量） - 错误处理（非法参数） - [ ] 运行 <code><a href="https://devtools.r-lib.org/reference/document.html" class="external-link">devtools::document()</a></code> - [ ] 运行 <code><a href="https://devtools.r-lib.org/reference/test.html" class="external-link">devtools::test()</a></code> - [ ] 运行 <code><a href="https://devtools.r-lib.org/reference/check.html" class="external-link">devtools::check()</a></code></p>
-<p><strong>Phase 5: 集成和完善</strong> - [ ] 创建使用示例（vignette 或 README 更新） - [ ] 更新 pkgdown 文档站点 - [ ] 与 <code>quick_*</code> 系列集成（可选：在 quick_ttest 结果中建议功效分析） - [ ] 性能优化和代码审查</p>
-<hr></div>
 </div>
 </div>
 <div class="section level2">
 <h2 id="white_check_mark-已完成任务">✅ 已完成任务<a class="anchor" aria-label="anchor" href="#white_check_mark-%E5%B7%B2%E5%AE%8C%E6%88%90%E4%BB%BB%E5%8A%A1"></a></h2>
+<div class="section level3">
+<h3 id="开发-stat_power-函数---统计功效计算">开发 <code>stat_power()</code> 函数 - 统计功效计算<a class="anchor" aria-label="anchor" href="#%E5%BC%80%E5%8F%91-stat_power-%E5%87%BD%E6%95%B0---%E7%BB%9F%E8%AE%A1%E5%8A%9F%E6%95%88%E8%AE%A1%E7%AE%97"></a></h3>
+<p><strong>开始日期</strong>: 2025-11-17 <strong>完成日期</strong>: 2025-11-18</p>
+<p><strong>完成内容</strong>: - ✅ 创建 <code>R/stat_power.R</code> 文件（594行） - ✅ 实现所有检验类型功效计算（t检验、ANOVA、proportion、correlation、chisq） - ✅ 实现功效曲线绘制（.create_power_curve） - ✅ 实现 S3 类 <code>stat_power_result</code> 和方法（print、summary、plot） - ✅ 编写完整的 roxygen2 文档（含丰富示例） - ✅ 创建测试文件 <code>tests/testthat/test-stat_power.R</code>（692行） - ✅ 编写97个单元测试，覆盖所有功能 - 正常使用（所有检验类型） - 参数验证（n, effect_size, alpha, k, df等） - 边界情况和特殊场景 - S3方法测试 - ✅ 添加 <code>pwr</code> 包到 DESCRIPTION Imports - ✅ 修复跨平台兼容性问题（Unicode字符） - ✅ 修复 R CMD check 警告 - ✅ 运行 <code><a href="https://devtools.r-lib.org/reference/document.html" class="external-link">devtools::document()</a></code> - ✅ 运行 <code><a href="https://devtools.r-lib.org/reference/test.html" class="external-link">devtools::test()</a></code> - 所有97个测试通过 - ✅ 运行 <code><a href="https://devtools.r-lib.org/reference/check.html" class="external-link">devtools::check()</a></code> - 通过 - ✅ 更新 pkgdown 文档站点</p>
+<p><strong>成果</strong>: - 功能完整的统计功效计算函数，支持5种检验类型 - 美观的功效曲线可视化，集成evanverse配色 - 完整的S3类系统和单元测试 - 完善的文档、智能推荐和错误处理 - 跨平台兼容（Mac/Linux/Windows）</p>
+<hr></div>
 <div class="section level3">
 <h3 id="开发-quick_cor-函数---相关性分析矩阵--热图">开发 <code>quick_cor()</code> 函数 - 相关性分析矩阵 + 热图<a class="anchor" aria-label="anchor" href="#%E5%BC%80%E5%8F%91-quick_cor-%E5%87%BD%E6%95%B0---%E7%9B%B8%E5%85%B3%E6%80%A7%E5%88%86%E6%9E%90%E7%9F%A9%E9%98%B5--%E7%83%AD%E5%9B%BE"></a></h3>
 <p><strong>开始日期</strong>: 2025-11-17 <strong>完成日期</strong>: 2025-11-17</p>

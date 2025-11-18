@@ -303,6 +303,7 @@ reference:
   - print.quick_cor_result
   - summary.quick_cor_result
   - stat_power
+  - stat_samplesize
 
 - title: "Color Palettes & Management"
   desc: >
