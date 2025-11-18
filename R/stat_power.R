@@ -425,7 +425,7 @@ summary.stat_power_result <- function(object, ...) {
 
 
 #' @export
-plot.stat_power_result <- function(x, y, ...) {
+plot.stat_power_result <- function(x, y = NULL, ...) {
   if (!is.null(x$plot)) {
     print(x$plot)
   } else {
