@@ -402,5 +402,5 @@ summary(result)          # Detailed summary
 #> Levene's test: p = 0.3038
 #> Equal variances: TRUE
 #> 
-#> Analysis performed: 2025-11-17 13:44:26
+#> Analysis performed: 2025-11-18 01:13:13
 ```

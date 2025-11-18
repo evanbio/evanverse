@@ -136,15 +136,15 @@ download_url(
 #> 
 #> ── Starting File Download ──────────────────────────────────────────────────────
 #> ℹ URL: <https://httpbin.org/robots.txt>
-#> ℹ Destination: /tmp/Rtmp9jgg6U/robots.txt
+#> ℹ Destination: /tmp/RtmpOw4WAB/robots.txt
 #> 
 #> ── Download Attempt 1/3 ──
 #> 
 #> ✔ Download completed successfully
 #> ℹ File size: 0 MB
-#> ℹ Download time: 2.48 seconds
+#> ℹ Download time: 0.43 seconds
 #> 
 #> ── Download Process Completed ──────────────────────────────────────────────────
-#> ✔ Final file: /tmp/Rtmp9jgg6U/robots.txt
+#> ✔ Final file: /tmp/RtmpOw4WAB/robots.txt
 # }
 ```
