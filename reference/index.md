@@ -68,6 +68,8 @@ Streamline your statistical workflows with smart defaults.
   : Summary method for quick_cor_result
 - [`stat_power()`](https://evanbio.github.io/evanverse/reference/stat_power.md)
   : Calculate Statistical Power
+- [`stat_samplesize()`](https://evanbio.github.io/evanverse/reference/stat_samplesize.md)
+  : Calculate Required Sample Size
 
 ## Color Palettes & Management
 

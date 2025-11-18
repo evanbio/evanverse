@@ -135,7 +135,7 @@ pkg_functions("evanverse")
 #> 
 #> ── Package: evanverse ──
 #> 
-#> ℹ Matched exported names: 64
+#> ℹ Matched exported names: 65
 #> %is%
 #> %map%
 #> %match%
@@ -196,6 +196,7 @@ pkg_functions("evanverse")
 #> scale_fill_evanverse
 #> set_mirror
 #> stat_power
+#> stat_samplesize
 #> update_pkg
 #> view
 #> with_timer
