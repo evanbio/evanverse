@@ -2,70 +2,325 @@
 % Please edit documentation in R/plot_forest.R
 \name{plot_forest}
 \alias{plot_forest}
-\title{Draw a forest plot using forestploter with publication-quality styling}
+\title{Forest Plot with Advanced Customization}
 \usage{
 plot_forest(
   data,
-  estimate_col = "estimate",
-  lower_col = "conf.low",
-  upper_col = "conf.high",
-  label_col = "variable",
-  p_col = "p.value",
+  est,
+  lower,
+  upper,
+  ci_column,
   ref_line = 1,
-  sig_level = 0.05,
-  bold_sig = TRUE,
-  arrow_lab = c("Unfavorable", "Favorable"),
-  ticks_at = c(0.5, 1, 1.5, 2),
-  xlim = c(0, 3),
-  footnote = "P-value < 0.05 was considered statistically significant",
-  boxcolor = c("#E64B35", "#4DBBD5", "#00A087", "#3C5488", "#F39B7F", "#8491B4",
-    "#91D1C2", "#DC0000", "#7E6148"),
-  align_left = 1,
-  align_right = NULL,
+  xlim = NULL,
+  ticks_at = NULL,
+  arrow_lab = NULL,
+  sizes = 0.6,
+  nudge_y = 0.2,
+  theme_preset = "default",
+  theme_custom = NULL,
+  align_left = NULL,
   align_center = NULL,
-  gap_width = 30
+  align_right = NULL,
+  bold_group = NULL,
+  bold_group_col = 1,
+  bold_pvalue_cols = NULL,
+  p_threshold = 0.05,
+  bold_custom = NULL,
+  background_style = "none",
+  background_group_rows = NULL,
+  background_colors = NULL,
+  ci_colors = NULL,
+  ci_group_ids = NULL,
+  add_borders = TRUE,
+  border_width = 3,
+  group_headers = NULL,
+  group_border_width = 6,
+  custom_borders = NULL,
+  height_top = 8,
+  height_header = 12,
+  height_main = 10,
+  height_bottom = 8,
+  width_left = 10,
+  width_right = 10,
+  width_adjust = 5,
+  height_custom = NULL,
+  width_custom = NULL,
+  layout_verbose = TRUE,
+  save_plot = FALSE,
+  filename = "forest_plot",
+  save_path = ".",
+  save_formats = c("png", "pdf"),
+  save_width = 35,
+  save_height = 42,
+  save_units = "cm",
+  save_dpi = 300,
+  save_bg = "white",
+  save_overwrite = TRUE,
+  save_verbose = TRUE
 )
 }
 \arguments{
-\item{data}{Data frame with required columns: estimate, lower, upper, label, and p-value.}
+\item{data}{Data frame containing the plot data (both text and numeric columns).}
 
-\item{estimate_col}{Name of column containing point estimates.}
+\item{est}{List of numeric vectors containing effect estimates. Use \code{list()}
+even for single group. Example: \code{list(data$estimate)} or
+\code{list(data$estimate_1, data$estimate_2)}.}
 
-\item{lower_col}{Name of column containing lower CI.}
+\item{lower}{List of numeric vectors containing lower CI bounds.}
 
-\item{upper_col}{Name of column containing upper CI.}
+\item{upper}{List of numeric vectors containing upper CI bounds.}
 
-\item{label_col}{Name of column for variable labels.}
+\item{ci_column}{Integer vector specifying which column(s) to draw CI graphics.
+Example: \code{c(3)} for single group, \code{c(3, 7)} for two groups.}
 
-\item{p_col}{Name of column for p-values.}
+\item{ref_line}{Numeric. Reference line position (e.g., 1 for OR, 0 for
+mean difference). Default: 1.}
 
-\item{ref_line}{Reference line value, typically 1 for OR/HR.}
+\item{xlim}{Numeric vector of length 2. X-axis limits. Default: \code{NULL} (auto-calculate).}
 
-\item{sig_level}{Threshold to bold significant rows (default 0.05).}
+\item{ticks_at}{Numeric vector. X-axis tick positions. Default: \code{NULL} (auto-calculate).}
 
-\item{bold_sig}{Whether to bold significant rows.}
+\item{arrow_lab}{Character vector of length 2. Labels for left and right arrows.
+Example: \code{c("Favors A", "Favors B")}. Default: \code{NULL}.}
 
-\item{arrow_lab}{Labels at both ends of the forest axis.}
+\item{sizes}{Numeric. Size of CI center points. Can be:
+\itemize{
+\item Single value: Automatically applied to all rows (e.g., \code{0.6})
+\item Vector: Must match the number of data rows. If length is insufficient,
+later rows will have no CI displayed. To repeat a pattern, use
+\code{rep(c(0.5, 0.4, 0.3), length.out = nrow(data))}.
+}
+Default: 0.6.}
 
-\item{ticks_at}{Vector of x-axis tick marks.}
+\item{nudge_y}{Numeric. Vertical nudge for multi-group CI positioning. Default: 0.2.}
 
-\item{xlim}{Range of x-axis (e.g., c(0, 3)). If NULL, auto-calculated. Default: c(0, 3).}
+\item{theme_preset}{Character. Theme preset name. Default: \code{"default"}.
+See \code{.get_forest_theme()} for available presets.}
 
-\item{footnote}{Caption text below the plot.}
+\item{theme_custom}{List. Custom theme parameters to override preset. Default: \code{NULL}.}
 
-\item{boxcolor}{Fill colors for CI boxes, will repeat if too short.}
+\item{align_left}{Integer vector. Columns to left-align. Default: \code{NULL}.}
 
-\item{align_left}{Integer column indices to left-align.}
+\item{align_center}{Integer vector. Columns to center-align. Default: \code{NULL}.}
 
-\item{align_right}{Integer column indices to right-align.}
+\item{align_right}{Integer vector. Columns to right-align. Default: \code{NULL}.}
 
-\item{align_center}{Integer column indices to center-align.}
+\item{bold_group}{Character vector. Group names to bold. Default: \code{NULL}.}
 
-\item{gap_width}{Number of spaces in the gap column (default = 30).}
+\item{bold_group_col}{Integer. Column containing group names. Default: 1.}
+
+\item{bold_pvalue_cols}{Integer vector. P-value columns to bold if significant. Default: \code{NULL}.}
+
+\item{p_threshold}{Numeric. P-value threshold for bolding. Default: 0.05.}
+
+\item{bold_custom}{List of custom bold specifications. Default: \code{NULL}.}
+
+\item{background_style}{Character. Background style: \code{"none"}, \code{"zebra"},
+\code{"group"}, \code{"block"}. Default: \code{"none"}.}
+
+\item{background_group_rows}{Integer vector. Row indices of group headers (for
+\code{"group"} and \code{"block"} styles). Default: \code{NULL}.}
+
+\item{background_colors}{Named list of colors (primary, secondary, alternate). Default: \code{NULL}.}
+
+\item{ci_colors}{Color specification for CI boxes. Can be single color, vector,
+or named list with mapping. Default: \code{NULL}.}
+
+\item{ci_group_ids}{Optional vector of group IDs for color mapping. Default: \code{NULL}.}
+
+\item{add_borders}{Logical. Add simple borders. Default: \code{TRUE}.}
+
+\item{border_width}{Numeric. Border line width (mm). Default: 3.}
+
+\item{group_headers}{List of group header specifications for multi-group plots. Default: \code{NULL}.}
+
+\item{group_border_width}{Numeric. Border width for group mode (mm). Default: 6.}
+
+\item{custom_borders}{List of custom border specifications. Default: \code{NULL}.}
+
+\item{height_top}{Numeric. Top margin height (mm). Default: 8.}
+
+\item{height_header}{Numeric. Header row height (mm). Default: 12.}
+
+\item{height_main}{Numeric. Data row height (mm). Default: 10.}
+
+\item{height_bottom}{Numeric. Bottom margin height (mm). Default: 8.}
+
+\item{width_left}{Numeric. Left margin width (mm). Default: 10.}
+
+\item{width_right}{Numeric. Right margin width (mm). Default: 10.}
+
+\item{width_adjust}{Numeric. Width adjustment for data columns (mm). Default: 5.}
+
+\item{height_custom}{Named list for manual height override. Default: \code{NULL}.}
+
+\item{width_custom}{Named list for manual width override. Default: \code{NULL}.}
+
+\item{layout_verbose}{Logical. Print layout adjustment info. Default: \code{TRUE}.}
+
+\item{save_plot}{Logical. Save plot to file(s). Default: \code{FALSE}.}
+
+\item{filename}{Character. Base filename (without extension). Default: \code{"forest_plot"}.}
+
+\item{save_path}{Character. Directory path for saving. Default: \code{"."}.}
+
+\item{save_formats}{Character vector. File formats to save. Default: \code{c("png", "pdf")}.}
+
+\item{save_width}{Numeric. Plot width. Default: 35.}
+
+\item{save_height}{Numeric. Plot height. Default: 42.}
+
+\item{save_units}{Character. Units for width/height. Default: \code{"cm"}.}
+
+\item{save_dpi}{Numeric. Resolution for raster formats. Default: 300.}
+
+\item{save_bg}{Character. Background color. Default: \code{"white"}.}
+
+\item{save_overwrite}{Logical. Overwrite existing files. Default: \code{TRUE}.}
+
+\item{save_verbose}{Logical. Print save messages. Default: \code{TRUE}.}
 }
 \value{
-A forestplot object
+A forest plot object (gtable). Can be displayed with \code{print()} or
+\code{grid.draw()}. The object contains the complete plot structure and can
+be saved using the built-in save functionality or standard ggplot2 methods.
 }
 \description{
-Draw a forest plot using forestploter with publication-quality styling
+Create publication-ready forest plots with extensive customization for
+confidence intervals, themes, colors, borders, and layout. Designed for
+meta-analysis and comparative study visualizations.
+}
+\details{
+\strong{Core Workflow:}
+
+The function creates a base forest plot using the \pkg{forestploter} package,
+then applies a series of customizations:
+\enumerate{
+\item Theme application (presets or custom)
+\item Text alignment adjustments
+\item Bold formatting for groups and significant p-values
+\item Background colors (zebra, group, or block patterns)
+\item CI box colors (single, vector, or mapped)
+\item Border additions (simple, group, or custom)
+\item Layout adjustments (widths and heights)
+\item Optional file saving
+}
+
+\strong{CI Color Mapping:}
+
+The \code{ci_colors} parameter accepts three formats:
+\itemize{
+\item \strong{Single color}: Applied to all rows (e.g., \code{"#E64B35"})
+\item \strong{Color vector}: Must match the number of rows
+\item \strong{Named list with mapping}: Maps group IDs to colors
+}
+
+Example of named mapping:
+\preformatted{
+ci_colors = list(
+  mapping = c("Q1" = "#DC0000", "Q2" = "#8491B4", "Q3" = "#F39B7F"),
+  default = "#999999"
+)
+}
+}
+\section{Important Notes}{
+
+\itemize{
+\item \strong{Data preparation}: The \code{data} parameter should contain all
+display columns including pre-formatted text
+\item \strong{CI graphics}: Use \code{strrep(" ", n)} to create space columns
+where CI graphics will be drawn
+\item \strong{Layout tuning}: Use \code{height_custom} and \code{width_custom}
+after inspecting verbose output for fine-grained control
+}
+}
+
+\examples{
+\dontrun{
+# Example 1: Using built-in forest_data
+library(dplyr)
+library(evanverse)
+
+# Load example data
+data("forest_data")
+
+# Filter to single-model data (rows without est_2)
+df <- forest_data \%>\%
+  filter(is.na(est_2)) \%>\%
+  filter(!is.na(est))  # Remove header rows
+
+# Prepare display data
+plot_data <- df \%>\%
+  mutate(
+    ` ` = strrep(" ", 20),
+    `OR (95\% CI)` = sprintf("\%.2f (\%.2f-\%.2f)", est, lower, upper),
+    `P` = ifelse(pval < 0.001, "<0.001", sprintf("\%.3f", pval))
+  ) \%>\%
+  select(Variable = variable, ` `, `OR (95\% CI)`, `P`)
+
+# Create plot
+p <- plot_forest(
+  data = plot_data,
+  est = list(df$est),
+  lower = list(df$lower),
+  upper = list(df$upper),
+  ci_column = 2,
+  ref_line = 1
+)
+print(p)
+
+# Example 2: Multi-model comparison
+df_multi <- forest_data \%>\%
+  filter(!is.na(est_2))  # Multi-model rows
+
+plot_data_multi <- df_multi \%>\%
+  mutate(
+    ` ` = strrep(" ", 20),
+    `Model 1` = sprintf("\%.2f (\%.2f-\%.2f)", est, lower, upper),
+    `Model 2` = sprintf("\%.2f (\%.2f-\%.2f)", est_2, lower_2, upper_2),
+    `Model 3` = sprintf("\%.2f (\%.2f-\%.2f)", est_3, lower_3, upper_3)
+  ) \%>\%
+  select(Variable = variable, ` `, `Model 1`, `Model 2`, `Model 3`)
+
+p <- plot_forest(
+  data = plot_data_multi,
+  est = list(df_multi$est, df_multi$est_2, df_multi$est_3),
+  lower = list(df_multi$lower, df_multi$lower_2, df_multi$lower_3),
+  upper = list(df_multi$upper, df_multi$upper_2, df_multi$upper_3),
+  ci_column = 2,
+  ref_line = 1
+)
+
+# Example 3: Customized styling
+p <- plot_forest(
+  data = plot_data,
+  est = list(df$est),
+  lower = list(df$lower),
+  upper = list(df$upper),
+  ci_column = 2,
+  xlim = c(0.5, 3),
+  arrow_lab = c("Lower Risk", "Higher Risk"),
+  align_left = 1,
+  align_center = c(2, 3, 4),
+  bold_pvalue_cols = 4,
+  background_style = "zebra"
+)
+
+# Example 4: Save to files
+plot_forest(
+  data = plot_data,
+  est = list(df$est),
+  lower = list(df$lower),
+  upper = list(df$upper),
+  ci_column = 2,
+  save_plot = TRUE,
+  filename = "forest_plot",
+  save_formats = c("png", "pdf")
+)
+}
+
+}
+\seealso{
+\code{\link[forestploter]{forest}} for the underlying plotting function,
+\code{\link[forestploter]{forest_theme}} for theme customization.
 }

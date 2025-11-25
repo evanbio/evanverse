@@ -29,6 +29,7 @@
 # Development & Build
 #-------------------------------------------------------
 dev/
+blog/
 .Rcheck/
 .Rbuildignore
 *.tar.gz

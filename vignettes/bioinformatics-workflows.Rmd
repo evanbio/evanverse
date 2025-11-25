@@ -41,7 +41,6 @@ The `evanverse` package provides specialized tools for common bioinformatics wor
 | `gmt2list()` | GMT file to named list | Enrichment analysis, functional annotation |
 | `download_geo_data()` | GEO data retrieval | Public dataset analysis |
 | `plot_venn()` | Venn diagram analysis | Gene set overlaps, differential expression |
-| `plot_forest()` | Forest plots | Meta-analysis, effect sizes |
 
 ## 🔄 Gene Identifier Conversion
 
@@ -419,48 +418,6 @@ summary_stats <- omics_data %>%
 print(summary_stats)
 ```
 
-## 📈 Survival Analysis Visualization
-
-### Forest Plot for Hazard Ratios
-
-```{r survival-analysis, fig.cap="Forest plot showing hazard ratios for genetic markers in survival analysis"}
-# Simulate survival analysis results
-survival_data <- data.frame(
-  Gene = c("BRCA1", "BRCA2", "TP53", "EGFR", "MYC", "KRAS", "PIK3CA", "AKT1"),
-  HazardRatio = c(1.23, 0.87, 1.45, 1.12, 0.92, 1.67, 1.34, 0.78),
-  CI_Lower = c(0.98, 0.71, 1.18, 0.89, 0.75, 1.32, 1.05, 0.61),
-  CI_Upper = c(1.55, 1.07, 1.78, 1.41, 1.13, 2.11, 1.71, 0.99),
-  PValue = c(0.067, 0.189, 0.001, 0.324, 0.445, 0.0001, 0.018, 0.041),
-  stringsAsFactors = FALSE
-)
-
-# Add significance categories
-survival_data$Significance <- ifelse(survival_data$PValue < 0.001, "***",
-                            ifelse(survival_data$PValue < 0.01, "**",
-                            ifelse(survival_data$PValue < 0.05, "*", "ns")))
-
-# Create forest plot using evanverse plotting functions
-p4 <- plot_forest(
-  data = survival_data,
-  label_col = "Gene",
-  estimate_col = "HazardRatio",
-  lower_col = "CI_Lower",
-  upper_col = "CI_Upper",
-  p_col = "PValue"
-)
-
-print(p4)
-
-cat("\n🎯 Survival Analysis Summary:\n")
-cat("=============================\n")
-significant_genes <- survival_data[survival_data$PValue < 0.05, ]
-cat("Significant prognostic markers:", nrow(significant_genes), "\n")
-cat("Risk factors (HR > 1):", sum(significant_genes$HazardRatio > 1), "\n")
-cat("Protective factors (HR < 1):", sum(significant_genes$HazardRatio < 1), "\n")
-
-print(significant_genes[, c("Gene", "HazardRatio", "PValue", "Significance")])
-```
-
 ## 🔬 Clinical Data Integration
 
 ### Biomarker Discovery Pipeline
@@ -714,7 +671,7 @@ pipeline_steps <- data.frame(
     "Built-in R functions",
     "gmt2df(), gmt2list()",
     "plot_venn(), combine_logic()",
-    "plot_forest(), get_palette()",
+    "get_palette(), plot_*() functions",
     "write_xlsx_flex(), remind()"
   ),
   Estimated_Time = c("5-10 min", "10-15 min", "30-60 min", "5 min",
@@ -759,8 +716,8 @@ pathways <- gmt2list("pathways.gmt")
 plot_venn(gene_sets, colors = get_palette("qual_vivid"))
 
 # Data visualization
-plot_forest(survival_data, hr_col = "HazardRatio")
 get_palette("div_contrast", type = "diverging")
+plot_venn(gene_sets)
 
 # Data management
 download_geo_data("GSE123456")

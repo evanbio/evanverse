@@ -74,3 +74,4 @@ Suggests:
     forestploter,
     purrr,
     reactable
+LazyData: true
