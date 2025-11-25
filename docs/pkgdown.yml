@@ -6,11 +6,12 @@ articles:
   color-palettes: color-palettes.html
   comprehensive-guide: comprehensive-guide.html
   data-processing: data-processing.html
+  forest-plot: forest-plot.html
   get-started: get-started.html
   install: install.html
   package-management: package-management.html
   palette-naming-convention: palette-naming-convention.html
-last_built: 2025-11-18T02:23Z
+last_built: 2025-11-25T04:26Z
 urls:
   reference: https://evanbio.github.io/evanverse/reference
   article: https://evanbio.github.io/evanverse/articles

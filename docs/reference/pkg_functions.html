@@ -133,9 +133,9 @@ by a case-insensitive keyword. Results are sorted alphabetically.</p>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># List all functions in evanverse:</span></span></span>
 <span class="r-in"><span><span class="fu">pkg_functions</span><span class="op">(</span><span class="st">"evanverse"</span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> ── <span style="font-weight: bold;">Package: </span><span style="color: #0000BB; font-weight: bold;">evanverse</span> ──</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> ── <span style="font-weight: bold;">Package: evanverse</span> ──</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> Matched exported names: 65</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> Matched exported names: 53</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> %is%</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> %map%</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> %match%</span>
@@ -144,7 +144,6 @@ by a case-insensitive keyword. Results are sorted alphabetically.</p>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> any_void</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> bio_palette_gallery</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> check_pkg</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> clear_palette_cache</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> cols_with_void</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> comb</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> combine_logic</span>
@@ -168,7 +167,6 @@ by a case-insensitive keyword. Results are sorted alphabetically.</p>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> is_void</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> list_palettes</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> map_column</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> palette_cache_info</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> perm</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> pkg_functions</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> pkg_version</span>
@@ -178,25 +176,15 @@ by a case-insensitive keyword. Results are sorted alphabetically.</p>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> plot_pie</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> plot_venn</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> preview_palette</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> quick_anova</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> quick_chisq</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> quick_cor</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> quick_ttest</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> read_excel_flex</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> read_table_flex</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> reload_palette_cache</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> remind</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> remove_palette</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> replace_void</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> rgb2hex</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> rows_with_void</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> safe_execute</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> scale_color_evanverse</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> scale_colour_evanverse</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> scale_fill_evanverse</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> set_mirror</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> stat_power</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> stat_samplesize</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> update_pkg</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> view</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> with_timer</span>
@@ -205,7 +193,7 @@ by a case-insensitive keyword. Results are sorted alphabetically.</p>
 <span class="r-in"><span><span class="co"># Filter by keyword:</span></span></span>
 <span class="r-in"><span><span class="fu">pkg_functions</span><span class="op">(</span><span class="st">"evanverse"</span>, key <span class="op">=</span> <span class="st">"plot"</span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> ── <span style="font-weight: bold;">Package: </span><span style="color: #0000BB; font-weight: bold;">evanverse</span> ──</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> ── <span style="font-weight: bold;">Package: evanverse</span> ──</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> Matched exported names: 5</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> plot_bar</span>
