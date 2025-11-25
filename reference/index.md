@@ -30,8 +30,7 @@ with minimal code.
 - [`plot_venn()`](https://evanbio.github.io/evanverse/reference/plot_venn.md)
   : Draw Venn Diagrams (2-4 sets, classic or gradient style)
 - [`plot_forest()`](https://evanbio.github.io/evanverse/reference/plot_forest.md)
-  : Draw a forest plot using forestploter with publication-quality
-  styling
+  : Forest Plot with Advanced Customization
 - [`plot_bar()`](https://evanbio.github.io/evanverse/reference/plot_bar.md)
   : Bar plot with optional fill grouping, sorting, and directional
   layout
@@ -227,7 +226,7 @@ Sample datasets included with evanverse for testing and demonstration
 purposes. Useful for learning functions and exploring package
 capabilities.
 
-- [`df_forest_test`](https://evanbio.github.io/evanverse/reference/df_forest_test.md)
-  : Test Dataset for Forest Plots
+- [`forest_data`](https://evanbio.github.io/evanverse/reference/forest_data.md)
+  : Comprehensive Forest Plot Dataset
 - [`trial`](https://evanbio.github.io/evanverse/reference/trial.md) :
   Clinical Trial Dataset

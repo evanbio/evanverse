@@ -534,5 +534,5 @@ summary(result)             # Detailed summary
 #>   mpg qsec   0.4186840 1.708199e-02
 #>  disp carb   0.3949769 2.526789e-02
 #> 
-#> Analysis performed: 2025-11-18 02:30:17
+#> Analysis performed: 2025-11-25 06:07:39
 ```

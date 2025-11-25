@@ -27,7 +27,6 @@ in genomics and systems biology.
 | [`gmt2list()`](https://evanbio.github.io/evanverse/reference/gmt2list.md)                   | GMT file to named list     | Enrichment analysis, functional annotation |
 | [`download_geo_data()`](https://evanbio.github.io/evanverse/reference/download_geo_data.md) | GEO data retrieval         | Public dataset analysis                    |
 | [`plot_venn()`](https://evanbio.github.io/evanverse/reference/plot_venn.md)                 | Venn diagram analysis      | Gene set overlaps, differential expression |
-| [`plot_forest()`](https://evanbio.github.io/evanverse/reference/plot_forest.md)             | Forest plots               | Meta-analysis, effect sizes                |
 
 ### 🔄 Gene Identifier Conversion
 
@@ -560,68 +559,6 @@ print(summary_stats)
 #> 3 Mutation        0.354     1.37      -1.5       2.3
 ```
 
-### 📈 Survival Analysis Visualization
-
-#### Forest Plot for Hazard Ratios
-
-``` r
-# Simulate survival analysis results
-survival_data <- data.frame(
-  Gene = c("BRCA1", "BRCA2", "TP53", "EGFR", "MYC", "KRAS", "PIK3CA", "AKT1"),
-  HazardRatio = c(1.23, 0.87, 1.45, 1.12, 0.92, 1.67, 1.34, 0.78),
-  CI_Lower = c(0.98, 0.71, 1.18, 0.89, 0.75, 1.32, 1.05, 0.61),
-  CI_Upper = c(1.55, 1.07, 1.78, 1.41, 1.13, 2.11, 1.71, 0.99),
-  PValue = c(0.067, 0.189, 0.001, 0.324, 0.445, 0.0001, 0.018, 0.041),
-  stringsAsFactors = FALSE
-)
-
-# Add significance categories
-survival_data$Significance <- ifelse(survival_data$PValue < 0.001, "***",
-                            ifelse(survival_data$PValue < 0.01, "**",
-                            ifelse(survival_data$PValue < 0.05, "*", "ns")))
-
-# Create forest plot using evanverse plotting functions
-p4 <- plot_forest(
-  data = survival_data,
-  label_col = "Gene",
-  estimate_col = "HazardRatio",
-  lower_col = "CI_Lower",
-  upper_col = "CI_Upper",
-  p_col = "PValue"
-)
-
-print(p4)
-```
-
-![Forest plot showing hazard ratios for genetic markers in survival
-analysis](bioinformatics-workflows_files/figure-html/survival-analysis-1.png)
-
-Forest plot showing hazard ratios for genetic markers in survival
-analysis
-
-``` r
-
-cat("\n🎯 Survival Analysis Summary:\n")
-#> 
-#> 🎯 Survival Analysis Summary:
-cat("=============================\n")
-#> =============================
-significant_genes <- survival_data[survival_data$PValue < 0.05, ]
-cat("Significant prognostic markers:", nrow(significant_genes), "\n")
-#> Significant prognostic markers: 4
-cat("Risk factors (HR > 1):", sum(significant_genes$HazardRatio > 1), "\n")
-#> Risk factors (HR > 1): 3
-cat("Protective factors (HR < 1):", sum(significant_genes$HazardRatio < 1), "\n")
-#> Protective factors (HR < 1): 1
-
-print(significant_genes[, c("Gene", "HazardRatio", "PValue", "Significance")])
-#>     Gene HazardRatio PValue Significance
-#> 3   TP53        1.45 0.0010           **
-#> 6   KRAS        1.67 0.0001          ***
-#> 7 PIK3CA        1.34 0.0180            *
-#> 8   AKT1        0.78 0.0410            *
-```
-
 ### 🔬 Clinical Data Integration
 
 #### Biomarker Discovery Pipeline
@@ -975,7 +912,7 @@ pipeline_steps <- data.frame(
     "Built-in R functions",
     "gmt2df(), gmt2list()",
     "plot_venn(), combine_logic()",
-    "plot_forest(), get_palette()",
+    "get_palette(), plot_*() functions",
     "write_xlsx_flex(), remind()"
   ),
   Estimated_Time = c("5-10 min", "10-15 min", "30-60 min", "5 min",
@@ -990,7 +927,7 @@ print(pipeline_steps)
 #> 4    4      Multiple Testing Correction                Built-in R functions
 #> 5    5      Pathway Enrichment Analysis                gmt2df(), gmt2list()
 #> 6    6        Gene Set Overlap Analysis        plot_venn(), combine_logic()
-#> 7    7         Visualization & Plotting        plot_forest(), get_palette()
+#> 7    7         Visualization & Plotting   get_palette(), plot_*() functions
 #> 8    8       Results Export & Reporting         write_xlsx_flex(), remind()
 #>   Estimated_Time
 #> 1       5-10 min
@@ -1050,8 +987,8 @@ pathways <- gmt2list("pathways.gmt")
 plot_venn(gene_sets, colors = get_palette("qual_vivid"))
 
 # Data visualization
-plot_forest(survival_data, hr_col = "HazardRatio")
 get_palette("div_contrast", type = "diverging")
+plot_venn(gene_sets)
 
 # Data management
 download_geo_data("GSE123456")

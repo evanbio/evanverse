@@ -10,6 +10,8 @@
   evanverse](https://evanbio.github.io/evanverse/articles/comprehensive-guide.md):
 - [Data Processing &
   Transformation](https://evanbio.github.io/evanverse/articles/data-processing.md):
+- [Publication-Ready Forest Plots with
+  evanverse](https://evanbio.github.io/evanverse/articles/forest-plot.md):
 - [Welcome to
   evanverse](https://evanbio.github.io/evanverse/articles/get-started.md):
 - [Installation
