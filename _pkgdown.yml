@@ -329,7 +329,9 @@ reference:
     Seamless ggplot2 integration for evanverse color palettes.
     Apply palettes directly to ggplot2 color and fill scales.
   contents:
-  - scale_evanverse
+  - scale_color_evanverse
+  - scale_colour_evanverse
+  - scale_fill_evanverse
 
 - title: "File & Data I/O"
   desc: >

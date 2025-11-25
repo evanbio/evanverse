@@ -338,9 +338,40 @@ or use fallback plotting.</p></li>
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># Example 1: Basic correlation analysis</span></span></span>
 <span class="r-in"><span><span class="va">result</span> <span class="op">&lt;-</span> <span class="fu">quick_cor</span><span class="op">(</span><span class="va">mtcars</span><span class="op">)</span></span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in quick_cor(mtcars):</span> could not find function "quick_cor"</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> ── <span style="font-weight: bold;">Data Preparation</span> ──</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> Automatically selected 11 numeric columns.</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> ── <span style="font-weight: bold;">Computing Correlations</span> ──</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> Found 44 significant correlations out of 55 tests</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #BBBB00;">!</span> Found 1 pair with |r| &gt; 0.9 (potential multicollinearity)</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> ── <span style="font-weight: bold;">Creating Heatmap</span> ──</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> Analysis complete!</span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">result</span><span class="op">)</span></span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error:</span> object 'result' not found</span>
+<span class="r-plt img"><img src="quick_cor-1.png" alt="" width="700" height="433"></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> ── <span style="font-weight: bold;">Quick Correlation Analysis Results</span> ──</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> Method: pearson</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> Variables: 11</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> Significant pairs: 44</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> ── Top 5 Significant Correlations </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  var1 var2 correlation      p_value</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   cyl disp   0.9020329 1.802838e-12</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  disp   wt   0.8879799 1.222320e-11</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   mpg   wt  -0.8676594 1.293959e-10</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   mpg  cyl  -0.8521620 6.112687e-10</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   mpg disp  -0.8475514 9.380327e-10</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Use `summary()` for detailed results.</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Example 2: Spearman correlation with specific variables</span></span></span>
 <span class="r-in"><span><span class="va">result</span> <span class="op">&lt;-</span> <span class="fu">quick_cor</span><span class="op">(</span></span></span>
@@ -348,7 +379,18 @@ or use fallback plotting.</p></li>
 <span class="r-in"><span>  vars <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"mpg"</span>, <span class="st">"hp"</span>, <span class="st">"wt"</span>, <span class="st">"qsec"</span><span class="op">)</span>,</span></span>
 <span class="r-in"><span>  method <span class="op">=</span> <span class="st">"spearman"</span></span></span>
 <span class="r-in"><span><span class="op">)</span></span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in quick_cor(mtcars, vars = c("mpg", "hp", "wt", "qsec"), method = "spearman"):</span> could not find function "quick_cor"</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> ── <span style="font-weight: bold;">Data Preparation</span> ──</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> Using 4 specified variables.</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> ── <span style="font-weight: bold;">Computing Correlations</span> ──</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> Found 5 significant correlations out of 6 tests</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> ── <span style="font-weight: bold;">Creating Heatmap</span> ──</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> Analysis complete!</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Example 3: Upper triangular with Bonferroni correction</span></span></span>
 <span class="r-in"><span><span class="va">result</span> <span class="op">&lt;-</span> <span class="fu">quick_cor</span><span class="op">(</span></span></span>
@@ -357,7 +399,21 @@ or use fallback plotting.</p></li>
 <span class="r-in"><span>  p_adjust_method <span class="op">=</span> <span class="st">"bonferroni"</span>,</span></span>
 <span class="r-in"><span>  show_coef <span class="op">=</span> <span class="cn">TRUE</span></span></span>
 <span class="r-in"><span><span class="op">)</span></span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in quick_cor(iris, type = "upper", p_adjust_method = "bonferroni",     show_coef = TRUE):</span> could not find function "quick_cor"</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #BBBB00;">!</span> Both `show_coef` and `show_sig` are TRUE. Setting `show_sig` to FALSE to avoid overlapping labels.</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> ── <span style="font-weight: bold;">Data Preparation</span> ──</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> Automatically selected 4 numeric columns.</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> ── <span style="font-weight: bold;">Computing Correlations</span> ──</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> Applying bonferroni correction for multiple testing...</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> Found 5 significant correlations out of 6 tests</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #BBBB00;">!</span> Found 1 pair with |r| &gt; 0.9 (potential multicollinearity)</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> ── <span style="font-weight: bold;">Creating Heatmap</span> ──</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> Analysis complete!</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Example 4: Custom palette and title</span></span></span>
 <span class="r-in"><span><span class="va">result</span> <span class="op">&lt;-</span> <span class="fu">quick_cor</span><span class="op">(</span></span></span>
@@ -366,7 +422,19 @@ or use fallback plotting.</p></li>
 <span class="r-in"><span>  title <span class="op">=</span> <span class="st">"Correlation Matrix of mtcars Dataset"</span>,</span></span>
 <span class="r-in"><span>  hc_order <span class="op">=</span> <span class="cn">TRUE</span></span></span>
 <span class="r-in"><span><span class="op">)</span></span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in quick_cor(mtcars, palette = "gradient_rd_bu", title = "Correlation Matrix of mtcars Dataset",     hc_order = TRUE):</span> could not find function "quick_cor"</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> ── <span style="font-weight: bold;">Data Preparation</span> ──</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> Automatically selected 11 numeric columns.</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> ── <span style="font-weight: bold;">Computing Correlations</span> ──</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> Found 44 significant correlations out of 55 tests</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #BBBB00;">!</span> Found 1 pair with |r| &gt; 0.9 (potential multicollinearity)</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> ── <span style="font-weight: bold;">Creating Heatmap</span> ──</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> Analysis complete!</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Example 5: Customize axis labels</span></span></span>
 <span class="r-in"><span><span class="va">result</span> <span class="op">&lt;-</span> <span class="fu">quick_cor</span><span class="op">(</span></span></span>
@@ -375,17 +443,180 @@ or use fallback plotting.</p></li>
 <span class="r-in"><span>  axis_text_size <span class="op">=</span> <span class="fl">12</span>,    <span class="co"># Larger text</span></span></span>
 <span class="r-in"><span>  show_axis_y <span class="op">=</span> <span class="cn">FALSE</span>     <span class="co"># Hide y-axis labels</span></span></span>
 <span class="r-in"><span><span class="op">)</span></span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in quick_cor(mtcars, axis_x_angle = 90, axis_text_size = 12, show_axis_y = FALSE):</span> could not find function "quick_cor"</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> ── <span style="font-weight: bold;">Data Preparation</span> ──</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> Automatically selected 11 numeric columns.</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> ── <span style="font-weight: bold;">Computing Correlations</span> ──</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> Found 44 significant correlations out of 55 tests</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #BBBB00;">!</span> Found 1 pair with |r| &gt; 0.9 (potential multicollinearity)</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> ── <span style="font-weight: bold;">Creating Heatmap</span> ──</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> Analysis complete!</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Access components</span></span></span>
 <span class="r-in"><span><span class="va">result</span><span class="op">$</span><span class="va">plot</span>                 <span class="co"># ggplot object</span></span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error:</span> object 'result' not found</span>
+<span class="r-plt img"><img src="quick_cor-2.png" alt="" width="700" height="433"></span>
 <span class="r-in"><span><span class="va">result</span><span class="op">$</span><span class="va">cor_matrix</span>           <span class="co"># Correlation matrix</span></span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error:</span> object 'result' not found</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>             mpg        cyl       disp         hp        drat         wt</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> mpg   1.0000000 -0.8521620 -0.8475514 -0.7761684  0.68117191 -0.8676594</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> cyl  -0.8521620  1.0000000  0.9020329  0.8324475 -0.69993811  0.7824958</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> disp -0.8475514  0.9020329  1.0000000  0.7909486 -0.71021393  0.8879799</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> hp   -0.7761684  0.8324475  0.7909486  1.0000000 -0.44875912  0.6587479</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> drat  0.6811719 -0.6999381 -0.7102139 -0.4487591  1.00000000 -0.7124406</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> wt   -0.8676594  0.7824958  0.8879799  0.6587479 -0.71244065  1.0000000</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> qsec  0.4186840 -0.5912421 -0.4336979 -0.7082234  0.09120476 -0.1747159</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> vs    0.6640389 -0.8108118 -0.7104159 -0.7230967  0.44027846 -0.5549157</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> am    0.5998324 -0.5226070 -0.5912270 -0.2432043  0.71271113 -0.6924953</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> gear  0.4802848 -0.4926866 -0.5555692 -0.1257043  0.69961013 -0.5832870</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> carb -0.5509251  0.5269883  0.3949769  0.7498125 -0.09078980  0.4276059</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>             qsec         vs          am       gear        carb</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> mpg   0.41868403  0.6640389  0.59983243  0.4802848 -0.55092507</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> cyl  -0.59124207 -0.8108118 -0.52260705 -0.4926866  0.52698829</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> disp -0.43369788 -0.7104159 -0.59122704 -0.5555692  0.39497686</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> hp   -0.70822339 -0.7230967 -0.24320426 -0.1257043  0.74981247</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> drat  0.09120476  0.4402785  0.71271113  0.6996101 -0.09078980</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> wt   -0.17471588 -0.5549157 -0.69249526 -0.5832870  0.42760594</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> qsec  1.00000000  0.7445354 -0.22986086 -0.2126822 -0.65624923</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> vs    0.74453544  1.0000000  0.16834512  0.2060233 -0.56960714</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> am   -0.22986086  0.1683451  1.00000000  0.7940588  0.05753435</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> gear -0.21268223  0.2060233  0.79405876  1.0000000  0.27407284</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> carb -0.65624923 -0.5696071  0.05753435  0.2740728  1.00000000</span>
 <span class="r-in"><span><span class="va">result</span><span class="op">$</span><span class="va">significant_pairs</span>    <span class="co"># Significant pairs</span></span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error:</span> object 'result' not found</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    var1 var2 correlation      p_value</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1   cyl disp   0.9020329 1.802838e-12</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2  disp   wt   0.8879799 1.222320e-11</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3   mpg   wt  -0.8676594 1.293959e-10</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4   mpg  cyl  -0.8521620 6.112687e-10</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 5   mpg disp  -0.8475514 9.380327e-10</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 6   cyl   hp   0.8324475 3.477861e-09</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 7   cyl   vs  -0.8108118 1.843018e-08</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 8    am gear   0.7940588 5.834043e-08</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 9  disp   hp   0.7909486 7.142679e-08</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 10  cyl   wt   0.7824958 1.217567e-07</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 11  mpg   hp  -0.7761684 1.787835e-07</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 12   hp carb   0.7498125 7.827810e-07</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 13 qsec   vs   0.7445354 1.029669e-06</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 14   hp   vs  -0.7230967 2.940896e-06</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 15 drat   am   0.7127111 4.726790e-06</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 16 drat   wt  -0.7124406 4.784260e-06</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 17 disp   vs  -0.7104159 5.235012e-06</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 18 disp drat  -0.7102139 5.282022e-06</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 19   hp qsec  -0.7082234 5.766253e-06</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 20  cyl drat  -0.6999381 8.244636e-06</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 21 drat gear   0.6996101 8.360110e-06</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 22   wt   am  -0.6924953 1.125440e-05</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 23  mpg drat   0.6811719 1.776240e-05</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 24  mpg   vs   0.6640389 3.415937e-05</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 25   hp   wt   0.6587479 4.145827e-05</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 26 qsec carb  -0.6562492 4.536949e-05</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 27  mpg   am   0.5998324 2.850207e-04</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 28  cyl qsec  -0.5912421 3.660533e-04</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 29 disp   am  -0.5912270 3.662114e-04</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 30   wt gear  -0.5832870 4.586601e-04</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 31   vs carb  -0.5696071 6.670496e-04</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 32 disp gear  -0.5555692 9.635921e-04</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 33   wt   vs  -0.5549157 9.798492e-04</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 34  mpg carb  -0.5509251 1.084446e-03</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 35  cyl carb   0.5269883 1.942340e-03</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 36  cyl   am  -0.5226070 2.151207e-03</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 37  cyl gear  -0.4926866 4.173297e-03</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 38  mpg gear   0.4802848 5.400948e-03</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 39   hp drat  -0.4487591 9.988772e-03</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 40 drat   vs   0.4402785 1.167553e-02</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 41 disp qsec  -0.4336979 1.314404e-02</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 42   wt carb   0.4276059 1.463861e-02</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 43  mpg qsec   0.4186840 1.708199e-02</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 44 disp carb   0.3949769 2.526789e-02</span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">result</span><span class="op">)</span>             <span class="co"># Detailed summary</span></span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error:</span> object 'result' not found</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> ── <span style="font-weight: bold;">Detailed Correlation Analysis Summary</span> ──</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> ── Analysis Parameters </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Correlation method: pearson</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Missing value handling: pairwise.complete.obs</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> P-value adjustment: none</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Number of variables: 11</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> ── Descriptive Statistics </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  variable  n       mean          sd  median    min     max</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       mpg 32  20.090625   6.0269481  19.200 10.400  33.900</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       cyl 32   6.187500   1.7859216   6.000  4.000   8.000</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>      disp 32 230.721875 123.9386938 196.300 71.100 472.000</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>        hp 32 146.687500  68.5628685 123.000 52.000 335.000</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>      drat 32   3.596563   0.5346787   3.695  2.760   4.930</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>        wt 32   3.217250   0.9784574   3.325  1.513   5.424</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>      qsec 32  17.848750   1.7869432  17.710 14.500  22.900</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>        vs 32   0.437500   0.5040161   0.000  0.000   1.000</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>        am 32   0.406250   0.4989909   0.000  0.000   1.000</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>      gear 32   3.687500   0.7378041   4.000  3.000   5.000</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>      carb 32   2.812500   1.6152000   2.000  1.000   8.000</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> ── Correlation Summary </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Min correlation: -0.868</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Max correlation: 0.902</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Mean |correlation|: 0.559</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> ── Significant Correlations </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> Significant pairs are based on <span style="font-weight: bold;">unadjusted</span> p-values</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Significant pairs: 44 out of 55 tests</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> All significant pairs:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  var1 var2 correlation      p_value</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   cyl disp   0.9020329 1.802838e-12</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  disp   wt   0.8879799 1.222320e-11</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   mpg   wt  -0.8676594 1.293959e-10</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   mpg  cyl  -0.8521620 6.112687e-10</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   mpg disp  -0.8475514 9.380327e-10</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   cyl   hp   0.8324475 3.477861e-09</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   cyl   vs  -0.8108118 1.843018e-08</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    am gear   0.7940588 5.834043e-08</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  disp   hp   0.7909486 7.142679e-08</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   cyl   wt   0.7824958 1.217567e-07</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   mpg   hp  -0.7761684 1.787835e-07</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    hp carb   0.7498125 7.827810e-07</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  qsec   vs   0.7445354 1.029669e-06</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    hp   vs  -0.7230967 2.940896e-06</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  drat   am   0.7127111 4.726790e-06</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  drat   wt  -0.7124406 4.784260e-06</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  disp   vs  -0.7104159 5.235012e-06</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  disp drat  -0.7102139 5.282022e-06</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    hp qsec  -0.7082234 5.766253e-06</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   cyl drat  -0.6999381 8.244636e-06</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  drat gear   0.6996101 8.360110e-06</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    wt   am  -0.6924953 1.125440e-05</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   mpg drat   0.6811719 1.776240e-05</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   mpg   vs   0.6640389 3.415937e-05</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    hp   wt   0.6587479 4.145827e-05</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  qsec carb  -0.6562492 4.536949e-05</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   mpg   am   0.5998324 2.850207e-04</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   cyl qsec  -0.5912421 3.660533e-04</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  disp   am  -0.5912270 3.662114e-04</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    wt gear  -0.5832870 4.586601e-04</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    vs carb  -0.5696071 6.670496e-04</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  disp gear  -0.5555692 9.635921e-04</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    wt   vs  -0.5549157 9.798492e-04</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   mpg carb  -0.5509251 1.084446e-03</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   cyl carb   0.5269883 1.942340e-03</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   cyl   am  -0.5226070 2.151207e-03</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   cyl gear  -0.4926866 4.173297e-03</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   mpg gear   0.4802848 5.400948e-03</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    hp drat  -0.4487591 9.988772e-03</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  drat   vs   0.4402785 1.167553e-02</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  disp qsec  -0.4336979 1.314404e-02</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    wt carb   0.4276059 1.463861e-02</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   mpg qsec   0.4186840 1.708199e-02</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  disp carb   0.3949769 2.526789e-02</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Analysis performed: 2025-11-25 13:57:14</span>
 <span class="r-in"><span></span></span>
 </code></pre></div>
     </div>

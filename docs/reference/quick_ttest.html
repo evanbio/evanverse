@@ -308,9 +308,43 @@ are very small (&lt; 5) or highly unbalanced (ratio &gt; 3:1).</p></li>
 <span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="va">result</span> <span class="op">&lt;-</span> <span class="fu">quick_ttest</span><span class="op">(</span><span class="va">data</span>, group <span class="op">=</span> <span class="va">group</span>, value <span class="op">=</span> <span class="va">expression</span><span class="op">)</span></span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in quick_ttest(data, group = group, value = expression):</span> could not find function "quick_ttest"</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> ── <span style="font-weight: bold;">Automatic Method Selection</span> ──</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> Checking normality for each group...</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> Data appears reasonably normal (using p &lt; 0.01 threshold for medium samples).</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Control: n = 30, p = 0.797</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Treatment: n = 30, p = 0.961</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> Variances appear equal (Levene's test, p = 0.304)</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> Using Student's t-test (equal variances assumed)</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> ── <span style="font-weight: bold;">Statistical Test</span> ──</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> Significant difference detected (p &lt; 0.001)</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> ── <span style="font-weight: bold;">Creating Visualization</span> ──</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> Loaded palette <span style="color: #0000BB;">"qual_vivid"</span> (<span style="color: #0000BB;">"qualitative"</span>), <span style="color: #0000BB;">9</span> colors</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> Analysis complete!</span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">result</span><span class="op">)</span></span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error:</span> object 'result' not found</span>
+<span class="r-plt img"><img src="quick_ttest-1.png" alt="" width="700" height="433"></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> ── <span style="font-weight: bold;">Quick t-test Results</span> ──</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> Method: t.test</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> Significant difference (p &lt; 0.001)</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> ── Descriptive Statistics </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 2 × 7</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   group         n  mean    sd median   min   max</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> Control      30  4.95 0.981   4.93  3.03  6.79</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> Treatment    30  6.18 0.835   6.05  4.45  8.17</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Use `summary()` for detailed results.</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Example 2: Paired samples (e.g., before/after)</span></span></span>
 <span class="r-in"><span><span class="va">paired_data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span></span></span>
@@ -324,7 +358,23 @@ are very small (&lt; 5) or highly unbalanced (ratio &gt; 3:1).</p></li>
 <span class="r-in"><span>                      value <span class="op">=</span> <span class="va">score</span>,</span></span>
 <span class="r-in"><span>                      paired <span class="op">=</span> <span class="cn">TRUE</span>,</span></span>
 <span class="r-in"><span>                      id <span class="op">=</span> <span class="va">patient</span><span class="op">)</span></span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in quick_ttest(paired_data, group = timepoint, value = score, paired = TRUE,     id = patient):</span> could not find function "quick_ttest"</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> Validated 20 paired observations.</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> ── <span style="font-weight: bold;">Automatic Method Selection</span> ──</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> Checking normality of paired differences...</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> Differences appear normal (Shapiro-Wilk p &gt;= 0.05).</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Differences: n = 20, p = 0.351</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> Using paired t-test</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> ── <span style="font-weight: bold;">Statistical Test</span> ──</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> Significant difference detected (p = 0.0048)</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> ── <span style="font-weight: bold;">Creating Visualization</span> ──</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> Loaded palette <span style="color: #0000BB;">"qual_vivid"</span> (<span style="color: #0000BB;">"qualitative"</span>), <span style="color: #0000BB;">9</span> colors</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> Analysis complete!</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Example 3: Non-normal data with manual method selection</span></span></span>
 <span class="r-in"><span><span class="va">skewed_data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span></span></span>
@@ -337,7 +387,16 @@ are very small (&lt; 5) or highly unbalanced (ratio &gt; 3:1).</p></li>
 <span class="r-in"><span>                      value <span class="op">=</span> <span class="va">value</span>,</span></span>
 <span class="r-in"><span>                      method <span class="op">=</span> <span class="st">"wilcox.test"</span>,</span></span>
 <span class="r-in"><span>                      verbose <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in quick_ttest(skewed_data, group = group, value = value, method = "wilcox.test",     verbose = TRUE):</span> could not find function "quick_ttest"</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> Using manually specified method: wilcox.test</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> ── <span style="font-weight: bold;">Statistical Test</span> ──</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> Significant difference detected (p = 0.0052)</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> ── <span style="font-weight: bold;">Creating Visualization</span> ──</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> Loaded palette <span style="color: #0000BB;">"qual_vivid"</span> (<span style="color: #0000BB;">"qualitative"</span>), <span style="color: #0000BB;">9</span> colors</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> Analysis complete!</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Example 4: Customize visualization</span></span></span>
 <span class="r-in"><span><span class="va">result</span> <span class="op">&lt;-</span> <span class="fu">quick_ttest</span><span class="op">(</span><span class="va">data</span>,</span></span>
@@ -346,15 +405,89 @@ are very small (&lt; 5) or highly unbalanced (ratio &gt; 3:1).</p></li>
 <span class="r-in"><span>                      plot_type <span class="op">=</span> <span class="st">"both"</span>,</span></span>
 <span class="r-in"><span>                      palette <span class="op">=</span> <span class="st">"qual_balanced"</span>,</span></span>
 <span class="r-in"><span>                      p_label <span class="op">=</span> <span class="st">"p.format"</span><span class="op">)</span></span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in quick_ttest(data, group = group, value = expression, plot_type = "both",     palette = "qual_balanced", p_label = "p.format"):</span> could not find function "quick_ttest"</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> ── <span style="font-weight: bold;">Automatic Method Selection</span> ──</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> Checking normality for each group...</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> Data appears reasonably normal (using p &lt; 0.01 threshold for medium samples).</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Control: n = 30, p = 0.797</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Treatment: n = 30, p = 0.961</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> Variances appear equal (Levene's test, p = 0.304)</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> Using Student's t-test (equal variances assumed)</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> ── <span style="font-weight: bold;">Statistical Test</span> ──</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> Significant difference detected (p &lt; 0.001)</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> ── <span style="font-weight: bold;">Creating Visualization</span> ──</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> Loaded palette <span style="color: #0000BB;">"qual_balanced"</span> (<span style="color: #0000BB;">"qualitative"</span>), <span style="color: #0000BB;">4</span> colors</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> Analysis complete!</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Access components</span></span></span>
 <span class="r-in"><span><span class="va">result</span><span class="op">$</span><span class="va">plot</span>              <span class="co"># ggplot object</span></span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error:</span> object 'result' not found</span>
+<span class="r-plt img"><img src="quick_ttest-2.png" alt="" width="700" height="433"></span>
 <span class="r-in"><span><span class="va">result</span><span class="op">$</span><span class="va">test_result</span>       <span class="co"># htest object</span></span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error:</span> object 'result' not found</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 	Two Sample t-test</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> data:  value by group</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> t = -5.2098, df = 58, p-value = 2.616e-06</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> alternative hypothesis: true difference in means between group Control and group Treatment is not equal to 0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 95 percent confidence interval:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  -1.6962870 -0.7545972</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> sample estimates:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   mean in group Control mean in group Treatment </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                4.952896                6.178338 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">result</span><span class="op">)</span>          <span class="co"># Detailed summary</span></span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error:</span> object 'result' not found</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> ── <span style="font-weight: bold;">Detailed Quick t-test Summary</span> ──</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> ── Test Method </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Method used: t.test</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Paired: FALSE</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Alternative: two.sided</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Equal variance: TRUE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> ── Test Result </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 	Two Sample t-test</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> data:  value by group</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> t = -5.2098, df = 58, p-value = 2.616e-06</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> alternative hypothesis: true difference in means between group Control and group Treatment is not equal to 0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 95 percent confidence interval:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  -1.6962870 -0.7545972</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> sample estimates:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   mean in group Control mean in group Treatment </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                4.952896                6.178338 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> ── Descriptive Statistics </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 2 × 7</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   group         n  mean    sd median   min   max</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> Control      30  4.95 0.981   4.93  3.03  6.79</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> Treatment    30  6.18 0.835   6.05  4.45  8.17</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> ── Normality Tests (Shapiro-Wilk) </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Control: n = 30, p = 0.7966</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Treatment: n = 30, p = 0.9614</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> Decision: Medium sample size (30 &lt;= n &lt; 100). Data appears reasonably normal (Shapiro p &gt;= 0.01). Using t-test.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> ── Variance Equality Test (Levene) </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Levene's test: p = 0.3038</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Equal variances: TRUE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Analysis performed: 2025-11-25 13:57:23</span>
 <span class="r-in"><span></span></span>
 </code></pre></div>
     </div>
