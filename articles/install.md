@@ -304,7 +304,7 @@ After installation:
 2.  Explore the [Comprehensive
     Guide](https://evanbio.github.io/evanverse/articles/comprehensive-guide.md)
 3.  Browse the [Function
-    Reference](https://evanbio.github.io/evanverse/reference/index.md)
+    Reference](https://evanbio.github.io/evanverse/reference/)
 4.  Try domain-specific vignettes:
     - [Package
       Management](https://evanbio.github.io/evanverse/articles/package-management.md)
