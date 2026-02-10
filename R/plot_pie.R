@@ -119,11 +119,12 @@ plot_pie <- function(data,
     dplyr::arrange(dplyr::desc(count)) |>
     dplyr::mutate(
       percent = round(count / total * 100, 1),
-      label_text = dplyr::case_when(
-        label == "count"   ~ as.character(count),
-        label == "percent" ~ paste0(percent, "%"),
-        label == "both"    ~ paste0(count, " (", percent, "%)"),
-        TRUE               ~ ""
+      label_text = switch(
+        label,
+        "count" = as.character(count),
+        "percent" = paste0(percent, "%"),
+        "both" = paste0(count, " (", percent, "%)"),
+        ""
       )
     )
 
