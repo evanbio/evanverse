@@ -11,14 +11,14 @@
 Source:
 [`DESCRIPTION`](https://github.com/evanbio/evanverse/blob/main/DESCRIPTION)
 
-Zhou E (2025). *evanverse: Utility Functions for Data Analysis and
+Zhou E (2026). *evanverse: Utility Functions for Data Analysis and
 Visualization*. R package version 0.3.7,
 <https://github.com/evanbio/evanverse>.
 
     @Manual{,
       title = {evanverse: Utility Functions for Data Analysis and Visualization},
       author = {Evan Zhou},
-      year = {2025},
+      year = {2026},
       note = {R package version 0.3.7},
       url = {https://github.com/evanbio/evanverse},
     }

@@ -680,5 +680,5 @@ rgb2hex(matrix(c(255, 107, 107), nrow = 1))
 
 ------------------------------------------------------------------------
 
-**Document Version**: 2.0 **Last Updated**: 2025-11-25 **Status**:
+**Document Version**: 2.0 **Last Updated**: 2026-02-10 **Status**:
 Official Documentation

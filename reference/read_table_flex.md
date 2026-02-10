@@ -2,7 +2,7 @@
 
 Robust table reader with auto delimiter detection for `.csv`, `.tsv`,
 `.txt`, and their `.gz` variants. Uses
-[`data.table::fread()`](https://rdatatable.gitlab.io/data.table/reference/fread.html)
+[`data.table::fread()`](https://rdrr.io/pkg/data.table/man/fread.html)
 and prints CLI messages.
 
 ## Usage

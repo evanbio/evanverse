@@ -519,7 +519,7 @@ p3 <- ggplot(omics_data, aes(x = DataType, y = Gene, fill = Normalized_Value)) +
   )
 #> Warning: Using `size` aesthetic for lines was deprecated in ggplot2 3.4.0.
 #> ℹ Please use `linewidth` instead.
-#> This warning is displayed once every 8 hours.
+#> This warning is displayed once per session.
 #> Call `lifecycle::last_lifecycle_warnings()` to see where this warning was
 #> generated.
 #> ✔ Loaded palette "div_contrast" ("diverging"), 2 colors

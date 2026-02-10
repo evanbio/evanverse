@@ -133,14 +133,14 @@ compile_palettes(
 #> ✔ Added 'qual_violin' (Type: qualitative, 5 colors)
 #> ✔ Added 'qual_vivid' (Type: qualitative, 9 colors)
 #> ✔ Added 'qual_wissing_met' (Type: qualitative, 5 colors)
-#> ✔ Saved RDS: /tmp/RtmpjLapgI/palettes.rds
+#> ✔ Saved RDS: /tmp/RtmpFu8n9c/palettes.rds
 #> 
 #> ── Compilation Summary ──
 #> 
 #> ℹ Sequential:   11
 #> ℹ Diverging:    7
 #> ℹ Qualitative:  75
-#> ℹ Log written to: /tmp/RtmpjLapgI/logs/palettes/compile_palettes.log
+#> ℹ Log written to: /tmp/RtmpFu8n9c/logs/palettes/compile_palettes.log
 #> ✔ All palettes compiled successfully!
 # }
 ```
