@@ -238,7 +238,7 @@ After installation:
 
 1. Read the [Getting Started Guide](get-started.html)
 2. Explore the [Comprehensive Guide](comprehensive-guide.html)
-3. Browse the [Function Reference](../reference/index.html)
+3. Browse the [Function Reference](https://evanbio.github.io/evanverse/reference/)
 4. Try domain-specific vignettes:
    - [Package Management](package-management.html)
    - [Data Processing](data-processing.html)

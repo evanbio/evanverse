@@ -281,7 +281,7 @@ With 55+ functions across 8 major categories, evanverse streamlines your data an
 
 - Explore the [Color Palettes guide](color-palettes.html) for advanced palette management
 - Check out [Bioinformatics Workflows](bioinformatics-workflows.html) for domain-specific applications
-- Visit the [Function Reference](../reference/) for detailed documentation
+- Visit the [Function Reference](https://evanbio.github.io/evanverse/reference/) for detailed documentation
 
 ---
 
