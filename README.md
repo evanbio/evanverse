@@ -27,7 +27,7 @@
 
 ## ✨ Overview
 
-**evanverse** is a comprehensive utility package designed to streamline your R workflows. Built by [Evan Zhou](mailto:evanzhou.bio@gmail.com), it combines 55+ carefully crafted functions for data analysis, visualization, and bioinformatics into a single, coherent toolkit.
+**evanverse** is a comprehensive utility package designed to streamline your R workflows. Built by [Evan Zhou](mailto:evanzhou.bio@gmail.com), it combines 60+ carefully crafted functions for data analysis, visualization, statistical testing, and bioinformatics into a single, coherent toolkit.
 
 ### Why evanverse?
 
@@ -121,11 +121,30 @@ devtools::install_github("evanbio/evanverse")
 </td>
 <td width="50%">
 
+### 📊 Statistical Analysis
+- t-test, ANOVA, chi-square, correlation
+- Power analysis & sample size calculation
+- Publication-ready visualizations
+- Automatic assumption checking
+
+</td>
+</tr>
+<tr>
+<td width="50%">
+
 ### ⚙️ Workflow Tools
 - Timer wrappers
 - Safe execution
 - Reminder system
 - Interactive viewing
+
+</td>
+<td width="50%">
+
+### 🎯 ggplot2 Integration
+- Custom color/fill scales
+- Seamless palette integration
+- Publication-quality theming
 
 </td>
 </tr>
@@ -208,10 +227,31 @@ pkg_version("evanverse")
 <summary><b>🎨 Visualization & Plotting</b> (5 functions)</summary>
 
 - `plot_venn()` - Venn diagrams
-- `plot_forest()` - Forest plots
+- `plot_forest()` - Forest plots (with advanced customization)
 - `plot_bar()` - Bar charts
 - `plot_pie()` - Pie charts
 - `plot_density()` - Density plots
+
+</details>
+
+<details>
+<summary><b>📊 Statistical Analysis</b> (6 functions)</summary>
+
+- `quick_ttest()` - Intelligent t-test with assumption checking
+- `quick_anova()` - One-way ANOVA with post-hoc tests
+- `quick_chisq()` - Chi-square test with visualization
+- `quick_cor()` - Correlation analysis with heatmap
+- `stat_power()` - Statistical power analysis
+- `stat_samplesize()` - Sample size calculation
+
+</details>
+
+<details>
+<summary><b>🎯 ggplot2 Integration</b> (3 functions)</summary>
+
+- `scale_color_evanverse()` - Color scale for ggplot2
+- `scale_fill_evanverse()` - Fill scale for ggplot2
+- `scale_colour_evanverse()` - Alias for British spelling
 
 </details>
 
@@ -316,7 +356,7 @@ We welcome contributions! Please see our [Contributing Guide](CONTRIBUTING.md) f
 
 ## 📜 License
 
-MIT License © 2025 [Evan Zhou](mailto:evanzhou.bio@gmail.com)
+MIT License © 2025-2026 [Evan Zhou](mailto:evanzhou.bio@gmail.com)
 
 See [LICENSE.md](LICENSE.md) for details.
 
@@ -324,7 +364,7 @@ See [LICENSE.md](LICENSE.md) for details.
 
 ## 📊 Project Status
 
-- ✅ **CRAN Published** - Version 0.3.7
+- ✅ **CRAN Published** - Version 0.4.0
 - ✅ **Stable Lifecycle** - Production ready
 - ✅ **Full Test Coverage** - Comprehensive test suite
 - ✅ **Active Maintenance** - Regular updates

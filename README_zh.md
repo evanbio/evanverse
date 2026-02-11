@@ -27,7 +27,7 @@
 
 ## ✨ 项目简介
 
-**evanverse** 是一个全面的 R 工具包，旨在简化您的数据分析工作流程。由 [Evan Zhou](mailto:evanzhou.bio@gmail.com) 开发，将 55+ 个精心设计的函数集成到一个统一的工具包中，涵盖数据分析、可视化和生物信息学等领域。
+**evanverse** 是一个全面的 R 工具包，旨在简化您的数据分析工作流程。由 [Evan Zhou](mailto:evanzhou.bio@gmail.com) 开发，将 60+ 个精心设计的函数集成到一个统一的工具包中，涵盖数据分析、可视化、统计检验和生物信息学等领域。
 
 ### 为什么选择 evanverse？
 
@@ -121,11 +121,30 @@ devtools::install_github("evanbio/evanverse")
 </td>
 <td width="50%">
 
+### 📊 统计分析
+- t 检验、ANOVA、卡方检验、相关性分析
+- 功效分析与样本量计算
+- 出版级可视化输出
+- 自动假设检验
+
+</td>
+</tr>
+<tr>
+<td width="50%">
+
 ### ⚙️ 工作流工具
 - 计时器包装
 - 安全执行
 - 提醒系统
 - 交互式查看
+
+</td>
+<td width="50%">
+
+### 🎯 ggplot2 集成
+- 自定义颜色/填充标度
+- 无缝配色方案集成
+- 出版级主题设置
 
 </td>
 </tr>
@@ -208,10 +227,31 @@ pkg_version("evanverse")
 <summary><b>🎨 可视化与绘图</b> (5 个函数)</summary>
 
 - `plot_venn()` - 韦恩图
-- `plot_forest()` - 森林图
+- `plot_forest()` - 森林图（支持高级自定义）
 - `plot_bar()` - 柱状图
 - `plot_pie()` - 饼图
 - `plot_density()` - 密度图
+
+</details>
+
+<details>
+<summary><b>📊 统计分析</b> (6 个函数)</summary>
+
+- `quick_ttest()` - 智能 t 检验（自动假设检验）
+- `quick_anova()` - 单因素方差分析（含事后检验）
+- `quick_chisq()` - 卡方检验（含可视化）
+- `quick_cor()` - 相关性分析（含热力图）
+- `stat_power()` - 统计功效分析
+- `stat_samplesize()` - 样本量计算
+
+</details>
+
+<details>
+<summary><b>🎯 ggplot2 集成</b> (3 个函数)</summary>
+
+- `scale_color_evanverse()` - ggplot2 颜色标度
+- `scale_fill_evanverse()` - ggplot2 填充标度
+- `scale_colour_evanverse()` - 英式拼写别名
 
 </details>
 
@@ -316,7 +356,7 @@ pkg_version("evanverse")
 
 ## 📜 开源协议
 
-MIT License © 2025 [Evan Zhou](mailto:evanzhou.bio@gmail.com)
+MIT License © 2025-2026 [Evan Zhou](mailto:evanzhou.bio@gmail.com)
 
 详见 [LICENSE.md](LICENSE.md)。
 
@@ -324,7 +364,7 @@ MIT License © 2025 [Evan Zhou](mailto:evanzhou.bio@gmail.com)
 
 ## 📊 项目状态
 
-- ✅ **已发布至 CRAN** - 版本 0.3.7
+- ✅ **已发布至 CRAN** - 版本 0.4.0
 - ✅ **稳定生命周期** - 生产环境可用
 - ✅ **全面测试覆盖** - 完善的测试套件
 - ✅ **持续维护** - 定期更新

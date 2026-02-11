@@ -11,7 +11,7 @@
 
 ## Overview
 
-**evanverse** provides 55+ utility functions designed to streamline R workflows across data analysis, visualization, and bioinformatics. Built with a focus on simplicity and reproducibility.
+**evanverse** provides 60+ utility functions designed to streamline R workflows across data analysis, visualization, statistical testing, and bioinformatics. Built with a focus on simplicity and reproducibility.
 
 ## Installation
 
@@ -30,6 +30,8 @@ devtools::install_github("evanbio/evanverse")
 **Package Management** — Multi-source installation (CRAN, GitHub, Bioconductor), version checking, and automated updates
 
 **Data Visualization** — Publication-ready plots with bioinformatics-focused color palettes and professional themes
+
+**Statistical Analysis** — t-test, ANOVA, chi-square, correlation analysis, power analysis, and sample size calculation with automatic assumption checking
 
 **Bioinformatics Tools** — Gene ID conversion, GMT file parsing, GEO data access, and reference management
 
@@ -73,4 +75,4 @@ convert_gene_id(c("TP53", "BRCA1"), from = "SYMBOL", to = "ENSEMBL")
 
 ## License
 
-MIT License © 2025 Evan Zhou
+MIT License © 2025-2026 Evan Zhou

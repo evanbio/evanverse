@@ -1,90 +1,61 @@
-# CRAN Comments for evanverse 0.3.7
+# CRAN Comments for evanverse 0.4.0
 
-## Resubmission - CRAN Compliance Release
+## Submission - Feature Release
 
-This is a resubmission addressing file system operation policy violations identified in the previous submission.
+This is a minor version update from 0.3.7 to 0.4.0. It addresses two CRAN-flagged issues and adds new functionality.
 
-### Response to Reviewer Feedback
+### CRAN Issues Resolved
 
-**Reviewer**: Benjamin Altmann
-**Date**: October 16, 2025
+1. **Test failures on 7 platforms (ERROR)**: `plot_pie()` tests failed due to dplyr 1.2.0 `case_when()` deprecation warning. Fixed by replacing `case_when()` with `switch()` (PR #4 from @DavisVaughan).
 
-**Issue**: Several functions wrote to the user's home directory by default, violating CRAN policy.
+2. **Relative URL paths (NOTE)**: `../reference/` in vignette HTML flagged as possibly invalid URL. Fixed by replacing with absolute pkgdown URLs.
 
-**Resolution**: Removed all default file paths from 9 functions. All affected functions now require explicit path parameters with clear error messages guiding users to use `tempdir()` for examples and tests.
+### Changes in v0.4.0
 
-### Changes in v0.3.7
+1. **New Statistical Analysis Functions** (6 new):
+   - `quick_ttest()`: t-test analysis with automatic assumption checking
+   - `quick_anova()`: One-way ANOVA with post-hoc tests
+   - `quick_chisq()`: Chi-square test with visualization
+   - `quick_cor()`: Correlation analysis with heatmap
+   - `stat_power()`: Statistical power analysis
+   - `stat_samplesize()`: Sample size calculation
 
-1. **CRAN Compliance Fixes** (Breaking Changes):
-   - `create_palette()`: `color_dir` parameter now required (no default)
-   - `remove_palette()`: `color_dir` parameter now required (no default)
-   - `compile_palettes()`: Both `palettes_dir` and `output_rds` now required
-   - `download_batch()`: `dest_dir` parameter now required (no default)
-   - `download_url()`: `dest` parameter now required (no default)
-   - `download_geo_data()`: Path parameters now required
-   - Enhanced parameter validation with helpful error messages
+2. **New ggplot2 Integration**:
+   - `scale_color_evanverse()` / `scale_fill_evanverse()`: Discrete color scales
 
-2. **Documentation Updates**:
-   - All examples updated to use `tempdir()` for file operations
-   - Man pages regenerated with updated parameter descriptions
-   - Clear migration guide provided in NEWS.md
+3. **Major Improvements**:
+   - `plot_forest()`: Complete rewrite with advanced customization
+   - Palette caching system for improved performance
+   - Palette naming convention standardized
+   - Void utilities and package management functions consolidated
 
-3. **Testing**:
-   - Fixed 7 test cases to provide required parameters
-   - All 1351 tests passing (0 errors, 0 warnings, 0 notes)
+4. **Bug Fixes**:
+   - dplyr 1.2.0 compatibility (case_when → switch in plot_pie)
+   - Relative URL paths in vignettes
+   - Unicode Greek letters replaced with ASCII for cross-platform compatibility
+   - NA validation in download_geo_data()
 
-### Policy Compliance
-
-This release specifically addresses:
-* **File Writing Policy**: [CRAN Cookbook - Writing Files](https://contributor.r-project.org/cran-cookbook/code_issues.html#writing-files-and-directories-to-the-home-filespace)
-  - Functions no longer write to user's home directory by default
-  - All file operations require explicit path specification
-  - Examples demonstrate proper use of `tempdir()`
-
-All other CRAN policies remain compliant from previous versions (v0.3.3-v0.3.6):
-* Proper namespace management with explicit package prefixes
-* Clean startup without unnecessary messages
-* Network-dependent code properly handled in examples and vignettes
-* No modification of user's global environment
+5. **Breaking Changes**:
+   - `df_forest_test` dataset replaced by `forest_data`
+   - `plot_forest()` API changed (complete rewrite)
+   - Palette names changed to `type_name_source` format
 
 ## Test environments
-* Local Windows install, R 4.5.0 (2025-04-11)
+* Local Windows install, R 4.5.0
 * GitHub Actions (ubuntu-latest): R-release, R-devel
 * GitHub Actions (windows-latest): R-release
 * GitHub Actions (macOS-latest): R-release
-* R-hub builder v2
 
 ## R CMD check results
 
 0 errors ✔ | 0 warnings ✔ | 0 notes ✔
 
-Perfect clean check with no issues identified.
-
 ## Downstream dependencies
 
 There are currently no downstream dependencies for this package.
 
-## Changes since v0.3.6
+## Quality Assurance
 
-* **CRAN Policy Fixes**: Removed default file paths from 9 functions
-* **Parameter Validation**: Enhanced error messages for required path parameters
-* **Documentation**: Updated all examples to use `tempdir()`
-* **Testing**: Fixed test cases to provide required parameters
-* **Backward Compatibility**: Breaking changes documented with migration guide
-
-### Files Modified
-- R source files: 9 functions updated
-- Documentation: 5 man pages regenerated
-- Tests: 3 test files fixed (7 test cases updated)
-- Version files: DESCRIPTION, NEWS.md, README.md, _pkgdown.yml
-
-### Quality Assurance
-
-* **Installation time**: 5 seconds
-* **Check time**: 133 seconds
+* **Test suite**: 2196 tests passing (0 failures, 0 warnings, 26 skipped)
+* **Check time**: 2m 55s
 * **Platform compatibility**: Verified on Windows, macOS, and Linux
-* **Package size**: 1.5MB (optimized)
-* **Test suite**: 1351 tests with appropriate skip conditions
-* **Test coverage**: All modified functions have comprehensive test coverage
-
-The package now fully complies with all CRAN policies, specifically addressing the file system operation requirements from the reviewer feedback.
