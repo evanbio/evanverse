@@ -100,10 +100,10 @@ The function uses an intelligent algorithm that considers both normality
 and sample size:
 
 \itemize{
-\item \strong{Large samples (n ≥ 100 per group)}: Prefers t-test due to
+\item \strong{Large samples (n >= 100 per group)}: Prefers t-test due to
 Central Limit Theorem, even if Shapiro-Wilk rejects normality (which
 becomes overly sensitive in large samples).
-\item \strong{Medium samples (30 ≤ n < 100)}: Uses Shapiro-Wilk test with
+\item \strong{Medium samples (30 <= n < 100)}: Uses Shapiro-Wilk test with
 a stricter threshold (p < 0.01) to avoid false positives.
 \item \strong{Small samples (n < 30)}: Strictly checks normality with
 standard threshold (p < 0.05).
