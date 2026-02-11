@@ -34,6 +34,6 @@ Requires the `tictoc` package (CLI messages are emitted via `cli`).
 slow_fn <- function(n) { Sys.sleep(0.01); n^2 }
 timed_fn <- with_timer(slow_fn, name = "Square Task")
 timed_fn(5)
-#> ℹ Square Task started at 2026-02-10 12:45:14
+#> ℹ Square Task started at 2026-02-11 06:20:59
 #> ✔ Square Task completed in 0.011 seconds
 ```

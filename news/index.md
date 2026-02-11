@@ -1,5 +1,98 @@
 # Changelog
 
+## evanverse 0.4.0
+
+*Released: February 2026*
+
+**Feature Release** - Major additions to statistical analysis toolkit
+with 6 new functions, plot_forest complete rewrite, and dplyr 1.2.0
+compatibility.
+
+------------------------------------------------------------------------
+
+#### New Features
+
+##### Statistical Analysis Functions (6 new)
+
+- [`quick_ttest()`](https://evanbio.github.io/evanverse/reference/quick_ttest.md):
+  Intelligent t-test analysis with automatic assumption checking and
+  visualization
+- [`quick_anova()`](https://evanbio.github.io/evanverse/reference/quick_anova.md):
+  One-way ANOVA with post-hoc tests and group comparison plots
+- [`quick_chisq()`](https://evanbio.github.io/evanverse/reference/quick_chisq.md):
+  Chi-square test with contingency table visualization
+- [`quick_cor()`](https://evanbio.github.io/evanverse/reference/quick_cor.md):
+  Correlation analysis with customizable heatmap output
+- [`stat_power()`](https://evanbio.github.io/evanverse/reference/stat_power.md):
+  Statistical power analysis for t-test, ANOVA, and chi-square designs
+- [`stat_samplesize()`](https://evanbio.github.io/evanverse/reference/stat_samplesize.md):
+  Sample size calculation for common study designs
+
+##### ggplot2 Integration
+
+- [`scale_color_evanverse()`](https://evanbio.github.io/evanverse/reference/scale_evanverse.md)
+  /
+  [`scale_fill_evanverse()`](https://evanbio.github.io/evanverse/reference/scale_evanverse.md):
+  Discrete color scales using evanverse palettes
+- Seamless integration with ggplot2 plotting workflow
+
+##### Performance
+
+- Added palette caching system to reduce file I/O for repeated palette
+  lookups
+
+#### Major Changes
+
+- **[`plot_forest()`](https://evanbio.github.io/evanverse/reference/plot_forest.md)
+  complete rewrite**: Advanced customization with multi-group support,
+  theme presets, background styling, bold formatting, and flexible
+  layout control
+- **`forest_data`**: New comprehensive example dataset replacing
+  `df_forest_test`
+- **Palette naming convention**: Standardized to `type_name_source`
+  format
+- **Void utilities**: Consolidated into single file with unified
+  documentation
+- **Package management functions**: Consolidated into single file
+
+#### Bug Fixes
+
+- Fixed dplyr 1.2.0 compatibility: replaced
+  [`case_when()`](https://dplyr.tidyverse.org/reference/case-and-replace-when.html)
+  with [`switch()`](https://rdrr.io/r/base/switch.html) in
+  [`plot_pie()`](https://evanbio.github.io/evanverse/reference/plot_pie.md)
+  (thanks [@DavisVaughan](https://github.com/DavisVaughan),
+  [\#4](https://github.com/evanbio/evanverse/issues/4))
+- Fixed relative URL paths in vignettes for CRAN compliance
+- Fixed
+  [`compile_palettes()`](https://evanbio.github.io/evanverse/reference/compile_palettes.md)
+  qual_vivid palette inclusion in package build
+- Fixed Unicode Greek letters replaced with ASCII for cross-platform
+  compatibility
+- Added `percent` to global variables declaration
+- Fixed NA validation in
+  [`download_geo_data()`](https://evanbio.github.io/evanverse/reference/download_geo_data.md)
+  parameters
+
+#### Documentation
+
+- New vignette: Forest Plot comprehensive guide
+- Updated color palette vignette with standardized workflow
+- Added palette naming convention guide
+- Modernized README with clean design
+
+#### Breaking Changes
+
+- `df_forest_test` dataset replaced by `forest_data` (more
+  comprehensive)
+- [`plot_forest()`](https://evanbio.github.io/evanverse/reference/plot_forest.md)
+  API changed due to complete rewrite - see function documentation for
+  new parameters
+- Palette names changed to `type_name_source` format - see naming
+  convention guide
+
+------------------------------------------------------------------------
+
 ## evanverse 0.3.7
 
 CRAN release: 2025-10-21

@@ -63,7 +63,7 @@
 
     <a class="navbar-brand me-2" href="index.html">evanverse</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.3.7</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.4.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -113,7 +113,7 @@
 </div>
 <hr><div class="section level2">
 <h2 id="id_-项目简介">✨ 项目简介<a class="anchor" aria-label="anchor" href="#id_-%E9%A1%B9%E7%9B%AE%E7%AE%80%E4%BB%8B"></a></h2>
-<p><strong>evanverse</strong> 是一个全面的 R 工具包，旨在简化您的数据分析工作流程。由 <a href="mailto:evanzhou.bio@gmail.com">Evan Zhou</a> 开发，将 55+ 个精心设计的函数集成到一个统一的工具包中，涵盖数据分析、可视化和生物信息学等领域。</p>
+<p><strong>evanverse</strong> 是一个全面的 R 工具包，旨在简化您的数据分析工作流程。由 <a href="mailto:evanzhou.bio@gmail.com">Evan Zhou</a> 开发，将 60+ 个精心设计的函数集成到一个统一的工具包中，涵盖数据分析、可视化、统计检验和生物信息学等领域。</p>
 <div class="section level3">
 <h3 id="为什么选择-evanverse">为什么选择 evanverse？<a class="anchor" aria-label="anchor" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E9%80%89%E6%8B%A9-evanverse"></a></h3>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
@@ -203,11 +203,30 @@
 <td width="50%">
 
 <div class="section level3">
+<h3 id="id_-统计分析">📊 统计分析<a class="anchor" aria-label="anchor" href="#id_-%E7%BB%9F%E8%AE%A1%E5%88%86%E6%9E%90"></a></h3>
+<ul><li>t 检验、ANOVA、卡方检验、相关性分析</li>
+<li>功效分析与样本量计算</li>
+<li>出版级可视化输出</li>
+<li>自动假设检验</li>
+</ul></div>
+</td>
+</tr><tr><td width="50%">
+
+<div class="section level3">
 <h3 id="id_️-工作流工具">⚙️ 工作流工具<a class="anchor" aria-label="anchor" href="#id_%EF%B8%8F-%E5%B7%A5%E4%BD%9C%E6%B5%81%E5%B7%A5%E5%85%B7"></a></h3>
 <ul><li>计时器包装</li>
 <li>安全执行</li>
 <li>提醒系统</li>
 <li>交互式查看</li>
+</ul></div>
+</td>
+<td width="50%">
+
+<div class="section level3">
+<h3 id="id_-ggplot2-集成">🎯 ggplot2 集成<a class="anchor" aria-label="anchor" href="#id_-ggplot2-%E9%9B%86%E6%88%90"></a></h3>
+<ul><li>自定义颜色/填充标度</li>
+<li>无缝配色方案集成</li>
+<li>出版级主题设置</li>
 </ul></div>
 </td>
 </tr></table><hr></div>
@@ -287,13 +306,33 @@
 </summary><ul><li>
 <code><a href="reference/plot_venn.html">plot_venn()</a></code> - 韦恩图</li>
 <li>
-<code><a href="reference/plot_forest.html">plot_forest()</a></code> - 森林图</li>
+<code><a href="reference/plot_forest.html">plot_forest()</a></code> - 森林图（支持高级自定义）</li>
 <li>
 <code><a href="reference/plot_bar.html">plot_bar()</a></code> - 柱状图</li>
 <li>
 <code><a href="reference/plot_pie.html">plot_pie()</a></code> - 饼图</li>
 <li>
 <code><a href="reference/plot_density.html">plot_density()</a></code> - 密度图</li>
+</ul></details><details><summary><b>📊 统计分析</b> (6 个函数)
+</summary><ul><li>
+<code><a href="reference/quick_ttest.html">quick_ttest()</a></code> - 智能 t 检验（自动假设检验）</li>
+<li>
+<code><a href="reference/quick_anova.html">quick_anova()</a></code> - 单因素方差分析（含事后检验）</li>
+<li>
+<code><a href="reference/quick_chisq.html">quick_chisq()</a></code> - 卡方检验（含可视化）</li>
+<li>
+<code><a href="reference/quick_cor.html">quick_cor()</a></code> - 相关性分析（含热力图）</li>
+<li>
+<code><a href="reference/stat_power.html">stat_power()</a></code> - 统计功效分析</li>
+<li>
+<code><a href="reference/stat_samplesize.html">stat_samplesize()</a></code> - 样本量计算</li>
+</ul></details><details><summary><b>🎯 ggplot2 集成</b> (3 个函数)
+</summary><ul><li>
+<code><a href="reference/scale_evanverse.html">scale_color_evanverse()</a></code> - ggplot2 颜色标度</li>
+<li>
+<code><a href="reference/scale_evanverse.html">scale_fill_evanverse()</a></code> - ggplot2 填充标度</li>
+<li>
+<code><a href="reference/scale_evanverse.html">scale_colour_evanverse()</a></code> - 英式拼写别名</li>
 </ul></details><details><summary><b>🌈 配色方案</b> (9 个函数)
 </summary><ul><li>
 <code><a href="reference/get_palette.html">get_palette()</a></code> - 获取配色方案</li>
@@ -404,12 +443,12 @@
 </ul><hr></div>
 <div class="section level2">
 <h2 id="id_-开源协议">📜 开源协议<a class="anchor" aria-label="anchor" href="#id_-%E5%BC%80%E6%BA%90%E5%8D%8F%E8%AE%AE"></a></h2>
-<p>MIT License © 2025 <a href="mailto:evanzhou.bio@gmail.com">Evan Zhou</a></p>
+<p>MIT License © 2025-2026 <a href="mailto:evanzhou.bio@gmail.com">Evan Zhou</a></p>
 <p>详见 <a href="LICENSE.html">LICENSE.md</a>。</p>
 <hr></div>
 <div class="section level2">
 <h2 id="id_-项目状态">📊 项目状态<a class="anchor" aria-label="anchor" href="#id_-%E9%A1%B9%E7%9B%AE%E7%8A%B6%E6%80%81"></a></h2>
-<ul><li>✅ <strong>已发布至 CRAN</strong> - 版本 0.3.7</li>
+<ul><li>✅ <strong>已发布至 CRAN</strong> - 版本 0.4.0</li>
 <li>✅ <strong>稳定生命周期</strong> - 生产环境可用</li>
 <li>✅ <strong>全面测试覆盖</strong> - 完善的测试套件</li>
 <li>✅ <strong>持续维护</strong> - 定期更新</li>
@@ -434,7 +473,7 @@
 
 <div class="pkgdown-footer-right">
   <div class="text-muted">
-<p><strong>evanverse v0.3.7</strong><br><small>Last updated: October 2025</small></p>
+<p><strong>evanverse v0.4.0</strong><br><small>Last updated: February 2026</small></p>
 </div><div class="footer-links">
 <p><a href="https://github.com/evanbio/evanverse" class="external-link text-muted me-3" aria-label="GitHub"> <i class="fab fa-github fa-lg"></i> </a> <a href="https://cran.r-project.org/package=evanverse" class="external-link text-muted me-3" aria-label="CRAN"> <i class="fas fa-download fa-lg"></i> </a> <a href="https://blog.evanzhou.org" class="external-link text-muted" aria-label="Blog"> <i class="fas fa-blog fa-lg"></i> </a></p>
 </div>

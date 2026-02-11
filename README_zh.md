@@ -25,8 +25,8 @@
 ## ✨ 项目简介
 
 **evanverse** 是一个全面的 R 工具包，旨在简化您的数据分析工作流程。由
-[Evan Zhou](mailto:evanzhou.bio@gmail.com) 开发，将 55+
-个精心设计的函数集成到一个统一的工具包中，涵盖数据分析、可视化和生物信息学等领域。
+[Evan Zhou](mailto:evanzhou.bio@gmail.com) 开发，将 60+
+个精心设计的函数集成到一个统一的工具包中，涵盖数据分析、可视化、统计检验和生物信息学等领域。
 
 ### 为什么选择 evanverse？
 
@@ -155,13 +155,37 @@ pkg_version("evanverse")
 - [`plot_venn()`](https://evanbio.github.io/evanverse/reference/plot_venn.md) -
   韦恩图
 - [`plot_forest()`](https://evanbio.github.io/evanverse/reference/plot_forest.md) -
-  森林图
+  森林图（支持高级自定义）
 - [`plot_bar()`](https://evanbio.github.io/evanverse/reference/plot_bar.md) -
   柱状图
 - [`plot_pie()`](https://evanbio.github.io/evanverse/reference/plot_pie.md) -
   饼图
 - [`plot_density()`](https://evanbio.github.io/evanverse/reference/plot_density.md) -
   密度图
+
+**📊 统计分析** (6 个函数)
+
+- [`quick_ttest()`](https://evanbio.github.io/evanverse/reference/quick_ttest.md) -
+  智能 t 检验（自动假设检验）
+- [`quick_anova()`](https://evanbio.github.io/evanverse/reference/quick_anova.md) -
+  单因素方差分析（含事后检验）
+- [`quick_chisq()`](https://evanbio.github.io/evanverse/reference/quick_chisq.md) -
+  卡方检验（含可视化）
+- [`quick_cor()`](https://evanbio.github.io/evanverse/reference/quick_cor.md) -
+  相关性分析（含热力图）
+- [`stat_power()`](https://evanbio.github.io/evanverse/reference/stat_power.md) -
+  统计功效分析
+- [`stat_samplesize()`](https://evanbio.github.io/evanverse/reference/stat_samplesize.md) -
+  样本量计算
+
+**🎯 ggplot2 集成** (3 个函数)
+
+- [`scale_color_evanverse()`](https://evanbio.github.io/evanverse/reference/scale_evanverse.md) -
+  ggplot2 颜色标度
+- [`scale_fill_evanverse()`](https://evanbio.github.io/evanverse/reference/scale_evanverse.md) -
+  ggplot2 填充标度
+- [`scale_colour_evanverse()`](https://evanbio.github.io/evanverse/reference/scale_evanverse.md) -
+  英式拼写别名
 
 **🌈 配色方案** (9 个函数)
 
@@ -288,7 +312,7 @@ pkg_version("evanverse")
 
 ## 📜 开源协议
 
-MIT License © 2025 [Evan Zhou](mailto:evanzhou.bio@gmail.com)
+MIT License © 2025-2026 [Evan Zhou](mailto:evanzhou.bio@gmail.com)
 
 详见 [LICENSE.md](https://evanbio.github.io/evanverse/LICENSE.md)。
 
@@ -296,7 +320,7 @@ MIT License © 2025 [Evan Zhou](mailto:evanzhou.bio@gmail.com)
 
 ## 📊 项目状态
 
-- ✅ **已发布至 CRAN** - 版本 0.3.7
+- ✅ **已发布至 CRAN** - 版本 0.4.0
 - ✅ **稳定生命周期** - 生产环境可用
 - ✅ **全面测试覆盖** - 完善的测试套件
 - ✅ **持续维护** - 定期更新
