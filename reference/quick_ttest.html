@@ -99,7 +99,7 @@ Designed for comparing two groups only."><meta property="og:image" content="http
 <div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
       <img src="../logo.png" class="logo" alt=""><h1>Quick t-test with Automatic Visualization</h1>
-      <small class="dont-index">Source: <a href="https://github.com/evanbio/evanverse/blob/v0.4.0/R/quick_ttest.R" class="external-link"><code>R/quick_ttest.R</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/evanbio/evanverse/blob/main/R/quick_ttest.R" class="external-link"><code>R/quick_ttest.R</code></a></small>
       <div class="d-none name"><code>quick_ttest.Rd</code></div>
     </div>
 
@@ -255,10 +255,10 @@ Default is "qual_vivid". Set to <code>NULL</code> to use ggplot2 defaults.</p></
 <h3 id="automatic-method-selection-method-auto-">Automatic Method Selection (method = "auto")<a class="anchor" aria-label="anchor" href="#automatic-method-selection-method-auto-"></a></h3>
 <p>The function uses an intelligent algorithm that considers both normality
 and sample size:</p>
-<ul><li><p><strong>Large samples (n ≥ 100 per group)</strong>: Prefers t-test due to
+<ul><li><p><strong>Large samples (n &gt;= 100 per group)</strong>: Prefers t-test due to
 Central Limit Theorem, even if Shapiro-Wilk rejects normality (which
 becomes overly sensitive in large samples).</p></li>
-<li><p><strong>Medium samples (30 ≤ n &lt; 100)</strong>: Uses Shapiro-Wilk test with
+<li><p><strong>Medium samples (30 &lt;= n &lt; 100)</strong>: Uses Shapiro-Wilk test with
 a stricter threshold (p &lt; 0.01) to avoid false positives.</p></li>
 <li><p><strong>Small samples (n &lt; 30)</strong>: Strictly checks normality with
 standard threshold (p &lt; 0.05).</p></li>
@@ -487,7 +487,7 @@ are very small (&lt; 5) or highly unbalanced (ratio &gt; 3:1).</p></li>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Levene's test: p = 0.3038</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Equal variances: TRUE</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Analysis performed: 2026-02-11 06:26:34</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Analysis performed: 2026-02-11 07:26:48</span>
 <span class="r-in"><span></span></span>
 </code></pre></div>
     </div>

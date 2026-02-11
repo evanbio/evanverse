@@ -477,7 +477,7 @@ qual_set1_rb         # Example
 - Color system guide:
   [`vignette("get-started", package = "evanverse")`](https://evanbio.github.io/evanverse/articles/get-started.md)
 - Package website: [evanverse
-  documentation](https://github.com/yourusername/evanverse)
+  documentation](https://github.com/evanbio/evanverse)
 
 ------------------------------------------------------------------------
 

@@ -165,11 +165,11 @@ checking:
 The function uses an intelligent algorithm that considers both normality
 and sample size:
 
-- **Large samples (n ≥ 100 per group)**: Prefers t-test due to Central
+- **Large samples (n \>= 100 per group)**: Prefers t-test due to Central
   Limit Theorem, even if Shapiro-Wilk rejects normality (which becomes
   overly sensitive in large samples).
 
-- **Medium samples (30 ≤ n \< 100)**: Uses Shapiro-Wilk test with a
+- **Medium samples (30 \<= n \< 100)**: Uses Shapiro-Wilk test with a
   stricter threshold (p \< 0.01) to avoid false positives.
 
 - **Small samples (n \< 30)**: Strictly checks normality with standard
@@ -402,5 +402,5 @@ summary(result)          # Detailed summary
 #> Levene's test: p = 0.3038
 #> Equal variances: TRUE
 #> 
-#> Analysis performed: 2026-02-11 06:26:34
+#> Analysis performed: 2026-02-11 07:26:48
 ```
