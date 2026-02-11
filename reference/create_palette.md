@@ -53,8 +53,8 @@ create_palette(
   c("#deebf7", "#9ecae1", "#3182bd"),
   color_dir = temp_dir
 )
-#> ℹ Directory created: /tmp/RtmplTAdO0/palettes/sequential
-#> ✔ Palette saved: /tmp/RtmplTAdO0/palettes/sequential/blues.json
+#> ℹ Directory created: /tmp/Rtmp2oHWiN/palettes/sequential
+#> ✔ Palette saved: /tmp/Rtmp2oHWiN/palettes/sequential/blues.json
 
 create_palette(
   "qual_vivid",
@@ -62,8 +62,8 @@ create_palette(
   c("#E64B35", "#4DBBD5", "#00A087"),
   color_dir = temp_dir
 )
-#> ℹ Directory created: /tmp/RtmplTAdO0/palettes/qualitative
-#> ✔ Palette saved: /tmp/RtmplTAdO0/palettes/qualitative/qual_vivid.json
+#> ℹ Directory created: /tmp/Rtmp2oHWiN/palettes/qualitative
+#> ✔ Palette saved: /tmp/Rtmp2oHWiN/palettes/qualitative/qual_vivid.json
 
 # Clean up
 unlink(temp_dir, recursive = TRUE)
