@@ -478,8 +478,8 @@ print(result)
 #>     cli::cli_alert_success("{name} completed in {sprintf('%.3f', elapsed)} seconds")
 #>     invisible(result)
 #> }
-#> <bytecode: 0x5576325ab0c0>
-#> <environment: 0x5576325adb08>
+#> <bytecode: 0x563707ab5320>
+#> <environment: 0x563707ab4590>
 ```
 
 #### Safe Execution
