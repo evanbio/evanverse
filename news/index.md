@@ -1,6 +1,34 @@
 # Changelog
 
+## evanverse 0.4.1
+
+*Released: March 2026*
+
+**Patch Release** - CRAN compliance fix for conditional use of Suggests
+packages.
+
+------------------------------------------------------------------------
+
+#### Bug Fixes
+
+- Fixed CRAN check failure: moved parameter validation before `Suggests`
+  package availability checks in
+  [`download_batch()`](https://evanbio.github.io/evanverse/reference/download_batch.md),
+  [`download_geo_data()`](https://evanbio.github.io/evanverse/reference/download_geo_data.md),
+  [`download_url()`](https://evanbio.github.io/evanverse/reference/download_url.md),
+  [`plot_venn()`](https://evanbio.github.io/evanverse/reference/plot_venn.md),
+  and
+  [`read_excel_flex()`](https://evanbio.github.io/evanverse/reference/read_excel_flex.md)
+  — ensures tests pass under `_R_CHECK_DEPENDS_ONLY_=true`
+- Removed redundant
+  [`requireNamespace()`](https://rdrr.io/r/base/ns-load.html) checks for
+  packages already listed in `Imports` (curl, cli, withr, readxl)
+
+------------------------------------------------------------------------
+
 ## evanverse 0.4.0
+
+CRAN release: 2026-02-11
 
 *Released: February 2026*
 

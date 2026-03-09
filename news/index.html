@@ -63,7 +63,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">evanverse</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.4.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.4.1</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -95,11 +95,22 @@
 <div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
       <img src="../logo.png" class="logo" alt=""><h1>Changelog</h1>
-      <small>Source: <a href="https://github.com/evanbio/evanverse/blob/v0.4.0/NEWS.md" class="external-link"><code>NEWS.md</code></a></small>
+      <small>Source: <a href="https://github.com/evanbio/evanverse/blob/main/NEWS.md" class="external-link"><code>NEWS.md</code></a></small>
     </div>
 
     <div class="section level2">
-<h2 class="pkg-version" data-toc-text="0.4.0" id="evanverse-040">evanverse 0.4.0<a class="anchor" aria-label="anchor" href="#evanverse-040"></a></h2>
+<h2 class="pkg-version" data-toc-text="0.4.1" id="evanverse-041">evanverse 0.4.1<a class="anchor" aria-label="anchor" href="#evanverse-041"></a></h2>
+<p><em>Released: March 2026</em></p>
+<p><strong>Patch Release</strong> - CRAN compliance fix for conditional use of Suggests packages.</p>
+<hr><div class="section level4">
+<h4 id="bug-fixes-0-4-1">Bug Fixes<a class="anchor" aria-label="anchor" href="#bug-fixes-0-4-1"></a></h4>
+<ul><li>Fixed CRAN check failure: moved parameter validation before <code>Suggests</code> package availability checks in <code><a href="../reference/download_batch.html">download_batch()</a></code>, <code><a href="../reference/download_geo_data.html">download_geo_data()</a></code>, <code><a href="../reference/download_url.html">download_url()</a></code>, <code><a href="../reference/plot_venn.html">plot_venn()</a></code>, and <code><a href="../reference/read_excel_flex.html">read_excel_flex()</a></code> — ensures tests pass under <code>_R_CHECK_DEPENDS_ONLY_=true</code>
+</li>
+<li>Removed redundant <code><a href="https://rdrr.io/r/base/ns-load.html" class="external-link">requireNamespace()</a></code> checks for packages already listed in <code>Imports</code> (curl, cli, withr, readxl)</li>
+</ul><hr></div>
+</div>
+    <div class="section level2">
+<h2 class="pkg-version" data-toc-text="0.4.0" id="evanverse-040">evanverse 0.4.0<a class="anchor" aria-label="anchor" href="#evanverse-040"></a></h2><p class="text-muted">CRAN release: 2026-02-11</p>
 <p><em>Released: February 2026</em></p>
 <p><strong>Feature Release</strong> - Major additions to statistical analysis toolkit with 6 new functions, plot_forest complete rewrite, and dplyr 1.2.0 compatibility.</p>
 <hr><div class="section level4">
