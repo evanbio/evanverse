@@ -53,7 +53,7 @@ src/*.dll
 inst/doc
 /Meta/
 /doc/
-# docs/ - commented out to allow GitHub Pages deployment
+docs/
 pkgdown/
 check/
 *.Rout

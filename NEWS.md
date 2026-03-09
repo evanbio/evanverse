@@ -1,3 +1,18 @@
+# evanverse 0.4.1
+
+*Released: March 2026*
+
+**Patch Release** - CRAN compliance fix for conditional use of Suggests packages.
+
+---
+
+### Bug Fixes
+
+* Fixed CRAN check failure: moved parameter validation before `Suggests` package availability checks in `download_batch()`, `download_geo_data()`, `download_url()`, `plot_venn()`, and `read_excel_flex()` — ensures tests pass under `_R_CHECK_DEPENDS_ONLY_=true`
+* Removed redundant `requireNamespace()` checks for packages already listed in `Imports` (curl, cli, withr, readxl)
+
+---
+
 # evanverse 0.4.0
 
 *Released: February 2026*

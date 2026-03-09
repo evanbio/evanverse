@@ -1,47 +1,21 @@
-# CRAN Comments for evanverse 0.4.0
+# CRAN Comments for evanverse 0.4.1
 
-## Submission - Feature Release
+## Submission - Patch Release
 
-This is a minor version update from 0.3.7 to 0.4.0. It addresses two CRAN-flagged issues and adds new functionality.
+This is a patch release from 0.4.0 to 0.4.1, addressing CRAN-flagged issues with conditional use of Suggests packages.
 
 ### CRAN Issues Resolved
 
-1. **Test failures on 7 platforms (ERROR)**: `plot_pie()` tests failed due to dplyr 1.2.0 `case_when()` deprecation warning. Fixed by replacing `case_when()` with `switch()` (PR #4 from @DavisVaughan).
+1. **Suggests packages used unconditionally (ERROR)**: In `download_geo_data()`, `GEOquery` (a Suggests package) was checked before parameter validation, causing test failures under `_R_CHECK_DEPENDS_ONLY_=true`. Fixed by moving all parameter validation before dependency checks in 5 affected functions.
 
-2. **Relative URL paths (NOTE)**: `../reference/` in vignette HTML flagged as possibly invalid URL. Fixed by replacing with absolute pkgdown URLs.
+### Changes in v0.4.1
 
-### Changes in v0.4.0
-
-1. **New Statistical Analysis Functions** (6 new):
-   - `quick_ttest()`: t-test analysis with automatic assumption checking
-   - `quick_anova()`: One-way ANOVA with post-hoc tests
-   - `quick_chisq()`: Chi-square test with visualization
-   - `quick_cor()`: Correlation analysis with heatmap
-   - `stat_power()`: Statistical power analysis
-   - `stat_samplesize()`: Sample size calculation
-
-2. **New ggplot2 Integration**:
-   - `scale_color_evanverse()` / `scale_fill_evanverse()`: Discrete color scales
-
-3. **Major Improvements**:
-   - `plot_forest()`: Complete rewrite with advanced customization
-   - Palette caching system for improved performance
-   - Palette naming convention standardized
-   - Void utilities and package management functions consolidated
-
-4. **Bug Fixes**:
-   - dplyr 1.2.0 compatibility (case_when → switch in plot_pie)
-   - Relative URL paths in vignettes
-   - Unicode Greek letters replaced with ASCII for cross-platform compatibility
-   - NA validation in download_geo_data()
-
-5. **Breaking Changes**:
-   - `df_forest_test` dataset replaced by `forest_data`
-   - `plot_forest()` API changed (complete rewrite)
-   - Palette names changed to `type_name_source` format
+* Reordered validation logic in `download_batch()`, `download_geo_data()`, `download_url()`, `plot_venn()`, and `read_excel_flex()` so parameter checks run before `requireNamespace()` calls for Suggests packages
+* Removed redundant `requireNamespace()` checks for packages already in `Imports` (curl, cli, withr, readxl)
 
 ## Test environments
-* Local Windows install, R 4.5.0
+
+* Local Windows 11 x64 (build 26200), R 4.5.1 (2025-06-13 ucrt)
 * GitHub Actions (ubuntu-latest): R-release, R-devel
 * GitHub Actions (windows-latest): R-release
 * GitHub Actions (macOS-latest): R-release
@@ -50,12 +24,14 @@ This is a minor version update from 0.3.7 to 0.4.0. It addresses two CRAN-flagge
 
 0 errors ✔ | 0 warnings ✔ | 0 notes ✔
 
+Duration: 2m 48.5s
+
 ## Downstream dependencies
 
 There are currently no downstream dependencies for this package.
 
 ## Quality Assurance
 
-* **Test suite**: 2196 tests passing (0 failures, 0 warnings, 26 skipped)
-* **Check time**: 2m 55s
+* **Test suite**: All tests passing
+* **Check time**: 2m 48.5s
 * **Platform compatibility**: Verified on Windows, macOS, and Linux
