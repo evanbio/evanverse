@@ -82,13 +82,8 @@ plot_venn <- function(set1, set2, set3 = NULL, set4 = NULL,
   # ===========================================================================
   # Parameter validation
   # ===========================================================================
-
-  # Check required packages
-  required_pkgs <- c("ggvenn", "ggVennDiagram")
-  missing <- required_pkgs[!sapply(required_pkgs, requireNamespace, quietly = TRUE)]
-  if (length(missing) > 0) {
-    cli::cli_abort("Missing required packages: {paste(missing, collapse = ', ')}")
-  }
+  # Reason: Parameter validation must come BEFORE dependency checks so that
+  # tests can validate parameters even when Suggests packages are not available
 
   # Validate required sets
   if (missing(set1) || missing(set2)) {
@@ -147,6 +142,17 @@ plot_venn <- function(set1, set2, set3 = NULL, set4 = NULL,
   }
   if (!is.logical(auto_scale) || length(auto_scale) != 1) {
     cli::cli_abort("`auto_scale` must be a single logical value.")
+  }
+
+  # ===========================================================================
+  # Dependency check
+  # ===========================================================================
+  # Reason: Check Suggests packages (ggvenn, ggVennDiagram) after parameter validation
+
+  required_pkgs <- c("ggvenn", "ggVennDiagram")
+  missing <- required_pkgs[!sapply(required_pkgs, requireNamespace, quietly = TRUE)]
+  if (length(missing) > 0) {
+    cli::cli_abort("Missing required packages: {paste(missing, collapse = ', ')}")
   }
 
   # Validate alpha parameters

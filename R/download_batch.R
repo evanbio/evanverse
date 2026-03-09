@@ -30,10 +30,8 @@ download_batch <- function(urls,
   # ===========================================================================
   # Parameter Validation Phase
   # ===========================================================================
-
-  if (!requireNamespace("curl", quietly = TRUE)) {
-    cli::cli_abort("Please install curl")
-  }
+  # Reason: Parameter validation must come BEFORE dependency checks so that
+  # tests can validate parameters even when Suggests packages are not available
 
   # Validate dest_dir (required parameter)
   if (missing(dest_dir) || is.null(dest_dir) || !is.character(dest_dir) || length(dest_dir) != 1) {
@@ -45,6 +43,16 @@ download_batch <- function(urls,
   }
   if (length(urls) == 0) {
     cli::cli_abort("No URLs provided")
+  }
+
+  # ===========================================================================
+  # Dependency Check Phase
+  # ===========================================================================
+  # Reason: Check Suggests packages (digest) after parameter validation
+  # Note: curl is in Imports, so always available - no check needed
+
+  if (!requireNamespace("digest", quietly = TRUE)) {
+    cli::cli_abort("Package {.pkg digest} is required. Please install it with: install.packages('digest')")
   }
 
   # ===========================================================================

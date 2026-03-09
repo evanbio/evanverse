@@ -63,22 +63,11 @@ download_geo_data <- function(gse_id,
                                timeout = 300) {
 
   # ===========================================================================
-  # Dependency and Parameter Validation Phase
+  # Parameter Validation Phase
   # ===========================================================================
-
-  # Check required dependencies
-  if (!requireNamespace("GEOquery", quietly = TRUE)) {
-    cli::cli_abort("GEOquery package is required. Please install it with: BiocManager::install('GEOquery')")
-  }
-  if (!requireNamespace("Biobase", quietly = TRUE)) {
-    cli::cli_abort("Biobase package is required. Please install it with: BiocManager::install('Biobase')")
-  }
-  if (!requireNamespace("withr", quietly = TRUE)) {
-    cli::cli_abort("withr package is required. Please install it with: install.packages('withr')")
-  }
-  if (!requireNamespace("cli", quietly = TRUE)) {
-    cli::cli_abort("cli package is required. Please install it with: install.packages('cli')")
-  }
+  # Reason: Parameter validation must come BEFORE dependency checks so that
+  # tests can validate parameters even when Suggests packages are not available
+  # (e.g., during CRAN checks with _R_CHECK_DEPENDS_ONLY_=true)
 
   # Validate GSE ID format
   if (!is.character(gse_id) || length(gse_id) != 1 || is.na(gse_id)) {
@@ -108,6 +97,20 @@ download_geo_data <- function(gse_id,
   }
   if (!is.numeric(timeout) || length(timeout) != 1 || is.na(timeout) || timeout <= 0) {
     cli::cli_abort("timeout must be a positive number")
+  }
+
+  # ===========================================================================
+  # Dependency Check Phase
+  # ===========================================================================
+  # Reason: Check Suggests packages (GEOquery, Biobase) after parameter validation
+  # Note: cli and withr are in Imports, so always available - no check needed
+
+  # Check required Suggests dependencies
+  if (!requireNamespace("GEOquery", quietly = TRUE)) {
+    cli::cli_abort("GEOquery package is required. Please install it with: BiocManager::install('GEOquery')")
+  }
+  if (!requireNamespace("Biobase", quietly = TRUE)) {
+    cli::cli_abort("Biobase package is required. Please install it with: BiocManager::install('Biobase')")
   }
 
   cli::cli_h1("Starting GEO Data Download for {gse_id}")

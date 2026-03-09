@@ -84,17 +84,10 @@ download_url <- function(url,
                          retries = 3) {
 
   # ===========================================================================
-  # Dependency & Parameter Validation Phase
+  # Parameter Validation Phase
   # ===========================================================================
-  if (!requireNamespace("curl", quietly = TRUE)) {
-    cli::cli_abort("curl package is required. Please install it with: install.packages('curl')")
-  }
-  if (!requireNamespace("cli", quietly = TRUE)) {
-    cli::cli_abort("cli package is required. Please install it with: install.packages('cli')")
-  }
-  if (isTRUE(unzip) && !requireNamespace("R.utils", quietly = TRUE)) {
-    cli::cli_abort("R.utils package is required for unzip functionality. Please install it with: install.packages('R.utils')")
-  }
+  # Reason: Parameter validation must come BEFORE dependency checks so that
+  # tests can validate parameters even when Suggests packages are not available
 
   if (!is.character(url) || length(url) != 1 || is.na(url) || url == "") {
     cli::cli_abort("url must be a single non-empty character string")
@@ -127,6 +120,16 @@ download_url <- function(url,
   }
   if (!is.numeric(retries) || length(retries) != 1 || retries < 0 || retries != as.integer(retries)) {
     cli::cli_abort("retries must be a non-negative integer")
+  }
+
+  # ===========================================================================
+  # Dependency Check Phase
+  # ===========================================================================
+  # Reason: Check Suggests packages (R.utils) after parameter validation
+  # Note: curl and cli are in Imports, so always available - no check needed
+
+  if (isTRUE(unzip) && !requireNamespace("R.utils", quietly = TRUE)) {
+    cli::cli_abort("R.utils package is required for unzip functionality. Please install it with: install.packages('R.utils')")
   }
 
   cli::cli_h1("Starting File Download")

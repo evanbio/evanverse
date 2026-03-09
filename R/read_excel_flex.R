@@ -32,18 +32,11 @@ read_excel_flex <- function(
 ) {
 
   # ===========================================================================
-  # Dependency check
-  # ===========================================================================
-  if (!requireNamespace("readxl", quietly = TRUE)) {
-    cli::cli_abort("Please install the {.pkg readxl} package.")
-  }
-  if (isTRUE(clean_names) && !requireNamespace("janitor", quietly = TRUE)) {
-    cli::cli_abort("Please install the {.pkg janitor} package (or set clean_names = FALSE).")
-  }
-
-  # ===========================================================================
   # Parameter validation
   # ===========================================================================
+  # Reason: Parameter validation must come BEFORE dependency checks so that
+  # tests can validate parameters even when Suggests packages are not available
+
   if (!is.character(file_path) || length(file_path) != 1L || is.na(file_path) || nzchar(file_path) == FALSE) {
     cli::cli_abort("'file_path' must be a non-empty character string.")
   }
@@ -70,6 +63,16 @@ read_excel_flex <- function(
   }
   if (!is.null(range) && !(is.character(range) && length(range) == 1L)) {
     cli::cli_abort("'range' must be a single character like \"B2:D100\" or NULL.")
+  }
+
+  # ===========================================================================
+  # Dependency check
+  # ===========================================================================
+  # Reason: Check Suggests packages (janitor) after parameter validation
+  # Note: readxl is in Imports, so always available - no check needed
+
+  if (isTRUE(clean_names) && !requireNamespace("janitor", quietly = TRUE)) {
+    cli::cli_abort("Please install the {.pkg janitor} package (or set clean_names = FALSE).")
   }
 
   # ===========================================================================
