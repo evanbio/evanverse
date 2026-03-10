@@ -240,7 +240,7 @@ print(result)
 #> 
 #> Decision: All expected frequencies adequate: using standard chi-square test 
 #> 
-#> Timestamp: 2026-03-10 05:29:56 
+#> Timestamp: 2026-03-10 05:35:44 
 #> ===========================================================
 
 # Example 2: 2x2 table
@@ -302,7 +302,7 @@ summary(result)                  # Detailed summary
 #> ===========================================================
 #> 
 #> Method: Chi-square test 
-#> Timestamp: 2026-03-10 05:29:56 
+#> Timestamp: 2026-03-10 05:35:45 
 #> 
 #> -----------------------------------------------------------
 #> Test Results:
