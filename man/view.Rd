@@ -36,7 +36,9 @@ A reactable widget rendered in the Viewer pane.
 Quickly view a data.frame or tibble as an interactive table in the Viewer pane.
 }
 \examples{
-view(iris)
-view(mtcars, page_size = 20, striped = TRUE, filterable = TRUE)
+if (requireNamespace("reactable", quietly = TRUE)) {
+  view(iris)
+  view(mtcars, page_size = 20, striped = TRUE, filterable = TRUE)
+}
 
 }

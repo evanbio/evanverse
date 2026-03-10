@@ -209,7 +209,7 @@ navbar:
 
   components:
     version:
-      text: "0.4.1"
+      text: "0.4.4"
       href: news/index.html
 
     install:
@@ -416,6 +416,8 @@ reference:
 
 news:
   releases:
+  - text: "Version 0.4.4 - CRAN Patch (March 2026)"
+    href: https://github.com/evanbio/evanverse/releases/tag/v0.4.4
   - text: "Version 0.4.1 - CRAN Patch (March 2026)"
     href: https://github.com/evanbio/evanverse/releases/tag/v0.4.1
   - text: "Version 0.4.0 - Feature Release (February 2026)"
@@ -453,7 +455,7 @@ footer:
   components:
     package_info: |
       <div class="text-muted">
-        <strong>evanverse v0.4.1</strong><br>
+        <strong>evanverse v0.4.4</strong><br>
         <small>Last updated: March 2026</small>
       </div>
 

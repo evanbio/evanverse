@@ -1,7 +1,7 @@
 Package: evanverse
 Type: Package
 Title: Utility Functions for Data Analysis and Visualization
-Version: 0.4.3
+Version: 0.4.4
 Date: 2026-03-10
 Authors@R:
     person("Evan", "Zhou", email = "evanzhou.bio@gmail.com", role = c("aut", "cre"),

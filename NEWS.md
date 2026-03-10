@@ -1,3 +1,17 @@
+# evanverse 0.4.4
+
+*Released: March 2026*
+
+**Patch Release** - CRAN noSuggests compliance fix for `view()`.
+
+---
+
+### Bug Fixes
+
+* Wrapped `view()` examples with `if (requireNamespace("reactable", quietly = TRUE))` guard — prevents example failures under `_R_CHECK_DEPENDS_ONLY_=true`
+
+---
+
 # evanverse 0.4.3
 
 *Released: March 2026*
