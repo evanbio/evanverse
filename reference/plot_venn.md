@@ -159,24 +159,25 @@ A ggplot object (and optionally a list of processed sets if
 ## Examples
 
 ``` r
-set.seed(123)
-g1 <- sample(letters, 15)
-g2 <- sample(letters, 10)
-g3 <- sample(letters, 12)
+if (requireNamespace("ggvenn", quietly = TRUE) &&
+    requireNamespace("ggVennDiagram", quietly = TRUE)) {
+  set.seed(123)
+  g1 <- sample(letters, 15)
+  g2 <- sample(letters, 10)
+  g3 <- sample(letters, 12)
 
-# Classic 3-set Venn
-plot_venn(g1, g2, g3, method = "classic", title = "Classic Venn")
+  # Classic 3-set Venn
+  plot_venn(g1, g2, g3, method = "classic", title = "Classic Venn")
+
+  # Gradient 2-set Venn
+  plot_venn(g1, g2, method = "gradient", title = "Gradient Venn")
+
+  # Return sets for downstream use
+  out <- plot_venn(g1, g2, return_sets = TRUE)
+  names(out)
+}
 
 
 
-# Gradient 2-set Venn
-plot_venn(g1, g2, method = "gradient", title = "Gradient Venn")
-
-
-
-# Return sets for downstream use
-out <- plot_venn(g1, g2, return_sets = TRUE)
-
-names(out)
 #> [1] "plot" "sets"
 ```

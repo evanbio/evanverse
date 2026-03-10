@@ -63,7 +63,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">evanverse</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.4.1</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.4.2</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -98,6 +98,18 @@
       <small>Source: <a href="https://github.com/evanbio/evanverse/blob/main/NEWS.md" class="external-link"><code>NEWS.md</code></a></small>
     </div>
 
+    <div class="section level2">
+<h2 class="pkg-version" data-toc-text="0.4.2" id="evanverse-042">evanverse 0.4.2<a class="anchor" aria-label="anchor" href="#evanverse-042"></a></h2>
+<p><em>Released: March 2026</em></p>
+<p><strong>Patch Release</strong> - CRAN noSuggests compliance fixes.</p>
+<hr><div class="section level4">
+<h4 id="bug-fixes-0-4-2">Bug Fixes<a class="anchor" aria-label="anchor" href="#bug-fixes-0-4-2"></a></h4>
+<ul><li>Wrapped <code><a href="../reference/plot_venn.html">plot_venn()</a></code> examples with <code><a href="https://rdrr.io/r/base/ns-load.html" class="external-link">requireNamespace()</a></code> guard for <code>ggvenn</code>/<code>ggVennDiagram</code> — prevents example failures under <code>_R_CHECK_DEPENDS_ONLY_=true</code>
+</li>
+<li>Moved <code>match.arg(species)</code> before <code>biomaRt</code> availability check in <code><a href="../reference/download_gene_ref.html">download_gene_ref()</a></code> — ensures species parameter validation tests run without Suggests packages</li>
+<li>Added <code>skip_if_not_installed("GSEABase")</code> to <code><a href="../reference/gmt2df.html">gmt2df()</a></code> and <code><a href="../reference/gmt2list.html">gmt2list()</a></code> tests that require <code>GSEABase</code> — prevents test failures in noSuggests environment</li>
+</ul><hr></div>
+</div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="0.4.1" id="evanverse-041">evanverse 0.4.1<a class="anchor" aria-label="anchor" href="#evanverse-041"></a></h2>
 <p><em>Released: March 2026</em></p>
