@@ -22,11 +22,11 @@ download_gene_ref <- function(species = c("human", "mouse"),
   # Parameter Validation and Standardization Phase
   # ============================================================================
 
+  species <- match.arg(species)
+
   if (!requireNamespace("biomaRt", quietly = TRUE)) {
     cli::cli_abort("Please install 'biomaRt' via BiocManager::install('biomaRt').")
   }
-
-  species <- match.arg(species)
 
   # ============================================================================
   # Setup Phase

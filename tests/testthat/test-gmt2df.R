@@ -9,6 +9,7 @@
 #------------------------------------------------------------------------------
 
 test_that("gmt2df() parses valid GMT file correctly", {
+  skip_if_not_installed("GSEABase")
   gmt_file <- system.file("extdata", "h.all.v2024.1.Hs.symbols.gmt", package = "evanverse")
   skip_if_not(file.exists(gmt_file), "GMT test file not found")
 
@@ -23,6 +24,7 @@ test_that("gmt2df() parses valid GMT file correctly", {
 })
 
 test_that("gmt2df() returns correct data structure", {
+  skip_if_not_installed("GSEABase")
   gmt_file <- system.file("extdata", "h.all.v2024.1.Hs.symbols.gmt", package = "evanverse")
   skip_if_not(file.exists(gmt_file), "GMT test file not found")
 
@@ -41,6 +43,7 @@ test_that("gmt2df() returns correct data structure", {
 })
 
 test_that("gmt2df() handles verbose parameter correctly", {
+  skip_if_not_installed("GSEABase")
   gmt_file <- system.file("extdata", "h.all.v2024.1.Hs.symbols.gmt", package = "evanverse")
   skip_if_not(file.exists(gmt_file), "GMT test file not found")
 
@@ -63,6 +66,7 @@ test_that("gmt2df() validates file parameter correctly", {
 })
 
 test_that("gmt2df() validates verbose parameter correctly", {
+  skip_if_not_installed("GSEABase")
   gmt_file <- system.file("extdata", "h.all.v2024.1.Hs.symbols.gmt", package = "evanverse")
   skip_if_not(file.exists(gmt_file), "GMT test file not found")
 
@@ -82,6 +86,7 @@ test_that("gmt2df() handles nonexistent file", {
 })
 
 test_that("gmt2df() handles invalid GMT file format", {
+  skip_if_not_installed("GSEABase")
   # Create a temporary invalid file
   temp_file <- tempfile(fileext = ".gmt")
   writeLines("invalid content", temp_file)
