@@ -110,7 +110,7 @@ file_tree(".", max_depth = 3)
 temp_dir <- tempdir()
 file_tree(temp_dir, max_depth = 2, log = TRUE, log_path = tempdir())
 #> 
-#> ── Directory Tree: /tmp/RtmpzMiVlo ─────────────────────────────────────────────
+#> ── Directory Tree: /tmp/RtmpkfOLEA ─────────────────────────────────────────────
 #> +-- bslib-03915c98e1bba073af2cc4dfd18baa4a
 #> |   +-- bootstrap.bundle.min.js
 #> |   +-- bootstrap.bundle.min.js.map
@@ -125,7 +125,9 @@ file_tree(temp_dir, max_depth = 2, log = TRUE, log_path = tempdir())
 #> |   +-- remotes
 #> |   +-- stats
 #> |   +-- utils
-#> +-- file19de17961103
+#> +-- file1a2618e7e605
+#> +-- file1a261a99150e
+#> +-- file1a26333aa1ac
 #> |   +-- font.css
 #> |   +-- tDbY2o-flEEny0FZhsfKu5WU4zr3E_BX0PnT8RD8yKxTN1OVgaY.woff2
 #> |   +-- tDbY2o-flEEny0FZhsfKu5WU4zr3E_BX0PnT8RD8yKxTNFOVgaY.woff2
@@ -133,18 +135,7 @@ file_tree(temp_dir, max_depth = 2, log = TRUE, log_path = tempdir())
 #> |   +-- tDbY2o-flEEny0FZhsfKu5WU4zr3E_BX0PnT8RD8yKxTOVOVgaY.woff2
 #> |   +-- tDbY2o-flEEny0FZhsfKu5WU4zr3E_BX0PnT8RD8yKxTOlOV.woff2
 #> |   +-- tDbY2o-flEEny0FZhsfKu5WU4zr3E_BX0PnT8RD8yKxTPlOVgaY.woff2
-#> +-- file19de20b0589b
-#> +-- file19de20f16db
-#> +-- file19de258d7dfe
-#> |   +-- UcCO3FwrK3iLTeHuS_nVMrMxCp50SjIw2boKoduKmMEVuLyfAZ9hiA.woff2
-#> |   +-- UcCO3FwrK3iLTeHuS_nVMrMxCp50SjIw2boKoduKmMEVuLyfAZBhiI2B.woff2
-#> |   +-- UcCO3FwrK3iLTeHuS_nVMrMxCp50SjIw2boKoduKmMEVuLyfAZFhiI2B.woff2
-#> |   +-- UcCO3FwrK3iLTeHuS_nVMrMxCp50SjIw2boKoduKmMEVuLyfAZJhiI2B.woff2
-#> |   +-- UcCO3FwrK3iLTeHuS_nVMrMxCp50SjIw2boKoduKmMEVuLyfAZNhiI2B.woff2
-#> |   +-- UcCO3FwrK3iLTeHuS_nVMrMxCp50SjIw2boKoduKmMEVuLyfAZthiI2B.woff2
-#> |   +-- UcCO3FwrK3iLTeHuS_nVMrMxCp50SjIw2boKoduKmMEVuLyfAZxhiI2B.woff2
-#> |   +-- font.css
-#> +-- file19de2dfba7e3
+#> +-- file1a2634a6b1aa
 #> |   +-- font.css
 #> |   +-- tDbY2o-flEEny0FZhsfKu5WU4zr3E_BX0PnT8RD8yKxTN1OVgaY.woff2
 #> |   +-- tDbY2o-flEEny0FZhsfKu5WU4zr3E_BX0PnT8RD8yKxTNFOVgaY.woff2
@@ -152,8 +143,8 @@ file_tree(temp_dir, max_depth = 2, log = TRUE, log_path = tempdir())
 #> |   +-- tDbY2o-flEEny0FZhsfKu5WU4zr3E_BX0PnT8RD8yKxTOVOVgaY.woff2
 #> |   +-- tDbY2o-flEEny0FZhsfKu5WU4zr3E_BX0PnT8RD8yKxTOlOV.woff2
 #> |   +-- tDbY2o-flEEny0FZhsfKu5WU4zr3E_BX0PnT8RD8yKxTPlOVgaY.woff2
-#> +-- file19de3a3337c9
-#> +-- file19de3ac47c2e
+#> +-- file1a26475d78ad
+#> +-- file1a264c4339a6
 #> |   +-- UcCO3FwrK3iLTeHuS_nVMrMxCp50SjIw2boKoduKmMEVuLyfAZ9hiA.woff2
 #> |   +-- UcCO3FwrK3iLTeHuS_nVMrMxCp50SjIw2boKoduKmMEVuLyfAZBhiI2B.woff2
 #> |   +-- UcCO3FwrK3iLTeHuS_nVMrMxCp50SjIw2boKoduKmMEVuLyfAZFhiI2B.woff2
@@ -162,8 +153,8 @@ file_tree(temp_dir, max_depth = 2, log = TRUE, log_path = tempdir())
 #> |   +-- UcCO3FwrK3iLTeHuS_nVMrMxCp50SjIw2boKoduKmMEVuLyfAZthiI2B.woff2
 #> |   +-- UcCO3FwrK3iLTeHuS_nVMrMxCp50SjIw2boKoduKmMEVuLyfAZxhiI2B.woff2
 #> |   +-- font.css
-#> +-- file19de542248c7
-#> +-- file19de5fa8818f
+#> +-- file1a266bd92683
+#> +-- file1a266d049e8e
 #> |   +-- UcCO3FwrK3iLTeHuS_nVMrMxCp50SjIw2boKoduKmMEVuLyfAZ9hiA.woff2
 #> |   +-- UcCO3FwrK3iLTeHuS_nVMrMxCp50SjIw2boKoduKmMEVuLyfAZBhiI2B.woff2
 #> |   +-- UcCO3FwrK3iLTeHuS_nVMrMxCp50SjIw2boKoduKmMEVuLyfAZFhiI2B.woff2
@@ -172,7 +163,8 @@ file_tree(temp_dir, max_depth = 2, log = TRUE, log_path = tempdir())
 #> |   +-- UcCO3FwrK3iLTeHuS_nVMrMxCp50SjIw2boKoduKmMEVuLyfAZthiI2B.woff2
 #> |   +-- UcCO3FwrK3iLTeHuS_nVMrMxCp50SjIw2boKoduKmMEVuLyfAZxhiI2B.woff2
 #> |   +-- font.css
-#> +-- file19de7692312d
+#> +-- file1a26711373a6
+#> +-- file1a269306694
 #> |   +-- UcCO3FwrK3iLTeHuS_nVMrMxCp50SjIw2boKoduKmMEVuLyfAZ9hiA.woff2
 #> |   +-- UcCO3FwrK3iLTeHuS_nVMrMxCp50SjIw2boKoduKmMEVuLyfAZBhiI2B.woff2
 #> |   +-- UcCO3FwrK3iLTeHuS_nVMrMxCp50SjIw2boKoduKmMEVuLyfAZFhiI2B.woff2
@@ -181,11 +173,19 @@ file_tree(temp_dir, max_depth = 2, log = TRUE, log_path = tempdir())
 #> |   +-- UcCO3FwrK3iLTeHuS_nVMrMxCp50SjIw2boKoduKmMEVuLyfAZthiI2B.woff2
 #> |   +-- UcCO3FwrK3iLTeHuS_nVMrMxCp50SjIw2boKoduKmMEVuLyfAZxhiI2B.woff2
 #> |   +-- font.css
-#> +-- file19de7d0a8276
+#> +-- file1a26c90c549
+#> |   +-- UcCO3FwrK3iLTeHuS_nVMrMxCp50SjIw2boKoduKmMEVuLyfAZ9hiA.woff2
+#> |   +-- UcCO3FwrK3iLTeHuS_nVMrMxCp50SjIw2boKoduKmMEVuLyfAZBhiI2B.woff2
+#> |   +-- UcCO3FwrK3iLTeHuS_nVMrMxCp50SjIw2boKoduKmMEVuLyfAZFhiI2B.woff2
+#> |   +-- UcCO3FwrK3iLTeHuS_nVMrMxCp50SjIw2boKoduKmMEVuLyfAZJhiI2B.woff2
+#> |   +-- UcCO3FwrK3iLTeHuS_nVMrMxCp50SjIw2boKoduKmMEVuLyfAZNhiI2B.woff2
+#> |   +-- UcCO3FwrK3iLTeHuS_nVMrMxCp50SjIw2boKoduKmMEVuLyfAZthiI2B.woff2
+#> |   +-- UcCO3FwrK3iLTeHuS_nVMrMxCp50SjIw2boKoduKmMEVuLyfAZxhiI2B.woff2
+#> |   +-- font.css
 #> +-- logs
 #> |   +-- palettes
 #> +-- palettes.rds
 #> +-- robots.txt
-#> ✔ File tree log saved to: /tmp/RtmpzMiVlo/file_tree_20260310_094555.log
+#> ✔ File tree log saved to: /tmp/RtmpkfOLEA/file_tree_20260310_135406.log
 # }
 ```

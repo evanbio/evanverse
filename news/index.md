@@ -1,5 +1,23 @@
 # Changelog
 
+## evanverse 0.4.4
+
+*Released: March 2026*
+
+**Patch Release** - CRAN noSuggests compliance fix for
+[`view()`](https://evanbio.github.io/evanverse/reference/view.md).
+
+------------------------------------------------------------------------
+
+#### Bug Fixes
+
+- Wrapped
+  [`view()`](https://evanbio.github.io/evanverse/reference/view.md)
+  examples with `if (requireNamespace("reactable", quietly = TRUE))`
+  guard — prevents example failures under `_R_CHECK_DEPENDS_ONLY_=true`
+
+------------------------------------------------------------------------
+
 ## evanverse 0.4.3
 
 *Released: March 2026*
