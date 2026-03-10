@@ -1,5 +1,37 @@
 # Changelog
 
+## evanverse 0.4.3
+
+*Released: March 2026*
+
+**Patch Release** - CRAN noSuggests compliance fixes.
+
+------------------------------------------------------------------------
+
+#### Bug Fixes
+
+- Fixed
+  [`quick_cor()`](https://evanbio.github.io/evanverse/reference/quick_cor.md)
+  examples by wrapping with
+  `if (requireNamespace("ggcorrplot", quietly = TRUE))` guard — prevents
+  example failures under `_R_CHECK_DEPENDS_ONLY_=true`
+- Moved `label_alpha`, `fill_alpha`, `label`, `label_geom` and set
+  validations before Suggests dependency check in
+  [`plot_venn()`](https://evanbio.github.io/evanverse/reference/plot_venn.md)
+  — ensures parameter validation tests pass without
+  `ggvenn`/`ggVennDiagram`
+- Added `skip_if_not_installed()` to
+  [`plot_venn()`](https://evanbio.github.io/evanverse/reference/plot_venn.md),
+  [`plot_forest()`](https://evanbio.github.io/evanverse/reference/plot_forest.md),
+  [`gmt2df()`](https://evanbio.github.io/evanverse/reference/gmt2df.md),
+  [`gmt2list()`](https://evanbio.github.io/evanverse/reference/gmt2list.md),
+  [`read_excel_flex()`](https://evanbio.github.io/evanverse/reference/read_excel_flex.md),
+  and
+  [`quick_cor()`](https://evanbio.github.io/evanverse/reference/quick_cor.md)
+  tests that require Suggests packages
+
+------------------------------------------------------------------------
+
 ## evanverse 0.4.2
 
 *Released: March 2026*

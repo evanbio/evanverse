@@ -128,7 +128,7 @@ library(evanverse)
 
 # Check version
 packageVersion("evanverse")
-#> [1] '0.4.2'
+#> [1] '0.4.3'
 
 # List available functions
 pkg_functions("evanverse")

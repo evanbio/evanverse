@@ -63,7 +63,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">evanverse</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.4.2</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.4.3</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -95,9 +95,22 @@
 <div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
       <img src="../logo.png" class="logo" alt=""><h1>Changelog</h1>
-      <small>Source: <a href="https://github.com/evanbio/evanverse/blob/v0.4.2/NEWS.md" class="external-link"><code>NEWS.md</code></a></small>
+      <small>Source: <a href="https://github.com/evanbio/evanverse/blob/main/NEWS.md" class="external-link"><code>NEWS.md</code></a></small>
     </div>
 
+    <div class="section level2">
+<h2 class="pkg-version" data-toc-text="0.4.3" id="evanverse-043">evanverse 0.4.3<a class="anchor" aria-label="anchor" href="#evanverse-043"></a></h2>
+<p><em>Released: March 2026</em></p>
+<p><strong>Patch Release</strong> - CRAN noSuggests compliance fixes.</p>
+<hr><div class="section level4">
+<h4 id="bug-fixes-0-4-3">Bug Fixes<a class="anchor" aria-label="anchor" href="#bug-fixes-0-4-3"></a></h4>
+<ul><li>Fixed <code><a href="../reference/quick_cor.html">quick_cor()</a></code> examples by wrapping with <code>if (requireNamespace("ggcorrplot", quietly = TRUE))</code> guard — prevents example failures under <code>_R_CHECK_DEPENDS_ONLY_=true</code>
+</li>
+<li>Moved <code>label_alpha</code>, <code>fill_alpha</code>, <code>label</code>, <code>label_geom</code> and set validations before Suggests dependency check in <code><a href="../reference/plot_venn.html">plot_venn()</a></code> — ensures parameter validation tests pass without <code>ggvenn</code>/<code>ggVennDiagram</code>
+</li>
+<li>Added <code>skip_if_not_installed()</code> to <code><a href="../reference/plot_venn.html">plot_venn()</a></code>, <code><a href="../reference/plot_forest.html">plot_forest()</a></code>, <code><a href="../reference/gmt2df.html">gmt2df()</a></code>, <code><a href="../reference/gmt2list.html">gmt2list()</a></code>, <code><a href="../reference/read_excel_flex.html">read_excel_flex()</a></code>, and <code><a href="../reference/quick_cor.html">quick_cor()</a></code> tests that require Suggests packages</li>
+</ul><hr></div>
+</div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="0.4.2" id="evanverse-042">evanverse 0.4.2<a class="anchor" aria-label="anchor" href="#evanverse-042"></a></h2>
 <p><em>Released: March 2026</em></p>

@@ -40,7 +40,7 @@ if (!identical(Sys.getenv("NOT_CRAN"), "false")) {
   try(pkg_version("evanverse"), silent = TRUE)
 }
 #>     package version latest source
-#> 1 evanverse   0.4.2  0.4.0   CRAN
+#> 1 evanverse   0.4.3  0.4.0   CRAN
 ```
 
 ### 🎨 Color Palette System
@@ -478,8 +478,8 @@ print(result)
 #>     cli::cli_alert_success("{name} completed in {sprintf('%.3f', elapsed)} seconds")
 #>     invisible(result)
 #> }
-#> <bytecode: 0x55d9b9af6d78>
-#> <environment: 0x55d9b9af5fe8>
+#> <bytecode: 0x55d2c20c9450>
+#> <environment: 0x55d2c20c86c0>
 ```
 
 #### Safe Execution
