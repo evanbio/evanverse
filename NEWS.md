@@ -1,3 +1,19 @@
+# evanverse 0.4.3
+
+*Released: March 2026*
+
+**Patch Release** - CRAN noSuggests compliance fixes.
+
+---
+
+### Bug Fixes
+
+* Fixed `quick_cor()` examples by wrapping with `if (requireNamespace("ggcorrplot", quietly = TRUE))` guard — prevents example failures under `_R_CHECK_DEPENDS_ONLY_=true`
+* Moved `label_alpha`, `fill_alpha`, `label`, `label_geom` and set validations before Suggests dependency check in `plot_venn()` — ensures parameter validation tests pass without `ggvenn`/`ggVennDiagram`
+* Added `skip_if_not_installed()` to `plot_venn()`, `plot_forest()`, `gmt2df()`, `gmt2list()`, `read_excel_flex()`, and `quick_cor()` tests that require Suggests packages
+
+---
+
 # evanverse 0.4.2
 
 *Released: March 2026*

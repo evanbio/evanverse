@@ -147,17 +147,6 @@ plot_venn <- function(set1, set2, set3 = NULL, set4 = NULL,
     cli::cli_abort("`auto_scale` must be a single logical value.")
   }
 
-  # ===========================================================================
-  # Dependency check
-  # ===========================================================================
-  # Reason: Check Suggests packages (ggvenn, ggVennDiagram) after parameter validation
-
-  required_pkgs <- c("ggvenn", "ggVennDiagram")
-  missing <- required_pkgs[!sapply(required_pkgs, requireNamespace, quietly = TRUE)]
-  if (length(missing) > 0) {
-    cli::cli_abort("Missing required packages: {paste(missing, collapse = ', ')}")
-  }
-
   # Validate alpha parameters
   if (!is.numeric(label_alpha) || length(label_alpha) != 1 || is.na(label_alpha) || label_alpha < 0 || label_alpha > 1) {
     cli::cli_abort("`label_alpha` must be a numeric value between 0 and 1.")
@@ -208,6 +197,18 @@ plot_venn <- function(set1, set2, set3 = NULL, set4 = NULL,
     if (typeof(venn_sets[[i]]) != base_type) {
       cli::cli_warn("Type mismatch: {var_names[i]} is {typeof(venn_sets[[i]])}, expected {base_type}")
     }
+  }
+
+  # ===========================================================================
+  # Dependency check
+  # ===========================================================================
+  # Reason: Check Suggests packages (ggvenn, ggVennDiagram) after all parameter
+  # validation so that tests can verify parameter errors without these packages
+
+  required_pkgs <- c("ggvenn", "ggVennDiagram")
+  missing <- required_pkgs[!sapply(required_pkgs, requireNamespace, quietly = TRUE)]
+  if (length(missing) > 0) {
+    cli::cli_abort("Missing required packages: {paste(missing, collapse = ', ')}")
   }
 
   # -- Deduplicate

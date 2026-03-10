@@ -80,6 +80,8 @@ test_that("plot_venn() validates method parameter", {
 #------------------------------------------------------------------------------
 
 test_that("plot_venn() gradient method returns a ggplot", {
+  skip_if_not_installed("ggvenn")
+  skip_if_not_installed("ggVennDiagram")
   s1 <- sample(letters, 100, replace = TRUE)
   s2 <- sample(letters, 120, replace = TRUE)
   p <- plot_venn(s1, s2, method = "gradient", preview = FALSE)
@@ -87,6 +89,8 @@ test_that("plot_venn() gradient method returns a ggplot", {
 })
 
 test_that("plot_venn() return_sets returns a named list", {
+  skip_if_not_installed("ggvenn")
+  skip_if_not_installed("ggVennDiagram")
   s1 <- sample(letters, 100, replace = TRUE)
   s2 <- sample(letters, 120, replace = TRUE)
   suppressWarnings(
@@ -100,6 +104,8 @@ test_that("plot_venn() return_sets returns a named list", {
 })
 
 test_that("plot_venn() supports 3 and 4 sets", {
+  skip_if_not_installed("ggvenn")
+  skip_if_not_installed("ggVennDiagram")
   g <- paste0("gene", 1:2000)
   a <- sample(g, 1000)
   b <- sample(g, 800)
@@ -115,6 +121,8 @@ test_that("plot_venn() supports 3 and 4 sets", {
 #------------------------------------------------------------------------------
 
 test_that("plot_venn() category.names mismatch handled gracefully", {
+  skip_if_not_installed("ggvenn")
+  skip_if_not_installed("ggVennDiagram")
   a <- sample(letters, 50, replace = TRUE)
   b <- sample(letters, 40, replace = TRUE)
   expect_warning(
@@ -142,6 +150,8 @@ test_that("plot_venn() empty input triggers error", {
 })
 
 test_that("plot_venn() type mismatch triggers warning", {
+  skip_if_not_installed("ggvenn")
+  skip_if_not_installed("ggVennDiagram")
   a <- letters[1:5]
   b <- 1:5
   expect_warning(
@@ -155,6 +165,8 @@ test_that("plot_venn() type mismatch triggers warning", {
 #------------------------------------------------------------------------------
 
 test_that("plot_venn() handles custom colors and styling", {
+  skip_if_not_installed("ggvenn")
+  skip_if_not_installed("ggVennDiagram")
   s1 <- letters[1:10]
   s2 <- letters[5:15]
 
@@ -171,6 +183,8 @@ test_that("plot_venn() handles custom colors and styling", {
 })
 
 test_that("plot_venn() handles different label types", {
+  skip_if_not_installed("ggvenn")
+  skip_if_not_installed("ggVennDiagram")
   s1 <- letters[1:10]
   s2 <- letters[5:15]
 
@@ -183,6 +197,8 @@ test_that("plot_venn() handles different label types", {
 })
 
 test_that("plot_venn() handles gradient method parameters", {
+  skip_if_not_installed("ggvenn")
+  skip_if_not_installed("ggVennDiagram")
   s1 <- letters[1:10]
   s2 <- letters[5:15]
 

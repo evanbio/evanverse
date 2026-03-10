@@ -115,46 +115,48 @@
 #' }
 #'
 #' @examples
-#' # Example 1: Basic correlation analysis
-#' result <- quick_cor(mtcars)
-#' print(result)
+#' if (requireNamespace("ggcorrplot", quietly = TRUE)) {
+#'   # Example 1: Basic correlation analysis
+#'   result <- quick_cor(mtcars)
+#'   print(result)
 #'
-#' # Example 2: Spearman correlation with specific variables
-#' result <- quick_cor(
-#'   mtcars,
-#'   vars = c("mpg", "hp", "wt", "qsec"),
-#'   method = "spearman"
-#' )
+#'   # Example 2: Spearman correlation with specific variables
+#'   result <- quick_cor(
+#'     mtcars,
+#'     vars = c("mpg", "hp", "wt", "qsec"),
+#'     method = "spearman"
+#'   )
 #'
-#' # Example 3: Upper triangular with Bonferroni correction
-#' result <- quick_cor(
-#'   iris,
-#'   type = "upper",
-#'   p_adjust_method = "bonferroni",
-#'   show_coef = TRUE
-#' )
+#'   # Example 3: Upper triangular with Bonferroni correction
+#'   result <- quick_cor(
+#'     iris,
+#'     type = "upper",
+#'     p_adjust_method = "bonferroni",
+#'     show_coef = TRUE
+#'   )
 #'
-#' # Example 4: Custom palette and title
-#' result <- quick_cor(
-#'   mtcars,
-#'   palette = "gradient_rd_bu",
-#'   title = "Correlation Matrix of mtcars Dataset",
-#'   hc_order = TRUE
-#' )
+#'   # Example 4: Custom palette and title
+#'   result <- quick_cor(
+#'     mtcars,
+#'     palette = "gradient_rd_bu",
+#'     title = "Correlation Matrix of mtcars Dataset",
+#'     hc_order = TRUE
+#'   )
 #'
-#' # Example 5: Customize axis labels
-#' result <- quick_cor(
-#'   mtcars,
-#'   axis_x_angle = 90,      # Vertical x-axis labels
-#'   axis_text_size = 12,    # Larger text
-#'   show_axis_y = FALSE     # Hide y-axis labels
-#' )
+#'   # Example 5: Customize axis labels
+#'   result <- quick_cor(
+#'     mtcars,
+#'     axis_x_angle = 90,      # Vertical x-axis labels
+#'     axis_text_size = 12,    # Larger text
+#'     show_axis_y = FALSE     # Hide y-axis labels
+#'   )
 #'
-#' # Access components
-#' result$plot                 # ggplot object
-#' result$cor_matrix           # Correlation matrix
-#' result$significant_pairs    # Significant pairs
-#' summary(result)             # Detailed summary
+#'   # Access components
+#'   result$plot                 # ggplot object
+#'   result$cor_matrix           # Correlation matrix
+#'   result$significant_pairs    # Significant pairs
+#'   summary(result)             # Detailed summary
+#' }
 #'
 #' @importFrom magrittr %>%
 #' @importFrom rlang .data

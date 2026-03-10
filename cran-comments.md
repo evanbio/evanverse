@@ -1,20 +1,19 @@
-# CRAN Comments for evanverse 0.4.2
+# CRAN Comments for evanverse 0.4.3
 
 ## Submission - Patch Release
 
-This is a patch release from 0.4.1 to 0.4.2, addressing CRAN-flagged noSuggests check failures.
+This is a patch release from 0.4.2 to 0.4.3, addressing CRAN-flagged noSuggests check failures.
 
 ### CRAN Issues Resolved
 
-1. **Examples failing under noSuggests (ERROR)**: `plot_venn()` examples called `ggvenn`/`ggVennDiagram` unconditionally. Fixed by wrapping examples with `requireNamespace()` guard.
-2. **Tests failing under noSuggests (ERROR)**: `gmt2df()` and `gmt2list()` tests lacked `skip_if_not_installed("GSEABase")`, causing failures when `GSEABase` is unavailable. Fixed by adding appropriate skip conditions.
-3. **Parameter validation order in `download_gene_ref()` (ERROR)**: `match.arg(species)` was called after the `biomaRt` availability check, causing species validation tests to fail without `biomaRt`. Fixed by moving `match.arg()` before the dependency check.
+1. **Examples failing under noSuggests (ERROR)**: `quick_cor()` examples called `ggcorrplot` unconditionally. Fixed by wrapping examples with `if (requireNamespace("ggcorrplot", quietly = TRUE))` guard.
+2. **Tests failing under noSuggests (ERROR)**: `plot_venn()` tests for `label_alpha`, `fill_alpha`, `label`, `label_geom`, and set validation lacked proper guards. Fixed by moving these validations before the Suggests dependency check in `plot_venn()`, and adding `skip_if_not_installed()` to functionality tests requiring `ggvenn`/`ggVennDiagram`.
 
-### Changes in v0.4.2
+### Changes in v0.4.3
 
-* Wrapped `plot_venn()` examples with `requireNamespace("ggvenn")` and `requireNamespace("ggVennDiagram")` conditional guard
-* Moved `match.arg(species)` before `requireNamespace("biomaRt")` check in `download_gene_ref()`
-* Added `skip_if_not_installed("GSEABase")` to all `gmt2df()` and `gmt2list()` tests that require `GSEABase`
+* Wrapped all `quick_cor()` examples with `if (requireNamespace("ggcorrplot", quietly = TRUE))` guard
+* Moved `label_alpha`, `fill_alpha`, `label`, `label_geom`, and set validations before Suggests dependency check in `plot_venn()`
+* Added `skip_if_not_installed()` to `plot_venn()`, `plot_forest()`, `read_excel_flex()`, and `quick_cor()` tests requiring Suggests packages
 
 ## Test environments
 
@@ -26,8 +25,8 @@ This is a patch release from 0.4.1 to 0.4.2, addressing CRAN-flagged noSuggests 
 ## R CMD check results
 
 ```
-── R CMD check results ──────────────────────────────────────────────────────────────────────── evanverse 0.4.2 ────
-Duration: 3m 9.4s
+── R CMD check results ──────────────────────────────────────────────────────────────────────── evanverse 0.4.3 ────
+Duration: 3m 22.9s
 
 0 errors ✔ | 0 warnings ✔ | 0 notes ✔
 ```
