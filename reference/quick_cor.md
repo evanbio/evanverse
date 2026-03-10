@@ -466,5 +466,5 @@ if (requireNamespace("ggcorrplot", quietly = TRUE)) {
 #>   mpg qsec   0.4186840 1.708199e-02
 #>  disp carb   0.3949769 2.526789e-02
 #> 
-#> Analysis performed: 2026-03-10 09:40:18
+#> Analysis performed: 2026-03-10 09:46:08
 ```
