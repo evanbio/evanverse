@@ -364,7 +364,7 @@ See [LICENSE.md](LICENSE.md) for details.
 
 ## 📊 Project Status
 
-- ✅ **CRAN Published** - Version 0.4.1
+- ✅ **CRAN Published** - Version 0.4.2
 - ✅ **Stable Lifecycle** - Production ready
 - ✅ **Full Test Coverage** - Comprehensive test suite
 - ✅ **Active Maintenance** - Regular updates

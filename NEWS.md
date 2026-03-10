@@ -1,3 +1,19 @@
+# evanverse 0.4.2
+
+*Released: March 2026*
+
+**Patch Release** - CRAN noSuggests compliance fixes.
+
+---
+
+### Bug Fixes
+
+* Wrapped `plot_venn()` examples with `requireNamespace()` guard for `ggvenn`/`ggVennDiagram` — prevents example failures under `_R_CHECK_DEPENDS_ONLY_=true`
+* Moved `match.arg(species)` before `biomaRt` availability check in `download_gene_ref()` — ensures species parameter validation tests run without Suggests packages
+* Added `skip_if_not_installed("GSEABase")` to `gmt2df()` and `gmt2list()` tests that require `GSEABase` — prevents test failures in noSuggests environment
+
+---
+
 # evanverse 0.4.1
 
 *Released: March 2026*
