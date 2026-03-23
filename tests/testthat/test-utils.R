@@ -2,7 +2,8 @@
 # Test: utils.R internal helpers
 # File: test-utils.R
 # Description: Unit tests for .assert_scalar_string(), .assert_dir_path(),
-#              .assert_flag(), .assert_count()
+#              .assert_flag(), .assert_character_vector(), .assert_file_exists(),
+#              .assert_count()
 #              (accessed via evanverse:::)
 #===============================================================================
 
@@ -109,6 +110,88 @@ test_that(".assert_flag() errors on logical vector of length != 1", {
 })
 
 #==============================================================================
+# .assert_character_vector()
+#==============================================================================
+
+test_that(".assert_character_vector() accepts a non-empty character vector", {
+  expect_no_error(evanverse:::.assert_character_vector("hello"))
+  expect_no_error(evanverse:::.assert_character_vector(c("a", "b", "c")))
+  expect_no_error(evanverse:::.assert_character_vector(letters))
+})
+
+test_that(".assert_character_vector() returns input invisibly on success", {
+  result <- evanverse:::.assert_character_vector(c("x", "y"))
+  expect_equal(result, c("x", "y"))
+})
+
+test_that(".assert_character_vector() errors on non-character input", {
+  expect_error(evanverse:::.assert_character_vector(123),    "non-empty character vector")
+  expect_error(evanverse:::.assert_character_vector(TRUE),   "non-empty character vector")
+  expect_error(evanverse:::.assert_character_vector(NULL),   "non-empty character vector")
+  expect_error(evanverse:::.assert_character_vector(list()), "non-empty character vector")
+})
+
+test_that(".assert_character_vector() errors on empty character vector", {
+  expect_error(evanverse:::.assert_character_vector(character(0)), "non-empty character vector")
+})
+
+test_that(".assert_character_vector() errors when any element is NA", {
+  expect_error(evanverse:::.assert_character_vector(NA_character_),     "non-empty character vector")
+  expect_error(evanverse:::.assert_character_vector(c("a", NA)),        "non-empty character vector")
+  expect_error(evanverse:::.assert_character_vector(c(NA_character_)),  "non-empty character vector")
+})
+
+#==============================================================================
+# .assert_file_exists()
+#==============================================================================
+
+test_that(".assert_file_exists() accepts a path to an existing file", {
+  tmp <- tempfile()
+  writeLines("test", tmp)
+  on.exit(unlink(tmp), add = TRUE)
+
+  expect_no_error(evanverse:::.assert_file_exists(tmp))
+})
+
+test_that(".assert_file_exists() returns input invisibly on success", {
+  tmp <- tempfile()
+  writeLines("test", tmp)
+  on.exit(unlink(tmp), add = TRUE)
+
+  result <- evanverse:::.assert_file_exists(tmp)
+  expect_equal(result, tmp)
+})
+
+test_that(".assert_file_exists() errors when file does not exist", {
+  expect_error(
+    evanverse:::.assert_file_exists("/nonexistent/path/file.txt"),
+    "File not found"
+  )
+})
+
+test_that(".assert_file_exists() errors on non-character input", {
+  expect_error(evanverse:::.assert_file_exists(123),  "single non-empty string")
+  expect_error(evanverse:::.assert_file_exists(NULL), "single non-empty string")
+  expect_error(evanverse:::.assert_file_exists(TRUE), "single non-empty string")
+})
+
+test_that(".assert_file_exists() errors on empty string", {
+  expect_error(evanverse:::.assert_file_exists(""), "single non-empty string")
+})
+
+test_that(".assert_file_exists() errors on NA", {
+  expect_error(evanverse:::.assert_file_exists(NA_character_), "single non-empty string")
+})
+
+test_that(".assert_file_exists() errors on length > 1", {
+  tmp <- tempfile()
+  writeLines("test", tmp)
+  on.exit(unlink(tmp), add = TRUE)
+
+  expect_error(evanverse:::.assert_file_exists(c(tmp, tmp)), "single non-empty string")
+})
+
+#==============================================================================
 # .assert_count()
 #==============================================================================
 
@@ -171,7 +254,19 @@ test_that(".assert_count() errors on vector of length > 1", {
 
 test_that("public functions propagate .assert_scalar_string errors correctly", {
   expect_error(get_palette(123),          "single non-empty string")
+  expect_error(pkg_functions(""),         "single non-empty string")
+})
+
+test_that("public functions propagate .assert_character_vector errors correctly", {
   expect_error(hex2rgb(character(0)),     "non-empty character vector")
+  expect_error(check_pkg(NULL, source = "CRAN"), "non-empty character vector")
+})
+
+test_that("public functions propagate .assert_file_exists errors correctly", {
+  expect_error(
+    inst_pkg(source = "Local", path = "/nonexistent/file.tar.gz"),
+    "File not found"
+  )
 })
 
 test_that("public functions propagate .assert_count errors correctly", {
