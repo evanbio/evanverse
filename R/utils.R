@@ -54,6 +54,41 @@
 }
 
 
+#' Assert that an argument is a non-empty character vector without NA values
+#'
+#' @param x The argument to check.
+#' @param arg Name of the argument (for error messages).
+#' @return Invisibly returns \code{x}.
+#'
+#' @keywords internal
+#' @noRd
+.assert_character_vector <- function(x, arg = deparse(substitute(x))) {
+  if (!is.character(x) || length(x) == 0L || any(is.na(x))) {
+    cli::cli_abort("{.arg {arg}} must be a non-empty character vector without NA values.", call = NULL)
+  }
+  invisible(x)
+}
+
+
+#' Assert that a file path exists on disk
+#'
+#' @param x The argument to check.
+#' @param arg Name of the argument (for error messages).
+#' @return Invisibly returns \code{x}.
+#'
+#' @keywords internal
+#' @noRd
+.assert_file_exists <- function(x, arg = deparse(substitute(x))) {
+  if (!is.character(x) || length(x) != 1L || is.na(x) || !nzchar(x)) {
+    cli::cli_abort("{.arg {arg}} must be a single non-empty string.", call = NULL)
+  }
+  if (!file.exists(x)) {
+    cli::cli_abort("File not found: {.path {x}}", call = NULL)
+  }
+  invisible(x)
+}
+
+
 #' Assert that an argument is a single positive integer (count parameter)
 #'
 #' @param x The argument to check.
