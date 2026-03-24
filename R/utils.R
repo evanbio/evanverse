@@ -106,3 +106,21 @@
   }
   invisible(as.integer(x))
 }
+
+
+#' Assert that an argument is a single integer >= min
+#'
+#' @param x The argument to check.
+#' @param min Minimum allowed value. Default 1L (same as .assert_count). Use 0L for non-negative integers.
+#' @param arg Name of the argument (for error messages).
+#' @return Invisibly returns \code{as.integer(x)}.
+#'
+#' @keywords internal
+#' @noRd
+.assert_count_min <- function(x, min = 1L, arg = deparse(substitute(x))) {
+  if (!is.numeric(x) || length(x) != 1L || is.na(x) ||
+      !is.finite(x) || x < min || x != floor(x)) {
+    cli::cli_abort("{.arg {arg}} must be a single integer >= {min}.", call = NULL)
+  }
+  invisible(as.integer(x))
+}
