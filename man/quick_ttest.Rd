@@ -2,7 +2,7 @@
 % Please edit documentation in R/quick_ttest.R
 \name{quick_ttest}
 \alias{quick_ttest}
-\title{Quick t-test with Automatic Visualization}
+\title{Two-group comparison with automatic method selection}
 \usage{
 quick_ttest(
   data,
@@ -10,7 +10,7 @@ quick_ttest(
   value,
   method = c("auto", "t.test", "wilcox.test"),
   paired = FALSE,
-  id,
+  id = NULL,
   alternative = c("two.sided", "less", "greater"),
   var.equal = NULL,
   conf.level = 0.95,
@@ -26,171 +26,73 @@ quick_ttest(
 )
 }
 \arguments{
-\item{data}{A data frame containing the variables.}
+\item{data}{A data frame.}
 
-\item{group}{Column name for the grouping variable (must have exactly 2 levels).
-Supports both quoted and unquoted names via NSE.}
+\item{group}{Column name for the grouping variable (exactly 2 levels). Supports NSE.}
 
-\item{value}{Column name for the numeric values to compare.
-Supports both quoted and unquoted names via NSE.}
+\item{value}{Column name for the numeric values. Supports NSE.}
 
-\item{method}{Character. Test method: "auto" (default), "t.test", or "wilcox.test".
-When "auto", the function intelligently selects based on normality and sample size.}
+\item{method}{One of \code{"auto"} (default), \code{"t.test"}, \code{"wilcox.test"}.}
 
-\item{paired}{Logical. Whether to perform a paired test. Default is \code{FALSE}.
-If \code{TRUE}, the \code{id} parameter must be specified to match pairs.}
+\item{paired}{Logical. Paired test? Default \code{FALSE}. Requires \code{id} when \code{TRUE}.}
 
-\item{id}{Column name for the pairing ID variable (required when \code{paired = TRUE}).
-Each unique ID should appear exactly once in each group. Supports both quoted
-and unquoted names via NSE.}
+\item{id}{Column name for pairing ID (required when \code{paired = TRUE}). Supports NSE.}
 
-\item{alternative}{Character. Alternative hypothesis: "two.sided" (default),
-"less", or "greater".}
+\item{alternative}{One of \code{"two.sided"} (default), \code{"less"}, \code{"greater"}.}
 
-\item{var.equal}{Logical or \code{NULL}. Assume equal variances?
-If \code{NULL} (default), automatically tested using Levene's test (ignored for paired tests).}
+\item{var.equal}{Logical or \code{NULL}. If \code{NULL}, auto-tested via Levene's test.}
 
-\item{conf.level}{Numeric. Confidence level for the interval. Default is 0.95.}
+\item{conf.level}{Numeric. Confidence level. Default \code{0.95}.}
 
-\item{plot_type}{Character. Type of plot: "boxplot" (default), "violin", or "both".}
+\item{plot_type}{One of \code{"boxplot"} (default), \code{"violin"}, \code{"both"}.}
 
-\item{add_jitter}{Logical. Add jittered points to the plot? Default is \code{TRUE}.}
+\item{add_jitter}{Logical. Add jittered points? Default \code{TRUE}.}
 
-\item{point_size}{Numeric. Size of the points. Default is 2.}
+\item{point_size}{Numeric. Point size. Default \code{2}.}
 
-\item{point_alpha}{Numeric. Transparency of points (0-1). Default is 0.6.}
+\item{point_alpha}{Numeric. Point transparency (0–1). Default \code{0.6}.}
 
-\item{show_p_value}{Logical. Display p-value on the plot? Default is \code{TRUE}.}
+\item{show_p_value}{Logical. Show p-value on plot? Default \code{TRUE}.}
 
-\item{p_label}{Character. P-value label format: "p.signif" (stars, default) or
-"p.format" (numeric p-value).}
+\item{p_label}{One of \code{"p.signif"} (stars, default) or \code{"p.format"} (numeric).}
 
-\item{palette}{Character. Color palette name from evanverse palettes.
-Default is "qual_vivid". Set to \code{NULL} to use ggplot2 defaults.}
+\item{palette}{Palette name from evanverse. Default \code{"qual_vivid"}. \code{NULL} for ggplot2 defaults.}
 
-\item{verbose}{Logical. Print diagnostic messages? Default is \code{TRUE}.}
+\item{verbose}{Logical. Print progress messages? Default \code{TRUE}.}
 
-\item{...}{Additional arguments (currently unused, reserved for future extensions).}
+\item{...}{Reserved for future use.}
 }
 \value{
-An object of class \code{quick_ttest_result} containing:
-\describe{
-\item{plot}{A ggplot object with the comparison visualization}
-\item{test_result}{The htest object from \code{t.test()} or \code{wilcox.test()}}
-\item{method_used}{Character string of the test method used}
-\item{normality_tests}{List of Shapiro-Wilk test results for each group}
-\item{variance_test}{Levene's test result (if applicable)}
-\item{descriptive_stats}{Data frame with descriptive statistics by group}
-\item{auto_decision}{Details about automatic method selection}
-\item{timestamp}{POSIXct timestamp of analysis}
+A \code{quick_ttest_result} object with:
+\itemize{
+\item \code{plot}: ggplot object
+\item \code{test_result}: htest object
+\item \code{method_used}, \code{descriptive_stats}, \code{normality_tests}, \code{variance_test}, \code{parameters}, \code{timestamp}
 }
 }
 \description{
-Perform t-test or Wilcoxon test (automatically selected based on data
-characteristics and sample size) with publication-ready visualization.
-Designed for comparing \strong{two groups only}.
+Performs a t-test or Wilcoxon test (auto-selected by normality and sample size)
+with a publication-ready plot. Requires exactly 2 groups.
 }
 \details{
-\strong{"Quick" means easy to use, not simplified or inaccurate.}
-
-This function performs full statistical testing with proper assumption checking:
-
-\subsection{Automatic Method Selection (method = "auto")}{
-The function uses an intelligent algorithm that considers both normality
-and sample size:
-
+Method selection when \code{method = "auto"}:
 \itemize{
-\item \strong{Large samples (n >= 100 per group)}: Prefers t-test due to
-Central Limit Theorem, even if Shapiro-Wilk rejects normality (which
-becomes overly sensitive in large samples).
-\item \strong{Medium samples (30 <= n < 100)}: Uses Shapiro-Wilk test with
-a stricter threshold (p < 0.01) to avoid false positives.
-\item \strong{Small samples (n < 30)}: Strictly checks normality with
-standard threshold (p < 0.05).
+\item n >= 100: t-test (CLT applies; Shapiro-Wilk is unreliable at large n)
+\item 30 <= n < 100: Shapiro-Wilk at p < 0.01 threshold
+\item n < 30: Shapiro-Wilk at p < 0.05 threshold
 }
 
-This approach avoids the common pitfall of automatically switching to
-non-parametric tests for large samples where t-test is actually more appropriate.
+When \code{var.equal = NULL}, Levene's test determines Student's vs Welch's t-test.
 }
-
-\subsection{Variance Equality Check}{
-When \code{var.equal = NULL} and t-test is selected, Levene's test is
-performed. If variances are unequal (p < 0.05), Welch's t-test is used
-automatically.
-}
-
-\subsection{Visualization}{
-The plot includes:
-\itemize{
-\item Boxplot, violin plot, or both (based on \code{plot_type})
-\item Individual data points (if \code{add_jitter = TRUE})
-\item Statistical comparison with p-value
-\item Publication-ready styling
-}
-}
-}
-\section{Important Notes}{
-
-
-\itemize{
-\item \strong{Two groups only}: This function requires exactly 2 levels in
-the grouping variable.
-\item \strong{Sample size warnings}: The function will warn if sample sizes
-are very small (< 5) or highly unbalanced (ratio > 3:1).
-\item \strong{Missing values}: Automatically removed with a warning.
-}
-}
-
 \examples{
-# Example 1: Basic usage with automatic method selection
-set.seed(123)
-data <- data.frame(
-  group = rep(c("Control", "Treatment"), each = 30),
-  expression = c(rnorm(30, mean = 5), rnorm(30, mean = 6))
+set.seed(42)
+df <- data.frame(
+  group = rep(c("A", "B"), each = 30),
+  value = c(rnorm(30, 5), rnorm(30, 6))
 )
-
-result <- quick_ttest(data, group = group, value = expression)
-print(result)
-
-# Example 2: Paired samples (e.g., before/after)
-paired_data <- data.frame(
-  patient = rep(1:20, 2),
-  timepoint = rep(c("Before", "After"), each = 20),
-  score = c(rnorm(20, 50, 10), rnorm(20, 55, 10))
-)
-
-result <- quick_ttest(paired_data,
-                      group = timepoint,
-                      value = score,
-                      paired = TRUE,
-                      id = patient)
-
-# Example 3: Non-normal data with manual method selection
-skewed_data <- data.frame(
-  group = rep(c("A", "B"), each = 25),
-  value = c(rexp(25, rate = 0.5), rexp(25, rate = 1))
-)
-
-result <- quick_ttest(skewed_data,
-                      group = group,
-                      value = value,
-                      method = "wilcox.test",
-                      verbose = TRUE)
-
-# Example 4: Customize visualization
-result <- quick_ttest(data,
-                      group = group,
-                      value = expression,
-                      plot_type = "both",
-                      palette = "qual_balanced",
-                      p_label = "p.format")
-
-# Access components
-result$plot              # ggplot object
-result$test_result       # htest object
-summary(result)          # Detailed summary
-
+result <- quick_ttest(df, group = group, value = value)
+summary(result)
 }
 \seealso{
-\code{\link[stats]{t.test}}, \code{\link[stats]{wilcox.test}}
+\code{\link[stats:t.test]{stats::t.test()}}, \code{\link[stats:wilcox.test]{stats::wilcox.test()}}
 }
