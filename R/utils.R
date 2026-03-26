@@ -89,6 +89,25 @@
 }
 
 
+#' Assert that a directory exists on disk
+#'
+#' @param x The argument to check.
+#' @param arg Name of the argument (for error messages).
+#' @return Invisibly returns \code{x}.
+#'
+#' @keywords internal
+#' @noRd
+.assert_dir_exists <- function(x, arg = deparse(substitute(x))) {
+  if (!is.character(x) || length(x) != 1L || is.na(x) || !nzchar(x)) {
+    cli::cli_abort("{.arg {arg}} must be a single non-empty string.", call = NULL)
+  }
+  if (!dir.exists(x)) {
+    cli::cli_abort("Directory not found: {.path {x}}", call = NULL)
+  }
+  invisible(x)
+}
+
+
 #' Assert that an argument is a single positive integer (count parameter)
 #'
 #' @param x The argument to check.
@@ -123,4 +142,148 @@
     cli::cli_abort("{.arg {arg}} must be a single integer >= {min}.", call = NULL)
   }
   invisible(as.integer(x))
+}
+
+
+#' Assert that an argument is a data.frame
+#'
+#' @param x The argument to check.
+#' @param arg Name of the argument (for error messages).
+#' @return Invisibly returns \code{x}.
+#'
+#' @keywords internal
+#' @noRd
+.assert_data_frame <- function(x, arg = deparse(substitute(x))) {
+  if (!is.data.frame(x)) {
+    cli::cli_abort("{.arg {arg}} must be a data.frame.", call = NULL)
+  }
+  invisible(x)
+}
+
+
+#' Assert that the parent directory of a destination path exists or can be created
+#'
+#' @param x A file path string.
+#' @param arg Name of the argument (for error messages).
+#' @return Invisibly returns \code{x}.
+#'
+#' @keywords internal
+#' @noRd
+.assert_dest_path <- function(x, arg = deparse(substitute(x))) {
+  parent <- dirname(x)
+  if (!dir.exists(parent)) {
+    ok <- dir.create(parent, recursive = TRUE, showWarnings = FALSE)
+    if (!ok) {
+      cli::cli_abort(
+        "Cannot create directory for {.arg {arg}}: {.path {parent}}",
+        call = NULL
+      )
+    }
+    cli::cli_alert_info("Created directory: {.path {parent}}")
+  }
+  invisible(x)
+}
+
+
+.assert_data_frame <- function(x, arg = deparse(substitute(x))) {
+  if (!is.data.frame(x)) {
+    cli::cli_abort("{.arg {arg}} must be a data.frame.", call = NULL)
+  }
+  invisible(x)
+}
+
+
+#' Assert that required columns are present in a data.frame
+#'
+#' Reports all missing columns in a single error rather than stopping at the
+#' first, so the user can fix everything in one pass.
+#'
+#' @param data The data.frame to check.
+#' @param cols Character vector of required column names.
+#' @param arg Name of the argument (for error messages).
+#' @return Invisibly returns \code{data}.
+#'
+#' @keywords internal
+#' @noRd
+.assert_has_cols <- function(data, cols, arg = deparse(substitute(data))) {
+  missing <- setdiff(cols, names(data))
+  if (length(missing) > 0L) {
+    cli::cli_abort(
+      "{.arg {arg}} is missing column{?s}: {.val {missing}}.",
+      call = NULL
+    )
+  }
+  invisible(data)
+}
+
+
+#' Assert that a vector has no duplicate values
+#'
+#' @param x The argument to check.
+#' @param arg Name of the argument (for error messages).
+#' @return Invisibly returns \code{x}.
+#'
+#' @keywords internal
+#' @noRd
+.assert_no_dupes <- function(x, arg = deparse(substitute(x))) {
+  dupes <- unique(x[duplicated(x)])
+  if (length(dupes) > 0L) {
+    cli::cli_abort(
+      "{.arg {arg}} must not contain duplicate value{?s}: {.val {dupes}}.",
+      call = NULL
+    )
+  }
+  invisible(x)
+}
+
+
+#' Assert that a character vector contains no NA or empty string values
+#'
+#' @param x The argument to check.
+#' @param arg Name of the argument (for error messages).
+#' @return Invisibly returns \code{x}.
+#'
+#' @keywords internal
+#' @noRd
+.assert_no_blank <- function(x, arg = deparse(substitute(x))) {
+  if (anyNA(x) || any(!nzchar(x))) {
+    cli::cli_abort(
+      "{.arg {arg}} must not contain NA or empty string values.",
+      call = NULL
+    )
+  }
+  invisible(x)
+}
+
+
+#' Assert that an argument is a named vector with no NA or empty names
+#'
+#' @param x The argument to check.
+#' @param arg Name of the argument (for error messages).
+#' @return Invisibly returns \code{x}.
+#'
+#' @keywords internal
+#' @noRd
+.assert_named_vector <- function(x, arg = deparse(substitute(x))) {
+  if (!is.vector(x) || is.list(x)) {
+    cli::cli_abort("{.arg {arg}} must be a vector.", call = NULL)
+  }
+  nms <- names(x)
+  if (is.null(nms) || anyNA(nms) || any(!nzchar(nms))) {
+    cli::cli_abort("{.arg {arg}} must be a named vector with non-empty names.", call = NULL)
+  }
+  .assert_no_dupes(nms)
+  invisible(x)
+}
+
+
+.assert_no_dupes <- function(x, arg = deparse(substitute(x))) {
+  dupes <- unique(x[duplicated(x)])
+  if (length(dupes) > 0L) {
+    cli::cli_abort(
+      "{.arg {arg}} must not contain duplicate value{?s}: {.val {dupes}}.",
+      call = NULL
+    )
+  }
+  invisible(x)
 }

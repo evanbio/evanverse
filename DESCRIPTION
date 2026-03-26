@@ -49,13 +49,12 @@ Imports:
     tools,
     stats,
     grDevices,
-    pwr
+    pwr,
+    biomaRt
 Suggests:
     BiocManager,
     GSEABase,
-    Biobase,
     GEOquery,
-    biomaRt,
     car,
     ggcorrplot,
     knitr,
@@ -70,7 +69,6 @@ Suggests:
     janitor,
     RColorBrewer,
     devtools,
-    digest,
     forestploter,
     purrr,
     reactable
