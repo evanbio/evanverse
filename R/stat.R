@@ -1,5 +1,5 @@
 # =============================================================================
-# biostat.R — Combinatorics and statistical utilities
+# stat.R — Combinatorics and statistical utilities
 # =============================================================================
 
 #' Number of permutations P(n, k)

@@ -1,5 +1,5 @@
 # =============================================================================
-# bioops.R — Custom infix operators
+# ops.R — Custom infix operators
 # =============================================================================
 
 #' Paste two strings with a single space

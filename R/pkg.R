@@ -1,5 +1,5 @@
 # =============================================================================
-# biopackage.R — Package management functions
+# pkg.R — Package management functions
 # =============================================================================
 
 #' Set CRAN/Bioconductor Mirrors

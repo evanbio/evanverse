@@ -1,5 +1,5 @@
 # =============================================================================
-# biopalette.R — Color palette management functions
+# palette.R — Color palette management functions
 # =============================================================================
 
 #' Get a Color Palette
