@@ -110,3 +110,198 @@ plot_bar <- function(data,
 
   p
 }
+
+
+#' Density plot with optional grouping and faceting
+#'
+#' Create a univariate density plot with optional fill grouping and faceting.
+#' Density curves have a fixed black border; fill is controlled by `group_col`.
+#'
+#' @param data A data.frame.
+#' @param x_col Character. Column name of the numeric variable to plot.
+#' @param group_col Character or `NULL`. Column name for fill grouping. Default: `NULL`.
+#' @param facet_col Character or `NULL`. Column name for faceting. Default: `NULL`.
+#' @param alpha Numeric. Fill transparency (0-1). Default: 0.7.
+#' @param adjust Numeric. Bandwidth adjustment multiplier. Default: 1.
+#' @param palette Character vector or `NULL`. Fill colors recycled to match the
+#'   number of groups. If `NULL`, uses ggplot2 default colors. Default: `NULL`.
+#'
+#' @return A `ggplot` object.
+#' @importFrom stats as.formula
+#' @export
+#'
+#' @examples
+#' plot_density(iris, x_col = "Sepal.Length", group_col = "Species")
+plot_density <- function(data,
+                         x_col,
+                         group_col = NULL,
+                         facet_col = NULL,
+                         alpha     = 0.7,
+                         adjust    = 1,
+                         palette   = NULL) {
+  # validation
+  .assert_data_frame(data)
+  .assert_scalar_string(x_col)
+  .assert_has_cols(data, x_col)
+
+  .assert_numeric_vector(data[[x_col]])
+  .assert_proportion(alpha)
+  .assert_positive_numeric(adjust)
+
+  # group_col
+  if (!is.null(group_col)) {
+    .assert_scalar_string(group_col)
+    .assert_has_cols(data, group_col)
+  }
+
+  # facet_col
+  if (!is.null(facet_col)) {
+    .assert_scalar_string(facet_col)
+    .assert_has_cols(data, facet_col)
+  }
+
+  # palette
+  if (!is.null(palette)) {
+    .assert_character_vector(palette)
+  }
+
+  # plot
+  aes_main <- if (!is.null(group_col)) {
+    ggplot2::aes(x = .data[[x_col]], fill = .data[[group_col]])
+  } else {
+    ggplot2::aes(x = .data[[x_col]])
+  }
+
+  p <- ggplot2::ggplot(data, aes_main) +
+    ggplot2::geom_density(alpha = alpha, adjust = adjust,
+                          linewidth = 0.6, color = "black") +
+    ggpubr::theme_pubr()
+
+  # manual palette
+  if (!is.null(group_col) && !is.null(palette)) {
+    group_levels <- if (is.factor(data[[group_col]])) {
+      levels(data[[group_col]])
+    } else {
+      unique(as.character(data[[group_col]]))
+    }
+    palette_use  <- rep(palette, length.out = length(group_levels))
+    names(palette_use) <- group_levels
+    p <- p + ggplot2::scale_fill_manual(values = palette_use)
+  }
+
+  # faceting
+  if (!is.null(facet_col)) {
+    p <- p + ggplot2::facet_wrap(stats::as.formula(paste("~", facet_col)))
+  }
+
+  p
+}
+
+
+#' Pie chart from a vector or grouped data frame
+#'
+#' Accepts either a character/factor vector (frequency counted automatically)
+#' or a data frame with pre-computed counts. Slices with zero count are dropped.
+#' At least two groups are required.
+#'
+#' @param data A character/factor vector, or a data.frame.
+#' @param group_col Character. Column name for group labels (data.frame only).
+#' @param count_col Character. Column name for counts (data.frame only).
+#'   Values must be non-negative.
+#' @param label Label type: `"none"`, `"count"`, `"percent"`, or `"both"`.
+#'   Default: `"none"`.
+#' @param palette Character vector or `NULL`. Slice fill colors recycled to
+#'   match the number of groups. If `NULL`, uses ggplot2 default colors.
+#'   Default: `NULL`.
+#'
+#' @return A `ggplot` object.
+#' @export
+#'
+#' @examples
+#' # From a vector
+#' plot_pie(c("A", "A", "B", "C", "C", "C"))
+#'
+#' # From a data frame
+#' df <- data.frame(group = c("X", "Y", "Z"), count = c(10, 25, 15))
+#' plot_pie(df, group_col = "group", count_col = "count", label = "percent")
+plot_pie <- function(data,
+                     group_col = NULL,
+                     count_col = NULL,
+                     label     = c("none", "count", "percent", "both"),
+                     palette   = NULL) {
+  # validation
+  label <- match.arg(label)
+
+  if (!is.null(palette)) .assert_character_vector(palette)
+
+  # prepare data
+  if (is.data.frame(data)) {
+    .assert_scalar_string(group_col)
+    .assert_scalar_string(count_col)
+    .assert_has_cols(data, c(group_col, count_col))
+
+    df <- data.frame(
+      group = as.character(data[[group_col]]),
+      count = as.numeric(data[[count_col]]),
+      stringsAsFactors = FALSE
+    )
+
+    .assert_no_blank(df$group)
+    if (anyNA(df$count)) {
+      cli::cli_abort("`{count_col}` must not contain NA values.")
+    }
+    if (any(df$count < 0)) {
+      cli::cli_abort("`{count_col}` must contain non-negative values.")
+    }
+
+  } else if (is.character(data) || is.factor(data)) {
+    tab <- table(data)
+    df  <- data.frame(
+      group = names(tab),
+      count = as.numeric(tab),
+      stringsAsFactors = FALSE
+    )
+
+  } else {
+    cli::cli_abort("`data` must be a vector or a data.frame.")
+  }
+
+  # drop zero-count slices
+  df <- df[df$count > 0, , drop = FALSE]
+
+  if (nrow(df) < 2) {
+    cli::cli_abort("At least two groups with non-zero count are required.")
+  }
+
+  # compute labels
+  total <- sum(df$count)
+  df$percent    <- round(df$count / total * 100, 1)
+  df$label_text <- switch(
+    label,
+    "count"   = as.character(df$count),
+    "percent" = paste0(df$percent, "%"),
+    "both"    = paste0(df$count, " (", df$percent, "%)"),
+    ""
+  )
+
+  # plot
+  p <- ggplot2::ggplot(df, ggplot2::aes(x = "", y = count, fill = group)) +
+    ggplot2::geom_col(width = 1, color = "white") +
+    ggplot2::coord_polar(theta = "y") +
+    ggplot2::theme_void()
+
+  if (label != "none") {
+    p <- p + ggplot2::geom_text(
+      ggplot2::aes(label = label_text),
+      position = ggplot2::position_stack(vjust = 0.5)
+    )
+  }
+
+  if (!is.null(palette)) {
+    palette_use        <- rep(palette, length.out = nrow(df))
+    names(palette_use) <- df$group
+    p <- p + ggplot2::scale_fill_manual(values = palette_use)
+  }
+
+  p
+}

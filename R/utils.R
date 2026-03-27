@@ -287,3 +287,55 @@
   }
   invisible(x)
 }
+
+
+#' Assert that an argument is a numeric scalar strictly between 0 and 1
+#'
+#' @keywords internal
+#' @noRd
+.assert_proportion <- function(x, arg = deparse(substitute(x))) {
+  if (!is.numeric(x) || length(x) != 1L || is.na(x) ||
+      !is.finite(x) || x <= 0 || x >= 1) {
+    cli::cli_abort("{.arg {arg}} must be a single number strictly between 0 and 1.", call = NULL)
+  }
+  invisible(x)
+}
+
+
+#' Assert that an argument is a non-empty numeric vector without NA values
+#'
+#' @keywords internal
+#' @noRd
+.assert_numeric_vector <- function(x, arg = deparse(substitute(x))) {
+  if (!is.numeric(x) || length(x) == 0L || any(is.na(x))) {
+    cli::cli_abort("{.arg {arg}} must be a non-empty numeric vector without NA values.", call = NULL)
+  }
+  invisible(x)
+}
+
+
+#' Assert that an argument is a single finite numeric value >= min
+#'
+#' @param min Numeric. Minimum allowed value (inclusive). Default: 0.
+#' @keywords internal
+#' @noRd
+.assert_numeric_min <- function(x, min = 0, arg = deparse(substitute(x))) {
+  if (!is.numeric(x) || length(x) != 1L || is.na(x) ||
+      !is.finite(x) || x < min) {
+    cli::cli_abort("{.arg {arg}} must be a single finite numeric value >= {min}.", call = NULL)
+  }
+  invisible(x)
+}
+
+
+#' Assert that an argument is a single finite numeric value strictly > 0
+#'
+#' @keywords internal
+#' @noRd
+.assert_positive_numeric <- function(x, arg = deparse(substitute(x))) {
+  if (!is.numeric(x) || length(x) != 1L || is.na(x) ||
+      !is.finite(x) || x <= 0) {
+    cli::cli_abort("{.arg {arg}} must be a single positive numeric value.", call = NULL)
+  }
+  invisible(x)
+}
