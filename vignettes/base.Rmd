@@ -1,0 +1,346 @@
+---
+title: "Base Utilities"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Base Utilities}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment  = "#>",
+  eval     = FALSE
+)
+```
+
+## Overview
+
+The base module provides eleven utility functions covering four areas:
+
+| Area | Functions |
+|---|---|
+| Data frame utilities | `df2list()`, `df2vect()`, `recode_column()`, `view()` |
+| File system utilities | `file_ls()`, `file_info()`, `file_tree()` |
+| Gene ID conversion | `gene2entrez()`, `gene2ensembl()` |
+| GMT file parsing | `gmt2df()`, `gmt2list()` |
+
+```{r load}
+library(evanverse)
+```
+
+---
+
+## 1 Data Frame Utilities
+
+### `df2list()` — Split a data frame into a named list
+
+Groups one column's values by another column and returns a named list. Useful
+for building marker lists, gene set inputs, or any grouping operation that
+downstream functions expect as a list.
+
+```{r df2list}
+df <- data.frame(
+  cell_type = c("T_cell", "T_cell", "B_cell", "B_cell", "B_cell"),
+  marker    = c("CD3D", "CD3E", "CD79A", "MS4A1", "CD19"),
+  stringsAsFactors = FALSE
+)
+
+df2list(df, group_col = "cell_type", value_col = "marker")
+#> $T_cell
+#> [1] "CD3D" "CD3E"
+#>
+#> $B_cell
+#> [1] "CD79A" "MS4A1" "CD19"
+```
+
+---
+
+### `df2vect()` — Extract a named vector from a data frame
+
+Extracts two columns and returns a named vector, using one column as names and
+the other as values. The original value type is preserved.
+
+```{r df2vect}
+df <- data.frame(
+  gene  = c("TP53", "BRCA1", "MYC"),
+  score = c(0.91, 0.74, 0.55),
+  stringsAsFactors = FALSE
+)
+
+df2vect(df, name_col = "gene", value_col = "score")
+#>  TP53 BRCA1   MYC
+#>  0.91  0.74  0.55
+```
+
+The name column must not contain `NA`, empty strings, or duplicates — all three
+are caught at input and raise an informative error.
+
+```{r df2vect-error}
+bad <- data.frame(id = c("a", "a"), val = 1:2)
+df2vect(bad, "id", "val")
+#> Error in `df2vect()`:
+#> ! `name_col` contains duplicate values.
+```
+
+---
+
+### `recode_column()` — Map column values via a named vector
+
+Replaces values in a column using a named vector (`dict`). Unmatched values
+receive `default` (NA by default). Set `name` to write to a new column instead
+of overwriting the source.
+
+```{r recode-column}
+df <- data.frame(
+  gene = c("TP53", "BRCA1", "EGFR", "XYZ"),
+  stringsAsFactors = FALSE
+)
+
+dict <- c("TP53" = "Tumour suppressor", "EGFR" = "Oncogene")
+
+# Overwrite in place
+recode_column(df, column = "gene", dict = dict)
+#>                gene
+#> 1 Tumour suppressor
+#> 2              <NA>
+#> 3          Oncogene
+#> 4              <NA>
+
+# Write to a new column, keep original; use a custom fallback
+recode_column(df, column = "gene", dict = dict,
+              name = "role", default = "Unknown")
+#>    gene              role
+#> 1  TP53 Tumour suppressor
+#> 2 BRCA1           Unknown
+#> 3  EGFR          Oncogene
+#> 4   XYZ           Unknown
+```
+
+---
+
+### `view()` — Interactive table viewer
+
+Returns an interactive `reactable` widget with search, filtering, sorting, and
+pagination. In RStudio the widget renders in the Viewer pane; in other
+environments it renders in the default HTML output.
+
+```{r view}
+view(iris, n = 10)
+```
+
+`view()` requires the `reactable` package. If it is not installed, the function
+raises a clear error rather than falling back silently.
+
+---
+
+## 2 File System Utilities
+
+### `file_ls()` — List files with metadata
+
+Returns a data frame of file metadata for all files in a directory. Columns:
+`file`, `size_MB`, `modified_time`, `path`.
+
+```{r file-ls}
+# All files in the current directory
+file_ls(".")
+#>              file size_MB       modified_time                          path
+#> 1  DESCRIPTION   0.002  2026-03-20 14:22:01  F:/project/evanverse/DESCRIPTION
+#> 2    NAMESPACE   0.002  2026-03-20 14:22:01  F:/project/evanverse/NAMESPACE
+#> ...
+
+# R source files only, searched recursively
+file_ls("R", recursive = TRUE, pattern = "\\.R$")
+```
+
+---
+
+### `file_info()` — Metadata for specific files
+
+Returns the same four-column data frame as `file_ls()` but for an explicit
+vector of file paths rather than a directory scan.
+
+```{r file-info}
+file_info(c("DESCRIPTION", "NAMESPACE"))
+#>          file size_MB       modified_time                          path
+#> 1 DESCRIPTION   0.002  2026-03-20 14:22:01  F:/project/evanverse/DESCRIPTION
+#> 2   NAMESPACE   0.002  2026-03-20 14:22:01  F:/project/evanverse/NAMESPACE
+```
+
+Duplicate paths in the input are silently deduplicated. Missing files raise an
+error listing all unresolved paths.
+
+---
+
+### `file_tree()` — Print a directory tree
+
+Prints the directory structure in tree format. Returns the lines invisibly so
+output can be captured if needed.
+
+```{r file-tree}
+file_tree(".", max_depth = 2)
+#> F:/project/evanverse
+#> +-- DESCRIPTION
+#> +-- NAMESPACE
+#> +-- R
+#> |   +-- base.R
+#> |   +-- plot.R
+#> |   +-- utils.R
+#> +-- tests
+#>     +-- testthat
+```
+
+---
+
+## 3 Gene ID Conversion
+
+Both `gene2entrez()` and `gene2ensembl()` accept a character vector of gene
+symbols and return a three-column data frame: the original input (`symbol`),
+the case-normalised form used for matching (`symbol_std`), and the converted ID.
+
+### Reference table
+
+Matching is performed against a `ref` data frame with columns `symbol`,
+`entrez_id`, and `ensembl_id`. Two sources are available:
+
+| Source | When to use |
+|---|---|
+| `toy_gene_ref()` | Examples, tests, offline work — 20 genes, no network |
+| `download_gene_ref()` | Production analysis — full genome via biomaRt |
+
+```{r gene-ref}
+# Fast, offline reference for development
+ref <- toy_gene_ref(species = "human")
+
+# Full reference for analysis (requires network + Bioconductor)
+# ref <- download_gene_ref(species = "human")
+```
+
+### Case normalisation
+
+| Species | Rule applied to both input and reference |
+|---|---|
+| `"human"` | `toupper()` — `"tp53"` and `"TP53"` both match `TP53` |
+| `"mouse"` | `tolower()` — `"TRP53"` and `"Trp53"` both match `Trp53` |
+
+Unmatched symbols are returned with `NA` in the ID column rather than dropped.
+
+### `gene2entrez()`
+
+```{r gene2entrez}
+ref <- toy_gene_ref(species = "human")
+
+gene2entrez(c("tp53", "BRCA1", "GHOST"), ref = ref, species = "human")
+#>   symbol symbol_std entrez_id
+#> 1   tp53       TP53      7157
+#> 2  BRCA1      BRCA1       672
+#> 3  GHOST      GHOST      <NA>
+```
+
+### `gene2ensembl()`
+
+```{r gene2ensembl}
+ref_mouse <- toy_gene_ref(species = "mouse")
+
+gene2ensembl(c("Trp53", "TRP53", "FakeGene"), ref = ref_mouse, species = "mouse")
+#>     symbol symbol_std          ensembl_id
+#> 1    Trp53      trp53  ENSMUSG00000059552
+#> 2    TRP53      trp53  ENSMUSG00000059552
+#> 3 FakeGene   fakegene                <NA>
+```
+
+---
+
+## 4 GMT File Parsing
+
+GMT (Gene Matrix Transposed) is the standard format for gene set collections
+such as MSigDB. Each line encodes one gene set: `term`, `description`, and a
+tab-separated list of gene symbols.
+
+`toy_gmt()` writes a minimal GMT file to a temp path for offline use:
+
+```{r toy-gmt}
+tmp <- toy_gmt(n = 3)
+readLines(tmp)
+#> [1] "HALLMARK_P53_PATHWAY\tGenes regulated by p53\tTP53\tBRCA1\tMYC\t..."
+#> [2] "HALLMARK_MTORC1_SIGNALING\tGenes upregulated by mTORC1\tPTEN\t..."
+#> [3] "HALLMARK_HYPOXIA\tGenes upregulated under hypoxia\tMTOR\tHIF1A\t..."
+```
+
+### `gmt2df()` — Long-format data frame
+
+Returns one row per gene, making the output directly compatible with `dplyr`
+and `data.table` workflows.
+
+```{r gmt2df}
+df <- gmt2df(tmp)
+head(df, 4)
+#>                      term               description  gene
+#> 1   HALLMARK_P53_PATHWAY  Genes regulated by p53   TP53
+#> 2   HALLMARK_P53_PATHWAY  Genes regulated by p53  BRCA1
+#> 3   HALLMARK_P53_PATHWAY  Genes regulated by p53    MYC
+#> 4   HALLMARK_P53_PATHWAY  Genes regulated by p53   EGFR
+```
+
+### `gmt2list()` — Named list of gene vectors
+
+Returns a named list where each element is a character vector of gene symbols.
+This is the format expected by most gene set enrichment tools (e.g., `fgsea`,
+`clusterProfiler`).
+
+```{r gmt2list}
+gs <- gmt2list(tmp)
+names(gs)
+#> [1] "HALLMARK_P53_PATHWAY"      "HALLMARK_MTORC1_SIGNALING"
+#> [3] "HALLMARK_HYPOXIA"
+
+gs[["HALLMARK_P53_PATHWAY"]]
+#>  [1] "TP53"   "BRCA1"  "MYC"    "EGFR"   "PTEN"   "CDK2"   "MDM2"
+#>  [8] "RB1"    "CDKN2A" "AKT1"
+```
+
+> Lines with fewer than 3 tab-separated fields are skipped with a warning and
+> removed from the result. If every line is malformed, both functions return
+> `NULL` rather than raising an error — this is the current behaviour.
+> Always check for a `NULL` return when parsing files from untrusted sources.
+
+---
+
+## 5 A Combined Workflow
+
+Gene ID conversion and GMT parsing compose naturally. The example below reads
+a GMT file, converts all gene symbols to Entrez IDs, and produces a named list
+of ID vectors ready for enrichment analysis.
+
+```{r workflow}
+library(evanverse)
+
+# 1. Parse GMT into long format
+tmp <- toy_gmt(n = 5)
+df  <- gmt2df(tmp)
+
+# 2. Convert symbols to Entrez IDs
+ref    <- toy_gene_ref(species = "human")
+id_map <- gene2entrez(df$gene, ref = ref, species = "human")
+
+# 3. Attach IDs and drop unmatched
+df$entrez_id <- id_map$entrez_id
+df <- df[!is.na(df$entrez_id), ]
+
+# 4. Rebuild named list with Entrez IDs
+gs_entrez <- df2list(df, group_col = "term", value_col = "entrez_id")
+gs_entrez[["HALLMARK_P53_PATHWAY"]]
+#> [1] "7157" "672"  "4609" "1956" "5728" "1031" "4193" "5925" "1029"  "207"
+```
+
+---
+
+## Getting Help
+
+- `?df2list`, `?df2vect`, `?recode_column`, `?view`
+- `?file_ls`, `?file_info`, `?file_tree`
+- `?gene2entrez`, `?gene2ensembl`
+- `?gmt2df`, `?gmt2list`
+- `?toy_gene_ref`, `?toy_gmt`, `?download_gene_ref`
+- [GitHub Issues](https://github.com/evanbio/evanverse/issues)
