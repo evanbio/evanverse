@@ -4,14 +4,12 @@
 \alias{download_geo}
 \title{Download a GEO series}
 \usage{
-download_geo(gse_id, dest_dir, overwrite = FALSE, retries = 2, timeout = 300)
+download_geo(gse_id, dest_dir, retries = 2, timeout = 300)
 }
 \arguments{
 \item{gse_id}{Character. GEO Series accession ID (e.g., "GSE12345").}
 
 \item{dest_dir}{Character. Destination directory for downloaded files.}
-
-\item{overwrite}{Logical. Whether to overwrite existing files. Default: FALSE.}
 
 \item{retries}{Integer. Number of retry attempts after the first failure. Default: 2.}
 

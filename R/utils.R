@@ -170,6 +170,8 @@
 #' @keywords internal
 #' @noRd
 .assert_dest_path <- function(x, arg = deparse(substitute(x))) {
+  if (!is.character(x) || length(x) != 1L || is.na(x) || !nzchar(x))
+    cli::cli_abort("{.arg {arg}} must be a single non-empty string.", call = NULL)
   parent <- dirname(x)
   if (!dir.exists(parent)) {
     ok <- dir.create(parent, recursive = TRUE, showWarnings = FALSE)
@@ -273,18 +275,6 @@
     cli::cli_abort("{.arg {arg}} must be a named vector with non-empty names.", call = NULL)
   }
   .assert_no_dupes(nms)
-  invisible(x)
-}
-
-
-.assert_no_dupes <- function(x, arg = deparse(substitute(x))) {
-  dupes <- unique(x[duplicated(x)])
-  if (length(dupes) > 0L) {
-    cli::cli_abort(
-      "{.arg {arg}} must not contain duplicate value{?s}: {.val {dupes}}.",
-      call = NULL
-    )
-  }
   invisible(x)
 }
 

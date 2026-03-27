@@ -1,5 +1,5 @@
 # =============================================================================
-# ops.R — Custom infix operators
+# download.R — Download utilities
 # =============================================================================
 
 #' Download gene annotation reference table from Ensembl
@@ -187,6 +187,9 @@ download_batch <- function(urls,
 
   dest_paths <- file.path(dest_dir, vapply(urls, .safe_filename_from_url, character(1)))
 
+  # Detect filename collisions: different URLs resolving to the same local name
+  .assert_no_dupes(dest_paths, arg = "destination filenames derived from urls")
+
   # Skip existing files if overwrite = FALSE
   skip    <- file.exists(dest_paths) & !overwrite
   to_dl   <- urls[!skip]
@@ -197,31 +200,45 @@ download_batch <- function(urls,
     return(invisible(dest_paths))
   }
 
-  # Download with retry
+  # Download with retry — only re-queue files that failed each round
   download_error <- NULL
 
   for (attempt in seq_len(retries + 1L)) {
-    if (attempt > 1L) {
-      Sys.sleep(min(2^(attempt - 2), 30))
-    }
+    if (attempt > 1L) Sys.sleep(min(2^(attempt - 2), 30))
 
-    result <- tryCatch({
+    res <- tryCatch(
       curl::multi_download(
-        urls     = to_dl,
-        destfile = to_dest,
-        resume   = overwrite && resume,
-        progress = FALSE,
+        urls          = to_dl,
+        destfile      = to_dest,
+        resume        = overwrite && resume,
+        progress      = FALSE,
         multi_timeout = timeout,
-        multiplex = TRUE
-      )
-      "ok"
-    }, error = function(e) e$message)
+        multiplex     = TRUE
+      ),
+      error = function(e) e$message
+    )
 
-    if (identical(result, "ok")) {
-      return(invisible(dest_paths))
+    # Hard failure: multi_download itself threw an error
+    if (is.character(res)) {
+      download_error <- res
+      next
     }
 
-    download_error <- result
+    # Soft failure: curl-level error OR HTTP >= 400
+    # Reason: multi_download returns success=TRUE for HTTP errors (e.g. 404),
+    # so status_code must be checked independently of the success flag.
+    failed <- !is.na(res$error) | (!is.na(res$status_code) & res$status_code >= 400L)
+
+    if (!any(failed)) return(invisible(dest_paths))
+
+    # Narrow retry set to only the files that failed
+    to_dl   <- res$url[failed]
+    to_dest <- res$destfile[failed]
+    download_error <- sprintf(
+      "%d/%d file(s) failed (last attempt %d): %s",
+      sum(failed), length(failed), attempt,
+      paste(to_dl, collapse = ", ")
+    )
   }
 
   cli::cli_abort("Batch download failed: {download_error}", call = NULL)
@@ -235,7 +252,6 @@ download_batch <- function(urls,
 #'
 #' @param gse_id Character. GEO Series accession ID (e.g., "GSE12345").
 #' @param dest_dir Character. Destination directory for downloaded files.
-#' @param overwrite Logical. Whether to overwrite existing files. Default: FALSE.
 #' @param retries Integer. Number of retry attempts after the first failure. Default: 2.
 #' @param timeout Integer. Timeout in seconds per request. Default: 300.
 #'
@@ -255,10 +271,9 @@ download_batch <- function(urls,
 #'
 #' @export
 download_geo <- function(gse_id,
-                               dest_dir,
-                               overwrite = FALSE,
-                               retries   = 2,
-                               timeout   = 300) {
+                         dest_dir,
+                         retries = 2,
+                         timeout = 300) {
 
   # Validation
   .assert_scalar_string(gse_id)
@@ -266,7 +281,6 @@ download_geo <- function(gse_id,
     cli::cli_abort("{.arg gse_id} must be a valid GEO accession (e.g., 'GSE12345').", call = NULL)
   }
   .assert_dir_path(dest_dir)
-  .assert_flag(overwrite)
   .assert_count_min(retries, min = 0L)
   .assert_count(timeout)
 
