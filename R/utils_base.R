@@ -1,5 +1,5 @@
 # =============================================================================
-# utils_base.R — Internal helpers for gene utilities
+# utils_base.R — Internal helpers for base utilities
 # =============================================================================
 
 #' Parse a GMT file into a list of gene sets
@@ -9,7 +9,6 @@
 #'
 #' @param file Character. Path to a \code{.gmt} file.
 #' @return A list of named lists with \code{term}, \code{description}, \code{genes}.
-#'
 #' @keywords internal
 #' @noRd
 .parse_gmt <- function(file) {
@@ -38,13 +37,11 @@
   result[valid]
 }
 
-#' Return biomaRt dataset and symbol attribute for a given species
+
+#' Return an empty file-info data frame with correct column types
 #'
-#' @param species One of \code{"human"} or \code{"mouse"}.
-#' @return A list with \code{dataset} and \code{symbol_attr}.
-#'
-#' @keywords internal
-#' @noRd
+#' @return A zero-row data.frame with columns \code{file}, \code{size_MB},
+#'   \code{modified_time}, \code{path}.
 #' @keywords internal
 #' @noRd
 .empty_file_info <- function() {
@@ -58,6 +55,11 @@
 }
 
 
+#' Extract file metadata as a single-row data frame
+#'
+#' @param f Character scalar. File path.
+#' @return A one-row data.frame with columns \code{file}, \code{size_MB},
+#'   \code{modified_time}, \code{path}.
 #' @keywords internal
 #' @noRd
 .file_metadata <- function(f) {
@@ -72,6 +74,12 @@
 }
 
 
+#' Return biomaRt dataset name and symbol attribute for a species
+#'
+#' @param species Character. One of \code{"human"} or \code{"mouse"}.
+#' @return A list with \code{dataset} and \code{symbol_attr}.
+#' @keywords internal
+#' @noRd
 .gene_ref_config <- function(species) {
   list(
     dataset     = switch(species,
