@@ -421,3 +421,233 @@ plot_venn <- function(set1, set2,
   if (isTRUE(return_sets)) return(list(plot = p, sets = venn_sets))
   p
 }
+#' Publication-ready forest plot
+#'
+#' Produces a publication-ready forest plot with UKB-standard styling.
+#' The user supplies a data frame whose first column is the row label
+#' (\code{item}), plus any additional display columns (e.g. \code{Cases/N}).
+#' The gap column and the auto-formatted \code{OR (95\% CI)} text column are
+#' inserted automatically at \code{ci_column}. Numeric p-value columns
+#' declared via \code{p_cols} are formatted in-place.
+#'
+#' @param data data.frame. First column must be the label column (\code{item}).
+#'   Additional columns are displayed as-is (character) or formatted if named
+#'   in \code{p_cols} (must be numeric). Column order is preserved.
+#' @param est Numeric vector. Point estimates (\code{NA} = no CI drawn).
+#' @param lower Numeric vector. Lower CI bounds (same length as \code{est}).
+#' @param upper Numeric vector. Upper CI bounds (same length as \code{est}).
+#' @param ci_column Integer. Column position in the final rendered table where
+#'   the gap/CI graphic is placed. Must be between \code{2} and
+#'   \code{ncol(data) + 1} (inclusive). Default: \code{2L}.
+#' @param ref_line Numeric. Reference line. Default: \code{1} (HR/OR).
+#'   Use \code{0} for beta coefficients.
+#' @param xlim Numeric vector of length 2. X-axis limits. \code{NULL} (default)
+#'   uses \code{c(0, 2)}.
+#' @param ticks_at Numeric vector. Tick positions. \code{NULL} (default) = 5
+#'   evenly spaced ticks across \code{xlim}.
+#' @param arrow_lab Character vector of length 2. Directional labels.
+#'   Default: \code{c("Lower risk", "Higher risk")}. \code{NULL} = none.
+#' @param header Character vector of length \code{ncol(data) + 2}. Column
+#'   header labels for the final rendered table (original columns + gap_ci +
+#'   OR label). \code{NULL} (default) = use column names from \code{data} plus
+#'   \code{"gap_ci"} and \code{"OR (95\% CI)"}. Pass \code{""} for the gap
+#'   column position.
+#' @param indent Integer vector (length = \code{nrow(data)}). Indentation
+#'   level of the label column: each unit adds two leading spaces.
+#'   Default: all zeros.
+#' @param bold_label Logical vector (length = \code{nrow(data)}). Which rows
+#'   to bold in the label column. \code{NULL} (default) = auto-derive from
+#'   \code{indent}: rows where \code{indent == 0} are bolded (parent rows),
+#'   indented sub-rows are plain.
+#' @param ci_col Character scalar or vector (length = \code{nrow(data)}).
+#'   CI colour(s). \code{NA} rows are skipped automatically.
+#'   Default: \code{"black"}.
+#' @param ci_sizes Numeric. Point size. Default: \code{0.6}.
+#' @param ci_Theight Numeric. CI cap height. Default: \code{0.2}.
+#' @param ci_digits Integer. Decimal places for the auto-generated
+#'   \code{OR (95\% CI)} column. Default: \code{2L}.
+#' @param ci_sep Character. Separator between lower and upper CI in the label,
+#'   e.g. \code{", "} or \code{" - "}. Default: \code{", "}.
+#' @param p_cols Character vector. Names of numeric p-value columns in
+#'   \code{data}. These are formatted to \code{p_digits} decimal places with
+#'   \code{"<0.001"}-style clipping. \code{NULL} = none.
+#' @param p_digits Integer. Decimal places for p-value formatting.
+#'   Default: \code{3L}.
+#' @param bold_p \code{TRUE} (bold all non-NA p below \code{p_threshold}),
+#'   \code{FALSE} (no bolding), or a logical vector (per-row control).
+#'   Default: \code{TRUE}.
+#' @param p_threshold Numeric. P-value threshold for bolding when
+#'   \code{bold_p = TRUE}. Default: \code{0.05}.
+#' @param align Integer vector of length \code{ncol(data) + 2}. Alignment per
+#'   column: \code{-1} left, \code{0} centre, \code{1} right. Must cover all
+#'   final columns (original + gap_ci + OR label).
+#'   \code{NULL} = auto (column 1 left, all others centre).
+#' @param background Character. Row background style: \code{"zebra"},
+#'   \code{"bold_label"} (shade rows where \code{bold_label = TRUE}),
+#'   or \code{"none"}. Default: \code{"zebra"}.
+#' @param bg_col Character. Shading colour for backgrounds (scalar), or a
+#'   per-row vector of length \code{nrow(data)} (overrides style).
+#'   Default: \code{"#F0F0F0"}.
+#' @param border Character. Border style: \code{"three_line"} or \code{"none"}.
+#'   Default: \code{"three_line"}.
+#' @param border_width Numeric. Border line width(s). Scalar = all three lines
+#'   same width; length-3 vector = top-of-header, bottom-of-header,
+#'   bottom-of-body. Default: \code{3}.
+#' @param row_height \code{NULL} (auto), numeric scalar, or numeric vector
+#'   (length = total gtable rows including margins). Auto sets 8 / 12 / 10 / 15
+#'   mm for top / header / data / bottom respectively.
+#' @param col_width \code{NULL} (auto), numeric scalar, or numeric vector
+#'   (length = total gtable columns). Auto rounds each default width up so the
+#'   adjustment is in \eqn{[5, 10)} mm.
+#' @param save Logical. Save output to files? Default: \code{FALSE}.
+#' @param dest Character. Destination file path (extension ignored; all four
+#'   formats are saved). Required when \code{save = TRUE}.
+#' @param save_width Numeric. Output width in cm. Default: \code{20}.
+#' @param save_height Numeric or \code{NULL}. Output height in cm.
+#'   \code{NULL} = \code{nrow(data) * 0.9 + 3}.
+#' @param theme Character preset (\code{"default"}) or a
+#'   \code{forestploter::forest_theme} object. Default: \code{"default"}.
+#'
+#' @return A \pkg{forestploter} plot object (gtable), returned invisibly.
+#'   Display with \code{plot()} or \code{grid::grid.draw()}.
+#'
+#' @importFrom forestploter forest forest_theme edit_plot add_border
+#' @importFrom grid gpar unit
+#' @export
+#'
+#' @examples
+#' df <- data.frame(
+#'   item      = c("Exposure vs. control", "Unadjusted", "Fully adjusted"),
+#'   `Cases/N` = c("", "89/4521", "89/4521"),
+#'   p_value   = c(NA_real_, 0.001, 0.006),
+#'   check.names = FALSE
+#' )
+#'
+#' p <- plot_forest(
+#'   data       = df,
+#'   est        = c(NA, 1.52, 1.43),
+#'   lower      = c(NA, 1.18, 1.11),
+#'   upper      = c(NA, 1.96, 1.85),
+#'   ci_column  = 2L,
+#'   indent     = c(0L, 1L, 1L),
+#'   bold_label = c(TRUE, FALSE, FALSE),
+#'   p_cols     = "p_value",
+#'   xlim       = c(0.5, 3.0)
+#' )
+#' plot(p)
+plot_forest <- function(data,
+                        est,
+                        lower,
+                        upper,
+                        ci_column   = 2L,
+                        ref_line    = 1,
+                        xlim        = NULL,
+                        ticks_at    = NULL,
+                        arrow_lab   = c("Lower risk", "Higher risk"),
+                        header      = NULL,
+                        indent      = NULL,
+                        bold_label  = NULL,
+                        ci_col      = "black",
+                        ci_sizes    = 0.6,
+                        ci_Theight  = 0.2,
+                        ci_digits   = 2L,
+                        ci_sep      = ", ",
+                        p_cols      = NULL,
+                        p_digits    = 3L,
+                        bold_p      = TRUE,
+                        p_threshold = 0.05,
+                        align       = NULL,
+                        background  = "zebra",
+                        bg_col      = "#F0F0F0",
+                        border      = "three_line",
+                        border_width = 3,
+                        row_height  = NULL,
+                        col_width   = NULL,
+                        save        = FALSE,
+                        dest        = NULL,
+                        save_width  = 20,
+                        save_height = NULL,
+                        theme       = "default") {
+
+  # Validate inputs
+  .assert_data_frame(data)
+  n        <- nrow(data)
+  nc_orig  <- ncol(data)
+  nc_final <- nc_orig + 2L   # gap_ci + OR label always inserted
+
+  .assert_length_n(est,   n)
+  .assert_length_n(lower, n)
+  .assert_length_n(upper, n)
+  if (!is.null(indent))     .assert_length_n(indent,     n)
+  if (!is.null(bold_label)) .assert_length_n(bold_label, n)
+  if (length(ci_col) > 1L)  .assert_length_n(ci_col,     n)
+  .assert_has_cols(data, p_cols)
+  .assert_logical(bold_p)
+  if (length(bold_p) == 1L) bold_p <- rep(bold_p, n)
+  .assert_length_n(bold_p, n)
+
+  if (ci_column < 2L || ci_column > nc_orig + 1L)
+    cli::cli_abort(
+      "{.arg ci_column} must be between 2 and {nc_orig + 1L} (ncol(data) + 1).",
+      call = NULL
+    )
+  if (!is.null(header)) .assert_length_n(header, nc_final)
+  if (!is.null(align))  .assert_length_n(align,  nc_final)
+
+  # Defaults
+  if (is.null(indent)) indent <- rep(0L, n)
+  # bold_label default: bold parent rows (indent == 0), leave sub-rows plain
+  if (is.null(bold_label)) bold_label <- indent == 0L
+
+  # Pre-process data
+  out        <- .fp_build_data(data, est, lower, upper, indent,
+                               p_cols, p_digits, ci_digits, ci_sep, ci_column)
+  data_r     <- out$data
+  p_col_idxs <- out$p_col_idxs
+  p_numeric  <- out$p_numeric
+
+  nr <- nrow(data_r)
+
+  if (!is.null(header)) names(data_r) <- header
+
+  # Build base plot
+  if (is.null(xlim)) xlim <- c(0, 2)
+  if (is.null(ticks_at))
+    ticks_at <- seq(xlim[1L], xlim[2L], length.out = 5L)
+
+  p <- forestploter::forest(
+    data      = data_r,
+    est       = list(est),
+    lower     = list(lower),
+    upper     = list(upper),
+    ci_column = ci_column,
+    ref_line  = ref_line,
+    xlim      = xlim,
+    ticks_at  = ticks_at,
+    arrow_lab = arrow_lab,
+    sizes     = ci_sizes,
+    theme     = .fp_theme(theme, ci_Theight = ci_Theight)
+  )
+
+  # Post-processing
+  p <- .fp_align(p, nc_final, align)
+  p <- .fp_bold_label(p, bold_label)
+
+  if (!is.null(p_cols))
+    p <- .fp_bold_p(p, p_cols, p_col_idxs, p_numeric, bold_p, p_threshold, nr)
+
+  p <- .fp_ci_colors(p, ci_col, ci_column, est, nr)
+  p <- .fp_background(p, nr, nc_final, background, bold_label, bg_col)
+  p <- .fp_borders(p, nr, border, border_width)
+  p <- .fp_layout(p, row_height, col_width)
+
+  # Save
+  if (isTRUE(save)) {
+    if (is.null(dest))
+      cli::cli_abort("{.arg dest} must be provided when {.arg save = TRUE}.", call = NULL)
+    h <- if (is.null(save_height)) nr * 0.9 + 3 else save_height
+    .fp_save(p, dest, save_width, h)
+  }
+
+  invisible(p)
+}

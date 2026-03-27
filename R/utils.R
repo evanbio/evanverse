@@ -339,3 +339,27 @@
   }
   invisible(x)
 }
+
+
+#' Assert that an argument has exactly n elements
+#'
+#' @keywords internal
+#' @noRd
+.assert_length_n <- function(x, n, arg = deparse(substitute(x))) {
+  if (length(x) != n) {
+    cli::cli_abort("{.arg {arg}} must have length {n}, not {length(x)}.", call = NULL)
+  }
+  invisible(x)
+}
+
+
+#' Assert that an argument is a logical vector (scalar or vector)
+#'
+#' @keywords internal
+#' @noRd
+.assert_logical <- function(x, arg = deparse(substitute(x))) {
+  if (!is.logical(x)) {
+    cli::cli_abort("{.arg {arg}} must be a logical vector.", call = NULL)
+  }
+  invisible(x)
+}
