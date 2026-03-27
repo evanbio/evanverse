@@ -17,6 +17,10 @@ A character vector of concatenated strings.
 \description{
 An infix operator for string concatenation with one space between \code{lhs} and \code{rhs}.
 }
+\note{
+Both \code{lhs} and \code{rhs} must be non-\code{NA} character vectors; \code{NA} values and
+non-character inputs (including \code{NULL}) raise an error.
+}
 \examples{
 "Hello" \%p\% "world"
 c("hello", "good") \%p\% c("world", "morning")

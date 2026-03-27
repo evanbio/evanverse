@@ -10,6 +10,9 @@
 #' @param rhs A character vector.
 #'
 #' @return A character vector of concatenated strings.
+#'
+#' @note Both `lhs` and `rhs` must be non-`NA` character vectors; `NA` values and
+#'   non-character inputs (including `NULL`) raise an error.
 #' @export
 #'
 #' @examples
@@ -52,6 +55,11 @@
 #' @param table Character vector of values to match against.
 #'
 #' @return An integer vector of match positions. Returns `NA` for non-matches.
+#'
+#' @note Both `x` and `table` must be **non-empty** character vectors; `character(0)` or
+#'   non-character inputs raise an error. This differs from [base::match()] and `%nin%`,
+#'   which accept empty vectors. The stricter contract is intentional for gene-ID workflows
+#'   where an empty query almost always signals a upstream mistake.
 #' @export
 #'
 #' @examples
@@ -76,7 +84,8 @@
 #' @param x Character vector of input strings.
 #' @param table Character vector to match against.
 #'
-#' @return A named character vector. Names from `table`, values from `x`. Unmatched entries dropped.
+#' @return A named character vector. Names are canonical entries from `table`; values are the
+#'   original elements from `x`. Order follows `x` (not `table`). Unmatched entries are dropped.
 #' @export
 #'
 #' @examples

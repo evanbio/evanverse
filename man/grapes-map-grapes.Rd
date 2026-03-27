@@ -12,7 +12,8 @@ x \%map\% table
 \item{table}{Character vector to match against.}
 }
 \value{
-A named character vector. Names from \code{table}, values from \code{x}. Unmatched entries dropped.
+A named character vector. Names are canonical entries from \code{table}; values are the
+original elements from \code{x}. Order follows \code{x} (not \code{table}). Unmatched entries are dropped.
 }
 \description{
 Like \verb{\%match\%}, but returns a named character vector instead of indices.
