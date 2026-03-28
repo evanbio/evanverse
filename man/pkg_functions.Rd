@@ -12,7 +12,7 @@ pkg_functions(pkg, key = NULL)
 \item{key}{Character. Keyword to filter function names (case-insensitive). Default: NULL.}
 }
 \value{
-Character vector of exported names (invisibly).
+Character vector of exported names.
 }
 \description{
 List exported symbols from a package's NAMESPACE, optionally filtered

@@ -1,5 +1,5 @@
 # =============================================================================
-# utils_biopackage.R — Internal helpers for the package management module
+# utils_pkg.R — Internal helpers for the package management module
 # =============================================================================
 
 
@@ -138,10 +138,12 @@
     desc <- tryCatch(read.dcf(desc_path), error = function(e) NULL)
     if (is.null(desc) || !"Version" %in% colnames(desc)) next
 
+    # Reason: use Package from DESCRIPTION (not user input) so path construction
+    # is correct on case-sensitive filesystems
     result[[tolower(p)]] <- list(
       Version = desc[, "Version"],
       LibPath = dirname(pkg_path),
-      Package = p
+      Package = desc[, "Package"]
     )
   }
   result
@@ -227,13 +229,15 @@
 #' @keywords internal
 #' @noRd
 .validate_github_format <- function(pkg) {
-  invalid <- !grepl("^[^/]+/[^/]+$", pkg)
+  # Reason: allow user/repo, user/repo@ref (branch/tag/SHA), user/repo#pr
+  # all devtools-supported formats contain exactly one '/'
+  invalid <- !grepl("^[^/[:space:]]+/[^/[:space:]]+$", pkg)
   if (any(invalid)) {
     cli::cli_abort(
       c(
         "GitHub packages must be in {.val user/repo} format.",
         "x" = "Invalid: {.val {pkg[invalid]}}",
-        "i" = "Example: {.val hadley/ggplot2}"
+        "i" = "Examples: {.val hadley/ggplot2}, {.val hadley/ggplot2@main}, {.val hadley/ggplot2#123}"
       )
     )
   }

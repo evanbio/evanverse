@@ -41,7 +41,7 @@ set_mirror <- function(repo = c("all", "cran", "bioc"),
   bioc_mirrors <- .bioc_mirrors()
 
   # Validate mirror name
-  if (repo %in% c("cran", "all")) {
+  if (repo == "cran") {
     if (!mirror %in% names(cran_mirrors)) {
       cli::cli_abort(
         c(
@@ -51,9 +51,7 @@ set_mirror <- function(repo = c("all", "cran", "bioc"),
         call = NULL
       )
     }
-  }
-
-  if (repo %in% c("bioc", "all")) {
+  } else if (repo == "bioc") {
     if (!mirror %in% names(bioc_mirrors)) {
       cli::cli_abort(
         c(
@@ -62,6 +60,39 @@ set_mirror <- function(repo = c("all", "cran", "bioc"),
         ),
         call = NULL
       )
+    }
+  } else {
+    # repo == "all": mirror must exist in both tables
+    shared <- intersect(names(cran_mirrors), names(bioc_mirrors))
+    if (!mirror %in% shared) {
+      if (mirror %in% names(cran_mirrors)) {
+        cli::cli_abort(
+          c(
+            "Mirror {.val {mirror}} is CRAN-only and cannot be used with {.code repo = \"all\"}.",
+            "i" = "Use {.code set_mirror(\"cran\", \"{mirror}\")} instead.",
+            "i" = "Shared mirrors: {.val {shared}}"
+          ),
+          call = NULL
+        )
+      } else if (mirror %in% names(bioc_mirrors)) {
+        cli::cli_abort(
+          c(
+            "Mirror {.val {mirror}} is Bioconductor-only and cannot be used with {.code repo = \"all\"}.",
+            "i" = "Use {.code set_mirror(\"bioc\", \"{mirror}\")} instead.",
+            "i" = "Shared mirrors: {.val {shared}}"
+          ),
+          call = NULL
+        )
+      } else {
+        cli::cli_abort(
+          c(
+            "Unknown mirror: {.val {mirror}}.",
+            "i" = "CRAN mirrors: {.val {names(cran_mirrors)}}",
+            "i" = "Bioconductor mirrors: {.val {names(bioc_mirrors)}}"
+          ),
+          call = NULL
+        )
+      }
     }
   }
 
@@ -77,7 +108,9 @@ set_mirror <- function(repo = c("all", "cran", "bioc"),
   }
 
   if (repo %in% c("bioc", "all")) {
-    bioc_url <- bioc_mirrors[[mirror]]
+    # Reason: strip trailing slash so BiocManager::repositories() doesn't
+    # produce double-slash URLs like .../bioconductor//packages/...
+    bioc_url <- sub("/$", "", bioc_mirrors[[mirror]])
     options(BioC_mirror = bioc_url)
     cli::cli_alert_success("Bioconductor mirror set to: {.url {bioc_url}}")
   }
@@ -161,7 +194,7 @@ inst_pkg <- function(pkg = NULL,
 #' check_pkg("r-lib/devtools", source = "GitHub", auto_install = FALSE)
 #'
 #' @export
-check_pkg <- function(pkg = NULL,
+check_pkg <- function(pkg,
                       source = c("CRAN", "GitHub", "Bioconductor"),
                       auto_install = FALSE,
                       ...) {
@@ -246,10 +279,10 @@ update_pkg <- function(pkg = NULL,
   if (source == "GitHub")
     .validate_github_format(pkg)
 
-  # Sync BiocManager + full Bioconductor update (covers all Bioc cases)
-  # Reason: plan B — this block IS the complete Bioc update;
-  # downstream branches must not repeat BiocManager::install()
-  if (source %in% c("all", "Bioconductor")) {
+  # Full Bioc upgrade — only when no specific pkg is given
+  # Reason: when pkg is provided, the specific-package branch below handles it;
+  # running BiocManager::install() here too would trigger a redundant full upgrade
+  if (source %in% c("all", "Bioconductor") && is.null(pkg)) {
     .ensure_biocmanager()
     cli::cli_alert_info("Checking for BiocManager updates...")
     utils::install.packages("BiocManager")
@@ -260,9 +293,8 @@ update_pkg <- function(pkg = NULL,
     cli::cli_alert_success("Bioconductor upgraded to version {bioc_ver}.")
   }
 
-  # Handle remaining cases (Bioc already done above)
+  # Specific package(s) or CRAN-wide update
   if (!is.null(pkg)) {
-    # Specific package(s)
     cli::cli_alert_info("Updating {.pkg {pkg}} from {source}...")
     switch(source,
       CRAN         = .install_from_cran(pkg, ...),
@@ -348,10 +380,11 @@ pkg_version <- function(pkg) {
       desc_path <- file.path(pkg_info$LibPath, pkg_info$Package, "DESCRIPTION")
       desc      <- tryCatch(read.dcf(desc_path), error = function(e) NULL)
 
+      github_fields <- c("RemoteType", "RemoteSha", "RemoteUsername", "RemoteRepo", "RemoteRef")
       if (!is.null(desc) &&
-          "RemoteType" %in% colnames(desc) &&
+          all(github_fields %in% colnames(desc)) &&
           desc[, "RemoteType"] == "github") {
-        gh_sha          <- substr(desc[, "RemoteSha"], 1, 7)
+        gh_sha           <- substr(desc[, "RemoteSha"], 1, 7)
         result$latest[i] <- gh_sha
         result$source[i] <- sprintf("GitHub (%s/%s@%s)",
                                     desc[, "RemoteUsername"],
@@ -364,7 +397,7 @@ pkg_version <- function(pkg) {
     result$source[i] <- "Not Found"
   }
 
-  invisible(result)
+  result
 }
 
 
@@ -376,7 +409,7 @@ pkg_version <- function(pkg) {
 #' @param pkg Character. Package name.
 #' @param key Character. Keyword to filter function names (case-insensitive). Default: NULL.
 #'
-#' @return Character vector of exported names (invisibly).
+#' @return Character vector of exported names.
 #'
 #' @examples
 #' pkg_functions("evanverse")

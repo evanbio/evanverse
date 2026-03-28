@@ -5,7 +5,7 @@
 \title{Check Package Installation Status}
 \usage{
 check_pkg(
-  pkg = NULL,
+  pkg,
   source = c("CRAN", "GitHub", "Bioconductor"),
   auto_install = FALSE,
   ...
