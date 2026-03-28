@@ -1,5 +1,5 @@
 # =============================================================================
-# utils_biopalette.R — Internal helpers for the palette module
+# utils_palette.R — Internal helpers for the palette module
 # =============================================================================
 
 
@@ -171,24 +171,46 @@
 
 #' Load compiled palette data
 #'
-#' Tries cache first, falls back to the default RDS in extdata.
+#' Returns the `palettes` package dataset, with fallbacks for devtools/testthat
+#' workflows where lazy-data binding may not be in namespace yet.
 #'
 #' @return Named list of palettes keyed by type.
 #'
 #' @keywords internal
 #' @noRd
 .load_palettes <- function() {
-  palettes <- .get_cached_palettes()
-
-  if (is.null(palettes)) {
-    rds <- system.file("extdata", "palettes.rds", package = "evanverse")
-    if (!file.exists(rds)) {
-      cli::cli_abort("Palette file not found. Please compile palettes first via {.fn compile_palettes}.", call = NULL)
-    }
-    palettes <- readRDS(rds)
+  ns <- asNamespace("evanverse")
+  if (exists("palettes", envir = ns, inherits = FALSE)) {
+    return(get("palettes", envir = ns, inherits = FALSE))
   }
 
-  palettes
+  pkg_env_name <- "package:evanverse"
+  if (pkg_env_name %in% search()) {
+    pkg_env <- as.environment(pkg_env_name)
+    if (exists("palettes", envir = pkg_env, inherits = FALSE)) {
+      return(get("palettes", envir = pkg_env, inherits = FALSE))
+    }
+  }
+
+  local_rda <- file.path("data", "palettes.rda")
+  if (file.exists(local_rda)) {
+    e <- new.env(parent = emptyenv())
+    load(local_rda, envir = e)
+    if (exists("palettes", envir = e, inherits = FALSE)) {
+      return(get("palettes", envir = e, inherits = FALSE))
+    }
+  }
+
+  e <- new.env(parent = emptyenv())
+  suppressWarnings(utils::data("palettes", package = "evanverse", envir = e))
+  if (exists("palettes", envir = e, inherits = FALSE)) {
+    return(get("palettes", envir = e, inherits = FALSE))
+  }
+
+  cli::cli_abort(
+    "Palette dataset {.val palettes} is unavailable. Rebuild it via {.file data-raw/palettes.R}.",
+    call = NULL
+  )
 }
 
 

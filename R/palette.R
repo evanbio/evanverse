@@ -113,6 +113,8 @@ list_palettes <- function(type = NULL,
     )
   }))
 
+  if (is.null(palette_df)) return(.empty_palette_df())
+
   if (sort) {
     palette_df <- palette_df[order(palette_df$type, palette_df$n_color, palette_df$name), ]
   }
@@ -236,6 +238,13 @@ preview_palette <- function(name,
 #'
 #' @return A named list of ggplot objects (one per page).
 #' @export
+#'
+#' @examples
+#' \donttest{
+#' palette_gallery()
+#' palette_gallery(type = "qualitative")
+#' palette_gallery(type = c("sequential", "diverging"), max_palettes = 10)
+#' }
 palette_gallery <- function(type = NULL,
                                 max_palettes = 30,
                                 max_row = 12,
@@ -288,29 +297,27 @@ palette_gallery <- function(type = NULL,
 }
 
 
-#' Compile JSON Palettes into RDS
+#' Compile JSON Palettes into a Palette List
 #'
-#' Read JSON files under `palettes_dir/`, validate content, and compile into a structured RDS file.
+#' Read JSON files under `palettes_dir/`, validate content, and return a
+#' structured list of palettes. Used by `data-raw/palettes.R` to build
+#' the package dataset via `usethis::use_data()`.
 #'
 #' @param palettes_dir Character. Folder containing subdirs: sequential/, diverging/, qualitative/.
-#' @param output_rds Character. Path to save compiled RDS file. Use tempdir() for examples/tests.
 #'
-#' @return Invisibly returns RDS file path (character).
+#' @return Invisibly returns a named list with elements `sequential`, `diverging`, `qualitative`.
 #'
 #' @examples
 #' \donttest{
 #' compile_palettes(
-#'   palettes_dir = system.file("extdata", "palettes", package = "evanverse"),
-#'   output_rds = file.path(tempdir(), "palettes.rds")
+#'   palettes_dir = system.file("extdata", "palettes", package = "evanverse")
 #' )
 #' }
 #'
 #' @export
-compile_palettes <- function(palettes_dir, output_rds) {
+compile_palettes <- function(palettes_dir) {
 
-  # Validate inputs
-  .assert_dir_path(palettes_dir)
-  .assert_dir_path(output_rds)
+  .assert_scalar_string(palettes_dir)
 
   if (!dir.exists(palettes_dir)) {
     cli::cli_abort("Palettes directory does not exist: {.path {palettes_dir}}", call = NULL)
@@ -339,24 +346,10 @@ compile_palettes <- function(palettes_dir, output_rds) {
     palettes[[p$type]][[p$name]] <- p$colors
   }
 
-  # Ensure output directory exists
-  out_dir <- dirname(output_rds)
-  if (!dir.exists(out_dir)) {
-    ok <- dir.create(out_dir, recursive = TRUE, showWarnings = FALSE)
-    if (!ok) cli::cli_abort("Failed to create output directory: {.path {out_dir}}", call = NULL)
-  }
-
-  tryCatch({
-    saveRDS(palettes, file = output_rds)
-    cli::cli_alert_success("Saved: {.file {output_rds}}")
-  }, error = function(e) {
-    cli::cli_abort("Failed to save RDS: {e$message}", call = NULL)
-  })
-
   total <- sum(lengths(palettes))
   cli::cli_alert_success("Compiled {total} palette{?s}: Sequential={length(palettes$sequential)}, Diverging={length(palettes$diverging)}, Qualitative={length(palettes$qualitative)}")
 
-  invisible(output_rds)
+  invisible(palettes)
 }
 
 
@@ -415,7 +408,7 @@ remove_palette <- function(name,
 #' Convert HEX Colors to RGB
 #'
 #' Convert a character vector of HEX color codes to a data.frame with columns
-#' `r`, `g`, `b`. Row names are set to the input HEX values.
+#' `hex`, `r`, `g`, `b`.
 #'
 #' @param hex Character vector of HEX color codes (e.g. `"#FF8000"` or `"#FF8000B2"`).
 #'   Both 6-digit and 8-digit (with alpha) codes are accepted. Alpha is silently ignored.
