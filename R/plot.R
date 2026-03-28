@@ -89,6 +89,9 @@ plot_bar <- function(data,
       df_sub        <- data[data[[group_col]] == sort_by, , drop = FALSE]
       ordering      <- order(df_sub[[y_col]], decreasing = decreasing)
       levels_sorted <- as.character(df_sub[[x_col]][ordering])
+      # Append any x_col values not covered by sort_by group at the end,
+      # so no categories are silently dropped as NA by ggplot.
+      levels_sorted <- union(levels_sorted, unique(as.character(data[[x_col]])))
       data[[x_col]] <- factor(data[[x_col]], levels = levels_sorted)
     }
   }
@@ -121,7 +124,8 @@ plot_bar <- function(data,
 #' @param x_col Character. Column name of the numeric variable to plot.
 #' @param group_col Character or `NULL`. Column name for fill grouping. Default: `NULL`.
 #' @param facet_col Character or `NULL`. Column name for faceting. Default: `NULL`.
-#' @param alpha Numeric. Fill transparency (0-1). Default: 0.7.
+#' @param alpha Numeric. Fill transparency \[0, 1\] (0 = fully transparent,
+#'   1 = fully opaque). Default: 0.7.
 #' @param adjust Numeric. Bandwidth adjustment multiplier. Default: 1.
 #' @param palette Character vector or `NULL`. Fill colors recycled to match the
 #'   number of groups. If `NULL`, uses ggplot2 default colors. Default: `NULL`.
@@ -163,6 +167,9 @@ plot_density <- function(data,
   # palette
   if (!is.null(palette)) {
     .assert_character_vector(palette)
+    if (is.null(group_col)) {
+      cli::cli_warn("`palette` is ignored when `group_col` is NULL.")
+    }
   }
 
   # plot
@@ -255,6 +262,9 @@ plot_pie <- function(data,
     }
 
   } else if (is.character(data) || is.factor(data)) {
+    if (anyNA(data)) {
+      cli::cli_abort("`data` must not contain NA values.")
+    }
     tab <- table(data)
     df  <- data.frame(
       group = names(tab),
@@ -400,7 +410,7 @@ plot_venn <- function(set1, set2,
       data            = venn_sets,
       columns         = names(venn_sets),
       show_elements   = (label == "both"),
-      show_percentage = (label == "percent"),
+      show_percentage = (label %in% c("percent", "both")),
       fill_color      = fill_colors
     ) + ggplot2::theme_void()
 
@@ -413,8 +423,13 @@ plot_venn <- function(set1, set2,
     )
 
     if (!is.null(palette)) {
-      .assert_scalar_string(palette[[1]])
-      p <- p + ggplot2::scale_fill_distiller(palette = palette[[1]])
+      if (length(palette) != 1L) {
+        cli::cli_abort(
+          'The {.val "gradient"} method requires a single RColorBrewer palette name (length 1). Got length {length(palette)}.'
+        )
+      }
+      .assert_scalar_string(palette)
+      p <- p + ggplot2::scale_fill_distiller(palette = palette)
     }
   }
 

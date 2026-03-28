@@ -285,8 +285,8 @@
 #' @noRd
 .assert_proportion <- function(x, arg = deparse(substitute(x))) {
   if (!is.numeric(x) || length(x) != 1L || is.na(x) ||
-      !is.finite(x) || x <= 0 || x >= 1) {
-    cli::cli_abort("{.arg {arg}} must be a single number strictly between 0 and 1.", call = NULL)
+      !is.finite(x) || x < 0 || x > 1) {
+    cli::cli_abort("{.arg {arg}} must be a single number between 0 and 1.", call = NULL)
   }
   invisible(x)
 }

@@ -1,5 +1,5 @@
 # =============================================================================
-# utils_plot.R — internal helpers for plot_forest()
+# utils_plot.R — internal helpers for the plot module
 # =============================================================================
 
 
@@ -86,14 +86,7 @@
   )
 
   # 4. Build final table: left cols | gap_ci | OR (95% CI) | right cols
-  if (ci_column <= 1L)
-    cli::cli_abort("{.arg ci_column} must be >= 2.", call = NULL)
-  if (ci_column > ncol_orig + 1L)
-    cli::cli_abort(
-      "{.arg ci_column} ({ci_column}) exceeds ncol(data)+1 ({ncol_orig + 1L}).",
-      call = NULL
-    )
-
+  # Reason: ci_column range is validated upstream in plot_forest(); no need to repeat here
   gap_df <- data.frame(gap_ci        = strrep(" ", 20L), stringsAsFactors = FALSE)
   lab_df <- data.frame(`OR (95% CI)` = ci_label,         stringsAsFactors = FALSE,
                        check.names   = FALSE)
@@ -171,13 +164,13 @@
   if (isFALSE(bold_p)) return(p)
 
   for (j in seq_along(p_cols)) {
-    pv      <- p_numeric[[p_cols[j]]]
-    col_idx <- p_col_idxs[j]
-
+    pv        <- p_numeric[[p_cols[j]]]
+    col_idx   <- p_col_idxs[j]
     bold_rows <- which(bold_p & !is.na(pv) & pv < p_threshold)
 
-    for (r in bold_rows) {
-      p <- forestploter::edit_plot(p, row = r, col = col_idx, which = "text",
+    if (length(bold_rows) > 0L) {
+      p <- forestploter::edit_plot(p, row = bold_rows, col = col_idx,
+                                   which = "text",
                                    gp = grid::gpar(fontface = "bold"))
     }
   }

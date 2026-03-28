@@ -23,7 +23,8 @@ plot_density(
 
 \item{facet_col}{Character or \code{NULL}. Column name for faceting. Default: \code{NULL}.}
 
-\item{alpha}{Numeric. Fill transparency (0-1). Default: 0.7.}
+\item{alpha}{Numeric. Fill transparency [0, 1] (0 = fully transparent,
+1 = fully opaque). Default: 0.7.}
 
 \item{adjust}{Numeric. Bandwidth adjustment multiplier. Default: 1.}
 
