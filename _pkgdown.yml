@@ -318,9 +318,6 @@ reference:
   - bio_palette_gallery
   - compile_palettes
   - remove_palette
-  - clear_palette_cache
-  - palette_cache_info
-  - reload_palette_cache
   - hex2rgb
   - rgb2hex
 

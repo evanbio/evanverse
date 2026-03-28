@@ -16,7 +16,7 @@ A data.frame with columns \code{hex}, \code{r}, \code{g}, \code{b}.
 }
 \description{
 Convert a character vector of HEX color codes to a data.frame with columns
-\code{r}, \code{g}, \code{b}. Row names are set to the input HEX values.
+\code{hex}, \code{r}, \code{g}, \code{b}.
 }
 \examples{
 hex2rgb("#FF8000")

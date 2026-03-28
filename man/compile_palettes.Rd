@@ -2,26 +2,25 @@
 % Please edit documentation in R/palette.R
 \name{compile_palettes}
 \alias{compile_palettes}
-\title{Compile JSON Palettes into RDS}
+\title{Compile JSON Palettes into a Palette List}
 \usage{
-compile_palettes(palettes_dir, output_rds)
+compile_palettes(palettes_dir)
 }
 \arguments{
 \item{palettes_dir}{Character. Folder containing subdirs: sequential/, diverging/, qualitative/.}
-
-\item{output_rds}{Character. Path to save compiled RDS file. Use tempdir() for examples/tests.}
 }
 \value{
-Invisibly returns RDS file path (character).
+Invisibly returns a named list with elements \code{sequential}, \code{diverging}, \code{qualitative}.
 }
 \description{
-Read JSON files under \verb{palettes_dir/}, validate content, and compile into a structured RDS file.
+Read JSON files under \verb{palettes_dir/}, validate content, and return a
+structured list of palettes. Used by \code{data-raw/palettes.R} to build
+the package dataset via \code{usethis::use_data()}.
 }
 \examples{
 \donttest{
 compile_palettes(
-  palettes_dir = system.file("extdata", "palettes", package = "evanverse"),
-  output_rds = file.path(tempdir(), "palettes.rds")
+  palettes_dir = system.file("extdata", "palettes", package = "evanverse")
 )
 }
 

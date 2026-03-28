@@ -21,3 +21,10 @@ A named list of ggplot objects (one per page).
 \description{
 Display palettes in a paged gallery format, returning a named list of ggplot objects.
 }
+\examples{
+\donttest{
+palette_gallery()
+palette_gallery(type = "qualitative")
+palette_gallery(type = c("sequential", "diverging"), max_palettes = 10)
+}
+}
