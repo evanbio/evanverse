@@ -6,9 +6,11 @@
 #              remove_palette(), hex2rgb(), rgb2hex()
 #===============================================================================
 
-palette_rds_exists <- function() {
-  f <- system.file("extdata", "palettes.rds", package = "evanverse")
-  file.exists(f)
+palette_data_available <- function() {
+  tryCatch(
+    is.list(get("palettes", envir = asNamespace("evanverse"))),
+    error = function(e) FALSE
+  )
 }
 
 # Helper: create a minimal temp palette directory with one JSON per type
@@ -170,7 +172,7 @@ test_that("rgb2hex() validates data.frame columns", {
 #==============================================================================
 
 test_that("get_palette() returns full color vector with explicit type", {
-  skip_if_not(palette_rds_exists(), "Compiled palette RDS not found")
+  skip_if_not(palette_data_available(), "Package palette dataset not available")
 
   result <- get_palette("qual_vivid", type = "qualitative")
   expect_type(result, "character")
@@ -179,7 +181,7 @@ test_that("get_palette() returns full color vector with explicit type", {
 })
 
 test_that("get_palette() returns correct subset with n", {
-  skip_if_not(palette_rds_exists(), "Compiled palette RDS not found")
+  skip_if_not(palette_data_available(), "Package palette dataset not available")
 
   result <- get_palette("qual_vivid", type = "qualitative", n = 3)
   expect_length(result, 3L)
@@ -187,7 +189,7 @@ test_that("get_palette() returns correct subset with n", {
 })
 
 test_that("get_palette() auto-detects type when type = NULL", {
-  skip_if_not(palette_rds_exists(), "Compiled palette RDS not found")
+  skip_if_not(palette_data_available(), "Package palette dataset not available")
 
   result <- get_palette("seq_blues")
   expect_type(result, "character")
@@ -195,7 +197,7 @@ test_that("get_palette() auto-detects type when type = NULL", {
 })
 
 test_that("get_palette() errors when name is found under a different type", {
-  skip_if_not(palette_rds_exists(), "Compiled palette RDS not found")
+  skip_if_not(palette_data_available(), "Package palette dataset not available")
 
   # seq_blues is sequential, not diverging
   expect_error(
@@ -205,7 +207,7 @@ test_that("get_palette() errors when name is found under a different type", {
 })
 
 test_that("get_palette() errors when name is not found anywhere", {
-  skip_if_not(palette_rds_exists(), "Compiled palette RDS not found")
+  skip_if_not(palette_data_available(), "Package palette dataset not available")
 
   expect_error(
     get_palette("nonexistent_palette_xyz"),
@@ -214,7 +216,7 @@ test_that("get_palette() errors when name is not found anywhere", {
 })
 
 test_that("get_palette() errors when n exceeds palette size", {
-  skip_if_not(palette_rds_exists(), "Compiled palette RDS not found")
+  skip_if_not(palette_data_available(), "Package palette dataset not available")
 
   expect_error(
     get_palette("qual_softtrio", type = "qualitative", n = 9999),
@@ -230,13 +232,13 @@ test_that("get_palette() validates name parameter", {
 })
 
 test_that("get_palette() validates type parameter", {
-  skip_if_not(palette_rds_exists(), "Compiled palette RDS not found")
+  skip_if_not(palette_data_available(), "Package palette dataset not available")
 
   expect_error(get_palette("qual_vivid", type = "invalid"), "should be one of")
 })
 
 test_that("get_palette() validates n parameter", {
-  skip_if_not(palette_rds_exists(), "Compiled palette RDS not found")
+  skip_if_not(palette_data_available(), "Package palette dataset not available")
 
   expect_error(get_palette("qual_vivid", type = "qualitative", n = 0),   "single positive integer")
   expect_error(get_palette("qual_vivid", type = "qualitative", n = -1),  "single positive integer")
@@ -249,7 +251,7 @@ test_that("get_palette() validates n parameter", {
 #==============================================================================
 
 test_that("list_palettes() returns data.frame with expected columns", {
-  skip_if_not(palette_rds_exists(), "Compiled palette RDS not found")
+  skip_if_not(palette_data_available(), "Package palette dataset not available")
 
   result <- list_palettes()
   expect_s3_class(result, "data.frame")
@@ -258,7 +260,7 @@ test_that("list_palettes() returns data.frame with expected columns", {
 })
 
 test_that("list_palettes() filters by single type", {
-  skip_if_not(palette_rds_exists(), "Compiled palette RDS not found")
+  skip_if_not(palette_data_available(), "Package palette dataset not available")
 
   result <- list_palettes(type = "qualitative")
   expect_true(all(result$type == "qualitative"))
@@ -266,7 +268,7 @@ test_that("list_palettes() filters by single type", {
 })
 
 test_that("list_palettes() filters by multiple types", {
-  skip_if_not(palette_rds_exists(), "Compiled palette RDS not found")
+  skip_if_not(palette_data_available(), "Package palette dataset not available")
 
   result <- list_palettes(type = c("sequential", "diverging"))
   expect_true(all(result$type %in% c("sequential", "diverging")))
@@ -274,7 +276,7 @@ test_that("list_palettes() filters by multiple types", {
 })
 
 test_that("list_palettes() sort=TRUE produces ordered output", {
-  skip_if_not(palette_rds_exists(), "Compiled palette RDS not found")
+  skip_if_not(palette_data_available(), "Package palette dataset not available")
 
   result <- list_palettes(sort = TRUE)
   sorted <- result[order(result$type, result$n_color, result$name), ]
@@ -282,11 +284,10 @@ test_that("list_palettes() sort=TRUE produces ordered output", {
 })
 
 test_that("list_palettes() sort=FALSE preserves original order", {
-  skip_if_not(palette_rds_exists(), "Compiled palette RDS not found")
+  skip_if_not(palette_data_available(), "Package palette dataset not available")
 
   sorted   <- list_palettes(sort = TRUE)
   unsorted <- list_palettes(sort = FALSE)
-  # Rows are the same set, but may differ in order
   expect_setequal(sorted$name, unsorted$name)
 })
 
@@ -423,52 +424,54 @@ test_that("remove_palette() validates name parameter", {
 # compile_palettes()
 #==============================================================================
 
-test_that("compile_palettes() creates a valid RDS from JSON directory", {
+test_that("compile_palettes() returns a named list with all three types", {
   src <- make_temp_palette_dir()
-  out <- file.path(tempdir(), paste0("out_", Sys.getpid(), ".rds"))
-  on.exit({ unlink(src, recursive = TRUE); unlink(out) }, add = TRUE)
+  on.exit(unlink(src, recursive = TRUE), add = TRUE)
 
-  result <- compile_palettes(palettes_dir = src, output_rds = out)
+  result <- compile_palettes(palettes_dir = src)
 
-  expect_true(file.exists(out))
-  expect_equal(result, out)
-
-  palettes <- readRDS(out)
-  expect_type(palettes, "list")
-  expect_true(all(c("sequential", "diverging", "qualitative") %in% names(palettes)))
-  expect_true("seq_test"  %in% names(palettes$sequential))
-  expect_true("div_test"  %in% names(palettes$diverging))
-  expect_true("qual_test" %in% names(palettes$qualitative))
+  expect_type(result, "list")
+  expect_true(all(c("sequential", "diverging", "qualitative") %in% names(result)))
+  expect_true("seq_test"  %in% names(result$sequential))
+  expect_true("div_test"  %in% names(result$diverging))
+  expect_true("qual_test" %in% names(result$qualitative))
 })
 
-test_that("compile_palettes() stores correct colors in RDS", {
+test_that("compile_palettes() stores correct colors in returned list", {
   src <- make_temp_palette_dir()
-  out <- file.path(tempdir(), paste0("out2_", Sys.getpid(), ".rds"))
-  on.exit({ unlink(src, recursive = TRUE); unlink(out) }, add = TRUE)
+  on.exit(unlink(src, recursive = TRUE), add = TRUE)
 
-  compile_palettes(palettes_dir = src, output_rds = out)
-  palettes <- readRDS(out)
+  result <- compile_palettes(palettes_dir = src)
 
-  expect_equal(palettes$sequential$seq_test,
-               c("#deebf7", "#9ecae1", "#3182bd"))
-  expect_equal(palettes$qualitative$qual_test,
-               c("#E64B35", "#4DBBD5", "#00A087"))
+  expect_equal(result$sequential$seq_test,  c("#deebf7", "#9ecae1", "#3182bd"))
+  expect_equal(result$qualitative$qual_test, c("#E64B35", "#4DBBD5", "#00A087"))
+})
+
+test_that("compile_palettes() returns invisibly", {
+  src <- make_temp_palette_dir()
+  on.exit(unlink(src, recursive = TRUE), add = TRUE)
+
+  expect_invisible(compile_palettes(palettes_dir = src))
 })
 
 test_that("compile_palettes() skips invalid JSON files gracefully", {
   src <- make_temp_palette_dir()
-  out <- file.path(tempdir(), paste0("out3_", Sys.getpid(), ".rds"))
-  on.exit({ unlink(src, recursive = TRUE); unlink(out) }, add = TRUE)
+  on.exit(unlink(src, recursive = TRUE), add = TRUE)
 
-  # Write a broken JSON
   writeLines("{not valid json", file.path(src, "sequential", "broken.json"))
 
-  expect_no_error(compile_palettes(palettes_dir = src, output_rds = out))
-  palettes <- readRDS(out)
-  expect_false("broken" %in% names(palettes$sequential))
+  result <- expect_no_error(compile_palettes(palettes_dir = src))
+  expect_false("broken" %in% names(result$sequential))
 })
 
-test_that("compile_palettes() errors when palettes_dir is missing", {
+test_that("compile_palettes() errors when palettes_dir does not exist", {
+  expect_error(
+    compile_palettes(palettes_dir = file.path(tempdir(), "nonexistent_xyz")),
+    "does not exist"
+  )
+})
+
+test_that("compile_palettes() errors when palettes_dir is invalid string", {
   expect_error(compile_palettes(""), "single non-empty string")
 })
 
@@ -477,7 +480,7 @@ test_that("compile_palettes() errors when palettes_dir is missing", {
 #==============================================================================
 
 test_that("preview_palette() returns NULL invisibly", {
-  skip_if_not(palette_rds_exists(), "Compiled palette RDS not found")
+  skip_if_not(palette_data_available(), "Package palette dataset not available")
 
   pdf(file = tempfile(fileext = ".pdf"))
   on.exit(grDevices::dev.off(), add = TRUE)
@@ -487,7 +490,7 @@ test_that("preview_palette() returns NULL invisibly", {
 })
 
 test_that("preview_palette() works with all plot_type options", {
-  skip_if_not(palette_rds_exists(), "Compiled palette RDS not found")
+  skip_if_not(palette_data_available(), "Package palette dataset not available")
 
   for (pt in c("bar", "pie", "point", "rect", "circle")) {
     pdf(file = tempfile(fileext = ".pdf"))
@@ -499,7 +502,7 @@ test_that("preview_palette() works with all plot_type options", {
 })
 
 test_that("preview_palette() respects n argument", {
-  skip_if_not(palette_rds_exists(), "Compiled palette RDS not found")
+  skip_if_not(palette_data_available(), "Package palette dataset not available")
 
   pdf(file = tempfile(fileext = ".pdf"))
   on.exit(grDevices::dev.off(), add = TRUE)
@@ -510,7 +513,7 @@ test_that("preview_palette() respects n argument", {
 })
 
 test_that("preview_palette() accepts custom title", {
-  skip_if_not(palette_rds_exists(), "Compiled palette RDS not found")
+  skip_if_not(palette_data_available(), "Package palette dataset not available")
 
   pdf(file = tempfile(fileext = ".pdf"))
   on.exit(grDevices::dev.off(), add = TRUE)
@@ -521,7 +524,7 @@ test_that("preview_palette() accepts custom title", {
 })
 
 test_that("preview_palette() errors on invalid palette name", {
-  skip_if_not(palette_rds_exists(), "Compiled palette RDS not found")
+  skip_if_not(palette_data_available(), "Package palette dataset not available")
 
   expect_error(
     preview_palette("does_not_exist"),
@@ -534,7 +537,7 @@ test_that("preview_palette() errors on invalid palette name", {
 #==============================================================================
 
 test_that("palette_gallery() returns named list of ggplot objects", {
-  skip_if_not(palette_rds_exists(), "Compiled palette RDS not found")
+  skip_if_not(palette_data_available(), "Package palette dataset not available")
   skip_if_not_installed("ggplot2")
 
   result <- palette_gallery(type = "qualitative", verbose = FALSE)
@@ -545,26 +548,22 @@ test_that("palette_gallery() returns named list of ggplot objects", {
 })
 
 test_that("palette_gallery() paginates correctly", {
-  skip_if_not(palette_rds_exists(), "Compiled palette RDS not found")
+  skip_if_not(palette_data_available(), "Package palette dataset not available")
   skip_if_not_installed("ggplot2")
 
   result <- palette_gallery(type = "qualitative", max_palettes = 5, verbose = FALSE)
   expect_true(length(result) > 1L)
 })
 
-test_that("palette_gallery() returns empty list for unknown type", {
-  skip_if_not(palette_rds_exists(), "Compiled palette RDS not found")
+test_that("palette_gallery() errors on invalid type argument", {
+  skip_if_not(palette_data_available(), "Package palette dataset not available")
 
-  # match.arg will error on truly invalid type, so test with no-match scenario
-  # by passing valid but mismatched types — function returns empty list
-  # when intersection of selected types and available types is empty.
-  # This can't happen with match.arg, so just confirm valid types work.
-  result <- palette_gallery(type = "sequential", verbose = FALSE)
-  expect_type(result, "list")
+  # match.arg rejects strings not in the allowed set
+  expect_error(palette_gallery(type = "rainbow"), "should be one of")
 })
 
 test_that("palette_gallery() validates max_palettes and max_row", {
-  skip_if_not(palette_rds_exists(), "Compiled palette RDS not found")
+  skip_if_not(palette_data_available(), "Package palette dataset not available")
 
   expect_error(palette_gallery(max_palettes = 0),  "single positive integer")
   expect_error(palette_gallery(max_row = -1),       "single positive integer")
