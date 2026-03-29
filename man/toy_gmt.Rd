@@ -2,34 +2,22 @@
 % Please edit documentation in R/toy.R
 \name{toy_gmt}
 \alias{toy_gmt}
-\title{Generate a toy gene reference table}
+\title{Generate a toy GMT file}
 \usage{
 toy_gmt(n = 5L)
 }
 \arguments{
-\item{n}{Integer. Number of gene sets to write. Maximum 5. Default: \code{5}.}
-
-\item{species}{One of \code{"human"} or \code{"mouse"}. Default: \code{"human"}.}
+\item{n}{Integer. Number of gene sets to write. Capped at 5 (maximum
+available). Default: \code{5}.}
 }
 \value{
-A data.frame with columns \code{symbol}, \code{ensembl_id}, and
-\code{entrez_id}.
-
 Path to the temporary \code{.gmt} file.
 }
 \description{
-Generates a small simulated gene reference table for use in examples and
-tests. Not intended for real analyses — use \code{\link{download_gene_ref}}
-for a complete reference.
-}
-\examples{
-toy_gene_ref()
-toy_gene_ref("mouse", n = 10)
-Generate a toy GMT file
-
 Writes a small GMT gene set file to a temporary path for use in examples
 and tests. Not intended for real analyses.
-
+}
+\examples{
 tmp <- toy_gmt()
 gmt2df(tmp)
 }

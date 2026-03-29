@@ -2,6 +2,8 @@
 # utils_toy.R — Internal helpers for toy data generation
 # =============================================================================
 
+#' @keywords internal
+#' @noRd
 .write_tmp_gmt <- function(n = 5L) {
   sets  <- .gmt_data(n)
   lines <- vapply(sets, function(x) {
@@ -13,6 +15,8 @@
 }
 
 
+#' @keywords internal
+#' @noRd
 .gmt_data <- function(n) {
   genes <- c(
     "TP53", "BRCA1", "MYC", "EGFR", "PTEN", "CDK2", "MDM2", "RB1",
@@ -30,6 +34,8 @@
 }
 
 
+#' @keywords internal
+#' @noRd
 .gene_ref_human <- function(n) {
   genes <- structure(list(ensembl_id = c("ENSG00000199396", "ENSG00000295528",
 "ENSG00000301748", "ENSG00000253260", "ENSG00000258537", "ENSG00000008196",
@@ -113,9 +119,12 @@ ensembl_version = rep("113", 100L),
 download_date = structure(rep(20201, 100L), class = "Date")),
 row.names = c(NA, -100L), class = "data.frame")
 
+  genes$symbol[genes$symbol == ""] <- NA_character_
   genes[seq_len(min(n, nrow(genes))), ]
 }
 
+#' @keywords internal
+#' @noRd
 .gene_ref_mouse <- function(n) {
   genes <- structure(list(ensembl_id = c("ENSMUSG00000123309", "ENSMUSG00000108739",
 "ENSMUSG00000078513", "ENSMUSG00000127289", "ENSMUSG00000112032",
@@ -206,5 +215,6 @@ ensembl_version = rep("113", 100L),
 download_date = structure(rep(20201, 100L), class = "Date")),
 row.names = c(NA, -100L), class = "data.frame")
 
+  genes$symbol[genes$symbol == ""] <- NA_character_
   genes[seq_len(min(n, nrow(genes))), ]
 }
