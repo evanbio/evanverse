@@ -1,21 +1,20 @@
 Package: evanverse
 Type: Package
 Title: Utility Functions for Data Analysis and Visualization
-Version: 0.4.4
-Date: 2026-03-10
+Version: 0.5.0
+Date: 2026-03-29
 Authors@R:
     person("Evan", "Zhou", email = "evanzhou.bio@gmail.com", role = c("aut", "cre"),
            comment = c(ORCID = "0009-0009-4600-8175"))
 Author: Evan Zhou [aut, cre] (<https://orcid.org/0009-0009-4600-8175>)
 Maintainer: Evan Zhou <evanzhou.bio@gmail.com>
-Description: A comprehensive collection of utility functions for data analysis
-    and visualization in R. The package provides 60+ functions for data
-    manipulation, file handling, color palette management, bioinformatics
-    workflows, statistical analysis, plotting, and package management. Features include void value
-    handling, custom infix operators, flexible file I/O, and publication-ready
-    visualizations with sensible defaults. Implementation follows tidyverse
-    principles (Wickham et al. (2019) <doi:10.21105/joss.01686>) and incorporates
-    best practices from the R community.
+Description: A utility toolkit for data analysis and visualization in R.
+    Provides ~50 functions covering package management, color palette management,
+    data visualization (bar, pie, density, Venn, forest plots), statistical
+    testing (t-test, ANOVA, chi-square, correlation, power analysis), bioinformatics
+    utilities (gene ID conversion, GMT parsing, GEO access), and custom infix
+    operators. Implementation follows tidyverse principles (Wickham et al. (2019)
+    <doi:10.21105/joss.01686>).
 License: MIT + file LICENSE
 License_is_FOSS: yes
 License_restricts_use: no

@@ -1,38 +1,35 @@
-# CRAN Comments for evanverse 0.4.4
+# CRAN Comments for evanverse 0.5.0
 
-## Submission - Patch Release
+## Submission — Major Refactor Release
 
-This is a patch release from 0.4.3 to 0.4.4, addressing CRAN-flagged noSuggests check failures.
+This is a major release from 0.4.4 to 0.5.0. It consolidates modules, cleans up the API,
+trims dependencies, and expands test and documentation coverage.
 
-### CRAN Issues Resolved
+### Summary of Changes
 
-1. **Examples failing under noSuggests (ERROR)**: `view()` examples called `reactable` unconditionally. Fixed by wrapping examples with `if (requireNamespace("reactable", quietly = TRUE))` guard.
+* Removed deprecated/unused functions (void utilities, ggplot2 scales, I/O helpers, workflow tools)
+* Renamed several functions for consistency (`stat_samplesize` → `stat_n`, `convert_gene_id` → `gene2ensembl`/`gene2entrez`, etc.)
+* Consolidated stat module into `stat.R` + `utils_stat.R`
+* Overhauled palette module with JSON-based storage
+* Added new vignettes for all major modules
+* Trimmed dependencies: removed `data.table`, `openxlsx`, `readxl`, `tictoc`, `fs`, `magrittr`
 
-### Changes in v0.4.4
-
-* Wrapped `view()` examples with `if (requireNamespace("reactable", quietly = TRUE))` guard — prevents example failures under `_R_CHECK_DEPENDS_ONLY_=true`
-
-## Test environments
-
-* Local Windows 11 x64 (build 26200), R 4.5.1 (2025-06-13 ucrt)
-* GitHub Actions (ubuntu-latest): R-release, R-devel
-* GitHub Actions (windows-latest): R-release
-* GitHub Actions (macOS-latest): R-release
-
-## R CMD check results
+### R CMD check results
 
 ```
-── R CMD check results ──────────────────────────────────────────────────────────────────────── evanverse 0.4.4 ────
-Duration: 3m 43.8s
+── R CMD check results ─────────────────────────────────── evanverse 0.5.0 ────
+Duration: 2m 1.6s
 
 0 errors ✔ | 0 warnings ✔ | 0 notes ✔
 ```
 
-## Downstream dependencies
+### Test environments
+
+* Local: Windows 11 x64 (build 26200), R 4.5.1 (2025-06-13 ucrt)
+* GitHub Actions (ubuntu-latest): R-release, R-devel
+* GitHub Actions (windows-latest): R-release
+* GitHub Actions (macOS-latest): R-release
+
+### Downstream dependencies
 
 There are currently no downstream dependencies for this package.
-
-## Quality Assurance
-
-* **Test suite**: All tests passing
-* **Platform compatibility**: Verified on Windows, macOS, and Linux

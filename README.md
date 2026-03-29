@@ -25,356 +25,157 @@
 
 ---
 
-## ✨ Overview
+## Overview
 
-**evanverse** is a comprehensive utility package designed to streamline your R workflows. Built by [Evan Zhou](mailto:evanzhou.bio@gmail.com), it combines 60+ carefully crafted functions for data analysis, visualization, statistical testing, and bioinformatics into a single, coherent toolkit.
+**evanverse** is a utility toolkit for R providing ~50 functions across package management, data visualization, statistical testing, bioinformatics, and more. Built by [Evan Zhou](mailto:evanzhou.bio@gmail.com).
 
-### Why evanverse?
-
-```r
-# 🎯 Intuitive operators
-"Hello" %p% "World"                    # → "Hello World"
-
-# 🎨 Beautiful visualizations
-plot_venn(list(A = 1:5, B = 3:8))     # Instant Venn diagrams
-
-# 📦 Smart package management
-inst_pkg("dplyr", source = "CRAN")     # Multi-source installation
-
-# 🧬 Bioinformatics made easy
-convert_gene_id(genes, from = "SYMBOL", to = "ENSEMBL")
-```
-
----
-
-## 🚀 Installation
-
-### Stable Release (CRAN)
-
-```r
-install.packages("evanverse")
-```
-
-### Development Version
-
-```r
-# install.packages("devtools")
-devtools::install_github("evanbio/evanverse")
-```
-
-**Requirements:** R ≥ 4.1.0
-
----
-
-## 🎯 Core Features
-
-<table>
-<tr>
-<td width="50%">
-
-### 📦 Package Management
-- Multi-source installation (CRAN, GitHub, Bioconductor)
-- Version checking & updates
-- Package function exploration
-- Mirror configuration
-
-</td>
-<td width="50%">
-
-### 🎨 Visualization
-- Ready-to-use plotting functions
-- Bioinformatics color palettes
-- Venn diagrams, forest plots
-- Bar, pie, density plots
-
-</td>
-</tr>
-<tr>
-<td width="50%">
-
-### 🧬 Bioinformatics
-- Gene ID conversion
-- GMT file handling
-- GEO data downloading
-- Reference data management
-
-</td>
-<td width="50%">
-
-### 🔧 Data Processing
-- Flexible file I/O
-- Column mapping utilities
-- Void value handling
-- Data transformations
-
-</td>
-</tr>
-<tr>
-<td width="50%">
-
-### 🧮 Custom Operators
-- `%p%` - String concatenation
-- `%is%` - Identity comparison
-- `%nin%` - Not in
-- `%map%`, `%match%` - Mapping tools
-
-</td>
-<td width="50%">
-
-### 📊 Statistical Analysis
-- t-test, ANOVA, chi-square, correlation
-- Power analysis & sample size calculation
-- Publication-ready visualizations
-- Automatic assumption checking
-
-</td>
-</tr>
-<tr>
-<td width="50%">
-
-### ⚙️ Workflow Tools
-- Timer wrappers
-- Safe execution
-- Reminder system
-- Interactive viewing
-
-</td>
-<td width="50%">
-
-### 🎯 ggplot2 Integration
-- Custom color/fill scales
-- Seamless palette integration
-- Publication-quality theming
-
-</td>
-</tr>
-</table>
-
----
-
-## 💡 Quick Examples
-
-### String Operations
 ```r
 library(evanverse)
 
-# Concatenate with %p%
-first_name %p% " " %p% last_name
-
-# Check if NOT in set
-5 %nin% c(1, 2, 3, 4)  # TRUE
-```
-
-### Color Palettes
-```r
-# List available palettes
-list_palettes()
-
-# Get a palette
-colors <- get_palette("celltype", n = 5)
-
-# Preview palette
-preview_palette("celltype")
-```
-
-### File Operations
-```r
-# Flexible table reading
-data <- read_table_flex("data.csv")
-
-# Directory tree visualization
-file_tree(".", max_depth = 2)
-```
-
-### Bioinformatics Workflows
-```r
-# Convert gene IDs
-genes <- c("TP53", "BRCA1", "EGFR")
-ensembl_ids <- convert_gene_id(genes, from = "SYMBOL", to = "ENSEMBL")
-
-# Parse GMT files
-pathways <- gmt2list("pathway.gmt")
-```
-
-### Package Management
-```r
-# Install from multiple sources
-inst_pkg(c("dplyr", "ggplot2"), source = "CRAN")
-inst_pkg("limma", source = "Bioconductor")
-inst_pkg("user/repo", source = "GitHub")
-
-# Check versions
-pkg_version("evanverse")
+"Hello" %p% " " %p% "World"           # string concatenation
+inst_pkg("limma", source = "Bioc")    # multi-source package install
+plot_venn(list(A = 1:5, B = 3:8))    # instant Venn diagram
+quick_ttest(df, "group", "value")     # t-test with auto assumption check
+gene2ensembl(c("TP53", "BRCA1"))      # gene ID conversion
 ```
 
 ---
 
-## 📖 Function Categories
+## Installation
+
+```r
+# Stable release (CRAN)
+install.packages("evanverse")
+
+# Development version
+devtools::install_github("evanbio/evanverse")
+```
+
+**Requires:** R ≥ 4.1.0
+
+---
+
+## Function Reference
 
 <details>
-<summary><b>📦 Package Management</b> (6 functions)</summary>
+<summary><b>📦 Package Management</b> (6)</summary>
 
-- `check_pkg()` - Check if packages are installed
-- `inst_pkg()` - Install packages from multiple sources
-- `update_pkg()` - Update installed packages
-- `pkg_version()` - Get package version
-- `pkg_functions()` - List package functions
-- `set_mirror()` - Configure CRAN mirror
+- `check_pkg()` — check if packages are installed
+- `inst_pkg()` — install from CRAN / GitHub / Bioconductor
+- `update_pkg()` — update installed packages
+- `pkg_version()` — get package version
+- `pkg_functions()` — list functions in a package
+- `set_mirror()` — configure CRAN mirror
 
 </details>
 
 <details>
-<summary><b>🎨 Visualization & Plotting</b> (5 functions)</summary>
+<summary><b>🎨 Visualization</b> (5)</summary>
 
-- `plot_venn()` - Venn diagrams
-- `plot_forest()` - Forest plots (with advanced customization)
-- `plot_bar()` - Bar charts
-- `plot_pie()` - Pie charts
-- `plot_density()` - Density plots
-
-</details>
-
-<details>
-<summary><b>📊 Statistical Analysis</b> (6 functions)</summary>
-
-- `quick_ttest()` - Intelligent t-test with assumption checking
-- `quick_anova()` - One-way ANOVA with post-hoc tests
-- `quick_chisq()` - Chi-square test with visualization
-- `quick_cor()` - Correlation analysis with heatmap
-- `stat_power()` - Statistical power analysis
-- `stat_samplesize()` - Sample size calculation
+- `plot_venn()` — Venn diagrams
+- `plot_forest()` — forest plots
+- `plot_bar()` — bar charts
+- `plot_pie()` — pie charts
+- `plot_density()` — density plots
 
 </details>
 
 <details>
-<summary><b>🎯 ggplot2 Integration</b> (3 functions)</summary>
+<summary><b>📊 Statistical Analysis</b> (6)</summary>
 
-- `scale_color_evanverse()` - Color scale for ggplot2
-- `scale_fill_evanverse()` - Fill scale for ggplot2
-- `scale_colour_evanverse()` - Alias for British spelling
-
-</details>
-
-<details>
-<summary><b>🌈 Color Palettes</b> (9 functions)</summary>
-
-- `get_palette()` - Retrieve color palette
-- `list_palettes()` - List available palettes
-- `create_palette()` - Create custom palette
-- `preview_palette()` - Preview palette colors
-- `bio_palette_gallery()` - Browse bio palettes
-- `compile_palettes()` - Compile palette data
-- `remove_palette()` - Remove palette
-- `hex2rgb()` - Convert hex to RGB
-- `rgb2hex()` - Convert RGB to hex
+- `quick_ttest()` — t-test with automatic method selection
+- `quick_anova()` — one-way ANOVA with post-hoc tests
+- `quick_chisq()` — chi-square / Fisher exact test
+- `quick_cor()` — correlation analysis with heatmap
+- `stat_power()` — statistical power analysis
+- `stat_n()` — sample size calculation
 
 </details>
 
 <details>
-<summary><b>📁 File & Data I/O</b> (10 functions)</summary>
+<summary><b>🌈 Color Palettes</b> (9)</summary>
 
-- `read_table_flex()` - Flexible table reading
-- `read_excel_flex()` - Flexible Excel reading
-- `write_xlsx_flex()` - Flexible Excel writing
-- `download_url()` - Download from URL
-- `download_batch()` - Batch downloads
-- `download_geo_data()` - Download GEO datasets
-- `file_info()` - File information
-- `file_tree()` - Directory tree
-- `get_ext()` - Get file extension
-- `view()` - Interactive data viewer
+- `get_palette()` — retrieve a palette
+- `list_palettes()` — list available palettes
+- `create_palette()` — create a custom palette
+- `preview_palette()` — preview palette colors
+- `palette_gallery()` — browse all palettes
+- `compile_palettes()` — compile palette data
+- `remove_palette()` — remove a palette
+- `hex2rgb()` / `rgb2hex()` — color conversion
 
 </details>
 
 <details>
-<summary><b>🧬 Bioinformatics</b> (4 functions)</summary>
+<summary><b>📁 File & Download</b> (7)</summary>
 
-- `convert_gene_id()` - Gene ID conversion
-- `download_gene_ref()` - Download gene references
-- `gmt2df()` - GMT to data frame
-- `gmt2list()` - GMT to list
-
-</details>
-
-<details>
-<summary><b>🔧 Data Processing</b> (10 functions)</summary>
-
-- `df2list()` - Data frame to list
-- `map_column()` - Map column values
-- `is_void()` - Check for void values
-- `any_void()` - Any void values
-- `drop_void()` - Remove void values
-- `replace_void()` - Replace void values
-- `cols_with_void()` - Columns with voids
-- `rows_with_void()` - Rows with voids
+- `download_url()` — download a single URL
+- `download_batch()` — batch downloads
+- `download_geo()` — download GEO datasets
+- `file_info()` — file metadata
+- `file_ls()` — list files with metadata
+- `file_tree()` — directory tree visualization
+- `view()` — interactive data viewer
 
 </details>
 
 <details>
-<summary><b>🧮 Operators & Logic</b> (8 functions)</summary>
+<summary><b>🧬 Bioinformatics</b> (5)</summary>
 
-- `%p%` - String concatenation operator
-- `%is%` - Identity comparison
-- `%nin%` - Not in operator
-- `%map%` - Mapping operator
-- `%match%` - Match operator
-- `combine_logic()` - Combine logical vectors
-- `comb()` - Combinations
-- `perm()` - Permutations
+- `gene2ensembl()` — convert gene symbols to Ensembl IDs
+- `gene2entrez()` — convert gene symbols to Entrez IDs
+- `download_gene_ref()` — download gene reference table
+- `gmt2df()` — parse GMT to data frame
+- `gmt2list()` — parse GMT to list
 
 </details>
 
 <details>
-<summary><b>⚙️ Workflow Tools</b> (3 functions)</summary>
+<summary><b>🔧 Data Processing</b> (3)</summary>
 
-- `with_timer()` - Execute with timing
-- `remind()` - Set reminders
-- `safe_execute()` - Safe function execution
+- `df2list()` — data frame to named list
+- `df2vect()` — data frame column to named vector
+- `recode_column()` — recode column values by mapping
+
+</details>
+
+<details>
+<summary><b>🧮 Operators & Combinatorics</b> (7)</summary>
+
+- `%p%` — string concatenation
+- `%is%` — identity check
+- `%nin%` — not-in operator
+- `%map%` — mapping operator
+- `%match%` — match operator
+- `comb()` — combinations
+- `perm()` — permutations
+
+</details>
+
+<details>
+<summary><b>🧪 Toy Data</b> (2)</summary>
+
+- `toy_gene_ref()` — small gene reference table for testing
+- `toy_gmt()` — small GMT file for testing
 
 </details>
 
 ---
 
-## 📚 Documentation
+## Documentation
 
-Complete documentation with examples and vignettes:
+Full documentation, vignettes, and function reference:
 
 👉 **[https://evanbio.github.io/evanverse/](https://evanbio.github.io/evanverse/)**
 
 ---
 
-## 🤝 Contributing
+## License
 
-We welcome contributions! Please see our [Contributing Guide](CONTRIBUTING.md) for details.
-
-- 🐛 [Report bugs](https://github.com/evanbio/evanverse/issues/new?template=bug_report.yml)
-- 💡 [Request features](https://github.com/evanbio/evanverse/issues/new?template=feature_request.yml)
-- 📖 [Improve docs](https://github.com/evanbio/evanverse/issues/new?template=documentation.yml)
-- ❓ [Ask questions](https://github.com/evanbio/evanverse/issues/new?template=question.yml)
-
----
-
-## 📜 License
-
-MIT License © 2025-2026 [Evan Zhou](mailto:evanzhou.bio@gmail.com)
-
-See [LICENSE.md](LICENSE.md) for details.
-
----
-
-## 📊 Project Status
-
-- ✅ **CRAN Published** - Version 0.4.4
-- ✅ **Stable Lifecycle** - Production ready
-- ✅ **Full Test Coverage** - Comprehensive test suite
-- ✅ **Active Maintenance** - Regular updates
-
----
+MIT License © 2025–2026 [Evan Zhou](mailto:evanzhou.bio@gmail.com)
 
 <div align="center">
 
 **Made with ❤️ by [Evan Zhou](https://github.com/evanbio)**
-
-[⬆ Back to Top](#evanverse)
 
 </div>

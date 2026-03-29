@@ -25,356 +25,157 @@
 
 ---
 
-## ✨ 项目简介
+## 项目简介
 
-**evanverse** 是一个全面的 R 工具包，旨在简化您的数据分析工作流程。由 [Evan Zhou](mailto:evanzhou.bio@gmail.com) 开发，将 60+ 个精心设计的函数集成到一个统一的工具包中，涵盖数据分析、可视化、统计检验和生物信息学等领域。
+**evanverse** 是一个 R 工具包，提供约 50 个函数，涵盖包管理、数据可视化、统计检验、生物信息学等领域。由 [Evan Zhou](mailto:evanzhou.bio@gmail.com) 开发。
 
-### 为什么选择 evanverse？
-
-```r
-# 🎯 直观的操作符
-"你好" %p% "世界"                      # → "你好世界"
-
-# 🎨 优雅的可视化
-plot_venn(list(A = 1:5, B = 3:8))     # 快速绘制韦恩图
-
-# 📦 智能包管理
-inst_pkg("dplyr", source = "CRAN")     # 多源安装包
-
-# 🧬 生物信息学变简单
-convert_gene_id(genes, from = "SYMBOL", to = "ENSEMBL")
-```
-
----
-
-## 🚀 安装
-
-### 稳定版本 (CRAN)
-
-```r
-install.packages("evanverse")
-```
-
-### 开发版本
-
-```r
-# install.packages("devtools")
-devtools::install_github("evanbio/evanverse")
-```
-
-**系统要求:** R ≥ 4.1.0
-
----
-
-## 🎯 核心功能
-
-<table>
-<tr>
-<td width="50%">
-
-### 📦 包管理
-- 多源安装 (CRAN、GitHub、Bioconductor)
-- 版本检查与更新
-- 包函数探索
-- 镜像配置
-
-</td>
-<td width="50%">
-
-### 🎨 数据可视化
-- 开箱即用的绘图函数
-- 生物信息学配色方案
-- 韦恩图、森林图
-- 柱状图、饼图、密度图
-
-</td>
-</tr>
-<tr>
-<td width="50%">
-
-### 🧬 生物信息学
-- 基因 ID 转换
-- GMT 文件处理
-- GEO 数据下载
-- 参考数据管理
-
-</td>
-<td width="50%">
-
-### 🔧 数据处理
-- 灵活的文件读写
-- 列映射工具
-- 空值处理
-- 数据转换
-
-</td>
-</tr>
-<tr>
-<td width="50%">
-
-### 🧮 自定义操作符
-- `%p%` - 字符串拼接
-- `%is%` - 身份比较
-- `%nin%` - 非成员运算
-- `%map%`、`%match%` - 映射工具
-
-</td>
-<td width="50%">
-
-### 📊 统计分析
-- t 检验、ANOVA、卡方检验、相关性分析
-- 功效分析与样本量计算
-- 出版级可视化输出
-- 自动假设检验
-
-</td>
-</tr>
-<tr>
-<td width="50%">
-
-### ⚙️ 工作流工具
-- 计时器包装
-- 安全执行
-- 提醒系统
-- 交互式查看
-
-</td>
-<td width="50%">
-
-### 🎯 ggplot2 集成
-- 自定义颜色/填充标度
-- 无缝配色方案集成
-- 出版级主题设置
-
-</td>
-</tr>
-</table>
-
----
-
-## 💡 快速示例
-
-### 字符串操作
 ```r
 library(evanverse)
 
-# 使用 %p% 拼接字符串
-first_name %p% " " %p% last_name
-
-# 检查元素不在集合中
-5 %nin% c(1, 2, 3, 4)  # TRUE
-```
-
-### 配色方案
-```r
-# 列出所有可用配色
-list_palettes()
-
-# 获取配色方案
-colors <- get_palette("celltype", n = 5)
-
-# 预览配色
-preview_palette("celltype")
-```
-
-### 文件操作
-```r
-# 灵活读取表格数据
-data <- read_table_flex("data.csv")
-
-# 可视化目录树
-file_tree(".", max_depth = 2)
-```
-
-### 生物信息学工作流
-```r
-# 转换基因 ID
-genes <- c("TP53", "BRCA1", "EGFR")
-ensembl_ids <- convert_gene_id(genes, from = "SYMBOL", to = "ENSEMBL")
-
-# 解析 GMT 文件
-pathways <- gmt2list("pathway.gmt")
-```
-
-### 包管理
-```r
-# 从多个源安装包
-inst_pkg(c("dplyr", "ggplot2"), source = "CRAN")
-inst_pkg("limma", source = "Bioconductor")
-inst_pkg("user/repo", source = "GitHub")
-
-# 检查版本
-pkg_version("evanverse")
+"你好" %p% "世界"                      # 字符串拼接
+inst_pkg("limma", source = "Bioc")    # 多源安装包
+plot_venn(list(A = 1:5, B = 3:8))    # 快速绘制韦恩图
+quick_ttest(df, "group", "value")     # 自动选择 t 检验方法
+gene2ensembl(c("TP53", "BRCA1"))      # 基因 ID 转换
 ```
 
 ---
 
-## 📖 功能分类
+## 安装
+
+```r
+# 稳定版（CRAN）
+install.packages("evanverse")
+
+# 开发版
+devtools::install_github("evanbio/evanverse")
+```
+
+**系统要求：** R ≥ 4.1.0
+
+---
+
+## 函数列表
 
 <details>
-<summary><b>📦 包管理</b> (6 个函数)</summary>
+<summary><b>📦 包管理</b>（6 个）</summary>
 
-- `check_pkg()` - 检查包是否已安装
-- `inst_pkg()` - 从多个源安装包
-- `update_pkg()` - 更新已安装的包
-- `pkg_version()` - 获取包版本
-- `pkg_functions()` - 列出包中的函数
-- `set_mirror()` - 配置 CRAN 镜像
+- `check_pkg()` — 检查包是否已安装
+- `inst_pkg()` — 从 CRAN / GitHub / Bioconductor 安装
+- `update_pkg()` — 更新已安装的包
+- `pkg_version()` — 获取包版本
+- `pkg_functions()` — 列出包中的函数
+- `set_mirror()` — 配置 CRAN 镜像
 
 </details>
 
 <details>
-<summary><b>🎨 可视化与绘图</b> (5 个函数)</summary>
+<summary><b>🎨 数据可视化</b>（5 个）</summary>
 
-- `plot_venn()` - 韦恩图
-- `plot_forest()` - 森林图（支持高级自定义）
-- `plot_bar()` - 柱状图
-- `plot_pie()` - 饼图
-- `plot_density()` - 密度图
-
-</details>
-
-<details>
-<summary><b>📊 统计分析</b> (6 个函数)</summary>
-
-- `quick_ttest()` - 智能 t 检验（自动假设检验）
-- `quick_anova()` - 单因素方差分析（含事后检验）
-- `quick_chisq()` - 卡方检验（含可视化）
-- `quick_cor()` - 相关性分析（含热力图）
-- `stat_power()` - 统计功效分析
-- `stat_samplesize()` - 样本量计算
+- `plot_venn()` — 韦恩图
+- `plot_forest()` — 森林图
+- `plot_bar()` — 柱状图
+- `plot_pie()` — 饼图
+- `plot_density()` — 密度图
 
 </details>
 
 <details>
-<summary><b>🎯 ggplot2 集成</b> (3 个函数)</summary>
+<summary><b>📊 统计分析</b>（6 个）</summary>
 
-- `scale_color_evanverse()` - ggplot2 颜色标度
-- `scale_fill_evanverse()` - ggplot2 填充标度
-- `scale_colour_evanverse()` - 英式拼写别名
-
-</details>
-
-<details>
-<summary><b>🌈 配色方案</b> (9 个函数)</summary>
-
-- `get_palette()` - 获取配色方案
-- `list_palettes()` - 列出可用配色
-- `create_palette()` - 创建自定义配色
-- `preview_palette()` - 预览配色
-- `bio_palette_gallery()` - 浏览生物配色库
-- `compile_palettes()` - 编译配色数据
-- `remove_palette()` - 删除配色
-- `hex2rgb()` - 十六进制转 RGB
-- `rgb2hex()` - RGB 转十六进制
+- `quick_ttest()` — 自动方法选择的 t 检验
+- `quick_anova()` — 单因素方差分析（含事后检验）
+- `quick_chisq()` — 卡方 / Fisher 精确检验
+- `quick_cor()` — 相关性分析（含热力图）
+- `stat_power()` — 统计功效分析
+- `stat_n()` — 样本量计算
 
 </details>
 
 <details>
-<summary><b>📁 文件与数据读写</b> (10 个函数)</summary>
+<summary><b>🌈 配色方案</b>（9 个）</summary>
 
-- `read_table_flex()` - 灵活读取表格
-- `read_excel_flex()` - 灵活读取 Excel
-- `write_xlsx_flex()` - 灵活写入 Excel
-- `download_url()` - 从 URL 下载
-- `download_batch()` - 批量下载
-- `download_geo_data()` - 下载 GEO 数据集
-- `file_info()` - 文件信息
-- `file_tree()` - 目录树
-- `get_ext()` - 获取文件扩展名
-- `view()` - 交互式数据查看器
+- `get_palette()` — 获取配色
+- `list_palettes()` — 列出可用配色
+- `create_palette()` — 创建自定义配色
+- `preview_palette()` — 预览配色
+- `palette_gallery()` — 浏览全部配色
+- `compile_palettes()` — 编译配色数据
+- `remove_palette()` — 删除配色
+- `hex2rgb()` / `rgb2hex()` — 颜色格式转换
 
 </details>
 
 <details>
-<summary><b>🧬 生物信息学</b> (4 个函数)</summary>
+<summary><b>📁 文件与下载</b>（7 个）</summary>
 
-- `convert_gene_id()` - 基因 ID 转换
-- `download_gene_ref()` - 下载基因参考数据
-- `gmt2df()` - GMT 转数据框
-- `gmt2list()` - GMT 转列表
-
-</details>
-
-<details>
-<summary><b>🔧 数据处理</b> (10 个函数)</summary>
-
-- `df2list()` - 数据框转列表
-- `map_column()` - 映射列值
-- `is_void()` - 检查空值
-- `any_void()` - 是否有空值
-- `drop_void()` - 删除空值
-- `replace_void()` - 替换空值
-- `cols_with_void()` - 含空值的列
-- `rows_with_void()` - 含空值的行
+- `download_url()` — 下载单个 URL
+- `download_batch()` — 批量下载
+- `download_geo()` — 下载 GEO 数据集
+- `file_info()` — 文件元信息
+- `file_ls()` — 列出文件及元信息
+- `file_tree()` — 目录树可视化
+- `view()` — 交互式数据查看
 
 </details>
 
 <details>
-<summary><b>🧮 操作符与逻辑</b> (8 个函数)</summary>
+<summary><b>🧬 生物信息学</b>（5 个）</summary>
 
-- `%p%` - 字符串拼接操作符
-- `%is%` - 身份比较
-- `%nin%` - 非成员操作符
-- `%map%` - 映射操作符
-- `%match%` - 匹配操作符
-- `combine_logic()` - 组合逻辑向量
-- `comb()` - 组合数
-- `perm()` - 排列数
+- `gene2ensembl()` — 基因符号转 Ensembl ID
+- `gene2entrez()` — 基因符号转 Entrez ID
+- `download_gene_ref()` — 下载基因参考表
+- `gmt2df()` — GMT 解析为数据框
+- `gmt2list()` — GMT 解析为列表
 
 </details>
 
 <details>
-<summary><b>⚙️ 工作流工具</b> (3 个函数)</summary>
+<summary><b>🔧 数据处理</b>（3 个）</summary>
 
-- `with_timer()` - 计时执行
-- `remind()` - 设置提醒
-- `safe_execute()` - 安全函数执行
+- `df2list()` — 数据框转命名列表
+- `df2vect()` — 数据框列转命名向量
+- `recode_column()` — 按映射表重编码列值
+
+</details>
+
+<details>
+<summary><b>🧮 操作符与组合数学</b>（7 个）</summary>
+
+- `%p%` — 字符串拼接
+- `%is%` — 身份比较
+- `%nin%` — 非成员判断
+- `%map%` — 映射操作符
+- `%match%` — 匹配操作符
+- `comb()` — 组合数
+- `perm()` — 排列数
+
+</details>
+
+<details>
+<summary><b>🧪 测试数据</b>（2 个）</summary>
+
+- `toy_gene_ref()` — 用于测试的小型基因参考表
+- `toy_gmt()` — 用于测试的小型 GMT 文件
 
 </details>
 
 ---
 
-## 📚 文档资源
+## 文档资源
 
-完整的文档、示例和教程：
+完整文档、教程和函数参考：
 
 👉 **[https://evanbio.github.io/evanverse/](https://evanbio.github.io/evanverse/)**
 
 ---
 
-## 🤝 参与贡献
+## 开源协议
 
-我们欢迎各种形式的贡献！详情请参阅 [贡献指南](CONTRIBUTING.md)。
-
-- 🐛 [报告 Bug](https://github.com/evanbio/evanverse/issues/new?template=bug_report.yml)
-- 💡 [功能建议](https://github.com/evanbio/evanverse/issues/new?template=feature_request.yml)
-- 📖 [改进文档](https://github.com/evanbio/evanverse/issues/new?template=documentation.yml)
-- ❓ [提问交流](https://github.com/evanbio/evanverse/issues/new?template=question.yml)
-
----
-
-## 📜 开源协议
-
-MIT License © 2025-2026 [Evan Zhou](mailto:evanzhou.bio@gmail.com)
-
-详见 [LICENSE.md](LICENSE.md)。
-
----
-
-## 📊 项目状态
-
-- ✅ **已发布至 CRAN** - 版本 0.4.4
-- ✅ **稳定生命周期** - 生产环境可用
-- ✅ **全面测试覆盖** - 完善的测试套件
-- ✅ **持续维护** - 定期更新
-
----
+MIT License © 2025–2026 [Evan Zhou](mailto:evanzhou.bio@gmail.com)
 
 <div align="center">
 
 **用 ❤️ 制作 by [Evan Zhou](https://github.com/evanbio)**
-
-[⬆ 返回顶部](#evanverse)
 
 </div>

@@ -1,3 +1,74 @@
+# evanverse 0.5.0
+
+*Released: March 2026*
+
+**Major Refactor Release** — Module consolidation, API cleanup, dependency trimming, and expanded test/documentation coverage.
+
+---
+
+### Breaking Changes
+
+* **Removed functions**: `is_void()`, `any_void()`, `drop_void()`, `replace_void()`, `cols_with_void()`, `rows_with_void()` (void module deleted)
+* **Removed functions**: `scale_color_evanverse()`, `scale_fill_evanverse()`, `scale_colour_evanverse()` (ggplot2 integration removed)
+* **Removed functions**: `read_table_flex()`, `read_excel_flex()`, `write_xlsx_flex()`, `get_ext()` (I/O utilities removed)
+* **Removed functions**: `with_timer()`, `remind()`, `safe_execute()`, `combine_logic()` (workflow tools removed)
+* **Renamed**: `stat_samplesize()` → `stat_n()`
+* **Renamed**: `bio_palette_gallery()` → `palette_gallery()`
+* **Renamed**: `map_column()` → `recode_column()`
+* **Renamed**: `convert_gene_id()` → `gene2ensembl()` + `gene2entrez()`
+* **Renamed**: `download_geo_data()` → `download_geo()`
+
+---
+
+### New Functions
+
+* `stat_n()` — sample size calculation (replaces `stat_samplesize()`)
+* `gene2ensembl()` / `gene2entrez()` — gene symbol conversion (replaces `convert_gene_id()`)
+* `toy_gene_ref()` — small gene reference table for testing and examples
+* `file_ls()` — list files in a directory with metadata
+* `df2vect()` — convert a data frame column to a named vector
+* `recode_column()` — recode column values by mapping table (replaces `map_column()`)
+
+---
+
+### Module Refactors
+
+* **Stat module**: consolidated `quick_anova()`, `quick_chisq()`, `quick_cor()`, `quick_ttest()`, `stat_power()`, and `stat_n()` into `stat.R`; extracted shared `pwr::` dispatch helpers into `utils_stat.R`; result class renamed to `power_result`
+* **Palette module**: overhauled with JSON-based storage and compiled `palettes` dataset; `palette_gallery()` replaces `bio_palette_gallery()`
+* **Plot module**: fixed `sort_by` union handling, NA checks, gradient palette validation
+* **Toy module**: exported `toy_gene_ref()`; fixed empty symbol strings → `NA_character_` in built-in gene ref data
+* **Pkg module**: renamed `utils_biopackage.R` → `utils_pkg.R`; internals cleaned up
+* **Base module**: moved `perm()` and `comb()` from stat to base
+
+---
+
+### Dependency Changes
+
+* **Removed from Imports**: `data.table`, `openxlsx`, `readxl`, `tictoc`, `fs`, `magrittr`
+* **Removed from Suggests**: `writexl`, `RColorBrewer`
+* **Moved to Imports**: `forestploter` (was Suggests)
+* **Added to Imports**: `rlang`
+
+---
+
+### Documentation
+
+* New vignettes: `stat`, `toy`, `base`, `ops`, `palette`, `pkg`, `plot`
+* Updated `get-started`, `install`, `plot` vignettes
+* `CONTRIBUTING.md` simplified to essential guidelines
+
+---
+
+### Bug Fixes
+
+* Fixed `file_ls()` example to use `tempdir()` — passes R CMD check
+* Fixed `create_palette()` example line widths — resolves `Rd line widths` NOTE
+* Fixed `quick_ttest()` and `quick_anova()` examples to pass column names as strings
+* Added `skip_on_ci()` to BioMart network test — prevents CI failures from Ensembl server
+* Suppressed Bioconductor `S4Arrays`/`DelayedArray` namespace warning in `download_geo()` test
+
+---
+
 # evanverse 0.4.4
 
 *Released: March 2026*

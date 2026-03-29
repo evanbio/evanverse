@@ -1,6 +1,6 @@
 # evanverse
 
-> A comprehensive R utility package for data science and bioinformatics workflows
+> A utility toolkit for R — data science & bioinformatics workflows
 
 [![CRAN](https://www.r-pkg.org/badges/version/evanverse)](https://CRAN.R-project.org/package=evanverse)
 [![R-CMD-check](https://github.com/evanbio/evanverse/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/evanbio/evanverse/actions/workflows/R-CMD-check.yaml)
@@ -11,68 +11,45 @@
 
 ## Overview
 
-**evanverse** provides 60+ utility functions designed to streamline R workflows across data analysis, visualization, statistical testing, and bioinformatics. Built with a focus on simplicity and reproducibility.
+**evanverse** provides ~50 functions across package management, visualization, statistical analysis, bioinformatics, and more.
 
 ## Installation
 
 ```r
-# Stable release from CRAN
 install.packages("evanverse")
-
-# Development version from GitHub
-devtools::install_github("evanbio/evanverse")
 ```
-
-**Requirements:** R ≥ 4.1.0
-
-## Key Features
-
-**Package Management** — Multi-source installation (CRAN, GitHub, Bioconductor), version checking, and automated updates
-
-**Data Visualization** — Publication-ready plots with bioinformatics-focused color palettes and professional themes
-
-**Statistical Analysis** — t-test, ANOVA, chi-square, correlation analysis, power analysis, and sample size calculation with automatic assumption checking
-
-**Bioinformatics Tools** — Gene ID conversion, GMT file parsing, GEO data access, and reference management
-
-**Data Processing** — Flexible I/O, void value handling, column mapping, and data transformations
-
-**Custom Operators** — Intuitive infix operators for string manipulation, set operations, and data mapping
-
-**Workflow Utilities** — Timer wrappers, safe execution, and productivity-enhancing development tools
 
 ## Quick Start
 
 ```r
 library(evanverse)
 
-# String concatenation with %p%
-"Hello" %p% " " %p% "World"  # → "Hello World"
-
-# Install packages from multiple sources
-inst_pkg("dplyr", source = "CRAN")
-inst_pkg("limma", source = "Bioconductor")
-
-# Create professional visualizations
-plot_venn(list(A = 1:5, B = 3:8))
-
-# Convert gene identifiers
-convert_gene_id(c("TP53", "BRCA1"), from = "SYMBOL", to = "ENSEMBL")
+"Hello" %p% " " %p% "World"           # string concatenation
+inst_pkg("limma", source = "Bioc")    # multi-source install
+plot_venn(list(A = 1:5, B = 3:8))    # Venn diagram
+quick_ttest(df, "group", "value")     # t-test with auto method selection
+gene2ensembl(c("TP53", "BRCA1"))      # gene ID conversion
+stat_power(n = 30, effect_size = 0.5) # power analysis
 ```
+
+## Function Areas
+
+| Area | Functions |
+|---|---|
+| Package management | `inst_pkg()`, `check_pkg()`, `update_pkg()`, `set_mirror()`, ... |
+| Visualization | `plot_bar()`, `plot_venn()`, `plot_forest()`, `plot_pie()`, `plot_density()` |
+| Statistical analysis | `quick_ttest()`, `quick_anova()`, `quick_chisq()`, `quick_cor()`, `stat_power()`, `stat_n()` |
+| Color palettes | `get_palette()`, `create_palette()`, `preview_palette()`, `palette_gallery()`, ... |
+| File & download | `file_ls()`, `file_tree()`, `download_url()`, `download_geo()`, ... |
+| Bioinformatics | `gene2ensembl()`, `gene2entrez()`, `gmt2df()`, `gmt2list()`, ... |
+| Operators | `%p%`, `%nin%`, `%is%`, `%map%`, `%match%` |
 
 ## Documentation
 
-- **[Getting Started Guide](articles/get-started.html)** — Installation and basic usage
-- **[Comprehensive Guide](articles/comprehensive-guide.html)** — Complete feature overview
-- **[Function Reference](reference/index.html)** — Detailed API documentation
-- **[Vignettes](articles/index.html)** — Topic-specific tutorials
-
-## Getting Help
-
-- Browse the [function reference](reference/index.html) for detailed documentation
-- Read [vignettes](articles/index.html) for comprehensive examples
-- Report issues on [GitHub](https://github.com/evanbio/evanverse/issues)
+- [Get Started](articles/get-started.html)
+- [Function Reference](reference/index.html)
+- [Vignettes](articles/index.html)
 
 ## License
 
-MIT License © 2025-2026 Evan Zhou
+MIT License © 2025–2026 Evan Zhou
