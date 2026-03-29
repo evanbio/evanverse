@@ -301,6 +301,7 @@ reference:
     Bioinformatics-focused color palette system with creation,
     management, and visualization tools.
   contents:
+  - palettes
   - get_palette
   - list_palettes
   - create_palette
