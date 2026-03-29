@@ -27,9 +27,9 @@ writeLines("hello", f1)
 writeLines("a,b\\n1,2", f2)
 file_info(c(f1, f2))
 #>                   file size_MB       modified_time
-#> 1 file1c4934549a56.txt       0 2026-03-29 15:21:34
-#> 2 file1c4910164596.csv       0 2026-03-29 15:21:34
+#> 1  file1c4d9a99eaf.txt       0 2026-03-29 15:25:44
+#> 2 file1c4d158cf86f.csv       0 2026-03-29 15:25:44
 #>                                   path
-#> 1 /tmp/RtmpDTkdcL/file1c4934549a56.txt
-#> 2 /tmp/RtmpDTkdcL/file1c4910164596.csv
+#> 1  /tmp/RtmpqUNPwK/file1c4d9a99eaf.txt
+#> 2 /tmp/RtmpqUNPwK/file1c4d158cf86f.csv
 ```

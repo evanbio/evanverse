@@ -31,33 +31,33 @@ A data.frame with columns: `file`, `size_MB`, `modified_time`, `path`.
 ``` r
 file_ls(tempdir())
 #>                                      file size_MB       modified_time
-#> 1  bslib-03915c98e1bba073af2cc4dfd18baa4a   0.004 2026-03-29 15:21:25
-#> 2                                 downlit   0.004 2026-03-29 15:21:34
-#> 3                    file1c4910164596.csv   0.000 2026-03-29 15:21:34
-#> 4                        file1c492a4c8516   0.000 2026-03-29 15:21:32
-#> 5                        file1c49303625e4   0.000 2026-03-29 15:21:28
-#> 6                        file1c4930a5f987   0.004 2026-03-29 15:21:27
-#> 7                    file1c4934549a56.txt   0.000 2026-03-29 15:21:34
-#> 8                        file1c4939a1b96a   0.004 2026-03-29 15:21:25
-#> 9                        file1c4946f182c5   0.004 2026-03-29 15:21:25
-#> 10                        file1c4947f074a   0.004 2026-03-29 15:21:27
-#> 11                       file1c4952392b97   0.000 2026-03-29 15:21:33
-#> 12                       file1c495f80176a   0.004 2026-03-29 15:21:25
-#> 13                       file1c4977984ac2   0.004 2026-03-29 15:21:27
+#> 1  bslib-03915c98e1bba073af2cc4dfd18baa4a   0.004 2026-03-29 15:25:34
+#> 2                                 downlit   0.004 2026-03-29 15:25:43
+#> 3                    file1c4d158cf86f.csv   0.000 2026-03-29 15:25:44
+#> 4                        file1c4d174201ae   0.004 2026-03-29 15:25:34
+#> 5                        file1c4d1cf72bb3   0.004 2026-03-29 15:25:36
+#> 6                        file1c4d4c451d55   0.000 2026-03-29 15:25:43
+#> 7                        file1c4d4f0bc237   0.000 2026-03-29 15:25:42
+#> 8                        file1c4d6553d411   0.004 2026-03-29 15:25:36
+#> 9                        file1c4d66848fda   0.004 2026-03-29 15:25:34
+#> 10                       file1c4d7ec01a09   0.000 2026-03-29 15:25:37
+#> 11                    file1c4d9a99eaf.txt   0.000 2026-03-29 15:25:44
+#> 12                         file1c4dd0c9f9   0.004 2026-03-29 15:25:34
+#> 13                        file1c4df20481e   0.004 2026-03-29 15:25:36
 #>                                                      path
-#> 1  /tmp/RtmpDTkdcL/bslib-03915c98e1bba073af2cc4dfd18baa4a
-#> 2                                 /tmp/RtmpDTkdcL/downlit
-#> 3                    /tmp/RtmpDTkdcL/file1c4910164596.csv
-#> 4                        /tmp/RtmpDTkdcL/file1c492a4c8516
-#> 5                        /tmp/RtmpDTkdcL/file1c49303625e4
-#> 6                        /tmp/RtmpDTkdcL/file1c4930a5f987
-#> 7                    /tmp/RtmpDTkdcL/file1c4934549a56.txt
-#> 8                        /tmp/RtmpDTkdcL/file1c4939a1b96a
-#> 9                        /tmp/RtmpDTkdcL/file1c4946f182c5
-#> 10                        /tmp/RtmpDTkdcL/file1c4947f074a
-#> 11                       /tmp/RtmpDTkdcL/file1c4952392b97
-#> 12                       /tmp/RtmpDTkdcL/file1c495f80176a
-#> 13                       /tmp/RtmpDTkdcL/file1c4977984ac2
+#> 1  /tmp/RtmpqUNPwK/bslib-03915c98e1bba073af2cc4dfd18baa4a
+#> 2                                 /tmp/RtmpqUNPwK/downlit
+#> 3                    /tmp/RtmpqUNPwK/file1c4d158cf86f.csv
+#> 4                        /tmp/RtmpqUNPwK/file1c4d174201ae
+#> 5                        /tmp/RtmpqUNPwK/file1c4d1cf72bb3
+#> 6                        /tmp/RtmpqUNPwK/file1c4d4c451d55
+#> 7                        /tmp/RtmpqUNPwK/file1c4d4f0bc237
+#> 8                        /tmp/RtmpqUNPwK/file1c4d6553d411
+#> 9                        /tmp/RtmpqUNPwK/file1c4d66848fda
+#> 10                       /tmp/RtmpqUNPwK/file1c4d7ec01a09
+#> 11                    /tmp/RtmpqUNPwK/file1c4d9a99eaf.txt
+#> 12                         /tmp/RtmpqUNPwK/file1c4dd0c9f9
+#> 13                        /tmp/RtmpqUNPwK/file1c4df20481e
 file_ls(tempdir(), pattern = "\\.R$", recursive = TRUE)
 #> [1] file          size_MB       modified_time path         
 #> <0 rows> (or 0-length row.names)
