@@ -93,7 +93,7 @@ on expected cell frequencies when \code{method = "auto"}.
 \itemize{
 \item 2×2 table with any expected frequency < 5: Fisher's exact test
 \item >20\\% of cells with expected frequency < 5: chi-square with warning
-\item 2×2 table with 5 ≤ expected frequency < 10: Yates' correction applied
+\item 2x2 table with 5 <= expected frequency < 10: Yates' correction applied
 \item Otherwise: standard chi-square test
 }
 

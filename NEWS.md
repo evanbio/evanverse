@@ -1,3 +1,17 @@
+# evanverse 0.5.1
+
+*Released: March 2026*
+
+**CRAN Patch** — Fix Unicode character in Rd documentation causing LaTeX PDF build failure.
+
+---
+
+### Bug Fixes
+
+* Replaced Unicode `≤` (U+2264) with `<=` in `quick_chisq()` documentation to fix LaTeX PDF manual build error on CRAN
+
+---
+
 # evanverse 0.5.0
 
 *Released: March 2026*

@@ -1,24 +1,20 @@
-# CRAN Comments for evanverse 0.5.0
+# CRAN Comments for evanverse 0.5.1
 
-## Submission — Major Refactor Release
+## Submission — CRAN Patch
 
-This is a major release from 0.4.4 to 0.5.0. It consolidates modules, cleans up the API,
-trims dependencies, and expands test and documentation coverage.
+This is a patch release from 0.5.0 to 0.5.1, fixing a documentation issue
+that caused the PDF manual build to fail on CRAN.
 
 ### Summary of Changes
 
-* Removed deprecated/unused functions (void utilities, ggplot2 scales, I/O helpers, workflow tools)
-* Renamed several functions for consistency (`stat_samplesize` → `stat_n`, `convert_gene_id` → `gene2ensembl`/`gene2entrez`, etc.)
-* Consolidated stat module into `stat.R` + `utils_stat.R`
-* Overhauled palette module with JSON-based storage
-* Added new vignettes for all major modules
-* Trimmed dependencies: removed `data.table`, `openxlsx`, `readxl`, `tictoc`, `fs`, `magrittr`
+* Replaced Unicode character `≤` (U+2264) with `<=` in `quick_chisq()` roxygen2
+  documentation, which caused a LaTeX error when building the PDF version of the manual
 
 ### R CMD check results
 
 ```
-── R CMD check results ─────────────────────────────────── evanverse 0.5.0 ────
-Duration: 2m 1.6s
+── R CMD check results ─────────────────────────────────── evanverse 0.5.1 ────
+Duration: 2m 24.4s
 
 0 errors ✔ | 0 warnings ✔ | 0 notes ✔
 ```
