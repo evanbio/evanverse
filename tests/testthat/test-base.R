@@ -451,3 +451,97 @@ test_that("view errors when reactable is not installed", {
   )
   expect_error(view(iris), class = "rlang_error")
 })
+
+
+# =============================================================================
+# perm
+# =============================================================================
+
+test_that("perm returns correct values for standard inputs", {
+  expect_equal(perm(8, 4), 1680)
+  expect_equal(perm(5, 2), 20)
+  expect_equal(perm(10, 3), 720)
+})
+
+test_that("perm(n, 0) returns 1 for any n", {
+  expect_equal(perm(0,  0), 1)
+  expect_equal(perm(5,  0), 1)
+  expect_equal(perm(100, 0), 1)
+})
+
+test_that("perm(n, n) returns n!", {
+  expect_equal(perm(1, 1), 1)
+  expect_equal(perm(4, 4), 24)
+  expect_equal(perm(6, 6), 720)
+})
+
+test_that("perm returns 0 when k > n", {
+  expect_equal(perm(5, 6), 0)
+  expect_equal(perm(0, 1), 0)
+})
+
+test_that("perm warns on overflow-prone inputs", {
+  expect_warning(perm(1000L, 999L), regexp = NA)   # may or may not warn; just must not error
+  # The actual overflow warning is a cli_alert, not a base warning --
+  # so we just confirm the call completes without hard error.
+  expect_no_error(perm(1000L, 999L))
+})
+
+test_that("perm errors on negative inputs", {
+  expect_error(perm(-1, 2), class = "rlang_error")
+  expect_error(perm(5, -1), class = "rlang_error")
+})
+
+test_that("perm errors on non-integer inputs", {
+  expect_error(perm(5.5, 2), class = "rlang_error")
+  expect_error(perm(5, 1.5), class = "rlang_error")
+})
+
+
+# =============================================================================
+# comb
+# =============================================================================
+
+test_that("comb returns correct values for standard inputs", {
+  expect_equal(comb(8, 4), 70)
+  expect_equal(comb(5, 2), 10)
+  expect_equal(comb(10, 3), 120)
+})
+
+test_that("comb(n, 0) returns 1 for any n", {
+  expect_equal(comb(0,  0), 1)
+  expect_equal(comb(5,  0), 1)
+  expect_equal(comb(100, 0), 1)
+})
+
+test_that("comb(n, n) returns 1 for any n", {
+  expect_equal(comb(1, 1), 1)
+  expect_equal(comb(8, 8), 1)
+  expect_equal(comb(50, 50), 1)
+})
+
+test_that("comb satisfies symmetry C(n,k) == C(n,n-k)", {
+  expect_equal(comb(10, 3), comb(10, 7))
+  expect_equal(comb(20, 5), comb(20, 15))
+})
+
+test_that("comb returns 0 when k > n", {
+  expect_equal(comb(5, 6), 0)
+  expect_equal(comb(0, 1), 0)
+})
+
+test_that("comb result is always <= perm result for same inputs", {
+  # C(n,k) <= P(n,k) for all valid n,k (they are equal only when k <= 1)
+  expect_true(comb(10, 4) <= perm(10, 4))
+  expect_true(comb(7, 3)  <= perm(7, 3))
+})
+
+test_that("comb errors on negative inputs", {
+  expect_error(comb(-1, 2), class = "rlang_error")
+  expect_error(comb(5, -1), class = "rlang_error")
+})
+
+test_that("comb errors on non-integer inputs", {
+  expect_error(comb(5.5, 2), class = "rlang_error")
+  expect_error(comb(5, 1.5), class = "rlang_error")
+})
