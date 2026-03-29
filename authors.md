@@ -9,16 +9,16 @@
 ## Citation
 
 Source:
-[`DESCRIPTION`](https://github.com/evanbio/evanverse/blob/v0.5.0/DESCRIPTION)
+[`DESCRIPTION`](https://github.com/evanbio/evanverse/blob/v0.5.1/DESCRIPTION)
 
 Zhou E (2026). *evanverse: Utility Functions for Data Analysis and
-Visualization*. R package version 0.5.0,
+Visualization*. R package version 0.5.1,
 <https://github.com/evanbio/evanverse>.
 
     @Manual{,
       title = {evanverse: Utility Functions for Data Analysis and Visualization},
       author = {Evan Zhou},
       year = {2026},
-      note = {R package version 0.5.0},
+      note = {R package version 0.5.1},
       url = {https://github.com/evanbio/evanverse},
     }

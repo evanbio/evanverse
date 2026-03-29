@@ -67,7 +67,7 @@ on expected cell frequencies when method = &quot;auto&quot;."><meta property="og
 
     <a class="navbar-brand me-2" href="../index.html">evanverse</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.5.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.5.1</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -101,7 +101,7 @@ on expected cell frequencies when method = &quot;auto&quot;."><meta property="og
 <div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
       <img src="../logo.png" class="logo" alt=""><h1>Categorical association test with automatic method selection</h1>
-      <small class="dont-index">Source: <a href="https://github.com/evanbio/evanverse/blob/v0.5.0/R/stat.R" class="external-link"><code>R/stat.R</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/evanbio/evanverse/blob/v0.5.1/R/stat.R" class="external-link"><code>R/stat.R</code></a></small>
       <div class="d-none name"><code>quick_chisq.Rd</code></div>
     </div>
 
@@ -247,7 +247,7 @@ for full details, and <code>plot(result)</code> for a visualization.</p>
     <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
     <p><strong>Auto method selection logic:</strong></p><ul><li><p>2×2 table with any expected frequency &lt; 5: Fisher's exact test</p></li>
 <li><p>&gt;20\<!-- % of cells with expected frequency &lt; 5: chi-square with warning --></p></li>
-<li><p>2×2 table with 5 ≤ expected frequency &lt; 10: Yates' correction applied</p></li>
+<li><p>2x2 table with 5 &lt;= expected frequency &lt; 10: Yates' correction applied</p></li>
 <li><p>Otherwise: standard chi-square test</p></li>
 </ul><p><strong>WARNING</strong>: <code>"mcnemar"</code> is ONLY for paired/matched data (e.g.,
 before-after measurements on the same subjects). Do NOT use for independent
@@ -346,7 +346,7 @@ samples — use <code>"chisq"</code> or <code>"fisher"</code> instead.</p>
 
 <div class="pkgdown-footer-right">
   <div class="text-muted">
-<p><strong>evanverse v0.5.0</strong><br><small>Last updated: March 2026</small></p>
+<p><strong>evanverse v0.5.1</strong><br><small>Last updated: March 2026</small></p>
 </div><div class="footer-links">
 <p><a href="https://github.com/evanbio/evanverse" class="external-link text-muted me-3" aria-label="GitHub"> <i class="fab fa-github fa-lg"></i> </a> <a href="https://cran.r-project.org/package=evanverse" class="external-link text-muted me-3" aria-label="CRAN"> <i class="fas fa-download fa-lg"></i> </a> <a href="https://blog.evanzhou.org" class="external-link text-muted" aria-label="Blog"> <i class="fas fa-blog fa-lg"></i> </a></p>
 </div>

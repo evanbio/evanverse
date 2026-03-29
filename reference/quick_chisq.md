@@ -151,7 +151,8 @@ details, and `plot(result)` for a visualization.
 
 - \>20\\
 
-- 2×2 table with 5 ≤ expected frequency \< 10: Yates' correction applied
+- 2x2 table with 5 \<= expected frequency \< 10: Yates' correction
+  applied
 
 - Otherwise: standard chi-square test
 
