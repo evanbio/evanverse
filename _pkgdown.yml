@@ -264,10 +264,8 @@ reference:
 - title: "Package Management"
   desc: >
     Functions for installing, checking, and managing R packages from
-    multiple sources (CRAN, GitHub, Bioconductor). Essential tools for
-    reproducible analysis environments.
+    multiple sources (CRAN, GitHub, Bioconductor).
   contents:
-  - pkg_management
   - check_pkg
   - inst_pkg
   - update_pkg
@@ -278,8 +276,7 @@ reference:
 - title: "Visualization & Plotting"
   desc: >
     High-level plotting functions with sensible defaults for common
-    chart types and publication-ready visualizations. Create professional
-    plots with minimal code.
+    chart types and publication-ready visualizations.
   contents:
   - plot_venn
   - plot_forest
@@ -289,9 +286,8 @@ reference:
 
 - title: "Statistical Analysis"
   desc: >
-    Intelligent statistical testing functions with automatic method selection,
-    assumption checking, and publication-ready visualizations. Streamline
-    your statistical workflows with smart defaults.
+    Statistical testing with automatic method selection, assumption
+    checking, and publication-ready output. Power and sample size tools.
   contents:
   - quick_ttest
   - quick_anova
@@ -303,100 +299,66 @@ reference:
 - title: "Color Palettes & Management"
   desc: >
     Bioinformatics-focused color palette system with creation,
-    management, and visualization tools. Build consistent, accessible
-    color schemes for your projects.
+    management, and visualization tools.
   contents:
   - get_palette
   - list_palettes
   - create_palette
   - preview_palette
-  - bio_palette_gallery
+  - palette_gallery
   - compile_palettes
   - remove_palette
   - hex2rgb
   - rgb2hex
 
-- title: "ggplot2 Integration"
+- title: "File & Download Utilities"
   desc: >
-    Seamless ggplot2 integration for evanverse color palettes.
-    Apply palettes directly to ggplot2 color and fill scales.
+    File system utilities and flexible download functions for URLs
+    and GEO datasets.
   contents:
-  - scale_color_evanverse
-  - scale_colour_evanverse
-  - scale_fill_evanverse
-
-- title: "File & Data I/O"
-  desc: >
-    Flexible file reading/writing functions with enhanced error handling,
-    progress reporting, and format detection. Handle various data formats
-    with robust error recovery.
-  contents:
-  - read_table_flex
-  - read_excel_flex
-  - write_xlsx_flex
   - download_url
   - download_batch
-  - download_geo_data
+  - download_geo
   - file_info
+  - file_ls
   - file_tree
-  - get_ext
   - view
 
 - title: "Bioinformatics Utilities"
   desc: >
-    Specialized functions for bioinformatics workflows including
-    gene ID conversion and gene set analysis. Essential tools for
-    genomic data processing and analysis.
+    Gene ID conversion, gene reference download, and gene set
+    analysis tools.
   contents:
-  - convert_gene_id
+  - gene2ensembl
+  - gene2entrez
   - download_gene_ref
   - gmt2df
   - gmt2list
 
 - title: "Data Processing & Transformation"
   desc: >
-    Functions for data manipulation, column mapping, and handling
-    missing or void values. Clean and transform data with comprehensive
-    void value handling.
+    Functions for data manipulation and column recoding.
   contents:
   - df2list
-  - map_column
-  - is_void
-  - any_void
-  - drop_void
-  - replace_void
-  - cols_with_void
-  - rows_with_void
+  - df2vect
+  - recode_column
 
-- title: "Operators & Logic"
+- title: "Operators & Combinatorics"
   desc: >
-    Custom infix operators and logical utility functions for
-    expressive and readable code. Enhance R syntax with powerful
-    shortcuts and combinatorial tools.
+    Custom infix operators and combinatorial utilities.
   contents:
   - "%p%"
   - "%is%"
   - "%nin%"
   - "%map%"
   - "%match%"
-  - combine_logic
   - comb
   - perm
 
-- title: "Workflow & Development Tools"
-  desc: >
-    Helper functions for development workflow, timing, and
-    safe code execution. Streamline your development process with
-    productivity-enhancing utilities.
-  contents:
-  - with_timer
-  - remind
-  - safe_execute
-
 - title: "Toy Data"
   desc: >
-    Functions that generate small, reproducible toy datasets for
-    testing and demonstration purposes.
+    Functions that generate small reproducible datasets for
+    testing and demonstration.
   contents:
   - toy_gene_ref
   - toy_gmt
