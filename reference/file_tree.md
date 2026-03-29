@@ -39,7 +39,6 @@ file_tree()
 #> +-- download_geo.html
 #> +-- download_url.html
 #> +-- figures
-#> |   +-- logo-input.png
 #> |   +-- logo.png
 #> +-- file_info.html
 #> +-- file_ls.html
@@ -57,7 +56,6 @@ file_tree(".", max_depth = 3)
 #> +-- download_geo.html
 #> +-- download_url.html
 #> +-- figures
-#> |   +-- logo-input.png
 #> |   +-- logo.png
 #> +-- file_info.html
 #> +-- file_ls.html
