@@ -63,7 +63,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">evanverse</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.4.4</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.5.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -100,6 +100,99 @@
       <small>Source: <a href="https://github.com/evanbio/evanverse/blob/main/NEWS.md" class="external-link"><code>NEWS.md</code></a></small>
     </div>
 
+    <div class="section level2">
+<h2 class="pkg-version" data-toc-text="0.5.0" id="evanverse-050">evanverse 0.5.0<a class="anchor" aria-label="anchor" href="#evanverse-050"></a></h2>
+<p><em>Released: March 2026</em></p>
+<p><strong>Major Refactor Release</strong> — Module consolidation, API cleanup, dependency trimming, and expanded test/documentation coverage.</p>
+<hr><div class="section level4">
+<h4 id="breaking-changes-0-5-0">Breaking Changes<a class="anchor" aria-label="anchor" href="#breaking-changes-0-5-0"></a></h4>
+<ul><li>
+<strong>Removed functions</strong>: <code>is_void()</code>, <code>any_void()</code>, <code>drop_void()</code>, <code>replace_void()</code>, <code>cols_with_void()</code>, <code>rows_with_void()</code> (void module deleted)</li>
+<li>
+<strong>Removed functions</strong>: <code>scale_color_evanverse()</code>, <code>scale_fill_evanverse()</code>, <code>scale_colour_evanverse()</code> (ggplot2 integration removed)</li>
+<li>
+<strong>Removed functions</strong>: <code>read_table_flex()</code>, <code>read_excel_flex()</code>, <code>write_xlsx_flex()</code>, <code>get_ext()</code> (I/O utilities removed)</li>
+<li>
+<strong>Removed functions</strong>: <code>with_timer()</code>, <code>remind()</code>, <code>safe_execute()</code>, <code>combine_logic()</code> (workflow tools removed)</li>
+<li>
+<strong>Renamed</strong>: <code>stat_samplesize()</code> → <code><a href="../reference/stat_n.html">stat_n()</a></code>
+</li>
+<li>
+<strong>Renamed</strong>: <code>bio_palette_gallery()</code> → <code><a href="../reference/palette_gallery.html">palette_gallery()</a></code>
+</li>
+<li>
+<strong>Renamed</strong>: <code>map_column()</code> → <code><a href="../reference/recode_column.html">recode_column()</a></code>
+</li>
+<li>
+<strong>Renamed</strong>: <code>convert_gene_id()</code> → <code><a href="../reference/gene2ensembl.html">gene2ensembl()</a></code> + <code><a href="../reference/gene2entrez.html">gene2entrez()</a></code>
+</li>
+<li>
+<strong>Renamed</strong>: <code>download_geo_data()</code> → <code><a href="../reference/download_geo.html">download_geo()</a></code>
+</li>
+</ul><hr></div>
+<div class="section level4">
+<h4 id="new-functions-0-5-0">New Functions<a class="anchor" aria-label="anchor" href="#new-functions-0-5-0"></a></h4>
+<ul><li>
+<code><a href="../reference/stat_n.html">stat_n()</a></code> — sample size calculation (replaces <code>stat_samplesize()</code>)</li>
+<li>
+<code><a href="../reference/gene2ensembl.html">gene2ensembl()</a></code> / <code><a href="../reference/gene2entrez.html">gene2entrez()</a></code> — gene symbol conversion (replaces <code>convert_gene_id()</code>)</li>
+<li>
+<code><a href="../reference/toy_gene_ref.html">toy_gene_ref()</a></code> — small gene reference table for testing and examples</li>
+<li>
+<code><a href="../reference/file_ls.html">file_ls()</a></code> — list files in a directory with metadata</li>
+<li>
+<code><a href="../reference/df2vect.html">df2vect()</a></code> — convert a data frame column to a named vector</li>
+<li>
+<code><a href="../reference/recode_column.html">recode_column()</a></code> — recode column values by mapping table (replaces <code>map_column()</code>)</li>
+</ul><hr></div>
+<div class="section level4">
+<h4 id="module-refactors-0-5-0">Module Refactors<a class="anchor" aria-label="anchor" href="#module-refactors-0-5-0"></a></h4>
+<ul><li>
+<strong>Stat module</strong>: consolidated <code><a href="../reference/quick_anova.html">quick_anova()</a></code>, <code><a href="../reference/quick_chisq.html">quick_chisq()</a></code>, <code><a href="../reference/quick_cor.html">quick_cor()</a></code>, <code><a href="../reference/quick_ttest.html">quick_ttest()</a></code>, <code><a href="../reference/stat_power.html">stat_power()</a></code>, and <code><a href="../reference/stat_n.html">stat_n()</a></code> into <code>stat.R</code>; extracted shared <code>pwr::</code> dispatch helpers into <code>utils_stat.R</code>; result class renamed to <code>power_result</code>
+</li>
+<li>
+<strong>Palette module</strong>: overhauled with JSON-based storage and compiled <code>palettes</code> dataset; <code><a href="../reference/palette_gallery.html">palette_gallery()</a></code> replaces <code>bio_palette_gallery()</code>
+</li>
+<li>
+<strong>Plot module</strong>: fixed <code>sort_by</code> union handling, NA checks, gradient palette validation</li>
+<li>
+<strong>Toy module</strong>: exported <code><a href="../reference/toy_gene_ref.html">toy_gene_ref()</a></code>; fixed empty symbol strings → <code>NA_character_</code> in built-in gene ref data</li>
+<li>
+<strong>Pkg module</strong>: renamed <code>utils_biopackage.R</code> → <code>utils_pkg.R</code>; internals cleaned up</li>
+<li>
+<strong>Base module</strong>: moved <code><a href="../reference/perm.html">perm()</a></code> and <code><a href="../reference/comb.html">comb()</a></code> from stat to base</li>
+</ul><hr></div>
+<div class="section level4">
+<h4 id="dependency-changes-0-5-0">Dependency Changes<a class="anchor" aria-label="anchor" href="#dependency-changes-0-5-0"></a></h4>
+<ul><li>
+<strong>Removed from Imports</strong>: <code>data.table</code>, <code>openxlsx</code>, <code>readxl</code>, <code>tictoc</code>, <code>fs</code>, <code>magrittr</code>
+</li>
+<li>
+<strong>Removed from Suggests</strong>: <code>writexl</code>, <code>RColorBrewer</code>
+</li>
+<li>
+<strong>Moved to Imports</strong>: <code>forestploter</code> (was Suggests)</li>
+<li>
+<strong>Added to Imports</strong>: <code>rlang</code>
+</li>
+</ul><hr></div>
+<div class="section level4">
+<h4 id="documentation-0-5-0">Documentation<a class="anchor" aria-label="anchor" href="#documentation-0-5-0"></a></h4>
+<ul><li>New vignettes: <code>stat</code>, <code>toy</code>, <code>base</code>, <code>ops</code>, <code>palette</code>, <code>pkg</code>, <code>plot</code>
+</li>
+<li>Updated <code>get-started</code>, <code>install</code>, <code>plot</code> vignettes</li>
+<li>
+<code>CONTRIBUTING.md</code> simplified to essential guidelines</li>
+</ul><hr></div>
+<div class="section level4">
+<h4 id="bug-fixes-0-5-0">Bug Fixes<a class="anchor" aria-label="anchor" href="#bug-fixes-0-5-0"></a></h4>
+<ul><li>Fixed <code><a href="../reference/file_ls.html">file_ls()</a></code> example to use <code><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempdir()</a></code> — passes R CMD check</li>
+<li>Fixed <code><a href="../reference/create_palette.html">create_palette()</a></code> example line widths — resolves <code>Rd line widths</code> NOTE</li>
+<li>Fixed <code><a href="../reference/quick_ttest.html">quick_ttest()</a></code> and <code><a href="../reference/quick_anova.html">quick_anova()</a></code> examples to pass column names as strings</li>
+<li>Added <code>skip_on_ci()</code> to BioMart network test — prevents CI failures from Ensembl server</li>
+<li>Suppressed Bioconductor <code>S4Arrays</code>/<code>DelayedArray</code> namespace warning in <code><a href="../reference/download_geo.html">download_geo()</a></code> test</li>
+</ul><hr></div>
+</div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="0.4.4" id="evanverse-044">evanverse 0.4.4<a class="anchor" aria-label="anchor" href="#evanverse-044"></a></h2><p class="text-muted">CRAN release: 2026-03-10</p>
 <p><em>Released: March 2026</em></p>
@@ -722,7 +815,7 @@
 
 <div class="pkgdown-footer-right">
   <div class="text-muted">
-<p><strong>evanverse v0.4.4</strong><br><small>Last updated: March 2026</small></p>
+<p><strong>evanverse v0.5.0</strong><br><small>Last updated: March 2026</small></p>
 </div><div class="footer-links">
 <p><a href="https://github.com/evanbio/evanverse" class="external-link text-muted me-3" aria-label="GitHub"> <i class="fab fa-github fa-lg"></i> </a> <a href="https://cran.r-project.org/package=evanverse" class="external-link text-muted me-3" aria-label="CRAN"> <i class="fas fa-download fa-lg"></i> </a> <a href="https://blog.evanzhou.org" class="external-link text-muted" aria-label="Blog"> <i class="fas fa-blog fa-lg"></i> </a></p>
 </div>

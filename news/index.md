@@ -1,5 +1,129 @@
 # Changelog
 
+## evanverse 0.5.0
+
+*Released: March 2026*
+
+**Major Refactor Release** — Module consolidation, API cleanup,
+dependency trimming, and expanded test/documentation coverage.
+
+------------------------------------------------------------------------
+
+#### Breaking Changes
+
+- **Removed functions**: `is_void()`, `any_void()`, `drop_void()`,
+  `replace_void()`, `cols_with_void()`, `rows_with_void()` (void module
+  deleted)
+- **Removed functions**: `scale_color_evanverse()`,
+  `scale_fill_evanverse()`, `scale_colour_evanverse()` (ggplot2
+  integration removed)
+- **Removed functions**: `read_table_flex()`, `read_excel_flex()`,
+  `write_xlsx_flex()`, `get_ext()` (I/O utilities removed)
+- **Removed functions**: `with_timer()`, `remind()`, `safe_execute()`,
+  `combine_logic()` (workflow tools removed)
+- **Renamed**: `stat_samplesize()` →
+  [`stat_n()`](https://evanbio.github.io/evanverse/reference/stat_n.md)
+- **Renamed**: `bio_palette_gallery()` →
+  [`palette_gallery()`](https://evanbio.github.io/evanverse/reference/palette_gallery.md)
+- **Renamed**: `map_column()` →
+  [`recode_column()`](https://evanbio.github.io/evanverse/reference/recode_column.md)
+- **Renamed**: `convert_gene_id()` →
+  [`gene2ensembl()`](https://evanbio.github.io/evanverse/reference/gene2ensembl.md) +
+  [`gene2entrez()`](https://evanbio.github.io/evanverse/reference/gene2entrez.md)
+- **Renamed**: `download_geo_data()` →
+  [`download_geo()`](https://evanbio.github.io/evanverse/reference/download_geo.md)
+
+------------------------------------------------------------------------
+
+#### New Functions
+
+- [`stat_n()`](https://evanbio.github.io/evanverse/reference/stat_n.md)
+  — sample size calculation (replaces `stat_samplesize()`)
+- [`gene2ensembl()`](https://evanbio.github.io/evanverse/reference/gene2ensembl.md)
+  /
+  [`gene2entrez()`](https://evanbio.github.io/evanverse/reference/gene2entrez.md)
+  — gene symbol conversion (replaces `convert_gene_id()`)
+- [`toy_gene_ref()`](https://evanbio.github.io/evanverse/reference/toy_gene_ref.md)
+  — small gene reference table for testing and examples
+- [`file_ls()`](https://evanbio.github.io/evanverse/reference/file_ls.md)
+  — list files in a directory with metadata
+- [`df2vect()`](https://evanbio.github.io/evanverse/reference/df2vect.md)
+  — convert a data frame column to a named vector
+- [`recode_column()`](https://evanbio.github.io/evanverse/reference/recode_column.md)
+  — recode column values by mapping table (replaces `map_column()`)
+
+------------------------------------------------------------------------
+
+#### Module Refactors
+
+- **Stat module**: consolidated
+  [`quick_anova()`](https://evanbio.github.io/evanverse/reference/quick_anova.md),
+  [`quick_chisq()`](https://evanbio.github.io/evanverse/reference/quick_chisq.md),
+  [`quick_cor()`](https://evanbio.github.io/evanverse/reference/quick_cor.md),
+  [`quick_ttest()`](https://evanbio.github.io/evanverse/reference/quick_ttest.md),
+  [`stat_power()`](https://evanbio.github.io/evanverse/reference/stat_power.md),
+  and
+  [`stat_n()`](https://evanbio.github.io/evanverse/reference/stat_n.md)
+  into `stat.R`; extracted shared `pwr::` dispatch helpers into
+  `utils_stat.R`; result class renamed to `power_result`
+- **Palette module**: overhauled with JSON-based storage and compiled
+  `palettes` dataset;
+  [`palette_gallery()`](https://evanbio.github.io/evanverse/reference/palette_gallery.md)
+  replaces `bio_palette_gallery()`
+- **Plot module**: fixed `sort_by` union handling, NA checks, gradient
+  palette validation
+- **Toy module**: exported
+  [`toy_gene_ref()`](https://evanbio.github.io/evanverse/reference/toy_gene_ref.md);
+  fixed empty symbol strings → `NA_character_` in built-in gene ref data
+- **Pkg module**: renamed `utils_biopackage.R` → `utils_pkg.R`;
+  internals cleaned up
+- **Base module**: moved
+  [`perm()`](https://evanbio.github.io/evanverse/reference/perm.md) and
+  [`comb()`](https://evanbio.github.io/evanverse/reference/comb.md) from
+  stat to base
+
+------------------------------------------------------------------------
+
+#### Dependency Changes
+
+- **Removed from Imports**: `data.table`, `openxlsx`, `readxl`,
+  `tictoc`, `fs`, `magrittr`
+- **Removed from Suggests**: `writexl`, `RColorBrewer`
+- **Moved to Imports**: `forestploter` (was Suggests)
+- **Added to Imports**: `rlang`
+
+------------------------------------------------------------------------
+
+#### Documentation
+
+- New vignettes: `stat`, `toy`, `base`, `ops`, `palette`, `pkg`, `plot`
+- Updated `get-started`, `install`, `plot` vignettes
+- `CONTRIBUTING.md` simplified to essential guidelines
+
+------------------------------------------------------------------------
+
+#### Bug Fixes
+
+- Fixed
+  [`file_ls()`](https://evanbio.github.io/evanverse/reference/file_ls.md)
+  example to use [`tempdir()`](https://rdrr.io/r/base/tempfile.html) —
+  passes R CMD check
+- Fixed
+  [`create_palette()`](https://evanbio.github.io/evanverse/reference/create_palette.md)
+  example line widths — resolves `Rd line widths` NOTE
+- Fixed
+  [`quick_ttest()`](https://evanbio.github.io/evanverse/reference/quick_ttest.md)
+  and
+  [`quick_anova()`](https://evanbio.github.io/evanverse/reference/quick_anova.md)
+  examples to pass column names as strings
+- Added `skip_on_ci()` to BioMart network test — prevents CI failures
+  from Ensembl server
+- Suppressed Bioconductor `S4Arrays`/`DelayedArray` namespace warning in
+  [`download_geo()`](https://evanbio.github.io/evanverse/reference/download_geo.md)
+  test
+
+------------------------------------------------------------------------
+
 ## evanverse 0.4.4
 
 CRAN release: 2026-03-10

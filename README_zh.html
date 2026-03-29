@@ -63,7 +63,7 @@
 
     <a class="navbar-brand me-2" href="index.html">evanverse</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.4.4</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.5.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -114,349 +114,147 @@
 </div>
 </div>
 <hr><div class="section level2">
-<h2 id="id_-项目简介">✨ 项目简介<a class="anchor" aria-label="anchor" href="#id_-%E9%A1%B9%E7%9B%AE%E7%AE%80%E4%BB%8B"></a></h2>
-<p><strong>evanverse</strong> 是一个全面的 R 工具包，旨在简化您的数据分析工作流程。由 <a href="mailto:evanzhou.bio@gmail.com">Evan Zhou</a> 开发，将 60+ 个精心设计的函数集成到一个统一的工具包中，涵盖数据分析、可视化、统计检验和生物信息学等领域。</p>
-<div class="section level3">
-<h3 id="为什么选择-evanverse">为什么选择 evanverse？<a class="anchor" aria-label="anchor" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E9%80%89%E6%8B%A9-evanverse"></a></h3>
+<h2 id="项目简介">项目简介<a class="anchor" aria-label="anchor" href="#%E9%A1%B9%E7%9B%AE%E7%AE%80%E4%BB%8B"></a></h2>
+<p><strong>evanverse</strong> 是一个 R 工具包，提供约 50 个函数，涵盖包管理、数据可视化、统计检验、生物信息学等领域。由 <a href="mailto:evanzhou.bio@gmail.com">Evan Zhou</a> 开发。</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># 🎯 直观的操作符</span></span>
-<span><span class="st">"你好"</span> <span class="op"><a href="reference/grapes-p-grapes.html">%p%</a></span> <span class="st">"世界"</span>                      <span class="co"># → "你好世界"</span></span>
-<span></span>
-<span><span class="co"># 🎨 优雅的可视化</span></span>
-<span><span class="fu"><a href="reference/plot_venn.html">plot_venn</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>A <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">5</span>, B <span class="op">=</span> <span class="fl">3</span><span class="op">:</span><span class="fl">8</span><span class="op">)</span><span class="op">)</span>     <span class="co"># 快速绘制韦恩图</span></span>
-<span></span>
-<span><span class="co"># 📦 智能包管理</span></span>
-<span><span class="fu"><a href="reference/inst_pkg.html">inst_pkg</a></span><span class="op">(</span><span class="st">"dplyr"</span>, source <span class="op">=</span> <span class="st">"CRAN"</span><span class="op">)</span>     <span class="co"># 多源安装包</span></span>
-<span></span>
-<span><span class="co"># 🧬 生物信息学变简单</span></span>
-<span><span class="fu">convert_gene_id</span><span class="op">(</span><span class="va">genes</span>, from <span class="op">=</span> <span class="st">"SYMBOL"</span>, to <span class="op">=</span> <span class="st">"ENSEMBL"</span><span class="op">)</span></span></code></pre></div>
-<hr></div>
-</div>
-<div class="section level2">
-<h2 id="id_-安装">🚀 安装<a class="anchor" aria-label="anchor" href="#id_-%E5%AE%89%E8%A3%85"></a></h2>
-<div class="section level3">
-<h3 id="稳定版本-cran">稳定版本 (CRAN)<a class="anchor" aria-label="anchor" href="#%E7%A8%B3%E5%AE%9A%E7%89%88%E6%9C%AC-cran"></a></h3>
-<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"evanverse"</span><span class="op">)</span></span></code></pre></div>
-</div>
-<div class="section level3">
-<h3 id="开发版本">开发版本<a class="anchor" aria-label="anchor" href="#%E5%BC%80%E5%8F%91%E7%89%88%E6%9C%AC"></a></h3>
-<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># install.packages("devtools")</span></span>
-<span><span class="fu">devtools</span><span class="fu">::</span><span class="fu"><a href="https://devtools.r-lib.org/reference/install-deprecated.html" class="external-link">install_github</a></span><span class="op">(</span><span class="st">"evanbio/evanverse"</span><span class="op">)</span></span></code></pre></div>
-<p><strong>系统要求:</strong> R ≥ 4.1.0</p>
-<hr></div>
-</div>
-<div class="section level2">
-<h2 id="id_-核心功能">🎯 核心功能<a class="anchor" aria-label="anchor" href="#id_-%E6%A0%B8%E5%BF%83%E5%8A%9F%E8%83%BD"></a></h2>
-<table class="table"><tr><td width="50%">
-<div class="section level3">
-<h3 id="id_-包管理">📦 包管理<a class="anchor" aria-label="anchor" href="#id_-%E5%8C%85%E7%AE%A1%E7%90%86"></a></h3>
-<ul><li>多源安装 (CRAN、GitHub、Bioconductor)</li>
-<li>版本检查与更新</li>
-<li>包函数探索</li>
-<li>镜像配置</li>
-</ul></div>
-</td>
-<td width="50%">
-
-<div class="section level3">
-<h3 id="id_-数据可视化">🎨 数据可视化<a class="anchor" aria-label="anchor" href="#id_-%E6%95%B0%E6%8D%AE%E5%8F%AF%E8%A7%86%E5%8C%96"></a></h3>
-<ul><li>开箱即用的绘图函数</li>
-<li>生物信息学配色方案</li>
-<li>韦恩图、森林图</li>
-<li>柱状图、饼图、密度图</li>
-</ul></div>
-</td>
-</tr><tr><td width="50%">
-
-<div class="section level3">
-<h3 id="id_-生物信息学">🧬 生物信息学<a class="anchor" aria-label="anchor" href="#id_-%E7%94%9F%E7%89%A9%E4%BF%A1%E6%81%AF%E5%AD%A6"></a></h3>
-<ul><li>基因 ID 转换</li>
-<li>GMT 文件处理</li>
-<li>GEO 数据下载</li>
-<li>参考数据管理</li>
-</ul></div>
-</td>
-<td width="50%">
-
-<div class="section level3">
-<h3 id="id_-数据处理">🔧 数据处理<a class="anchor" aria-label="anchor" href="#id_-%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86"></a></h3>
-<ul><li>灵活的文件读写</li>
-<li>列映射工具</li>
-<li>空值处理</li>
-<li>数据转换</li>
-</ul></div>
-</td>
-</tr><tr><td width="50%">
-
-<div class="section level3">
-<h3 id="id_-自定义操作符">🧮 自定义操作符<a class="anchor" aria-label="anchor" href="#id_-%E8%87%AA%E5%AE%9A%E4%B9%89%E6%93%8D%E4%BD%9C%E7%AC%A6"></a></h3>
-<ul><li>
-<code>%p%</code> - 字符串拼接</li>
-<li>
-<code>%is%</code> - 身份比较</li>
-<li>
-<code>%nin%</code> - 非成员运算</li>
-<li>
-<code>%map%</code>、<code>%match%</code> - 映射工具</li>
-</ul></div>
-</td>
-<td width="50%">
-
-<div class="section level3">
-<h3 id="id_-统计分析">📊 统计分析<a class="anchor" aria-label="anchor" href="#id_-%E7%BB%9F%E8%AE%A1%E5%88%86%E6%9E%90"></a></h3>
-<ul><li>t 检验、ANOVA、卡方检验、相关性分析</li>
-<li>功效分析与样本量计算</li>
-<li>出版级可视化输出</li>
-<li>自动假设检验</li>
-</ul></div>
-</td>
-</tr><tr><td width="50%">
-
-<div class="section level3">
-<h3 id="id_️-工作流工具">⚙️ 工作流工具<a class="anchor" aria-label="anchor" href="#id_%EF%B8%8F-%E5%B7%A5%E4%BD%9C%E6%B5%81%E5%B7%A5%E5%85%B7"></a></h3>
-<ul><li>计时器包装</li>
-<li>安全执行</li>
-<li>提醒系统</li>
-<li>交互式查看</li>
-</ul></div>
-</td>
-<td width="50%">
-
-<div class="section level3">
-<h3 id="id_-ggplot2-集成">🎯 ggplot2 集成<a class="anchor" aria-label="anchor" href="#id_-ggplot2-%E9%9B%86%E6%88%90"></a></h3>
-<ul><li>自定义颜色/填充标度</li>
-<li>无缝配色方案集成</li>
-<li>出版级主题设置</li>
-</ul></div>
-</td>
-</tr></table><hr></div>
-
-<div class="section level2">
-<h2 id="id_-快速示例">💡 快速示例<a class="anchor" aria-label="anchor" href="#id_-%E5%BF%AB%E9%80%9F%E7%A4%BA%E4%BE%8B"></a></h2>
-<div class="section level3">
-<h3 id="字符串操作">字符串操作<a class="anchor" aria-label="anchor" href="#%E5%AD%97%E7%AC%A6%E4%B8%B2%E6%93%8D%E4%BD%9C"></a></h3>
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/evanbio/evanverse" class="external-link">evanverse</a></span><span class="op">)</span></span>
 <span></span>
-<span><span class="co"># 使用 %p% 拼接字符串</span></span>
-<span><span class="va">first_name</span> <span class="op"><a href="reference/grapes-p-grapes.html">%p%</a></span> <span class="st">" "</span> <span class="op"><a href="reference/grapes-p-grapes.html">%p%</a></span> <span class="va">last_name</span></span>
-<span></span>
-<span><span class="co"># 检查元素不在集合中</span></span>
-<span><span class="fl">5</span> <span class="op"><a href="reference/grapes-nin-grapes.html">%nin%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">2</span>, <span class="fl">3</span>, <span class="fl">4</span><span class="op">)</span>  <span class="co"># TRUE</span></span></code></pre></div>
-</div>
-<div class="section level3">
-<h3 id="配色方案">配色方案<a class="anchor" aria-label="anchor" href="#%E9%85%8D%E8%89%B2%E6%96%B9%E6%A1%88"></a></h3>
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># 列出所有可用配色</span></span>
-<span><span class="fu"><a href="reference/list_palettes.html">list_palettes</a></span><span class="op">(</span><span class="op">)</span></span>
-<span></span>
-<span><span class="co"># 获取配色方案</span></span>
-<span><span class="va">colors</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/get_palette.html">get_palette</a></span><span class="op">(</span><span class="st">"celltype"</span>, n <span class="op">=</span> <span class="fl">5</span><span class="op">)</span></span>
-<span></span>
-<span><span class="co"># 预览配色</span></span>
-<span><span class="fu"><a href="reference/preview_palette.html">preview_palette</a></span><span class="op">(</span><span class="st">"celltype"</span><span class="op">)</span></span></code></pre></div>
-</div>
-<div class="section level3">
-<h3 id="文件操作">文件操作<a class="anchor" aria-label="anchor" href="#%E6%96%87%E4%BB%B6%E6%93%8D%E4%BD%9C"></a></h3>
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># 灵活读取表格数据</span></span>
-<span><span class="va">data</span> <span class="op">&lt;-</span> <span class="fu">read_table_flex</span><span class="op">(</span><span class="st">"data.csv"</span><span class="op">)</span></span>
-<span></span>
-<span><span class="co"># 可视化目录树</span></span>
-<span><span class="fu"><a href="reference/file_tree.html">file_tree</a></span><span class="op">(</span><span class="st">"."</span>, max_depth <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span></code></pre></div>
-</div>
-<div class="section level3">
-<h3 id="生物信息学工作流">生物信息学工作流<a class="anchor" aria-label="anchor" href="#%E7%94%9F%E7%89%A9%E4%BF%A1%E6%81%AF%E5%AD%A6%E5%B7%A5%E4%BD%9C%E6%B5%81"></a></h3>
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># 转换基因 ID</span></span>
-<span><span class="va">genes</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"TP53"</span>, <span class="st">"BRCA1"</span>, <span class="st">"EGFR"</span><span class="op">)</span></span>
-<span><span class="va">ensembl_ids</span> <span class="op">&lt;-</span> <span class="fu">convert_gene_id</span><span class="op">(</span><span class="va">genes</span>, from <span class="op">=</span> <span class="st">"SYMBOL"</span>, to <span class="op">=</span> <span class="st">"ENSEMBL"</span><span class="op">)</span></span>
-<span></span>
-<span><span class="co"># 解析 GMT 文件</span></span>
-<span><span class="va">pathways</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/gmt2list.html">gmt2list</a></span><span class="op">(</span><span class="st">"pathway.gmt"</span><span class="op">)</span></span></code></pre></div>
-</div>
-<div class="section level3">
-<h3 id="包管理">包管理<a class="anchor" aria-label="anchor" href="#%E5%8C%85%E7%AE%A1%E7%90%86"></a></h3>
-<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># 从多个源安装包</span></span>
-<span><span class="fu"><a href="reference/inst_pkg.html">inst_pkg</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"dplyr"</span>, <span class="st">"ggplot2"</span><span class="op">)</span>, source <span class="op">=</span> <span class="st">"CRAN"</span><span class="op">)</span></span>
-<span><span class="fu"><a href="reference/inst_pkg.html">inst_pkg</a></span><span class="op">(</span><span class="st">"limma"</span>, source <span class="op">=</span> <span class="st">"Bioconductor"</span><span class="op">)</span></span>
-<span><span class="fu"><a href="reference/inst_pkg.html">inst_pkg</a></span><span class="op">(</span><span class="st">"user/repo"</span>, source <span class="op">=</span> <span class="st">"GitHub"</span><span class="op">)</span></span>
-<span></span>
-<span><span class="co"># 检查版本</span></span>
-<span><span class="fu"><a href="reference/pkg_version.html">pkg_version</a></span><span class="op">(</span><span class="st">"evanverse"</span><span class="op">)</span></span></code></pre></div>
+<span><span class="st">"你好"</span> <span class="op"><a href="reference/grapes-p-grapes.html">%p%</a></span> <span class="st">"世界"</span>                      <span class="co"># 字符串拼接</span></span>
+<span><span class="fu"><a href="reference/inst_pkg.html">inst_pkg</a></span><span class="op">(</span><span class="st">"limma"</span>, source <span class="op">=</span> <span class="st">"Bioc"</span><span class="op">)</span>    <span class="co"># 多源安装包</span></span>
+<span><span class="fu"><a href="reference/plot_venn.html">plot_venn</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>A <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">5</span>, B <span class="op">=</span> <span class="fl">3</span><span class="op">:</span><span class="fl">8</span><span class="op">)</span><span class="op">)</span>    <span class="co"># 快速绘制韦恩图</span></span>
+<span><span class="fu"><a href="reference/quick_ttest.html">quick_ttest</a></span><span class="op">(</span><span class="va">df</span>, <span class="st">"group"</span>, <span class="st">"value"</span><span class="op">)</span>     <span class="co"># 自动选择 t 检验方法</span></span>
+<span><span class="fu"><a href="reference/gene2ensembl.html">gene2ensembl</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"TP53"</span>, <span class="st">"BRCA1"</span><span class="op">)</span><span class="op">)</span>      <span class="co"># 基因 ID 转换</span></span></code></pre></div>
 <hr></div>
-</div>
 <div class="section level2">
-<h2 id="id_-功能分类">📖 功能分类<a class="anchor" aria-label="anchor" href="#id_-%E5%8A%9F%E8%83%BD%E5%88%86%E7%B1%BB"></a></h2>
-<details><summary><b>📦 包管理</b> (6 个函数)
+<h2 id="安装">安装<a class="anchor" aria-label="anchor" href="#%E5%AE%89%E8%A3%85"></a></h2>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># 稳定版（CRAN）</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"evanverse"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># 开发版</span></span>
+<span><span class="fu">devtools</span><span class="fu">::</span><span class="fu"><a href="https://devtools.r-lib.org/reference/install-deprecated.html" class="external-link">install_github</a></span><span class="op">(</span><span class="st">"evanbio/evanverse"</span><span class="op">)</span></span></code></pre></div>
+<p><strong>系统要求：</strong> R ≥ 4.1.0</p>
+<hr></div>
+<div class="section level2">
+<h2 id="函数列表">函数列表<a class="anchor" aria-label="anchor" href="#%E5%87%BD%E6%95%B0%E5%88%97%E8%A1%A8"></a></h2>
+<details><summary><b>📦 包管理</b>（6 个）
 </summary><ul><li>
-<code><a href="reference/check_pkg.html">check_pkg()</a></code> - 检查包是否已安装</li>
+<code><a href="reference/check_pkg.html">check_pkg()</a></code> — 检查包是否已安装</li>
 <li>
-<code><a href="reference/inst_pkg.html">inst_pkg()</a></code> - 从多个源安装包</li>
+<code><a href="reference/inst_pkg.html">inst_pkg()</a></code> — 从 CRAN / GitHub / Bioconductor 安装</li>
 <li>
-<code><a href="reference/update_pkg.html">update_pkg()</a></code> - 更新已安装的包</li>
+<code><a href="reference/update_pkg.html">update_pkg()</a></code> — 更新已安装的包</li>
 <li>
-<code><a href="reference/pkg_version.html">pkg_version()</a></code> - 获取包版本</li>
+<code><a href="reference/pkg_version.html">pkg_version()</a></code> — 获取包版本</li>
 <li>
-<code><a href="reference/pkg_functions.html">pkg_functions()</a></code> - 列出包中的函数</li>
+<code><a href="reference/pkg_functions.html">pkg_functions()</a></code> — 列出包中的函数</li>
 <li>
-<code><a href="reference/set_mirror.html">set_mirror()</a></code> - 配置 CRAN 镜像</li>
-</ul></details><details><summary><b>🎨 可视化与绘图</b> (5 个函数)
+<code><a href="reference/set_mirror.html">set_mirror()</a></code> — 配置 CRAN 镜像</li>
+</ul></details><details><summary><b>🎨 数据可视化</b>（5 个）
 </summary><ul><li>
-<code><a href="reference/plot_venn.html">plot_venn()</a></code> - 韦恩图</li>
+<code><a href="reference/plot_venn.html">plot_venn()</a></code> — 韦恩图</li>
 <li>
-<code><a href="reference/plot_forest.html">plot_forest()</a></code> - 森林图（支持高级自定义）</li>
+<code><a href="reference/plot_forest.html">plot_forest()</a></code> — 森林图</li>
 <li>
-<code><a href="reference/plot_bar.html">plot_bar()</a></code> - 柱状图</li>
+<code><a href="reference/plot_bar.html">plot_bar()</a></code> — 柱状图</li>
 <li>
-<code><a href="reference/plot_pie.html">plot_pie()</a></code> - 饼图</li>
+<code><a href="reference/plot_pie.html">plot_pie()</a></code> — 饼图</li>
 <li>
-<code><a href="reference/plot_density.html">plot_density()</a></code> - 密度图</li>
-</ul></details><details><summary><b>📊 统计分析</b> (6 个函数)
+<code><a href="reference/plot_density.html">plot_density()</a></code> — 密度图</li>
+</ul></details><details><summary><b>📊 统计分析</b>（6 个）
 </summary><ul><li>
-<code><a href="reference/quick_ttest.html">quick_ttest()</a></code> - 智能 t 检验（自动假设检验）</li>
+<code><a href="reference/quick_ttest.html">quick_ttest()</a></code> — 自动方法选择的 t 检验</li>
 <li>
-<code><a href="reference/quick_anova.html">quick_anova()</a></code> - 单因素方差分析（含事后检验）</li>
+<code><a href="reference/quick_anova.html">quick_anova()</a></code> — 单因素方差分析（含事后检验）</li>
 <li>
-<code><a href="reference/quick_chisq.html">quick_chisq()</a></code> - 卡方检验（含可视化）</li>
+<code><a href="reference/quick_chisq.html">quick_chisq()</a></code> — 卡方 / Fisher 精确检验</li>
 <li>
-<code><a href="reference/quick_cor.html">quick_cor()</a></code> - 相关性分析（含热力图）</li>
+<code><a href="reference/quick_cor.html">quick_cor()</a></code> — 相关性分析（含热力图）</li>
 <li>
-<code><a href="reference/stat_power.html">stat_power()</a></code> - 统计功效分析</li>
+<code><a href="reference/stat_power.html">stat_power()</a></code> — 统计功效分析</li>
 <li>
-<code>stat_samplesize()</code> - 样本量计算</li>
-</ul></details><details><summary><b>🎯 ggplot2 集成</b> (3 个函数)
+<code><a href="reference/stat_n.html">stat_n()</a></code> — 样本量计算</li>
+</ul></details><details><summary><b>🌈 配色方案</b>（9 个）
 </summary><ul><li>
-<code>scale_color_evanverse()</code> - ggplot2 颜色标度</li>
+<code><a href="reference/get_palette.html">get_palette()</a></code> — 获取配色</li>
 <li>
-<code>scale_fill_evanverse()</code> - ggplot2 填充标度</li>
+<code><a href="reference/list_palettes.html">list_palettes()</a></code> — 列出可用配色</li>
 <li>
-<code>scale_colour_evanverse()</code> - 英式拼写别名</li>
-</ul></details><details><summary><b>🌈 配色方案</b> (9 个函数)
+<code><a href="reference/create_palette.html">create_palette()</a></code> — 创建自定义配色</li>
+<li>
+<code><a href="reference/preview_palette.html">preview_palette()</a></code> — 预览配色</li>
+<li>
+<code><a href="reference/palette_gallery.html">palette_gallery()</a></code> — 浏览全部配色</li>
+<li>
+<code><a href="reference/compile_palettes.html">compile_palettes()</a></code> — 编译配色数据</li>
+<li>
+<code><a href="reference/remove_palette.html">remove_palette()</a></code> — 删除配色</li>
+<li>
+<code><a href="reference/hex2rgb.html">hex2rgb()</a></code> / <code><a href="reference/rgb2hex.html">rgb2hex()</a></code> — 颜色格式转换</li>
+</ul></details><details><summary><b>📁 文件与下载</b>（7 个）
 </summary><ul><li>
-<code><a href="reference/get_palette.html">get_palette()</a></code> - 获取配色方案</li>
+<code><a href="reference/download_url.html">download_url()</a></code> — 下载单个 URL</li>
 <li>
-<code><a href="reference/list_palettes.html">list_palettes()</a></code> - 列出可用配色</li>
+<code><a href="reference/download_batch.html">download_batch()</a></code> — 批量下载</li>
 <li>
-<code><a href="reference/create_palette.html">create_palette()</a></code> - 创建自定义配色</li>
+<code><a href="reference/download_geo.html">download_geo()</a></code> — 下载 GEO 数据集</li>
 <li>
-<code><a href="reference/preview_palette.html">preview_palette()</a></code> - 预览配色</li>
+<code><a href="reference/file_info.html">file_info()</a></code> — 文件元信息</li>
 <li>
-<code>bio_palette_gallery()</code> - 浏览生物配色库</li>
+<code><a href="reference/file_ls.html">file_ls()</a></code> — 列出文件及元信息</li>
 <li>
-<code><a href="reference/compile_palettes.html">compile_palettes()</a></code> - 编译配色数据</li>
+<code><a href="reference/file_tree.html">file_tree()</a></code> — 目录树可视化</li>
 <li>
-<code><a href="reference/remove_palette.html">remove_palette()</a></code> - 删除配色</li>
-<li>
-<code><a href="reference/hex2rgb.html">hex2rgb()</a></code> - 十六进制转 RGB</li>
-<li>
-<code><a href="reference/rgb2hex.html">rgb2hex()</a></code> - RGB 转十六进制</li>
-</ul></details><details><summary><b>📁 文件与数据读写</b> (10 个函数)
+<code><a href="reference/view.html">view()</a></code> — 交互式数据查看</li>
+</ul></details><details><summary><b>🧬 生物信息学</b>（5 个）
 </summary><ul><li>
-<code>read_table_flex()</code> - 灵活读取表格</li>
+<code><a href="reference/gene2ensembl.html">gene2ensembl()</a></code> — 基因符号转 Ensembl ID</li>
 <li>
-<code>read_excel_flex()</code> - 灵活读取 Excel</li>
+<code><a href="reference/gene2entrez.html">gene2entrez()</a></code> — 基因符号转 Entrez ID</li>
 <li>
-<code>write_xlsx_flex()</code> - 灵活写入 Excel</li>
+<code><a href="reference/download_gene_ref.html">download_gene_ref()</a></code> — 下载基因参考表</li>
 <li>
-<code><a href="reference/download_url.html">download_url()</a></code> - 从 URL 下载</li>
+<code><a href="reference/gmt2df.html">gmt2df()</a></code> — GMT 解析为数据框</li>
 <li>
-<code><a href="reference/download_batch.html">download_batch()</a></code> - 批量下载</li>
-<li>
-<code>download_geo_data()</code> - 下载 GEO 数据集</li>
-<li>
-<code><a href="reference/file_info.html">file_info()</a></code> - 文件信息</li>
-<li>
-<code><a href="reference/file_tree.html">file_tree()</a></code> - 目录树</li>
-<li>
-<code>get_ext()</code> - 获取文件扩展名</li>
-<li>
-<code><a href="reference/view.html">view()</a></code> - 交互式数据查看器</li>
-</ul></details><details><summary><b>🧬 生物信息学</b> (4 个函数)
+<code><a href="reference/gmt2list.html">gmt2list()</a></code> — GMT 解析为列表</li>
+</ul></details><details><summary><b>🔧 数据处理</b>（3 个）
 </summary><ul><li>
-<code>convert_gene_id()</code> - 基因 ID 转换</li>
+<code><a href="reference/df2list.html">df2list()</a></code> — 数据框转命名列表</li>
 <li>
-<code><a href="reference/download_gene_ref.html">download_gene_ref()</a></code> - 下载基因参考数据</li>
+<code><a href="reference/df2vect.html">df2vect()</a></code> — 数据框列转命名向量</li>
 <li>
-<code><a href="reference/gmt2df.html">gmt2df()</a></code> - GMT 转数据框</li>
-<li>
-<code><a href="reference/gmt2list.html">gmt2list()</a></code> - GMT 转列表</li>
-</ul></details><details><summary><b>🔧 数据处理</b> (10 个函数)
+<code><a href="reference/recode_column.html">recode_column()</a></code> — 按映射表重编码列值</li>
+</ul></details><details><summary><b>🧮 操作符与组合数学</b>（7 个）
 </summary><ul><li>
-<code><a href="reference/df2list.html">df2list()</a></code> - 数据框转列表</li>
+<code>%p%</code> — 字符串拼接</li>
 <li>
-<code>map_column()</code> - 映射列值</li>
+<code>%is%</code> — 身份比较</li>
 <li>
-<code>is_void()</code> - 检查空值</li>
+<code>%nin%</code> — 非成员判断</li>
 <li>
-<code>any_void()</code> - 是否有空值</li>
+<code>%map%</code> — 映射操作符</li>
 <li>
-<code>drop_void()</code> - 删除空值</li>
+<code>%match%</code> — 匹配操作符</li>
 <li>
-<code>replace_void()</code> - 替换空值</li>
+<code><a href="reference/comb.html">comb()</a></code> — 组合数</li>
 <li>
-<code>cols_with_void()</code> - 含空值的列</li>
-<li>
-<code>rows_with_void()</code> - 含空值的行</li>
-</ul></details><details><summary><b>🧮 操作符与逻辑</b> (8 个函数)
+<code><a href="reference/perm.html">perm()</a></code> — 排列数</li>
+</ul></details><details><summary><b>🧪 测试数据</b>（2 个）
 </summary><ul><li>
-<code>%p%</code> - 字符串拼接操作符</li>
+<code><a href="reference/toy_gene_ref.html">toy_gene_ref()</a></code> — 用于测试的小型基因参考表</li>
 <li>
-<code>%is%</code> - 身份比较</li>
-<li>
-<code>%nin%</code> - 非成员操作符</li>
-<li>
-<code>%map%</code> - 映射操作符</li>
-<li>
-<code>%match%</code> - 匹配操作符</li>
-<li>
-<code>combine_logic()</code> - 组合逻辑向量</li>
-<li>
-<code><a href="reference/comb.html">comb()</a></code> - 组合数</li>
-<li>
-<code><a href="reference/perm.html">perm()</a></code> - 排列数</li>
-</ul></details><details><summary><b>⚙️ 工作流工具</b> (3 个函数)
-</summary><ul><li>
-<code>with_timer()</code> - 计时执行</li>
-<li>
-<code>remind()</code> - 设置提醒</li>
-<li>
-<code>safe_execute()</code> - 安全函数执行</li>
+<code><a href="reference/toy_gmt.html">toy_gmt()</a></code> — 用于测试的小型 GMT 文件</li>
 </ul></details><hr></div>
 <div class="section level2">
-<h2 id="id_-文档资源">📚 文档资源<a class="anchor" aria-label="anchor" href="#id_-%E6%96%87%E6%A1%A3%E8%B5%84%E6%BA%90"></a></h2>
-<p>完整的文档、示例和教程：</p>
+<h2 id="文档资源">文档资源<a class="anchor" aria-label="anchor" href="#%E6%96%87%E6%A1%A3%E8%B5%84%E6%BA%90"></a></h2>
+<p>完整文档、教程和函数参考：</p>
 <p>👉 <strong><a href="https://evanbio.github.io/evanverse/">https://evanbio.github.io/evanverse/</a></strong></p>
 <hr></div>
 <div class="section level2">
-<h2 id="id_-参与贡献">🤝 参与贡献<a class="anchor" aria-label="anchor" href="#id_-%E5%8F%82%E4%B8%8E%E8%B4%A1%E7%8C%AE"></a></h2>
-<p>我们欢迎各种形式的贡献！详情请参阅 <a href="CONTRIBUTING.html">贡献指南</a>。</p>
-<ul><li>🐛 <a href="https://github.com/evanbio/evanverse/issues/new?template=bug_report.yml" class="external-link">报告 Bug</a>
-</li>
-<li>💡 <a href="https://github.com/evanbio/evanverse/issues/new?template=feature_request.yml" class="external-link">功能建议</a>
-</li>
-<li>📖 <a href="https://github.com/evanbio/evanverse/issues/new?template=documentation.yml" class="external-link">改进文档</a>
-</li>
-<li>❓ <a href="https://github.com/evanbio/evanverse/issues/new?template=question.yml" class="external-link">提问交流</a>
-</li>
-</ul><hr></div>
-<div class="section level2">
-<h2 id="id_-开源协议">📜 开源协议<a class="anchor" aria-label="anchor" href="#id_-%E5%BC%80%E6%BA%90%E5%8D%8F%E8%AE%AE"></a></h2>
-<p>MIT License © 2025-2026 <a href="mailto:evanzhou.bio@gmail.com">Evan Zhou</a></p>
-<p>详见 <a href="LICENSE.html">LICENSE.md</a>。</p>
-<hr></div>
-<div class="section level2">
-<h2 id="id_-项目状态">📊 项目状态<a class="anchor" aria-label="anchor" href="#id_-%E9%A1%B9%E7%9B%AE%E7%8A%B6%E6%80%81"></a></h2>
-<ul><li>✅ <strong>已发布至 CRAN</strong> - 版本 0.4.4</li>
-<li>✅ <strong>稳定生命周期</strong> - 生产环境可用</li>
-<li>✅ <strong>全面测试覆盖</strong> - 完善的测试套件</li>
-<li>✅ <strong>持续维护</strong> - 定期更新</li>
-</ul><hr><div align="center">
+<h2 id="开源协议">开源协议<a class="anchor" aria-label="anchor" href="#%E5%BC%80%E6%BA%90%E5%8D%8F%E8%AE%AE"></a></h2>
+<p>MIT License © 2025–2026 <a href="mailto:evanzhou.bio@gmail.com">Evan Zhou</a></p>
+<div align="center">
 <p><strong>用 ❤️ 制作 by <a href="https://github.com/evanbio" class="external-link">Evan Zhou</a></strong></p>
-<p><a href="#evanverse">⬆ 返回顶部</a></p>
 </div>
 </div>
 
@@ -475,7 +273,7 @@
 
 <div class="pkgdown-footer-right">
   <div class="text-muted">
-<p><strong>evanverse v0.4.4</strong><br><small>Last updated: March 2026</small></p>
+<p><strong>evanverse v0.5.0</strong><br><small>Last updated: March 2026</small></p>
 </div><div class="footer-links">
 <p><a href="https://github.com/evanbio/evanverse" class="external-link text-muted me-3" aria-label="GitHub"> <i class="fab fa-github fa-lg"></i> </a> <a href="https://cran.r-project.org/package=evanverse" class="external-link text-muted me-3" aria-label="CRAN"> <i class="fas fa-download fa-lg"></i> </a> <a href="https://blog.evanzhou.org" class="external-link text-muted" aria-label="Blog"> <i class="fas fa-blog fa-lg"></i> </a></p>
 </div>
