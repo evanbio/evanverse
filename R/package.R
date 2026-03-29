@@ -14,6 +14,7 @@
 #'
 #' Designed for researchers, developers, and anyone seeking simplicity and clarity in R scripting.
 #'
+#' @importFrom rlang .data
 #' @docType package
 #' @name evanverse
 #' @keywords utilities workflow scripting

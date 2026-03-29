@@ -20,6 +20,7 @@
 #'   is set. Must be a valid level of the `group_col` column; used to order x
 #'   positions by that group's y values.
 #'
+#' @importFrom rlang .data
 #' @return A `ggplot` object.
 #' @export
 #'

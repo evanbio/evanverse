@@ -203,7 +203,11 @@ file_ls <- function(dir, recursive = FALSE, pattern = NULL) {
 #' @export
 #'
 #' @examples
-#' file_info(c("README.md", "DESCRIPTION"))
+#' f1 <- tempfile(fileext = ".txt")
+#' f2 <- tempfile(fileext = ".csv")
+#' writeLines("hello", f1)
+#' writeLines("a,b\\n1,2", f2)
+#' file_info(c(f1, f2))
 file_info <- function(file) {
   .assert_character_vector(file)
 

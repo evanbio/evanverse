@@ -16,5 +16,9 @@ A data.frame with columns: \code{file}, \code{size_MB}, \code{modified_time}, \c
 Returns a data.frame with file metadata for the given file path(s).
 }
 \examples{
-file_info(c("README.md", "DESCRIPTION"))
+f1 <- tempfile(fileext = ".txt")
+f2 <- tempfile(fileext = ".csv")
+writeLines("hello", f1)
+writeLines("a,b\\\\n1,2", f2)
+file_info(c(f1, f2))
 }
