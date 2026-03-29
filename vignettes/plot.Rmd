@@ -22,10 +22,10 @@ The plot module provides five publication-ready plotting functions:
 | Function | Purpose |
 |---|---|
 | `plot_bar()` | Bar chart with optional grouping and sorting |
-| `plot_density()` | Density plot with optional grouping and faceting |
-| `plot_pie()` | Pie chart from a vector or pre-computed counts |
-| `plot_venn()` | Venn diagram for 2-4 sets |
-| `plot_forest()` | Publication-ready forest plot (HR / OR / beta) |
+| `plot_density()` | Density / distribution curves with optional faceting |
+| `plot_pie()` | Pie / donut chart from a vector or data frame |
+| `plot_venn()` | Venn diagram for 2–4 sets |
+| `plot_forest()` | Publication-ready forest plot |
 
 ```{r load}
 library(evanverse)
@@ -33,614 +33,413 @@ library(evanverse)
 
 > **Note:** All code examples in this vignette are static (`eval = FALSE`).
 > Output is hand-written to reflect the current implementation.
-> `plot_bar()`, `plot_density()`, `plot_pie()`, and `plot_venn()` return
-> `ggplot` objects and can be customised with additional `ggplot2` layers or
-> saved with `ggsave()`. `plot_forest()` returns a `gtable`; use the built-in
-> `save = TRUE` parameter or `grid::grid.draw()` / `gridExtra::grid.arrange()`
-> for export.
 
 ---
 
 ## 1 Bar Chart
 
-### `plot_bar()` --Bar chart with optional grouping and sorting
+### `plot_bar()` — Bar chart with optional grouping
 
-Draws a vertical or horizontal bar chart. When `group_col` is supplied the
-bars are placed side-by-side using `position = "dodge"`.
+Creates a vertical or horizontal bar chart. Bars can be sorted, and an
+optional `group_col` produces a grouped (side-by-side) chart. All inputs
+are character column names, so the function works naturally in pipelines.
+
+**Key parameters**
+
+| Parameter | Default | Description |
+|---|---|---|
+| `data` | — | Data frame |
+| `x_col` | — | Column for x-axis categories |
+| `y_col` | — | Column for bar heights |
+| `horizontal` | `FALSE` | Flip to a horizontal bar chart |
+| `sort` | `FALSE` | Sort bars by height |
+| `decreasing` | `TRUE` | Sort order when `sort = TRUE` |
+| `group_col` | `NULL` | Column for grouped bars |
+| `sort_by` | `"union"` | Which groups to base sort order on |
+
+#### Basic usage
 
 ```{r bar-basic}
 df <- data.frame(
-  category = c("A", "B", "C", "D"),
-  value    = c(10, 25, 15, 30),
-  stringsAsFactors = FALSE
+  category = c("Alpha", "Beta", "Gamma", "Delta", "Epsilon"),
+  count    = c(42, 18, 35, 27, 51)
 )
 
-plot_bar(df, x_col = "category", y_col = "value")
+plot_bar(df, x_col = "category", y_col = "count")
+#> # A ggplot object — vertical bars, categories in original order
 ```
 
-### Sorting
+#### Sorted bars
 
-Set `sort = TRUE` to reorder bars by their `y_col` value. Use `decreasing`
-to control direction (default: `TRUE`).
-
-```{r bar-sort}
-plot_bar(df, x_col = "category", y_col = "value",
-         sort = TRUE, decreasing = TRUE)
-# Bars rendered left-to-right: D(30), B(25), C(15), A(10)
-
-plot_bar(df, x_col = "category", y_col = "value",
-         sort = TRUE, decreasing = FALSE,
-         horizontal = TRUE)
-# Horizontal, ascending: A, C, B, D
+```{r bar-sorted}
+plot_bar(df, x_col = "category", y_col = "count", sort = TRUE)
+#> # Bars ordered from tallest (Epsilon = 51) to shortest (Beta = 18)
 ```
 
-### Grouped bars
+#### Horizontal layout
 
-Pass `group_col` to draw a dodge bar chart. When `sort = TRUE`, you must also
-provide `sort_by` --a single level of `group_col` whose `y` values determine
-the `x` ordering.
+```{r bar-horizontal}
+plot_bar(df, x_col = "category", y_col = "count",
+         sort = TRUE, horizontal = TRUE)
+#> # Horizontal bars, sorted descending
+```
+
+#### Grouped bars
 
 ```{r bar-grouped}
-gdf <- data.frame(
-  category = rep(c("Gene A", "Gene B", "Gene C"), 2),
-  group    = rep(c("Control", "Treated"), each = 3),
-  expr     = c(2.1, 5.4, 3.8, 4.0, 3.1, 6.2),
-  stringsAsFactors = FALSE
+df2 <- data.frame(
+  category = rep(c("Alpha", "Beta", "Gamma"), each = 2),
+  group    = rep(c("Control", "Treatment"), 3),
+  value    = c(10, 15, 8, 22, 18, 20)
 )
 
-# Unsorted
-plot_bar(gdf, x_col = "category", y_col = "expr", group_col = "group")
-
-# Sorted by the "Treated" group's expression values
-plot_bar(gdf, x_col = "category", y_col = "expr",
-         group_col = "group", sort = TRUE, sort_by = "Treated")
-# x order: Gene C(6.2) > Gene A(4.0) > Gene B(3.1)
-```
-
-> **Tip:** When `sort_by` does not cover every `x_col` value (e.g. a
-> subgroup is absent from some categories), the missing categories are
-> appended at the end of the ordering rather than dropped. No data is lost.
-
-### Common errors
-
-```{r bar-errors}
-# sort_by required when group_col is set
-plot_bar(gdf, x_col = "category", y_col = "expr",
-         group_col = "group", sort = TRUE)
-#> Error in `plot_bar()`:
-#> ! `sort = TRUE` requires `sort_by`. Available levels of `group`: ...
-
-# sort_by must be a valid group level
-plot_bar(gdf, x_col = "category", y_col = "expr",
-         group_col = "group", sort = TRUE, sort_by = "Placebo")
-#> Error in `plot_bar()`:
-#> ! `sort_by = "Placebo"` is not a valid level of `group`.
+plot_bar(df2, x_col = "category", y_col = "value", group_col = "group")
+#> # Side-by-side bars, two groups per category
 ```
 
 ---
 
 ## 2 Density Plot
 
-### `plot_density()` --Density plot with optional grouping and faceting
+### `plot_density()` — Distribution curves
 
-Draws a kernel density estimate. The curve border is always black;
-fill is controlled by `group_col`. Use `adjust` to smooth or sharpen the
-bandwidth.
+Draws kernel density curves via `geom_density`. Supports multi-group
+overlays, optional faceting, and palette customisation.
+
+**Key parameters**
+
+| Parameter | Default | Description |
+|---|---|---|
+| `data` | — | Data frame |
+| `x_col` | — | Numeric column for the distribution |
+| `group_col` | `NULL` | Column for overlaid group curves |
+| `facet_col` | `NULL` | Column for faceted panels |
+| `alpha` | `0.3` | Fill transparency |
+| `adjust` | `1` | Bandwidth multiplier |
+| `palette` | `NULL` | Named or unnamed character vector of colours |
+
+#### Single distribution
 
 ```{r density-basic}
-plot_density(iris, x_col = "Sepal.Length")
+set.seed(42)
+df <- data.frame(score = rnorm(200, mean = 50, sd = 10))
+
+plot_density(df, x_col = "score")
+#> # Density curve for all 200 observations
 ```
 
-### Grouping and faceting
+#### Multiple groups
 
-```{r density-group}
-# Fill by Species
-plot_density(iris, x_col = "Sepal.Length", group_col = "Species",
-             alpha = 0.6)
+```{r density-groups}
+df2 <- data.frame(
+  score = c(rnorm(100, 50, 10), rnorm(100, 65, 8)),
+  group = rep(c("Control", "Treatment"), each = 100)
+)
 
-# Separate panels per Species
-plot_density(iris, x_col = "Sepal.Length", facet_col = "Species",
-             alpha = 0.8)
-
-# Both: fill and facet
-plot_density(iris, x_col = "Sepal.Length",
-             group_col = "Species", facet_col = "Species",
-             alpha = 0.5)
+plot_density(df2, x_col = "score", group_col = "group")
+#> # Two overlaid density curves, one per group
 ```
 
-### Custom palette
+#### Faceted panels
 
-When `group_col` is set, pass `palette` to override the default ggplot2
-colors. Colors are recycled to the number of groups.
+```{r density-facet}
+df3 <- data.frame(
+  score  = c(rnorm(150, 50, 10), rnorm(150, 60, 12)),
+  group  = rep(c("A", "B"), each = 150),
+  cohort = rep(c("Discovery", "Replication"), 150)
+)
 
-```{r density-palette}
-plot_density(iris, x_col = "Sepal.Length", group_col = "Species",
-             palette = c("#E64B35", "#4DBBD5", "#00A087"))
-```
-
-Supplying `palette` without `group_col` raises a warning and the palette
-is ignored:
-
-```{r density-palette-warn}
-plot_density(iris, x_col = "Sepal.Length", palette = c("red", "blue"))
-#> Warning: `palette` is ignored when `group_col` is NULL.
-```
-
-### `alpha` boundary values
-
-`alpha` accepts the full closed interval **[0, 1]**. Both boundary values
-are valid and meaningful:
-
-```{r density-alpha}
-# Fully transparent fill (outline only)
-plot_density(iris, x_col = "Sepal.Length", group_col = "Species", alpha = 0)
-
-# Fully opaque fill
-plot_density(iris, x_col = "Sepal.Length", group_col = "Species", alpha = 1)
-```
-
-### Common errors
-
-```{r density-errors}
-# Non-numeric x_col
-plot_density(iris, x_col = "Species")
-#> Error in `plot_density()`:
-#> ! `x_col` must be a non-empty numeric vector without NA values.
-
-# alpha out of range
-plot_density(iris, x_col = "Sepal.Length", alpha = 1.5)
-#> Error in `plot_density()`:
-#> ! `alpha` must be a single number between 0 and 1.
+plot_density(df3, x_col = "score", group_col = "group", facet_col = "cohort")
+#> # Two facet panels (Discovery / Replication), each with two group curves
 ```
 
 ---
 
 ## 3 Pie Chart
 
-### `plot_pie()` --Pie chart from a vector or data frame
+### `plot_pie()` — Pie / donut chart
 
-Accepts either a raw character/factor vector (counts computed automatically)
-or a data frame with pre-computed counts. Slices with zero count are dropped
-silently. At least two non-zero groups are required.
+Accepts either a plain named vector of counts or a data frame with separate
+group and count columns. Labels can show counts, percentages, both, or none.
 
-### From a vector
+**Key parameters**
+
+| Parameter | Default | Description |
+|---|---|---|
+| `data` | — | Named numeric vector or data frame |
+| `group_col` | `NULL` | Column for slice labels (data frame only) |
+| `count_col` | `NULL` | Column for slice sizes (data frame only) |
+| `label` | `"percent"` | `"count"`, `"percent"`, `"both"`, or `"none"` |
+| `palette` | `NULL` | Character vector of fill colours |
+
+#### From a named vector
 
 ```{r pie-vector}
-# Counts are computed with table()
-plot_pie(c("T cell", "T cell", "B cell", "NK cell", "NK cell", "NK cell"))
+counts <- c(T_cell = 423, B_cell = 187, NK_cell = 95, Monocyte = 312)
+plot_pie(counts)
+#> # Pie chart with four slices, percentage labels
 ```
 
-### From a data frame
+#### From a data frame
 
 ```{r pie-df}
 df <- data.frame(
-  cell_type = c("T cell", "B cell", "NK cell", "Myeloid"),
-  n         = c(420, 185, 96, 311),
-  stringsAsFactors = FALSE
+  cell_type = c("T_cell", "B_cell", "NK_cell", "Monocyte"),
+  n         = c(423, 187, 95, 312)
 )
 
-plot_pie(df, group_col = "cell_type", count_col = "n",
-         label = "percent")
-```
-
-### Label options
-
-| `label` | Display |
-|---|---|
-| `"none"` (default) | No labels |
-| `"count"` | Raw count per slice |
-| `"percent"` | Percentage per slice |
-| `"both"` | `count (percent%)` |
-
-```{r pie-labels}
 plot_pie(df, group_col = "cell_type", count_col = "n", label = "both")
-# Each slice shows e.g. "420 (41.6%)"
+#> # Pie chart with count + percentage labels
 ```
 
-### Custom palette
+#### Custom palette
 
 ```{r pie-palette}
-plot_pie(df, group_col = "cell_type", count_col = "n",
-         label   = "percent",
-         palette = c("#E64B35", "#4DBBD5", "#00A087", "#3C5488"))
-```
-
-### Zero-count slices are dropped
-
-```{r pie-zero}
-df_zero <- data.frame(
-  group = c("A", "B", "C"),
-  count = c(10, 0, 5),
-  stringsAsFactors = FALSE
-)
-plot_pie(df_zero, group_col = "group", count_col = "count")
-# Only A and C are rendered; the zero-count B slice is silently dropped
-```
-
-### Common errors
-
-```{r pie-errors}
-# NA in vector input
-plot_pie(c("A", NA, "B", "B"))
-#> Error in `plot_pie()`:
-#> ! `data` must not contain NA values.
-
-# NA in count column
-plot_pie(data.frame(g = c("A", "B"), n = c(10, NA)),
-         group_col = "g", count_col = "n")
-#> Error in `plot_pie()`:
-#> ! `n` must not contain NA values.
-
-# Negative counts
-plot_pie(data.frame(g = c("A", "B"), n = c(10, -5)),
-         group_col = "g", count_col = "n")
-#> Error in `plot_pie()`:
-#> ! `n` must contain non-negative values.
-
-# Fewer than 2 groups after dropping zeros
-plot_pie(data.frame(g = c("A", "B"), n = c(10, 0)),
-         group_col = "g", count_col = "n")
-#> Error in `plot_pie()`:
-#> ! At least two groups with non-zero count are required.
+plot_pie(counts, palette = c("#4C72B0", "#DD8452", "#55A868", "#C44E52"))
+#> # Same chart with custom fill colours
 ```
 
 ---
 
 ## 4 Venn Diagram
 
-### `plot_venn()` --Venn diagram for 2-4 sets
+### `plot_venn()` — Venn diagram for 2–4 sets
 
-Supports two rendering backends controlled by `method`:
+Draws classic (`ggvenn`) or gradient-filled (`ggVennDiagram`) Venn diagrams.
+Both packages are in `Suggests` — install the one you need.
 
-| `method` | Package required | Use case |
+**Key parameters**
+
+| Parameter | Default | Description |
 |---|---|---|
-| `"classic"` (default) | `ggvenn` | Standard fill-coloured diagram |
-| `"gradient"` | `ggVennDiagram` | Count-gradient heatmap |
+| `set1`, `set2` | — | Required input vectors |
+| `set3`, `set4` | `NULL` | Optional third and fourth sets |
+| `set_names` | `NULL` | Override labels (default: variable names) |
+| `method` | `"classic"` | `"classic"` (ggvenn) or `"gradient"` (ggVennDiagram) |
+| `label` | `"count"` | `"count"`, `"percent"`, `"both"`, or `"none"` |
+| `palette` | `NULL` | Fill colours (vector for classic; palette name for gradient) |
+| `return_sets` | `FALSE` | Return `list(plot, sets)` instead of just the plot |
 
-Both packages are in `Suggests` and must be installed separately.
+#### Two sets
 
-### Classic (2-4 sets)
-
-```{r venn-classic}
+```{r venn-two}
 set.seed(42)
-genes_a <- sample(letters, 15)
-genes_b <- sample(letters, 12)
-genes_c <- sample(letters, 10)
+genes_a <- sample(paste0("GENE", 1:100), 40)
+genes_b <- sample(paste0("GENE", 1:100), 35)
 
-# Two sets
-plot_venn(genes_a, genes_b)
-
-# Three sets
-plot_venn(genes_a, genes_b, genes_c)
-
-# Four sets with custom names
-plot_venn(genes_a, genes_b, genes_c, sample(letters, 8),
-          set_names = c("Cohort A", "Cohort B", "Cohort C", "Cohort D"))
+plot_venn(genes_a, genes_b, set_names = c("Set A", "Set B"))
+#> # Two-circle Venn with overlap count labels
 ```
 
-### Custom fill colors (classic)
+#### Three sets
 
-```{r venn-palette}
+```{r venn-three}
+genes_c <- sample(paste0("GENE", 1:100), 30)
+
 plot_venn(genes_a, genes_b, genes_c,
-          palette = c("#E64B35", "#4DBBD5", "#00A087"))
+          set_names = c("RNA-seq", "ATAC-seq", "ChIP-seq"),
+          label = "percent")
+#> # Three-circle Venn with percentage labels
 ```
 
-### Label type
-
-```{r venn-label}
-plot_venn(genes_a, genes_b,
-          label = "both")    # count + percent in each region
-```
-
-### Gradient method
-
-The `"gradient"` method colors each region by element count using a
-`RColorBrewer` palette name (length-1 string):
+#### Gradient method
 
 ```{r venn-gradient}
 plot_venn(genes_a, genes_b, genes_c,
           method  = "gradient",
           palette = "Blues")
+#> # Gradient-filled Venn (requires ggVennDiagram)
 ```
 
-> Supplying more than one palette name with `method = "gradient"` raises
-> an error --the gradient backend accepts exactly one palette name.
+#### Return intersection sets
 
-```{r venn-gradient-error}
-plot_venn(genes_a, genes_b,
-          method  = "gradient",
-          palette = c("Blues", "Reds"))
-#> Error in `plot_venn()`:
-#> ! The "gradient" method requires a single RColorBrewer palette name
-#>   (length 1). Got length 2.
-```
+```{r venn-return}
+result <- plot_venn(genes_a, genes_b, return_sets = TRUE)
+names(result)
+#> [1] "plot" "sets"
 
-### Accessing the set intersection data
-
-Set `return_sets = TRUE` to get a named list containing both the plot and
-the deduplicated set list. Useful when you need the intersection elements
-for downstream analysis.
-
-```{r venn-return-sets}
-out <- plot_venn(genes_a, genes_b, genes_c, return_sets = TRUE)
-
-out$plot    # the ggplot object
-out$sets    # named list of deduplicated vectors
-
-intersect(out$sets[[1]], out$sets[[2]])
-#> [1] ...   # elements in both Cohort A and Cohort B
-```
-
-### Common errors
-
-```{r venn-errors}
-# Empty set
-plot_venn(c("A", "B"), character(0))
-#> Error in `plot_venn()`:
-#> ! set2 must not be empty.
-
-# set_names length mismatch
-plot_venn(c("A", "B"), c("B", "C"),
-          set_names = c("only_one"))
-#> Error in `plot_venn()`:
-#> ! `set_names` length (1) must match number of sets (2).
+lapply(result$sets, length)
+#> $genes_a
+#> [1] 40
+#>
+#> $genes_b
+#> [1] 35
 ```
 
 ---
 
 ## 5 Forest Plot
 
-### `plot_forest()` --Publication-ready forest plot
+### `plot_forest()` — Publication-ready forest plot
 
-Produces a multi-column table with an embedded CI graphic, following the
-UKB-style three-line border convention. The function handles indentation,
-bold row labels, p-value formatting, per-row CI colours, background shading,
-and optional file export.
+Produces a publication-ready forest plot with automatic OR (95% CI) label
+generation, p-value formatting, row bolding, background shading, and
+three-line borders. Built on `forestploter`.
 
-The function returns a `gtable` (grid table) **invisibly**. Display it with
-`plot()` or `grid::grid.draw()`.
+**Key parameters**
 
-### Minimal example
+| Parameter | Default | Description |
+|---|---|---|
+| `data` | — | Data frame; first column is the row label |
+| `est` | — | Numeric vector of point estimates (`NA` = header row) |
+| `lower`, `upper` | — | CI lower and upper bounds |
+| `ci_column` | `2L` | Column position for the CI graphic |
+| `ref_line` | `1` | Reference line (use `0` for beta coefficients) |
+| `xlim` | `c(0, 2)` | X-axis limits |
+| `p_cols` | `NULL` | Numeric column(s) to auto-format as p-values |
+| `indent` | `NULL` | Per-row indentation level (0 = parent, 1+ = sub-row) |
+| `bold_label` | `NULL` | Logical vector for label bolding |
+| `background` | `"zebra"` | `"zebra"`, `"bold_label"`, or `"none"` |
+| `save` | `FALSE` | Save output to file |
+| `dest` | `NULL` | File path when `save = TRUE` |
+
+#### Basic forest plot
 
 ```{r forest-basic}
 df <- data.frame(
-  item      = c("Exposure vs. control", "  Unadjusted", "  Fully adjusted"),
+  item      = c("Exposure vs. control", "Unadjusted", "Fully adjusted"),
   `Cases/N` = c("", "89/4521", "89/4521"),
-  check.names = FALSE,
-  stringsAsFactors = FALSE
+  p_value   = c(NA_real_, 0.001, 0.006),
+  check.names = FALSE
 )
 
 p <- plot_forest(
-  data  = df,
-  est   = c(NA, 1.52, 1.43),
-  lower = c(NA, 1.18, 1.11),
-  upper = c(NA, 1.96, 1.85)
+  data      = df,
+  est       = c(NA, 1.52, 1.43),
+  lower     = c(NA, 1.18, 1.11),
+  upper     = c(NA, 1.96, 1.85),
+  ci_column = 2L,
+  indent    = c(0L, 1L, 1L),
+  p_cols    = "p_value",
+  xlim      = c(0.5, 3.0)
 )
 
 plot(p)
+#> # Forest plot — header row bolded, two indented model rows,
+#> # OR (95% CI) column auto-generated, significant p-values bolded
 ```
 
-> Rows where `est = NA` display no CI whisker --use this for header rows.
+#### Multi-exposure plot
 
-### Indentation and bold labels
-
-Use `indent` (integer) to add leading spaces to the label column, and
-`bold_label` (logical) to bold parent rows. When `bold_label` is `NULL`
-(default), rows with `indent == 0` are automatically bolded.
-
-```{r forest-indent}
-p <- plot_forest(
-  data       = df,
-  est        = c(NA, 1.52, 1.43),
-  lower      = c(NA, 1.18, 1.11),
-  upper      = c(NA, 1.96, 1.85),
-  indent     = c(0L, 1L, 1L),
-  bold_label = c(TRUE, FALSE, FALSE)
-)
-```
-
-### P-value formatting
-
-Declare numeric p-value columns with `p_cols`. They are formatted to
-`p_digits` decimal places with `"<0.001"`-style clipping, and rows below
-`p_threshold` are bolded when `bold_p = TRUE`.
-
-```{r forest-pval}
+```{r forest-multi}
 df2 <- data.frame(
-  item      = c("Exposure", "  Model 1", "  Model 2", "  Model 3"),
-  `Cases/N` = c("", "89/4521", "89/4521", "89/4521"),
-  p_value   = c(NA_real_, 0.001, 0.023, 0.210),
-  check.names = FALSE,
-  stringsAsFactors = FALSE
+  item    = c("Biomarker A", "  Model 1", "  Model 2",
+              "Biomarker B", "  Model 1", "  Model 2"),
+  N       = c("", "4521", "4521", "", "4389", "4389"),
+  p_value = c(NA, 0.001, 0.012, NA, 0.034, 0.21),
+  check.names = FALSE
 )
 
-p <- plot_forest(
-  data        = df2,
-  est         = c(NA, 1.52, 1.43, 1.18),
-  lower       = c(NA, 1.18, 1.11, 0.91),
-  upper       = c(NA, 1.96, 1.85, 1.53),
-  indent      = c(0L, 1L, 1L, 1L),
-  p_cols      = "p_value",
-  p_threshold = 0.05     # bold rows with p < 0.05
-)
-```
-
-### Custom axis range and ticks
-
-```{r forest-xlim}
-p <- plot_forest(
-  data     = df2,
-  est      = c(NA, 1.52, 1.43, 1.18),
-  lower    = c(NA, 1.18, 1.11, 0.91),
-  upper    = c(NA, 1.96, 1.85, 1.53),
-  xlim     = c(0.5, 3.0),
-  ticks_at = c(0.5, 1.0, 2.0, 3.0),
-  ref_line = 1
-)
-```
-
-### CI column position and OR label
-
-`ci_column` controls where in the rendered table the CI graphic is inserted
-(default: column 2). The auto-generated `OR (95% CI)` text column is always
-placed immediately after.
-
-```{r forest-ci-column}
-# Insert the CI graphic at column 3 (after Cases/N)
-p <- plot_forest(
-  data      = df2,
-  est       = c(NA, 1.52, 1.43, 1.18),
-  lower     = c(NA, 1.18, 1.11, 0.91),
-  upper     = c(NA, 1.96, 1.85, 1.53),
-  ci_column = 3L
-)
-```
-
-### Per-row CI colors
-
-`ci_col` can be a scalar (all rows the same) or a vector of length
-`nrow(data)`. Rows where `est = NA` are skipped automatically.
-
-```{r forest-ci-col}
-p <- plot_forest(
-  data   = df2,
-  est    = c(NA, 1.52, 1.43, 1.18),
-  lower  = c(NA, 1.18, 1.11, 0.91),
-  upper  = c(NA, 1.96, 1.85, 1.53),
-  ci_col = c(NA, "#E64B35", "#4DBBD5", "#00A087")
-)
-```
-
-### Background and border
-
-| Parameter | Options | Default |
-|---|---|---|
-| `background` | `"zebra"`, `"bold_label"`, `"none"` | `"zebra"` |
-| `border` | `"three_line"`, `"none"` | `"three_line"` |
-
-```{r forest-bg}
-# Shade rows where bold_label = TRUE instead of alternating rows
-p <- plot_forest(
+p2 <- plot_forest(
   data       = df2,
-  est        = c(NA, 1.52, 1.43, 1.18),
-  lower      = c(NA, 1.18, 1.11, 0.91),
-  upper      = c(NA, 1.96, 1.85, 1.53),
-  indent     = c(0L, 1L, 1L, 1L),
-  background = "bold_label",
-  bg_col     = "#EEF5FB",
-  border     = "three_line"
+  est        = c(NA, 1.52, 1.43, NA, 0.88, 0.91),
+  lower      = c(NA, 1.18, 1.11, NA, 0.72, 0.74),
+  upper      = c(NA, 1.96, 1.85, NA, 1.07, 1.12),
+  ci_column  = 2L,
+  indent     = c(0L, 1L, 1L, 0L, 1L, 1L),
+  bold_label = c(TRUE, FALSE, FALSE, TRUE, FALSE, FALSE),
+  p_cols     = "p_value",
+  xlim       = c(0.5, 2.5),
+  background = "bold_label"
 )
+
+plot(p2)
+#> # Two parent rows (bolded, shaded) with four indented sub-rows
 ```
 
-### Saving to files
+#### Custom CI colours
 
-Set `save = TRUE` and provide a `dest` file path. Four formats are written
-simultaneously: `png`, `pdf`, `jpg`, `tiff`.
+```{r forest-colors}
+p3 <- plot_forest(
+  data      = df,
+  est       = c(NA, 1.52, 1.43),
+  lower     = c(NA, 1.18, 1.11),
+  upper     = c(NA, 1.96, 1.85),
+  ci_column = 2L,
+  indent    = c(0L, 1L, 1L),
+  ci_col    = c(NA, "#E74C3C", "#3498DB"),
+  p_cols    = "p_value",
+  xlim      = c(0.5, 3.0)
+)
+
+plot(p3)
+#> # Red CI for Unadjusted model, blue CI for Fully adjusted model
+```
+
+#### Save to file
 
 ```{r forest-save}
 plot_forest(
-  data        = df2,
-  est         = c(NA, 1.52, 1.43, 1.18),
-  lower       = c(NA, 1.18, 1.11, 0.91),
-  upper       = c(NA, 1.96, 1.85, 1.53),
+  data        = df,
+  est         = c(NA, 1.52, 1.43),
+  lower       = c(NA, 1.18, 1.11),
+  upper       = c(NA, 1.96, 1.85),
+  ci_column   = 2L,
+  indent      = c(0L, 1L, 1L),
+  p_cols      = "p_value",
+  xlim        = c(0.5, 3.0),
   save        = TRUE,
-  dest        = "results/forest_main",   # extension is ignored
-  save_width  = 22,
+  dest        = "results/forest_plot",
+  save_width  = 20,
   save_height = 8
 )
-#> v Saved: results/forest_main.png
-#> v Saved: results/forest_main.pdf
-#> v Saved: results/forest_main.jpg
-#> v Saved: results/forest_main.tiff
-```
-
-### Common errors
-
-```{r forest-errors}
-# est / lower / upper must all have the same length as nrow(data)
-plot_forest(df, est = c(1, 2), lower = c(0.5, 1), upper = c(1.5, 2.5))
-#> Error in `plot_forest()`:
-#> ! `est` must have length 3.
-
-# ci_column must be within [2, ncol(data) + 1]
-plot_forest(df,
-            est = c(NA, 1.52, 1.43), lower = c(NA, 1.18, 1.11),
-            upper = c(NA, 1.96, 1.85), ci_column = 10L)
-#> Error in `plot_forest()`:
-#> ! `ci_column` must be between 2 and 4 (ncol(data) + 1).
-
-# dest required when save = TRUE
-plot_forest(df,
-            est = c(NA, 1.52, 1.43), lower = c(NA, 1.18, 1.11),
-            upper = c(NA, 1.96, 1.85), save = TRUE)
-#> Error in `plot_forest()`:
-#> ! `dest` must be provided when `save = TRUE`.
+#> # Saves forest_plot.pdf, .png, .svg, .tiff to results/
 ```
 
 ---
 
-## 6 A Combined Workflow
+## Combined Workflow
 
-The following example takes a small gene expression data frame and produces
-three complementary plots: a bar chart of mean expression, a density
-distribution by group, and a forest plot of fold-change estimates.
+A typical analysis might use several plot functions together:
 
 ```{r workflow}
 library(evanverse)
 
-# --- Data setup ---------------------------------------------------------------
-expr_df <- data.frame(
-  gene      = rep(c("TP53", "MYC", "EGFR", "PTEN", "BRCA1"), each = 2),
-  condition = rep(c("Control", "Treated"), times = 5),
-  mean_expr = c(4.2, 6.1,  8.5, 5.3,  3.1, 7.8,  6.4, 4.9,  5.5, 9.2),
-  stringsAsFactors = FALSE
+# Group sizes as a sorted bar chart
+summary_df <- data.frame(
+  group = c("T_cell", "B_cell", "NK_cell", "Monocyte"),
+  n     = c(423, 187, 95, 312)
 )
 
-fc_df <- data.frame(
-  item    = c("Differential Expression", "  TP53", "  MYC", "  EGFR",
-              "  PTEN", "  BRCA1"),
-  p_value = c(NA_real_, 0.003, 0.041, 0.002, 0.180, 0.001),
-  check.names = FALSE,
-  stringsAsFactors = FALSE
+plot_bar(summary_df, x_col = "group", y_col = "n",
+         sort = TRUE, horizontal = TRUE)
+#> # Horizontal sorted bar chart
+
+# Proportional composition as a pie chart
+plot_pie(summary_df, group_col = "group", count_col = "n", label = "percent")
+#> # Pie chart with percentage labels
+
+# Score distributions per cell type
+score_df <- data.frame(
+  score = c(rnorm(423, 55, 10), rnorm(187, 62, 9),
+            rnorm(95, 70, 8),   rnorm(312, 48, 12)),
+  group = rep(c("T_cell", "B_cell", "NK_cell", "Monocyte"),
+              c(423, 187, 95, 312))
 )
 
-# --- 1. Bar chart: mean expression by gene and condition ----------------------
-plot_bar(expr_df,
-         x_col     = "gene",
-         y_col     = "mean_expr",
-         group_col = "condition",
-         sort      = TRUE,
-         sort_by   = "Treated")
+plot_density(score_df, x_col = "score", group_col = "group")
+#> # Overlaid density curves for all four cell types
 
-# --- 2. Density: expression distribution (all genes combined) ----------------
-plot_density(expr_df,
-             x_col     = "mean_expr",
-             group_col = "condition",
-             alpha     = 0.5,
-             palette   = c("#3C5488", "#E64B35"))
+# DEG overlaps across comparisons
+deg_tc <- paste0("GENE", sample(1:500, 80))
+deg_bc <- paste0("GENE", sample(1:500, 65))
+deg_nk <- paste0("GENE", sample(1:500, 45))
 
-# --- 3. Forest plot: log2 fold-change with p-values --------------------------
-plot_forest(
-  data        = fc_df,
-  est         = c(NA,  0.54, -0.68,  1.33, -0.41,  0.74),
-  lower       = c(NA,  0.21, -1.02,  0.88, -0.93,  0.38),
-  upper       = c(NA,  0.87, -0.34,  1.78,  0.11,  1.10),
-  indent      = c(0L,  1L,   1L,    1L,    1L,    1L),
-  p_cols      = "p_value",
-  ref_line    = 0,           # beta / log2FC reference at 0
-  xlim        = c(-1.5, 2),
-  ticks_at    = c(-1, 0, 1, 2),
-  arrow_lab   = c("Down", "Up"),
-  ci_col      = c(NA, "#E64B35", "#4DBBD5", "#E64B35",
-                  "grey50", "#E64B35"),
-  background  = "bold_label"
-)
+plot_venn(deg_tc, deg_bc, deg_nk,
+          set_names = c("T_cell DEGs", "B_cell DEGs", "NK_cell DEGs"))
+#> # Three-set Venn of differentially expressed genes
 ```
 
 ---
 
 ## Getting Help
 
-- `?plot_bar`, `?plot_density`, `?plot_pie`
-- `?plot_venn`, `?plot_forest`
-- [GitHub Issues](https://github.com/evanbio/evanverse/issues)
+```{r help}
+?plot_bar
+?plot_density
+?plot_pie
+?plot_venn
+?plot_forest
+
+help(package = "evanverse")
+```
