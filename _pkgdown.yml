@@ -143,27 +143,24 @@ home:
     structure: [links, toc, license, community, citation, authors, dev]
 
   links:
-  - text: "Quick Start Guide"
+  - text: "Get Started"
     href: articles/get-started.html
     desc: "Get up and running with evanverse in minutes"
-  - text: "Comprehensive Guide"
-    href: articles/comprehensive-guide.html
-    desc: "Complete overview of all evanverse features"
-  - text: "Data Processing"
-    href: articles/data-processing.html
-    desc: "Data transformation and void value handling"
   - text: "Package Management"
-    href: articles/package-management.html
-    desc: "Advanced installation and management"
+    href: articles/pkg.html
+    desc: "Install and manage R packages from multiple sources"
   - text: "Color Palettes"
-    href: articles/color-palettes.html
+    href: articles/palette.html
     desc: "Professional color management for data visualization"
-  - text: "Bioinformatics Workflows"
-    href: articles/bioinformatics-workflows.html
-    desc: "Domain-specific applications and tutorials"
+  - text: "Plotting Functions"
+    href: articles/plot.html
+    desc: "High-level plotting with sensible defaults"
+  - text: "Statistical Utilities"
+    href: articles/stat.html
+    desc: "Statistical testing and power analysis"
   - text: "Function Reference"
     href: reference/
-    desc: "Complete documentation for all 56+ functions"
+    desc: "Complete documentation for all functions"
   - text: "Install from CRAN"
     href: https://cran.r-project.org/package=evanverse
     desc: "Stable release on CRAN"
@@ -223,16 +220,20 @@ navbar:
     vignettes:
       text: "Vignettes"
       menu:
-      - text: "Comprehensive Guide"
-        href: articles/comprehensive-guide.html
+      - text: "Base Utilities"
+        href: articles/base.html
+      - text: "Custom Infix Operators"
+        href: articles/ops.html
       - text: "Package Management"
-        href: articles/package-management.html
-      - text: "Data Processing"
-        href: articles/data-processing.html
-      - text: "Color Palettes"
-        href: articles/color-palettes.html
-      - text: "Bioinformatics Workflows"
-        href: articles/bioinformatics-workflows.html
+        href: articles/pkg.html
+      - text: "Color Palette Management"
+        href: articles/palette.html
+      - text: "Plotting Functions"
+        href: articles/plot.html
+      - text: "Statistical Utilities"
+        href: articles/stat.html
+      - text: "Toy Data Utilities"
+        href: articles/toy.html
       - text: "--------"
       - text: "All Articles"
         href: articles/
@@ -293,17 +294,11 @@ reference:
     your statistical workflows with smart defaults.
   contents:
   - quick_ttest
-  - print.quick_ttest_result
-  - summary.quick_ttest_result
   - quick_anova
   - quick_chisq
-  - print.quick_chisq_result
-  - summary.quick_chisq_result
   - quick_cor
-  - print.quick_cor_result
-  - summary.quick_cor_result
   - stat_power
-  - stat_samplesize
+  - stat_n
 
 - title: "Color Palettes & Management"
   desc: >
@@ -398,14 +393,13 @@ reference:
   - remind
   - safe_execute
 
-- title: "Example Datasets"
+- title: "Toy Data"
   desc: >
-    Sample datasets included with evanverse for testing and
-    demonstration purposes. Useful for learning functions and
-    exploring package capabilities.
+    Functions that generate small, reproducible toy datasets for
+    testing and demonstration purposes.
   contents:
-  - forest_data
-  - trial
+  - toy_gene_ref
+  - toy_gmt
 
 # ==============================================================================
 # News & Release Configuration

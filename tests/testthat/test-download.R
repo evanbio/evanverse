@@ -92,6 +92,7 @@ test_that("download_gene_ref returns data.frame with expected columns", {
 
 test_that("download_gene_ref network: returns valid data.frame for human", {
   skip_on_cran()
+  skip_on_ci()
   skip_if_not_installed("biomaRt")
 
   out <- download_gene_ref(species = "human")
@@ -395,7 +396,7 @@ test_that("download_geo orchestrates helpers and returns correct list structure"
     .package = "evanverse"
   )
 
-  out <- download_geo("GSE99999", dest_dir = tmp)
+  out <- suppressWarnings(download_geo("GSE99999", dest_dir = tmp))
   expect_named(out, c("gse_object", "supplemental_files", "platform_info"))
   expect_identical(out$gse_object, fake_eset)
   expect_type(out$supplemental_files, "character")
