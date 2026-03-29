@@ -20,6 +20,6 @@ A data.frame with columns: \code{file}, \code{size_MB}, \code{modified_time}, \c
 Returns a data.frame with file metadata for all files in a directory.
 }
 \examples{
-file_ls("R")
-file_ls("R", pattern = "\\\\.R$", recursive = TRUE)
+file_ls(tempdir())
+file_ls(tempdir(), pattern = "\\\\.R$", recursive = TRUE)
 }

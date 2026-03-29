@@ -109,7 +109,7 @@ df <- data.frame(
   group = rep(LETTERS[1:3], each = 40),
   value = rnorm(120, mean = rep(c(0, 0.5, 1.2), each = 40), sd = 1)
 )
-result <- quick_anova(df, group_col = group, value_col = value)
+result <- quick_anova(df, group_col = "group", value_col = "value")
 print(result)
 summary(result)
 plot(result)

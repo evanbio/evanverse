@@ -172,8 +172,8 @@ gene2ensembl <- function(x, ref = NULL, species = c("human", "mouse")) {
 #' @export
 #'
 #' @examples
-#' file_ls("R")
-#' file_ls("R", pattern = "\\.R$", recursive = TRUE)
+#' file_ls(tempdir())
+#' file_ls(tempdir(), pattern = "\\.R$", recursive = TRUE)
 file_ls <- function(dir, recursive = FALSE, pattern = NULL) {
   .assert_scalar_string(dir)
   .assert_flag(recursive)

@@ -186,15 +186,6 @@
   invisible(x)
 }
 
-
-.assert_data_frame <- function(x, arg = deparse(substitute(x))) {
-  if (!is.data.frame(x)) {
-    cli::cli_abort("{.arg {arg}} must be a data.frame.", call = NULL)
-  }
-  invisible(x)
-}
-
-
 #' Assert that required columns are present in a data.frame
 #'
 #' Reports all missing columns in a single error rather than stopping at the

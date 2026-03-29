@@ -110,7 +110,7 @@ df <- data.frame(
   group = rep(c("A", "B"), each = 30),
   value = c(rnorm(30, 5), rnorm(30, 6))
 )
-result <- quick_ttest(df, group_col = group, value_col = value)
+result <- quick_ttest(df, group_col = "group", value_col = "value")
 print(result)
 summary(result)
 plot(result)

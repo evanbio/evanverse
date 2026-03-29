@@ -138,11 +138,14 @@ list_palettes <- function(type = NULL,
 #'
 #' @examples
 #' temp_dir <- file.path(tempdir(), "palettes")
-#' create_palette("blues", "sequential", c("#deebf7", "#9ecae1", "#3182bd"), color_dir = temp_dir)
-#' create_palette("qual_vivid", "qualitative", c("#E64B35", "#4DBBD5", "#00A087"), color_dir = temp_dir)
+#' create_palette("blues", "sequential", c("#deebf7", "#9ecae1", "#3182bd"),
+#'   color_dir = temp_dir)
+#' create_palette("qual_vivid", "qualitative", c("#E64B35", "#4DBBD5", "#00A087"),
+#'   color_dir = temp_dir)
 #'
 #' # Overwrite an existing palette explicitly
-#' create_palette("blues", "sequential", c("#c6dbef", "#6baed6", "#2171b5"), color_dir = temp_dir, overwrite = TRUE)
+#' create_palette("blues", "sequential", c("#c6dbef", "#6baed6", "#2171b5"),
+#'   color_dir = temp_dir, overwrite = TRUE)
 #'
 #' unlink(temp_dir, recursive = TRUE)
 create_palette <- function(name,
