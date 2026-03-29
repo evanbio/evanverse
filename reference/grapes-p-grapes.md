@@ -1,8 +1,7 @@
-# `%p%`: paste two strings with a single space
+# Paste two strings with a single space
 
 An infix operator for string concatenation with one space between `lhs`
-and `rhs`. Inspired by the readability of `%>%`, intended for expressive
-text building.
+and `rhs`.
 
 ## Usage
 
@@ -14,23 +13,26 @@ lhs %p% rhs
 
 - lhs:
 
-  A character vector on the left-hand side.
+  A character vector.
 
 - rhs:
 
-  A character vector on the right-hand side.
+  A character vector.
 
 ## Value
 
-A character vector, concatenating `lhs` and `rhs` with a single space.
+A character vector of concatenated strings.
+
+## Note
+
+Both `lhs` and `rhs` must be non-`NA` character vectors; `NA` values and
+non-character inputs (including `NULL`) raise an error.
 
 ## Examples
 
 ``` r
 "Hello" %p% "world"
 #> [1] "Hello world"
-"Good" %p% "job"
-#> [1] "Good job"
-c("hello", "good") %p% c("world", "morning")   # vectorized
+c("hello", "good") %p% c("world", "morning")
 #> [1] "hello world"  "good morning"
 ```

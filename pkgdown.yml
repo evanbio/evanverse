@@ -2,16 +2,16 @@ pandoc: 3.1.11
 pkgdown: 2.2.0
 pkgdown_sha: ~
 articles:
-  bioinformatics-workflows: bioinformatics-workflows.html
-  color-palettes: color-palettes.html
-  comprehensive-guide: comprehensive-guide.html
-  data-processing: data-processing.html
-  forest-plot: forest-plot.html
+  base: base.html
   get-started: get-started.html
   install: install.html
-  package-management: package-management.html
-  palette-naming-convention: palette-naming-convention.html
-last_built: 2026-03-10T14:02Z
+  ops: ops.html
+  palette: palette.html
+  pkg: pkg.html
+  plot: plot.html
+  stat: stat.html
+  toy: toy.html
+last_built: 2026-03-29T11:22Z
 urls:
   reference: https://evanbio.github.io/evanverse/reference
   article: https://evanbio.github.io/evanverse/articles

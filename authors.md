@@ -9,7 +9,7 @@
 ## Citation
 
 Source:
-[`DESCRIPTION`](https://github.com/evanbio/evanverse/blob/v0.4.4/DESCRIPTION)
+[`DESCRIPTION`](https://github.com/evanbio/evanverse/blob/main/DESCRIPTION)
 
 Zhou E (2026). *evanverse: Utility Functions for Data Analysis and
 Visualization*. R package version 0.4.4,

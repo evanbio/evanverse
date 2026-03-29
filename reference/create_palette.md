@@ -1,7 +1,7 @@
-# create_palette(): Save Custom Color Palettes as JSON
+# Create and Save a Custom Color Palette
 
-Save a named color palette (sequential, diverging, or qualitative) to a
-JSON file. Used for palette sharing, reuse, and future compilation.
+Save a named color palette to a JSON file for future compilation and
+reuse.
 
 ## Usage
 
@@ -11,7 +11,7 @@ create_palette(
   type = c("sequential", "diverging", "qualitative"),
   colors,
   color_dir,
-  log = TRUE
+  overwrite = FALSE
 )
 ```
 
@@ -19,7 +19,7 @@ create_palette(
 
 - name:
 
-  Character. Palette name (e.g., "Blues").
+  Character. Palette name (e.g., "blues").
 
 - type:
 
@@ -31,40 +31,33 @@ create_palette(
 
 - color_dir:
 
-  Character. Root folder to store palettes (required). Use tempdir() for
+  Character. Root folder to store palettes. Use tempdir() for
   examples/tests.
 
-- log:
+- overwrite:
 
-  Logical. Whether to log palette creation to a temporary log file.
+  Logical. If TRUE, overwrite existing palette file. Default: FALSE.
 
 ## Value
 
-(Invisibly) A list with `path` and `info`.
+Invisibly returns a list with `path` and `info`.
 
 ## Examples
 
 ``` r
-# Create palette in temporary directory:
 temp_dir <- file.path(tempdir(), "palettes")
-create_palette(
-  "blues",
-  "sequential",
-  c("#deebf7", "#9ecae1", "#3182bd"),
-  color_dir = temp_dir
-)
-#> ℹ Directory created: /tmp/Rtmpf763UI/palettes/sequential
-#> ✔ Palette saved: /tmp/Rtmpf763UI/palettes/sequential/blues.json
+create_palette("blues", "sequential", c("#deebf7", "#9ecae1", "#3182bd"),
+  color_dir = temp_dir)
+#> ✔ Palette saved: /tmp/RtmpsD08Ck/palettes/sequential/blues.json
+create_palette("qual_vivid", "qualitative", c("#E64B35", "#4DBBD5", "#00A087"),
+  color_dir = temp_dir)
+#> ✔ Palette saved: /tmp/RtmpsD08Ck/palettes/qualitative/qual_vivid.json
 
-create_palette(
-  "qual_vivid",
-  "qualitative",
-  c("#E64B35", "#4DBBD5", "#00A087"),
-  color_dir = temp_dir
-)
-#> ℹ Directory created: /tmp/Rtmpf763UI/palettes/qualitative
-#> ✔ Palette saved: /tmp/Rtmpf763UI/palettes/qualitative/qual_vivid.json
+# Overwrite an existing palette explicitly
+create_palette("blues", "sequential", c("#c6dbef", "#6baed6", "#2171b5"),
+  color_dir = temp_dir, overwrite = TRUE)
+#> ℹ Overwriting existing palette: "blues"
+#> ✔ Palette saved: /tmp/RtmpsD08Ck/palettes/sequential/blues.json
 
-# Clean up
 unlink(temp_dir, recursive = TRUE)
 ```

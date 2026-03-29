@@ -1,8 +1,6 @@
-# download_url(): Download File from URL
+# Download a file from a URL
 
-Downloads files from URLs (HTTP/HTTPS/FTP/SFTP) with robust error
-handling, retry mechanisms, and advanced features like resume, bandwidth
-limiting, and auto-extraction.
+Downloads a file from a URL with retry and resume support.
 
 ## Usage
 
@@ -11,12 +9,8 @@ download_url(
   url,
   dest,
   overwrite = FALSE,
-  unzip = FALSE,
-  verbose = TRUE,
+  resume = TRUE,
   timeout = 600,
-  headers = NULL,
-  resume = FALSE,
-  speed_limit = NULL,
   retries = 3
 )
 ```
@@ -25,126 +19,44 @@ download_url(
 
 - url:
 
-  Character string. Full URL to the file to download. Supports HTTP,
-  HTTPS, FTP, and SFTP protocols.
+  Character string. Full URL to the file to download.
 
 - dest:
 
-  Character string. Destination file path (required). Use
-  file.path(tempdir(), basename(url)) for examples/tests.
+  Character string. Destination file path.
 
 - overwrite:
 
-  Logical. Whether to overwrite existing files. Default: FALSE.
-
-- unzip:
-
-  Logical. Whether to automatically extract compressed files after
-  download. Supports .zip, .gz, .tar.gz formats. Default: FALSE.
-
-- verbose:
-
-  Logical. Whether to show download progress and status messages.
-  Default: TRUE.
-
-- timeout:
-
-  Numeric. Download timeout in seconds. Default: 600 (10 minutes).
-
-- headers:
-
-  Named list. Custom HTTP headers for the request (e.g.,
-  list(Authorization = "Bearer token")). Default: NULL.
+  Logical. Whether to overwrite an existing file. Default: FALSE. If
+  FALSE and the file exists, download is skipped. If TRUE and
+  `resume = TRUE`, will attempt to resume from an existing non-empty
+  destination file. If TRUE and `resume = FALSE`, the file is downloaded
+  from scratch.
 
 - resume:
 
-  Logical. Whether to attempt resuming interrupted downloads if a
-  partial file exists. Default: FALSE.
+  Logical. Whether to resume from an existing non-empty destination file
+  when `overwrite = TRUE`. Default: TRUE.
 
-- speed_limit:
+- timeout:
 
-  Numeric. Bandwidth limit in bytes per second (e.g., 500000 = 500KB/s).
-  Default: NULL (no limit).
+  Integer. Download timeout in seconds. Default: 600.
 
 - retries:
 
-  Integer. Number of retry attempts on download failure. Default: 3.
+  Integer. Number of retry attempts after the first failure. Default: 3.
 
 ## Value
 
-Invisible character string or vector of file paths:
-
-- If unzip = FALSE:
-
-  Path to the downloaded file
-
-- If unzip = TRUE:
-
-  Vector of paths to extracted files
-
-## Details
-
-This function provides a comprehensive solution for downloading files
-with:
-
-### Supported Protocols
-
-Supports HTTP/HTTPS, FTP, and SFTP protocols.
-
-### Features
-
-Includes retry mechanism, resume support, bandwidth control,
-auto-extraction, progress tracking, and custom headers.
-
-### Compression Support
-
-Supports .zip, .gz, and .tar.gz formats.
-
-## Dependencies
-
-Required packages: curl, cli, R.utils (automatically checked at
-runtime).
+Invisibly returns the path to the downloaded file.
 
 ## Examples
 
 ``` r
 if (FALSE) { # \dontrun{
-# Download a CSV file from GitHub:
 download_url(
-  url = "https://raw.githubusercontent.com/tidyverse/ggplot2/main/README.md",
-  dest = file.path(tempdir(), "ggplot2_readme.md"),
-  timeout = 30
-)
-
-# Download and extract a zip file:
-download_url(
-  url = "https://cran.r-project.org/src/contrib/Archive/dplyr/dplyr_0.8.0.tar.gz",
-  dest = file.path(tempdir(), "dplyr.tar.gz"),
-  unzip = TRUE,
-  timeout = 60
+  url  = "https://raw.githubusercontent.com/tidyverse/ggplot2/main/README.md",
+  dest = file.path(tempdir(), "ggplot2_readme.md")
 )
 } # }
-
-# \donttest{
-# Quick demo with a tiny file:
-download_url(
-  url = "https://httpbin.org/robots.txt",
-  dest = file.path(tempdir(), "robots.txt"),
-  timeout = 10,
-  verbose = FALSE
-)
-#> 
-#> ── Starting File Download ──────────────────────────────────────────────────────
-#> ℹ URL: <https://httpbin.org/robots.txt>
-#> ℹ Destination: /tmp/Rtmpf763UI/robots.txt
-#> 
-#> ── Download Attempt 1/3 ──
-#> 
-#> ✔ Download completed successfully
-#> ℹ File size: 0 MB
-#> ℹ Download time: 0.22 seconds
-#> 
-#> ── Download Process Completed ──────────────────────────────────────────────────
-#> ✔ Final file: /tmp/Rtmpf763UI/robots.txt
-# }
 ```

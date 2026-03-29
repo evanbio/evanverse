@@ -1,9 +1,8 @@
-# Quick Correlation Analysis with Heatmap Visualization
+# Correlation analysis with heatmap visualization
 
-Perform correlation analysis with automatic p-value calculation and
-publication-ready heatmap visualization. Supports multiple correlation
-methods and significance testing with optional multiple testing
-correction.
+Computes pairwise correlations with p-values, optional multiple-testing
+correction, and a publication-ready heatmap. Supports Pearson, Spearman,
+and Kendall methods.
 
 ## Usage
 
@@ -15,7 +14,13 @@ quick_cor(
   use = "pairwise.complete.obs",
   p_adjust_method = c("none", "holm", "hochberg", "hommel", "bonferroni", "BH", "BY",
     "fdr"),
-  sig_level = c(0.001, 0.01, 0.05),
+  alpha = 0.05
+)
+
+# S3 method for class 'quick_cor_result'
+plot(
+  x,
+  y = NULL,
   type = c("full", "upper", "lower"),
   show_coef = FALSE,
   show_sig = TRUE,
@@ -29,7 +34,7 @@ quick_cor(
   axis_x_angle = 45,
   axis_y_angle = 0,
   axis_text_size = 10,
-  verbose = TRUE,
+  sig_level = c(0.001, 0.01, 0.05),
   ...
 )
 ```
@@ -38,363 +43,180 @@ quick_cor(
 
 - data:
 
-  A data frame containing numeric variables.
+  A data frame.
 
 - vars:
 
-  Optional character vector specifying which variables to include. If
-  `NULL` (default), all numeric columns will be used.
+  Character vector of column names to include. `NULL` (default) uses all
+  numeric columns.
 
 - method:
 
-  Character. Correlation method: "pearson" (default), "spearman", or
-  "kendall".
+  One of `"pearson"` (default), `"spearman"`, `"kendall"`.
 
 - use:
 
-  Character. Method for handling missing values, passed to
-  [`cor()`](https://rdrr.io/r/stats/cor.html). Default is
-  "pairwise.complete.obs". Other options: "everything", "all.obs",
-  "complete.obs", "na.or.complete".
+  Character. Missing-value handling passed to
+  [`cor()`](https://rdrr.io/r/stats/cor.html). Default
+  `"pairwise.complete.obs"`.
 
 - p_adjust_method:
 
-  Character. Method for p-value adjustment for multiple testing. Default
-  is "none". Options: "holm", "hochberg", "hommel", "bonferroni", "BH",
-  "BY", "fdr", "none". See
-  [`p.adjust`](https://rdrr.io/r/stats/p.adjust.html).
+  P-value adjustment method passed to
+  [`p.adjust`](https://rdrr.io/r/stats/p.adjust.html). Default `"none"`.
 
-- sig_level:
+- alpha:
 
-  Numeric vector. Significance levels for star annotations. Default is
-  `c(0.001, 0.01, 0.05)` corresponding to \*\*\*, \*\*, \*.
+  Numeric. Significance threshold for identifying significant pairs.
+  Default `0.05`.
+
+- x:
+
+  A `quick_cor_result` object from `quick_cor()`.
+
+- y:
+
+  Ignored.
 
 - type:
 
-  Character. Type of heatmap: "full" (default), "upper", or "lower".
+  One of `"full"` (default), `"upper"`, `"lower"`.
 
 - show_coef:
 
-  Logical. Display correlation coefficients on the heatmap? Default is
-  `FALSE`.
+  Logical. Show correlation coefficients? Default `FALSE`.
 
 - show_sig:
 
-  Logical. Display significance stars on the heatmap? Default is `TRUE`.
+  Logical. Show significance stars? Default `TRUE`. Silently disabled
+  when `show_coef = TRUE`.
 
 - hc_order:
 
-  Logical. Reorder variables using hierarchical clustering? Default is
-  `TRUE`.
+  Logical. Reorder by hierarchical clustering? Default `TRUE`.
 
 - hc_method:
 
-  Character. Hierarchical clustering method if `hc_order = TRUE`.
-  Default is "complete". See
-  [`hclust`](https://rdrr.io/r/stats/hclust.html).
+  Clustering method. Default `"complete"`.
 
 - palette:
 
-  Character. Color palette name from evanverse palettes. Default is
-  "gradient_rd_bu" (diverging Red-Blue palette, recommended for
-  correlation matrices). Set to `NULL` to use ggplot2 defaults. Other
-  diverging options: "piyg", "earthy_diverge", "fire_ice_duo".
+  evanverse palette name. Default `"gradient_rd_bu"`. `NULL` uses a
+  built-in Blue-White-Red scale.
 
 - lab_size:
 
-  Numeric. Size of coefficient labels if `show_coef = TRUE`. Default is
-  3.
+  Numeric. Label size when `show_coef = TRUE`. Default `3`.
 
 - title:
 
-  Character. Plot title. Default is `NULL` (no title).
+  Character. Plot title. Default `NULL`.
 
 - show_axis_x:
 
-  Logical. Display x-axis labels? Default is `TRUE`.
+  Logical. Show x-axis labels? Default `TRUE`.
 
 - show_axis_y:
 
-  Logical. Display y-axis labels? Default is `TRUE`.
+  Logical. Show y-axis labels? Default `TRUE`.
 
 - axis_x_angle:
 
-  Numeric. Rotation angle for x-axis labels in degrees. Default is 45.
-  Common values: 0 (horizontal), 45 (diagonal), 90 (vertical).
+  Numeric. X-axis label angle. Default `45`.
 
 - axis_y_angle:
 
-  Numeric. Rotation angle for y-axis labels in degrees. Default is 0
-  (horizontal).
+  Numeric. Y-axis label angle. Default `0`.
 
 - axis_text_size:
 
-  Numeric. Font size for axis labels. Default is 10.
+  Numeric. Axis text size. Default `10`.
 
-- verbose:
+- sig_level:
 
-  Logical. Print diagnostic messages? Default is `TRUE`.
+  Numeric vector. P-value thresholds for \*\*\*, \*\*, \*. Default
+  `c(0.001, 0.01, 0.05)`.
 
 - ...:
 
-  Additional arguments (currently unused, reserved for future
-  extensions).
+  Additional arguments passed to the internal plotting backend.
 
 ## Value
 
-An object of class `quick_cor_result` containing:
+An object of class `"quick_cor_result"` (invisibly) containing:
 
-- plot:
-
-  A ggplot object with the correlation heatmap
-
-- cor_matrix:
+- `cor_matrix`:
 
   Correlation coefficient matrix
 
-- p_matrix:
+- `p_matrix`:
 
-  P-value matrix (unadjusted)
+  Unadjusted p-value matrix
 
-- p_adjusted:
+- `p_adjusted`:
 
-  Adjusted p-value matrix (if p_adjust_method != "none")
+  Adjusted p-value matrix; `NULL` when `p_adjust_method = "none"`
 
-- method_used:
+- `method_used`:
 
   Correlation method used
 
-- significant_pairs:
+- `significant_pairs`:
 
-  Data frame of significant correlation pairs
+  Data frame of significant pairs
 
-- descriptive_stats:
+- `descriptive_stats`:
 
-  Descriptive statistics for each variable
+  Per-variable summary data frame
 
-- parameters:
+- `params`:
 
-  List of analysis parameters
+  List of input parameters
 
-- timestamp:
+- `data`:
 
-  POSIXct timestamp of analysis
+  Cleaned data frame (for
+  [`plot()`](https://rdrr.io/r/graphics/plot.default.html) method)
+
+Use `print(result)` for a one-line summary, `summary(result)` for full
+details, and `plot(result)` for the correlation heatmap.
 
 ## Details
 
-**"Quick" means easy to use, not simplified or inaccurate.**
-
-This function performs complete correlation analysis with proper
-statistical testing:
-
-### Correlation Methods
-
-- **Pearson**: Measures linear relationships, assumes normality
-
-- **Spearman**: Rank-based, robust to outliers and non-normality
-
-- **Kendall**: Rank-based, better for small samples or many ties
-
-### P-value Calculation
-
-P-values are calculated for each pairwise correlation. The function
-automatically uses
-[`psych::corr.test()`](https://rdrr.io/pkg/psych/man/corr.test.html) if
-the `psych` package is installed, which provides significantly faster
-computation (10-100x speedup for large matrices) compared to the base R
-[`stats::cor.test()`](https://rdrr.io/r/stats/cor.test.html) loop. If
-`psych` is not available, the function gracefully falls back to the base
-R implementation.
-
-For large correlation matrices with many tests, consider using
-`p_adjust_method` to control for multiple testing (e.g., "bonferroni" or
-"fdr").
-
-**Performance tip**: Install the `psych` package for faster p-value
-computation: `install.packages("psych")`
-
-### Visualization
-
-The heatmap includes:
-
-- Color-coded correlation coefficients (red = positive, blue = negative)
-
-- Optional significance stars (\*\*\*, \*\*, \*)
-
-- Optional coefficient values
-
-- Hierarchical clustering to group similar variables
-
-- Publication-ready styling
-
-## Important Notes
-
-- **Numeric variables only**: The function automatically selects numeric
-  columns or uses the variables specified in `vars`.
-
-- **Constant variables**: Variables with zero variance are automatically
-  removed with a warning.
-
-- **Sample size**: The function will warn if sample sizes are very small
-  (n \< 5) after removing missing values.
-
-- **Missing values**: Handled according to the `use` parameter.
-  "pairwise.complete.obs" is recommended for optimal sample size usage.
-
-- **Optional dependencies**: For optimal performance, install `psych`
-  (fast p-value computation) and `ggcorrplot` (heatmap visualization).
-  The function will work without them but may be slower or use fallback
-  plotting.
+**P-value computation:** Uses
+[`psych::corr.test()`](https://rdrr.io/pkg/psych/man/corr.test.html)
+when available (10-100× faster for large matrices); otherwise falls back
+to a [`stats::cor.test()`](https://rdrr.io/r/stats/cor.test.html) loop.
 
 ## See also
 
 [`cor`](https://rdrr.io/r/stats/cor.html),
-[`cor.test`](https://rdrr.io/r/stats/cor.test.html)
+[`cor.test`](https://rdrr.io/r/stats/cor.test.html),
+[`quick_ttest`](https://evanbio.github.io/evanverse/reference/quick_ttest.md),
+[`quick_chisq`](https://evanbio.github.io/evanverse/reference/quick_chisq.md)
 
 ## Examples
 
 ``` r
-if (requireNamespace("ggcorrplot", quietly = TRUE)) {
-  # Example 1: Basic correlation analysis
-  result <- quick_cor(mtcars)
-  print(result)
-
-  # Example 2: Spearman correlation with specific variables
-  result <- quick_cor(
-    mtcars,
-    vars = c("mpg", "hp", "wt", "qsec"),
-    method = "spearman"
-  )
-
-  # Example 3: Upper triangular with Bonferroni correction
-  result <- quick_cor(
-    iris,
-    type = "upper",
-    p_adjust_method = "bonferroni",
-    show_coef = TRUE
-  )
-
-  # Example 4: Custom palette and title
-  result <- quick_cor(
-    mtcars,
-    palette = "gradient_rd_bu",
-    title = "Correlation Matrix of mtcars Dataset",
-    hc_order = TRUE
-  )
-
-  # Example 5: Customize axis labels
-  result <- quick_cor(
-    mtcars,
-    axis_x_angle = 90,      # Vertical x-axis labels
-    axis_text_size = 12,    # Larger text
-    show_axis_y = FALSE     # Hide y-axis labels
-  )
-
-  # Access components
-  result$plot                 # ggplot object
-  result$cor_matrix           # Correlation matrix
-  result$significant_pairs    # Significant pairs
-  summary(result)             # Detailed summary
-}
+result <- quick_cor(mtcars)
+#> ℹ Found 44 significant pairs out of 55 tests.
+#> ! 1 pair with |r| > 0.9 (potential multicollinearity).
+print(result)
+#> pearson | 11 vars | 44/55 significant pairs (alpha = 0.05)
+summary(result)
 #> 
-#> ── Data Preparation ──
+#> ── Correlation Analysis ────────────────────────────────────────────────────────
 #> 
-#> ℹ Automatically selected 11 numeric columns.
+#> ── Parameters ──
 #> 
-#> ── Computing Correlations ──
+#> Method: pearson
+#> Missing obs: pairwise.complete.obs
+#> P-adjust: none
+#> Variables: 11
+#> alpha: 0.050
 #> 
-#> ℹ Found 44 significant correlations out of 55 tests
-#> ! Found 1 pair with |r| > 0.9 (potential multicollinearity)
+#> ── Descriptive Statistics ──
 #> 
-#> ── Creating Heatmap ──
-#> 
-#> ✔ Analysis complete!
-
-#> 
-#> 
-#> ── Quick Correlation Analysis Results ──
-#> 
-#> 
-#> ℹ Method: pearson
-#> ℹ Variables: 11
-#> ℹ Significant pairs: 44
-#> 
-#> 
-#> ── Top 5 Significant Correlations 
-#>  var1 var2 correlation      p_value
-#>   cyl disp   0.9020329 1.802838e-12
-#>  disp   wt   0.8879799 1.222320e-11
-#>   mpg   wt  -0.8676594 1.293959e-10
-#>   mpg  cyl  -0.8521620 6.112687e-10
-#>   mpg disp  -0.8475514 9.380327e-10
-#> 
-#> Use `summary()` for detailed results.
-#> 
-#> ── Data Preparation ──
-#> 
-#> ℹ Using 4 specified variables.
-#> 
-#> ── Computing Correlations ──
-#> 
-#> ℹ Found 5 significant correlations out of 6 tests
-#> 
-#> ── Creating Heatmap ──
-#> 
-#> ✔ Analysis complete!
-#> ! Both `show_coef` and `show_sig` are TRUE. Setting `show_sig` to FALSE to avoid overlapping labels.
-#> 
-#> ── Data Preparation ──
-#> 
-#> ℹ Automatically selected 4 numeric columns.
-#> 
-#> ── Computing Correlations ──
-#> 
-#> ℹ Applying bonferroni correction for multiple testing...
-#> ℹ Found 5 significant correlations out of 6 tests
-#> ! Found 1 pair with |r| > 0.9 (potential multicollinearity)
-#> 
-#> ── Creating Heatmap ──
-#> 
-#> ✔ Analysis complete!
-#> 
-#> ── Data Preparation ──
-#> 
-#> ℹ Automatically selected 11 numeric columns.
-#> 
-#> ── Computing Correlations ──
-#> 
-#> ℹ Found 44 significant correlations out of 55 tests
-#> ! Found 1 pair with |r| > 0.9 (potential multicollinearity)
-#> 
-#> ── Creating Heatmap ──
-#> 
-#> ✔ Analysis complete!
-#> 
-#> ── Data Preparation ──
-#> 
-#> ℹ Automatically selected 11 numeric columns.
-#> 
-#> ── Computing Correlations ──
-#> 
-#> ℹ Found 44 significant correlations out of 55 tests
-#> ! Found 1 pair with |r| > 0.9 (potential multicollinearity)
-#> 
-#> ── Creating Heatmap ──
-#> 
-#> ✔ Analysis complete!
-#> 
-#> 
-#> ── Detailed Correlation Analysis Summary ──
-#> 
-#> 
-#> ── Analysis Parameters 
-#> Correlation method: pearson
-#> Missing value handling: pairwise.complete.obs
-#> P-value adjustment: none
-#> Number of variables: 11
-#> 
-#> 
-#> ── Descriptive Statistics 
 #>  variable  n       mean          sd  median    min     max
 #>       mpg 32  20.090625   6.0269481  19.200 10.400  33.900
 #>       cyl 32   6.187500   1.7859216   6.000  4.000   8.000
@@ -407,19 +229,17 @@ if (requireNamespace("ggcorrplot", quietly = TRUE)) {
 #>        am 32   0.406250   0.4989909   0.000  0.000   1.000
 #>      gear 32   3.687500   0.7378041   4.000  3.000   5.000
 #>      carb 32   2.812500   1.6152000   2.000  1.000   8.000
+#> ── Correlation Summary ──
 #> 
+#> Min: -0.868
+#> Max: 0.902
+#> Mean |r|: 0.559
 #> 
-#> ── Correlation Summary 
-#> Min correlation: -0.868
-#> Max correlation: 0.902
-#> Mean |correlation|: 0.559
+#> ── Significant Pairs ──
 #> 
+#> ℹ Based on unadjusted p-values.
+#> 44 out of 55 pairs significant at alpha = 0.05
 #> 
-#> ── Significant Correlations 
-#> ℹ Significant pairs are based on unadjusted p-values
-#> Significant pairs: 44 out of 55 tests
-#> 
-#> All significant pairs:
 #>  var1 var2 correlation      p_value
 #>   cyl disp   0.9020329 1.802838e-12
 #>  disp   wt   0.8879799 1.222320e-11
@@ -466,5 +286,14 @@ if (requireNamespace("ggcorrplot", quietly = TRUE)) {
 #>   mpg qsec   0.4186840 1.708199e-02
 #>  disp carb   0.3949769 2.526789e-02
 #> 
-#> Analysis performed: 2026-03-10 14:02:37
+plot(result)
+
+
+result <- quick_cor(
+  mtcars,
+  vars   = c("mpg", "hp", "wt", "qsec"),
+  method = "spearman",
+  p_adjust_method = "BH"
+)
+#> ℹ Found 5 significant pairs out of 6 tests.
 ```

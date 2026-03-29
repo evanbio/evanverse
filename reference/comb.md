@@ -1,9 +1,7 @@
-# comb: Calculate Number of Combinations C(n, k)
+# Number of combinations C(n, k)
 
-Calculates the total number of ways to choose k items from n distinct
-items (without regard to order), i.e., the number of combinations C(n,
-k) = n! / (k! \* (n - k)!). This function is intended for moderate n and
-k. For very large values, consider the 'gmp' package.
+Calculates the number of ways to choose `k` items from `n` distinct
+items (unordered). C(n, k) = n! / (k! \* (n - k)!)
 
 ## Usage
 
@@ -15,26 +13,25 @@ comb(n, k)
 
 - n:
 
-  Integer. Total number of items (non-negative integer).
+  Non-negative integer. Total number of items.
 
 - k:
 
-  Integer. Number of items to choose (non-negative integer, must be \<=
-  n).
+  Non-negative integer. Number of items to choose. Must be \<= `n`.
 
 ## Value
 
-Numeric. The combination count C(n, k) (returns Inf for very large n).
+A numeric value. Returns `0` when `k > n`, `1` when `k = 0` or `k = n`.
 
 ## Examples
 
 ``` r
-comb(8, 4)      # 70
+comb(8, 4)   # 70
 #> [1] 70
-comb(5, 2)      # 10
+comb(5, 2)   # 10
 #> [1] 10
-comb(10, 0)     # 1
+comb(10, 0)  # 1
 #> [1] 1
-comb(5, 6)      # 0
+comb(5, 6)   # 0
 #> [1] 0
 ```

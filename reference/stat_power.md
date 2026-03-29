@@ -1,9 +1,9 @@
 # Calculate Statistical Power
 
-Compute the statistical power (probability of correctly rejecting the
-null hypothesis) for a given sample size, effect size, and significance
-level. Supports multiple test types including t-tests, ANOVA, proportion
-tests, correlation tests, and chi-square tests.
+Computes statistical power for a planned study given sample size, effect
+size, and design parameters. Supports t-tests (two-sample, one-sample,
+paired), ANOVA, proportion tests, correlation tests, and chi-square
+tests.
 
 ## Usage
 
@@ -11,65 +11,55 @@ tests, correlation tests, and chi-square tests.
 stat_power(
   n,
   effect_size,
-  test = c("t.test", "anova", "proportion", "correlation", "chisq"),
-  type = c("two.sample", "one.sample", "paired"),
+  test = c("t_two", "t_one", "t_paired", "anova", "proportion", "correlation", "chisq"),
   alternative = c("two.sided", "less", "greater"),
   alpha = 0.05,
   k = NULL,
-  df = NULL,
-  plot = TRUE,
-  plot_range = NULL,
-  palette = "qual_vivid",
-  verbose = TRUE
+  df = NULL
 )
+
+# S3 method for class 'power_result'
+plot(x, y = NULL, plot_range = NULL, ...)
 ```
 
 ## Arguments
 
 - n:
 
-  Integer. Sample size. Interpretation depends on test type:
+  Integer. Sample size. Interpretation depends on test:
 
-  - t-tests and ANOVA: Sample size per group
+  - `"t_two"`, `"anova"`: per group
 
-  - Proportion test: Total sample size (one-sample test)
+  - `"t_paired"`: number of pairs
 
-  - Correlation: Total number of paired observations
-
-  - Chi-square: Total sample size
+  - all others: total
 
 - effect_size:
 
-  Numeric. Effect size appropriate for the test (must be positive):
+  Numeric. Effect size appropriate for the chosen test (must be
+  positive). Conventions:
 
-  - Cohen's d for t-tests (small: 0.2, medium: 0.5, large: 0.8)
+  - Cohen's d for t-tests (small 0.2, medium 0.5, large 0.8)
 
-  - Cohen's f for ANOVA (small: 0.1, medium: 0.25, large: 0.4)
+  - Cohen's f for ANOVA (small 0.1, medium 0.25, large 0.4)
 
-  - Cohen's h for proportion tests (small: 0.2, medium: 0.5, large: 0.8)
+  - Cohen's h for proportion tests (small 0.2, medium 0.5, large 0.8)
 
-  - Correlation coefficient r for correlation tests (small: 0.1, medium:
-    0.3, large: 0.5). Use absolute value; power is the same for positive
-    and negative correlations.
+  - Pearson r for correlation (small 0.1, medium 0.3, large 0.5)
 
-  - Cohen's w for chi-square tests (small: 0.1, medium: 0.3, large: 0.5)
+  - Cohen's w for chi-square (small 0.1, medium 0.3, large 0.5)
 
 - test:
 
-  Character. Type of statistical test: "t.test" (default), "anova",
-  "proportion", "correlation", or "chisq".
-
-- type:
-
-  Character. For t-tests only: "two.sample" (default), "one.sample", or
-  "paired".
+  Character. Test type: `"t_two"` (two-sample t-test, default),
+  `"t_one"` (one-sample t-test), `"t_paired"` (paired t-test),
+  `"anova"`, `"proportion"`, `"correlation"`, or `"chisq"`.
 
 - alternative:
 
-  Character. Direction of alternative hypothesis: "two.sided" (default),
-  "less", or "greater". Note: Only applicable to t-tests, proportion
-  tests, and correlation tests. Ignored for ANOVA and chi-square tests
-  (which are inherently non-directional).
+  Character. Direction of the alternative hypothesis: `"two.sided"`
+  (default), `"less"`, or `"greater"`. Ignored for `"anova"` and
+  `"chisq"`.
 
 - alpha:
 
@@ -77,146 +67,73 @@ stat_power(
 
 - k:
 
-  Integer. Number of groups (required for ANOVA).
+  Integer \\\ge 2\\. Number of groups. Required when `test = "anova"`.
 
 - df:
 
-  Integer. Degrees of freedom (required for chi-square tests).
+  Integer \\\ge 1\\. Degrees of freedom. Required when `test = "chisq"`.
 
-- plot:
+- x:
 
-  Logical. Generate a power curve plot? Default: TRUE.
+  A `power_result` object returned by `stat_power()` or
+  [`stat_n()`](https://evanbio.github.io/evanverse/reference/stat_n.md).
+
+- y:
+
+  Ignored.
 
 - plot_range:
 
-  Numeric vector of length 2. Range of sample sizes for the power curve.
-  If NULL (default), automatically determined.
+  Numeric vector of length 2. Custom axis range for the curve. For
+  `stat_power()` results: range over sample sizes. For
+  [`stat_n()`](https://evanbio.github.io/evanverse/reference/stat_n.md)
+  results: range over effect sizes. `NULL` uses an automatic range.
 
-- palette:
+- ...:
 
-  Character. evanverse palette name for the plot. Default: "qual_vivid".
-
-- verbose:
-
-  Logical. Print detailed diagnostic information? Default: TRUE.
+  Additional arguments (currently unused).
 
 ## Value
 
-An object of class `stat_power_result` containing:
+An object of class `"power_result"` (invisibly) containing:
 
-- power:
+- `params`:
 
-  The calculated statistical power (probability of detecting the effect)
+  Named list of all input parameters
 
-- n:
+- `power`:
 
-  Sample size used in the calculation
+  Computed statistical power (numeric in `[0, 1]`)
 
-- effect_size:
+- `computed`:
 
-  Effect size used in the calculation
+  `"power"` — distinguishes from
+  [`stat_n()`](https://evanbio.github.io/evanverse/reference/stat_n.md)
+  results where `computed = "n"`
 
-- alpha:
+- `interpretation`:
 
-  Significance level
+  Plain-text interpretation of the power value
 
-- test_type:
+- `recommendation`:
 
-  Type of statistical test
+  Actionable recommendation, or `NULL` when power is between 0.8 and
+  0.95
 
-- test_subtype:
-
-  Subtype for t-tests (e.g., "two.sample", "one.sample", "paired"); NULL
-  for other tests
-
-- alternative:
-
-  Direction of alternative hypothesis used in the test
-
-- k:
-
-  Number of groups (for ANOVA); NULL for other tests
-
-- df:
-
-  Degrees of freedom (for chi-square tests); NULL for other tests
-
-- plot:
-
-  ggplot2 object showing the power curve (if plot = TRUE); NULL
-  otherwise
-
-- pwr_object:
-
-  Raw result object from the pwr package function
-
-- details:
-
-  List with interpretation and recommendation text
-
-- timestamp:
-
-  POSIXct timestamp of when the calculation was performed
-
-## Details
-
-Statistical power is the probability of correctly rejecting the null
-hypothesis when it is false (i.e., detecting a true effect).
-Conventionally, a power of 0.8 (80%) is considered adequate, though
-higher power (0.9 or 0.95) may be desirable in some contexts.
-
-The function uses the pwr package for all power calculations, ensuring
-accurate results based on well-established statistical theory.
-
-## Test-Specific Notes
-
-**Proportion Test:** Uses `pwr.p.test`, which is for one-sample
-proportion tests (testing a single proportion against a hypothesized
-value). For two-sample proportion tests, consider using specialized
-tools or packages. The `effect_size` parameter uses Cohen's h, which
-quantifies the difference between two proportions. In one-sample
-settings, Cohen's h is computed from the observed proportion *p* and the
-null hypothesis proportion *p0*.
-
-## Power Curve
-
-When `plot = TRUE`, a power curve is generated showing how statistical
-power changes with sample size. The curve helps visualize:
-
-- The current power level (marked with a red point)
-
-- The conventional 0.8 power threshold (red dashed line)
-
-- How increasing sample size affects power
+Use `print(result)` for a brief summary, `summary(result)` for full
+details, and `plot(result)` to display the power curve.
 
 ## Examples
 
 ``` r
 if (FALSE) { # \dontrun{
-# Example 1: Power for a two-sample t-test
-result <- stat_power(
-  n = 30,
-  effect_size = 0.5,
-  test = "t.test",
-  type = "two.sample"
-)
+result <- stat_power(n = 30, effect_size = 0.5)
 print(result)
+summary(result)
 plot(result)
 
-# Example 2: Power for ANOVA with 3 groups
-stat_power(
-  n = 25,
-  effect_size = 0.25,
-  test = "anova",
-  k = 3
-)
-
-# Example 3: Power for correlation test
-stat_power(
-  n = 50,
-  effect_size = 0.3,
-  test = "correlation"
-)
+stat_power(n = 25, effect_size = 0.25, test = "anova", k = 3)
+stat_power(n = 50, effect_size = 0.3,  test = "correlation",
+           alternative = "greater")
 } # }
-
 ```

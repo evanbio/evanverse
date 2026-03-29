@@ -1,20 +1,16 @@
-# Preview Palette: Visualize a Palette from RDS
+# Preview a Color Palette
 
-Preview the appearance of a palette from `data/palettes.rds` using
-various plot types. This function provides multiple visualization
-options to help users evaluate color palettes.
+Visualize a palette using various plot styles.
 
 ## Usage
 
 ``` r
 preview_palette(
   name,
-  type = c("sequential", "diverging", "qualitative"),
+  type = NULL,
   n = NULL,
   plot_type = c("bar", "pie", "point", "rect", "circle"),
-  title = name,
-  palette_rds = system.file("extdata", "palettes.rds", package = "evanverse"),
-  preview = TRUE
+  title = NULL
 )
 ```
 
@@ -22,66 +18,39 @@ preview_palette(
 
 - name:
 
-  Name of the palette.
+  Character. Name of the palette.
 
 - type:
 
-  Palette type: "sequential", "diverging", "qualitative".
+  Character. One of "sequential", "diverging", "qualitative". If NULL,
+  auto-detected.
 
 - n:
 
-  Number of colors to use (default: all).
+  Integer. Number of colors to use. If NULL, uses all. Default: NULL.
 
 - plot_type:
 
-  Plot style: "bar", "pie", "point", "rect", "circle".
+  Character. One of "bar", "pie", "point", "rect", "circle". Default:
+  "bar".
 
 - title:
 
-  Plot title (default: same as palette name).
-
-- palette_rds:
-
-  Path to RDS file. Default: system.file("extdata", "palettes.rds",
-  package = "evanverse").
-
-- preview:
-
-  Whether to show the plot immediately. Default: TRUE.
+  Character. Plot title. If NULL, defaults to palette name.
 
 ## Value
 
-NULL (invisible), for plotting side effect.
+Invisibly returns NULL. Called for plotting side effect.
 
 ## Examples
 
 ``` r
 # \donttest{
-# Preview sequential palette:
-preview_palette("seq_blues", type = "sequential", plot_type = "bar")
-#> ✔ Loaded palette "seq_blues" ("sequential"), 3 colors
-#> 
-#> ── Previewing palette: "seq_blues" ──
-#> 
-#> ℹ Plot type: "bar", colors: 3
+preview_palette("seq_blues", plot_type = "bar")
 
+preview_palette("div_fireice", plot_type = "pie")
 
-# Preview diverging palette:
-preview_palette("div_fireice", type = "diverging", plot_type = "pie")
-#> ✔ Loaded palette "div_fireice" ("diverging"), 2 colors
-#> 
-#> ── Previewing palette: "div_fireice" ──
-#> 
-#> ℹ Plot type: "pie", colors: 2
-
-
-# Preview qualitative palette with custom colors:
-preview_palette("qual_vivid", type = "qualitative", n = 4, plot_type = "circle")
-#> ✔ Loaded palette "qual_vivid" ("qualitative"), 9 colors
-#> 
-#> ── Previewing palette: "qual_vivid" ──
-#> 
-#> ℹ Plot type: "circle", colors: 4
+preview_palette("qual_vivid", n = 4, plot_type = "circle")
 
 # }
 ```

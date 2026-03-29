@@ -2,6 +2,8 @@
 
 ## evanverse 0.4.4
 
+CRAN release: 2026-03-10
+
 *Released: March 2026*
 
 **Patch Release** - CRAN noSuggests compliance fix for
@@ -43,8 +45,7 @@
   [`plot_forest()`](https://evanbio.github.io/evanverse/reference/plot_forest.md),
   [`gmt2df()`](https://evanbio.github.io/evanverse/reference/gmt2df.md),
   [`gmt2list()`](https://evanbio.github.io/evanverse/reference/gmt2list.md),
-  [`read_excel_flex()`](https://evanbio.github.io/evanverse/reference/read_excel_flex.md),
-  and
+  `read_excel_flex()`, and
   [`quick_cor()`](https://evanbio.github.io/evanverse/reference/quick_cor.md)
   tests that require Suggests packages
 
@@ -93,12 +94,11 @@ packages.
 - Fixed CRAN check failure: moved parameter validation before `Suggests`
   package availability checks in
   [`download_batch()`](https://evanbio.github.io/evanverse/reference/download_batch.md),
-  [`download_geo_data()`](https://evanbio.github.io/evanverse/reference/download_geo_data.md),
+  `download_geo_data()`,
   [`download_url()`](https://evanbio.github.io/evanverse/reference/download_url.md),
   [`plot_venn()`](https://evanbio.github.io/evanverse/reference/plot_venn.md),
-  and
-  [`read_excel_flex()`](https://evanbio.github.io/evanverse/reference/read_excel_flex.md)
-  — ensures tests pass under `_R_CHECK_DEPENDS_ONLY_=true`
+  and `read_excel_flex()` — ensures tests pass under
+  `_R_CHECK_DEPENDS_ONLY_=true`
 - Removed redundant
   [`requireNamespace()`](https://rdrr.io/r/base/ns-load.html) checks for
   packages already listed in `Imports` (curl, cli, withr, readxl)
@@ -132,15 +132,12 @@ compatibility.
   Correlation analysis with customizable heatmap output
 - [`stat_power()`](https://evanbio.github.io/evanverse/reference/stat_power.md):
   Statistical power analysis for t-test, ANOVA, and chi-square designs
-- [`stat_samplesize()`](https://evanbio.github.io/evanverse/reference/stat_samplesize.md):
-  Sample size calculation for common study designs
+- `stat_samplesize()`: Sample size calculation for common study designs
 
 ##### ggplot2 Integration
 
-- [`scale_color_evanverse()`](https://evanbio.github.io/evanverse/reference/scale_evanverse.md)
-  /
-  [`scale_fill_evanverse()`](https://evanbio.github.io/evanverse/reference/scale_evanverse.md):
-  Discrete color scales using evanverse palettes
+- `scale_color_evanverse()` / `scale_fill_evanverse()`: Discrete color
+  scales using evanverse palettes
 - Seamless integration with ggplot2 plotting workflow
 
 ##### Performance
@@ -164,9 +161,8 @@ compatibility.
 
 #### Bug Fixes
 
-- Fixed dplyr 1.2.0 compatibility: replaced
-  [`case_when()`](https://dplyr.tidyverse.org/reference/case-and-replace-when.html)
-  with [`switch()`](https://rdrr.io/r/base/switch.html) in
+- Fixed dplyr 1.2.0 compatibility: replaced `case_when()` with
+  [`switch()`](https://rdrr.io/r/base/switch.html) in
   [`plot_pie()`](https://evanbio.github.io/evanverse/reference/plot_pie.md)
   (thanks [@DavisVaughan](https://github.com/DavisVaughan),
   [\#4](https://github.com/evanbio/evanverse/issues/4))
@@ -177,9 +173,7 @@ compatibility.
 - Fixed Unicode Greek letters replaced with ASCII for cross-platform
   compatibility
 - Added `percent` to global variables declaration
-- Fixed NA validation in
-  [`download_geo_data()`](https://evanbio.github.io/evanverse/reference/download_geo_data.md)
-  parameters
+- Fixed NA validation in `download_geo_data()` parameters
 
 #### Documentation
 
@@ -230,7 +224,7 @@ violations.
     [`compile_palettes()`](https://evanbio.github.io/evanverse/reference/compile_palettes.md),
     [`download_batch()`](https://evanbio.github.io/evanverse/reference/download_batch.md),
     [`download_url()`](https://evanbio.github.io/evanverse/reference/download_url.md),
-    [`download_geo_data()`](https://evanbio.github.io/evanverse/reference/download_geo_data.md)
+    `download_geo_data()`
   - All examples and tests now use
     [`tempdir()`](https://rdrr.io/r/base/tempfile.html) for file
     operations
@@ -336,8 +330,7 @@ examples and file operation handling.
     to use existing palette names
 - **Network operation handling**: Properly wrapped all network-dependent
   examples
-  - Functions updated:
-    [`download_geo_data()`](https://evanbio.github.io/evanverse/reference/download_geo_data.md),
+  - Functions updated: `download_geo_data()`,
     [`download_url()`](https://evanbio.github.io/evanverse/reference/download_url.md),
     [`inst_pkg()`](https://evanbio.github.io/evanverse/reference/inst_pkg.md),
     [`pkg_version()`](https://evanbio.github.io/evanverse/reference/pkg_version.md),
@@ -560,13 +553,11 @@ tighter parameter validation, stronger tests, and several new utilities.
   — Bar charts with optional fill grouping, sorting, vertical/horizontal
   layout, and clean defaults.
 
-- **[`read_excel_flex()`](https://evanbio.github.io/evanverse/reference/read_excel_flex.md)**
-  — Enhanced Excel reader (readxl) with optional name cleaning
-  (janitor), range/col_types controls, and CLI feedback.
+- **`read_excel_flex()`** — Enhanced Excel reader (readxl) with optional
+  name cleaning (janitor), range/col_types controls, and CLI feedback.
 
-- **[`write_xlsx_flex()`](https://evanbio.github.io/evanverse/reference/write_xlsx_flex.md)**
-  — Flexible Excel writer (openxlsx) with header styling, auto column
-  width, overwrite/timestamp options.
+- **`write_xlsx_flex()`** — Flexible Excel writer (openxlsx) with header
+  styling, auto column width, overwrite/timestamp options.
 
 - **[`view()`](https://evanbio.github.io/evanverse/reference/view.md)**
   — Quick interactive data viewer (reactable) for exploration/QC.
@@ -582,7 +573,7 @@ tighter parameter validation, stronger tests, and several new utilities.
 
 #### Enhancements & Refactors
 
-- **[`read_table_flex()`](https://evanbio.github.io/evanverse/reference/read_table_flex.md)**
+- **`read_table_flex()`**
   - Inlined, robust delimiter detection for .csv/.tsv/.txt and .gz files
   - Stricter parameter checks and clearer CLI error messages
   - Enhanced encoding guardrails for better file handling
@@ -602,20 +593,16 @@ tighter parameter validation, stronger tests, and several new utilities.
   - `%nin%` implemented as `Negate(%in%)` with simple, predictable NA
     semantics
 - **Data Utilities**
-  - [`map_column()`](https://evanbio.github.io/evanverse/reference/map_column.md)
-    uses unified `cli` output and counts unmatched keys
+  - `map_column()` uses unified `cli` output and counts unmatched keys
   - Skips numeric columns by design, removes emoji, adds modular
     separators
-  - [`with_timer()`](https://evanbio.github.io/evanverse/reference/with_timer.md)
-    simplified using `tictoc` timing and `cli` output
-  - [`remind()`](https://evanbio.github.io/evanverse/reference/remind.md)
-    rendering fixed for `cli` braces with partial/case-insensitive
-    matches
+  - `with_timer()` simplified using `tictoc` timing and `cli` output
+  - `remind()` rendering fixed for `cli` braces with
+    partial/case-insensitive matches
   - [`rgb2hex()`](https://evanbio.github.io/evanverse/reference/rgb2hex.md)
     input validation tightened with concise CLI feedback
-  - [`rows_with_void()`](https://evanbio.github.io/evanverse/reference/void.md)
-    header streamlined, delegates detection to
-    [`is_void()`](https://evanbio.github.io/evanverse/reference/void.md)
+  - `rows_with_void()` header streamlined, delegates detection to
+    `is_void()`
 - **Startup and Documentation**
   - `.onAttach` switched to plain
     [`cli::cli_text()`](https://cli.r-lib.org/reference/cli_text.html)
@@ -637,18 +624,13 @@ tighter parameter validation, stronger tests, and several new utilities.
   - Added/updated coverage for plotting functions:
     [`plot_forest()`](https://evanbio.github.io/evanverse/reference/plot_forest.md),
     [`plot_bar()`](https://evanbio.github.io/evanverse/reference/plot_bar.md)
-  - File I/O functions:
-    [`read_table_flex()`](https://evanbio.github.io/evanverse/reference/read_table_flex.md),
-    [`read_excel_flex()`](https://evanbio.github.io/evanverse/reference/read_excel_flex.md),
-    [`write_xlsx_flex()`](https://evanbio.github.io/evanverse/reference/write_xlsx_flex.md)
+  - File I/O functions: `read_table_flex()`, `read_excel_flex()`,
+    `write_xlsx_flex()`
   - Package management:
     [`set_mirror()`](https://evanbio.github.io/evanverse/reference/set_mirror.md),
     [`pkg_functions()`](https://evanbio.github.io/evanverse/reference/pkg_functions.md)
-  - Utilities:
-    [`remind()`](https://evanbio.github.io/evanverse/reference/remind.md),
-    [`map_column()`](https://evanbio.github.io/evanverse/reference/map_column.md),
-    [`replace_void()`](https://evanbio.github.io/evanverse/reference/void.md),
-    [`rows_with_void()`](https://evanbio.github.io/evanverse/reference/void.md),
+  - Utilities: `remind()`, `map_column()`, `replace_void()`,
+    `rows_with_void()`,
     [`rgb2hex()`](https://evanbio.github.io/evanverse/reference/rgb2hex.md)
   - Operators: `%is%`, `%near%`, `%nin%`, `%p%`
 - **Environment Compatibility**
@@ -686,8 +668,7 @@ bioinformaticians.
 
 - [`file_info()`](https://evanbio.github.io/evanverse/reference/file_info.md),
   [`file_tree()`](https://evanbio.github.io/evanverse/reference/file_tree.md),
-  [`get_ext()`](https://evanbio.github.io/evanverse/reference/get_ext.md),
-  [`read_table_flex()`](https://evanbio.github.io/evanverse/reference/read_table_flex.md),
+  `get_ext()`, `read_table_flex()`,
   [`download_url()`](https://evanbio.github.io/evanverse/reference/download_url.md)
 
 ##### Package Management Tools
@@ -704,35 +685,29 @@ bioinformaticians.
   [`list_palettes()`](https://evanbio.github.io/evanverse/reference/list_palettes.md),
   [`create_palette()`](https://evanbio.github.io/evanverse/reference/create_palette.md)
 - [`preview_palette()`](https://evanbio.github.io/evanverse/reference/preview_palette.md),
-  [`bio_palette_gallery()`](https://evanbio.github.io/evanverse/reference/bio_palette_gallery.md)
+  `bio_palette_gallery()`
 
 ##### Data Processing Tools
 
-- [`map_column()`](https://evanbio.github.io/evanverse/reference/map_column.md),
+- `map_column()`,
   [`df2list()`](https://evanbio.github.io/evanverse/reference/df2list.md),
   [`gmt2df()`](https://evanbio.github.io/evanverse/reference/gmt2df.md),
   [`gmt2list()`](https://evanbio.github.io/evanverse/reference/gmt2list.md)
-- [`convert_gene_id()`](https://evanbio.github.io/evanverse/reference/convert_gene_id.md),
+- `convert_gene_id()`,
   [`download_gene_ref()`](https://evanbio.github.io/evanverse/reference/download_gene_ref.md)
 
 ##### Development Helper Functions
 
-- [`remind()`](https://evanbio.github.io/evanverse/reference/remind.md),
-  [`with_timer()`](https://evanbio.github.io/evanverse/reference/with_timer.md),
-  `%map%`, `%match%`, `%is%`, `%nin%`, `%p%`
+- `remind()`, `with_timer()`, `%map%`, `%match%`, `%is%`, `%nin%`, `%p%`
 
 ##### Void Value Handling
 
-- [`is_void()`](https://evanbio.github.io/evanverse/reference/void.md),
-  [`any_void()`](https://evanbio.github.io/evanverse/reference/void.md),
-  [`drop_void()`](https://evanbio.github.io/evanverse/reference/void.md),
-  [`replace_void()`](https://evanbio.github.io/evanverse/reference/void.md)
-- [`cols_with_void()`](https://evanbio.github.io/evanverse/reference/void.md),
-  [`rows_with_void()`](https://evanbio.github.io/evanverse/reference/void.md)
+- `is_void()`, `any_void()`, `drop_void()`, `replace_void()`
+- `cols_with_void()`, `rows_with_void()`
 
 ##### Vector & Logic Operations
 
-- [`combine_logic()`](https://evanbio.github.io/evanverse/reference/combine_logic.md),
+- `combine_logic()`,
   [`hex2rgb()`](https://evanbio.github.io/evanverse/reference/hex2rgb.md),
   [`rgb2hex()`](https://evanbio.github.io/evanverse/reference/rgb2hex.md)
 

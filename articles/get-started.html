@@ -5,7 +5,7 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>Welcome to evanverse • evanverse</title>
+<title>Get Started • evanverse</title>
 <!-- favicons --><link rel="icon" type="image/png" sizes="96x96" href="../favicon-96x96.png">
 <link rel="icon" type="”image/svg+xml”" href="../favicon.svg">
 <link rel="apple-touch-icon" sizes="180x180" href="../apple-touch-icon.png">
@@ -17,7 +17,7 @@
 <link href="../deps/JetBrains_Mono-0.4.10/font.css" rel="stylesheet">
 <link href="../deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet">
 <link href="../deps/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet">
-<script src="../deps/headroom-0.11.0/headroom.min.js"></script><script src="../deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="../deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="../deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="../deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="../deps/search-1.0.0/fuse.min.js"></script><script src="../deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="Welcome to evanverse">
+<script src="../deps/headroom-0.11.0/headroom.min.js"></script><script src="../deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="../deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="../deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="../deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="../deps/search-1.0.0/fuse.min.js"></script><script src="../deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="Get Started">
 <meta name="keywords" content="R package, data analysis, bioinformatics, visualization, utilities, CRAN">
 <meta name="description" content="evanverse: A comprehensive R utility package with 56+ functions for data analysis, visualization, and bioinformatics workflows">
 <meta name="author" content="Evan Zhou">
@@ -104,11 +104,13 @@
 <li class="nav-item dropdown">
   <button class="nav-link dropdown-toggle" type="button" id="dropdown-vignettes" data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true">Vignettes</button>
   <ul class="dropdown-menu" aria-labelledby="dropdown-vignettes">
-<li><a class="dropdown-item" href="../articles/comprehensive-guide.html">Comprehensive Guide</a></li>
-    <li><a class="dropdown-item" href="../articles/package-management.html">Package Management</a></li>
-    <li><a class="dropdown-item" href="../articles/data-processing.html">Data Processing</a></li>
-    <li><a class="dropdown-item" href="../articles/color-palettes.html">Color Palettes</a></li>
-    <li><a class="dropdown-item" href="../articles/bioinformatics-workflows.html">Bioinformatics Workflows</a></li>
+<li><a class="dropdown-item" href="../articles/base.html">Base Utilities</a></li>
+    <li><a class="dropdown-item" href="../articles/ops.html">Custom Infix Operators</a></li>
+    <li><a class="dropdown-item" href="../articles/pkg.html">Package Management</a></li>
+    <li><a class="dropdown-item" href="../articles/palette.html">Color Palette Management</a></li>
+    <li><a class="dropdown-item" href="../articles/plot.html">Plotting Functions</a></li>
+    <li><a class="dropdown-item" href="../articles/stat.html">Statistical Utilities</a></li>
+    <li><a class="dropdown-item" href="../articles/toy.html">Toy Data Utilities</a></li>
     <li><hr class="dropdown-divider"></li>
     <li><a class="dropdown-item" href="../articles/">All Articles</a></li>
   </ul>
@@ -131,118 +133,226 @@
 
 <div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
-      <img src="../logo.png" class="logo" alt=""><h1>Welcome to evanverse</h1>
+      <img src="../logo.png" class="logo" alt=""><h1>Get Started</h1>
             
       
-      <small class="dont-index">Source: <a href="https://github.com/evanbio/evanverse/blob/v0.4.4/vignettes/get-started.Rmd" class="external-link"><code>vignettes/get-started.Rmd</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/evanbio/evanverse/blob/main/vignettes/get-started.Rmd" class="external-link"><code>vignettes/get-started.Rmd</code></a></small>
       <div class="d-none name"><code>get-started.Rmd</code></div>
     </div>
 
     
     
-<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/evanbio/evanverse" class="external-link">evanverse</a></span><span class="op">)</span></span></code></pre></div>
 <div class="section level2">
-<h2 id="welcome-to-evanverse">👋 Welcome to <code>evanverse</code><a class="anchor" aria-label="anchor" href="#welcome-to-evanverse"></a>
+<h2 id="overview">Overview<a class="anchor" aria-label="anchor" href="#overview"></a>
 </h2>
-<p><strong><code>evanverse</code></strong> is a lightweight, modular R
-toolkit designed to assist your everyday development workflow — with
-functions that are simple, practical, and elegant.</p>
-<p>Whether you’re installing packages, building logical filters, or
-writing expressive scripts, <code>evanverse</code> offers convenience
-functions that <em>just work</em>.</p>
-</div>
-<div class="section level2">
-<h2 id="installation">🚀 Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
-</h2>
-<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># Recommended installation via GitHub</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"devtools"</span><span class="op">)</span></span>
-<span><span class="fu">devtools</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html" class="external-link">install_github</a></span><span class="op">(</span><span class="st">"evanbio/evanverse"</span><span class="op">)</span></span></code></pre></div>
-</div>
-<div class="section level2">
-<h2 id="core-functions-at-a-glance">🔧 Core Functions at a Glance<a class="anchor" aria-label="anchor" href="#core-functions-at-a-glance"></a>
-</h2>
-<div class="section level3">
-<h3 id="p-string-concatenation-operator">
-<code>%p%</code> — String concatenation operator<a class="anchor" aria-label="anchor" href="#p-string-concatenation-operator"></a>
-</h3>
-<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="st">"Good"</span> <span class="op"><a href="../reference/grapes-p-grapes.html">%p%</a></span> <span class="st">"morning"</span></span>
-<span><span class="co">#&gt; [1] "Good morning"</span></span>
-<span><span class="co">#&gt; [1] "Good morning"</span></span></code></pre></div>
-</div>
-<div class="section level3">
-<h3 id="combine_logic-combine-logical-vectors-in-parallel">
-<code>combine_logic()</code> — Combine logical vectors in
-parallel<a class="anchor" aria-label="anchor" href="#combine_logic-combine-logical-vectors-in-parallel"></a>
-</h3>
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="../reference/combine_logic.html">combine_logic</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="cn">TRUE</span>, <span class="cn">FALSE</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="cn">TRUE</span>, <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="co">#&gt; [1]  TRUE FALSE</span></span>
-<span><span class="co">#&gt; [1] TRUE FALSE</span></span></code></pre></div>
-</div>
-</div>
-<div class="section level2">
-<h2 id="full-function-overview">📦 Full Function Overview<a class="anchor" aria-label="anchor" href="#full-function-overview"></a>
-</h2>
+<p><code>evanverse</code> is a utility toolkit that combines package
+management, data helpers, plotting tools, statistical workflows, and
+convenient operators.</p>
 <table class="table">
+<colgroup>
+<col width="50%">
+<col width="50%">
+</colgroup>
 <thead><tr class="header">
-<th>Function</th>
-<th>Description</th>
+<th>Area</th>
+<th>Examples</th>
 </tr></thead>
 <tbody>
 <tr class="odd">
-<td><code>%p%</code></td>
-<td>Concatenates strings with space</td>
+<td>Operators</td>
+<td>
+<code>%p%</code>, <code>%nin%</code>, <code>%match%</code>,
+<code>%map%</code>, <code>%is%</code>
+</td>
 </tr>
 <tr class="even">
-<td><code>%is%</code></td>
-<td>Expressive conditional matching</td>
+<td>Package management</td>
+<td>
+<code><a href="../reference/set_mirror.html">set_mirror()</a></code>, <code><a href="../reference/inst_pkg.html">inst_pkg()</a></code>,
+<code><a href="../reference/check_pkg.html">check_pkg()</a></code>, <code><a href="../reference/update_pkg.html">update_pkg()</a></code>
+</td>
 </tr>
 <tr class="odd">
-<td><code><a href="../reference/combine_logic.html">combine_logic()</a></code></td>
-<td>Combines multiple logical vectors</td>
+<td>Data and parsing</td>
+<td>
+<code><a href="../reference/df2list.html">df2list()</a></code>, <code><a href="../reference/df2vect.html">df2vect()</a></code>,
+<code><a href="../reference/gmt2df.html">gmt2df()</a></code>, <code><a href="../reference/gmt2list.html">gmt2list()</a></code>
+</td>
 </tr>
 <tr class="even">
-<td><code><a href="../reference/remind.html">remind()</a></code></td>
-<td>Random reminders for better mood</td>
+<td>Statistics</td>
+<td>
+<code><a href="../reference/quick_ttest.html">quick_ttest()</a></code>, <code><a href="../reference/quick_anova.html">quick_anova()</a></code>,
+<code><a href="../reference/quick_chisq.html">quick_chisq()</a></code>, <code><a href="../reference/quick_cor.html">quick_cor()</a></code>
+</td>
 </tr>
 <tr class="odd">
-<td><code><a href="../reference/with_timer.html">with_timer()</a></code></td>
-<td>Time any function easily</td>
-</tr>
-<tr class="even">
-<td><code><a href="../reference/inst_pkg.html">inst_pkg()</a></code></td>
-<td>Install packages from multiple sources</td>
-</tr>
-<tr class="odd">
-<td><code><a href="../reference/update_pkg.html">update_pkg()</a></code></td>
-<td>Update all packages (CRAN/Bio/GitHub)</td>
+<td>Plotting</td>
+<td>
+<code><a href="../reference/plot_bar.html">plot_bar()</a></code>, <code><a href="../reference/plot_density.html">plot_density()</a></code>,
+<code><a href="../reference/plot_pie.html">plot_pie()</a></code>, <code><a href="../reference/plot_venn.html">plot_venn()</a></code>,
+<code><a href="../reference/plot_forest.html">plot_forest()</a></code>
+</td>
 </tr>
 </tbody>
 </table>
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/evanbio/evanverse" class="external-link">evanverse</a></span><span class="op">)</span></span></code></pre></div>
+<blockquote>
+<p><strong>Note:</strong> All code examples are static
+(<code>eval = FALSE</code>). If you copy-paste everything at once and
+your fan starts roaring, congratulations: your laptop has entered
+“research mode”.</p>
+</blockquote>
+<hr>
 </div>
 <div class="section level2">
-<h2 id="additional-resources">📘 Additional Resources<a class="anchor" aria-label="anchor" href="#additional-resources"></a>
+<h2 id="first-30-seconds">1 First 30 Seconds<a class="anchor" aria-label="anchor" href="#first-30-seconds"></a>
+</h2>
+<p>Try a few operators first:</p>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="st">"Good"</span> <span class="op"><a href="../reference/grapes-p-grapes.html">%p%</a></span> <span class="st">"morning"</span></span>
+<span><span class="co">#&gt; [1] "Good morning"</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"A"</span>, <span class="st">"B"</span>, <span class="st">"C"</span><span class="op">)</span> <span class="op"><a href="../reference/grapes-nin-grapes.html">%nin%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"B"</span>, <span class="st">"D"</span><span class="op">)</span></span>
+<span><span class="co">#&gt; [1]  TRUE FALSE  TRUE</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"tp53"</span>, <span class="st">"egfr"</span><span class="op">)</span> <span class="op"><a href="../reference/grapes-match-grapes.html">%match%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"TP53"</span>, <span class="st">"MYC"</span>, <span class="st">"EGFR"</span><span class="op">)</span></span>
+<span><span class="co">#&gt; [1] 1 3</span></span></code></pre></div>
+<hr>
+</div>
+<div class="section level2">
+<h2 id="install-and-check-packages">2 Install And Check Packages<a class="anchor" aria-label="anchor" href="#install-and-check-packages"></a>
+</h2>
+<p>Use built-in package-management helpers:</p>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/set_mirror.html">set_mirror</a></span><span class="op">(</span><span class="st">"all"</span>, <span class="st">"tuna"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="../reference/inst_pkg.html">inst_pkg</a></span><span class="op">(</span><span class="st">"dplyr"</span>, source <span class="op">=</span> <span class="st">"CRAN"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="../reference/check_pkg.html">check_pkg</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"dplyr"</span>, <span class="st">"ggplot2"</span><span class="op">)</span>, source <span class="op">=</span> <span class="st">"CRAN"</span><span class="op">)</span></span>
+<span><span class="co">#&gt; # A tibble with installed status</span></span></code></pre></div>
+<p>Update packages when needed:</p>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/update_pkg.html">update_pkg</a></span><span class="op">(</span>source <span class="op">=</span> <span class="st">"CRAN"</span><span class="op">)</span></span></code></pre></div>
+<hr>
+</div>
+<div class="section level2">
+<h2 id="quick-data-helpers">3 Quick Data Helpers<a class="anchor" aria-label="anchor" href="#quick-data-helpers"></a>
+</h2>
+<div class="section level3">
+<h3 id="df2list-and-df2vect">
+<code>df2list()</code> and <code>df2vect()</code><a class="anchor" aria-label="anchor" href="#df2list-and-df2vect"></a>
+</h3>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span></span>
+<span>  group <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"A"</span>, <span class="st">"A"</span>, <span class="st">"B"</span><span class="op">)</span>,</span>
+<span>  gene  <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"TP53"</span>, <span class="st">"EGFR"</span>, <span class="st">"BRCA1"</span><span class="op">)</span>,</span>
+<span>  score <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1.2</span>, <span class="fl">0.8</span>, <span class="fl">1.6</span><span class="op">)</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="../reference/df2list.html">df2list</a></span><span class="op">(</span><span class="va">df</span>, group_col <span class="op">=</span> <span class="st">"group"</span>, value_col <span class="op">=</span> <span class="st">"gene"</span><span class="op">)</span></span>
+<span><span class="co">#&gt; $A</span></span>
+<span><span class="co">#&gt; [1] "TP53" "EGFR"</span></span>
+<span><span class="co">#&gt; $B</span></span>
+<span><span class="co">#&gt; [1] "BRCA1"</span></span>
+<span></span>
+<span><span class="fu"><a href="../reference/df2vect.html">df2vect</a></span><span class="op">(</span><span class="va">df</span>, name_col <span class="op">=</span> <span class="st">"gene"</span>, value_col <span class="op">=</span> <span class="st">"score"</span><span class="op">)</span></span>
+<span><span class="co">#&gt;  TP53  EGFR BRCA1</span></span>
+<span><span class="co">#&gt;   1.2   0.8   1.6</span></span></code></pre></div>
+</div>
+<div class="section level3">
+<h3 id="toy_gmt-with-gmt-parsers">
+<code>toy_gmt()</code> with GMT parsers<a class="anchor" aria-label="anchor" href="#toy_gmt-with-gmt-parsers"></a>
+</h3>
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">path</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/toy_gmt.html">toy_gmt</a></span><span class="op">(</span>n <span class="op">=</span> <span class="fl">3</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">gmt_df</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/gmt2df.html">gmt2df</a></span><span class="op">(</span><span class="va">path</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">gmt_df</span>, <span class="fl">3</span><span class="op">)</span></span>
+<span><span class="co">#&gt;                    term               description  gene</span></span>
+<span><span class="co">#&gt; 1 HALLMARK_P53_PATHWAY   Genes regulated by p53  TP53</span></span>
+<span><span class="co">#&gt; ...</span></span>
+<span></span>
+<span><span class="va">gmt_list</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/gmt2list.html">gmt2list</a></span><span class="op">(</span><span class="va">path</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/names.html" class="external-link">names</a></span><span class="op">(</span><span class="va">gmt_list</span><span class="op">)</span></span>
+<span><span class="co">#&gt; [1] "HALLMARK_P53_PATHWAY" "HALLMARK_MTORC1_SIGNALING" "HALLMARK_HYPOXIA"</span></span></code></pre></div>
+<hr>
+</div>
+</div>
+<div class="section level2">
+<h2 id="quick-statistics">4 Quick Statistics<a class="anchor" aria-label="anchor" href="#quick-statistics"></a>
+</h2>
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed</a></span><span class="op">(</span><span class="fl">42</span><span class="op">)</span></span>
+<span><span class="va">df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span></span>
+<span>  group <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"A"</span>, <span class="st">"B"</span><span class="op">)</span>, each <span class="op">=</span> <span class="fl">30</span><span class="op">)</span>,</span>
+<span>  value <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Normal.html" class="external-link">rnorm</a></span><span class="op">(</span><span class="fl">30</span>, <span class="fl">5</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html" class="external-link">rnorm</a></span><span class="op">(</span><span class="fl">30</span>, <span class="fl">6</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">res_t</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/quick_ttest.html">quick_ttest</a></span><span class="op">(</span><span class="va">df</span>, group_col <span class="op">=</span> <span class="st">"group"</span>, value_col <span class="op">=</span> <span class="st">"value"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">res_t</span><span class="op">)</span></span>
+<span><span class="co">#&gt; t.test | p = ...</span></span></code></pre></div>
+<p>Correlation summary:</p>
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">res_cor</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/quick_cor.html">quick_cor</a></span><span class="op">(</span><span class="va">mtcars</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">res_cor</span><span class="op">)</span></span>
+<span><span class="co">#&gt; pearson | ... vars | ... significant pairs</span></span></code></pre></div>
+<hr>
+</div>
+<div class="section level2">
+<h2 id="first-plot">5 First Plot<a class="anchor" aria-label="anchor" href="#first-plot"></a>
+</h2>
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/plot_bar.html">plot_bar</a></span><span class="op">(</span></span>
+<span>  data <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span>category <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"A"</span>, <span class="st">"B"</span>, <span class="st">"C"</span><span class="op">)</span>, value <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">10</span>, <span class="fl">7</span>, <span class="fl">12</span><span class="op">)</span><span class="op">)</span>,</span>
+<span>  x_col <span class="op">=</span> <span class="st">"category"</span>,</span>
+<span>  y_col <span class="op">=</span> <span class="st">"value"</span></span>
+<span><span class="op">)</span></span>
+<span><span class="co">#&gt; # A ggplot object</span></span></code></pre></div>
+<hr>
+</div>
+<div class="section level2">
+<h2 id="a-combined-workflow">6 A Combined Workflow<a class="anchor" aria-label="anchor" href="#a-combined-workflow"></a>
+</h2>
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># 1) Prepare toy reference and gene sets</span></span>
+<span><span class="va">ref</span>  <span class="op">&lt;-</span> <span class="fu"><a href="../reference/toy_gene_ref.html">toy_gene_ref</a></span><span class="op">(</span><span class="st">"human"</span>, n <span class="op">=</span> <span class="fl">100</span><span class="op">)</span></span>
+<span><span class="va">path</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/toy_gmt.html">toy_gmt</a></span><span class="op">(</span>n <span class="op">=</span> <span class="fl">3</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># 2) Parse GMT and convert gene IDs</span></span>
+<span><span class="va">long</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/gmt2df.html">gmt2df</a></span><span class="op">(</span><span class="va">path</span><span class="op">)</span></span>
+<span><span class="va">idm</span>  <span class="op">&lt;-</span> <span class="fu"><a href="../reference/gene2entrez.html">gene2entrez</a></span><span class="op">(</span><span class="va">long</span><span class="op">$</span><span class="va">gene</span>, ref <span class="op">=</span> <span class="va">ref</span>, species <span class="op">=</span> <span class="st">"human"</span><span class="op">)</span></span>
+<span><span class="va">long</span><span class="op">$</span><span class="va">entrez_id</span> <span class="op">&lt;-</span> <span class="va">idm</span><span class="op">$</span><span class="va">entrez_id</span></span>
+<span></span>
+<span><span class="co"># 3) Build list per term</span></span>
+<span><span class="va">long2</span> <span class="op">&lt;-</span> <span class="va">long</span><span class="op">[</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html" class="external-link">is.na</a></span><span class="op">(</span><span class="va">long</span><span class="op">$</span><span class="va">entrez_id</span><span class="op">)</span>, <span class="op">]</span></span>
+<span><span class="va">sets</span>  <span class="op">&lt;-</span> <span class="fu"><a href="../reference/df2list.html">df2list</a></span><span class="op">(</span><span class="va">long2</span>, group_col <span class="op">=</span> <span class="st">"term"</span>, value_col <span class="op">=</span> <span class="st">"entrez_id"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># 4) Quick statistical and plotting step</span></span>
+<span><span class="va">res</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/quick_cor.html">quick_cor</a></span><span class="op">(</span><span class="va">mtcars</span><span class="op">[</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"mpg"</span>, <span class="st">"hp"</span>, <span class="st">"wt"</span>, <span class="st">"qsec"</span><span class="op">)</span><span class="op">]</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">res</span>, type <span class="op">=</span> <span class="st">"upper"</span>, show_sig <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
+<hr>
+</div>
+<div class="section level2">
+<h2 id="getting-help">Getting Help<a class="anchor" aria-label="anchor" href="#getting-help"></a>
 </h2>
 <ul>
-<li><p>📄 <a href="https://github.com/evanbio/evanverse" class="external-link">README on
-GitHub</a></p></li>
-<li><p>🌐 <a href="https://evanbio.github.io/evanverse/">Documentation
-site</a></p></li>
-<li><p>❔ View all functions: <code>?evanverse</code> or
-<code><a href="https://evanbio.github.io/evanverse/reference">help(package = "evanverse")</a></code></p></li>
+<li>
+<code><a href="../reference/grapes-p-grapes.html">?"%p%"</a></code>, <code><a href="../reference/grapes-nin-grapes.html">?"%nin%"</a></code>, <code><a href="../reference/grapes-match-grapes.html">?"%match%"</a></code>,
+<code><a href="../reference/grapes-map-grapes.html">?"%map%"</a></code>, <code><a href="../reference/grapes-is-grapes.html">?"%is%"</a></code>
+</li>
+<li>
+<code><a href="../reference/set_mirror.html">?set_mirror</a></code>, <code><a href="../reference/inst_pkg.html">?inst_pkg</a></code>,
+<code><a href="../reference/check_pkg.html">?check_pkg</a></code>, <code><a href="../reference/update_pkg.html">?update_pkg</a></code>
+</li>
+<li>
+<code><a href="../reference/quick_ttest.html">?quick_ttest</a></code>, <code><a href="../reference/quick_anova.html">?quick_anova</a></code>,
+<code><a href="../reference/quick_chisq.html">?quick_chisq</a></code>, <code><a href="../reference/quick_cor.html">?quick_cor</a></code>
+</li>
+<li><a href="https://github.com/evanbio/evanverse/issues" class="external-link">GitHub
+Issues</a></li>
 </ul>
-</div>
-<div class="section level2">
-<h2 id="a-note-from-the-author">💬 A note from the author<a class="anchor" aria-label="anchor" href="#a-note-from-the-author"></a>
-</h2>
-<blockquote>
-<p>You’re building your own verse in R — let this toolkit help you move
-faster, smoother, and a little happier along the way.</p>
-</blockquote>
-<p>—— Evan Zhou</p>
 </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
     </nav></aside>

@@ -1,8 +1,7 @@
-# %match%: Case-insensitive match returning indices
+# Case-insensitive match returning indices
 
-Performs case-insensitive matching, like
-[`base::match()`](https://rdrr.io/r/base/match.html), but ignores letter
-case.
+Like [`base::match()`](https://rdrr.io/r/base/match.html), but ignores
+letter case. Useful for gene ID matching.
 
 ## Usage
 
@@ -22,28 +21,20 @@ x %match% table
 
 ## Value
 
-An integer vector of the positions of matches of `x` in `table`, like
-[`base::match()`](https://rdrr.io/r/base/match.html). Returns `NA` for
-non-matches. Returns an integer(0) if `x` is length 0.
+An integer vector of match positions. Returns `NA` for non-matches.
+
+## Note
+
+Both `x` and `table` must be **non-empty** character vectors;
+`character(0)` or non-character inputs raise an error. This differs from
+[`base::match()`](https://rdrr.io/r/base/match.html) and `%nin%`, which
+accept empty vectors. The stricter contract is intentional for gene-ID
+workflows where an empty query almost always signals a upstream mistake.
 
 ## Examples
 
 ``` r
-# Basic matching
 c("tp53", "BRCA1", "egfr") %match% c("TP53", "EGFR", "MYC")
 #> [1]  1 NA  2
 # returns: 1 NA 2
-
-# No matches returns: all NA
-c("aaa", "bbb") %match% c("xxx", "yyy")
-#> [1] NA NA
-
-# Empty input
-character(0) %match% c("a", "b")
-#> integer(0)
-
-# Order sensitivity (like match): first match is returned
-c("x") %match% c("X", "x", "x")
-#> [1] 1
-# returns: 1
 ```

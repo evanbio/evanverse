@@ -1,8 +1,11 @@
-# Forest Plot with Advanced Customization
+# Publication-ready forest plot
 
-Create publication-ready forest plots with extensive customization for
-confidence intervals, themes, colors, borders, and layout. Designed for
-meta-analysis and comparative study visualizations.
+Produces a publication-ready forest plot with UKB-standard styling. The
+user supplies a data frame whose first column is the row label (`item`),
+plus any additional display columns (e.g. `Cases/N`). The gap column and
+the auto-formatted `OR (95% CI)` text column are inserted automatically
+at `ci_column`. Numeric p-value columns declared via `p_cols` are
+formatted in-place.
 
 ## Usage
 
@@ -12,54 +15,35 @@ plot_forest(
   est,
   lower,
   upper,
-  ci_column,
+  ci_column = 2L,
   ref_line = 1,
   xlim = NULL,
   ticks_at = NULL,
-  arrow_lab = NULL,
-  sizes = 0.6,
-  nudge_y = 0.2,
-  theme_preset = "default",
-  theme_custom = NULL,
-  align_left = NULL,
-  align_center = NULL,
-  align_right = NULL,
-  bold_group = NULL,
-  bold_group_col = 1,
-  bold_pvalue_cols = NULL,
+  arrow_lab = c("Lower risk", "Higher risk"),
+  header = NULL,
+  indent = NULL,
+  bold_label = NULL,
+  ci_col = "black",
+  ci_sizes = 0.6,
+  ci_Theight = 0.2,
+  ci_digits = 2L,
+  ci_sep = ", ",
+  p_cols = NULL,
+  p_digits = 3L,
+  bold_p = TRUE,
   p_threshold = 0.05,
-  bold_custom = NULL,
-  background_style = "none",
-  background_group_rows = NULL,
-  background_colors = NULL,
-  ci_colors = NULL,
-  ci_group_ids = NULL,
-  add_borders = TRUE,
+  align = NULL,
+  background = "zebra",
+  bg_col = "#F0F0F0",
+  border = "three_line",
   border_width = 3,
-  group_headers = NULL,
-  group_border_width = 6,
-  custom_borders = NULL,
-  height_top = 8,
-  height_header = 12,
-  height_main = 10,
-  height_bottom = 8,
-  width_left = 10,
-  width_right = 10,
-  width_adjust = 5,
-  height_custom = NULL,
-  width_custom = NULL,
-  layout_verbose = TRUE,
-  save_plot = FALSE,
-  filename = "forest_plot",
-  save_path = ".",
-  save_formats = c("png", "pdf"),
-  save_width = 35,
-  save_height = 42,
-  save_units = "cm",
-  save_dpi = 300,
-  save_bg = "white",
-  save_overwrite = TRUE,
-  save_verbose = TRUE
+  row_height = NULL,
+  col_width = NULL,
+  save = FALSE,
+  dest = NULL,
+  save_width = 20,
+  save_height = NULL,
+  theme = "default"
 )
 ```
 
@@ -67,383 +51,198 @@ plot_forest(
 
 - data:
 
-  Data frame containing the plot data (both text and numeric columns).
+  data.frame. First column must be the label column (`item`). Additional
+  columns are displayed as-is (character) or formatted if named in
+  `p_cols` (must be numeric). Column order is preserved.
 
 - est:
 
-  List of numeric vectors containing effect estimates. Use
-  [`list()`](https://rdrr.io/r/base/list.html) even for single group.
-  Example: `list(data$estimate)` or
-  `list(data$estimate_1, data$estimate_2)`.
+  Numeric vector. Point estimates (`NA` = no CI drawn).
 
 - lower:
 
-  List of numeric vectors containing lower CI bounds.
+  Numeric vector. Lower CI bounds (same length as `est`).
 
 - upper:
 
-  List of numeric vectors containing upper CI bounds.
+  Numeric vector. Upper CI bounds (same length as `est`).
 
 - ci_column:
 
-  Integer vector specifying which column(s) to draw CI graphics.
-  Example: `c(3)` for single group, `c(3, 7)` for two groups.
+  Integer. Column position in the final rendered table where the gap/CI
+  graphic is placed. Must be between `2` and `ncol(data) + 1`
+  (inclusive). Default: `2L`.
 
 - ref_line:
 
-  Numeric. Reference line position (e.g., 1 for OR, 0 for mean
-  difference). Default: 1.
+  Numeric. Reference line. Default: `1` (HR/OR). Use `0` for beta
+  coefficients.
 
 - xlim:
 
-  Numeric vector of length 2. X-axis limits. Default: `NULL`
-  (auto-calculate).
+  Numeric vector of length 2. X-axis limits. `NULL` (default) uses
+  `c(0, 2)`.
 
 - ticks_at:
 
-  Numeric vector. X-axis tick positions. Default: `NULL`
-  (auto-calculate).
+  Numeric vector. Tick positions. `NULL` (default) = 5 evenly spaced
+  ticks across `xlim`.
 
 - arrow_lab:
 
-  Character vector of length 2. Labels for left and right arrows.
-  Example: `c("Favors A", "Favors B")`. Default: `NULL`.
+  Character vector of length 2. Directional labels. Default:
+  `c("Lower risk", "Higher risk")`. `NULL` = none.
 
-- sizes:
+- header:
 
-  Numeric. Size of CI center points. Can be:
+  Character vector of length `ncol(data) + 2`. Column header labels for
+  the final rendered table (original columns + gap_ci + OR label).
+  `NULL` (default) = use column names from `data` plus `"gap_ci"` and
+  `"OR (95% CI)"`. Pass `""` for the gap column position.
 
-  - Single value: Automatically applied to all rows (e.g., `0.6`)
+- indent:
 
-  - Vector: Must match the number of data rows. If length is
-    insufficient, later rows will have no CI displayed. To repeat a
-    pattern, use `rep(c(0.5, 0.4, 0.3), length.out = nrow(data))`.
+  Integer vector (length = `nrow(data)`). Indentation level of the label
+  column: each unit adds two leading spaces. Default: all zeros.
 
-  Default: 0.6.
+- bold_label:
 
-- nudge_y:
+  Logical vector (length = `nrow(data)`). Which rows to bold in the
+  label column. `NULL` (default) = auto-derive from `indent`: rows where
+  `indent == 0` are bolded (parent rows), indented sub-rows are plain.
 
-  Numeric. Vertical nudge for multi-group CI positioning. Default: 0.2.
+- ci_col:
 
-- theme_preset:
+  Character scalar or vector (length = `nrow(data)`). CI colour(s). `NA`
+  rows are skipped automatically. Default: `"black"`.
 
-  Character. Theme preset name. Default: `"default"`. See
-  `.get_forest_theme()` for available presets.
+- ci_sizes:
 
-- theme_custom:
+  Numeric. Point size. Default: `0.6`.
 
-  List. Custom theme parameters to override preset. Default: `NULL`.
+- ci_Theight:
 
-- align_left:
+  Numeric. CI cap height. Default: `0.2`.
 
-  Integer vector. Columns to left-align. Default: `NULL`.
+- ci_digits:
 
-- align_center:
+  Integer. Decimal places for the auto-generated `OR (95% CI)` column.
+  Default: `2L`.
 
-  Integer vector. Columns to center-align. Default: `NULL`.
+- ci_sep:
 
-- align_right:
+  Character. Separator between lower and upper CI in the label, e.g.
+  `", "` or `" - "`. Default: `", "`.
 
-  Integer vector. Columns to right-align. Default: `NULL`.
+- p_cols:
 
-- bold_group:
+  Character vector. Names of numeric p-value columns in `data`. These
+  are formatted to `p_digits` decimal places with `"<0.001"`-style
+  clipping. `NULL` = none.
 
-  Character vector. Group names to bold. Default: `NULL`.
+- p_digits:
 
-- bold_group_col:
+  Integer. Decimal places for p-value formatting. Default: `3L`.
 
-  Integer. Column containing group names. Default: 1.
+- bold_p:
 
-- bold_pvalue_cols:
-
-  Integer vector. P-value columns to bold if significant. Default:
-  `NULL`.
+  `TRUE` (bold all non-NA p below `p_threshold`), `FALSE` (no bolding),
+  or a logical vector (per-row control). Default: `TRUE`.
 
 - p_threshold:
 
-  Numeric. P-value threshold for bolding. Default: 0.05.
+  Numeric. P-value threshold for bolding when `bold_p = TRUE`. Default:
+  `0.05`.
 
-- bold_custom:
+- align:
 
-  List of custom bold specifications. Default: `NULL`.
+  Integer vector of length `ncol(data) + 2`. Alignment per column: `-1`
+  left, `0` centre, `1` right. Must cover all final columns (original +
+  gap_ci + OR label). `NULL` = auto (column 1 left, all others centre).
 
-- background_style:
+- background:
 
-  Character. Background style: `"none"`, `"zebra"`, `"group"`,
-  `"block"`. Default: `"none"`.
+  Character. Row background style: `"zebra"`, `"bold_label"` (shade rows
+  where `bold_label = TRUE`), or `"none"`. Default: `"zebra"`.
 
-- background_group_rows:
+- bg_col:
 
-  Integer vector. Row indices of group headers (for `"group"` and
-  `"block"` styles). Default: `NULL`.
+  Character. Shading colour for backgrounds (scalar), or a per-row
+  vector of length `nrow(data)` (overrides style). Default: `"#F0F0F0"`.
 
-- background_colors:
+- border:
 
-  Named list of colors (primary, secondary, alternate). Default: `NULL`.
-
-- ci_colors:
-
-  Color specification for CI boxes. Can be single color, vector, or
-  named list with mapping. Default: `NULL`.
-
-- ci_group_ids:
-
-  Optional vector of group IDs for color mapping. Default: `NULL`.
-
-- add_borders:
-
-  Logical. Add simple borders. Default: `TRUE`.
+  Character. Border style: `"three_line"` or `"none"`. Default:
+  `"three_line"`.
 
 - border_width:
 
-  Numeric. Border line width (mm). Default: 3.
+  Numeric. Border line width(s). Scalar = all three lines same width;
+  length-3 vector = top-of-header, bottom-of-header, bottom-of-body.
+  Default: `3`.
 
-- group_headers:
+- row_height:
 
-  List of group header specifications for multi-group plots. Default:
-  `NULL`.
+  `NULL` (auto), numeric scalar, or numeric vector (length = total
+  gtable rows including margins). Auto sets 8 / 12 / 10 / 15 mm for top
+  / header / data / bottom respectively.
 
-- group_border_width:
+- col_width:
 
-  Numeric. Border width for group mode (mm). Default: 6.
+  `NULL` (auto), numeric scalar, or numeric vector (length = total
+  gtable columns). Auto rounds each default width up so the adjustment
+  is in \\\[5, 10)\\ mm.
 
-- custom_borders:
+- save:
 
-  List of custom border specifications. Default: `NULL`.
+  Logical. Save output to files? Default: `FALSE`.
 
-- height_top:
+- dest:
 
-  Numeric. Top margin height (mm). Default: 8.
-
-- height_header:
-
-  Numeric. Header row height (mm). Default: 12.
-
-- height_main:
-
-  Numeric. Data row height (mm). Default: 10.
-
-- height_bottom:
-
-  Numeric. Bottom margin height (mm). Default: 8.
-
-- width_left:
-
-  Numeric. Left margin width (mm). Default: 10.
-
-- width_right:
-
-  Numeric. Right margin width (mm). Default: 10.
-
-- width_adjust:
-
-  Numeric. Width adjustment for data columns (mm). Default: 5.
-
-- height_custom:
-
-  Named list for manual height override. Default: `NULL`.
-
-- width_custom:
-
-  Named list for manual width override. Default: `NULL`.
-
-- layout_verbose:
-
-  Logical. Print layout adjustment info. Default: `TRUE`.
-
-- save_plot:
-
-  Logical. Save plot to file(s). Default: `FALSE`.
-
-- filename:
-
-  Character. Base filename (without extension). Default:
-  `"forest_plot"`.
-
-- save_path:
-
-  Character. Directory path for saving. Default: `"."`.
-
-- save_formats:
-
-  Character vector. File formats to save. Default: `c("png", "pdf")`.
+  Character. Destination file path (extension ignored; all four formats
+  are saved). Required when `save = TRUE`.
 
 - save_width:
 
-  Numeric. Plot width. Default: 35.
+  Numeric. Output width in cm. Default: `20`.
 
 - save_height:
 
-  Numeric. Plot height. Default: 42.
+  Numeric or `NULL`. Output height in cm. `NULL` =
+  `nrow(data) * 0.9 + 3`.
 
-- save_units:
+- theme:
 
-  Character. Units for width/height. Default: `"cm"`.
-
-- save_dpi:
-
-  Numeric. Resolution for raster formats. Default: 300.
-
-- save_bg:
-
-  Character. Background color. Default: `"white"`.
-
-- save_overwrite:
-
-  Logical. Overwrite existing files. Default: `TRUE`.
-
-- save_verbose:
-
-  Logical. Print save messages. Default: `TRUE`.
+  Character preset (`"default"`) or a
+  [`forestploter::forest_theme`](https://rdrr.io/pkg/forestploter/man/forest_theme.html)
+  object. Default: `"default"`.
 
 ## Value
 
-A forest plot object (gtable). Can be displayed with
-[`print()`](https://rdrr.io/r/base/print.html) or `grid.draw()`. The
-object contains the complete plot structure and can be saved using the
-built-in save functionality or standard ggplot2 methods.
-
-## Details
-
-**Core Workflow:**
-
-The function creates a base forest plot using the forestploter package,
-then applies a series of customizations:
-
-1.  Theme application (presets or custom)
-
-2.  Text alignment adjustments
-
-3.  Bold formatting for groups and significant p-values
-
-4.  Background colors (zebra, group, or block patterns)
-
-5.  CI box colors (single, vector, or mapped)
-
-6.  Border additions (simple, group, or custom)
-
-7.  Layout adjustments (widths and heights)
-
-8.  Optional file saving
-
-**CI Color Mapping:**
-
-The `ci_colors` parameter accepts three formats:
-
-- **Single color**: Applied to all rows (e.g., `"#E64B35"`)
-
-- **Color vector**: Must match the number of rows
-
-- **Named list with mapping**: Maps group IDs to colors
-
-Example of named mapping:
-
-    ci_colors = list(
-      mapping = c("Q1" = "#DC0000", "Q2" = "#8491B4", "Q3" = "#F39B7F"),
-      default = "#999999"
-    )
-
-## Important Notes
-
-- **Data preparation**: The `data` parameter should contain all display
-  columns including pre-formatted text
-
-- **CI graphics**: Use `strrep(" ", n)` to create space columns where CI
-  graphics will be drawn
-
-- **Layout tuning**: Use `height_custom` and `width_custom` after
-  inspecting verbose output for fine-grained control
-
-## See also
-
-[`forest`](https://rdrr.io/pkg/forestploter/man/forest.html) for the
-underlying plotting function,
-[`forest_theme`](https://rdrr.io/pkg/forestploter/man/forest_theme.html)
-for theme customization.
+A forestploter plot object (gtable), returned invisibly. Display with
+[`plot()`](https://rdrr.io/r/graphics/plot.default.html) or
+[`grid::grid.draw()`](https://rdrr.io/r/grid/grid.draw.html).
 
 ## Examples
 
 ``` r
-if (FALSE) { # \dontrun{
-# Example 1: Using built-in forest_data
-library(dplyr)
-library(evanverse)
-
-# Load example data
-data("forest_data")
-
-# Filter to single-model data (rows without est_2)
-df <- forest_data %>%
-  filter(is.na(est_2)) %>%
-  filter(!is.na(est))  # Remove header rows
-
-# Prepare display data
-plot_data <- df %>%
-  mutate(
-    ` ` = strrep(" ", 20),
-    `OR (95% CI)` = sprintf("%.2f (%.2f-%.2f)", est, lower, upper),
-    `P` = ifelse(pval < 0.001, "<0.001", sprintf("%.3f", pval))
-  ) %>%
-  select(Variable = variable, ` `, `OR (95% CI)`, `P`)
-
-# Create plot
-p <- plot_forest(
-  data = plot_data,
-  est = list(df$est),
-  lower = list(df$lower),
-  upper = list(df$upper),
-  ci_column = 2,
-  ref_line = 1
+df <- data.frame(
+  item      = c("Exposure vs. control", "Unadjusted", "Fully adjusted"),
+  `Cases/N` = c("", "89/4521", "89/4521"),
+  p_value   = c(NA_real_, 0.001, 0.006),
+  check.names = FALSE
 )
-print(p)
-
-# Example 2: Multi-model comparison
-df_multi <- forest_data %>%
-  filter(!is.na(est_2))  # Multi-model rows
-
-plot_data_multi <- df_multi %>%
-  mutate(
-    ` ` = strrep(" ", 20),
-    `Model 1` = sprintf("%.2f (%.2f-%.2f)", est, lower, upper),
-    `Model 2` = sprintf("%.2f (%.2f-%.2f)", est_2, lower_2, upper_2),
-    `Model 3` = sprintf("%.2f (%.2f-%.2f)", est_3, lower_3, upper_3)
-  ) %>%
-  select(Variable = variable, ` `, `Model 1`, `Model 2`, `Model 3`)
 
 p <- plot_forest(
-  data = plot_data_multi,
-  est = list(df_multi$est, df_multi$est_2, df_multi$est_3),
-  lower = list(df_multi$lower, df_multi$lower_2, df_multi$lower_3),
-  upper = list(df_multi$upper, df_multi$upper_2, df_multi$upper_3),
-  ci_column = 2,
-  ref_line = 1
+  data       = df,
+  est        = c(NA, 1.52, 1.43),
+  lower      = c(NA, 1.18, 1.11),
+  upper      = c(NA, 1.96, 1.85),
+  ci_column  = 2L,
+  indent     = c(0L, 1L, 1L),
+  bold_label = c(TRUE, FALSE, FALSE),
+  p_cols     = "p_value",
+  xlim       = c(0.5, 3.0)
 )
-
-# Example 3: Customized styling
-p <- plot_forest(
-  data = plot_data,
-  est = list(df$est),
-  lower = list(df$lower),
-  upper = list(df$upper),
-  ci_column = 2,
-  xlim = c(0.5, 3),
-  arrow_lab = c("Lower Risk", "Higher Risk"),
-  align_left = 1,
-  align_center = c(2, 3, 4),
-  bold_pvalue_cols = 4,
-  background_style = "zebra"
-)
-
-# Example 4: Save to files
-plot_forest(
-  data = plot_data,
-  est = list(df$est),
-  lower = list(df$lower),
-  upper = list(df$upper),
-  ci_column = 2,
-  save_plot = TRUE,
-  filename = "forest_plot",
-  save_formats = c("png", "pdf")
-)
-} # }
+plot(p)
 ```

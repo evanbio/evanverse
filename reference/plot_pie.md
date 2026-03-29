@@ -1,26 +1,18 @@
-# Plot a Clean Pie Chart with Optional Inner Labels
+# Pie chart from a vector or grouped data frame
 
-Generate a polished pie chart from a vector or a grouped data frame.
-Labels (optional) are placed inside the pie slices.
+Accepts either a character/factor vector (frequency counted
+automatically) or a data frame with pre-computed counts. Slices with
+zero count are dropped. At least two groups are required.
 
 ## Usage
 
 ``` r
 plot_pie(
   data,
-  group_col = "group",
-  count_col = "count",
+  group_col = NULL,
+  count_col = NULL,
   label = c("none", "count", "percent", "both"),
-  label_size = 4,
-  label_color = "black",
-  fill = c("#009076", "#C71E1D", "#15607A", "#FA8C00", "#18A1CD"),
-  title = "Pie Chart",
-  title_size = 14,
-  title_color = "black",
-  legend.position = "right",
-  preview = TRUE,
-  save = NULL,
-  return_data = FALSE
+  palette = NULL
 )
 ```
 
@@ -28,61 +20,40 @@ plot_pie(
 
 - data:
 
-  A character/factor vector or data.frame.
+  A character/factor vector, or a data.frame.
 
 - group_col:
 
-  Group column name (for data.frame). Default: "group".
+  Character. Column name for group labels (data.frame only).
 
 - count_col:
 
-  Count column name (for data.frame). Default: "count".
+  Character. Column name for counts (data.frame only). Values must be
+  non-negative.
 
 - label:
 
-  Type of label to display: "none", "count", "percent", or "both".
-  Default: "none".
+  Label type: `"none"`, `"count"`, `"percent"`, or `"both"`. Default:
+  `"none"`.
 
-- label_size:
+- palette:
 
-  Label font size. Default: 4.
-
-- label_color:
-
-  Label font color. Default: "black".
-
-- fill:
-
-  Fill color vector. Default: 5-color palette.
-
-- title:
-
-  Plot title. Default: "Pie Chart".
-
-- title_size:
-
-  Title font size. Default: 14.
-
-- title_color:
-
-  Title color. Default: "black".
-
-- legend.position:
-
-  Legend position. Default: "right".
-
-- preview:
-
-  Whether to print the plot. Default: TRUE.
-
-- save:
-
-  Optional path to save the plot (e.g., "plot.png").
-
-- return_data:
-
-  If TRUE, return list(plot = ..., data = ...). Default: FALSE.
+  Character vector or `NULL`. Slice fill colors recycled to match the
+  number of groups. If `NULL`, uses ggplot2 default colors. Default:
+  `NULL`.
 
 ## Value
 
-A ggplot object or list(plot, data)
+A `ggplot` object.
+
+## Examples
+
+``` r
+# From a vector
+plot_pie(c("A", "A", "B", "C", "C", "C"))
+
+
+# From a data frame
+df <- data.frame(group = c("X", "Y", "Z"), count = c(10, 25, 15))
+plot_pie(df, group_col = "group", count_col = "count", label = "percent")
+```

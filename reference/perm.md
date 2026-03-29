@@ -1,9 +1,7 @@
-# Calculate Number of Permutations A(n, k)
+# Number of permutations P(n, k)
 
-Calculates the total number of ways to arrange k items selected from n
-distinct items, i.e., the number of permutations A(n, k) = n! / (n -
-k)!. This function is intended for moderate n and k. For very large
-numbers, consider supporting the 'gmp' package.
+Calculates the number of ordered arrangements of `k` items from `n`
+distinct items. P(n, k) = n! / (n - k)!
 
 ## Usage
 
@@ -15,26 +13,25 @@ perm(n, k)
 
 - n:
 
-  Integer. Total number of items (non-negative integer).
+  Non-negative integer. Total number of items.
 
 - k:
 
-  Integer. Number of items selected for permutation (non-negative
-  integer, must be \<= n).
+  Non-negative integer. Number of items to arrange. Must be \<= `n`.
 
 ## Value
 
-Numeric. The permutation count A(n, k) (returns Inf for very large n).
+A numeric value. Returns `0` when `k > n`, `1` when `k = 0`.
 
 ## Examples
 
 ``` r
-perm(8, 4)      # 1680
+perm(8, 4)   # 1680
 #> [1] 1680
-perm(5, 2)      # 20
+perm(5, 2)   # 20
 #> [1] 20
-perm(10, 0)     # 1
+perm(10, 0)  # 1
 #> [1] 1
-perm(5, 6)      # 0
+perm(5, 6)   # 0
 #> [1] 0
 ```

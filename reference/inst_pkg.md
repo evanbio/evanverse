@@ -1,7 +1,7 @@
 # Install R Packages from Multiple Sources
 
 Install R packages from CRAN, GitHub, Bioconductor, or local source.
-Automatically respects mirror settings from
+Respects mirror settings from
 [`set_mirror()`](https://evanbio.github.io/evanverse/reference/set_mirror.md).
 
 ## Usage
@@ -19,45 +19,33 @@ inst_pkg(
 
 - pkg:
 
-  Character vector. Package name(s) or GitHub repo (e.g., "user/repo").
-  Not required for `source = "local"`.
+  Character vector. Package name(s) or GitHub `"user/repo"`. Not
+  required for `source = "Local"`.
 
 - source:
 
-  Character. Package source: "CRAN", "GitHub", "Bioconductor", "Local".
-  Case-insensitive, first match used.
+  Character. One of `"CRAN"`, `"GitHub"`, `"Bioconductor"`, `"Local"`.
 
 - path:
 
-  Character. Path to local package file (required when
-  `source = "local"`).
+  Character. Path to local package file (required for
+  `source = "Local"`).
 
 - ...:
 
-  Additional arguments passed to
-  [`install.packages`](https://rdrr.io/r/utils/install.packages.html),
-  [`install_github`](https://remotes.r-lib.org/reference/install_github.html),
-  or
-  [`install`](https://bioconductor.github.io/BiocManager/reference/install.html).
+  Passed to the underlying install function.
 
 ## Value
 
-NULL (invisibly). Side effect: installs packages.
+NULL invisibly.
 
 ## Examples
 
 ``` r
 if (FALSE) { # \dontrun{
-# Install from CRAN:
 inst_pkg("dplyr", source = "CRAN")
-
-# Install from GitHub:
 inst_pkg("hadley/emo", source = "GitHub")
-
-# Install from Bioconductor:
 inst_pkg("scRNAseq", source = "Bioconductor")
-
-# Install from local file:
 inst_pkg(source = "Local", path = "mypackage.tar.gz")
 } # }
 ```

@@ -2,21 +2,21 @@
 
 ### All vignettes
 
-- [Bioinformatics Workflows with
-  evanverse](https://evanbio.github.io/evanverse/articles/bioinformatics-workflows.md):
-- [Color Palette
-  System](https://evanbio.github.io/evanverse/articles/color-palettes.md):
-- [Comprehensive Guide to
-  evanverse](https://evanbio.github.io/evanverse/articles/comprehensive-guide.md):
-- [Data Processing &
-  Transformation](https://evanbio.github.io/evanverse/articles/data-processing.md):
-- [Publication-Ready Forest Plots with
-  evanverse](https://evanbio.github.io/evanverse/articles/forest-plot.md):
-- [Welcome to
-  evanverse](https://evanbio.github.io/evanverse/articles/get-started.md):
+- [Base
+  Utilities](https://evanbio.github.io/evanverse/articles/base.md):
+- [Get
+  Started](https://evanbio.github.io/evanverse/articles/get-started.md):
 - [Installation
   Guide](https://evanbio.github.io/evanverse/articles/install.md):
-- [Managing R Packages with
-  evanverse](https://evanbio.github.io/evanverse/articles/package-management.md):
-- [Color Palette Naming
-  Convention](https://evanbio.github.io/evanverse/articles/palette-naming-convention.md):
+- [Custom Infix
+  Operators](https://evanbio.github.io/evanverse/articles/ops.md):
+- [Color Palette
+  Management](https://evanbio.github.io/evanverse/articles/palette.md):
+- [Package
+  Management](https://evanbio.github.io/evanverse/articles/pkg.md):
+- [Plotting
+  Functions](https://evanbio.github.io/evanverse/articles/plot.md):
+- [Statistical
+  Utilities](https://evanbio.github.io/evanverse/articles/stat.md):
+- [Toy Data
+  Utilities](https://evanbio.github.io/evanverse/articles/toy.md):

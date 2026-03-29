@@ -1,0 +1,412 @@
+# Color Palette Management
+
+## Overview
+
+The palette module provides nine functions covering four areas:
+
+| Area              | Functions                                                                                                                                                                                                                                                               |
+|-------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Querying palettes | [`get_palette()`](https://evanbio.github.io/evanverse/reference/get_palette.md), [`list_palettes()`](https://evanbio.github.io/evanverse/reference/list_palettes.md)                                                                                                    |
+| Visualization     | [`preview_palette()`](https://evanbio.github.io/evanverse/reference/preview_palette.md), [`palette_gallery()`](https://evanbio.github.io/evanverse/reference/palette_gallery.md)                                                                                        |
+| Managing palettes | [`create_palette()`](https://evanbio.github.io/evanverse/reference/create_palette.md), [`remove_palette()`](https://evanbio.github.io/evanverse/reference/remove_palette.md), [`compile_palettes()`](https://evanbio.github.io/evanverse/reference/compile_palettes.md) |
+| Color conversion  | [`hex2rgb()`](https://evanbio.github.io/evanverse/reference/hex2rgb.md), [`rgb2hex()`](https://evanbio.github.io/evanverse/reference/rgb2hex.md)                                                                                                                        |
+
+``` r
+library(evanverse)
+```
+
+> **Note:** All code examples in this vignette are static
+> (`eval = FALSE`). Output is hand-written to reflect the current
+> implementation. If you modify the palette functions, re-verify the
+> examples manually or switch chunks to `eval = TRUE`.
+
+Palettes are stored as JSON files organized under three subdirectories —
+`sequential/`, `diverging/`, and `qualitative/` — and compiled into the
+`palettes` package dataset via
+[`compile_palettes()`](https://evanbio.github.io/evanverse/reference/compile_palettes.md).
+
+------------------------------------------------------------------------
+
+## 1 Querying Palettes
+
+### `get_palette()` — Retrieve a palette by name
+
+Returns a character vector of HEX color codes. If `type` is omitted, the
+palette type is auto-detected. Use `n` to take the first N colors from a
+larger palette.
+
+``` r
+# Auto-detect type
+get_palette("qual_vivid")
+#> [1] "#E64B35" "#4DBBD5" "#00A087" "#3C5488" "#F39B7F" "#8491B4"
+
+# Specify type explicitly
+get_palette("qual_vivid", type = "qualitative")
+#> [1] "#E64B35" "#4DBBD5" "#00A087" "#3C5488" "#F39B7F" "#8491B4"
+
+# Take only the first 3 colors
+get_palette("seq_blues", type = "sequential", n = 3)
+#> [1] "#deebf7" "#9ecae1" "#3182bd"
+```
+
+When `type` is wrong, the error message tells you where the palette
+actually lives:
+
+``` r
+get_palette("qual_vivid", type = "sequential")
+#> Error in `get_palette()`:
+#> ! Palette "qual_vivid" not found under "sequential", but exists under "qualitative".
+#> Try: get_palette("qual_vivid", type = "qualitative")
+```
+
+Requesting more colors than the palette contains raises an informative
+error rather than silently recycling:
+
+``` r
+get_palette("qual_softtrio", type = "qualitative", n = 10)
+#> Error in `get_palette()`:
+#> ! Palette "qual_softtrio" only has 3 colors, but requested 10.
+```
+
+------------------------------------------------------------------------
+
+### `list_palettes()` — Browse available palettes
+
+Returns a data frame with columns `name`, `type`, `n_color`, and
+`colors`. Filter by one or more types with the `type` argument.
+
+``` r
+list_palettes()
+#>              name       type n_color                                   colors
+#> 1    div_contrast  diverging       5  #2166ac, #92c5de, #f7f7f7, ...
+#> 2    div_fireice   diverging       7  #4575b4, #91bfdb, #e0f3f8, ...
+#> ...
+#> 12   qual_vivid   qualitative       6  #E64B35, #4DBBD5, #00A087, ...
+#> ...
+```
+
+``` r
+# Single type
+list_palettes(type = "qualitative")
+
+# Multiple types
+list_palettes(type = c("sequential", "diverging"))
+```
+
+Results are sorted by `type`, `n_color`, and `name` by default. Set
+`sort = FALSE` to keep the original file order.
+
+------------------------------------------------------------------------
+
+## 2 Visualization
+
+### `preview_palette()` — Visualize a single palette
+
+Plots a single palette using one of five styles: `"bar"` (default),
+`"pie"`, `"point"`, `"rect"`, or `"circle"`. Returns `NULL` invisibly —
+called for the plotting side effect.
+
+``` r
+preview_palette("seq_blues", type = "sequential")
+preview_palette("div_fireice", plot_type = "pie")
+preview_palette("qual_vivid", n = 4, plot_type = "circle")
+```
+
+Supply `title` to override the default title (which is the palette
+name):
+
+``` r
+preview_palette("qual_vivid", title = "My favourite palette")
+```
+
+------------------------------------------------------------------------
+
+### `palette_gallery()` — Browse all palettes at once
+
+Renders a paged gallery of all palettes and returns a named list of
+ggplot objects (one per page). Useful for picking colors interactively.
+
+``` r
+plots <- palette_gallery()
+#> i Type sequential: 8 palettes -> 1 page(s)
+#> v Built "sequential_page1"
+#> i Type diverging: 6 palettes -> 1 page(s)
+#> v Built "diverging_page1"
+#> i Type qualitative: 16 palettes -> 1 page(s)
+#> v Built "qualitative_page1"
+```
+
+Filter by type and control how many palettes appear per page:
+
+``` r
+plots <- palette_gallery(type = "qualitative")
+plots <- palette_gallery(type = c("sequential", "diverging"), max_palettes = 10)
+```
+
+Access individual pages from the returned list:
+
+``` r
+plots[["qualitative_page1"]]
+```
+
+Set `verbose = FALSE` to suppress progress messages when calling
+[`palette_gallery()`](https://evanbio.github.io/evanverse/reference/palette_gallery.md)
+programmatically.
+
+------------------------------------------------------------------------
+
+## 3 Managing Palettes
+
+### `create_palette()` — Save a custom palette
+
+Writes a named palette as a JSON file under
+`color_dir/<type>/<name>.json`. The directory is created automatically
+if it does not exist.
+
+``` r
+temp_dir <- file.path(tempdir(), "palettes")
+
+create_palette("blues", "sequential", c("#deebf7", "#9ecae1", "#3182bd"),
+               color_dir = temp_dir)
+#> v Palette saved: /tmp/.../palettes/sequential/blues.json
+
+create_palette("qual_vivid", "qualitative",
+               c("#E64B35", "#4DBBD5", "#00A087"),
+               color_dir = temp_dir)
+#> v Palette saved: /tmp/.../palettes/qualitative/qual_vivid.json
+```
+
+By default, saving over an existing name raises an error. Pass
+`overwrite = TRUE` to replace it:
+
+``` r
+create_palette("blues", "sequential", c("#c6dbef", "#6baed6", "#2171b5"),
+               color_dir = temp_dir, overwrite = TRUE)
+#> i Overwriting existing palette: "blues"
+#> v Palette saved: /tmp/.../palettes/sequential/blues.json
+```
+
+``` r
+# Without overwrite = TRUE
+create_palette("blues", "sequential", c("#deebf7", "#9ecae1", "#3182bd"),
+               color_dir = temp_dir)
+#> Error in `create_palette()`:
+#> ! Palette "blues" already exists. Use `overwrite = TRUE` to replace.
+```
+
+The function invisibly returns a list with `path` and `info` so the
+result can be captured when needed.
+
+------------------------------------------------------------------------
+
+### `remove_palette()` — Delete a palette JSON
+
+Removes a palette JSON file by name. If `type` is omitted, all three
+type directories are searched in order.
+
+``` r
+remove_palette("blues", color_dir = temp_dir)
+#> v Removed "blues" from sequential
+
+# Specify type to skip the search
+remove_palette("qual_vivid", type = "qualitative", color_dir = temp_dir)
+#> v Removed "qual_vivid" from qualitative
+```
+
+If the palette is not found in any directory, a warning is issued and
+the function returns `FALSE` invisibly:
+
+``` r
+remove_palette("nonexistent", color_dir = temp_dir)
+#> ! Palette "nonexistent" not found in any type.
+```
+
+------------------------------------------------------------------------
+
+### `compile_palettes()` — Build the palette dataset
+
+Reads all JSON files under `palettes_dir/sequential/`,
+`palettes_dir/diverging/`, and `palettes_dir/qualitative/`, validates
+them, and returns a structured list. This is the function used in
+`data-raw/palettes.R` to rebuild the `palettes` package dataset via
+[`usethis::use_data()`](https://usethis.r-lib.org/reference/use_data.html).
+
+``` r
+compiled <- compile_palettes(
+  palettes_dir = system.file("extdata", "palettes", package = "evanverse")
+)
+#> v Compiled 30 palettes: Sequential=8, Diverging=6, Qualitative=16
+```
+
+The return value is a named list with three elements — `sequential`,
+`diverging`, and `qualitative` — each of which is a named list of HEX
+vectors:
+
+``` r
+compiled$qualitative[["qual_vivid"]]
+#> [1] "#E64B35" "#4DBBD5" "#00A087" "#3C5488" "#F39B7F" "#8491B4"
+```
+
+> Duplicate palette names within the same type emit a warning and the
+> last file read wins. JSON files with missing or invalid fields are
+> skipped with a warning rather than aborting the whole compile.
+
+------------------------------------------------------------------------
+
+## 4 Color Conversion
+
+### `hex2rgb()` — HEX to RGB data frame
+
+Converts a character vector of HEX codes to a data frame with columns
+`hex`, `r`, `g`, `b`. Both 6-digit (`#RRGGBB`) and 8-digit (`#RRGGBBAA`)
+codes are accepted; the alpha channel is silently ignored.
+
+``` r
+hex2rgb("#FF8000")
+#>       hex   r   g b
+#> 1 #FF8000 255 128 0
+
+hex2rgb(c("#FF8000", "#00FF00", "#3182bdB2"))
+#>          hex   r   g   b
+#> 1    #FF8000 255 128   0
+#> 2    #00FF00   0 255   0
+#> 3 #3182bdB2  49 130 189
+```
+
+The `#` prefix is required; codes that fail the pattern and `NA` values
+are both reported as invalid:
+
+``` r
+# Missing '#' prefix
+hex2rgb("FF8000")
+#> Error in `hex2rgb()`:
+#> ! `hex` contains invalid HEX codes: "FF8000".
+
+# NA is treated as an invalid code
+hex2rgb(c("#FF8000", NA))
+#> Error in `hex2rgb()`:
+#> ! `hex` contains invalid HEX codes: NA.
+```
+
+------------------------------------------------------------------------
+
+### `rgb2hex()` — RGB to HEX color codes
+
+The symmetric counterpart to
+[`hex2rgb()`](https://evanbio.github.io/evanverse/reference/hex2rgb.md).
+Accepts either a numeric vector of length 3 or the data frame returned
+by
+[`hex2rgb()`](https://evanbio.github.io/evanverse/reference/hex2rgb.md).
+Non-integer values are rounded before conversion.
+
+``` r
+# Single color as a length-3 vector
+rgb2hex(c(255, 128, 0))
+#> [1] "#FF8000"
+```
+
+``` r
+# Round-trip: HEX -> RGB -> HEX
+rgb2hex(hex2rgb(c("#FF8000", "#00FF00")))
+#> [1] "#FF8000" "#00FF00"
+```
+
+``` r
+# Non-integer values are rounded
+rgb2hex(c(254.7, 128.2, 0.4))
+#> [1] "#FF8000"
+```
+
+Typical failure cases for the vector form:
+
+``` r
+# Wrong length
+rgb2hex(c(255, 128))
+#> Error in `rgb2hex()`:
+#> ! `rgb` must be a numeric vector of length 3.
+
+# Value out of range
+rgb2hex(c(255, 128, 300))
+#> Error in `rgb2hex()`:
+#> ! `rgb` values must be in [0, 255].
+```
+
+And for the data frame form:
+
+``` r
+# Missing column
+rgb2hex(data.frame(r = 255, g = 128))
+#> Error in `rgb2hex()`:
+#> ! `rgb` must have columns {"r", "g", "b"}. Missing: {"b"}.
+
+# Column value out of range
+rgb2hex(data.frame(r = 255, g = 128, b = 300))
+#> Error in `rgb2hex()`:
+#> ! Column "b" in `rgb` must be numeric with values in [0, 255].
+```
+
+------------------------------------------------------------------------
+
+## 5 A Combined Workflow
+
+The palette and conversion functions compose naturally. The example
+below picks a qualitative palette, converts its colors to RGB for
+downstream processing, then rounds-trips back to HEX to verify no
+information was lost.
+
+``` r
+library(evanverse)
+
+# 1. Retrieve a qualitative palette
+colors <- get_palette("qual_vivid", type = "qualitative", n = 4)
+colors
+#> [1] "#E64B35" "#4DBBD5" "#00A087" "#3C5488"
+
+# 2. Convert to RGB for numeric manipulation
+rgb_df <- hex2rgb(colors)
+rgb_df
+#>       hex   r   g   b
+#> 1 #E64B35 230  75  53
+#> 2 #4DBBD5  77 187 213
+#> 3 #00A087   0 160 135
+#> 4 #3C5488  60  84 136
+
+# 3. Lighten each color by blending 50% toward white (255)
+rgb_light <- rgb_df
+rgb_light$r <- (rgb_light$r + 255) / 2
+rgb_light$g <- (rgb_light$g + 255) / 2
+rgb_light$b <- (rgb_light$b + 255) / 2
+
+# 4. Convert back to HEX and preview
+light_hex <- rgb2hex(rgb_light)
+light_hex
+#> [1] "#F2A59A" "#A6DDEA" "#80CFC7" "#9EAAC4"
+
+# 5. Save the new derived palette for reuse
+temp_dir <- file.path(tempdir(), "palettes")
+create_palette("qual_vivid_light", "qualitative", light_hex,
+               color_dir = temp_dir)
+#> v Palette saved: /tmp/.../palettes/qualitative/qual_vivid_light.json
+
+# 6. Verify the new palette is retrievable
+"qual_vivid_light" %in% list_palettes(type = "qualitative")$name
+#> [1] TRUE
+
+# 7. Clean up
+unlink(temp_dir, recursive = TRUE)
+```
+
+------------------------------------------------------------------------
+
+## Getting Help
+
+- [`?get_palette`](https://evanbio.github.io/evanverse/reference/get_palette.md),
+  [`?list_palettes`](https://evanbio.github.io/evanverse/reference/list_palettes.md)
+- [`?preview_palette`](https://evanbio.github.io/evanverse/reference/preview_palette.md),
+  [`?palette_gallery`](https://evanbio.github.io/evanverse/reference/palette_gallery.md)
+- [`?create_palette`](https://evanbio.github.io/evanverse/reference/create_palette.md),
+  [`?remove_palette`](https://evanbio.github.io/evanverse/reference/remove_palette.md),
+  [`?compile_palettes`](https://evanbio.github.io/evanverse/reference/compile_palettes.md)
+- [`?hex2rgb`](https://evanbio.github.io/evanverse/reference/hex2rgb.md),
+  [`?rgb2hex`](https://evanbio.github.io/evanverse/reference/rgb2hex.md)
+- [GitHub Issues](https://github.com/evanbio/evanverse/issues)

@@ -1,25 +1,30 @@
-# Quick Chi-Square Test with Automatic Visualization
+# Categorical association test with automatic method selection
 
-Perform chi-square test of independence or Fisher's exact test
-(automatically selected based on expected frequencies) with
-publication-ready visualization. Designed for analyzing the association
-between two categorical variables.
+Tests the association between two categorical variables using
+chi-square, Fisher's exact, or McNemar's test, with automatic method
+selection based on expected cell frequencies when `method = "auto"`.
 
 ## Usage
 
 ``` r
 quick_chisq(
   data,
-  var1,
-  var2,
+  x_col,
+  y_col,
   method = c("auto", "chisq", "fisher", "mcnemar"),
   correct = NULL,
-  conf.level = 0.95,
+  conf_level = 0.95,
+  alpha = 0.05
+)
+
+# S3 method for class 'quick_chisq_result'
+plot(
+  x,
+  y = NULL,
   plot_type = c("bar_grouped", "bar_stacked", "heatmap"),
   show_p_value = TRUE,
   p_label = c("p.format", "p.signif"),
   palette = "qual_vivid",
-  verbose = TRUE,
   ...
 )
 ```
@@ -28,172 +33,131 @@ quick_chisq(
 
 - data:
 
-  A data frame containing the variables.
+  A data frame.
 
-- var1:
+- x_col:
 
-  Column name for the first categorical variable (row variable).
-  Supports both quoted and unquoted names via NSE.
+  Character. Column name for the first categorical variable (row
+  variable).
 
-- var2:
+- y_col:
 
-  Column name for the second categorical variable (column variable).
-  Supports both quoted and unquoted names via NSE.
+  Character. Column name for the second categorical variable (column
+  variable).
 
 - method:
 
-  Character. Test method: "auto" (default), "chisq", "fisher", or
-  "mcnemar". When "auto", the function intelligently selects based on
-  expected frequencies and table size. **WARNING**: "mcnemar" is ONLY
-  for paired/matched data (e.g., before-after measurements on the same
-  subjects). It tests marginal homogeneity, NOT independence. Do NOT use
-  McNemar's test for independent samples - use "chisq" or "fisher"
-  instead.
+  One of `"auto"` (default), `"chisq"`, `"fisher"`, `"mcnemar"`.
 
 - correct:
 
-  Logical or `NULL`. Apply Yates' continuity correction? If `NULL`
-  (default), automatically applied for 2x2 tables with expected
-  frequencies \< 10.
+  Logical or `NULL`. Apply Yates' continuity correction? `NULL`
+  (default) applies it automatically for 2×2 tables with expected
+  frequencies between 5 and 10.
 
-- conf.level:
+- conf_level:
 
-  Numeric. Confidence level for the interval. Default is 0.95.
+  Numeric. Confidence level for Fisher's exact test interval. Default
+  `0.95`.
+
+- alpha:
+
+  Numeric. Significance level for
+  [`print()`](https://rdrr.io/r/base/print.html) and
+  [`summary()`](https://rdrr.io/r/base/summary.html). Default `0.05`.
+
+- x:
+
+  A `quick_chisq_result` object from `quick_chisq()`.
+
+- y:
+
+  Ignored.
 
 - plot_type:
 
-  Character. Type of plot: "bar_grouped" (default), "bar_stacked", or
-  "heatmap".
+  One of `"bar_grouped"` (default), `"bar_stacked"`, or `"heatmap"`.
 
 - show_p_value:
 
-  Logical. Display p-value on the plot? Default is `TRUE`.
+  Logical. Annotate plot with p-value? Default `TRUE`.
 
 - p_label:
 
-  Character. P-value label format: "p.format" (numeric p-value, default)
-  or "p.signif" (stars).
+  One of `"p.format"` (numeric, default) or `"p.signif"` (stars).
 
 - palette:
 
-  Character. Color palette name from evanverse palettes. Default is
-  "qual_vivid". Set to `NULL` to use ggplot2 defaults.
-
-- verbose:
-
-  Logical. Print diagnostic messages? Default is `TRUE`.
+  evanverse palette name. Default `"qual_vivid"`. `NULL` uses ggplot2
+  defaults.
 
 - ...:
 
-  Additional arguments (currently unused, reserved for future
-  extensions).
+  Additional arguments passed to the internal plotting backend.
 
 ## Value
 
-An object of class `quick_chisq_result` containing:
+An object of class `"quick_chisq_result"` (invisibly) containing:
 
-- plot:
+- `test_result`:
 
-  A ggplot object with the association visualization
+  An `htest` object from the test
 
-- test_result:
+- `method_used`:
 
-  The htest object from
-  [`chisq.test()`](https://rdrr.io/r/stats/chisq.test.html) or
-  [`fisher.test()`](https://rdrr.io/r/stats/fisher.test.html)
+  Character: human-readable test method label
 
-- method_used:
+- `contingency_table`:
 
-  Character string of the test method used
+  Observed frequency table
 
-- contingency_table:
-
-  The contingency table (counts)
-
-- expected_freq:
+- `expected_freq`:
 
   Matrix of expected frequencies
 
-- pearson_residuals:
+- `pearson_residuals`:
 
-  Pearson residuals for each cell
+  Pearson residuals matrix; `NULL` for Fisher/McNemar
 
-- effect_size:
+- `effect_size`:
 
-  Cramer's V effect size measure
+  Cramer's V and interpretation; `NULL` when statistic is unavailable
 
-- descriptive_stats:
+- `descriptive_stats`:
 
-  Data frame with frequencies and proportions
+  Data frame with counts, proportions, and percents
 
-- auto_decision:
+- `auto_decision`:
 
-  Details about automatic method selection
+  List with method selection details
 
-- timestamp:
+- `params`:
 
-  POSIXct timestamp of analysis
+  List of input parameters
+
+- `data`:
+
+  Cleaned data frame used for the test (for
+  [`plot()`](https://rdrr.io/r/graphics/plot.default.html) method)
+
+Use `print(result)` for a one-line summary, `summary(result)` for full
+details, and `plot(result)` for a visualization.
 
 ## Details
 
-**"Quick" means easy to use, not simplified or inaccurate.**
+**Auto method selection logic:**
 
-This function performs full statistical testing with proper assumption
-checking:
+- 2×2 table with any expected frequency \< 5: Fisher's exact test
 
-### Automatic Method Selection (method = "auto")
+- \>20\\
 
-The function uses an intelligent algorithm based on expected
-frequencies:
+- 2×2 table with 5 ≤ expected frequency \< 10: Yates' correction applied
 
-- **All expected frequencies \>= 5**: Standard chi-square test
+- Otherwise: standard chi-square test
 
-- **2x2 table with any expected frequency \< 5**: Fisher's exact test
-
-- **Larger table with expected frequency \< 5**: Chi-square with warning
-
-- **2x2 table with 5 \<= expected frequency \< 10**: Chi-square with
-  Yates' correction
-
-### Effect Size
-
-Cramer's V is calculated as a measure of effect size:
-
-- Small effect: V = 0.1
-
-- Medium effect: V = 0.3
-
-- Large effect: V = 0.5
-
-### Pearson Residuals
-
-Pearson residuals are calculated for each cell as (observed - expected)
-/ sqrt(expected):
-
-- Values \> \|2\| indicate significant deviation from independence
-
-- Values \> \|3\| indicate very significant deviation
-
-### Visualization Options
-
-- **bar_grouped**: Grouped bar chart (default)
-
-- **bar_stacked**: Stacked bar chart (100\\
-
-- **heatmap**: Heatmap of Pearson residuals
-
-## Important Notes
-
-- **Categorical variables**: Both variables must be categorical or will
-  be coerced to factors.
-
-- **Sample size**: Fisher's exact test may be computationally intensive
-  for large tables.
-
-- **Missing values**: Automatically removed with a warning.
-
-- **Low frequencies**: Cells with expected frequency \< 5 may lead to
-  unreliable results.
+**WARNING**: `"mcnemar"` is ONLY for paired/matched data (e.g.,
+before-after measurements on the same subjects). Do NOT use for
+independent samples — use `"chisq"` or `"fisher"` instead.
 
 ## See also
 
@@ -205,108 +169,30 @@ Pearson residuals are calculated for each cell as (observed - expected)
 ## Examples
 
 ``` r
-# Example 1: Basic usage with automatic method selection
 set.seed(123)
-data <- data.frame(
+df <- data.frame(
   treatment = sample(c("A", "B", "C"), 100, replace = TRUE),
-  response = sample(c("Success", "Failure"), 100, replace = TRUE,
-                    prob = c(0.6, 0.4))
+  response  = sample(c("Success", "Failure"), 100, replace = TRUE,
+                     prob = c(0.6, 0.4))
 )
-
-result <- quick_chisq(data, var1 = treatment, var2 = response)
-#> ℹ treatment converted to factor with 3 levels.
-#> ℹ response converted to factor with 2 levels.
-#> ! Failed to load palette 'qual_vivid': Palette "qual_vivid" not found under "sequential", but exists under "qualitative". Try: `get_palette("qual_vivid", type = "qualitative")`. Using default colors.
+result <- quick_chisq(df, x_col = "treatment", y_col = "response")
 print(result)
-
+#> Chi-square test | p = 0.9568 | 3x2 | V = 0.03 (negligible)
+summary(result)
 #> 
-#> ===========================================================
-#>   Quick Chi-Square Test Result
-#> ===========================================================
+#> ── Categorical Association Test ────────────────────────────────────────────────
 #> 
-#> Method: Chi-square test 
-#> Test statistic: 0.088 
-#> Degrees of freedom: 2 
-#> P-value: 0.9568 
+#> ── Parameters ──
 #> 
-#> Effect Size (Cramer's V): 0.03 ( negligible )
+#> Test: Chi-square test
+#> Variables: treatment × response
+#> Table size: 3x2
+#> alpha: 0.050
 #> 
-#> Contingency Table:
-#>    
-#>     Failure Success
-#>   A      13      20
-#>   B      13      19
-#>   C      13      22
+#> ── Result ──
 #> 
-#> Decision: All expected frequencies adequate: using standard chi-square test 
+#> ℹ p = 0.9568  (not significant at alpha = 0.05)
 #> 
-#> Timestamp: 2026-03-10 14:02:34 
-#> ===========================================================
-
-# Example 2: 2x2 table
-data_2x2 <- data.frame(
-  gender = rep(c("Male", "Female"), each = 50),
-  disease = sample(c("Yes", "No"), 100, replace = TRUE)
-)
-
-result <- quick_chisq(data_2x2, var1 = gender, var2 = disease)
-#> ℹ gender converted to factor with 2 levels.
-#> ℹ disease converted to factor with 2 levels.
-#> ! Failed to load palette 'qual_vivid': Palette "qual_vivid" not found under "sequential", but exists under "qualitative". Try: `get_palette("qual_vivid", type = "qualitative")`. Using default colors.
-
-# Example 3: Customize visualization
-result <- quick_chisq(data,
-                      var1 = treatment,
-                      var2 = response,
-                      plot_type = "bar_grouped",
-                      palette = "qual_balanced")
-#> ℹ treatment converted to factor with 3 levels.
-#> ℹ response converted to factor with 2 levels.
-#> ! Failed to load palette 'qual_balanced': Palette "qual_balanced" not found under "sequential", but exists under "qualitative". Try: `get_palette("qual_balanced", type = "qualitative")`. Using default colors.
-
-# Example 4: Manual method selection
-result <- quick_chisq(data,
-                      var1 = treatment,
-                      var2 = response,
-                      method = "chisq",
-                      correct = FALSE)
-#> ℹ treatment converted to factor with 3 levels.
-#> ℹ response converted to factor with 2 levels.
-#> ! Failed to load palette 'qual_vivid': Palette "qual_vivid" not found under "sequential", but exists under "qualitative". Try: `get_palette("qual_vivid", type = "qualitative")`. Using default colors.
-
-# Access components
-result$plot                      # ggplot object
-
-result$test_result               # htest object
-#> 
-#>  Pearson's Chi-squared test
-#> 
-#> data:  cont_table
-#> X-squared = 0.088413, df = 2, p-value = 0.9568
-#> 
-result$contingency_table         # Contingency table
-#>    
-#>     Failure Success
-#>   A      13      20
-#>   B      13      19
-#>   C      13      22
-result$pearson_residuals         # Pearson residuals
-#>    
-#>         Failure     Success
-#>   A  0.03623715 -0.02897487
-#>   B  0.14719601 -0.11769647
-#>   C -0.17593289  0.14067419
-summary(result)                  # Detailed summary
-#> ===========================================================
-#>   Quick Chi-Square Test - Detailed Summary
-#> ===========================================================
-#> 
-#> Method: Chi-square test 
-#> Timestamp: 2026-03-10 14:02:35 
-#> 
-#> -----------------------------------------------------------
-#> Test Results:
-#> -----------------------------------------------------------
 #> 
 #>  Pearson's Chi-squared test
 #> 
@@ -314,60 +200,41 @@ summary(result)                  # Detailed summary
 #> X-squared = 0.088413, df = 2, p-value = 0.9568
 #> 
 #> 
-#> -----------------------------------------------------------
-#> Effect Size:
-#> -----------------------------------------------------------
-#> Cramer's V: 0.03 
-#> Interpretation: negligible 
+#> ── Effect Size (Cramer's V) ──
 #> 
-#> -----------------------------------------------------------
-#> Observed Frequencies:
-#> -----------------------------------------------------------
+#> V: 0.03
+#> Interpretation: negligible
+#> 
+#> ── Observed Frequencies ──
+#> 
 #>    
 #>     Failure Success
 #>   A      13      20
 #>   B      13      19
 #>   C      13      22
+#> ── Expected Frequencies ──
 #> 
-#> -----------------------------------------------------------
-#> Expected Frequencies:
-#> -----------------------------------------------------------
 #>   Failure Success
 #> A   12.87   20.13
 #> B   12.48   19.52
 #> C   13.65   21.35
+#> ── Pearson Residuals ──
 #> 
-#> -----------------------------------------------------------
-#> Pearson Residuals:
-#> -----------------------------------------------------------
 #>    
 #>     Failure Success
 #>   A    0.04   -0.03
 #>   B    0.15   -0.12
 #>   C   -0.18    0.14
+#> → |residual| > 2 indicates significant deviation from independence
 #> 
-#> Note: Values > |2| indicate significant deviation from independence
+#> ── Method Selection ──
 #> 
-#> -----------------------------------------------------------
-#> Descriptive Statistics:
-#> -----------------------------------------------------------
-#>   treatment response Count Proportion Percent
-#> 1         A  Failure    13       0.13      13
-#> 2         B  Failure    13       0.13      13
-#> 3         C  Failure    13       0.13      13
-#> 4         A  Success    20       0.20      20
-#> 5         B  Success    19       0.19      19
-#> 6         C  Success    22       0.22      22
+#> Table size: 3x2
+#> Total N: 100
+#> Min expected freq: 12.48
+#> Cells with freq < 5: 0
+#> Decision: All expected frequencies adequate: using standard chi-square test
 #> 
-#> -----------------------------------------------------------
-#> Method Selection Details:
-#> -----------------------------------------------------------
-#> Table size: 3x2 
-#> Total N: 100 
-#> Minimum expected frequency: 12.48 
-#> Cells with expected freq < 5: 0 
-#> Proportion of cells < 5: 0 
-#> Reason: User-specified method: chisq 
-#> 
-#> ===========================================================
+plot(result)
+
 ```

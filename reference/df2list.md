@@ -1,45 +1,40 @@
-# Convert Data Frame to Named List by Grouping
+# Convert a data frame to a named list by grouping
 
-Group a data frame by one column and convert to named list. Each key
-becomes a list name; each value column becomes vector.
+Groups a data frame by one column and collects values from another
+column into a named list.
 
 ## Usage
 
 ``` r
-df2list(data, key_col, value_col, verbose = TRUE)
+df2list(data, group_col, value_col)
 ```
 
 ## Arguments
 
 - data:
 
-  A data.frame or tibble to be grouped.
+  A data.frame or tibble.
 
-- key_col:
+- group_col:
 
-  Character. Column name for list names.
+  Character. Column name to use as list names.
 
 - value_col:
 
-  Character. Column name for list values.
-
-- verbose:
-
-  Logical. Whether to show message. Default = TRUE.
+  Character. Column name to collect as list values.
 
 ## Value
 
-A named list, where each element is a character vector of values.
+A named list where each element is a vector of values for that group.
 
 ## Examples
 
 ``` r
 df <- data.frame(
   cell_type = c("T_cells", "T_cells", "B_cells", "B_cells"),
-  marker = c("CD3D", "CD3E", "CD79A", "MS4A1")
+  marker    = c("CD3D", "CD3E", "CD79A", "MS4A1")
 )
 df2list(df, "cell_type", "marker")
-#> ✔ Converted 2 groups into a named list.
 #> $B_cells
 #> [1] "CD79A" "MS4A1"
 #> 

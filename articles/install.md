@@ -2,315 +2,245 @@
 
 ## Overview
 
-This guide covers all installation methods for **evanverse**, including
-system requirements, dependencies, and troubleshooting.
+This guide covers installation, mirror setup, dependency checks, and
+updates for `evanverse` and related packages.
+
+| Area                    | Tools                                                                                                                                                               |
+|-------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Base installation       | [`install.packages()`](https://rdrr.io/r/utils/install.packages.html), [`devtools::install_github()`](https://devtools.r-lib.org/reference/install-deprecated.html) |
+| Mirror configuration    | [`set_mirror()`](https://evanbio.github.io/evanverse/reference/set_mirror.md)                                                                                       |
+| Installation and checks | [`inst_pkg()`](https://evanbio.github.io/evanverse/reference/inst_pkg.md), [`check_pkg()`](https://evanbio.github.io/evanverse/reference/check_pkg.md)              |
+| Updates                 | [`update_pkg()`](https://evanbio.github.io/evanverse/reference/update_pkg.md)                                                                                       |
+
+``` r
+library(evanverse)
+```
+
+> **Note:** All examples are static (`eval = FALSE`). Network-dependent
+> commands require internet access.
 
 ------------------------------------------------------------------------
 
-## Quick Install
+## 1 Install evanverse
 
-### From CRAN (Recommended)
-
-The stable release is available on CRAN:
+### CRAN release (recommended)
 
 ``` r
 install.packages("evanverse")
 ```
 
-### From GitHub (Development Version)
-
-For the latest features and bug fixes:
+### GitHub development version
 
 ``` r
-# Install devtools if needed
 install.packages("devtools")
-
-# Install evanverse
 devtools::install_github("evanbio/evanverse")
 ```
 
-------------------------------------------------------------------------
-
-## System Requirements
-
-- **R Version**: ≥ 4.1.0
-- **Operating Systems**: Windows, macOS, Linux
-- **Internet Connection**: Required for initial installation and some
-  functions
-
-------------------------------------------------------------------------
-
-## Dependencies
-
-evanverse depends on several packages that will be automatically
-installed:
-
-### Core Dependencies
-
-- **tidyverse** — Data manipulation and visualization
-- **data.table** — Fast data processing
-- **jsonlite** — JSON handling for color palettes
-
-### Bioinformatics Dependencies
-
-- **Biobase** — Bioconductor infrastructure
-- **GSEABase** — Gene set analysis
-- **biomaRt** — Gene ID conversion
-
-### Visualization Dependencies
-
-- **ggplot2** — Plotting framework
-- **VennDiagram** — Venn diagram generation
-- **ggVennDiagram** — Modern Venn diagrams
-
-### Utility Dependencies
-
-- **cli** — Command-line interface
-- **fs** — File system operations
-- **curl** — URL downloads
-- **openxlsx** — Excel file handling
-
-------------------------------------------------------------------------
-
-## Installation Options
-
-### Minimal Installation
-
-Install without suggested packages:
+### Minimal vs full dependency install
 
 ``` r
+# Minimal: Depends + Imports only
 install.packages("evanverse", dependencies = c("Depends", "Imports"))
-```
 
-### Full Installation
-
-Install with all suggested packages for complete functionality:
-
-``` r
+# Full: include Suggests
 install.packages("evanverse", dependencies = TRUE)
 ```
 
-### Install Specific Version
+------------------------------------------------------------------------
+
+## 2 Configure Mirrors
+
+### `set_mirror()` - Configure CRAN/Bioconductor mirrors
+
+[`set_mirror()`](https://evanbio.github.io/evanverse/reference/set_mirror.md)
+controls mirror sources used by
+[`inst_pkg()`](https://evanbio.github.io/evanverse/reference/inst_pkg.md)
+and
+[`update_pkg()`](https://evanbio.github.io/evanverse/reference/update_pkg.md).
 
 ``` r
-# Install a specific version from CRAN
-devtools::install_version("evanverse", version = "0.3.7")
+# Set both CRAN + Bioconductor mirrors (default mirror: tuna)
+set_mirror()
+#> v CRAN mirror set to: https://mirrors.tuna.tsinghua.edu.cn/CRAN
+#> v Bioconductor mirror set to: https://mirrors.tuna.tsinghua.edu.cn/bioconductor
 
-# Install from a specific GitHub release
-devtools::install_github("evanbio/evanverse@v0.3.7")
+# CRAN only
+set_mirror("cran", "westlake")
+
+# Bioconductor only
+set_mirror("bioc", "official")
+```
+
+Supported mirror names:
+
+| Scope        | Mirrors                                                                                             |
+|--------------|-----------------------------------------------------------------------------------------------------|
+| CRAN         | `official`, `rstudio`, `tuna`, `ustc`, `aliyun`, `sjtu`, `pku`, `hku`, `westlake`, `nju`, `sustech` |
+| Bioconductor | `official`, `tuna`, `ustc`, `westlake`, `nju`                                                       |
+
+CRAN-only mirrors cannot be used with `repo = "all"`:
+
+``` r
+set_mirror("all", "aliyun")
+#> Error in `set_mirror()`:
+#> ! Mirror "aliyun" is CRAN-only and cannot be used with repo = "all".
 ```
 
 ------------------------------------------------------------------------
 
-## Bioconductor Dependencies
+## 3 Install Other Packages With evanverse
 
-Some bioinformatics functions require Bioconductor packages. Install
-them separately:
+### `inst_pkg()` - Install from CRAN, GitHub, Bioconductor, or local file
 
 ``` r
-# Install BiocManager if needed
-if (!requireNamespace("BiocManager", quietly = TRUE))
-    install.packages("BiocManager")
+inst_pkg("dplyr", source = "CRAN")
+```
 
-# Install Bioconductor dependencies
-BiocManager::install(c("Biobase", "GSEABase", "biomaRt", "GEOquery"))
+``` r
+inst_pkg("hadley/emo", source = "GitHub")
+```
+
+``` r
+inst_pkg("DESeq2", source = "Bioconductor")
+```
+
+``` r
+inst_pkg(source = "Local", path = "mypackage_1.0.0.tar.gz")
+```
+
+Local installation requires `path`:
+
+``` r
+inst_pkg(source = "Local")
+#> Error in `inst_pkg()`:
+#> ! Must provide `path` for local installation.
+```
+
+Already-installed packages are skipped automatically.
+
+------------------------------------------------------------------------
+
+## 4 Verify Installation Status
+
+### `check_pkg()` - Check and optionally auto-install missing packages
+
+``` r
+check_pkg("ggplot2", source = "CRAN")
+#> # A tibble: 1 x 4
+#>   package name    installed source
+#>   <chr>   <chr>   <lgl>     <chr>
+#> 1 ggplot2 ggplot2 TRUE      CRAN
+```
+
+``` r
+check_pkg(c("ggplot2", "fakepkg123"), source = "CRAN")
+#> v Installed: ggplot2
+#> ! Missing: fakepkg123
+```
+
+``` r
+check_pkg(c("ggplot2", "fakepkg123"), source = "CRAN", auto_install = TRUE)
+#> i Installing missing packages automatically...
+```
+
+For GitHub source, use `"user/repo"` format:
+
+``` r
+check_pkg("r-lib/devtools", source = "GitHub")
 ```
 
 ------------------------------------------------------------------------
 
-## Verify Installation
+## 5 Update Packages
 
-After installation, verify that evanverse is working correctly:
+### `update_pkg()` - Update all packages or specific targets
 
 ``` r
-# Load the package
-library(evanverse)
-
-# Check version
-packageVersion("evanverse")
-#> [1] '0.4.4'
-
-# List available functions
-pkg_functions("evanverse")
-#> 
-#> ── Package: evanverse ──
-#> 
-#> ℹ Matched exported names: 65
-#> %is%
-#> %map%
-#> %match%
-#> %nin%
-#> %p%
-#> any_void
-#> bio_palette_gallery
-#> check_pkg
-#> clear_palette_cache
-#> cols_with_void
-#> comb
-#> combine_logic
-#> compile_palettes
-#> convert_gene_id
-#> create_palette
-#> df2list
-#> download_batch
-#> download_gene_ref
-#> download_geo_data
-#> download_url
-#> drop_void
-#> file_info
-#> file_tree
-#> get_ext
-#> get_palette
-#> gmt2df
-#> gmt2list
-#> hex2rgb
-#> inst_pkg
-#> is_void
-#> list_palettes
-#> map_column
-#> palette_cache_info
-#> perm
-#> pkg_functions
-#> pkg_version
-#> plot_bar
-#> plot_density
-#> plot_forest
-#> plot_pie
-#> plot_venn
-#> preview_palette
-#> quick_anova
-#> quick_chisq
-#> quick_cor
-#> quick_ttest
-#> read_excel_flex
-#> read_table_flex
-#> reload_palette_cache
-#> remind
-#> remove_palette
-#> replace_void
-#> rgb2hex
-#> rows_with_void
-#> safe_execute
-#> scale_color_evanverse
-#> scale_colour_evanverse
-#> scale_fill_evanverse
-#> set_mirror
-#> stat_power
-#> stat_samplesize
-#> update_pkg
-#> view
-#> with_timer
-#> write_xlsx_flex
-
-# Test basic functionality
-"Hello" %p% " " %p% "World"
-#> [1] "Hello   World"
+# Update all CRAN + Bioconductor packages
+update_pkg()
 ```
+
+``` r
+# CRAN only
+update_pkg(source = "CRAN")
+```
+
+``` r
+# Specific package(s)
+update_pkg("ggplot2", source = "CRAN")
+update_pkg("hadley/ggplot2", source = "GitHub")
+update_pkg("DESeq2", source = "Bioconductor")
+```
+
+If `pkg` is provided, `source` must also be provided (cannot stay at
+`"all"`).
 
 ------------------------------------------------------------------------
 
-## Update evanverse
+## 6 Troubleshooting
 
-### Update from CRAN
-
-``` r
-update.packages("evanverse")
-```
-
-### Update from GitHub
-
-``` r
-devtools::install_github("evanbio/evanverse", force = TRUE)
-```
-
-### Using evanverse’s Built-in Updater
-
-``` r
-library(evanverse)
-update_pkg("evanverse")
-```
-
-------------------------------------------------------------------------
-
-## Troubleshooting
-
-### Installation Fails with “package not available”
-
-**Solution**: Ensure you’re using R ≥ 4.1.0
+### Package not available
 
 ``` r
 R.version.string
 ```
 
-### Bioconductor Packages Not Installing
+If your R version is too old, upgrade R and retry.
 
-**Solution**: Install BiocManager first, then retry:
-
-``` r
-install.packages("BiocManager")
-BiocManager::install(c("Biobase", "GSEABase"))
-```
-
-### Permission Errors on Linux/macOS
-
-**Solution**: Install to user library:
+### Bioconductor install problems
 
 ``` r
-install.packages("evanverse", lib = Sys.getenv("R_LIBS_USER"))
+if (!requireNamespace("BiocManager", quietly = TRUE)) {
+  install.packages("BiocManager")
+}
+BiocManager::install(c("Biobase", "GSEABase", "biomaRt", "GEOquery"))
 ```
 
-### Network/Firewall Issues
-
-**Solution**: Configure proxy if behind a firewall:
+### Corporate network / proxy issues
 
 ``` r
 Sys.setenv(http_proxy = "http://your-proxy:port")
 Sys.setenv(https_proxy = "https://your-proxy:port")
 ```
 
-### Compilation Issues on Windows
+### Local library permission issues
 
-**Solution**: Install Rtools from
-[CRAN](https://cran.r-project.org/bin/windows/Rtools/)
+``` r
+install.packages("evanverse", lib = Sys.getenv("R_LIBS_USER"))
+```
 
 ------------------------------------------------------------------------
 
-## Uninstall
+## 7 A Combined Workflow
 
-To remove evanverse:
+The following sequence is practical for a fresh environment:
 
 ``` r
-remove.packages("evanverse")
+# 1) Install evanverse
+install.packages("evanverse")
+library(evanverse)
+
+# 2) Set mirrors
+set_mirror("all", "tuna")
+
+# 3) Install key dependencies
+inst_pkg(c("dplyr", "ggplot2"), source = "CRAN")
+inst_pkg("DESeq2", source = "Bioconductor")
+
+# 4) Verify status
+check_pkg(c("dplyr", "ggplot2", "DESeq2"), source = "CRAN")
+
+# 5) Keep packages updated
+update_pkg(source = "CRAN")
 ```
 
 ------------------------------------------------------------------------
 
 ## Getting Help
 
-- **Documentation**: <https://evanbio.github.io/evanverse/>
-- **Issues**: [GitHub
-  Issues](https://github.com/evanbio/evanverse/issues)
-- **CRAN**: [CRAN Package
-  Page](https://cran.r-project.org/package=evanverse)
-
-------------------------------------------------------------------------
-
-## Next Steps
-
-After installation:
-
-1.  Read the [Getting Started
-    Guide](https://evanbio.github.io/evanverse/articles/get-started.md)
-2.  Explore the [Comprehensive
-    Guide](https://evanbio.github.io/evanverse/articles/comprehensive-guide.md)
-3.  Browse the [Function
-    Reference](https://evanbio.github.io/evanverse/reference/)
-4.  Try domain-specific vignettes:
-    - [Package
-      Management](https://evanbio.github.io/evanverse/articles/package-management.md)
-    - [Data
-      Processing](https://evanbio.github.io/evanverse/articles/data-processing.md)
-    - [Color
-      Palettes](https://evanbio.github.io/evanverse/articles/color-palettes.md)
-    - [Bioinformatics
-      Workflows](https://evanbio.github.io/evanverse/articles/bioinformatics-workflows.md)
+- [`?set_mirror`](https://evanbio.github.io/evanverse/reference/set_mirror.md),
+  [`?inst_pkg`](https://evanbio.github.io/evanverse/reference/inst_pkg.md),
+  [`?check_pkg`](https://evanbio.github.io/evanverse/reference/check_pkg.md),
+  [`?update_pkg`](https://evanbio.github.io/evanverse/reference/update_pkg.md)
+- [CRAN Package Page](https://cran.r-project.org/package=evanverse)
+- [GitHub Issues](https://github.com/evanbio/evanverse/issues)

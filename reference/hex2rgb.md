@@ -1,9 +1,7 @@
-# Convert HEX color(s) to RGB numeric components
+# Convert HEX Colors to RGB
 
-Convert a single HEX color string or a character vector of HEX strings
-to RGB numeric components. The function accepts values with or without a
-leading `#`. Messaging uses `cli` if available and falls back to
-[`message()`](https://rdrr.io/r/base/message.html).
+Convert a character vector of HEX color codes to a data.frame with
+columns `hex`, `r`, `g`, `b`.
 
 ## Usage
 
@@ -15,32 +13,23 @@ hex2rgb(hex)
 
 - hex:
 
-  Character. A HEX color string (e.g. `"#FF8000"`) or a character vector
-  of HEX codes. No NA values allowed.
+  Character vector of HEX color codes (e.g. `"#FF8000"` or
+  `"#FF8000B2"`). Both 6-digit and 8-digit (with alpha) codes are
+  accepted. Alpha is silently ignored. The `#` prefix is required. No NA
+  values allowed.
 
 ## Value
 
-If `hex` has length 1, a named numeric vector with elements
-`c(r, g, b)`. If `hex` has length \> 1, a named list where each element
-is a named numeric vector for the corresponding input.
+A data.frame with columns `hex`, `r`, `g`, `b`.
 
 ## Examples
 
 ``` r
 hex2rgb("#FF8000")
-#> ✔ #FF8000 -> RGB: c(255, 128, 0)
-#>   r   g   b 
-#> 255 128   0 
+#>       hex   r   g b
+#> 1 #FF8000 255 128 0
 hex2rgb(c("#FF8000", "#00FF00"))
-#> ✔ Converted 2 HEX values to RGB.
-#> ℹ #FF8000 -> RGB: c(255, 128, 0)
-#> ℹ #00FF00 -> RGB: c(0, 255, 0)
-#> $`#FF8000`
-#>   r   g   b 
-#> 255 128   0 
-#> 
-#> $`#00FF00`
-#>   r   g   b 
-#>   0 255   0 
-#> 
+#>       hex   r   g b
+#> 1 #FF8000 255 128 0
+#> 2 #00FF00   0 255 0
 ```

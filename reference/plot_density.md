@@ -1,30 +1,20 @@
-# plot_density: Univariate Density Plot (Fill Group, Black Outline)
+# Density plot with optional grouping and faceting
 
-Create a density plot with group color as fill, and fixed black border
-for all curves.
+Create a univariate density plot with optional fill grouping and
+faceting. Density curves have a fixed black border; fill is controlled
+by `group_col`.
 
 ## Usage
 
 ``` r
 plot_density(
   data,
-  x,
-  group = NULL,
-  facet = NULL,
-  palette = c("#1b9e77", "#d95f02", "#7570b3"),
+  x_col,
+  group_col = NULL,
+  facet_col = NULL,
   alpha = 0.7,
-  base_size = 14,
-  xlab = NULL,
-  ylab = "Density",
-  title = NULL,
-  legend_pos = "right",
   adjust = 1,
-  show_mean = FALSE,
-  mean_line_color = "red",
-  add_hist = FALSE,
-  hist_bins = NULL,
-  add_rug = FALSE,
-  theme = "minimal"
+  palette = NULL
 )
 ```
 
@@ -32,80 +22,40 @@ plot_density(
 
 - data:
 
-  data.frame. Input dataset.
+  A data.frame.
 
-- x:
+- x_col:
 
-  Character. Name of numeric variable to plot.
+  Character. Column name of the numeric variable to plot.
 
-- group:
+- group_col:
 
-  Character. Grouping variable for fill color. (Optional)
+  Character or `NULL`. Column name for fill grouping. Default: `NULL`.
 
-- facet:
+- facet_col:
 
-  Character. Faceting variable. (Optional)
-
-- palette:
-
-  Character vector. Fill color palette, e.g.
-  c("#FF0000","#00FF00","#0000FF"). Will be recycled as needed. Cannot
-  be a palette name. Default: c("#1b9e77", "#d95f02", "#7570b3")
+  Character or `NULL`. Column name for faceting. Default: `NULL`.
 
 - alpha:
 
-  Numeric. Fill transparency. Default: 0.7.
-
-- base_size:
-
-  Numeric. Theme base font size. Default: 14.
-
-- xlab:
-
-  Character. X-axis label. Default: NULL (uses variable name).
-
-- ylab:
-
-  Character. Y-axis label. Default: "Density".
-
-- title:
-
-  Character. Plot title. Default: NULL.
-
-- legend_pos:
-
-  Character. Legend position. One of "right", "left", "top", "bottom",
-  "none". Default: "right".
+  Numeric. Fill transparency \[0, 1\] (0 = fully transparent, 1 = fully
+  opaque). Default: 0.7.
 
 - adjust:
 
-  Numeric. Density bandwidth adjust. Default: 1.
+  Numeric. Bandwidth adjustment multiplier. Default: 1.
 
-- show_mean:
+- palette:
 
-  Logical. Whether to add mean line. Default: FALSE.
-
-- mean_line_color:
-
-  Character. Mean line color. Default: "red".
-
-- add_hist:
-
-  Logical. Whether to add histogram layer. Default: FALSE.
-
-- hist_bins:
-
-  Integer. Number of histogram bins. Default: NULL (auto).
-
-- add_rug:
-
-  Logical. Whether to add rug marks at bottom. Default: FALSE.
-
-- theme:
-
-  Character. ggplot2 theme style. One of "minimal", "classic", "bw",
-  "light", "dark". Default: "minimal".
+  Character vector or `NULL`. Fill colors recycled to match the number
+  of groups. If `NULL`, uses ggplot2 default colors. Default: `NULL`.
 
 ## Value
 
-ggplot object.
+A `ggplot` object.
+
+## Examples
+
+``` r
+plot_density(iris, x_col = "Sepal.Length", group_col = "Species")
+```

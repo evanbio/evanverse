@@ -1,22 +1,20 @@
-# Bar plot with optional fill grouping, sorting, and directional layout
+# Bar plot with optional grouping and sorting
 
-Create a bar chart from a data frame with optional grouping (`fill`),
-vertical/horizontal orientation, and sorting by values.
+Create a bar chart from a data frame with optional dodge grouping,
+vertical/horizontal orientation, and sorting by y values.
 
 ## Usage
 
 ``` r
 plot_bar(
   data,
-  x,
-  y,
-  fill = NULL,
-  direction = c("vertical", "horizontal"),
+  x_col,
+  y_col,
+  horizontal = FALSE,
   sort = FALSE,
-  sort_by = NULL,
-  sort_dir = c("asc", "desc"),
-  width = 0.7,
-  ...
+  decreasing = TRUE,
+  group_col = NULL,
+  sort_by = NULL
 )
 ```
 
@@ -24,47 +22,50 @@ plot_bar(
 
 - data:
 
-  A data frame.
+  A data.frame.
 
-- x:
+- x_col:
 
-  Column name for the x-axis (quoted or unquoted).
+  Character. Column name for the x-axis. Values must be unique when
+  `group_col` is `NULL`.
 
-- y:
+- y_col:
 
-  Column name for the y-axis (quoted or unquoted).
+  Character. Column name for the y-axis.
 
-- fill:
+- horizontal:
 
-  Optional character scalar. Column name to map to fill (grouping).
-
-- direction:
-
-  Plot direction: "vertical" or "horizontal". Default: "vertical".
+  Logical. If `TRUE`, flip to horizontal layout. Default: `FALSE`.
 
 - sort:
 
-  Logical. Whether to sort bars based on y values. Default: FALSE.
+  Logical. Whether to sort bars by y values. Default: `FALSE`.
+
+- decreasing:
+
+  Logical. If `sort = TRUE`, sort in decreasing order. Default: `TRUE`.
+
+- group_col:
+
+  Character or `NULL`. Column name for dodge grouping. Default: `NULL`.
 
 - sort_by:
 
-  Optional. If `fill` is set and `sort = TRUE`, choose which level of
-  `fill` is used for sorting.
-
-- sort_dir:
-
-  Sorting direction: "asc" or "desc". Default: "asc".
-
-- width:
-
-  Numeric. Bar width. Default: 0.7.
-
-- ...:
-
-  Additional args passed to
-  [`ggplot2::geom_bar()`](https://ggplot2.tidyverse.org/reference/geom_bar.html),
-  e.g. `alpha`, `color`.
+  Character or `NULL`. Required when `sort = TRUE` and `group_col` is
+  set. Must be a valid level of the `group_col` column; used to order x
+  positions by that group's y values.
 
 ## Value
 
 A `ggplot` object.
+
+## Examples
+
+``` r
+df <- data.frame(
+  category = c("A", "B", "C", "D"),
+  value    = c(10, 25, 15, 30)
+)
+plot_bar(df, x_col = "category", y_col = "value",
+         sort = TRUE, horizontal = TRUE)
+```

@@ -175,17 +175,13 @@ pkg_version("evanverse")
   相关性分析（含热力图）
 - [`stat_power()`](https://evanbio.github.io/evanverse/reference/stat_power.md) -
   统计功效分析
-- [`stat_samplesize()`](https://evanbio.github.io/evanverse/reference/stat_samplesize.md) -
-  样本量计算
+- `stat_samplesize()` - 样本量计算
 
 **🎯 ggplot2 集成** (3 个函数)
 
-- [`scale_color_evanverse()`](https://evanbio.github.io/evanverse/reference/scale_evanverse.md) -
-  ggplot2 颜色标度
-- [`scale_fill_evanverse()`](https://evanbio.github.io/evanverse/reference/scale_evanverse.md) -
-  ggplot2 填充标度
-- [`scale_colour_evanverse()`](https://evanbio.github.io/evanverse/reference/scale_evanverse.md) -
-  英式拼写别名
+- `scale_color_evanverse()` - ggplot2 颜色标度
+- `scale_fill_evanverse()` - ggplot2 填充标度
+- `scale_colour_evanverse()` - 英式拼写别名
 
 **🌈 配色方案** (9 个函数)
 
@@ -197,8 +193,7 @@ pkg_version("evanverse")
   创建自定义配色
 - [`preview_palette()`](https://evanbio.github.io/evanverse/reference/preview_palette.md) -
   预览配色
-- [`bio_palette_gallery()`](https://evanbio.github.io/evanverse/reference/bio_palette_gallery.md) -
-  浏览生物配色库
+- `bio_palette_gallery()` - 浏览生物配色库
 - [`compile_palettes()`](https://evanbio.github.io/evanverse/reference/compile_palettes.md) -
   编译配色数据
 - [`remove_palette()`](https://evanbio.github.io/evanverse/reference/remove_palette.md) -
@@ -210,31 +205,25 @@ pkg_version("evanverse")
 
 **📁 文件与数据读写** (10 个函数)
 
-- [`read_table_flex()`](https://evanbio.github.io/evanverse/reference/read_table_flex.md) -
-  灵活读取表格
-- [`read_excel_flex()`](https://evanbio.github.io/evanverse/reference/read_excel_flex.md) -
-  灵活读取 Excel
-- [`write_xlsx_flex()`](https://evanbio.github.io/evanverse/reference/write_xlsx_flex.md) -
-  灵活写入 Excel
+- `read_table_flex()` - 灵活读取表格
+- `read_excel_flex()` - 灵活读取 Excel
+- `write_xlsx_flex()` - 灵活写入 Excel
 - [`download_url()`](https://evanbio.github.io/evanverse/reference/download_url.md) -
   从 URL 下载
 - [`download_batch()`](https://evanbio.github.io/evanverse/reference/download_batch.md) -
   批量下载
-- [`download_geo_data()`](https://evanbio.github.io/evanverse/reference/download_geo_data.md) -
-  下载 GEO 数据集
+- `download_geo_data()` - 下载 GEO 数据集
 - [`file_info()`](https://evanbio.github.io/evanverse/reference/file_info.md) -
   文件信息
 - [`file_tree()`](https://evanbio.github.io/evanverse/reference/file_tree.md) -
   目录树
-- [`get_ext()`](https://evanbio.github.io/evanverse/reference/get_ext.md) -
-  获取文件扩展名
+- `get_ext()` - 获取文件扩展名
 - [`view()`](https://evanbio.github.io/evanverse/reference/view.md) -
   交互式数据查看器
 
 **🧬 生物信息学** (4 个函数)
 
-- [`convert_gene_id()`](https://evanbio.github.io/evanverse/reference/convert_gene_id.md) -
-  基因 ID 转换
+- `convert_gene_id()` - 基因 ID 转换
 - [`download_gene_ref()`](https://evanbio.github.io/evanverse/reference/download_gene_ref.md) -
   下载基因参考数据
 - [`gmt2df()`](https://evanbio.github.io/evanverse/reference/gmt2df.md) -
@@ -246,20 +235,13 @@ pkg_version("evanverse")
 
 - [`df2list()`](https://evanbio.github.io/evanverse/reference/df2list.md) -
   数据框转列表
-- [`map_column()`](https://evanbio.github.io/evanverse/reference/map_column.md) -
-  映射列值
-- [`is_void()`](https://evanbio.github.io/evanverse/reference/void.md) -
-  检查空值
-- [`any_void()`](https://evanbio.github.io/evanverse/reference/void.md) -
-  是否有空值
-- [`drop_void()`](https://evanbio.github.io/evanverse/reference/void.md) -
-  删除空值
-- [`replace_void()`](https://evanbio.github.io/evanverse/reference/void.md) -
-  替换空值
-- [`cols_with_void()`](https://evanbio.github.io/evanverse/reference/void.md) -
-  含空值的列
-- [`rows_with_void()`](https://evanbio.github.io/evanverse/reference/void.md) -
-  含空值的行
+- `map_column()` - 映射列值
+- `is_void()` - 检查空值
+- `any_void()` - 是否有空值
+- `drop_void()` - 删除空值
+- `replace_void()` - 替换空值
+- `cols_with_void()` - 含空值的列
+- `rows_with_void()` - 含空值的行
 
 **🧮 操作符与逻辑** (8 个函数)
 
@@ -268,8 +250,7 @@ pkg_version("evanverse")
 - `%nin%` - 非成员操作符
 - `%map%` - 映射操作符
 - `%match%` - 匹配操作符
-- [`combine_logic()`](https://evanbio.github.io/evanverse/reference/combine_logic.md) -
-  组合逻辑向量
+- `combine_logic()` - 组合逻辑向量
 - [`comb()`](https://evanbio.github.io/evanverse/reference/comb.md) -
   组合数
 - [`perm()`](https://evanbio.github.io/evanverse/reference/perm.md) -
@@ -277,12 +258,9 @@ pkg_version("evanverse")
 
 **⚙️ 工作流工具** (3 个函数)
 
-- [`with_timer()`](https://evanbio.github.io/evanverse/reference/with_timer.md) -
-  计时执行
-- [`remind()`](https://evanbio.github.io/evanverse/reference/remind.md) -
-  设置提醒
-- [`safe_execute()`](https://evanbio.github.io/evanverse/reference/safe_execute.md) -
-  安全函数执行
+- `with_timer()` - 计时执行
+- `remind()` - 设置提醒
+- `safe_execute()` - 安全函数执行
 
 ------------------------------------------------------------------------
 

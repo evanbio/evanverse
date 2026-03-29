@@ -1,11 +1,11 @@
 # Remove a Saved Palette JSON
 
-Remove a palette file by name, trying across types if necessary.
+Remove a palette JSON file by name, searching across types if needed.
 
 ## Usage
 
 ``` r
-remove_palette(name, type = NULL, color_dir, log = TRUE)
+remove_palette(name, type = NULL, color_dir)
 ```
 
 ## Arguments
@@ -16,17 +16,12 @@ remove_palette(name, type = NULL, color_dir, log = TRUE)
 
 - type:
 
-  Character. Optional. Preferred type ("sequential", "diverging", or
-  "qualitative").
+  Character. One of "sequential", "diverging", "qualitative". If NULL,
+  searches all types.
 
 - color_dir:
 
-  Character. Root folder where palettes are stored (required). Use
-  tempdir() for examples/tests.
-
-- log:
-
-  Logical. Whether to log palette removal to a temporary log file.
+  Character. Root folder where palettes are stored.
 
 ## Value
 
@@ -36,10 +31,7 @@ Invisibly TRUE if removed successfully, FALSE otherwise.
 
 ``` r
 if (FALSE) { # \dontrun{
-# Remove a palette (requires write permissions):
-remove_palette("seq_blues")
-
-# Remove with specific type:
-remove_palette("qual_vivid", type = "qualitative")
+remove_palette("seq_blues", color_dir = "path/to/palettes")
+remove_palette("qual_vivid", type = "qualitative", color_dir = "path/to/palettes")
 } # }
 ```

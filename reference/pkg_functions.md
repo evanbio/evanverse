@@ -1,7 +1,7 @@
 # List Package Functions
 
-List exported symbols from a package's NAMESPACE. Optionally filter by a
-case-insensitive keyword. Results are sorted alphabetically.
+List exported symbols from a package's NAMESPACE, optionally filtered by
+a case-insensitive keyword. Results are sorted alphabetically.
 
 ## Usage
 
@@ -17,97 +17,34 @@ pkg_functions(pkg, key = NULL)
 
 - key:
 
-  Character. Optional keyword to filter function names
-  (case-insensitive).
+  Character. Keyword to filter function names (case-insensitive).
+  Default: NULL.
 
 ## Value
 
-Character vector of exported names (invisibly).
+Character vector of exported names.
 
 ## Examples
 
 ``` r
-# List all functions in evanverse:
 pkg_functions("evanverse")
-#> 
-#> ── Package: evanverse ──
-#> 
-#> ℹ Matched exported names: 65
-#> %is%
-#> %map%
-#> %match%
-#> %nin%
-#> %p%
-#> any_void
-#> bio_palette_gallery
-#> check_pkg
-#> clear_palette_cache
-#> cols_with_void
-#> comb
-#> combine_logic
-#> compile_palettes
-#> convert_gene_id
-#> create_palette
-#> df2list
-#> download_batch
-#> download_gene_ref
-#> download_geo_data
-#> download_url
-#> drop_void
-#> file_info
-#> file_tree
-#> get_ext
-#> get_palette
-#> gmt2df
-#> gmt2list
-#> hex2rgb
-#> inst_pkg
-#> is_void
-#> list_palettes
-#> map_column
-#> palette_cache_info
-#> perm
-#> pkg_functions
-#> pkg_version
-#> plot_bar
-#> plot_density
-#> plot_forest
-#> plot_pie
-#> plot_venn
-#> preview_palette
-#> quick_anova
-#> quick_chisq
-#> quick_cor
-#> quick_ttest
-#> read_excel_flex
-#> read_table_flex
-#> reload_palette_cache
-#> remind
-#> remove_palette
-#> replace_void
-#> rgb2hex
-#> rows_with_void
-#> safe_execute
-#> scale_color_evanverse
-#> scale_colour_evanverse
-#> scale_fill_evanverse
-#> set_mirror
-#> stat_power
-#> stat_samplesize
-#> update_pkg
-#> view
-#> with_timer
-#> write_xlsx_flex
-
-# Filter by keyword:
+#>  [1] "%is%"              "%map%"             "%match%"          
+#>  [4] "%nin%"             "%p%"               "check_pkg"        
+#>  [7] "comb"              "compile_palettes"  "create_palette"   
+#> [10] "df2list"           "df2vect"           "download_batch"   
+#> [13] "download_gene_ref" "download_geo"      "download_url"     
+#> [16] "file_info"         "file_ls"           "file_tree"        
+#> [19] "gene2ensembl"      "gene2entrez"       "get_palette"      
+#> [22] "gmt2df"            "gmt2list"          "hex2rgb"          
+#> [25] "inst_pkg"          "list_palettes"     "palette_gallery"  
+#> [28] "perm"              "pkg_functions"     "pkg_version"      
+#> [31] "plot_bar"          "plot_density"      "plot_forest"      
+#> [34] "plot_pie"          "plot_venn"         "preview_palette"  
+#> [37] "quick_anova"       "quick_chisq"       "quick_cor"        
+#> [40] "quick_ttest"       "recode_column"     "remove_palette"   
+#> [43] "rgb2hex"           "set_mirror"        "stat_n"           
+#> [46] "stat_power"        "toy_gene_ref"      "toy_gmt"          
+#> [49] "update_pkg"        "view"             
 pkg_functions("evanverse", key = "plot")
-#> 
-#> ── Package: evanverse ──
-#> 
-#> ℹ Matched exported names: 5
-#> plot_bar
-#> plot_density
-#> plot_forest
-#> plot_pie
-#> plot_venn
+#> [1] "plot_bar"     "plot_density" "plot_forest"  "plot_pie"     "plot_venn"   
 ```
