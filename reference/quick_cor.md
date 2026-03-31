@@ -286,7 +286,9 @@ summary(result)
 #>   mpg qsec   0.4186840 1.708199e-02
 #>  disp carb   0.3949769 2.526789e-02
 #> 
-plot(result)
+if (requireNamespace("ggcorrplot", quietly = TRUE)) {
+  plot(result)
+}
 
 
 result <- quick_cor(

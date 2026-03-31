@@ -63,7 +63,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">evanverse</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.5.1</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.5.2</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -101,7 +101,19 @@
     </div>
 
     <div class="section level2">
-<h2 class="pkg-version" data-toc-text="0.5.1" id="evanverse-051">evanverse 0.5.1<a class="anchor" aria-label="anchor" href="#evanverse-051"></a></h2>
+<h2 class="pkg-version" data-toc-text="0.5.2" id="evanverse-052">evanverse 0.5.2<a class="anchor" aria-label="anchor" href="#evanverse-052"></a></h2>
+<p><em>Released: March 2026</em></p>
+<p><strong>CRAN Patch</strong> — Fix Suggests conditional usage and mirror test pollution.</p>
+<hr><div class="section level4">
+<h4 id="bug-fixes-0-5-2">Bug Fixes<a class="anchor" aria-label="anchor" href="#bug-fixes-0-5-2"></a></h4>
+<ul><li>Added <code><a href="https://rdrr.io/r/base/ns-load.html" class="external-link">requireNamespace()</a></code> guard to <code><a href="../reference/quick_cor.html">quick_cor()</a></code> example for <code>ggcorrplot</code> (Suggests)</li>
+<li>Added <code>skip_if_not_installed()</code> to <code>plot_venn</code> and <code>download_geo</code> tests that require Suggests packages</li>
+<li>Added <code>skip_on_cran()</code> to all <code><a href="../reference/set_mirror.html">set_mirror()</a></code> tests to prevent <code>options("repos")</code> modification during CRAN checks</li>
+<li>Replaced <code>old &lt;- options(...); on.exit(options(old))</code> with <code><a href="https://withr.r-lib.org/reference/with_options.html" class="external-link">withr::local_options()</a></code> in tests</li>
+</ul><hr></div>
+</div>
+    <div class="section level2">
+<h2 class="pkg-version" data-toc-text="0.5.1" id="evanverse-051">evanverse 0.5.1<a class="anchor" aria-label="anchor" href="#evanverse-051"></a></h2><p class="text-muted">CRAN release: 2026-03-29</p>
 <p><em>Released: March 2026</em></p>
 <p><strong>CRAN Patch</strong> — Fix Unicode character in Rd documentation causing LaTeX PDF build failure.</p>
 <hr><div class="section level4">
@@ -824,7 +836,7 @@
 
 <div class="pkgdown-footer-right">
   <div class="text-muted">
-<p><strong>evanverse v0.5.1</strong><br><small>Last updated: March 2026</small></p>
+<p><strong>evanverse v0.5.2</strong><br><small>Last updated: March 2026</small></p>
 </div><div class="footer-links">
 <p><a href="https://github.com/evanbio/evanverse" class="external-link text-muted me-3" aria-label="GitHub"> <i class="fab fa-github fa-lg"></i> </a> <a href="https://cran.r-project.org/package=evanverse" class="external-link text-muted me-3" aria-label="CRAN"> <i class="fas fa-download fa-lg"></i> </a> <a href="https://blog.evanzhou.org" class="external-link text-muted" aria-label="Blog"> <i class="fas fa-blog fa-lg"></i> </a></p>
 </div>

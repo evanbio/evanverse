@@ -1,6 +1,34 @@
 # Changelog
 
+## evanverse 0.5.2
+
+*Released: March 2026*
+
+**CRAN Patch** — Fix Suggests conditional usage and mirror test
+pollution.
+
+------------------------------------------------------------------------
+
+#### Bug Fixes
+
+- Added [`requireNamespace()`](https://rdrr.io/r/base/ns-load.html)
+  guard to
+  [`quick_cor()`](https://evanbio.github.io/evanverse/reference/quick_cor.md)
+  example for `ggcorrplot` (Suggests)
+- Added `skip_if_not_installed()` to `plot_venn` and `download_geo`
+  tests that require Suggests packages
+- Added `skip_on_cran()` to all
+  [`set_mirror()`](https://evanbio.github.io/evanverse/reference/set_mirror.md)
+  tests to prevent `options("repos")` modification during CRAN checks
+- Replaced `old <- options(...); on.exit(options(old))` with
+  [`withr::local_options()`](https://withr.r-lib.org/reference/with_options.html)
+  in tests
+
+------------------------------------------------------------------------
+
 ## evanverse 0.5.1
+
+CRAN release: 2026-03-29
 
 *Released: March 2026*
 
