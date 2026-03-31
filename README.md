@@ -25,6 +25,18 @@
 
 ---
 
+## Status
+
+`evanverse` is currently under active maintenance. The CRAN version has been archived, and v0.5.2 will be resubmitted after further cleanup and testing.
+
+You can install the development version from GitHub:
+
+```r
+devtools::install_github("evanbio/evanverse")
+```
+
+---
+
 ## Overview
 
 **evanverse** is a utility toolkit for R providing ~50 functions across package management, data visualization, statistical testing, bioinformatics, and more. Built by [Evan Zhou](mailto:evanzhou.bio@gmail.com).

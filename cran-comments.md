@@ -1,20 +1,31 @@
-# CRAN Comments for evanverse 0.5.1
+# CRAN Comments for evanverse 0.5.2
 
 ## Submission — CRAN Patch
 
-This is a patch release from 0.5.0 to 0.5.1, fixing a documentation issue
-that caused the PDF manual build to fail on CRAN.
+This is a patch release from 0.5.1 to 0.5.2, fixing Suggests conditional usage
+and test environment issues flagged during CRAN checks.
 
 ### Summary of Changes
 
-* Replaced Unicode character `≤` (U+2264) with `<=` in `quick_chisq()` roxygen2
-  documentation, which caused a LaTeX error when building the PDF version of the manual
+* Added `requireNamespace()` guard to `quick_cor()` example for `ggcorrplot` (Suggests)
+* Added `skip_if_not_installed()` to tests requiring Suggests packages (`ggvenn`, `ggVennDiagram`, `GEOquery`)
+* Added `skip_on_cran()` to all `set_mirror()` tests to prevent `options("repos")` modification during CRAN checks
+* Replaced manual `on.exit(options(...))` with `withr::local_options()` in tests
 
 ### R CMD check results
 
 ```
-── R CMD check results ─────────────────────────────────── evanverse 0.5.1 ────
-Duration: 2m 24.4s
+── R CMD check results ─────────────────────────────────── evanverse 0.5.2 ────
+Duration: 2m 48.8s
+
+0 errors ✔ | 0 warnings ✔ | 0 notes ✔
+```
+
+### R CMD check results (`_R_CHECK_DEPENDS_ONLY_=true`)
+
+```
+── R CMD check results ─────────────────────────────────── evanverse 0.5.2 ────
+Duration: 1m 6.7s
 
 0 errors ✔ | 0 warnings ✔ | 0 notes ✔
 ```

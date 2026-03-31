@@ -375,6 +375,8 @@ test_that("plot_venn errors when ggvenn is not installed (classic)", {
 })
 
 test_that("plot_venn gradient errors when palette has length > 1", {
+  skip_if_not_installed("ggvenn")
+  skip_if_not_installed("ggVennDiagram")
   local_mocked_bindings(
     requireNamespace = function(pkg, ...) TRUE,
     .package = "base"

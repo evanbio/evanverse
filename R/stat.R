@@ -1434,7 +1434,9 @@ plot.quick_chisq_result <- function(x, y = NULL,
 #' result <- quick_cor(mtcars)
 #' print(result)
 #' summary(result)
-#' plot(result)
+#' if (requireNamespace("ggcorrplot", quietly = TRUE)) {
+#'   plot(result)
+#' }
 #'
 #' result <- quick_cor(
 #'   mtcars,

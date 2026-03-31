@@ -10,8 +10,8 @@
 #==============================================================================
 
 test_that("set_mirror() sets CRAN mirror correctly", {
-  old <- options(repos = c(CRAN = "https://cloud.r-project.org"))
-  on.exit(options(old), add = TRUE)
+  skip_on_cran()
+  withr::local_options(list(repos = c(CRAN = "https://cloud.r-project.org")))
 
   set_mirror("cran", "tuna")
   expect_equal(getOption("repos")[["CRAN"]],
@@ -27,8 +27,8 @@ test_that("set_mirror() sets CRAN mirror correctly", {
 })
 
 test_that("set_mirror() sets Bioconductor mirror correctly", {
-  old <- options(BioC_mirror = "https://bioconductor.org")
-  on.exit(options(old), add = TRUE)
+  skip_on_cran()
+  withr::local_options(list(BioC_mirror = "https://bioconductor.org"))
 
   set_mirror("bioc", "tuna")
   expect_equal(getOption("BioC_mirror"),
@@ -40,9 +40,9 @@ test_that("set_mirror() sets Bioconductor mirror correctly", {
 })
 
 test_that("set_mirror() sets both mirrors with repo = 'all'", {
-  old <- options(repos = c(CRAN = "https://cloud.r-project.org"),
-                 BioC_mirror = "https://bioconductor.org")
-  on.exit(options(old), add = TRUE)
+  skip_on_cran()
+  withr::local_options(list(repos = c(CRAN = "https://cloud.r-project.org"),
+                            BioC_mirror = "https://bioconductor.org"))
 
   set_mirror("all", "tuna")
   expect_equal(getOption("repos")[["CRAN"]],
@@ -52,9 +52,9 @@ test_that("set_mirror() sets both mirrors with repo = 'all'", {
 })
 
 test_that("set_mirror() defaults to repo = 'all' and mirror = 'tuna'", {
-  old <- options(repos = c(CRAN = "https://cloud.r-project.org"),
-                 BioC_mirror = "https://bioconductor.org")
-  on.exit(options(old), add = TRUE)
+  skip_on_cran()
+  withr::local_options(list(repos = c(CRAN = "https://cloud.r-project.org"),
+                            BioC_mirror = "https://bioconductor.org"))
 
   set_mirror()
   expect_equal(getOption("repos")[["CRAN"]],
@@ -64,9 +64,9 @@ test_that("set_mirror() defaults to repo = 'all' and mirror = 'tuna'", {
 })
 
 test_that("set_mirror() returns previous settings invisibly", {
-  old <- options(repos = c(CRAN = "https://cloud.r-project.org"),
-                 BioC_mirror = "https://bioconductor.org")
-  on.exit(options(old), add = TRUE)
+  skip_on_cran()
+  withr::local_options(list(repos = c(CRAN = "https://cloud.r-project.org"),
+                            BioC_mirror = "https://bioconductor.org"))
 
   prev <- set_mirror("all", "tuna")
   expect_type(prev, "list")
@@ -76,9 +76,9 @@ test_that("set_mirror() returns previous settings invisibly", {
 })
 
 test_that("set_mirror() official mirrors set correct URLs", {
-  old <- options(repos = c(CRAN = "https://cloud.r-project.org"),
-                 BioC_mirror = "https://bioconductor.org")
-  on.exit(options(old), add = TRUE)
+  skip_on_cran()
+  withr::local_options(list(repos = c(CRAN = "https://cloud.r-project.org"),
+                            BioC_mirror = "https://bioconductor.org"))
 
   set_mirror("cran", "official")
   expect_equal(getOption("repos")[["CRAN"]], "https://cloud.r-project.org")
@@ -88,9 +88,9 @@ test_that("set_mirror() official mirrors set correct URLs", {
 })
 
 test_that("set_mirror() emits CLI messages", {
-  old <- options(repos = c(CRAN = "https://cloud.r-project.org"),
-                 BioC_mirror = "https://bioconductor.org")
-  on.exit(options(old), add = TRUE)
+  skip_on_cran()
+  withr::local_options(list(repos = c(CRAN = "https://cloud.r-project.org"),
+                            BioC_mirror = "https://bioconductor.org"))
 
   expect_message(set_mirror("cran", "tuna"), "CRAN mirror set to")
   expect_message(set_mirror("bioc", "ustc"), "Bioconductor mirror set to")
@@ -122,9 +122,9 @@ test_that("set_mirror() errors on completely unknown mirror with all", {
 })
 
 test_that("set_mirror() preserves non-CRAN repo entries when setting CRAN mirror", {
-  old <- options(repos = c(CRAN = "https://cloud.r-project.org",
-                           RSPM = "https://packagemanager.posit.co/cran/latest"))
-  on.exit(options(old), add = TRUE)
+  skip_on_cran()
+  withr::local_options(list(repos = c(CRAN = "https://cloud.r-project.org",
+                                      RSPM = "https://packagemanager.posit.co/cran/latest")))
 
   set_mirror("cran", "tuna")
   repos <- getOption("repos")
@@ -361,8 +361,7 @@ test_that("pkg_version() handles incomplete GitHub DESCRIPTION fields gracefully
 test_that("pkg_version() returns data.frame with correct columns (online)", {
   skip_on_cran()
   skip_if_offline()
-  old <- options(BioC_mirror = "https://bioconductor.org")
-  on.exit(options(old), add = TRUE)
+  withr::local_options(list(BioC_mirror = "https://bioconductor.org"))
 
   res <- pkg_version("cli")
   expect_s3_class(res, "data.frame")
@@ -372,8 +371,7 @@ test_that("pkg_version() returns data.frame with correct columns (online)", {
 test_that("pkg_version() detects installed version and CRAN source (online)", {
   skip_on_cran()
   skip_if_offline()
-  old <- options(BioC_mirror = "https://bioconductor.org")
-  on.exit(options(old), add = TRUE)
+  withr::local_options(list(BioC_mirror = "https://bioconductor.org"))
 
   res <- pkg_version("cli")
   expect_false(is.na(res$version[[1]]))
@@ -384,8 +382,7 @@ test_that("pkg_version() detects installed version and CRAN source (online)", {
 test_that("pkg_version() returns 'Not Found' for unknown package (online)", {
   skip_on_cran()
   skip_if_offline()
-  old <- options(BioC_mirror = "https://bioconductor.org")
-  on.exit(options(old), add = TRUE)
+  withr::local_options(list(BioC_mirror = "https://bioconductor.org"))
 
   res <- pkg_version("nonexistentpackage123456")
   expect_true(is.na(res$version[[1]]))

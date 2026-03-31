@@ -385,6 +385,7 @@ test_that("download_geo errors with informative message when GEOquery is absent"
 })
 
 test_that("download_geo orchestrates helpers and returns correct list structure", {
+  skip_if_not_installed("GEOquery")
   tmp      <- withr::local_tempdir()
   fake_eset <- structure(list(annotation = "GPL1234"), class = "ExpressionSet")
 

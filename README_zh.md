@@ -25,6 +25,18 @@
 
 ---
 
+## 当前状态
+
+`evanverse` 目前正在积极维护中。CRAN 版本已被归档，v0.5.2 修复完成后将重新提交。
+
+开发版可通过 GitHub 安装：
+
+```r
+devtools::install_github("evanbio/evanverse")
+```
+
+---
+
 ## 项目简介
 
 **evanverse** 是一个 R 工具包，提供约 50 个函数，涵盖包管理、数据可视化、统计检验、生物信息学等领域。由 [Evan Zhou](mailto:evanzhou.bio@gmail.com) 开发。

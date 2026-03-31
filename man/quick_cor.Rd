@@ -120,7 +120,9 @@ and Kendall methods.
 result <- quick_cor(mtcars)
 print(result)
 summary(result)
-plot(result)
+if (requireNamespace("ggcorrplot", quietly = TRUE)) {
+  plot(result)
+}
 
 result <- quick_cor(
   mtcars,
