@@ -68,7 +68,6 @@ jobs:
     env:
       GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
       R_KEEP_PKG_SOURCE: yes
-      _R_CHECK_DEPENDS_ONLY_: true
 
     steps:
       - uses: actions/checkout@v4
@@ -87,6 +86,8 @@ jobs:
           needs: check
 
       - uses: r-lib/actions/check-r-package@v2
+        env:
+          _R_CHECK_DEPENDS_ONLY_: true
         with:
           upload-snapshots: true
           args: 'c("--as-cran", "--no-manual")'
