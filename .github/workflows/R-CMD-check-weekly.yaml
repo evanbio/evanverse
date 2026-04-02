@@ -1,12 +1,11 @@
 # Workflow derived from https://github.com/r-lib/actions/tree/v2/examples
-# Triggers: push / PR on main — 6 jobs (r-release × 3 platforms + DEPENDS_ONLY × 3 platforms)
+# Triggers: weekly schedule — Saturday 21:00 CST (13:00 UTC)
+#   Full CRAN-like check, same as release
 on:
-  push:
-    branches: [main]
-  pull_request:
-    branches: [main]
+  schedule:
+    - cron: '0 13 * * 6'
 
-name: R-CMD-check
+name: R-CMD-check-weekly
 
 permissions: read-all
 
@@ -23,6 +22,8 @@ jobs:
           - {os: ubuntu-latest,  r: 'release'}
           - {os: windows-latest, r: 'release'}
           - {os: macOS-latest,   r: 'release'}
+          - {os: ubuntu-latest,  r: 'devel'}
+          - {os: ubuntu-latest,  r: 'oldrel'}
 
     env:
       GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
@@ -47,6 +48,7 @@ jobs:
       - uses: r-lib/actions/check-r-package@v2
         with:
           upload-snapshots: true
+          args: 'c("--as-cran", "--no-manual")'
           build_args: 'c("--no-manual","--compact-vignettes=gs+qpdf")'
 
   R-CMD-check-depends-only:
@@ -86,4 +88,5 @@ jobs:
       - uses: r-lib/actions/check-r-package@v2
         with:
           upload-snapshots: true
+          args: 'c("--as-cran", "--no-manual")'
           build_args: 'c("--no-manual","--compact-vignettes=gs+qpdf")'

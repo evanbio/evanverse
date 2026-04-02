@@ -1,12 +1,12 @@
 # Workflow derived from https://github.com/r-lib/actions/tree/v2/examples
-# Triggers: push / PR on main — 6 jobs (r-release × 3 platforms + DEPENDS_ONLY × 3 platforms)
+# Triggers: tag v* — full CRAN-like check
+#   r-release × 3 platforms + r-devel (ubuntu) + r-oldrel (ubuntu)
+#   + DEPENDS_ONLY × 3 platforms, all with --as-cran
 on:
   push:
-    branches: [main]
-  pull_request:
-    branches: [main]
+    tags: ['v*']
 
-name: R-CMD-check
+name: R-CMD-check-release
 
 permissions: read-all
 
@@ -23,6 +23,8 @@ jobs:
           - {os: ubuntu-latest,  r: 'release'}
           - {os: windows-latest, r: 'release'}
           - {os: macOS-latest,   r: 'release'}
+          - {os: ubuntu-latest,  r: 'devel'}
+          - {os: ubuntu-latest,  r: 'oldrel'}
 
     env:
       GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
@@ -47,6 +49,7 @@ jobs:
       - uses: r-lib/actions/check-r-package@v2
         with:
           upload-snapshots: true
+          args: 'c("--as-cran", "--no-manual")'
           build_args: 'c("--no-manual","--compact-vignettes=gs+qpdf")'
 
   R-CMD-check-depends-only:
@@ -86,4 +89,5 @@ jobs:
       - uses: r-lib/actions/check-r-package@v2
         with:
           upload-snapshots: true
+          args: 'c("--as-cran", "--no-manual")'
           build_args: 'c("--no-manual","--compact-vignettes=gs+qpdf")'
