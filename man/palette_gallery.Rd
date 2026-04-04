@@ -4,7 +4,13 @@
 \alias{palette_gallery}
 \title{Visualize All Palettes in a Gallery View}
 \usage{
-palette_gallery(type = NULL, max_palettes = 30, max_row = 12, verbose = TRUE)
+palette_gallery(
+  type = NULL,
+  max_palettes = 30,
+  max_row = 12,
+  verbose = TRUE,
+  palettes_path = NULL
+)
 }
 \arguments{
 \item{type}{Palette types to include: "sequential", "diverging", "qualitative". Default NULL returns all.}
@@ -14,6 +20,8 @@ palette_gallery(type = NULL, max_palettes = 30, max_row = 12, verbose = TRUE)
 \item{max_row}{Max colors per row. Default: 12.}
 
 \item{verbose}{Whether to print progress info. Default: TRUE.}
+
+\item{palettes_path}{Character. Path to a \code{palettes.rda} file. If NULL, uses the installed package dataset.}
 }
 \value{
 A named list of ggplot objects (one per page).

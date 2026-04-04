@@ -6,11 +6,14 @@
 #              remove_palette(), hex2rgb(), rgb2hex()
 #===============================================================================
 
+.test_palettes_path <- function() {
+  p <- system.file("data", "palettes.rda", package = "evanverse")
+  if (nzchar(p) && file.exists(p)) return(p)
+  NULL
+}
+
 palette_data_available <- function() {
-  tryCatch(
-    is.list(get("palettes", envir = asNamespace("evanverse"))),
-    error = function(e) FALSE
-  )
+  !is.null(.test_palettes_path())
 }
 
 # Helper: create a minimal temp palette directory with one JSON per type
@@ -174,7 +177,7 @@ test_that("rgb2hex() validates data.frame columns", {
 test_that("get_palette() returns full color vector with explicit type", {
   skip_if_not(palette_data_available(), "Package palette dataset not available")
 
-  result <- get_palette("qual_vivid", type = "qualitative")
+  result <- get_palette("qual_vivid", type = "qualitative", palettes_path = .test_palettes_path())
   expect_type(result, "character")
   expect_true(length(result) >= 1L)
   expect_true(all(grepl("^#[0-9A-Fa-f]{6,8}$", result)))
@@ -183,7 +186,7 @@ test_that("get_palette() returns full color vector with explicit type", {
 test_that("get_palette() returns correct subset with n", {
   skip_if_not(palette_data_available(), "Package palette dataset not available")
 
-  result <- get_palette("qual_vivid", type = "qualitative", n = 3)
+  result <- get_palette("qual_vivid", type = "qualitative", n = 3, palettes_path = .test_palettes_path())
   expect_length(result, 3L)
   expect_type(result, "character")
 })
@@ -191,7 +194,7 @@ test_that("get_palette() returns correct subset with n", {
 test_that("get_palette() auto-detects type when type = NULL", {
   skip_if_not(palette_data_available(), "Package palette dataset not available")
 
-  result <- get_palette("seq_blues")
+  result <- get_palette("seq_blues", palettes_path = .test_palettes_path())
   expect_type(result, "character")
   expect_true(length(result) >= 1L)
 })
@@ -201,7 +204,7 @@ test_that("get_palette() errors when name is found under a different type", {
 
   # seq_blues is sequential, not diverging
   expect_error(
-    get_palette("seq_blues", type = "diverging"),
+    get_palette("seq_blues", type = "diverging", palettes_path = .test_palettes_path()),
     "not found under"
   )
 })
@@ -210,7 +213,7 @@ test_that("get_palette() errors when name is not found anywhere", {
   skip_if_not(palette_data_available(), "Package palette dataset not available")
 
   expect_error(
-    get_palette("nonexistent_palette_xyz"),
+    get_palette("nonexistent_palette_xyz", palettes_path = .test_palettes_path()),
     "not found in any type"
   )
 })
@@ -219,7 +222,7 @@ test_that("get_palette() errors when n exceeds palette size", {
   skip_if_not(palette_data_available(), "Package palette dataset not available")
 
   expect_error(
-    get_palette("qual_softtrio", type = "qualitative", n = 9999),
+    get_palette("qual_softtrio", type = "qualitative", n = 9999, palettes_path = .test_palettes_path()),
     "only has .* colors, but requested"
   )
 })
@@ -253,7 +256,7 @@ test_that("get_palette() validates n parameter", {
 test_that("list_palettes() returns data.frame with expected columns", {
   skip_if_not(palette_data_available(), "Package palette dataset not available")
 
-  result <- list_palettes()
+  result <- list_palettes(palettes_path = .test_palettes_path())
   expect_s3_class(result, "data.frame")
   expect_true(all(c("name", "type", "n_color", "colors") %in% names(result)))
   expect_true(nrow(result) > 0L)
@@ -262,7 +265,7 @@ test_that("list_palettes() returns data.frame with expected columns", {
 test_that("list_palettes() filters by single type", {
   skip_if_not(palette_data_available(), "Package palette dataset not available")
 
-  result <- list_palettes(type = "qualitative")
+  result <- list_palettes(type = "qualitative", palettes_path = .test_palettes_path())
   expect_true(all(result$type == "qualitative"))
   expect_true(nrow(result) > 0L)
 })
@@ -270,7 +273,7 @@ test_that("list_palettes() filters by single type", {
 test_that("list_palettes() filters by multiple types", {
   skip_if_not(palette_data_available(), "Package palette dataset not available")
 
-  result <- list_palettes(type = c("sequential", "diverging"))
+  result <- list_palettes(type = c("sequential", "diverging"), palettes_path = .test_palettes_path())
   expect_true(all(result$type %in% c("sequential", "diverging")))
   expect_false("qualitative" %in% result$type)
 })
@@ -278,7 +281,7 @@ test_that("list_palettes() filters by multiple types", {
 test_that("list_palettes() sort=TRUE produces ordered output", {
   skip_if_not(palette_data_available(), "Package palette dataset not available")
 
-  result <- list_palettes(sort = TRUE)
+  result <- list_palettes(sort = TRUE, palettes_path = .test_palettes_path())
   sorted <- result[order(result$type, result$n_color, result$name), ]
   expect_equal(result$name, sorted$name)
 })
@@ -286,8 +289,8 @@ test_that("list_palettes() sort=TRUE produces ordered output", {
 test_that("list_palettes() sort=FALSE preserves original order", {
   skip_if_not(palette_data_available(), "Package palette dataset not available")
 
-  sorted   <- list_palettes(sort = TRUE)
-  unsorted <- list_palettes(sort = FALSE)
+  sorted   <- list_palettes(sort = TRUE,  palettes_path = .test_palettes_path())
+  unsorted <- list_palettes(sort = FALSE, palettes_path = .test_palettes_path())
   expect_setequal(sorted$name, unsorted$name)
 })
 
@@ -485,7 +488,8 @@ test_that("preview_palette() returns NULL invisibly", {
   pdf(file = tempfile(fileext = ".pdf"))
   on.exit(grDevices::dev.off(), add = TRUE)
 
-  result <- preview_palette("seq_blues", type = "sequential", plot_type = "bar")
+  result <- preview_palette("seq_blues", type = "sequential", plot_type = "bar",
+                            palettes_path = .test_palettes_path())
   expect_null(result)
 })
 
@@ -495,7 +499,8 @@ test_that("preview_palette() works with all plot_type options", {
   for (pt in c("bar", "pie", "point", "rect", "circle")) {
     pdf(file = tempfile(fileext = ".pdf"))
     expect_no_error(
-      preview_palette("qual_vivid", type = "qualitative", plot_type = pt)
+      preview_palette("qual_vivid", type = "qualitative", plot_type = pt,
+                      palettes_path = .test_palettes_path())
     )
     grDevices::dev.off()
   }
@@ -508,7 +513,8 @@ test_that("preview_palette() respects n argument", {
   on.exit(grDevices::dev.off(), add = TRUE)
 
   expect_no_error(
-    preview_palette("qual_vivid", type = "qualitative", n = 3, plot_type = "bar")
+    preview_palette("qual_vivid", type = "qualitative", n = 3, plot_type = "bar",
+                    palettes_path = .test_palettes_path())
   )
 })
 
@@ -519,7 +525,8 @@ test_that("preview_palette() accepts custom title", {
   on.exit(grDevices::dev.off(), add = TRUE)
 
   expect_no_error(
-    preview_palette("seq_blues", type = "sequential", title = "My Custom Title")
+    preview_palette("seq_blues", type = "sequential", title = "My Custom Title",
+                    palettes_path = .test_palettes_path())
   )
 })
 
@@ -527,7 +534,7 @@ test_that("preview_palette() errors on invalid palette name", {
   skip_if_not(palette_data_available(), "Package palette dataset not available")
 
   expect_error(
-    preview_palette("does_not_exist"),
+    preview_palette("does_not_exist", palettes_path = .test_palettes_path()),
     "not found in any type"
   )
 })
@@ -540,7 +547,8 @@ test_that("palette_gallery() returns named list of ggplot objects", {
   skip_if_not(palette_data_available(), "Package palette dataset not available")
   skip_if_not_installed("ggplot2")
 
-  result <- palette_gallery(type = "qualitative", verbose = FALSE)
+  result <- palette_gallery(type = "qualitative", verbose = FALSE,
+                            palettes_path = .test_palettes_path())
   expect_type(result, "list")
   expect_true(length(result) >= 1L)
   expect_true(all(sapply(result, inherits, "gg")))
@@ -551,7 +559,8 @@ test_that("palette_gallery() paginates correctly", {
   skip_if_not(palette_data_available(), "Package palette dataset not available")
   skip_if_not_installed("ggplot2")
 
-  result <- palette_gallery(type = "qualitative", max_palettes = 5, verbose = FALSE)
+  result <- palette_gallery(type = "qualitative", max_palettes = 5, verbose = FALSE,
+                            palettes_path = .test_palettes_path())
   expect_true(length(result) > 1L)
 })
 
@@ -559,7 +568,10 @@ test_that("palette_gallery() errors on invalid type argument", {
   skip_if_not(palette_data_available(), "Package palette dataset not available")
 
   # match.arg rejects strings not in the allowed set
-  expect_error(palette_gallery(type = "rainbow"), "should be one of")
+  expect_error(
+    palette_gallery(type = "rainbow", palettes_path = .test_palettes_path()),
+    "should be one of"
+  )
 })
 
 test_that("palette_gallery() validates max_palettes and max_row", {

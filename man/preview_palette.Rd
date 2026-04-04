@@ -9,7 +9,8 @@ preview_palette(
   type = NULL,
   n = NULL,
   plot_type = c("bar", "pie", "point", "rect", "circle"),
-  title = NULL
+  title = NULL,
+  palettes_path = NULL
 )
 }
 \arguments{
@@ -22,6 +23,8 @@ preview_palette(
 \item{plot_type}{Character. One of "bar", "pie", "point", "rect", "circle". Default: "bar".}
 
 \item{title}{Character. Plot title. If NULL, defaults to palette name.}
+
+\item{palettes_path}{Character. Path to a \code{palettes.rda} file. If NULL, uses the installed package dataset.}
 }
 \value{
 Invisibly returns NULL. Called for plotting side effect.

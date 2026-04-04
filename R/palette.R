@@ -10,6 +10,7 @@
 #' @param name Character. Name of the palette (e.g. "qual_vivid").
 #' @param type Character. One of "sequential", "diverging", "qualitative". If NULL, type is auto-detected.
 #' @param n Integer. Number of colors to return. If NULL, returns all colors. Default is NULL.
+#' @param palettes_path Character. Path to a `palettes.rda` file. If NULL, uses the installed package dataset.
 #'
 #' @return Character vector of HEX color codes.
 #'
@@ -22,14 +23,15 @@
 #' @export
 get_palette <- function(name,
                         type = NULL,
-                        n = NULL) {
+                        n = NULL,
+                        palettes_path = NULL) {
 
   # Validate inputs
   .assert_scalar_string(name)
   if (!is.null(type)) type <- match.arg(type, c("sequential", "diverging", "qualitative"))
   if (!is.null(n)) .assert_count(n)
 
-  palettes <- .load_palettes()
+  palettes <- .load_palettes(palettes_path)
 
   # Auto-detect type if not provided
   if (is.null(type)) {
@@ -70,6 +72,7 @@ get_palette <- function(name,
 #'
 #' @param type Palette type(s) to filter: `"sequential"`, `"diverging"`, `"qualitative"`. Default NULL returns all.
 #' @param sort Whether to sort by type, n_color, name. Default: TRUE.
+#' @param palettes_path Character. Path to a `palettes.rda` file. If NULL, uses the installed package dataset.
 #'
 #' @return A `data.frame` with columns: `name`, `type`, `n_color`, `colors`.
 #' @export
@@ -79,12 +82,13 @@ get_palette <- function(name,
 #' list_palettes(type = "qualitative")
 #' list_palettes(type = c("sequential", "diverging"))
 list_palettes <- function(type = NULL,
-                          sort = TRUE) {
+                          sort = TRUE,
+                          palettes_path = NULL) {
 
   # Validate inputs
   .assert_flag(sort)
 
-  palettes <- .load_palettes()
+  palettes <- .load_palettes(palettes_path)
 
   # Resolve type: NULL means all available types
   if (!is.null(type)) {
@@ -200,6 +204,7 @@ create_palette <- function(name,
 #' @param n Integer. Number of colors to use. If NULL, uses all. Default: NULL.
 #' @param plot_type Character. One of "bar", "pie", "point", "rect", "circle". Default: "bar".
 #' @param title Character. Plot title. If NULL, defaults to palette name.
+#' @param palettes_path Character. Path to a `palettes.rda` file. If NULL, uses the installed package dataset.
 #'
 #' @return Invisibly returns NULL. Called for plotting side effect.
 #' @export
@@ -214,7 +219,8 @@ preview_palette <- function(name,
                             type = NULL,
                             n = NULL,
                             plot_type = c("bar", "pie", "point", "rect", "circle"),
-                            title = NULL) {
+                            title = NULL,
+                            palettes_path = NULL) {
 
   # Validate inputs
   .assert_scalar_string(name)
@@ -223,7 +229,7 @@ preview_palette <- function(name,
   plot_type <- match.arg(plot_type)
   if (is.null(title)) title <- name else .assert_scalar_string(title)
 
-  colors <- get_palette(name = name, type = type, n = n)
+  colors <- get_palette(name = name, type = type, n = n, palettes_path = palettes_path)
   .plot_palette_preview(colors, plot_type, title)
 
   invisible(NULL)
@@ -238,6 +244,7 @@ preview_palette <- function(name,
 #' @param max_palettes Number of palettes per page. Default: 30.
 #' @param max_row Max colors per row. Default: 12.
 #' @param verbose Whether to print progress info. Default: TRUE.
+#' @param palettes_path Character. Path to a `palettes.rda` file. If NULL, uses the installed package dataset.
 #'
 #' @return A named list of ggplot objects (one per page).
 #' @export
@@ -251,14 +258,15 @@ preview_palette <- function(name,
 palette_gallery <- function(type = NULL,
                                 max_palettes = 30,
                                 max_row = 12,
-                                verbose = TRUE) {
+                                verbose = TRUE,
+                                palettes_path = NULL) {
 
   # Validate inputs
   .assert_count(max_palettes)
   .assert_count(max_row)
   .assert_flag(verbose)
 
-  palettes <- .load_palettes()
+  palettes <- .load_palettes(palettes_path)
 
   # Resolve type: NULL means all available types
   if (!is.null(type)) {

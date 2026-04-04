@@ -88,9 +88,12 @@
 #' @param plot_type Character. One of "bar", "pie", "point", "rect", "circle".
 #' @param title Character. Plot title.
 #'
+#' @importFrom graphics par
 #' @keywords internal
 #' @noRd
 .plot_palette_preview <- function(colors, plot_type, title) {
+  opar <- par(mai = c(0.15, 0.1, 0.35, 0.1))
+  on.exit(par(opar), add = TRUE)
   num_colors <- length(colors)
 
   switch(plot_type,
@@ -108,10 +111,26 @@
       graphics::text(seq_len(num_colors), rep(1.2, num_colors), labels = colors, pos = 3, cex = 0.8)
     },
     "rect" = {
-      graphics::plot(0, 0, type = "n", xlim = c(0, num_colors), ylim = c(0, 1),
-        axes = FALSE, xlab = "", ylab = "", main = title)
-      graphics::rect(0:(num_colors - 1), 0, 1:num_colors, 1, col = colors, border = NA)
-      graphics::text((0:(num_colors - 1) + 1:num_colors) / 2, 0.5, labels = colors, col = "white", cex = 0.8)
+      n_slots  <- max(num_colors, 12L)
+      xs       <- .palette_tile_x(num_colors, n_slots)
+      title_x  <- mean(xs)   # center title over the tiles
+      df <- data.frame(x = xs, color = colors, stringsAsFactors = FALSE)
+
+      p <- ggplot2::ggplot(df) +
+        ggplot2::annotate(
+          "text", x = title_x, y = 0.92, label = title,
+          color = "#000000", size = 4.2, hjust = 0.5, vjust = 1
+        ) +
+        ggplot2::geom_tile(
+          ggplot2::aes(x = x, y = 0.5, fill = color),
+          width = 1.0, height = 0.55, color = NA
+        ) +
+        ggplot2::scale_fill_identity() +
+        ggplot2::scale_x_continuous(limits = c(0, n_slots), expand = c(0, 0)) +
+        ggplot2::scale_y_continuous(limits = c(0, 1)) +
+        ggplot2::theme_void() +
+        ggplot2::theme(plot.margin = ggplot2::margin(8, 12, 8, 12))
+      print(p)
     },
     "circle" = {
       graphics::plot(0, 0, type = "n", xlim = c(0, num_colors), ylim = c(0, 1),
@@ -171,20 +190,43 @@
 
 #' Load compiled palette data
 #'
-#' Returns the `palettes` package dataset, with fallbacks for devtools/testthat
-#' workflows where lazy-data binding may not be in namespace yet.
+#' Returns the `palettes` package dataset. If `palettes_path` is given, loads
+#' from that `.rda` file directly (useful in dev scripts before the package is
+#' installed). Otherwise falls back to: package namespace → attached env →
+#' local `data/palettes.rda` → `utils::data()`.
 #'
+#' @param palettes_path Character or NULL. Path to a `palettes.rda` file.
+#'   If NULL, the package dataset is used.
 #' @return Named list of palettes keyed by type.
 #'
 #' @keywords internal
 #' @noRd
-.load_palettes <- function() {
-  ns <- asNamespace("evanverse")
-  if (exists("palettes", envir = ns, inherits = FALSE)) {
+.load_palettes <- function(palettes_path = NULL) {
+
+  # Explicit path wins — dev/preview workflow before package is installed
+  if (!is.null(palettes_path)) {
+    if (!file.exists(palettes_path)) {
+      cli::cli_abort("palettes_path does not exist: {.path {palettes_path}}", call = NULL)
+    }
+    e <- new.env(parent = emptyenv())
+    load(palettes_path, envir = e)
+    if (exists("palettes", envir = e, inherits = FALSE)) {
+      return(get("palettes", envir = e, inherits = FALSE))
+    }
+    cli::cli_abort(
+      "Object {.val palettes} not found in {.path {palettes_path}}.",
+      call = NULL
+    )
+  }
+
+  # Package namespace (normal installed / devtools::load_all() usage)
+  pkg <- "evanverse"
+  ns <- tryCatch(asNamespace(pkg), error = function(e) NULL)
+  if (!is.null(ns) && exists("palettes", envir = ns, inherits = FALSE)) {
     return(get("palettes", envir = ns, inherits = FALSE))
   }
 
-  pkg_env_name <- "package:evanverse"
+  pkg_env_name <- paste0("package:", pkg)
   if (pkg_env_name %in% search()) {
     pkg_env <- as.environment(pkg_env_name)
     if (exists("palettes", envir = pkg_env, inherits = FALSE)) {
@@ -192,6 +234,7 @@
     }
   }
 
+  # Local data/ folder fallback (devtools workflow, working dir = package root)
   local_rda <- file.path("data", "palettes.rda")
   if (file.exists(local_rda)) {
     e <- new.env(parent = emptyenv())
@@ -202,7 +245,7 @@
   }
 
   e <- new.env(parent = emptyenv())
-  suppressWarnings(utils::data("palettes", package = "evanverse", envir = e))
+  suppressWarnings(utils::data("palettes", package = pkg, envir = e))
   if (exists("palettes", envir = e, inherits = FALSE)) {
     return(get("palettes", envir = e, inherits = FALSE))
   }
@@ -211,6 +254,44 @@
     "Palette dataset {.val palettes} is unavailable. Rebuild it via {.file data-raw/palettes.R}.",
     call = NULL
   )
+}
+
+
+#' Compute centered x positions for palette tiles
+#'
+#' Given n_colors tiles in a fixed n_slots grid, returns x midpoints
+#' so the tiles are centered with equal white space on both sides.
+#'
+#' @param n_colors Integer. Number of color tiles.
+#' @param n_slots  Integer. Total slots in the grid (>= n_colors).
+#' @return Numeric vector of x midpoints, length n_colors.
+#'
+#' @keywords internal
+#' @noRd
+.palette_tile_x <- function(n_colors, n_slots) {
+  n_slots  <- max(n_slots, n_colors)
+  offset   <- (n_slots - n_colors) / 2
+  offset + seq_len(n_colors) - 0.5
+}
+
+
+#' Choose readable text color for a given background HEX
+#'
+#' Uses perceived luminance (BT.601) to decide between white and black.
+#' Dark backgrounds get white text; light backgrounds get black text.
+#'
+#' @param hex Character. A single HEX color code (e.g. "#B11522").
+#' @return "white" or "black".
+#'
+#' @keywords internal
+#' @noRd
+.auto_text_color <- function(hex) {
+  hex_clean <- gsub("^#", "", hex)
+  r <- strtoi(substr(hex_clean, 1, 2), 16L) / 255
+  g <- strtoi(substr(hex_clean, 3, 4), 16L) / 255
+  b <- strtoi(substr(hex_clean, 5, 6), 16L) / 255
+  luminance <- 0.299 * r + 0.587 * g + 0.114 * b
+  if (luminance < 0.5) "white" else "black"
 }
 
 

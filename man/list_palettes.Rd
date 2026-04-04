@@ -4,12 +4,14 @@
 \alias{list_palettes}
 \title{List Available Color Palettes}
 \usage{
-list_palettes(type = NULL, sort = TRUE)
+list_palettes(type = NULL, sort = TRUE, palettes_path = NULL)
 }
 \arguments{
 \item{type}{Palette type(s) to filter: \code{"sequential"}, \code{"diverging"}, \code{"qualitative"}. Default NULL returns all.}
 
 \item{sort}{Whether to sort by type, n_color, name. Default: TRUE.}
+
+\item{palettes_path}{Character. Path to a \code{palettes.rda} file. If NULL, uses the installed package dataset.}
 }
 \value{
 A \code{data.frame} with columns: \code{name}, \code{type}, \code{n_color}, \code{colors}.

@@ -4,7 +4,7 @@
 \alias{get_palette}
 \title{Get a Color Palette}
 \usage{
-get_palette(name, type = NULL, n = NULL)
+get_palette(name, type = NULL, n = NULL, palettes_path = NULL)
 }
 \arguments{
 \item{name}{Character. Name of the palette (e.g. "qual_vivid").}
@@ -12,6 +12,8 @@ get_palette(name, type = NULL, n = NULL)
 \item{type}{Character. One of "sequential", "diverging", "qualitative". If NULL, type is auto-detected.}
 
 \item{n}{Integer. Number of colors to return. If NULL, returns all colors. Default is NULL.}
+
+\item{palettes_path}{Character. Path to a \code{palettes.rda} file. If NULL, uses the installed package dataset.}
 }
 \value{
 Character vector of HEX color codes.
