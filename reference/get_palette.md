@@ -7,7 +7,7 @@ suggestions.
 ## Usage
 
 ``` r
-get_palette(name, type = NULL, n = NULL)
+get_palette(name, type = NULL, n = NULL, palettes_path = NULL)
 ```
 
 ## Arguments
@@ -25,6 +25,11 @@ get_palette(name, type = NULL, n = NULL)
 
   Integer. Number of colors to return. If NULL, returns all colors.
   Default is NULL.
+
+- palettes_path:
+
+  Character. Path to a `palettes.rda` file. If NULL, uses the installed
+  package dataset.
 
 ## Value
 

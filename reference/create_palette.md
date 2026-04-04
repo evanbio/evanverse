@@ -48,16 +48,16 @@ Invisibly returns a list with `path` and `info`.
 temp_dir <- file.path(tempdir(), "palettes")
 create_palette("blues", "sequential", c("#deebf7", "#9ecae1", "#3182bd"),
   color_dir = temp_dir)
-#> ✔ Palette saved: /tmp/Rtmp97J7zu/palettes/sequential/blues.json
+#> ✔ Palette saved: /tmp/RtmpMbHjBv/palettes/sequential/blues.json
 create_palette("qual_vivid", "qualitative", c("#E64B35", "#4DBBD5", "#00A087"),
   color_dir = temp_dir)
-#> ✔ Palette saved: /tmp/Rtmp97J7zu/palettes/qualitative/qual_vivid.json
+#> ✔ Palette saved: /tmp/RtmpMbHjBv/palettes/qualitative/qual_vivid.json
 
 # Overwrite an existing palette explicitly
 create_palette("blues", "sequential", c("#c6dbef", "#6baed6", "#2171b5"),
   color_dir = temp_dir, overwrite = TRUE)
 #> ℹ Overwriting existing palette: "blues"
-#> ✔ Palette saved: /tmp/Rtmp97J7zu/palettes/sequential/blues.json
+#> ✔ Palette saved: /tmp/RtmpMbHjBv/palettes/sequential/blues.json
 
 unlink(temp_dir, recursive = TRUE)
 ```

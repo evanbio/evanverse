@@ -6,7 +6,13 @@ ggplot objects.
 ## Usage
 
 ``` r
-palette_gallery(type = NULL, max_palettes = 30, max_row = 12, verbose = TRUE)
+palette_gallery(
+  type = NULL,
+  max_palettes = 30,
+  max_row = 12,
+  verbose = TRUE,
+  palettes_path = NULL
+)
 ```
 
 ## Arguments
@@ -27,6 +33,11 @@ palette_gallery(type = NULL, max_palettes = 30, max_row = 12, verbose = TRUE)
 - verbose:
 
   Whether to print progress info. Default: TRUE.
+
+- palettes_path:
+
+  Character. Path to a `palettes.rda` file. If NULL, uses the installed
+  package dataset.
 
 ## Value
 

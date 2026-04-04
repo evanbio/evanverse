@@ -10,7 +10,8 @@ preview_palette(
   type = NULL,
   n = NULL,
   plot_type = c("bar", "pie", "point", "rect", "circle"),
-  title = NULL
+  title = NULL,
+  palettes_path = NULL
 )
 ```
 
@@ -37,6 +38,11 @@ preview_palette(
 - title:
 
   Character. Plot title. If NULL, defaults to palette name.
+
+- palettes_path:
+
+  Character. Path to a `palettes.rda` file. If NULL, uses the installed
+  package dataset.
 
 ## Value
 

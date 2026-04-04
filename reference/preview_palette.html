@@ -112,7 +112,8 @@
 <span>  type <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  n <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  plot_type <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"bar"</span>, <span class="st">"pie"</span>, <span class="st">"point"</span>, <span class="st">"rect"</span>, <span class="st">"circle"</span><span class="op">)</span>,</span>
-<span>  title <span class="op">=</span> <span class="cn">NULL</span></span>
+<span>  title <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  palettes_path <span class="op">=</span> <span class="cn">NULL</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
 
@@ -138,6 +139,10 @@
 
 <dt id="arg-title">title<a class="anchor" aria-label="anchor" href="#arg-title"></a></dt>
 <dd><p>Character. Plot title. If NULL, defaults to palette name.</p></dd>
+
+
+<dt id="arg-palettes-path">palettes_path<a class="anchor" aria-label="anchor" href="#arg-palettes-path"></a></dt>
+<dd><p>Character. Path to a <code>palettes.rda</code> file. If NULL, uses the installed package dataset.</p></dd>
 
 </dl></div>
     <div class="section level2">

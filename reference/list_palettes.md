@@ -6,7 +6,7 @@ filtered by type.
 ## Usage
 
 ``` r
-list_palettes(type = NULL, sort = TRUE)
+list_palettes(type = NULL, sort = TRUE, palettes_path = NULL)
 ```
 
 ## Arguments
@@ -19,6 +19,11 @@ list_palettes(type = NULL, sort = TRUE)
 - sort:
 
   Whether to sort by type, n_color, name. Default: TRUE.
+
+- palettes_path:
+
+  Character. Path to a `palettes.rda` file. If NULL, uses the installed
+  package dataset.
 
 ## Value
 
