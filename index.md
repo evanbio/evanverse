@@ -11,8 +11,8 @@
 
 ## Overview
 
-**evanverse** provides ~50 functions across package management,
-visualization, statistical analysis, bioinformatics, and more.
+**evanverse** provides 50+ functions across visualization, statistical
+analysis, bioinformatics, and more.
 
 ## Installation
 
@@ -26,7 +26,7 @@ install.packages("evanverse")
 library(evanverse)
 
 "Hello" %p% " " %p% "World"           # string concatenation
-inst_pkg("limma", source = "Bioc")    # multi-source install
+set_mirror("cran", "tuna")            # configure CRAN mirror
 plot_venn(list(A = 1:5, B = 3:8))    # Venn diagram
 quick_ttest(df, "group", "value")     # t-test with auto method selection
 gene2ensembl(c("TP53", "BRCA1"))      # gene ID conversion
@@ -37,7 +37,7 @@ stat_power(n = 30, effect_size = 0.5) # power analysis
 
 | Area                 | Functions                                                                                                                                                                                                                                                                                                                                                                                                                                                                            |
 |----------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| Package management   | [`inst_pkg()`](https://evanbio.github.io/evanverse/reference/inst_pkg.md), [`check_pkg()`](https://evanbio.github.io/evanverse/reference/check_pkg.md), [`update_pkg()`](https://evanbio.github.io/evanverse/reference/update_pkg.md), [`set_mirror()`](https://evanbio.github.io/evanverse/reference/set_mirror.md), …                                                                                                                                                              |
+| Package management   | [`set_mirror()`](https://evanbio.github.io/evanverse/reference/set_mirror.md), [`pkg_functions()`](https://evanbio.github.io/evanverse/reference/pkg_functions.md) — see [pak](https://pak.r-lib.org/) for install/update/check                                                                                                                                                                                                                                                      |
 | Visualization        | [`plot_bar()`](https://evanbio.github.io/evanverse/reference/plot_bar.md), [`plot_venn()`](https://evanbio.github.io/evanverse/reference/plot_venn.md), [`plot_forest()`](https://evanbio.github.io/evanverse/reference/plot_forest.md), [`plot_pie()`](https://evanbio.github.io/evanverse/reference/plot_pie.md), [`plot_density()`](https://evanbio.github.io/evanverse/reference/plot_density.md)                                                                                |
 | Statistical analysis | [`quick_ttest()`](https://evanbio.github.io/evanverse/reference/quick_ttest.md), [`quick_anova()`](https://evanbio.github.io/evanverse/reference/quick_anova.md), [`quick_chisq()`](https://evanbio.github.io/evanverse/reference/quick_chisq.md), [`quick_cor()`](https://evanbio.github.io/evanverse/reference/quick_cor.md), [`stat_power()`](https://evanbio.github.io/evanverse/reference/stat_power.md), [`stat_n()`](https://evanbio.github.io/evanverse/reference/stat_n.md) |
 | Color palettes       | [`get_palette()`](https://evanbio.github.io/evanverse/reference/get_palette.md), [`create_palette()`](https://evanbio.github.io/evanverse/reference/create_palette.md), [`preview_palette()`](https://evanbio.github.io/evanverse/reference/preview_palette.md), [`palette_gallery()`](https://evanbio.github.io/evanverse/reference/palette_gallery.md), …                                                                                                                          |

@@ -17,7 +17,6 @@
 <url><loc>https://evanbio.github.io/evanverse/authors.html</loc></url>
 <url><loc>https://evanbio.github.io/evanverse/index.html</loc></url>
 <url><loc>https://evanbio.github.io/evanverse/news/index.html</loc></url>
-<url><loc>https://evanbio.github.io/evanverse/reference/check_pkg.html</loc></url>
 <url><loc>https://evanbio.github.io/evanverse/reference/comb.html</loc></url>
 <url><loc>https://evanbio.github.io/evanverse/reference/compile_palettes.html</loc></url>
 <url><loc>https://evanbio.github.io/evanverse/reference/create_palette.html</loc></url>
@@ -42,13 +41,11 @@
 <url><loc>https://evanbio.github.io/evanverse/reference/grapes-p-grapes.html</loc></url>
 <url><loc>https://evanbio.github.io/evanverse/reference/hex2rgb.html</loc></url>
 <url><loc>https://evanbio.github.io/evanverse/reference/index.html</loc></url>
-<url><loc>https://evanbio.github.io/evanverse/reference/inst_pkg.html</loc></url>
 <url><loc>https://evanbio.github.io/evanverse/reference/list_palettes.html</loc></url>
 <url><loc>https://evanbio.github.io/evanverse/reference/palette_gallery.html</loc></url>
 <url><loc>https://evanbio.github.io/evanverse/reference/palettes.html</loc></url>
 <url><loc>https://evanbio.github.io/evanverse/reference/perm.html</loc></url>
 <url><loc>https://evanbio.github.io/evanverse/reference/pkg_functions.html</loc></url>
-<url><loc>https://evanbio.github.io/evanverse/reference/pkg_version.html</loc></url>
 <url><loc>https://evanbio.github.io/evanverse/reference/plot_bar.html</loc></url>
 <url><loc>https://evanbio.github.io/evanverse/reference/plot_density.html</loc></url>
 <url><loc>https://evanbio.github.io/evanverse/reference/plot_forest.html</loc></url>
@@ -67,7 +64,6 @@
 <url><loc>https://evanbio.github.io/evanverse/reference/stat_power.html</loc></url>
 <url><loc>https://evanbio.github.io/evanverse/reference/toy_gene_ref.html</loc></url>
 <url><loc>https://evanbio.github.io/evanverse/reference/toy_gmt.html</loc></url>
-<url><loc>https://evanbio.github.io/evanverse/reference/update_pkg.html</loc></url>
 <url><loc>https://evanbio.github.io/evanverse/reference/view.html</loc></url>
 </urlset>
 

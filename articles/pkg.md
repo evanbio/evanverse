@@ -2,36 +2,34 @@
 
 ## Overview
 
-The pkg module provides six functions covering four areas:
+The pkg module provides two functions:
 
-| Area                    | Functions                                                                                                                                                      |
-|-------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| Mirror configuration    | [`set_mirror()`](https://evanbio.github.io/evanverse/reference/set_mirror.md)                                                                                  |
-| Installation & checking | [`inst_pkg()`](https://evanbio.github.io/evanverse/reference/inst_pkg.md), [`check_pkg()`](https://evanbio.github.io/evanverse/reference/check_pkg.md)         |
-| Updates & versions      | [`update_pkg()`](https://evanbio.github.io/evanverse/reference/update_pkg.md), [`pkg_version()`](https://evanbio.github.io/evanverse/reference/pkg_version.md) |
-| Exploration             | [`pkg_functions()`](https://evanbio.github.io/evanverse/reference/pkg_functions.md)                                                                            |
+| Function                                                                            | Purpose                                            |
+|-------------------------------------------------------------------------------------|----------------------------------------------------|
+| [`set_mirror()`](https://evanbio.github.io/evanverse/reference/set_mirror.md)       | Configure CRAN / Bioconductor download mirrors     |
+| [`pkg_functions()`](https://evanbio.github.io/evanverse/reference/pkg_functions.md) | List exported functions from any installed package |
+
+For installation, updates, and status checks, we recommend
+[pak](https://pak.r-lib.org/) — it provides a more elegant and
+performant workflow with parallel downloads and a unified interface for
+CRAN, GitHub, and Bioconductor.
 
 ``` r
 library(evanverse)
 ```
 
 > **Note:** All code examples in this vignette are static
-> (`eval = FALSE`). Output is hand-written to reflect the current
-> implementation. Network-dependent functions
-> ([`inst_pkg()`](https://evanbio.github.io/evanverse/reference/inst_pkg.md),
-> [`update_pkg()`](https://evanbio.github.io/evanverse/reference/update_pkg.md),
-> [`pkg_version()`](https://evanbio.github.io/evanverse/reference/pkg_version.md))
-> require an active internet connection at runtime.
+> (`eval = FALSE`).
 
 ------------------------------------------------------------------------
 
 ## 1 Mirror Configuration
 
-### `set_mirror()` -Set CRAN and Bioconductor mirrors
+### `set_mirror()` — Set CRAN and Bioconductor mirrors
 
-Configures the CRAN and/or Bioconductor download mirrors used by all
-subsequent installation and update calls. The previous settings are
-returned invisibly, making it easy to restore them.
+Configures the CRAN and/or Bioconductor download mirrors. Settings are
+respected by R’s native install functions and by pak. The previous
+settings are returned invisibly, making it easy to restore them.
 
 ``` r
 # Set both mirrors to Tsinghua (default)
@@ -84,206 +82,9 @@ options(prev)  # restore original mirror
 
 ------------------------------------------------------------------------
 
-## 2 Installation & Checking
+## 2 Package Exploration
 
-### `inst_pkg()` -Install packages from multiple sources
-
-Installs packages from CRAN, GitHub, Bioconductor, or a local file.
-Packages that are already installed are automatically skipped.
-
-``` r
-# CRAN
-inst_pkg("ggplot2", source = "CRAN")
-#> i Installing from CRAN: ggplot2
-#> v Installation complete!
-
-# Multiple packages at once
-inst_pkg(c("dplyr", "tidyr", "purrr"), source = "CRAN")
-```
-
-``` r
-# GitHub — basic "user/repo" format
-inst_pkg("hadley/emo", source = "GitHub")
-
-# devtools extended formats are also accepted:
-# @ref pins a specific branch, tag, or SHA; #pr installs from a pull request
-inst_pkg("tidyverse/ggplot2@v3.4.0", source = "GitHub")
-inst_pkg("r-lib/cli#123",            source = "GitHub")
-```
-
-``` r
-# Bioconductor
-inst_pkg("DESeq2",    source = "Bioconductor")
-inst_pkg("scRNAseq",  source = "Bioconductor")
-```
-
-``` r
-# Local file
-inst_pkg(source = "Local", path = "mypackage_1.0.0.tar.gz")
-```
-
-`path` is required for local installs — omitting it raises an error
-immediately:
-
-``` r
-inst_pkg(source = "Local")
-#> Error in `inst_pkg()`:
-#> ! Must provide `path` for local installation.
-```
-
-Already-installed packages are skipped rather than reinstalled:
-
-``` r
-inst_pkg("ggplot2", source = "CRAN")
-#> i Package ggplot2 is already installed. Skipped.
-#> v All packages already installed.
-```
-
-------------------------------------------------------------------------
-
-### `check_pkg()` -Check installation status
-
-Returns a tibble reporting whether each package is installed. Pass
-`auto_install = TRUE` to install missing packages automatically; a
-single failure does not interrupt the remaining checks.
-
-``` r
-check_pkg("ggplot2", source = "CRAN")
-#> # A tibble: 1 × 4
-#>   package name    installed source
-#>   <chr>   <chr>   <lgl>     <chr>
-#> 1 ggplot2 ggplot2 TRUE      CRAN
-```
-
-``` r
-check_pkg(c("ggplot2", "fakepkg123"), source = "CRAN")
-#> v Installed: ggplot2
-#> ! Missing: fakepkg123
-#> # A tibble: 2 × 4
-#>   package    name       installed source
-#>   <chr>      <chr>      <lgl>     <chr>
-#> 1 ggplot2    ggplot2    TRUE      CRAN
-#> 2 fakepkg123 fakepkg123 FALSE     CRAN
-```
-
-For GitHub packages the `package` column holds the full `"user/repo"`
-string while `name` holds just the package name:
-
-``` r
-check_pkg("r-lib/cli", source = "GitHub")
-#> # A tibble: 1 × 4
-#>   package   name  installed source
-#>   <chr>     <chr> <lgl>     <chr>
-#> 1 r-lib/cli cli   TRUE      GitHub
-```
-
-Auto-install missing packages in one call:
-
-``` r
-check_pkg(c("ggplot2", "fakepkg123"), source = "CRAN", auto_install = TRUE)
-#> v Installed: ggplot2
-#> ! Missing: fakepkg123
-#> i Installing from CRAN: fakepkg123
-#> ...
-```
-
-------------------------------------------------------------------------
-
-## 3 Updates & Versions
-
-### `update_pkg()` -Update installed packages
-
-Supports three update modes: full update across all sources,
-source-specific bulk update, or targeted update of named packages.
-
-``` r
-# Update all CRAN + Bioconductor packages
-update_pkg()
-#> i Checking for BiocManager updates...
-#> i Upgrading Bioconductor packages to version 3.21...
-#> v Bioconductor upgraded to version 3.21.
-#> i Updating all CRAN packages...
-#> v Update complete!
-```
-
-``` r
-# CRAN only
-update_pkg(source = "CRAN")
-
-# Bioconductor only (full Bioc upgrade)
-update_pkg(source = "Bioconductor")
-```
-
-``` r
-# Specific packages
-update_pkg("ggplot2",            source = "CRAN")
-update_pkg("hadley/ggplot2",     source = "GitHub")
-update_pkg("DESeq2",             source = "Bioconductor")
-```
-
-> Providing `pkg` with `source = "Bioconductor"` updates only that
-> package — it does **not** trigger a full Bioconductor upgrade.
-
-Combining `pkg` with `source = "all"` is an error:
-
-``` r
-update_pkg("ggplot2")
-#> Error in `update_pkg()`:
-#> ! Must specify `source` when providing `pkg`.
-```
-
-------------------------------------------------------------------------
-
-### `pkg_version()` -Check installed and latest versions
-
-Returns a data frame with columns `package`, `version` (installed),
-`latest` (newest available), and `source` (CRAN, Bioconductor, or
-GitHub). Source detection is automatic.
-
-> If the Bioconductor mirror is unreachable,
-> [`pkg_version()`](https://evanbio.github.io/evanverse/reference/pkg_version.md)
-> degrades gracefully: it emits a warning and treats all Bioc packages
-> as “Not Found”. Switch to the official mirror and retry:
-> `set_mirror("bioc", "official")`.
-
-``` r
-pkg_version(c("ggplot2", "dplyr"))
-#>   package version latest source
-#> 1 ggplot2   3.4.4  3.5.0   CRAN
-#> 2   dplyr   1.1.4  1.1.4   CRAN
-```
-
-Uninstalled or unknown packages return `NA` for `version` and
-`"Not Found"` for `source`:
-
-``` r
-pkg_version("nonexistentpkg")
-#>        package version latest      source
-#> 1 nonexistentpkg    <NA>   <NA> Not Found
-```
-
-GitHub-installed packages report the installed commit SHA and the remote
-reference:
-
-``` r
-pkg_version("emo")
-#>   package version  latest                      source
-#> 1     emo   0.0.1 a1b2c3d GitHub (hadley/emo@master)
-```
-
-Duplicate package names in the input are silently deduplicated:
-
-``` r
-pkg_version(c("ggplot2", "ggplot2"))
-#>   package version latest source
-#> 1 ggplot2   3.4.4  3.5.0   CRAN
-```
-
-------------------------------------------------------------------------
-
-## 4 Exploration
-
-### `pkg_functions()` -List exported functions
+### `pkg_functions()` — List exported functions
 
 Returns an alphabetically sorted character vector of exported symbols
 from any installed package. Use `key` to filter by a case-insensitive
@@ -291,8 +92,8 @@ keyword.
 
 ``` r
 pkg_functions("evanverse")
-#>  [1] "check_pkg"       "compile_palettes" "create_palette"  "df2list"
-#>  [5] "df2vect"         "file_info"        "file_ls"         "file_tree"
+#>  [1] "compile_palettes" "create_palette"  "df2list"
+#>  [4] "df2vect"          "file_info"        "file_ls"
 #>  ...
 ```
 
@@ -300,12 +101,12 @@ pkg_functions("evanverse")
 # Filter by keyword (case-insensitive)
 pkg_functions("evanverse", key = "palette")
 #> [1] "compile_palettes" "create_palette"   "get_palette"
-#> [4] "list_palettes"    "palette_gallery"   "preview_palette"
+#> [4] "list_palettes"    "palette_gallery"  "preview_palette"
 #> [7] "remove_palette"
 
 pkg_functions("stats", key = "test")
-#> [1] "ansari.test"     "bartlett.test"   "binom.test"
-#> [4] "chisq.test"      "cor.test"        "fisher.test"
+#> [1] "ansari.test"   "bartlett.test" "binom.test"
+#> [4] "chisq.test"    "cor.test"      "fisher.test"
 #> ...
 ```
 
@@ -326,56 +127,33 @@ pkg_functions("somefakepkg")
 
 ------------------------------------------------------------------------
 
-## 5 A Combined Workflow
+## 3 Recommended: pak for Installation & Updates
 
-The functions compose naturally for setting up a new analysis
-environment. The example below configures mirrors, checks a dependency
-list, installs missing packages, then verifies versions are up to date.
+We found that [pak](https://pak.r-lib.org/) provides a more elegant and
+performant package management workflow. It supports parallel
+installation, automatic dependency resolution, and a unified interface
+for all package sources — which is why `inst_pkg()`, `check_pkg()`,
+`update_pkg()`, and `pkg_version()` were removed from evanverse.
 
 ``` r
-library(evanverse)
+# Install pak
+install.packages("pak")
 
-# 1. Switch to a fast local mirror
+# Set a fast mirror first (evanverse)
 set_mirror("all", "tuna")
-#> v CRAN mirror set to: https://mirrors.tuna.tsinghua.edu.cn/CRAN
-#> v Bioconductor mirror set to: https://mirrors.tuna.tsinghua.edu.cn/bioconductor
 
-# 2. Define required packages
-cran_pkgs <- c("ggplot2", "dplyr", "purrr", "readxl")
-bioc_pkgs <- c("DESeq2", "clusterProfiler")
+# Install from any source with a unified interface
+pak::pkg_install("ggplot2")                              # CRAN
+pak::pkg_install("tidyverse/ggplot2")                    # GitHub
+pak::pkg_install("bioc::DESeq2")                         # Bioconductor
+pak::pkg_install(c("dplyr", "bioc::limma", "r-lib/pak")) # mixed
 
-# 3. Check what is already installed
-cran_status <- check_pkg(cran_pkgs, source = "CRAN")
-bioc_status <- check_pkg(bioc_pkgs, source = "Bioconductor")
+# Check status
+pak::pkg_status(c("ggplot2", "DESeq2"))
 
-# 4. Install only missing packages
-missing_cran <- cran_status$name[!cran_status$installed]
-missing_bioc <- bioc_status$name[!bioc_status$installed]
-
-if (length(missing_cran) > 0) inst_pkg(missing_cran, source = "CRAN")
-if (length(missing_bioc) > 0) inst_pkg(missing_bioc, source = "Bioconductor")
-
-# 5. Verify versions -flag anything outdated
-versions <- pkg_version(c(cran_pkgs, bioc_pkgs))
-outdated <- versions[!is.na(versions$version) &
-                     !is.na(versions$latest)   &
-                     versions$version != versions$latest, ]
-outdated
-#>      package version latest source
-#> 1    ggplot2   3.4.4  3.5.0   CRAN
-#> 2     DESeq2  1.38.0 1.40.0   Bioconductor
-
-# 6. Update only the outdated ones
-if (nrow(outdated) > 0) {
-  cran_out <- outdated$package[outdated$source == "CRAN"]
-  bioc_out <- outdated$package[outdated$source == "Bioconductor"]
-  if (length(cran_out) > 0) update_pkg(cran_out, source = "CRAN")
-  if (length(bioc_out) > 0) update_pkg(bioc_out, source = "Bioconductor")
-}
-
-# 7. Confirm evanverse exports look right
-pkg_functions("evanverse", key = "pkg")
-#> [1] "check_pkg"    "inst_pkg"     "pkg_functions" "pkg_version"  "update_pkg"
+# Update all or specific packages
+pak::pkg_update()
+pak::pkg_update("ggplot2")
 ```
 
 ------------------------------------------------------------------------
@@ -383,9 +161,6 @@ pkg_functions("evanverse", key = "pkg")
 ## Getting Help
 
 - [`?set_mirror`](https://evanbio.github.io/evanverse/reference/set_mirror.md)
-- [`?inst_pkg`](https://evanbio.github.io/evanverse/reference/inst_pkg.md),
-  [`?check_pkg`](https://evanbio.github.io/evanverse/reference/check_pkg.md)
-- [`?update_pkg`](https://evanbio.github.io/evanverse/reference/update_pkg.md),
-  [`?pkg_version`](https://evanbio.github.io/evanverse/reference/pkg_version.md)
 - [`?pkg_functions`](https://evanbio.github.io/evanverse/reference/pkg_functions.md)
+- [pak documentation](https://pak.r-lib.org/)
 - [GitHub Issues](https://github.com/evanbio/evanverse/issues)

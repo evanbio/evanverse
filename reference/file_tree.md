@@ -28,7 +28,6 @@ Invisibly returns a character vector of tree lines.
 ``` r
 file_tree()
 #> /home/runner/work/evanverse/evanverse/docs/reference
-#> +-- check_pkg.html
 #> +-- comb.html
 #> +-- compile_palettes.html
 #> +-- create_palette.html
@@ -45,7 +44,6 @@ file_tree()
 #> +-- index.html
 file_tree(".", max_depth = 3)
 #> /home/runner/work/evanverse/evanverse/docs/reference
-#> +-- check_pkg.html
 #> +-- comb.html
 #> +-- compile_palettes.html
 #> +-- create_palette.html

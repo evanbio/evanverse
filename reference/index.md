@@ -2,17 +2,11 @@
 
 ## Package Management
 
-Functions for installing, checking, and managing R packages from
-multiple sources (CRAN, GitHub, Bioconductor).
+Mirror configuration and package inspection utilities. For installing,
+updating, and checking packages, we recommend
+[pak](https://pak.r-lib.org/) — it provides a more elegant and
+performant workflow than the functions previously bundled here.
 
-- [`check_pkg()`](https://evanbio.github.io/evanverse/reference/check_pkg.md)
-  : Check Package Installation Status
-- [`inst_pkg()`](https://evanbio.github.io/evanverse/reference/inst_pkg.md)
-  : Install R Packages from Multiple Sources
-- [`update_pkg()`](https://evanbio.github.io/evanverse/reference/update_pkg.md)
-  : Update R Packages
-- [`pkg_version()`](https://evanbio.github.io/evanverse/reference/pkg_version.md)
-  : Check Package Versions
 - [`pkg_functions()`](https://evanbio.github.io/evanverse/reference/pkg_functions.md)
   : List Package Functions
 - [`set_mirror()`](https://evanbio.github.io/evanverse/reference/set_mirror.md)

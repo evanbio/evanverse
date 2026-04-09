@@ -501,8 +501,7 @@ examples and file operation handling.
   examples
   - Functions updated: `download_geo_data()`,
     [`download_url()`](https://evanbio.github.io/evanverse/reference/download_url.md),
-    [`inst_pkg()`](https://evanbio.github.io/evanverse/reference/inst_pkg.md),
-    [`pkg_version()`](https://evanbio.github.io/evanverse/reference/pkg_version.md),
+    `inst_pkg()`, `pkg_version()`,
     [`set_mirror()`](https://evanbio.github.io/evanverse/reference/set_mirror.md)
 - **GMT file examples**: Enhanced examples for
   [`gmt2df()`](https://evanbio.github.io/evanverse/reference/gmt2df.md)
@@ -746,13 +745,13 @@ tighter parameter validation, stronger tests, and several new utilities.
   - Inlined, robust delimiter detection for .csv/.tsv/.txt and .gz files
   - Stricter parameter checks and clearer CLI error messages
   - Enhanced encoding guardrails for better file handling
-- **[`update_pkg()`](https://evanbio.github.io/evanverse/reference/update_pkg.md)**
+- **`update_pkg()`**
   - Source normalization via strict
     [`match()`](https://rdrr.io/r/base/match.html) function
   - Supports only “CRAN”, “GitHub”, “Bioconductor” sources
   - Clearer messages and mirror handling aligned with
     [`set_mirror()`](https://evanbio.github.io/evanverse/reference/set_mirror.md)
-- **[`pkg_version()`](https://evanbio.github.io/evanverse/reference/pkg_version.md)**
+- **`pkg_version()`**
   - More robust CRAN/Bioconductor database retrieval
   - Helpful suggestions for GitHub package installations
   - Optional preview printing with clearer CLI output
@@ -842,10 +841,7 @@ bioinformaticians.
 
 ##### Package Management Tools
 
-- [`check_pkg()`](https://evanbio.github.io/evanverse/reference/check_pkg.md),
-  [`inst_pkg()`](https://evanbio.github.io/evanverse/reference/inst_pkg.md),
-  [`update_pkg()`](https://evanbio.github.io/evanverse/reference/update_pkg.md),
-  [`pkg_version()`](https://evanbio.github.io/evanverse/reference/pkg_version.md)
+- `check_pkg()`, `inst_pkg()`, `update_pkg()`, `pkg_version()`
 
 ##### Bioinformatics Color Palettes
 

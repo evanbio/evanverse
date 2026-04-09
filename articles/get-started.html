@@ -19,7 +19,7 @@
 <link href="../deps/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet">
 <script src="../deps/headroom-0.11.0/headroom.min.js"></script><script src="../deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="../deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="../deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="../deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="../deps/search-1.0.0/fuse.min.js"></script><script src="../deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="Get Started">
 <meta name="keywords" content="R package, data analysis, bioinformatics, visualization, utilities, CRAN">
-<meta name="description" content="evanverse: A comprehensive R utility package with 56+ functions for data analysis, visualization, and bioinformatics workflows">
+<meta name="description" content="evanverse: A comprehensive R utility package with 50+ functions for data analysis, visualization, and bioinformatics workflows">
 <meta name="author" content="Evan Zhou">
 <!-- Enhanced Favicon --><link rel="icon" type="image/png" sizes="32x32" href="man/figures/logo.png">
 <link rel="icon" type="image/png" sizes="16x16" href="man/figures/logo.png">
@@ -168,8 +168,7 @@ convenient operators.</p>
 <tr class="even">
 <td>Package management</td>
 <td>
-<code><a href="../reference/set_mirror.html">set_mirror()</a></code>, <code><a href="../reference/inst_pkg.html">inst_pkg()</a></code>,
-<code><a href="../reference/check_pkg.html">check_pkg()</a></code>, <code><a href="../reference/update_pkg.html">update_pkg()</a></code>
+<code><a href="../reference/set_mirror.html">set_mirror()</a></code>, <code><a href="../reference/pkg_functions.html">pkg_functions()</a></code>
 </td>
 </tr>
 <tr class="odd">
@@ -222,19 +221,21 @@ your fan starts roaring, congratulations: your laptop has entered
 <hr>
 </div>
 <div class="section level2">
-<h2 id="install-and-check-packages">2 Install And Check Packages<a class="anchor" aria-label="anchor" href="#install-and-check-packages"></a>
+<h2 id="mirror-package-management">2 Mirror &amp; Package Management<a class="anchor" aria-label="anchor" href="#mirror-package-management"></a>
 </h2>
-<p>Use built-in package-management helpers:</p>
+<p>Configure mirrors with <code><a href="../reference/set_mirror.html">set_mirror()</a></code>, then use <a href="https://pak.r-lib.org/" class="external-link">pak</a> for installation:</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="../reference/set_mirror.html">set_mirror</a></span><span class="op">(</span><span class="st">"all"</span>, <span class="st">"tuna"</span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="co"># Set CRAN + Bioconductor mirrors (great for users in China)</span></span>
+<span><span class="fu"><a href="../reference/set_mirror.html">set_mirror</a></span><span class="op">(</span><span class="st">"all"</span>, <span class="st">"tuna"</span><span class="op">)</span></span>
 <span></span>
-<span><span class="fu"><a href="../reference/inst_pkg.html">inst_pkg</a></span><span class="op">(</span><span class="st">"dplyr"</span>, source <span class="op">=</span> <span class="st">"CRAN"</span><span class="op">)</span></span>
+<span><span class="co"># pak handles CRAN, GitHub, and Bioconductor with a unified interface</span></span>
+<span><span class="fu">pak</span><span class="fu">::</span><span class="fu"><a href="https://pak.r-lib.org/reference/pkg_install.html" class="external-link">pkg_install</a></span><span class="op">(</span><span class="st">"dplyr"</span><span class="op">)</span></span>
+<span><span class="fu">pak</span><span class="fu">::</span><span class="fu"><a href="https://pak.r-lib.org/reference/pkg_install.html" class="external-link">pkg_install</a></span><span class="op">(</span><span class="st">"tidyverse/ggplot2"</span><span class="op">)</span>   <span class="co"># GitHub</span></span>
+<span><span class="fu">pak</span><span class="fu">::</span><span class="fu"><a href="https://pak.r-lib.org/reference/pkg_install.html" class="external-link">pkg_install</a></span><span class="op">(</span><span class="st">"bioc::DESeq2"</span><span class="op">)</span>        <span class="co"># Bioconductor</span></span>
 <span></span>
-<span><span class="fu"><a href="../reference/check_pkg.html">check_pkg</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"dplyr"</span>, <span class="st">"ggplot2"</span><span class="op">)</span>, source <span class="op">=</span> <span class="st">"CRAN"</span><span class="op">)</span></span>
-<span><span class="co">#&gt; # A tibble with installed status</span></span></code></pre></div>
-<p>Update packages when needed:</p>
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="../reference/update_pkg.html">update_pkg</a></span><span class="op">(</span>source <span class="op">=</span> <span class="st">"CRAN"</span><span class="op">)</span></span></code></pre></div>
+<span><span class="co"># Check status or update</span></span>
+<span><span class="fu">pak</span><span class="fu">::</span><span class="fu"><a href="https://pak.r-lib.org/reference/pkg_status.html" class="external-link">pkg_status</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"dplyr"</span>, <span class="st">"ggplot2"</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="fu">pak</span><span class="fu">::</span><span class="fu">pkg_update</span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <hr>
 </div>
 <div class="section level2">
@@ -244,7 +245,7 @@ your fan starts roaring, congratulations: your laptop has entered
 <h3 id="df2list-and-df2vect">
 <code>df2list()</code> and <code>df2vect()</code><a class="anchor" aria-label="anchor" href="#df2list-and-df2vect"></a>
 </h3>
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span></span>
 <span>  group <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"A"</span>, <span class="st">"A"</span>, <span class="st">"B"</span><span class="op">)</span>,</span>
 <span>  gene  <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"TP53"</span>, <span class="st">"EGFR"</span>, <span class="st">"BRCA1"</span><span class="op">)</span>,</span>
@@ -265,7 +266,7 @@ your fan starts roaring, congratulations: your laptop has entered
 <h3 id="toy_gmt-with-gmt-parsers">
 <code>toy_gmt()</code> with GMT parsers<a class="anchor" aria-label="anchor" href="#toy_gmt-with-gmt-parsers"></a>
 </h3>
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">path</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/toy_gmt.html">toy_gmt</a></span><span class="op">(</span>n <span class="op">=</span> <span class="fl">3</span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">gmt_df</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/gmt2df.html">gmt2df</a></span><span class="op">(</span><span class="va">path</span><span class="op">)</span></span>
@@ -283,7 +284,7 @@ your fan starts roaring, congratulations: your laptop has entered
 <div class="section level2">
 <h2 id="quick-statistics">4 Quick Statistics<a class="anchor" aria-label="anchor" href="#quick-statistics"></a>
 </h2>
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed</a></span><span class="op">(</span><span class="fl">42</span><span class="op">)</span></span>
 <span><span class="va">df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span></span>
 <span>  group <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"A"</span>, <span class="st">"B"</span><span class="op">)</span>, each <span class="op">=</span> <span class="fl">30</span><span class="op">)</span>,</span>
@@ -294,7 +295,7 @@ your fan starts roaring, congratulations: your laptop has entered
 <span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">res_t</span><span class="op">)</span></span>
 <span><span class="co">#&gt; t.test | p = ...</span></span></code></pre></div>
 <p>Correlation summary:</p>
-<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">res_cor</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/quick_cor.html">quick_cor</a></span><span class="op">(</span><span class="va">mtcars</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">res_cor</span><span class="op">)</span></span>
 <span><span class="co">#&gt; pearson | ... vars | ... significant pairs</span></span></code></pre></div>
@@ -303,7 +304,7 @@ your fan starts roaring, congratulations: your laptop has entered
 <div class="section level2">
 <h2 id="first-plot">5 First Plot<a class="anchor" aria-label="anchor" href="#first-plot"></a>
 </h2>
-<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/plot_bar.html">plot_bar</a></span><span class="op">(</span></span>
 <span>  data <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span>category <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"A"</span>, <span class="st">"B"</span>, <span class="st">"C"</span><span class="op">)</span>, value <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">10</span>, <span class="fl">7</span>, <span class="fl">12</span><span class="op">)</span><span class="op">)</span>,</span>
 <span>  x_col <span class="op">=</span> <span class="st">"category"</span>,</span>
@@ -315,7 +316,7 @@ your fan starts roaring, congratulations: your laptop has entered
 <div class="section level2">
 <h2 id="a-combined-workflow">6 A Combined Workflow<a class="anchor" aria-label="anchor" href="#a-combined-workflow"></a>
 </h2>
-<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># 1) Prepare toy reference and gene sets</span></span>
 <span><span class="va">ref</span>  <span class="op">&lt;-</span> <span class="fu"><a href="../reference/toy_gene_ref.html">toy_gene_ref</a></span><span class="op">(</span><span class="st">"human"</span>, n <span class="op">=</span> <span class="fl">100</span><span class="op">)</span></span>
 <span><span class="va">path</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/toy_gmt.html">toy_gmt</a></span><span class="op">(</span>n <span class="op">=</span> <span class="fl">3</span><span class="op">)</span></span>
@@ -343,8 +344,7 @@ your fan starts roaring, congratulations: your laptop has entered
 <code><a href="../reference/grapes-map-grapes.html">?"%map%"</a></code>, <code><a href="../reference/grapes-is-grapes.html">?"%is%"</a></code>
 </li>
 <li>
-<code><a href="../reference/set_mirror.html">?set_mirror</a></code>, <code><a href="../reference/inst_pkg.html">?inst_pkg</a></code>,
-<code><a href="../reference/check_pkg.html">?check_pkg</a></code>, <code><a href="../reference/update_pkg.html">?update_pkg</a></code>
+<code><a href="../reference/set_mirror.html">?set_mirror</a></code>, <code><a href="../reference/pkg_functions.html">?pkg_functions</a></code>
 </li>
 <li>
 <code><a href="../reference/quick_ttest.html">?quick_ttest</a></code>, <code><a href="../reference/quick_anova.html">?quick_anova</a></code>,

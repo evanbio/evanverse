@@ -1,10 +1,8 @@
 # Set CRAN/Bioconductor Mirrors
 
 Configure CRAN and/or Bioconductor mirrors for faster package
-installation. All package management functions
-([`inst_pkg()`](https://evanbio.github.io/evanverse/reference/inst_pkg.md),
-[`update_pkg()`](https://evanbio.github.io/evanverse/reference/update_pkg.md),
-etc.) will respect these settings once set.
+installation. All package management functions (`inst_pkg()`,
+`update_pkg()`, etc.) will respect these settings once set.
 
 ## Usage
 

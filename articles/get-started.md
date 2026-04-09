@@ -9,7 +9,7 @@ operators.
 | Area               | Examples                                                                                                                                                                                                                                                                                                                                                                                              |
 |--------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | Operators          | `%p%`, `%nin%`, `%match%`, `%map%`, `%is%`                                                                                                                                                                                                                                                                                                                                                            |
-| Package management | [`set_mirror()`](https://evanbio.github.io/evanverse/reference/set_mirror.md), [`inst_pkg()`](https://evanbio.github.io/evanverse/reference/inst_pkg.md), [`check_pkg()`](https://evanbio.github.io/evanverse/reference/check_pkg.md), [`update_pkg()`](https://evanbio.github.io/evanverse/reference/update_pkg.md)                                                                                  |
+| Package management | [`set_mirror()`](https://evanbio.github.io/evanverse/reference/set_mirror.md), [`pkg_functions()`](https://evanbio.github.io/evanverse/reference/pkg_functions.md)                                                                                                                                                                                                                                    |
 | Data and parsing   | [`df2list()`](https://evanbio.github.io/evanverse/reference/df2list.md), [`df2vect()`](https://evanbio.github.io/evanverse/reference/df2vect.md), [`gmt2df()`](https://evanbio.github.io/evanverse/reference/gmt2df.md), [`gmt2list()`](https://evanbio.github.io/evanverse/reference/gmt2list.md)                                                                                                    |
 | Statistics         | [`quick_ttest()`](https://evanbio.github.io/evanverse/reference/quick_ttest.md), [`quick_anova()`](https://evanbio.github.io/evanverse/reference/quick_anova.md), [`quick_chisq()`](https://evanbio.github.io/evanverse/reference/quick_chisq.md), [`quick_cor()`](https://evanbio.github.io/evanverse/reference/quick_cor.md)                                                                        |
 | Plotting           | [`plot_bar()`](https://evanbio.github.io/evanverse/reference/plot_bar.md), [`plot_density()`](https://evanbio.github.io/evanverse/reference/plot_density.md), [`plot_pie()`](https://evanbio.github.io/evanverse/reference/plot_pie.md), [`plot_venn()`](https://evanbio.github.io/evanverse/reference/plot_venn.md), [`plot_forest()`](https://evanbio.github.io/evanverse/reference/plot_forest.md) |
@@ -41,23 +41,24 @@ c("tp53", "egfr") %match% c("TP53", "MYC", "EGFR")
 
 ------------------------------------------------------------------------
 
-## 2 Install And Check Packages
+## 2 Mirror & Package Management
 
-Use built-in package-management helpers:
+Configure mirrors with
+[`set_mirror()`](https://evanbio.github.io/evanverse/reference/set_mirror.md),
+then use [pak](https://pak.r-lib.org/) for installation:
 
 ``` r
+# Set CRAN + Bioconductor mirrors (great for users in China)
 set_mirror("all", "tuna")
 
-inst_pkg("dplyr", source = "CRAN")
+# pak handles CRAN, GitHub, and Bioconductor with a unified interface
+pak::pkg_install("dplyr")
+pak::pkg_install("tidyverse/ggplot2")   # GitHub
+pak::pkg_install("bioc::DESeq2")        # Bioconductor
 
-check_pkg(c("dplyr", "ggplot2"), source = "CRAN")
-#> # A tibble with installed status
-```
-
-Update packages when needed:
-
-``` r
-update_pkg(source = "CRAN")
+# Check status or update
+pak::pkg_status(c("dplyr", "ggplot2"))
+pak::pkg_update()
 ```
 
 ------------------------------------------------------------------------
@@ -170,9 +171,7 @@ plot(res, type = "upper", show_sig = TRUE)
   [`?"%map%"`](https://evanbio.github.io/evanverse/reference/grapes-map-grapes.md),
   [`?"%is%"`](https://evanbio.github.io/evanverse/reference/grapes-is-grapes.md)
 - [`?set_mirror`](https://evanbio.github.io/evanverse/reference/set_mirror.md),
-  [`?inst_pkg`](https://evanbio.github.io/evanverse/reference/inst_pkg.md),
-  [`?check_pkg`](https://evanbio.github.io/evanverse/reference/check_pkg.md),
-  [`?update_pkg`](https://evanbio.github.io/evanverse/reference/update_pkg.md)
+  [`?pkg_functions`](https://evanbio.github.io/evanverse/reference/pkg_functions.md)
 - [`?quick_ttest`](https://evanbio.github.io/evanverse/reference/quick_ttest.md),
   [`?quick_anova`](https://evanbio.github.io/evanverse/reference/quick_anova.md),
   [`?quick_chisq`](https://evanbio.github.io/evanverse/reference/quick_chisq.md),
