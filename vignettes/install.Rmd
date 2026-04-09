@@ -17,15 +17,16 @@ knitr::opts_chunk$set(
 
 ## Overview
 
-This guide covers installation, mirror setup, dependency checks, and updates
-for `evanverse` and related packages.
+This guide covers installation and mirror setup for `evanverse`.
+For package installation and updates beyond evanverse itself,
+we recommend [pak](https://pak.r-lib.org/).
 
 | Area | Tools |
 |---|---|
-| Base installation | `install.packages()`, `devtools::install_github()` |
+| Base installation | `install.packages()`, `pak::pkg_install()` |
 | Mirror configuration | `set_mirror()` |
-| Installation and checks | `inst_pkg()`, `check_pkg()` |
-| Updates | `update_pkg()` |
+| Installation and checks | `pak::pkg_install()`, `pak::pkg_status()` |
+| Updates | `pak::pkg_update()` |
 
 ```{r load}
 library(evanverse)
@@ -67,7 +68,7 @@ install.packages("evanverse", dependencies = TRUE)
 
 ### `set_mirror()` - Configure CRAN/Bioconductor mirrors
 
-`set_mirror()` controls mirror sources used by `inst_pkg()` and `update_pkg()`.
+`set_mirror()` configures the mirrors used by R's package system (and respected by pak).
 
 ```{r set-mirror-basic}
 # Set both CRAN + Bioconductor mirrors (default mirror: tuna)
@@ -99,95 +100,39 @@ set_mirror("all", "aliyun")
 
 ---
 
-## 3 Install Other Packages With evanverse
+## 3 Installing Other Packages
 
-### `inst_pkg()` - Install from CRAN, GitHub, Bioconductor, or local file
+We recommend [pak](https://pak.r-lib.org/) for all package installation needs.
+It provides parallel installs, a unified interface for CRAN / GitHub /
+Bioconductor, and automatic dependency resolution.
 
-```{r inst-cran}
-inst_pkg("dplyr", source = "CRAN")
+```{r pak-install}
+# Install pak first (if needed)
+install.packages("pak")
+
+# CRAN
+pak::pkg_install("dplyr")
+
+# GitHub
+pak::pkg_install("hadley/emo")
+
+# Bioconductor
+pak::pkg_install("DESeq2")
+
+# Multiple sources at once
+pak::pkg_install(c("dplyr", "tidyverse/ggplot2", "bioc::DESeq2"))
 ```
 
-```{r inst-github}
-inst_pkg("hadley/emo", source = "GitHub")
-```
+Check status and update:
 
-```{r inst-bioc}
-inst_pkg("DESeq2", source = "Bioconductor")
-```
-
-```{r inst-local}
-inst_pkg(source = "Local", path = "mypackage_1.0.0.tar.gz")
-```
-
-Local installation requires `path`:
-
-```{r inst-local-error}
-inst_pkg(source = "Local")
-#> Error in `inst_pkg()`:
-#> ! Must provide `path` for local installation.
-```
-
-Already-installed packages are skipped automatically.
-
----
-
-## 4 Verify Installation Status
-
-### `check_pkg()` - Check and optionally auto-install missing packages
-
-```{r check-basic}
-check_pkg("ggplot2", source = "CRAN")
-#> # A tibble: 1 x 4
-#>   package name    installed source
-#>   <chr>   <chr>   <lgl>     <chr>
-#> 1 ggplot2 ggplot2 TRUE      CRAN
-```
-
-```{r check-multiple}
-check_pkg(c("ggplot2", "fakepkg123"), source = "CRAN")
-#> v Installed: ggplot2
-#> ! Missing: fakepkg123
-```
-
-```{r check-auto}
-check_pkg(c("ggplot2", "fakepkg123"), source = "CRAN", auto_install = TRUE)
-#> i Installing missing packages automatically...
-```
-
-For GitHub source, use `"user/repo"` format:
-
-```{r check-github}
-check_pkg("r-lib/devtools", source = "GitHub")
+```{r pak-status}
+pak::pkg_status(c("ggplot2", "dplyr"))
+pak::pkg_update()
 ```
 
 ---
 
-## 5 Update Packages
-
-### `update_pkg()` - Update all packages or specific targets
-
-```{r update-all}
-# Update all CRAN + Bioconductor packages
-update_pkg()
-```
-
-```{r update-cran-only}
-# CRAN only
-update_pkg(source = "CRAN")
-```
-
-```{r update-specific}
-# Specific package(s)
-update_pkg("ggplot2", source = "CRAN")
-update_pkg("hadley/ggplot2", source = "GitHub")
-update_pkg("DESeq2", source = "Bioconductor")
-```
-
-If `pkg` is provided, `source` must also be provided (cannot stay at `"all"`).
-
----
-
-## 6 Troubleshooting
+## 4 Troubleshooting
 
 ### Package not available
 
@@ -221,7 +166,7 @@ install.packages("evanverse", lib = Sys.getenv("R_LIBS_USER"))
 
 ---
 
-## 7 A Combined Workflow
+## 5 A Combined Workflow
 
 The following sequence is practical for a fresh environment:
 
@@ -230,24 +175,25 @@ The following sequence is practical for a fresh environment:
 install.packages("evanverse")
 library(evanverse)
 
-# 2) Set mirrors
+# 2) Set mirrors (especially useful in China)
 set_mirror("all", "tuna")
 
-# 3) Install key dependencies
-inst_pkg(c("dplyr", "ggplot2"), source = "CRAN")
-inst_pkg("DESeq2", source = "Bioconductor")
+# 3) Install packages via pak
+pak::pkg_install(c("dplyr", "ggplot2"))
+pak::pkg_install("bioc::DESeq2")
 
 # 4) Verify status
-check_pkg(c("dplyr", "ggplot2", "DESeq2"), source = "CRAN")
+pak::pkg_status(c("dplyr", "ggplot2", "DESeq2"))
 
 # 5) Keep packages updated
-update_pkg(source = "CRAN")
+pak::pkg_update()
 ```
 
 ---
 
 ## Getting Help
 
-- `?set_mirror`, `?inst_pkg`, `?check_pkg`, `?update_pkg`
+- `?set_mirror`
+- [pak documentation](https://pak.r-lib.org/)
 - [CRAN Package Page](https://cran.r-project.org/package=evanverse)
 - [GitHub Issues](https://github.com/evanbio/evanverse/issues)

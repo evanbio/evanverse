@@ -46,7 +46,6 @@ Imports:
     biomaRt,
     forestploter
 Suggests:
-    BiocManager,
     GSEABase,
     GEOquery,
     car,
@@ -60,7 +59,6 @@ Suggests:
     scales,
     R.utils,
     janitor,
-    devtools,
     purrr,
     reactable
 LazyData: true

@@ -23,7 +23,7 @@ plotting tools, statistical workflows, and convenient operators.
 | Area | Examples |
 |---|---|
 | Operators | `%p%`, `%nin%`, `%match%`, `%map%`, `%is%` |
-| Package management | `set_mirror()`, `inst_pkg()`, `check_pkg()`, `update_pkg()` |
+| Package management | `set_mirror()`, `pkg_functions()` |
 | Data and parsing | `df2list()`, `df2vect()`, `gmt2df()`, `gmt2list()` |
 | Statistics | `quick_ttest()`, `quick_anova()`, `quick_chisq()`, `quick_cor()` |
 | Plotting | `plot_bar()`, `plot_density()`, `plot_pie()`, `plot_venn()`, `plot_forest()` |
@@ -55,23 +55,22 @@ c("tp53", "egfr") %match% c("TP53", "MYC", "EGFR")
 
 ---
 
-## 2 Install And Check Packages
+## 2 Mirror & Package Management
 
-Use built-in package-management helpers:
+Configure mirrors with `set_mirror()`, then use [pak](https://pak.r-lib.org/) for installation:
 
 ```{r pkg-basic}
+# Set CRAN + Bioconductor mirrors (great for users in China)
 set_mirror("all", "tuna")
 
-inst_pkg("dplyr", source = "CRAN")
+# pak handles CRAN, GitHub, and Bioconductor with a unified interface
+pak::pkg_install("dplyr")
+pak::pkg_install("tidyverse/ggplot2")   # GitHub
+pak::pkg_install("bioc::DESeq2")        # Bioconductor
 
-check_pkg(c("dplyr", "ggplot2"), source = "CRAN")
-#> # A tibble with installed status
-```
-
-Update packages when needed:
-
-```{r pkg-update}
-update_pkg(source = "CRAN")
+# Check status or update
+pak::pkg_status(c("dplyr", "ggplot2"))
+pak::pkg_update()
 ```
 
 ---
@@ -179,6 +178,6 @@ plot(res, type = "upper", show_sig = TRUE)
 ## Getting Help
 
 - `?"%p%"`, `?"%nin%"`, `?"%match%"`, `?"%map%"`, `?"%is%"`
-- `?set_mirror`, `?inst_pkg`, `?check_pkg`, `?update_pkg`
+- `?set_mirror`, `?pkg_functions`
 - `?quick_ttest`, `?quick_anova`, `?quick_chisq`, `?quick_cor`
 - [GitHub Issues](https://github.com/evanbio/evanverse/issues)

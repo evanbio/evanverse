@@ -45,7 +45,7 @@ devtools::install_github("evanbio/evanverse")
 library(evanverse)
 
 "你好" %p% "世界"                      # 字符串拼接
-inst_pkg("limma", source = "Bioc")    # 多源安装包
+set_mirror("cran", "tuna")            # 配置 CRAN 镜像
 plot_venn(list(A = 1:5, B = 3:8))    # 快速绘制韦恩图
 quick_ttest(df, "group", "value")     # 自动选择 t 检验方法
 gene2ensembl(c("TP53", "BRCA1"))      # 基因 ID 转换
@@ -70,14 +70,12 @@ devtools::install_github("evanbio/evanverse")
 ## 函数列表
 
 <details>
-<summary><b>📦 包管理</b>（6 个）</summary>
+<summary><b>📦 包管理</b>（2 个）</summary>
 
-- `check_pkg()` — 检查包是否已安装
-- `inst_pkg()` — 从 CRAN / GitHub / Bioconductor 安装
-- `update_pkg()` — 更新已安装的包
-- `pkg_version()` — 获取包版本
 - `pkg_functions()` — 列出包中的函数
-- `set_mirror()` — 配置 CRAN 镜像
+- `set_mirror()` — 配置 CRAN / Bioconductor 镜像
+
+> **说明：** `inst_pkg()`、`check_pkg()`、`update_pkg()` 和 `pkg_version()` 已从本包移除。我们发现 [pak](https://pak.r-lib.org/) 提供了更加优雅、高性能的包管理工作流——并行安装、统一的 `pak::pkg_install()` 接口（支持 CRAN / GitHub / Bioconductor），并内置状态查询与更新功能。推荐直接使用 pak。
 
 </details>
 

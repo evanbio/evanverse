@@ -58,7 +58,7 @@ template:
   includes:
     in_header: |
       <meta name="keywords" content="R package, data analysis, bioinformatics, visualization, utilities, CRAN">
-      <meta name="description" content="evanverse: A comprehensive R utility package with 56+ functions for data analysis, visualization, and bioinformatics workflows">
+      <meta name="description" content="evanverse: A comprehensive R utility package with 50+ functions for data analysis, visualization, and bioinformatics workflows">
       <meta name="author" content="Evan Zhou">
 
       <!-- Enhanced Favicon -->
@@ -133,10 +133,10 @@ home:
   title: evanverse
   subtitle: "Comprehensive R Utilities for Data Science & Bioinformatics"
   description: >
-    A feature-rich R utility package providing 56+ functions for data analysis,
-    visualization, and bioinformatics workflows. Streamlines package management,
-    data processing, color palettes, plotting, and workflow automation with a
-    focus on simplicity and reproducibility.
+    A feature-rich R utility package providing 50+ functions for data analysis,
+    visualization, and bioinformatics workflows. Covers data processing,
+    color palettes, plotting, and workflow automation with a focus on
+    simplicity and reproducibility.
   strip_header: false
 
   sidebar:
@@ -263,13 +263,11 @@ navbar:
 reference:
 - title: "Package Management"
   desc: >
-    Functions for installing, checking, and managing R packages from
-    multiple sources (CRAN, GitHub, Bioconductor).
+    Mirror configuration and package inspection utilities.
+    For installing, updating, and checking packages, we recommend
+    [pak](https://pak.r-lib.org/) — it provides a more elegant and
+    performant workflow than the functions previously bundled here.
   contents:
-  - check_pkg
-  - inst_pkg
-  - update_pkg
-  - pkg_version
   - pkg_functions
   - set_mirror
 

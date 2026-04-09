@@ -11,7 +11,7 @@
 
 ## Overview
 
-**evanverse** provides ~50 functions across package management, visualization, statistical analysis, bioinformatics, and more.
+**evanverse** provides 50+ functions across visualization, statistical analysis, bioinformatics, and more.
 
 ## Installation
 
@@ -25,7 +25,7 @@ install.packages("evanverse")
 library(evanverse)
 
 "Hello" %p% " " %p% "World"           # string concatenation
-inst_pkg("limma", source = "Bioc")    # multi-source install
+set_mirror("cran", "tuna")            # configure CRAN mirror
 plot_venn(list(A = 1:5, B = 3:8))    # Venn diagram
 quick_ttest(df, "group", "value")     # t-test with auto method selection
 gene2ensembl(c("TP53", "BRCA1"))      # gene ID conversion
@@ -36,7 +36,7 @@ stat_power(n = 30, effect_size = 0.5) # power analysis
 
 | Area | Functions |
 |---|---|
-| Package management | `inst_pkg()`, `check_pkg()`, `update_pkg()`, `set_mirror()`, ... |
+| Package management | `set_mirror()`, `pkg_functions()` — see [pak](https://pak.r-lib.org/) for install/update/check |
 | Visualization | `plot_bar()`, `plot_venn()`, `plot_forest()`, `plot_pie()`, `plot_density()` |
 | Statistical analysis | `quick_ttest()`, `quick_anova()`, `quick_chisq()`, `quick_cor()`, `stat_power()`, `stat_n()` |
 | Color palettes | `get_palette()`, `create_palette()`, `preview_palette()`, `palette_gallery()`, ... |

@@ -524,14 +524,6 @@ test_that("public functions propagate .assert_scalar_string errors correctly", {
 
 test_that("public functions propagate .assert_character_vector errors correctly", {
   expect_error(hex2rgb(character(0)),     "non-empty character vector")
-  expect_error(check_pkg(NULL, source = "CRAN"), "non-empty character vector")
-})
-
-test_that("public functions propagate .assert_file_exists errors correctly", {
-  expect_error(
-    inst_pkg(source = "Local", path = "/nonexistent/file.tar.gz"),
-    "File not found"
-  )
 })
 
 test_that("public functions propagate .assert_flag errors correctly", {

@@ -45,7 +45,7 @@ devtools::install_github("evanbio/evanverse")
 library(evanverse)
 
 "Hello" %p% " " %p% "World"           # string concatenation
-inst_pkg("limma", source = "Bioc")    # multi-source package install
+set_mirror("cran", "tuna")            # configure CRAN mirror
 plot_venn(list(A = 1:5, B = 3:8))    # instant Venn diagram
 quick_ttest(df, "group", "value")     # t-test with auto assumption check
 gene2ensembl(c("TP53", "BRCA1"))      # gene ID conversion
@@ -70,14 +70,12 @@ devtools::install_github("evanbio/evanverse")
 ## Function Reference
 
 <details>
-<summary><b>📦 Package Management</b> (6)</summary>
+<summary><b>📦 Package Management</b> (2)</summary>
 
-- `check_pkg()` — check if packages are installed
-- `inst_pkg()` — install from CRAN / GitHub / Bioconductor
-- `update_pkg()` — update installed packages
-- `pkg_version()` — get package version
 - `pkg_functions()` — list functions in a package
-- `set_mirror()` — configure CRAN mirror
+- `set_mirror()` — configure CRAN / Bioconductor mirror
+
+> **Note:** `inst_pkg()`, `check_pkg()`, `update_pkg()`, and `pkg_version()` have been removed from this package. We found that [pak](https://pak.r-lib.org/) provides a more elegant and performant package management workflow — parallel installs, unified `pkg::pkg_install()` interface for CRAN / GitHub / Bioconductor, and built-in status/update support. We recommend using pak directly instead.
 
 </details>
 
