@@ -25,7 +25,6 @@
 utils::globalVariables(
   c(
     "x", "y", "color", "group", "name", "label_text", "count",
-    "symbol", "entrez_id", "gene", "current_release", "percent",
-    "palettes"
+    "symbol", "entrez_id", "gene", "current_release", "percent"
   )
 )

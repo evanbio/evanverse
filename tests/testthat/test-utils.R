@@ -518,15 +518,11 @@ test_that(".assert_logical() errors on non-logical input", {
 #==============================================================================
 
 test_that("public functions propagate .assert_scalar_string errors correctly", {
-  expect_error(get_palette(123),          "single non-empty string")
   expect_error(pkg_functions(""),         "single non-empty string")
 })
 
-test_that("public functions propagate .assert_character_vector errors correctly", {
-  expect_error(hex2rgb(character(0)),     "non-empty character vector")
-})
-
 test_that("public functions propagate .assert_flag errors correctly", {
-  expect_error(list_palettes(sort = "yes"), "TRUE or FALSE")
-  expect_error(list_palettes(sort = NA),    "TRUE or FALSE")
+  df <- data.frame(x = letters[1:3], y = 1:3)
+  expect_error(plot_bar(df, "x", "y", sort = "yes"), "TRUE or FALSE")
+  expect_error(plot_bar(df, "x", "y", sort = NA),    "TRUE or FALSE")
 })
