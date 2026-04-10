@@ -237,5 +237,6 @@ summary(result)
 #> Decision: All expected frequencies adequate: using standard chi-square test
 #> 
 plot(result)
+#> ! Failed to load palette 'qual_vivid': Palette "qual_vivid" not found in any type.. Using defaults.
 
 ```

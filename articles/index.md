@@ -10,8 +10,6 @@
   Guide](https://evanbio.github.io/evanverse/articles/install.md):
 - [Custom Infix
   Operators](https://evanbio.github.io/evanverse/articles/ops.md):
-- [Color Palette
-  Management](https://evanbio.github.io/evanverse/articles/palette.md):
 - [Package
   Management](https://evanbio.github.io/evanverse/articles/pkg.md):
 - [Plotting

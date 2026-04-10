@@ -111,26 +111,11 @@ devtools::install_github("evanbio/evanverse")
 - [`stat_n()`](https://evanbio.github.io/evanverse/reference/stat_n.md)
   — 样本量计算
 
-**🌈 配色方案**（9 个）
+**🌈 配色方案**
 
-- [`get_palette()`](https://evanbio.github.io/evanverse/reference/get_palette.md)
-  — 获取配色
-- [`list_palettes()`](https://evanbio.github.io/evanverse/reference/list_palettes.md)
-  — 列出可用配色
-- [`create_palette()`](https://evanbio.github.io/evanverse/reference/create_palette.md)
-  — 创建自定义配色
-- [`preview_palette()`](https://evanbio.github.io/evanverse/reference/preview_palette.md)
-  — 预览配色
-- [`palette_gallery()`](https://evanbio.github.io/evanverse/reference/palette_gallery.md)
-  — 浏览全部配色
-- [`compile_palettes()`](https://evanbio.github.io/evanverse/reference/compile_palettes.md)
-  — 编译配色数据
-- [`remove_palette()`](https://evanbio.github.io/evanverse/reference/remove_palette.md)
-  — 删除配色
-- [`hex2rgb()`](https://evanbio.github.io/evanverse/reference/hex2rgb.md)
-  /
-  [`rgb2hex()`](https://evanbio.github.io/evanverse/reference/rgb2hex.md)
-  — 颜色格式转换
+> 配色方案功能已迁移至独立包
+> [**biopalette**](https://github.com/evanbio/biopalette)。
+> 安装方式：`devtools::install_github("evanbio/biopalette")`
 
 **📁 文件与下载**（7 个）
 

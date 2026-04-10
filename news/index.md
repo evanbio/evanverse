@@ -68,8 +68,7 @@ dependency trimming, and expanded test/documentation coverage.
   `combine_logic()` (workflow tools removed)
 - **Renamed**: `stat_samplesize()` →
   [`stat_n()`](https://evanbio.github.io/evanverse/reference/stat_n.md)
-- **Renamed**: `bio_palette_gallery()` →
-  [`palette_gallery()`](https://evanbio.github.io/evanverse/reference/palette_gallery.md)
+- **Renamed**: `bio_palette_gallery()` → `palette_gallery()`
 - **Renamed**: `map_column()` →
   [`recode_column()`](https://evanbio.github.io/evanverse/reference/recode_column.md)
 - **Renamed**: `convert_gene_id()` →
@@ -112,9 +111,8 @@ dependency trimming, and expanded test/documentation coverage.
   into `stat.R`; extracted shared `pwr::` dispatch helpers into
   `utils_stat.R`; result class renamed to `power_result`
 - **Palette module**: overhauled with JSON-based storage and compiled
-  `palettes` dataset;
-  [`palette_gallery()`](https://evanbio.github.io/evanverse/reference/palette_gallery.md)
-  replaces `bio_palette_gallery()`
+  `palettes` dataset; `palette_gallery()` replaces
+  `bio_palette_gallery()`
 - **Plot module**: fixed `sort_by` union handling, NA checks, gradient
   palette validation
 - **Toy module**: exported
@@ -153,9 +151,8 @@ dependency trimming, and expanded test/documentation coverage.
   [`file_ls()`](https://evanbio.github.io/evanverse/reference/file_ls.md)
   example to use [`tempdir()`](https://rdrr.io/r/base/tempfile.html) —
   passes R CMD check
-- Fixed
-  [`create_palette()`](https://evanbio.github.io/evanverse/reference/create_palette.md)
-  example line widths — resolves `Rd line widths` NOTE
+- Fixed `create_palette()` example line widths — resolves
+  `Rd line widths` NOTE
 - Fixed
   [`quick_ttest()`](https://evanbio.github.io/evanverse/reference/quick_ttest.md)
   and
@@ -336,9 +333,8 @@ compatibility.
   (thanks [@DavisVaughan](https://github.com/DavisVaughan),
   [\#4](https://github.com/evanbio/evanverse/issues/4))
 - Fixed relative URL paths in vignettes for CRAN compliance
-- Fixed
-  [`compile_palettes()`](https://evanbio.github.io/evanverse/reference/compile_palettes.md)
-  qual_vivid palette inclusion in package build
+- Fixed `compile_palettes()` qual_vivid palette inclusion in package
+  build
 - Fixed Unicode Greek letters replaced with ASCII for cross-platform
   compatibility
 - Added `percent` to global variables declaration
@@ -387,10 +383,8 @@ violations.
   that write to user’s home directory or working directory
   - Fixed 9 functions to require explicit path parameters instead of
     defaults
-  - Functions updated:
-    [`create_palette()`](https://evanbio.github.io/evanverse/reference/create_palette.md),
-    [`remove_palette()`](https://evanbio.github.io/evanverse/reference/remove_palette.md),
-    [`compile_palettes()`](https://evanbio.github.io/evanverse/reference/compile_palettes.md),
+  - Functions updated: `create_palette()`, `remove_palette()`,
+    `compile_palettes()`,
     [`download_batch()`](https://evanbio.github.io/evanverse/reference/download_batch.md),
     [`download_url()`](https://evanbio.github.io/evanverse/reference/download_url.md),
     `download_geo_data()`
@@ -399,12 +393,10 @@ violations.
     operations
 - **Updated function signatures** (Breaking Changes - Path Parameters
   Now Required):
-  - [`create_palette()`](https://evanbio.github.io/evanverse/reference/create_palette.md):
-    `color_dir` parameter now required (no default)
-  - [`remove_palette()`](https://evanbio.github.io/evanverse/reference/remove_palette.md):
-    `color_dir` parameter now required (no default)
-  - [`compile_palettes()`](https://evanbio.github.io/evanverse/reference/compile_palettes.md):
-    Both `palettes_dir` and `output_rds` parameters now required
+  - `create_palette()`: `color_dir` parameter now required (no default)
+  - `remove_palette()`: `color_dir` parameter now required (no default)
+  - `compile_palettes()`: Both `palettes_dir` and `output_rds`
+    parameters now required
   - [`download_batch()`](https://evanbio.github.io/evanverse/reference/download_batch.md):
     `dest_dir` parameter now required (no default)
   - [`download_url()`](https://evanbio.github.io/evanverse/reference/download_url.md):
@@ -488,15 +480,11 @@ examples and file operation handling.
 - **File operation improvements**: All examples now use
   [`tempdir()`](https://rdrr.io/r/base/tempfile.html) for temporary file
   creation
-  - Enhanced
-    [`create_palette()`](https://evanbio.github.io/evanverse/reference/create_palette.md)
-    examples with proper cleanup code
+  - Enhanced `create_palette()` examples with proper cleanup code
   - Updated
     [`file_tree()`](https://evanbio.github.io/evanverse/reference/file_tree.md)
     examples to use appropriate paths
-  - Fixed
-    [`preview_palette()`](https://evanbio.github.io/evanverse/reference/preview_palette.md)
-    to use existing palette names
+  - Fixed `preview_palette()` to use existing palette names
 - **Network operation handling**: Properly wrapped all network-dependent
   examples
   - Functions updated: `download_geo_data()`,
@@ -508,10 +496,8 @@ examples and file operation handling.
   and
   [`gmt2list()`](https://evanbio.github.io/evanverse/reference/gmt2list.md)
   functions
-- **Palette management**: Fixed examples for
-  [`compile_palettes()`](https://evanbio.github.io/evanverse/reference/compile_palettes.md)
-  and
-  [`remove_palette()`](https://evanbio.github.io/evanverse/reference/remove_palette.md)
+- **Palette management**: Fixed examples for `compile_palettes()` and
+  `remove_palette()`
 
 #### Technical Details
 
@@ -767,8 +753,7 @@ tighter parameter validation, stronger tests, and several new utilities.
   - `with_timer()` simplified using `tictoc` timing and `cli` output
   - `remind()` rendering fixed for `cli` braces with
     partial/case-insensitive matches
-  - [`rgb2hex()`](https://evanbio.github.io/evanverse/reference/rgb2hex.md)
-    input validation tightened with concise CLI feedback
+  - `rgb2hex()` input validation tightened with concise CLI feedback
   - `rows_with_void()` header streamlined, delegates detection to
     `is_void()`
 - **Startup and Documentation**
@@ -798,8 +783,7 @@ tighter parameter validation, stronger tests, and several new utilities.
     [`set_mirror()`](https://evanbio.github.io/evanverse/reference/set_mirror.md),
     [`pkg_functions()`](https://evanbio.github.io/evanverse/reference/pkg_functions.md)
   - Utilities: `remind()`, `map_column()`, `replace_void()`,
-    `rows_with_void()`,
-    [`rgb2hex()`](https://evanbio.github.io/evanverse/reference/rgb2hex.md)
+    `rows_with_void()`, `rgb2hex()`
   - Operators: `%is%`, `%near%`, `%nin%`, `%p%`
 - **Environment Compatibility**
   - Marked environment-dependent tests (e.g.,
@@ -845,12 +829,9 @@ bioinformaticians.
 
 ##### Bioinformatics Color Palettes
 
-- [`compile_palettes()`](https://evanbio.github.io/evanverse/reference/compile_palettes.md),
-  [`get_palette()`](https://evanbio.github.io/evanverse/reference/get_palette.md),
-  [`list_palettes()`](https://evanbio.github.io/evanverse/reference/list_palettes.md),
-  [`create_palette()`](https://evanbio.github.io/evanverse/reference/create_palette.md)
-- [`preview_palette()`](https://evanbio.github.io/evanverse/reference/preview_palette.md),
-  `bio_palette_gallery()`
+- `compile_palettes()`, `get_palette()`, `list_palettes()`,
+  `create_palette()`
+- `preview_palette()`, `bio_palette_gallery()`
 
 ##### Data Processing Tools
 
@@ -872,9 +853,7 @@ bioinformaticians.
 
 ##### Vector & Logic Operations
 
-- `combine_logic()`,
-  [`hex2rgb()`](https://evanbio.github.io/evanverse/reference/hex2rgb.md),
-  [`rgb2hex()`](https://evanbio.github.io/evanverse/reference/rgb2hex.md)
+- `combine_logic()`, `hex2rgb()`, `rgb2hex()`
 
 ##### Visualization Tools
 

@@ -40,7 +40,7 @@ stat_power(n = 30, effect_size = 0.5) # power analysis
 | Package management   | [`set_mirror()`](https://evanbio.github.io/evanverse/reference/set_mirror.md), [`pkg_functions()`](https://evanbio.github.io/evanverse/reference/pkg_functions.md) — see [pak](https://pak.r-lib.org/) for install/update/check                                                                                                                                                                                                                                                      |
 | Visualization        | [`plot_bar()`](https://evanbio.github.io/evanverse/reference/plot_bar.md), [`plot_venn()`](https://evanbio.github.io/evanverse/reference/plot_venn.md), [`plot_forest()`](https://evanbio.github.io/evanverse/reference/plot_forest.md), [`plot_pie()`](https://evanbio.github.io/evanverse/reference/plot_pie.md), [`plot_density()`](https://evanbio.github.io/evanverse/reference/plot_density.md)                                                                                |
 | Statistical analysis | [`quick_ttest()`](https://evanbio.github.io/evanverse/reference/quick_ttest.md), [`quick_anova()`](https://evanbio.github.io/evanverse/reference/quick_anova.md), [`quick_chisq()`](https://evanbio.github.io/evanverse/reference/quick_chisq.md), [`quick_cor()`](https://evanbio.github.io/evanverse/reference/quick_cor.md), [`stat_power()`](https://evanbio.github.io/evanverse/reference/stat_power.md), [`stat_n()`](https://evanbio.github.io/evanverse/reference/stat_n.md) |
-| Color palettes       | [`get_palette()`](https://evanbio.github.io/evanverse/reference/get_palette.md), [`create_palette()`](https://evanbio.github.io/evanverse/reference/create_palette.md), [`preview_palette()`](https://evanbio.github.io/evanverse/reference/preview_palette.md), [`palette_gallery()`](https://evanbio.github.io/evanverse/reference/palette_gallery.md), …                                                                                                                          |
+| Color palettes       | Moved to [biopalette](https://github.com/evanbio/biopalette)                                                                                                                                                                                                                                                                                                                                                                                                                         |
 | File & download      | [`file_ls()`](https://evanbio.github.io/evanverse/reference/file_ls.md), [`file_tree()`](https://evanbio.github.io/evanverse/reference/file_tree.md), [`download_url()`](https://evanbio.github.io/evanverse/reference/download_url.md), [`download_geo()`](https://evanbio.github.io/evanverse/reference/download_geo.md), …                                                                                                                                                        |
 | Bioinformatics       | [`gene2ensembl()`](https://evanbio.github.io/evanverse/reference/gene2ensembl.md), [`gene2entrez()`](https://evanbio.github.io/evanverse/reference/gene2entrez.md), [`gmt2df()`](https://evanbio.github.io/evanverse/reference/gmt2df.md), [`gmt2list()`](https://evanbio.github.io/evanverse/reference/gmt2list.md), …                                                                                                                                                              |
 | Operators            | `%p%`, `%nin%`, `%is%`, `%map%`, `%match%`                                                                                                                                                                                                                                                                                                                                                                                                                                           |
@@ -109,32 +109,6 @@ checking, and publication-ready output. Power and sample size tools.
   : Calculate Statistical Power
 - [`stat_n()`](https://evanbio.github.io/evanverse/reference/stat_n.md)
   : Calculate Required Sample Size
-
-## Color Palettes & Management
-
-Bioinformatics-focused color palette system with creation, management,
-and visualization tools.
-
-- [`palettes`](https://evanbio.github.io/evanverse/reference/palettes.md)
-  : Built-in color palettes
-- [`get_palette()`](https://evanbio.github.io/evanverse/reference/get_palette.md)
-  : Get a Color Palette
-- [`list_palettes()`](https://evanbio.github.io/evanverse/reference/list_palettes.md)
-  : List Available Color Palettes
-- [`create_palette()`](https://evanbio.github.io/evanverse/reference/create_palette.md)
-  : Create and Save a Custom Color Palette
-- [`preview_palette()`](https://evanbio.github.io/evanverse/reference/preview_palette.md)
-  : Preview a Color Palette
-- [`palette_gallery()`](https://evanbio.github.io/evanverse/reference/palette_gallery.md)
-  : Visualize All Palettes in a Gallery View
-- [`compile_palettes()`](https://evanbio.github.io/evanverse/reference/compile_palettes.md)
-  : Compile JSON Palettes into a Palette List
-- [`remove_palette()`](https://evanbio.github.io/evanverse/reference/remove_palette.md)
-  : Remove a Saved Palette JSON
-- [`hex2rgb()`](https://evanbio.github.io/evanverse/reference/hex2rgb.md)
-  : Convert HEX Colors to RGB
-- [`rgb2hex()`](https://evanbio.github.io/evanverse/reference/rgb2hex.md)
-  : Convert RGB Values to HEX Color Codes
 
 ## File & Download Utilities
 
@@ -224,8 +198,6 @@ demonstration.
   Guide](https://evanbio.github.io/evanverse/articles/install.md):
 - [Custom Infix
   Operators](https://evanbio.github.io/evanverse/articles/ops.md):
-- [Color Palette
-  Management](https://evanbio.github.io/evanverse/articles/palette.md):
 - [Package
   Management](https://evanbio.github.io/evanverse/articles/pkg.md):
 - [Plotting

@@ -51,32 +51,6 @@ checking, and publication-ready output. Power and sample size tools.
 - [`stat_n()`](https://evanbio.github.io/evanverse/reference/stat_n.md)
   : Calculate Required Sample Size
 
-## Color Palettes & Management
-
-Bioinformatics-focused color palette system with creation, management,
-and visualization tools.
-
-- [`palettes`](https://evanbio.github.io/evanverse/reference/palettes.md)
-  : Built-in color palettes
-- [`get_palette()`](https://evanbio.github.io/evanverse/reference/get_palette.md)
-  : Get a Color Palette
-- [`list_palettes()`](https://evanbio.github.io/evanverse/reference/list_palettes.md)
-  : List Available Color Palettes
-- [`create_palette()`](https://evanbio.github.io/evanverse/reference/create_palette.md)
-  : Create and Save a Custom Color Palette
-- [`preview_palette()`](https://evanbio.github.io/evanverse/reference/preview_palette.md)
-  : Preview a Color Palette
-- [`palette_gallery()`](https://evanbio.github.io/evanverse/reference/palette_gallery.md)
-  : Visualize All Palettes in a Gallery View
-- [`compile_palettes()`](https://evanbio.github.io/evanverse/reference/compile_palettes.md)
-  : Compile JSON Palettes into a Palette List
-- [`remove_palette()`](https://evanbio.github.io/evanverse/reference/remove_palette.md)
-  : Remove a Saved Palette JSON
-- [`hex2rgb()`](https://evanbio.github.io/evanverse/reference/hex2rgb.md)
-  : Convert HEX Colors to RGB
-- [`rgb2hex()`](https://evanbio.github.io/evanverse/reference/rgb2hex.md)
-  : Convert RGB Values to HEX Color Codes
-
 ## File & Download Utilities
 
 File system utilities and flexible download functions for URLs and GEO

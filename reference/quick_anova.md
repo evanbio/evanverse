@@ -223,5 +223,6 @@ summary(result)
 #> 3 C      B      0.715  0.236  1.19  0.00163    
 #> 
 plot(result)
+#> ! Could not load palette "qual_vivid". Using ggplot2 defaults.
 
 ```

@@ -212,5 +212,6 @@ summary(result)
 #> → Medium samples (min n = 30). Data reasonably normal (all Shapiro p ≥ 0.01).
 #> 
 plot(result)
+#> ! Could not load palette "qual_vivid". Using ggplot2 defaults.
 
 ```

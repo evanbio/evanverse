@@ -9,7 +9,6 @@
 <url><loc>https://evanbio.github.io/evanverse/articles/index.html</loc></url>
 <url><loc>https://evanbio.github.io/evanverse/articles/install.html</loc></url>
 <url><loc>https://evanbio.github.io/evanverse/articles/ops.html</loc></url>
-<url><loc>https://evanbio.github.io/evanverse/articles/palette.html</loc></url>
 <url><loc>https://evanbio.github.io/evanverse/articles/pkg.html</loc></url>
 <url><loc>https://evanbio.github.io/evanverse/articles/plot.html</loc></url>
 <url><loc>https://evanbio.github.io/evanverse/articles/stat.html</loc></url>
@@ -18,8 +17,6 @@
 <url><loc>https://evanbio.github.io/evanverse/index.html</loc></url>
 <url><loc>https://evanbio.github.io/evanverse/news/index.html</loc></url>
 <url><loc>https://evanbio.github.io/evanverse/reference/comb.html</loc></url>
-<url><loc>https://evanbio.github.io/evanverse/reference/compile_palettes.html</loc></url>
-<url><loc>https://evanbio.github.io/evanverse/reference/create_palette.html</loc></url>
 <url><loc>https://evanbio.github.io/evanverse/reference/df2list.html</loc></url>
 <url><loc>https://evanbio.github.io/evanverse/reference/df2vect.html</loc></url>
 <url><loc>https://evanbio.github.io/evanverse/reference/download_batch.html</loc></url>
@@ -31,7 +28,6 @@
 <url><loc>https://evanbio.github.io/evanverse/reference/file_tree.html</loc></url>
 <url><loc>https://evanbio.github.io/evanverse/reference/gene2ensembl.html</loc></url>
 <url><loc>https://evanbio.github.io/evanverse/reference/gene2entrez.html</loc></url>
-<url><loc>https://evanbio.github.io/evanverse/reference/get_palette.html</loc></url>
 <url><loc>https://evanbio.github.io/evanverse/reference/gmt2df.html</loc></url>
 <url><loc>https://evanbio.github.io/evanverse/reference/gmt2list.html</loc></url>
 <url><loc>https://evanbio.github.io/evanverse/reference/grapes-is-grapes.html</loc></url>
@@ -39,11 +35,7 @@
 <url><loc>https://evanbio.github.io/evanverse/reference/grapes-match-grapes.html</loc></url>
 <url><loc>https://evanbio.github.io/evanverse/reference/grapes-nin-grapes.html</loc></url>
 <url><loc>https://evanbio.github.io/evanverse/reference/grapes-p-grapes.html</loc></url>
-<url><loc>https://evanbio.github.io/evanverse/reference/hex2rgb.html</loc></url>
 <url><loc>https://evanbio.github.io/evanverse/reference/index.html</loc></url>
-<url><loc>https://evanbio.github.io/evanverse/reference/list_palettes.html</loc></url>
-<url><loc>https://evanbio.github.io/evanverse/reference/palette_gallery.html</loc></url>
-<url><loc>https://evanbio.github.io/evanverse/reference/palettes.html</loc></url>
 <url><loc>https://evanbio.github.io/evanverse/reference/perm.html</loc></url>
 <url><loc>https://evanbio.github.io/evanverse/reference/pkg_functions.html</loc></url>
 <url><loc>https://evanbio.github.io/evanverse/reference/plot_bar.html</loc></url>
@@ -51,14 +43,11 @@
 <url><loc>https://evanbio.github.io/evanverse/reference/plot_forest.html</loc></url>
 <url><loc>https://evanbio.github.io/evanverse/reference/plot_pie.html</loc></url>
 <url><loc>https://evanbio.github.io/evanverse/reference/plot_venn.html</loc></url>
-<url><loc>https://evanbio.github.io/evanverse/reference/preview_palette.html</loc></url>
 <url><loc>https://evanbio.github.io/evanverse/reference/quick_anova.html</loc></url>
 <url><loc>https://evanbio.github.io/evanverse/reference/quick_chisq.html</loc></url>
 <url><loc>https://evanbio.github.io/evanverse/reference/quick_cor.html</loc></url>
 <url><loc>https://evanbio.github.io/evanverse/reference/quick_ttest.html</loc></url>
 <url><loc>https://evanbio.github.io/evanverse/reference/recode_column.html</loc></url>
-<url><loc>https://evanbio.github.io/evanverse/reference/remove_palette.html</loc></url>
-<url><loc>https://evanbio.github.io/evanverse/reference/rgb2hex.html</loc></url>
 <url><loc>https://evanbio.github.io/evanverse/reference/set_mirror.html</loc></url>
 <url><loc>https://evanbio.github.io/evanverse/reference/stat_n.html</loc></url>
 <url><loc>https://evanbio.github.io/evanverse/reference/stat_power.html</loc></url>

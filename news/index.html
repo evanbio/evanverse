@@ -78,7 +78,6 @@
   <ul class="dropdown-menu" aria-labelledby="dropdown-vignettes"><li><a class="dropdown-item" href="../articles/base.html">Base Utilities</a></li>
     <li><a class="dropdown-item" href="../articles/ops.html">Custom Infix Operators</a></li>
     <li><a class="dropdown-item" href="../articles/pkg.html">Package Management</a></li>
-    <li><a class="dropdown-item" href="../articles/palette.html">Color Palette Management</a></li>
     <li><a class="dropdown-item" href="../articles/plot.html">Plotting Functions</a></li>
     <li><a class="dropdown-item" href="../articles/stat.html">Statistical Utilities</a></li>
     <li><a class="dropdown-item" href="../articles/toy.html">Toy Data Utilities</a></li>
@@ -139,7 +138,7 @@
 <strong>Renamed</strong>: <code>stat_samplesize()</code> → <code><a href="../reference/stat_n.html">stat_n()</a></code>
 </li>
 <li>
-<strong>Renamed</strong>: <code>bio_palette_gallery()</code> → <code><a href="../reference/palette_gallery.html">palette_gallery()</a></code>
+<strong>Renamed</strong>: <code>bio_palette_gallery()</code> → <code>palette_gallery()</code>
 </li>
 <li>
 <strong>Renamed</strong>: <code>map_column()</code> → <code><a href="../reference/recode_column.html">recode_column()</a></code>
@@ -172,7 +171,7 @@
 <strong>Stat module</strong>: consolidated <code><a href="../reference/quick_anova.html">quick_anova()</a></code>, <code><a href="../reference/quick_chisq.html">quick_chisq()</a></code>, <code><a href="../reference/quick_cor.html">quick_cor()</a></code>, <code><a href="../reference/quick_ttest.html">quick_ttest()</a></code>, <code><a href="../reference/stat_power.html">stat_power()</a></code>, and <code><a href="../reference/stat_n.html">stat_n()</a></code> into <code>stat.R</code>; extracted shared <code>pwr::</code> dispatch helpers into <code>utils_stat.R</code>; result class renamed to <code>power_result</code>
 </li>
 <li>
-<strong>Palette module</strong>: overhauled with JSON-based storage and compiled <code>palettes</code> dataset; <code><a href="../reference/palette_gallery.html">palette_gallery()</a></code> replaces <code>bio_palette_gallery()</code>
+<strong>Palette module</strong>: overhauled with JSON-based storage and compiled <code>palettes</code> dataset; <code>palette_gallery()</code> replaces <code>bio_palette_gallery()</code>
 </li>
 <li>
 <strong>Plot module</strong>: fixed <code>sort_by</code> union handling, NA checks, gradient palette validation</li>
@@ -208,7 +207,7 @@
 <div class="section level4">
 <h4 id="bug-fixes-0-5-0">Bug Fixes<a class="anchor" aria-label="anchor" href="#bug-fixes-0-5-0"></a></h4>
 <ul><li>Fixed <code><a href="../reference/file_ls.html">file_ls()</a></code> example to use <code><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempdir()</a></code> — passes R CMD check</li>
-<li>Fixed <code><a href="../reference/create_palette.html">create_palette()</a></code> example line widths — resolves <code>Rd line widths</code> NOTE</li>
+<li>Fixed <code>create_palette()</code> example line widths — resolves <code>Rd line widths</code> NOTE</li>
 <li>Fixed <code><a href="../reference/quick_ttest.html">quick_ttest()</a></code> and <code><a href="../reference/quick_anova.html">quick_anova()</a></code> examples to pass column names as strings</li>
 <li>Added <code>skip_on_ci()</code> to BioMart network test — prevents CI failures from Ensembl server</li>
 <li>Suppressed Bioconductor <code>S4Arrays</code>/<code>DelayedArray</code> namespace warning in <code><a href="../reference/download_geo.html">download_geo()</a></code> test</li>
@@ -310,7 +309,7 @@
 <h4 id="bug-fixes-0-4-0">Bug Fixes<a class="anchor" aria-label="anchor" href="#bug-fixes-0-4-0"></a></h4>
 <ul><li>Fixed dplyr 1.2.0 compatibility: replaced <code>case_when()</code> with <code><a href="https://rdrr.io/r/base/switch.html" class="external-link">switch()</a></code> in <code><a href="../reference/plot_pie.html">plot_pie()</a></code> (thanks <a href="https://github.com/DavisVaughan" class="external-link">@DavisVaughan</a>, <a href="https://github.com/evanbio/evanverse/issues/4" class="external-link">#4</a>)</li>
 <li>Fixed relative URL paths in vignettes for CRAN compliance</li>
-<li>Fixed <code><a href="../reference/compile_palettes.html">compile_palettes()</a></code> qual_vivid palette inclusion in package build</li>
+<li>Fixed <code>compile_palettes()</code> qual_vivid palette inclusion in package build</li>
 <li>Fixed Unicode Greek letters replaced with ASCII for cross-platform compatibility</li>
 <li>Added <code>percent</code> to global variables declaration</li>
 <li>Fixed NA validation in <code>download_geo_data()</code> parameters</li>
@@ -353,18 +352,18 @@
 <ul><li>
 <strong>File operation policy compliance</strong>: Removed all default file paths that write to user’s home directory or working directory
 <ul><li>Fixed 9 functions to require explicit path parameters instead of defaults</li>
-<li>Functions updated: <code><a href="../reference/create_palette.html">create_palette()</a></code>, <code><a href="../reference/remove_palette.html">remove_palette()</a></code>, <code><a href="../reference/compile_palettes.html">compile_palettes()</a></code>, <code><a href="../reference/download_batch.html">download_batch()</a></code>, <code><a href="../reference/download_url.html">download_url()</a></code>, <code>download_geo_data()</code>
+<li>Functions updated: <code>create_palette()</code>, <code>remove_palette()</code>, <code>compile_palettes()</code>, <code><a href="../reference/download_batch.html">download_batch()</a></code>, <code><a href="../reference/download_url.html">download_url()</a></code>, <code>download_geo_data()</code>
 </li>
 <li>All examples and tests now use <code><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempdir()</a></code> for file operations</li>
 </ul></li>
 <li>
 <strong>Updated function signatures</strong> (Breaking Changes - Path Parameters Now Required):
 <ul><li>
-<code><a href="../reference/create_palette.html">create_palette()</a></code>: <code>color_dir</code> parameter now required (no default)</li>
+<code>create_palette()</code>: <code>color_dir</code> parameter now required (no default)</li>
 <li>
-<code><a href="../reference/remove_palette.html">remove_palette()</a></code>: <code>color_dir</code> parameter now required (no default)</li>
+<code>remove_palette()</code>: <code>color_dir</code> parameter now required (no default)</li>
 <li>
-<code><a href="../reference/compile_palettes.html">compile_palettes()</a></code>: Both <code>palettes_dir</code> and <code>output_rds</code> parameters now required</li>
+<code>compile_palettes()</code>: Both <code>palettes_dir</code> and <code>output_rds</code> parameters now required</li>
 <li>
 <code><a href="../reference/download_batch.html">download_batch()</a></code>: <code>dest_dir</code> parameter now required (no default)</li>
 <li>
@@ -381,14 +380,14 @@
 <p>For users upgrading from 0.3.6:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># OLD (0.3.6) - No longer works in 0.3.7</span></span>
-<span><span class="fu"><a href="../reference/create_palette.html">create_palette</a></span><span class="op">(</span><span class="st">"my_palette"</span>, <span class="st">"sequential"</span>, <span class="va">colors</span><span class="op">)</span></span>
+<span><span class="fu">create_palette</span><span class="op">(</span><span class="st">"my_palette"</span>, <span class="st">"sequential"</span>, <span class="va">colors</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># NEW (0.3.7) - Explicit path required</span></span>
 <span><span class="va">temp_dir</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempdir</a></span><span class="op">(</span><span class="op">)</span>, <span class="st">"palettes"</span><span class="op">)</span></span>
-<span><span class="fu"><a href="../reference/create_palette.html">create_palette</a></span><span class="op">(</span><span class="st">"my_palette"</span>, <span class="st">"sequential"</span>, <span class="va">colors</span>, color_dir <span class="op">=</span> <span class="va">temp_dir</span><span class="op">)</span></span>
+<span><span class="fu">create_palette</span><span class="op">(</span><span class="st">"my_palette"</span>, <span class="st">"sequential"</span>, <span class="va">colors</span>, color_dir <span class="op">=</span> <span class="va">temp_dir</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># For production use, specify your desired directory</span></span>
-<span><span class="fu"><a href="../reference/create_palette.html">create_palette</a></span><span class="op">(</span><span class="st">"my_palette"</span>, <span class="st">"sequential"</span>, <span class="va">colors</span>,</span>
+<span><span class="fu">create_palette</span><span class="op">(</span><span class="st">"my_palette"</span>, <span class="st">"sequential"</span>, <span class="va">colors</span>,</span>
 <span>               color_dir <span class="op">=</span> <span class="st">"path/to/your/palette/directory"</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level4">
@@ -437,9 +436,9 @@
 </ul></li>
 <li>
 <strong>File operation improvements</strong>: All examples now use <code><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempdir()</a></code> for temporary file creation
-<ul><li>Enhanced <code><a href="../reference/create_palette.html">create_palette()</a></code> examples with proper cleanup code</li>
+<ul><li>Enhanced <code>create_palette()</code> examples with proper cleanup code</li>
 <li>Updated <code><a href="../reference/file_tree.html">file_tree()</a></code> examples to use appropriate paths</li>
-<li>Fixed <code><a href="../reference/preview_palette.html">preview_palette()</a></code> to use existing palette names</li>
+<li>Fixed <code>preview_palette()</code> to use existing palette names</li>
 </ul></li>
 <li>
 <strong>Network operation handling</strong>: Properly wrapped all network-dependent examples
@@ -449,7 +448,7 @@
 <li>
 <strong>GMT file examples</strong>: Enhanced examples for <code><a href="../reference/gmt2df.html">gmt2df()</a></code> and <code><a href="../reference/gmt2list.html">gmt2list()</a></code> functions</li>
 <li>
-<strong>Palette management</strong>: Fixed examples for <code><a href="../reference/compile_palettes.html">compile_palettes()</a></code> and <code><a href="../reference/remove_palette.html">remove_palette()</a></code>
+<strong>Palette management</strong>: Fixed examples for <code>compile_palettes()</code> and <code>remove_palette()</code>
 </li>
 </ul></div>
 <div class="section level4">
@@ -680,7 +679,7 @@
 <li>
 <code>remind()</code> rendering fixed for <code>cli</code> braces with partial/case-insensitive matches</li>
 <li>
-<code><a href="../reference/rgb2hex.html">rgb2hex()</a></code> input validation tightened with concise CLI feedback</li>
+<code>rgb2hex()</code> input validation tightened with concise CLI feedback</li>
 <li>
 <code>rows_with_void()</code> header streamlined, delegates detection to <code>is_void()</code>
 </li>
@@ -710,7 +709,7 @@
 </li>
 <li>Package management: <code><a href="../reference/set_mirror.html">set_mirror()</a></code>, <code><a href="../reference/pkg_functions.html">pkg_functions()</a></code>
 </li>
-<li>Utilities: <code>remind()</code>, <code>map_column()</code>, <code>replace_void()</code>, <code>rows_with_void()</code>, <code><a href="../reference/rgb2hex.html">rgb2hex()</a></code>
+<li>Utilities: <code>remind()</code>, <code>map_column()</code>, <code>replace_void()</code>, <code>rows_with_void()</code>, <code>rgb2hex()</code>
 </li>
 <li>Operators: <code>%is%</code>, <code>%near%</code>, <code>%nin%</code>, <code>%p%</code>
 </li>
@@ -757,10 +756,10 @@
 <div class="section level5">
 <h5 id="bioinformatics-color-palettes-0-2-0">Bioinformatics Color Palettes<a class="anchor" aria-label="anchor" href="#bioinformatics-color-palettes-0-2-0"></a></h5>
 <ul><li>
-<code><a href="../reference/compile_palettes.html">compile_palettes()</a></code>, <code><a href="../reference/get_palette.html">get_palette()</a></code>, <code><a href="../reference/list_palettes.html">list_palettes()</a></code>, <code><a href="../reference/create_palette.html">create_palette()</a></code>
+<code>compile_palettes()</code>, <code>get_palette()</code>, <code>list_palettes()</code>, <code>create_palette()</code>
 </li>
 <li>
-<code><a href="../reference/preview_palette.html">preview_palette()</a></code>, <code>bio_palette_gallery()</code>
+<code>preview_palette()</code>, <code>bio_palette_gallery()</code>
 </li>
 </ul></div>
 <div class="section level5">
@@ -790,7 +789,7 @@
 <div class="section level5">
 <h5 id="vector--logic-operations-0-2-0">Vector &amp; Logic Operations<a class="anchor" aria-label="anchor" href="#vector--logic-operations-0-2-0"></a></h5>
 <ul><li>
-<code>combine_logic()</code>, <code><a href="../reference/hex2rgb.html">hex2rgb()</a></code>, <code><a href="../reference/rgb2hex.html">rgb2hex()</a></code>
+<code>combine_logic()</code>, <code>hex2rgb()</code>, <code>rgb2hex()</code>
 </li>
 </ul></div>
 <div class="section level5">
