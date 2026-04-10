@@ -135,7 +135,7 @@ home:
   description: >
     A feature-rich R utility package providing 50+ functions for data analysis,
     visualization, and bioinformatics workflows. Covers data processing,
-    color palettes, plotting, and workflow automation with a focus on
+    plotting, and workflow automation with a focus on
     simplicity and reproducibility.
   strip_header: false
 
@@ -149,9 +149,6 @@ home:
   - text: "Package Management"
     href: articles/pkg.html
     desc: "Install and manage R packages from multiple sources"
-  - text: "Color Palettes"
-    href: articles/palette.html
-    desc: "Professional color management for data visualization"
   - text: "Plotting Functions"
     href: articles/plot.html
     desc: "High-level plotting with sensible defaults"
@@ -226,8 +223,6 @@ navbar:
         href: articles/ops.html
       - text: "Package Management"
         href: articles/pkg.html
-      - text: "Color Palette Management"
-        href: articles/palette.html
       - text: "Plotting Functions"
         href: articles/plot.html
       - text: "Statistical Utilities"
@@ -293,22 +288,6 @@ reference:
   - quick_cor
   - stat_power
   - stat_n
-
-- title: "Color Palettes & Management"
-  desc: >
-    Bioinformatics-focused color palette system with creation,
-    management, and visualization tools.
-  contents:
-  - palettes
-  - get_palette
-  - list_palettes
-  - create_palette
-  - preview_palette
-  - palette_gallery
-  - compile_palettes
-  - remove_palette
-  - hex2rgb
-  - rgb2hex
 
 - title: "File & Download Utilities"
   desc: >

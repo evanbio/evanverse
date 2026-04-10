@@ -103,16 +103,10 @@ devtools::install_github("evanbio/evanverse")
 </details>
 
 <details>
-<summary><b>🌈 配色方案</b>（9 个）</summary>
+<summary><b>🌈 配色方案</b></summary>
 
-- `get_palette()` — 获取配色
-- `list_palettes()` — 列出可用配色
-- `create_palette()` — 创建自定义配色
-- `preview_palette()` — 预览配色
-- `palette_gallery()` — 浏览全部配色
-- `compile_palettes()` — 编译配色数据
-- `remove_palette()` — 删除配色
-- `hex2rgb()` / `rgb2hex()` — 颜色格式转换
+> 配色方案功能已迁移至独立包 [**biopalette**](https://github.com/evanbio/biopalette)。
+> 安装方式：`devtools::install_github("evanbio/biopalette")`
 
 </details>
 

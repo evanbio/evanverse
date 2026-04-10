@@ -27,14 +27,16 @@ BugReports: https://github.com/evanbio/evanverse/issues
 VignetteBuilder: knitr, rmarkdown
 Depends:
     R (>= 4.1)
+Remotes:
+    evanbio/biopalette
 Imports:
+    biopalette,
     cli,
     tibble,
     tidyr,
     dplyr,
     rlang,
     ggplot2,
-    jsonlite,
     curl,
     withr,
     ggpubr,

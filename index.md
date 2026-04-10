@@ -39,7 +39,7 @@ stat_power(n = 30, effect_size = 0.5) # power analysis
 | Package management | `set_mirror()`, `pkg_functions()` — see [pak](https://pak.r-lib.org/) for install/update/check |
 | Visualization | `plot_bar()`, `plot_venn()`, `plot_forest()`, `plot_pie()`, `plot_density()` |
 | Statistical analysis | `quick_ttest()`, `quick_anova()`, `quick_chisq()`, `quick_cor()`, `stat_power()`, `stat_n()` |
-| Color palettes | `get_palette()`, `create_palette()`, `preview_palette()`, `palette_gallery()`, ... |
+| Color palettes | Moved to [biopalette](https://github.com/evanbio/biopalette) |
 | File & download | `file_ls()`, `file_tree()`, `download_url()`, `download_geo()`, ... |
 | Bioinformatics | `gene2ensembl()`, `gene2entrez()`, `gmt2df()`, `gmt2list()`, ... |
 | Operators | `%p%`, `%nin%`, `%is%`, `%map%`, `%match%` |

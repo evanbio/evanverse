@@ -103,16 +103,10 @@ devtools::install_github("evanbio/evanverse")
 </details>
 
 <details>
-<summary><b>🌈 Color Palettes</b> (9)</summary>
+<summary><b>🌈 Color Palettes</b></summary>
 
-- `get_palette()` — retrieve a palette
-- `list_palettes()` — list available palettes
-- `create_palette()` — create a custom palette
-- `preview_palette()` — preview palette colors
-- `palette_gallery()` — browse all palettes
-- `compile_palettes()` — compile palette data
-- `remove_palette()` — remove a palette
-- `hex2rgb()` / `rgb2hex()` — color conversion
+> Color palette functions have been moved to [**biopalette**](https://github.com/evanbio/biopalette).
+> Install with: `devtools::install_github("evanbio/biopalette")`
 
 </details>
 

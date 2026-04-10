@@ -760,7 +760,7 @@
   colors <- NULL
   if (!is.null(palette)) {
     tryCatch({
-      colors <- get_palette(palette, type = "qualitative")
+      colors <- biopalette::get_palette(palette, type = "qualitative")
       if (length(colors) < length(group_levels))
         colors <- rep(colors, length.out = length(group_levels))
     }, error = function(e) {
@@ -1011,7 +1011,7 @@
   colors <- NULL
   if (!is.null(palette)) {
     tryCatch({
-      colors <- get_palette(palette, type = "qualitative")
+      colors <- biopalette::get_palette(palette, type = "qualitative")
       if (length(colors) < length(group_levels))
         colors <- rep(colors, length.out = length(group_levels))
     }, error = function(e) {
@@ -1247,7 +1247,7 @@
   if (!is.null(palette)) {
     n_needed <- nlevels(plot_data$var2)
     tryCatch({
-      colors <- get_palette(palette, n = n_needed)
+      colors <- biopalette::get_palette(palette, n = n_needed)
       if (is.null(colors) || length(colors) < n_needed) {
         cli::cli_alert_warning(
           "Palette '{palette}' has insufficient colors ({length(colors)} of {n_needed} needed). Using defaults."
@@ -1490,7 +1490,7 @@
     tryCatch({
       for (type_try in c("diverging", "sequential", "qualitative")) {
         color_vec <- tryCatch(
-          get_palette(palette, type = type_try),
+          biopalette::get_palette(palette, type = type_try),
           error = function(e) NULL
         )
         if (!is.null(color_vec) && length(color_vec) >= 3) break
