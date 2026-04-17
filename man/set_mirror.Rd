@@ -19,7 +19,7 @@ Previous mirror settings (invisibly).
 }
 \description{
 Configure CRAN and/or Bioconductor mirrors for faster package installation.
-All package management functions (\code{inst_pkg()}, \code{update_pkg()}, etc.) will
+R's native installation functions, \pkg{BiocManager}, and \pkg{pak} can
 respect these settings once set.
 }
 \examples{

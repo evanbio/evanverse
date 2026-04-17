@@ -131,6 +131,14 @@ test_that("set_mirror() preserves non-CRAN repo entries when setting CRAN mirror
   expect_equal(repos[["RSPM"]], "https://packagemanager.posit.co/cran/latest")
 })
 
+test_that("set_mirror() creates CRAN repo entry when repos option is NULL", {
+  skip_on_cran()
+  withr::local_options(list(repos = NULL))
+
+  set_mirror("cran", "official")
+  expect_equal(getOption("repos"), c(CRAN = "https://cloud.r-project.org"))
+})
+
 #==============================================================================
 # pkg_functions()
 #==============================================================================

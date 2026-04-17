@@ -75,7 +75,7 @@ devtools::install_github("evanbio/evanverse")
 - `pkg_functions()` — list functions in a package
 - `set_mirror()` — configure CRAN / Bioconductor mirror
 
-> **Note:** `inst_pkg()`, `check_pkg()`, `update_pkg()`, and `pkg_version()` have been removed from this package. We found that [pak](https://pak.r-lib.org/) provides a more elegant and performant package management workflow — parallel installs, unified `pkg::pkg_install()` interface for CRAN / GitHub / Bioconductor, and built-in status/update support. We recommend using pak directly instead.
+> **Note:** `inst_pkg()`, `check_pkg()`, `update_pkg()`, and `pkg_version()` have been removed from this package. We found that [pak](https://pak.r-lib.org/) provides a more elegant and performant package management workflow — parallel installs, unified `pak::pkg_install()` interface for CRAN / GitHub / Bioconductor, and built-in status/update support. We recommend using pak directly instead.
 
 </details>
 

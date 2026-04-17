@@ -5,7 +5,7 @@
 #' Set CRAN/Bioconductor Mirrors
 #'
 #' Configure CRAN and/or Bioconductor mirrors for faster package installation.
-#' All package management functions (`inst_pkg()`, `update_pkg()`, etc.) will
+#' R's native installation functions, \pkg{BiocManager}, and \pkg{pak} can
 #' respect these settings once set.
 #'
 #' @param repo Character. One of `"all"`, `"cran"`, `"bioc"`. Default: `"all"`.
