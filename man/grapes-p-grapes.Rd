@@ -19,7 +19,8 @@ An infix operator for string concatenation with one space between \code{lhs} and
 }
 \note{
 Both \code{lhs} and \code{rhs} must be non-\code{NA} character vectors; \code{NA} values and
-non-character inputs (including \code{NULL}) raise an error.
+non-character inputs (including \code{NULL}) raise an error. Lengths must be
+equal, or one side must have length 1.
 }
 \examples{
 "Hello" \%p\% "world"

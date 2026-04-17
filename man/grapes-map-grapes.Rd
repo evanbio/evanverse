@@ -20,6 +20,11 @@ Like \verb{\%match\%}, but returns a named character vector instead of indices.
 Names are canonical entries from \code{table}; values are the original elements from \code{x}.
 Unmatched values are dropped.
 }
+\note{
+Both \code{x} and \code{table} must be non-empty character vectors without \code{NA}
+or empty string values. If \code{table} contains duplicated values after case
+normalization, the first match is used with a warning.
+}
 \examples{
 c("tp53", "brca1", "egfr") \%map\% c("TP53", "EGFR", "MYC")
 # returns: TP53 = "tp53", EGFR = "egfr"

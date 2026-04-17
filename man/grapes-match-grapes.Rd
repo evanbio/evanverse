@@ -19,9 +19,10 @@ Like \code{\link[base:match]{base::match()}}, but ignores letter case. Useful fo
 }
 \note{
 Both \code{x} and \code{table} must be \strong{non-empty} character vectors; \code{character(0)} or
-non-character inputs raise an error. This differs from \code{\link[base:match]{base::match()}} and \verb{\%nin\%},
+non-character inputs raise an error. Empty strings are also rejected.
+This differs from \code{\link[base:match]{base::match()}} and \verb{\%nin\%},
 which accept empty vectors. The stricter contract is intentional for gene-ID workflows
-where an empty query almost always signals a upstream mistake.
+where an empty query almost always signals an upstream mistake.
 }
 \examples{
 c("tp53", "BRCA1", "egfr") \%match\% c("TP53", "EGFR", "MYC")

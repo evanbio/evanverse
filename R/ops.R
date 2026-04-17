@@ -12,7 +12,8 @@
 #' @return A character vector of concatenated strings.
 #'
 #' @note Both `lhs` and `rhs` must be non-`NA` character vectors; `NA` values and
-#'   non-character inputs (including `NULL`) raise an error.
+#'   non-character inputs (including `NULL`) raise an error. Lengths must be
+#'   equal, or one side must have length 1.
 #' @export
 #'
 #' @examples
@@ -22,6 +23,15 @@
   # Validate inputs
   .assert_character_vector(lhs)
   .assert_character_vector(rhs)
+
+  lhs_len <- length(lhs)
+  rhs_len <- length(rhs)
+  if (lhs_len != rhs_len && lhs_len != 1L && rhs_len != 1L) {
+    cli::cli_abort(
+      "{.arg lhs} and {.arg rhs} must have equal lengths, or one side must have length 1.",
+      call = NULL
+    )
+  }
 
   # Concatenate with space
   paste(lhs, rhs, sep = " ")
@@ -57,9 +67,10 @@
 #' @return An integer vector of match positions. Returns `NA` for non-matches.
 #'
 #' @note Both `x` and `table` must be **non-empty** character vectors; `character(0)` or
-#'   non-character inputs raise an error. This differs from [base::match()] and `%nin%`,
+#'   non-character inputs raise an error. Empty strings are also rejected.
+#'   This differs from [base::match()] and `%nin%`,
 #'   which accept empty vectors. The stricter contract is intentional for gene-ID workflows
-#'   where an empty query almost always signals a upstream mistake.
+#'   where an empty query almost always signals an upstream mistake.
 #' @export
 #'
 #' @examples
@@ -69,9 +80,14 @@
   # Validate inputs
   .assert_character_vector(x)
   .assert_character_vector(table)
+  .assert_no_blank(x)
+  .assert_no_blank(table)
 
   # Case-insensitive match via tolower
-  match(tolower(x), tolower(table))
+  x_norm     <- tolower(x)
+  table_norm <- .normalize_ops_table(table)
+
+  match(x_norm, table_norm)
 }
 
 
@@ -86,6 +102,10 @@
 #'
 #' @return A named character vector. Names are canonical entries from `table`; values are the
 #'   original elements from `x`. Order follows `x` (not `table`). Unmatched entries are dropped.
+#'
+#' @note Both `x` and `table` must be non-empty character vectors without `NA`
+#'   or empty string values. If `table` contains duplicated values after case
+#'   normalization, the first match is used with a warning.
 #' @export
 #'
 #' @examples
@@ -95,9 +115,11 @@
   # Validate inputs
   .assert_character_vector(x)
   .assert_character_vector(table)
+  .assert_no_blank(x)
+  .assert_no_blank(table)
 
   # Case-insensitive match
-  match_idx <- match(tolower(x), tolower(table))
+  match_idx <- match(tolower(x), .normalize_ops_table(table))
 
   # Build named vector, drop unmatched
   result <- stats::setNames(x, table[match_idx])
@@ -120,4 +142,25 @@
 #' 1:3 %is% c(1, 2, 3)   # FALSE (integer vs double)
 `%is%` <- function(a, b) {
   identical(a, b)
+}
+
+
+#' Normalize an operator lookup table and warn on ambiguous matches
+#'
+#' @param table Character vector to normalize.
+#' @return Lower-case version of \code{table}.
+#' @keywords internal
+#' @noRd
+.normalize_ops_table <- function(table) {
+  table_norm <- tolower(table)
+  duplicated_value <- unique(table_norm[duplicated(table_norm)])
+
+  if (length(duplicated_value) > 0L) {
+    cli::cli_warn(
+      "{.arg table} contains duplicated value{?s} after case normalization: {.val {duplicated_value}}. Using the first match.",
+      call = NULL
+    )
+  }
+
+  table_norm
 }
