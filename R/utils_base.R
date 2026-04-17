@@ -34,7 +34,34 @@
     valid[i]   <- TRUE
   }
 
-  result[valid]
+  out <- result[valid]
+  if (length(out) == 0L) {
+    cli::cli_abort("GMT file contains no valid gene sets: {.path {file}}", call = NULL)
+  }
+
+  out
+}
+
+
+#' Warn when a gene reference contains duplicated symbols after normalization
+#'
+#' @param symbol Character vector of reference symbols.
+#' @param species Character. One of \code{"human"} or \code{"mouse"}.
+#' @return Normalized symbols used for matching.
+#' @keywords internal
+#' @noRd
+.normalize_ref_symbols <- function(symbol, species) {
+  ref_symbol <- if (species == "human") toupper(symbol) else tolower(symbol)
+  duplicated_symbol <- unique(ref_symbol[duplicated(ref_symbol)])
+
+  if (length(duplicated_symbol) > 0L) {
+    cli::cli_warn(
+      "Reference contains duplicated gene symbol{?s} after case normalization: {.val {duplicated_symbol}}. Using the first match.",
+      call = NULL
+    )
+  }
+
+  ref_symbol
 }
 
 

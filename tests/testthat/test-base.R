@@ -145,6 +145,20 @@ test_that("gene2entrez errors on invalid species argument", {
                class = "error")
 })
 
+test_that("gene2entrez warns and uses first match for duplicated normalized symbols", {
+  ref <- data.frame(
+    symbol = c("TP53", "tp53"),
+    entrez_id = c("7157", "9999"),
+    stringsAsFactors = FALSE
+  )
+
+  expect_warning(
+    out <- gene2entrez("tp53", ref = ref, species = "human"),
+    "duplicated gene symbol"
+  )
+  expect_equal(out$entrez_id, "7157")
+})
+
 
 # =============================================================================
 # gene2ensembl
@@ -177,6 +191,20 @@ test_that("gene2ensembl errors when ref is missing required columns", {
 test_that("gene2ensembl errors on invalid species argument", {
   expect_error(gene2ensembl("TP53", ref = .ref_human(), species = "fly"),
                class = "error")
+})
+
+test_that("gene2ensembl warns and uses first match for duplicated normalized symbols", {
+  ref <- data.frame(
+    symbol = c("Trp53", "TRP53"),
+    ensembl_id = c("ENSMUSG00000059552", "DUPLICATE"),
+    stringsAsFactors = FALSE
+  )
+
+  expect_warning(
+    out <- gene2ensembl("trp53", ref = ref, species = "mouse"),
+    "duplicated gene symbol"
+  )
+  expect_equal(out$ensembl_id, "ENSMUSG00000059552")
 })
 
 
@@ -334,13 +362,10 @@ test_that("gmt2df warns and skips malformed lines, keeps valid ones", {
   expect_true(all(out$term == "GOOD_SET"))
 })
 
-test_that("gmt2df returns NULL when all lines are malformed (regression)", {
-  # do.call(rbind, list()) returns NULL — documents current behaviour so any
-  # future fix (e.g. returning a zero-row data.frame) shows up as a test change.
+test_that("gmt2df errors when all lines are malformed", {
   tmp <- withr::local_tempfile(fileext = ".gmt")
   writeLines(c("only_one_field", "also_bad"), tmp)
-  out <- suppressWarnings(gmt2df(tmp))
-  expect_null(out)
+  expect_error(suppressWarnings(gmt2df(tmp)), class = "rlang_error")
 })
 
 test_that("gmt2df always returns a data.frame, never NULL", {
@@ -376,6 +401,12 @@ test_that("gmt2list errors on non-existent file", {
   expect_error(gmt2list("/no/such/file.gmt"), class = "rlang_error")
 })
 
+test_that("gmt2list errors when all lines are malformed", {
+  tmp <- withr::local_tempfile(fileext = ".gmt")
+  writeLines(c("only_one_field", "also_bad"), tmp)
+  expect_error(suppressWarnings(gmt2list(tmp)), class = "rlang_error")
+})
+
 
 # =============================================================================
 # recode_column
@@ -405,6 +436,14 @@ test_that("recode_column applies custom default for unmatched values", {
   expect_equal(out$x, c("alpha", "other"))
 })
 
+test_that("recode_column preserves explicit NA mappings", {
+  df   <- data.frame(x = c("a", "b", "z"), stringsAsFactors = FALSE)
+  dict <- c(a = NA_character_, b = "beta")
+  out  <- recode_column(df, "x", dict, default = "other")
+
+  expect_equal(out$x, c(NA_character_, "beta", "other"))
+})
+
 test_that("recode_column errors on non-data.frame input", {
   expect_error(recode_column(list(x = 1), "x", c(a = "A")), class = "rlang_error")
 })
@@ -426,6 +465,14 @@ test_that("recode_column scalar default does not recycle silently across rows", 
   out  <- recode_column(df, "x", c(a = "alpha"), default = "other")
   expect_equal(out$x, c("alpha", "other", "other"))
   expect_length(out$x, 3L)
+})
+
+test_that("recode_column errors when default is not scalar", {
+  df <- data.frame(x = c("a", "z"), stringsAsFactors = FALSE)
+  expect_error(
+    recode_column(df, "x", c(a = "alpha"), default = c("other", "missing")),
+    class = "rlang_error"
+  )
 })
 
 
@@ -481,10 +528,7 @@ test_that("perm returns 0 when k > n", {
 })
 
 test_that("perm warns on overflow-prone inputs", {
-  expect_warning(perm(1000L, 999L), regexp = NA)   # may or may not warn; just must not error
-  # The actual overflow warning is a cli_alert, not a base warning --
-  # so we just confirm the call completes without hard error.
-  expect_no_error(perm(1000L, 999L))
+  expect_warning(perm(1000L, 999L), "exceeds double range")
 })
 
 test_that("perm errors on negative inputs", {
@@ -534,6 +578,10 @@ test_that("comb result is always <= perm result for same inputs", {
   # C(n,k) <= P(n,k) for all valid n,k (they are equal only when k <= 1)
   expect_true(comb(10, 4) <= perm(10, 4))
   expect_true(comb(7, 3)  <= perm(7, 3))
+})
+
+test_that("comb warns on overflow-prone inputs", {
+  expect_warning(comb(2000L, 1000L), "exceeds double range")
 })
 
 test_that("comb errors on negative inputs", {

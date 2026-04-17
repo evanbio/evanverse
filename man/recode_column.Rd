@@ -16,14 +16,15 @@ recode_column(data, column, dict, name = NULL, default = NA)
 \item{name}{Character or \code{NULL}. Name of the output column. If \code{NULL}
 (default), the original column is overwritten. Otherwise a new column is created.}
 
-\item{default}{Default value for unmatched entries. Default: \code{NA}.}
+\item{default}{Scalar default value for unmatched entries. Default: \code{NA}.}
 }
 \value{
 A data.frame with the recoded column.
 }
 \description{
 Maps values in a column to new values using a named vector (\code{dict}).
-Unmatched values are replaced with \code{default}.
+Unmatched values are replaced with \code{default}. Matched values are kept
+as-is, including explicit \code{NA} values in \code{dict}.
 }
 \examples{
 df <- data.frame(gene = c("TP53", "BRCA1", "EGFR", "XYZ"))

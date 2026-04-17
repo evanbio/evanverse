@@ -17,7 +17,7 @@ knitr::opts_chunk$set(
 
 ## Overview
 
-The base module provides eleven utility functions covering four areas:
+The base module provides thirteen utility functions covering six areas:
 
 | Area | Functions |
 |---|---|
@@ -25,6 +25,7 @@ The base module provides eleven utility functions covering four areas:
 | File system utilities | `file_ls()`, `file_info()`, `file_tree()` |
 | Gene ID conversion | `gene2entrez()`, `gene2ensembl()` |
 | GMT file parsing | `gmt2df()`, `gmt2list()` |
+| Math utilities | `perm()`, `comb()` |
 
 ```{r load}
 library(evanverse)
@@ -89,8 +90,9 @@ df2vect(bad, "id", "val")
 ### `recode_column()` — Map column values via a named vector
 
 Replaces values in a column using a named vector (`dict`). Unmatched values
-receive `default` (NA by default). Set `name` to write to a new column instead
-of overwriting the source.
+receive the scalar `default` (NA by default). Set `name` to write to a new
+column instead of overwriting the source. Explicit `NA` values in `dict` are
+kept as matched values rather than replaced by `default`.
 
 ```{r recode-column}
 df <- data.frame(
@@ -225,6 +227,8 @@ ref <- toy_gene_ref(species = "human")
 | `"mouse"` | `tolower()` — `"TRP53"` and `"Trp53"` both match `Trp53` |
 
 Unmatched symbols are returned with `NA` in the ID column rather than dropped.
+If the reference table contains duplicated symbols after case normalisation,
+the first match is used and a warning is emitted.
 
 ### `gene2entrez()`
 
@@ -301,13 +305,46 @@ gs[["HALLMARK_P53_PATHWAY"]]
 ```
 
 > Lines with fewer than 3 tab-separated fields are skipped with a warning and
-> removed from the result. If every line is malformed, both functions return
-> `NULL` rather than raising an error — this is the current behaviour.
-> Always check for a `NULL` return when parsing files from untrusted sources.
+> removed from the result. If every line is malformed, both functions raise an
+> error because no valid gene set can be returned.
 
 ---
 
-## 5 A Combined Workflow
+## 5 Math Utilities
+
+### `perm()` — Ordered arrangements
+
+Calculates the number of ordered arrangements of `k` items from `n` distinct
+items:
+
+```{r perm}
+perm(8, 4)
+#> [1] 1680
+
+perm(5, 6)
+#> [1] 0
+```
+
+`perm(n, 0)` returns 1. If `k > n`, the result is 0.
+
+### `comb()` — Unordered combinations
+
+Calculates the number of ways to choose `k` items from `n` distinct items:
+
+```{r comb}
+comb(8, 4)
+#> [1] 70
+
+comb(10, 3)
+#> [1] 120
+```
+
+`comb(n, 0)` and `comb(n, n)` return 1. If `k > n`, the result is 0.
+Very large inputs warn before returning an infinite result.
+
+---
+
+## 6 A Combined Workflow
 
 Gene ID conversion and GMT parsing compose naturally. The example below reads
 a GMT file, converts all gene symbols to Entrez IDs, and produces a named list
@@ -342,5 +379,6 @@ gs_entrez[["HALLMARK_P53_PATHWAY"]]
 - `?file_ls`, `?file_info`, `?file_tree`
 - `?gene2entrez`, `?gene2ensembl`
 - `?gmt2df`, `?gmt2list`
+- `?perm`, `?comb`
 - `?toy_gene_ref`, `?toy_gmt`, `?download_gene_ref`
 - [GitHub Issues](https://github.com/evanbio/evanverse/issues)

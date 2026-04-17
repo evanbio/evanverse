@@ -2,6 +2,10 @@
 # base.R — Base utility functions
 # =============================================================================
 
+# =============================================================================
+# Data frame utilities
+# =============================================================================
+
 #' Convert a data frame to a named list by grouping
 #'
 #' Groups a data frame by one column and collects values from another column
@@ -68,97 +72,104 @@ df2vect <- function(data, name_col, value_col) {
 }
 
 
-#' Convert gene symbols to Entrez IDs
+#' Recode a column in a data frame using a named vector
 #'
-#' @param x Character vector of gene symbols.
-#' @param ref Data frame with columns \code{symbol} and \code{entrez_id}.
-#'   If \code{NULL} (default), a full reference is downloaded via
-#'   \code{\link{download_gene_ref}} — this may trigger a network request.
-#'   For examples and tests, pass \code{toy_gene_ref()} instead.
-#' @param species One of \code{"human"} or \code{"mouse"}. Controls symbol
-#'   case normalization before matching. Default: \code{"human"}.
+#' Maps values in a column to new values using a named vector (\code{dict}).
+#' Unmatched values are replaced with \code{default}. Matched values are kept
+#' as-is, including explicit \code{NA} values in \code{dict}.
 #'
-#' @return A data.frame with columns \code{symbol} (original input),
-#'   \code{symbol_std} (case-normalized), and \code{entrez_id}.
-#'   Unmatched entries have \code{NA} in \code{entrez_id}.
+#' @param data A data.frame.
+#' @param column Character. Column name to recode.
+#' @param dict Named vector. Names are original values, values are replacements.
+#' @param name Character or \code{NULL}. Name of the output column. If \code{NULL}
+#'   (default), the original column is overwritten. Otherwise a new column is created.
+#' @param default Scalar default value for unmatched entries. Default: \code{NA}.
+#'
+#' @return A data.frame with the recoded column.
 #' @export
 #'
 #' @examples
-#' ref <- toy_gene_ref(species = "human")
-#' gene2entrez(c("tp53", "brca1", "MYC"), ref = ref, species = "human")
-#'
-#' ref <- toy_gene_ref(species = "mouse")
-#' gene2entrez(c("Trp53", "Zbp1"), ref = ref, species = "mouse")
-gene2entrez <- function(x, ref = NULL, species = c("human", "mouse")) {
-  .assert_character_vector(x)
-  species <- match.arg(species)
+#' df <- data.frame(gene = c("TP53", "BRCA1", "EGFR", "XYZ"))
+#' dict <- c("TP53" = "Tumor suppressor", "EGFR" = "Oncogene")
+#' recode_column(df, "gene", dict, name = "label")
+#' recode_column(df, "gene", dict)
+recode_column <- function(data, column, dict, name = NULL, default = NA) {
+  .assert_data_frame(data)
+  .assert_scalar_string(column)
+  .assert_has_cols(data, column)
 
-  if (is.null(ref)) {
-    ref <- download_gene_ref(species)
-  } else {
-    .assert_data_frame(ref)
-    .assert_has_cols(ref, c("symbol", "entrez_id"))
+  .assert_named_vector(dict)
+  if (!is.null(name)) .assert_scalar_string(name)
+  if (length(default) != 1L) {
+    cli::cli_abort("{.arg default} must be a scalar value.", call = NULL)
   }
 
-  x_norm      <- if (species == "human") toupper(x)          else tolower(x)
-  ref_symbol  <- if (species == "human") toupper(ref$symbol) else tolower(ref$symbol)
+  key <- as.character(data[[column]])
+  idx <- match(key, names(dict))
+  matched <- !is.na(idx)
 
-  idx <- match(x_norm, ref_symbol)
+  mapped <- rep(default, length(key))
+  mapped[matched] <- unname(dict[idx[matched]])
 
-  data.frame(
-    symbol     = x,
-    symbol_std = x_norm,
-    entrez_id  = ref$entrez_id[idx],
-    stringsAsFactors = FALSE
+  out_col <- if (is.null(name)) column else name
+  data[[out_col]] <- mapped
+
+  data
+}
+
+
+#' Quick interactive table viewer
+#'
+#' Displays a data.frame as an interactive table in the Viewer pane
+#' using \code{reactable}.
+#'
+#' @param data A data.frame to display.
+#' @param n Integer. Number of rows per page. Default: 10.
+#'
+#' @return A reactable widget rendered in the Viewer pane.
+#' @export
+#'
+#' @examples
+#' if (requireNamespace("reactable", quietly = TRUE)) {
+#'   view(iris)
+#' }
+view <- function(data, n = 10) {
+  .assert_data_frame(data)
+  .assert_count(n)
+
+  if (!requireNamespace("reactable", quietly = TRUE)) {
+    cli::cli_abort("Please install {.pkg reactable} to use {.fn view}.", call = NULL)
+  }
+
+  reactable::reactable(
+    data,
+    searchable      = TRUE,
+    filterable      = TRUE,
+    striped         = TRUE,
+    highlight       = TRUE,
+    compact         = FALSE,
+    pagination      = TRUE,
+    defaultPageSize = n,
+    resizable       = TRUE,
+    bordered        = TRUE,
+    showPageInfo    = TRUE,
+    theme = reactable::reactableTheme(
+      headerStyle  = list(fontWeight = "bold", fontSize = "14px",
+                          backgroundColor = "#f7f7f8", color = "#333333",
+                          borderBottom = "2px solid #dee2e6"),
+      cellStyle    = list(fontSize = "13px", color = "#555555",
+                          padding = "8px 12px"),
+      stripedColor   = "#f6f8fa",
+      highlightColor = "#e8f4fa",
+      borderColor    = "#dee2e6"
+    )
   )
 }
 
 
-#' Convert gene symbols to Ensembl IDs
-#'
-#' @param x Character vector of gene symbols.
-#' @param ref Data frame with columns \code{symbol} and \code{ensembl_id}.
-#'   If \code{NULL} (default), a full reference is downloaded via
-#'   \code{\link{download_gene_ref}} — this may trigger a network request.
-#'   For examples and tests, pass \code{toy_gene_ref()} instead.
-#' @param species One of \code{"human"} or \code{"mouse"}. Controls symbol
-#'   case normalization before matching. Default: \code{"human"}.
-#'
-#' @return A data.frame with columns \code{symbol} (original input),
-#'   \code{symbol_std} (case-normalized), and \code{ensembl_id}.
-#'   Unmatched entries have \code{NA} in \code{ensembl_id}.
-#' @export
-#'
-#' @examples
-#' ref <- toy_gene_ref(species = "human")
-#' gene2ensembl(c("tp53", "brca1", "MYC"), ref = ref, species = "human")
-#'
-#' ref <- toy_gene_ref(species = "mouse")
-#' gene2ensembl(c("Zbp1", "Sftpd"), ref = ref, species = "mouse")
-gene2ensembl <- function(x, ref = NULL, species = c("human", "mouse")) {
-  .assert_character_vector(x)
-  species <- match.arg(species)
-
-  if (is.null(ref)) {
-    ref <- download_gene_ref(species)
-  } else {
-    .assert_data_frame(ref)
-    .assert_has_cols(ref, c("symbol", "ensembl_id"))
-  }
-
-  x_norm     <- if (species == "human") toupper(x)          else tolower(x)
-  ref_symbol <- if (species == "human") toupper(ref$symbol) else tolower(ref$symbol)
-
-  idx <- match(x_norm, ref_symbol)
-
-  data.frame(
-    symbol     = x,
-    symbol_std = x_norm,
-    ensembl_id = ref$ensembl_id[idx],
-    stringsAsFactors = FALSE
-  )
-}
-
+# =============================================================================
+# File system utilities
+# =============================================================================
 
 #' List files in a directory with metadata
 #'
@@ -264,6 +275,108 @@ file_tree <- function(dir = ".", max_depth = 2) {
 }
 
 
+# =============================================================================
+# Gene ID conversion
+# =============================================================================
+
+#' Convert gene symbols to Entrez IDs
+#'
+#' @param x Character vector of gene symbols.
+#' @param ref Data frame with columns \code{symbol} and \code{entrez_id}.
+#'   If \code{NULL} (default), a full reference is downloaded via
+#'   \code{\link{download_gene_ref}} — this may trigger a network request.
+#'   For examples and tests, pass \code{toy_gene_ref()} instead.
+#' @param species One of \code{"human"} or \code{"mouse"}. Controls symbol
+#'   case normalization before matching. Default: \code{"human"}.
+#'
+#' @return A data.frame with columns \code{symbol} (original input),
+#'   \code{symbol_std} (case-normalized), and \code{entrez_id}.
+#'   Unmatched entries have \code{NA} in \code{entrez_id}. If the reference
+#'   contains duplicated normalized symbols, the first match is used with a warning.
+#' @export
+#'
+#' @examples
+#' ref <- toy_gene_ref(species = "human")
+#' gene2entrez(c("tp53", "brca1", "MYC"), ref = ref, species = "human")
+#'
+#' ref <- toy_gene_ref(species = "mouse")
+#' gene2entrez(c("Trp53", "Zbp1"), ref = ref, species = "mouse")
+gene2entrez <- function(x, ref = NULL, species = c("human", "mouse")) {
+  .assert_character_vector(x)
+  species <- match.arg(species)
+
+  if (is.null(ref)) {
+    ref <- download_gene_ref(species)
+  } else {
+    .assert_data_frame(ref)
+    .assert_has_cols(ref, c("symbol", "entrez_id"))
+  }
+
+  x_norm     <- if (species == "human") toupper(x) else tolower(x)
+  ref_symbol <- .normalize_ref_symbols(ref$symbol, species)
+
+  idx <- match(x_norm, ref_symbol)
+
+  data.frame(
+    symbol     = x,
+    symbol_std = x_norm,
+    entrez_id  = ref$entrez_id[idx],
+    stringsAsFactors = FALSE
+  )
+}
+
+
+#' Convert gene symbols to Ensembl IDs
+#'
+#' @param x Character vector of gene symbols.
+#' @param ref Data frame with columns \code{symbol} and \code{ensembl_id}.
+#'   If \code{NULL} (default), a full reference is downloaded via
+#'   \code{\link{download_gene_ref}} — this may trigger a network request.
+#'   For examples and tests, pass \code{toy_gene_ref()} instead.
+#' @param species One of \code{"human"} or \code{"mouse"}. Controls symbol
+#'   case normalization before matching. Default: \code{"human"}.
+#'
+#' @return A data.frame with columns \code{symbol} (original input),
+#'   \code{symbol_std} (case-normalized), and \code{ensembl_id}.
+#'   Unmatched entries have \code{NA} in \code{ensembl_id}. If the reference
+#'   contains duplicated normalized symbols, the first match is used with a warning.
+#' @export
+#'
+#' @examples
+#' ref <- toy_gene_ref(species = "human")
+#' gene2ensembl(c("tp53", "brca1", "MYC"), ref = ref, species = "human")
+#'
+#' ref <- toy_gene_ref(species = "mouse")
+#' gene2ensembl(c("Zbp1", "Sftpd"), ref = ref, species = "mouse")
+gene2ensembl <- function(x, ref = NULL, species = c("human", "mouse")) {
+  .assert_character_vector(x)
+  species <- match.arg(species)
+
+  if (is.null(ref)) {
+    ref <- download_gene_ref(species)
+  } else {
+    .assert_data_frame(ref)
+    .assert_has_cols(ref, c("symbol", "ensembl_id"))
+  }
+
+  x_norm     <- if (species == "human") toupper(x) else tolower(x)
+  ref_symbol <- .normalize_ref_symbols(ref$symbol, species)
+
+  idx <- match(x_norm, ref_symbol)
+
+  data.frame(
+    symbol     = x,
+    symbol_std = x_norm,
+    ensembl_id = ref$ensembl_id[idx],
+    stringsAsFactors = FALSE
+  )
+}
+
+
+# =============================================================================
+# GMT parsing
+# =============================================================================
+
 #' Convert a GMT file to a long-format data frame
 #'
 #' Reads a \code{.gmt} gene set file and returns a long-format data frame with
@@ -316,92 +429,9 @@ gmt2list <- function(file) {
 }
 
 
-#' Recode a column in a data frame using a named vector
-#'
-#' Maps values in a column to new values using a named vector (\code{dict}).
-#' Unmatched values are replaced with \code{default}.
-#'
-#' @param data A data.frame.
-#' @param column Character. Column name to recode.
-#' @param dict Named vector. Names are original values, values are replacements.
-#' @param name Character or \code{NULL}. Name of the output column. If \code{NULL}
-#'   (default), the original column is overwritten. Otherwise a new column is created.
-#' @param default Default value for unmatched entries. Default: \code{NA}.
-#'
-#' @return A data.frame with the recoded column.
-#' @export
-#'
-#' @examples
-#' df <- data.frame(gene = c("TP53", "BRCA1", "EGFR", "XYZ"))
-#' dict <- c("TP53" = "Tumor suppressor", "EGFR" = "Oncogene")
-#' recode_column(df, "gene", dict, name = "label")
-#' recode_column(df, "gene", dict)
-recode_column <- function(data, column, dict, name = NULL, default = NA) {
-  .assert_data_frame(data)
-  .assert_scalar_string(column)
-  .assert_has_cols(data, column)
-
-  .assert_named_vector(dict)
-  if (!is.null(name)) .assert_scalar_string(name)
-
-  mapped <- dict[as.character(data[[column]])]
-  mapped[is.na(mapped)] <- default
-
-  out_col <- if (is.null(name)) column else name
-  data[[out_col]] <- unname(mapped)
-
-  data
-}
-
-
-#' Quick interactive table viewer
-#'
-#' Displays a data.frame as an interactive table in the Viewer pane
-#' using \code{reactable}.
-#'
-#' @param data A data.frame to display.
-#' @param n Integer. Number of rows per page. Default: 10.
-#'
-#' @return A reactable widget rendered in the Viewer pane.
-#' @export
-#'
-#' @examples
-#' if (requireNamespace("reactable", quietly = TRUE)) {
-#'   view(iris)
-#' }
-view <- function(data, n = 10) {
-  .assert_data_frame(data)
-  .assert_count(n)
-
-  if (!requireNamespace("reactable", quietly = TRUE)) {
-    cli::cli_abort("Please install {.pkg reactable} to use {.fn view}.", call = NULL)
-  }
-
-  reactable::reactable(
-    data,
-    searchable      = TRUE,
-    filterable      = TRUE,
-    striped         = TRUE,
-    highlight       = TRUE,
-    compact         = FALSE,
-    pagination      = TRUE,
-    defaultPageSize = n,
-    resizable       = TRUE,
-    bordered        = TRUE,
-    showPageInfo    = TRUE,
-    theme = reactable::reactableTheme(
-      headerStyle  = list(fontWeight = "bold", fontSize = "14px",
-                          backgroundColor = "#f7f7f8", color = "#333333",
-                          borderBottom = "2px solid #dee2e6"),
-      cellStyle    = list(fontSize = "13px", color = "#555555",
-                          padding = "8px 12px"),
-      stripedColor   = "#f6f8fa",
-      highlightColor = "#e8f4fa",
-      borderColor    = "#dee2e6"
-    )
-  )
-}
-
+# =============================================================================
+# Math utilities
+# =============================================================================
 
 #' Number of permutations P(n, k)
 #'
@@ -430,7 +460,7 @@ perm <- function(n, k) {
 
   # Warn if result likely overflows double (log scale check via lgamma)
   if (lgamma(n + 1) - lgamma(n - k + 1) > log(.Machine$double.xmax))
-    cli::cli_alert_warning("P({n}, {k}) exceeds double range and will return Inf.")
+    cli::cli_warn("P({n}, {k}) exceeds double range and will return Inf.", call = NULL)
 
   # Iterative multiplication: avoids computing full factorials
   result <- 1
@@ -466,7 +496,7 @@ comb <- function(n, k) {
 
   # Warn if result likely overflows double (log scale check via lgamma)
   if (lgamma(n + 1) - lgamma(k + 1) - lgamma(n - k + 1) > log(.Machine$double.xmax))
-    cli::cli_alert_warning("C({n}, {k}) exceeds double range and will return Inf.")
+    cli::cli_warn("C({n}, {k}) exceeds double range and will return Inf.", call = NULL)
 
   # Use symmetry C(n,k) = C(n,n-k) to minimise multiplications
   if (k > n - k) k <- n - k

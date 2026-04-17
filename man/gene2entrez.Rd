@@ -20,7 +20,8 @@ case normalization before matching. Default: \code{"human"}.}
 \value{
 A data.frame with columns \code{symbol} (original input),
 \code{symbol_std} (case-normalized), and \code{entrez_id}.
-Unmatched entries have \code{NA} in \code{entrez_id}.
+Unmatched entries have \code{NA} in \code{entrez_id}. If the reference
+contains duplicated normalized symbols, the first match is used with a warning.
 }
 \description{
 Convert gene symbols to Entrez IDs
