@@ -93,6 +93,17 @@ test_that("toy_gmt n = 3 gmt2df returns exactly 3 distinct gene sets", {
   expect_equal(length(unique(out$term)), 3L)
 })
 
+test_that("toy_gmt genes are mappable with human toy_gene_ref", {
+  path <- toy_gmt(n = 3L)
+  long <- gmt2df(path)
+  ref  <- toy_gene_ref("human", n = 100L)
+  ids  <- gene2entrez(long$gene, ref = ref, species = "human")
+
+  expect_false(anyNA(ids$entrez_id))
+  expect_equal(ids$entrez_id[match(c("TP53", "BRCA1"), ids$symbol)],
+               c(7157L, 672L))
+})
+
 test_that("toy_gmt errors on n = 0", {
   expect_error(toy_gmt(n = 0L), class = "rlang_error")
 })
@@ -123,7 +134,11 @@ test_that("toy_gene_ref returns a data.frame", {
 
 test_that("toy_gene_ref default has expected columns", {
   out <- toy_gene_ref()
-  expect_true(all(c("symbol", "ensembl_id", "entrez_id") %in% names(out)))
+  expect_named(
+    out,
+    c("symbol", "ensembl_id", "entrez_id", "gene_type", "species",
+      "ensembl_version", "download_date")
+  )
 })
 
 test_that("toy_gene_ref default returns 20 rows", {
@@ -158,6 +173,30 @@ test_that("toy_gene_ref human and mouse return different data", {
   expect_false(identical(h$ensembl_id, m$ensembl_id))
 })
 
+test_that("toy_gene_ref contains key GMT genes in human reference", {
+  out <- toy_gene_ref("human", n = 100L)
+  expect_true(all(c("TP53", "BRCA1", "MYC", "EGFR") %in% out$symbol))
+  expect_equal(out$entrez_id[match("TP53", out$symbol)], 7157L)
+  expect_equal(out$ensembl_id[match("BRCA1", out$symbol)], "ENSG00000012048")
+})
+
+test_that("toy_gene_ref contains mouse ortholog examples", {
+  out <- toy_gene_ref("mouse", n = 100L)
+  expect_true(all(c("Trp53", "Brca1", "Myc", "Egfr") %in% out$symbol))
+  expect_equal(out$entrez_id[match("Trp53", out$symbol)], 22059L)
+  expect_equal(out$ensembl_id[match("Trp53", out$symbol)], "ENSMUSG00000059552")
+})
+
+test_that("toy_gene_ref has no duplicated non-missing symbols or Ensembl IDs", {
+  human <- toy_gene_ref("human", n = 100L)
+  mouse <- toy_gene_ref("mouse", n = 100L)
+
+  expect_equal(anyDuplicated(stats::na.omit(human$symbol)), 0L)
+  expect_equal(anyDuplicated(human$ensembl_id), 0L)
+  expect_equal(anyDuplicated(stats::na.omit(mouse$symbol)), 0L)
+  expect_equal(anyDuplicated(mouse$ensembl_id), 0L)
+})
+
 test_that("toy_gene_ref ensembl_id column is character", {
   out <- toy_gene_ref()
   expect_type(out$ensembl_id, "character")
@@ -189,14 +228,15 @@ test_that("toy_gene_ref has gene_type column", {
   expect_type(out$gene_type, "character")
 })
 
-test_that("toy_gene_ref symbol is NA (not empty string) for missing entries", {
+test_that("toy_gene_ref human symbols are present and non-empty", {
   out <- toy_gene_ref(n = 20L)
-  # Empty symbols must be NA, not ""
+  expect_false(anyNA(out$symbol))
   expect_false(any(out$symbol == "", na.rm = TRUE))
 })
 
-test_that("toy_gene_ref mouse symbol is NA (not empty string) for missing entries", {
+test_that("toy_gene_ref mouse symbols are present and non-empty", {
   out <- toy_gene_ref("mouse", n = 20L)
+  expect_false(anyNA(out$symbol))
   expect_false(any(out$symbol == "", na.rm = TRUE))
 })
 

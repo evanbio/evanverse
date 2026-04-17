@@ -18,8 +18,10 @@ A data.frame with columns \code{symbol}, \code{ensembl_id},
 and \code{download_date}.
 }
 \description{
-Generates a small simulated gene reference table for use in examples and
-tests. Not intended for real analyses — use \code{\link{download_gene_ref}}
+Generates a small deterministic gene reference table for examples and tests.
+The human reference includes the symbols used by \code{\link{toy_gmt}} so
+offline GMT parsing and gene ID conversion examples compose without network
+access. Not intended for real analyses — use \code{\link{download_gene_ref}}
 for a complete reference.
 }
 \examples{

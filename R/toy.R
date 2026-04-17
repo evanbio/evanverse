@@ -4,8 +4,10 @@
 
 #' Generate a toy gene reference table
 #'
-#' Generates a small simulated gene reference table for use in examples and
-#' tests. Not intended for real analyses — use \code{\link{download_gene_ref}}
+#' Generates a small deterministic gene reference table for examples and tests.
+#' The human reference includes the symbols used by \code{\link{toy_gmt}} so
+#' offline GMT parsing and gene ID conversion examples compose without network
+#' access. Not intended for real analyses — use \code{\link{download_gene_ref}}
 #' for a complete reference.
 #'
 #' @param species One of \code{"human"} or \code{"mouse"}. Default: \code{"human"}.
@@ -24,7 +26,7 @@ toy_gene_ref <- function(species = c("human", "mouse"), n = 20L) {
   species <- match.arg(species)
   .assert_count(n)
 
-  if (species == "human") .gene_ref_human(n) else .gene_ref_mouse(n)
+  .toy_gene_ref_data(species, n)
 }
 
 
