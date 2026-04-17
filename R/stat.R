@@ -209,13 +209,13 @@ summary.power_result <- function(object, ...) {
     cli::cli_h2("Result")
     power_pct <- sprintf("%.2f%%", x$power * 100)
     if (x$power < 0.5) {
-      cli::cli_alert_danger( "Power (1\u2212\u03b2): {power_pct}  (very low)")
+      cli::cli_alert_danger( "Power (1-beta): {power_pct}  (very low)")
     } else if (x$power < 0.8) {
-      cli::cli_alert_warning("Power (1\u2212\u03b2): {power_pct}  (below 80% threshold)")
+      cli::cli_alert_warning("Power (1-beta): {power_pct}  (below 80% threshold)")
     } else if (x$power < 0.95) {
-      cli::cli_alert_success("Power (1\u2212\u03b2): {power_pct}  (good)")
+      cli::cli_alert_success("Power (1-beta): {power_pct}  (good)")
     } else {
-      cli::cli_alert_success("Power (1\u2212\u03b2): {power_pct}  (very high)")
+      cli::cli_alert_success("Power (1-beta): {power_pct}  (very high)")
     }
 
   } else {

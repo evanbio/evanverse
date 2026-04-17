@@ -103,7 +103,7 @@
     )
   } else if (power < 0.95) {
     sprintf(
-      "Power of %.1f%% is good \u2014 %.1f%% probability of detecting a true effect of size %.2f.",
+      "Power of %.1f%% is good - %.1f%% probability of detecting a true effect of size %.2f.",
       power * 100, power * 100, effect_size
     )
   } else {
@@ -142,7 +142,7 @@
       n, req_n, .n_unit(test)
     )
   } else {
-    "Power > 95%: consider whether such a large sample is necessary \u2014 trivially small effects may reach significance."
+    "Power > 95%: consider whether such a large sample is necessary - trivially small effects may reach significance."
   }
 }
 
@@ -188,7 +188,7 @@
       title    = "Statistical Power Curve",
       subtitle = sprintf("Effect size = %.3f,  alpha = %.3f", effect_size, alpha),
       x        = sprintf("Sample size (%s)", .n_unit(test)),
-      y        = "Power (1 \u2212 \u03b2)"
+      y        = expression("Power" ~ (1 - beta))
     ) +
     ggplot2::scale_y_continuous(limits = c(0, 1), breaks = seq(0, 1, 0.1)) +
     ggplot2::theme_minimal(base_size = 12) +
@@ -228,13 +228,13 @@
 #' @noRd
 .n_recommend <- function(n) {
   if (n < 10) {
-    "Very small sample \u2014 ensure measurement instruments have high reliability."
+    "Very small sample - ensure measurement instruments have high reliability."
   } else if (n < 30) {
-    "Recruit 10\u201315% extra to account for potential dropout or exclusions."
+    "Recruit 10-15% extra to account for potential dropout or exclusions."
   } else if (n < 100) {
-    "Recruit 10\u201320% extra to account for dropout, missing data, or protocol violations."
+    "Recruit 10-20% extra to account for dropout, missing data, or protocol violations."
   } else {
-    "For large studies, budget 15\u201320% extra for dropout and consider interim analyses."
+    "For large studies, budget 15-20% extra for dropout and consider interim analyses."
   }
 }
 
