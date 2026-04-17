@@ -13,7 +13,7 @@ plot_pie(
 )
 }
 \arguments{
-\item{data}{A character/factor vector, or a data.frame.}
+\item{data}{A character/factor vector, named numeric vector, or data.frame.}
 
 \item{group_col}{Character. Column name for group labels (data.frame only).}
 
@@ -31,9 +31,9 @@ Default: \code{NULL}.}
 A \code{ggplot} object.
 }
 \description{
-Accepts either a character/factor vector (frequency counted automatically)
-or a data frame with pre-computed counts. Slices with zero count are dropped.
-At least two groups are required.
+Accepts a character/factor vector (frequency counted automatically), a named
+numeric vector of pre-computed counts, or a data frame with pre-computed
+counts. Slices with zero count are dropped. At least two groups are required.
 }
 \examples{
 # From a vector

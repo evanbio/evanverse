@@ -67,7 +67,13 @@
   if (!is.null(p_cols)) {
     thresh_str <- formatC(10^(-p_digits), digits = p_digits, format = "f")
     for (col in p_cols) {
-      pv             <- as.numeric(data[[col]])
+      if (!is.numeric(data[[col]])) {
+        cli::cli_abort(
+          "{.arg p_cols} must refer to numeric p-value columns. Column {.field {col}} is not numeric.",
+          call = NULL
+        )
+      }
+      pv             <- data[[col]]
       p_numeric[[col]] <- pv
       data[[col]]    <- ifelse(
         is.na(pv), "",

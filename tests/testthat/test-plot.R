@@ -126,6 +126,15 @@ test_that("plot_bar errors when y_col is absent", {
   )
 })
 
+test_that("plot_bar errors when y_col is non-numeric", {
+  df <- data.frame(category = c("A", "B"), value = c("low", "high"))
+  expect_error(
+    plot_bar(df, x_col = "category", y_col = "value"),
+    regexp = "value",
+    class  = "rlang_error"
+  )
+})
+
 test_that("plot_bar errors when sort = TRUE, group_col set, sort_by = NULL", {
   expect_error(
     plot_bar(.bar_df_grouped(), x_col = "category", y_col = "value",
@@ -252,6 +261,13 @@ test_that("plot_pie returns a ggplot from a factor vector", {
   expect_s3_class(p, "ggplot")
 })
 
+test_that("plot_pie returns a ggplot from a named numeric vector", {
+  p <- plot_pie(c(A = 10, B = 25, C = 15))
+  expect_s3_class(p, "ggplot")
+  expect_equal(p$data$group, c("A", "B", "C"))
+  expect_equal(p$data$count, c(10, 25, 15))
+})
+
 test_that("plot_pie returns a ggplot from a data.frame", {
   p <- plot_pie(.pie_df(), group_col = "group", count_col = "count")
   expect_s3_class(p, "ggplot")
@@ -321,6 +337,15 @@ test_that("plot_pie errors when count_col contains negative values", {
   expect_error(
     plot_pie(df, group_col = "group", count_col = "count"),
     regexp = "non-negative",
+    class  = "rlang_error"
+  )
+})
+
+test_that("plot_pie errors when data.frame group values are duplicated", {
+  df <- data.frame(group = c("A", "A", "B"), count = c(10, 5, 7))
+  expect_error(
+    plot_pie(df, group_col = "group", count_col = "count"),
+    regexp = "duplicate",
     class  = "rlang_error"
   )
 })
@@ -511,21 +536,17 @@ test_that("plot_forest border_width scalar is recycled to length 3 without error
   expect_true(inherits(out, "gtable"))
 })
 
-test_that("plot_forest p_cols pointing to character column coerces silently", {
-  # as.numeric() on a character column returns NA with a warning -- locks in
-  # the current behaviour so any future change (error vs. warn) shows as a
-  # test failure.
+test_that("plot_forest errors when p_cols points to a non-numeric column", {
   df        <- .forest_df()
   df$label  <- c("a", "b", "c")   # non-numeric column
-  # as.numeric() on a character column warns "NAs introduced by coercion"
-  # rather than throwing a hard error -- lock in that behaviour here.
-  expect_warning(
+  expect_error(
     plot_forest(df,
                 est    = c(NA, 1.52, 1.43),
                 lower  = c(NA, 1.18, 1.11),
                 upper  = c(NA, 1.96, 1.85),
                 p_cols = "label"),
-    regexp = "coercion"
+    regexp = "numeric",
+    class  = "rlang_error"
   )
 })
 

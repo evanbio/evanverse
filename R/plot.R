@@ -44,6 +44,7 @@ plot_bar <- function(data,
   .assert_scalar_string(x_col)
   .assert_scalar_string(y_col)
   .assert_has_cols(data, c(x_col, y_col))
+  .assert_numeric_vector(data[[y_col]], y_col)
   .assert_flag(horizontal)
   .assert_flag(sort)
   .assert_flag(decreasing)
@@ -208,11 +209,11 @@ plot_density <- function(data,
 
 #' Pie chart from a vector or grouped data frame
 #'
-#' Accepts either a character/factor vector (frequency counted automatically)
-#' or a data frame with pre-computed counts. Slices with zero count are dropped.
-#' At least two groups are required.
+#' Accepts a character/factor vector (frequency counted automatically), a named
+#' numeric vector of pre-computed counts, or a data frame with pre-computed
+#' counts. Slices with zero count are dropped. At least two groups are required.
 #'
-#' @param data A character/factor vector, or a data.frame.
+#' @param data A character/factor vector, named numeric vector, or data.frame.
 #' @param group_col Character. Column name for group labels (data.frame only).
 #' @param count_col Character. Column name for counts (data.frame only).
 #'   Values must be non-negative.
@@ -255,6 +256,7 @@ plot_pie <- function(data,
     )
 
     .assert_no_blank(df$group)
+    .assert_no_dupes(df$group, arg = group_col)
     if (anyNA(df$count)) {
       cli::cli_abort("`{count_col}` must not contain NA values.")
     }
@@ -273,8 +275,23 @@ plot_pie <- function(data,
       stringsAsFactors = FALSE
     )
 
+  } else if (is.numeric(data)) {
+    .assert_named_vector(data)
+    df <- data.frame(
+      group = names(data),
+      count = as.numeric(data),
+      stringsAsFactors = FALSE
+    )
+
+    if (anyNA(df$count)) {
+      cli::cli_abort("`data` must not contain NA values.")
+    }
+    if (any(df$count < 0)) {
+      cli::cli_abort("`data` must contain non-negative values.")
+    }
+
   } else {
-    cli::cli_abort("`data` must be a vector or a data.frame.")
+    cli::cli_abort("`data` must be a character/factor vector, named numeric vector, or data.frame.")
   }
 
   # drop zero-count slices
@@ -516,8 +533,8 @@ plot_venn <- function(set1, set2,
 #'   (length = total gtable columns). Auto rounds each default width up so the
 #'   adjustment is in \eqn{[5, 10)} mm.
 #' @param save Logical. Save output to files? Default: \code{FALSE}.
-#' @param dest Character. Destination file path (extension ignored; all four
-#'   formats are saved). Required when \code{save = TRUE}.
+#' @param dest Character. Destination file path (extension ignored; PNG, PDF,
+#'   JPG, and TIFF files are saved). Required when \code{save = TRUE}.
 #' @param save_width Numeric. Output width in cm. Default: \code{20}.
 #' @param save_height Numeric or \code{NULL}. Output height in cm.
 #'   \code{NULL} = \code{nrow(data) * 0.9 + 3}.

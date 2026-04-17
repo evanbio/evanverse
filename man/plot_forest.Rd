@@ -140,8 +140,8 @@ adjustment is in \eqn{[5, 10)} mm.}
 
 \item{save}{Logical. Save output to files? Default: \code{FALSE}.}
 
-\item{dest}{Character. Destination file path (extension ignored; all four
-formats are saved). Required when \code{save = TRUE}.}
+\item{dest}{Character. Destination file path (extension ignored; PNG, PDF,
+JPG, and TIFF files are saved). Required when \code{save = TRUE}.}
 
 \item{save_width}{Numeric. Output width in cm. Default: \code{20}.}
 
