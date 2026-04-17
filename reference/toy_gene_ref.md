@@ -1,7 +1,10 @@
 # Generate a toy gene reference table
 
-Generates a small simulated gene reference table for use in examples and
-tests. Not intended for real analyses — use
+Generates a small deterministic gene reference table for examples and
+tests. The human reference includes the symbols used by
+[`toy_gmt`](https://evanbio.github.io/evanverse/reference/toy_gmt.md) so
+offline GMT parsing and gene ID conversion examples compose without
+network access. Not intended for real analyses — use
 [`download_gene_ref`](https://evanbio.github.io/evanverse/reference/download_gene_ref.md)
 for a complete reference.
 
@@ -31,69 +34,69 @@ A data.frame with columns `symbol`, `ensembl_id`, `entrez_id`,
 
 ``` r
 toy_gene_ref()
-#>         ensembl_id    symbol entrez_id                          gene_type
-#> 1  ENSG00000199396    RNA5S5 124905431                               rRNA
-#> 2  ENSG00000295528      <NA>        NA                             lncRNA
-#> 3  ENSG00000301748      <NA>        NA                             lncRNA
-#> 4  ENSG00000253260      <NA>        NA                             lncRNA
-#> 5  ENSG00000258537 FRMD6-AS2 100874185                             lncRNA
-#> 6  ENSG00000008196    TFAP2B      7021                     protein_coding
-#> 7  ENSG00000202521    RNA5S7 124905438                               rRNA
-#> 8  ENSG00000285726      <NA>        NA                             lncRNA
-#> 9  ENSG00000284501    MGAT4B     11282                     protein_coding
-#> 10 ENSG00000199270   RNA5S12 124905842                               rRNA
-#> 11 ENSG00000294467      <NA>        NA                             lncRNA
-#> 12 ENSG00000293097      <NA>        NA                             lncRNA
-#> 13 ENSG00000172845       SP3      6670                     protein_coding
-#> 14 ENSG00000270149      <NA>        NA                     protein_coding
-#> 15 ENSG00000277660      <NA> 124906683                              snRNA
-#> 16 ENSG00000292419      <NA>        NA               processed_pseudogene
-#> 17 ENSG00000227671   ZNF731P        NA transcribed_unprocessed_pseudogene
-#> 18 ENSG00000278499    NPAP1L        NA             unprocessed_pseudogene
-#> 19 ENSG00000179958    DCTPP1     79077                     protein_coding
-#> 20 ENSG00000260659      <NA>        NA                             lncRNA
-#>    species ensembl_version download_date
-#> 1    human             113    2025-04-23
-#> 2    human             113    2025-04-23
-#> 3    human             113    2025-04-23
-#> 4    human             113    2025-04-23
-#> 5    human             113    2025-04-23
-#> 6    human             113    2025-04-23
-#> 7    human             113    2025-04-23
-#> 8    human             113    2025-04-23
-#> 9    human             113    2025-04-23
-#> 10   human             113    2025-04-23
-#> 11   human             113    2025-04-23
-#> 12   human             113    2025-04-23
-#> 13   human             113    2025-04-23
-#> 14   human             113    2025-04-23
-#> 15   human             113    2025-04-23
-#> 16   human             113    2025-04-23
-#> 17   human             113    2025-04-23
-#> 18   human             113    2025-04-23
-#> 19   human             113    2025-04-23
-#> 20   human             113    2025-04-23
+#>    symbol      ensembl_id entrez_id      gene_type species ensembl_version
+#> 1    TP53 ENSG00000141510      7157 protein_coding   human             113
+#> 2   BRCA1 ENSG00000012048       672         lncRNA   human             113
+#> 3     MYC ENSG00000136997      4609     pseudogene   human             113
+#> 4    EGFR ENSG00000146648      1956          miRNA   human             113
+#> 5    PTEN ENSG00000171862      5728 protein_coding   human             113
+#> 6    CDK2 ENSG00000123374      1017         lncRNA   human             113
+#> 7    MDM2 ENSG00000135679      4193     pseudogene   human             113
+#> 8     RB1 ENSG00000139687      5925          miRNA   human             113
+#> 9  CDKN2A ENSG00000147889      1029 protein_coding   human             113
+#> 10   AKT1 ENSG00000142208       207         lncRNA   human             113
+#> 11   MTOR ENSG00000198793      2475     pseudogene   human             113
+#> 12 PIK3CA ENSG00000121879      5290          miRNA   human             113
+#> 13   KRAS ENSG00000133703      3845 protein_coding   human             113
+#> 14   BRAF ENSG00000157764       673         lncRNA   human             113
+#> 15   NRAS ENSG00000213281      4893     pseudogene   human             113
+#> 16  VEGFA ENSG00000112715      7422          miRNA   human             113
+#> 17  HIF1A ENSG00000100644      3091 protein_coding   human             113
+#> 18  STAT3 ENSG00000168610      6774         lncRNA   human             113
+#> 19   JAK2 ENSG00000096968      3717     pseudogene   human             113
+#> 20   BCL2 ENSG00000171791       596          miRNA   human             113
+#>    download_date
+#> 1     2025-04-23
+#> 2     2025-04-23
+#> 3     2025-04-23
+#> 4     2025-04-23
+#> 5     2025-04-23
+#> 6     2025-04-23
+#> 7     2025-04-23
+#> 8     2025-04-23
+#> 9     2025-04-23
+#> 10    2025-04-23
+#> 11    2025-04-23
+#> 12    2025-04-23
+#> 13    2025-04-23
+#> 14    2025-04-23
+#> 15    2025-04-23
+#> 16    2025-04-23
+#> 17    2025-04-23
+#> 18    2025-04-23
+#> 19    2025-04-23
+#> 20    2025-04-23
 toy_gene_ref("mouse", n = 10)
-#>            ensembl_id        symbol entrez_id
-#> 1  ENSMUSG00000123309          <NA>        NA
-#> 2  ENSMUSG00000108739       Gm45096        NA
-#> 3  ENSMUSG00000078513      Pramel22    277668
-#> 4  ENSMUSG00000127289          <NA>        NA
-#> 5  ENSMUSG00000112032       Gm48036        NA
-#> 6  ENSMUSG00000083239       Mup-ps1        NA
-#> 7  ENSMUSG00000088811       Gm22381 115487860
-#> 8  ENSMUSG00000027942 4933434E20Rik     99650
-#> 9  ENSMUSG00000109888       Gm45600        NA
-#> 10 ENSMUSG00000126842          <NA>        NA
-#>                             gene_type species ensembl_version download_date
-#> 1                              lncRNA   mouse             113    2025-04-23
-#> 2                              lncRNA   mouse             113    2025-04-23
-#> 3                      protein_coding   mouse             113    2025-04-23
-#> 4                              lncRNA   mouse             113    2025-04-23
-#> 5                              lncRNA   mouse             113    2025-04-23
-#> 6  transcribed_unprocessed_pseudogene   mouse             113    2025-04-23
-#> 7                               snRNA   mouse             113    2025-04-23
-#> 8                      protein_coding   mouse             113    2025-04-23
-#> 9                              lncRNA   mouse             113    2025-04-23
-#> 10                             lncRNA   mouse             113    2025-04-23
+#>    symbol         ensembl_id entrez_id      gene_type species ensembl_version
+#> 1   Trp53 ENSMUSG00000059552     22059 protein_coding   mouse             113
+#> 2   Brca1 ENSMUSG00000017146     12189         lncRNA   mouse             113
+#> 3     Myc ENSMUSG00000022346     17869     pseudogene   mouse             113
+#> 4    Egfr ENSMUSG00000020122     13649          miRNA   mouse             113
+#> 5    Pten ENSMUSG00000013663     19211 protein_coding   mouse             113
+#> 6    Cdk2 ENSMUSG00000025358     12566         lncRNA   mouse             113
+#> 7    Mdm2 ENSMUSG00000020184     17246     pseudogene   mouse             113
+#> 8     Rb1 ENSMUSG00000022105     19645          miRNA   mouse             113
+#> 9  Cdkn2a ENSMUSG00000044303     12578 protein_coding   mouse             113
+#> 10   Akt1 ENSMUSG00000001729     11651         lncRNA   mouse             113
+#>    download_date
+#> 1     2025-04-23
+#> 2     2025-04-23
+#> 3     2025-04-23
+#> 4     2025-04-23
+#> 5     2025-04-23
+#> 6     2025-04-23
+#> 7     2025-04-23
+#> 8     2025-04-23
+#> 9     2025-04-23
+#> 10    2025-04-23
 ```

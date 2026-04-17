@@ -25,26 +25,28 @@ library(evanverse)
 ### `toy_gene_ref()` - Generate a compact gene reference table
 
 [`toy_gene_ref()`](https://evanbio.github.io/evanverse/reference/toy_gene_ref.md)
-returns a small reference table compatible with
+returns a small deterministic reference table compatible with
 [`gene2entrez()`](https://evanbio.github.io/evanverse/reference/gene2entrez.md)
 /
 [`gene2ensembl()`](https://evanbio.github.io/evanverse/reference/gene2ensembl.md)
-workflows.
+workflows. The human reference includes the symbols used by
+[`toy_gmt()`](https://evanbio.github.io/evanverse/reference/toy_gmt.md),
+so GMT parsing and gene ID conversion examples can run offline together.
 
 ``` r
 ref_human <- toy_gene_ref()
 head(ref_human, 3)
 #>          symbol       ensembl_id entrez_id      gene_type species ensembl_version download_date
-#> 1        RNA5S5 ENSG00000199396 124905431           rRNA   human             113    2025-04-24
-#> 2          <NA> ENSG00000295528        NA         lncRNA   human             113    2025-04-24
-#> 3          <NA> ENSG00000301748        NA         lncRNA   human             113    2025-04-24
+#> 1          TP53 ENSG00000141510      7157 protein_coding   human             113    2025-04-23
+#> 2         BRCA1 ENSG00000012048       672         lncRNA   human             113    2025-04-23
+#> 3           MYC ENSG00000136997      4609     pseudogene   human             113    2025-04-23
 ```
 
 Key behavior:
 
 - `species` supports only `"human"` and `"mouse"`.
 - `n` controls returned rows and is capped at 100 available rows.
-- Missing symbols are returned as `NA` (never empty strings).
+- Symbols and Ensembl IDs are unique within each species.
 
 Mouse example:
 
@@ -52,8 +54,8 @@ Mouse example:
 ref_mouse <- toy_gene_ref(species = "mouse", n = 10)
 ref_mouse[, c("symbol", "ensembl_id", "species")]
 #>          symbol          ensembl_id species
-#> 1          <NA> ENSMUSG00000123309   mouse
-#> 2       Gm45096 ENSMUSG00000108739   mouse
+#> 1         Trp53 ENSMUSG00000059552   mouse
+#> 2         Brca1 ENSMUSG00000017146   mouse
 #> ...
 ```
 

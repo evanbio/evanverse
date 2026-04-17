@@ -32,21 +32,22 @@ gene2ensembl(x, ref = NULL, species = c("human", "mouse"))
 
 A data.frame with columns `symbol` (original input), `symbol_std`
 (case-normalized), and `ensembl_id`. Unmatched entries have `NA` in
-`ensembl_id`.
+`ensembl_id`. If the reference contains duplicated normalized symbols,
+the first match is used with a warning.
 
 ## Examples
 
 ``` r
 ref <- toy_gene_ref(species = "human")
 gene2ensembl(c("tp53", "brca1", "MYC"), ref = ref, species = "human")
-#>   symbol symbol_std ensembl_id
-#> 1   tp53       TP53       <NA>
-#> 2  brca1      BRCA1       <NA>
-#> 3    MYC        MYC       <NA>
+#>   symbol symbol_std      ensembl_id
+#> 1   tp53       TP53 ENSG00000141510
+#> 2  brca1      BRCA1 ENSG00000012048
+#> 3    MYC        MYC ENSG00000136997
 
 ref <- toy_gene_ref(species = "mouse")
 gene2ensembl(c("Zbp1", "Sftpd"), ref = ref, species = "mouse")
-#>   symbol symbol_std         ensembl_id
-#> 1   Zbp1       zbp1 ENSMUSG00000027514
-#> 2  Sftpd      sftpd ENSMUSG00000021795
+#>   symbol symbol_std ensembl_id
+#> 1   Zbp1       zbp1       <NA>
+#> 2  Sftpd      sftpd       <NA>
 ```

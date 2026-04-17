@@ -166,7 +166,7 @@ functions:</p>
 </tr>
 <tr class="odd">
 <td><code><a href="../reference/plot_pie.html">plot_pie()</a></code></td>
-<td>Pie / donut chart from a vector or data frame</td>
+<td>Pie chart from a vector or grouped data frame</td>
 </tr>
 <tr class="even">
 <td><code><a href="../reference/plot_venn.html">plot_venn()</a></code></td>
@@ -244,8 +244,8 @@ naturally in pipelines.</p>
 </tr>
 <tr class="even">
 <td><code>sort_by</code></td>
-<td><code>"union"</code></td>
-<td>Which groups to base sort order on</td>
+<td><code>NULL</code></td>
+<td>Group level used for sorting grouped bars</td>
 </tr>
 </tbody>
 </table>
@@ -331,7 +331,7 @@ multi-group overlays, optional faceting, and palette customisation.</p>
 </tr>
 <tr class="odd">
 <td><code>alpha</code></td>
-<td><code>0.3</code></td>
+<td><code>0.7</code></td>
 <td>Fill transparency</td>
 </tr>
 <tr class="even">
@@ -388,12 +388,13 @@ multi-group overlays, optional faceting, and palette customisation.</p>
 <h2 id="pie-chart">3 Pie Chart<a class="anchor" aria-label="anchor" href="#pie-chart"></a>
 </h2>
 <div class="section level3">
-<h3 id="plot_pie-pie-donut-chart">
-<code>plot_pie()</code> — Pie / donut chart<a class="anchor" aria-label="anchor" href="#plot_pie-pie-donut-chart"></a>
+<h3 id="plot_pie-pie-chart">
+<code>plot_pie()</code> — Pie chart<a class="anchor" aria-label="anchor" href="#plot_pie-pie-chart"></a>
 </h3>
-<p>Accepts either a plain named vector of counts or a data frame with
-separate group and count columns. Labels can show counts, percentages,
-both, or none.</p>
+<p>Accepts a character/factor vector (frequency counted automatically),
+a named numeric vector of counts, or a data frame with separate group
+and count columns. Labels can show counts, percentages, both, or
+none.</p>
 <p><strong>Key parameters</strong></p>
 <table class="table">
 <colgroup>
@@ -410,7 +411,7 @@ both, or none.</p>
 <tr class="odd">
 <td><code>data</code></td>
 <td>—</td>
-<td>Named numeric vector or data frame</td>
+<td>Character/factor vector, named numeric vector, or data frame</td>
 </tr>
 <tr class="even">
 <td><code>group_col</code></td>
@@ -768,7 +769,7 @@ row)</td>
 <span>  save_width  <span class="op">=</span> <span class="fl">20</span>,</span>
 <span>  save_height <span class="op">=</span> <span class="fl">8</span></span>
 <span><span class="op">)</span></span>
-<span><span class="co">#&gt; # Saves forest_plot.pdf, .png, .svg, .tiff to results/</span></span></code></pre></div>
+<span><span class="co">#&gt; # Saves forest_plot.png, .pdf, .jpg, .tiff to results/</span></span></code></pre></div>
 <hr>
 </div>
 </div>

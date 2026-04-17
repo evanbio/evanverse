@@ -26,10 +26,12 @@ An integer vector of match positions. Returns `NA` for non-matches.
 ## Note
 
 Both `x` and `table` must be **non-empty** character vectors;
-`character(0)` or non-character inputs raise an error. This differs from
+`character(0)` or non-character inputs raise an error. Empty strings are
+also rejected. This differs from
 [`base::match()`](https://rdrr.io/r/base/match.html) and `%nin%`, which
 accept empty vectors. The stricter contract is intentional for gene-ID
-workflows where an empty query almost always signals a upstream mistake.
+workflows where an empty query almost always signals an upstream
+mistake.
 
 ## Examples
 

@@ -199,8 +199,8 @@ plot_forest(
 
 - dest:
 
-  Character. Destination file path (extension ignored; all four formats
-  are saved). Required when `save = TRUE`.
+  Character. Destination file path (extension ignored; PNG, PDF, JPG,
+  and TIFF files are saved). Required when `save = TRUE`.
 
 - save_width:
 

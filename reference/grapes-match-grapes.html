@@ -128,9 +128,10 @@
     <div class="section level2">
     <h2 id="note">Note<a class="anchor" aria-label="anchor" href="#note"></a></h2>
     <p>Both <code>x</code> and <code>table</code> must be <strong>non-empty</strong> character vectors; <code>character(0)</code> or
-non-character inputs raise an error. This differs from <code><a href="https://rdrr.io/r/base/match.html" class="external-link">base::match()</a></code> and <code>%nin%</code>,
+non-character inputs raise an error. Empty strings are also rejected.
+This differs from <code><a href="https://rdrr.io/r/base/match.html" class="external-link">base::match()</a></code> and <code>%nin%</code>,
 which accept empty vectors. The stricter contract is intentional for gene-ID workflows
-where an empty query almost always signals a upstream mistake.</p>
+where an empty query almost always signals an upstream mistake.</p>
     </div>
 
     <div class="section level2">

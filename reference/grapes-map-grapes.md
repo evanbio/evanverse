@@ -26,6 +26,12 @@ A named character vector. Names are canonical entries from `table`;
 values are the original elements from `x`. Order follows `x` (not
 `table`). Unmatched entries are dropped.
 
+## Note
+
+Both `x` and `table` must be non-empty character vectors without `NA` or
+empty string values. If `table` contains duplicated values after case
+normalization, the first match is used with a warning.
+
 ## Examples
 
 ``` r

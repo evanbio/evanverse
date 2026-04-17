@@ -8,7 +8,7 @@ The plot module provides five publication-ready plotting functions:
 |-----------------------------------------------------------------------------------|------------------------------------------------------|
 | [`plot_bar()`](https://evanbio.github.io/evanverse/reference/plot_bar.md)         | Bar chart with optional grouping and sorting         |
 | [`plot_density()`](https://evanbio.github.io/evanverse/reference/plot_density.md) | Density / distribution curves with optional faceting |
-| [`plot_pie()`](https://evanbio.github.io/evanverse/reference/plot_pie.md)         | Pie / donut chart from a vector or data frame        |
+| [`plot_pie()`](https://evanbio.github.io/evanverse/reference/plot_pie.md)         | Pie chart from a vector or grouped data frame        |
 | [`plot_venn()`](https://evanbio.github.io/evanverse/reference/plot_venn.md)       | Venn diagram for 2–4 sets                            |
 | [`plot_forest()`](https://evanbio.github.io/evanverse/reference/plot_forest.md)   | Publication-ready forest plot                        |
 
@@ -33,16 +33,16 @@ pipelines.
 
 **Key parameters**
 
-| Parameter    | Default   | Description                        |
-|--------------|-----------|------------------------------------|
-| `data`       | —         | Data frame                         |
-| `x_col`      | —         | Column for x-axis categories       |
-| `y_col`      | —         | Column for bar heights             |
-| `horizontal` | `FALSE`   | Flip to a horizontal bar chart     |
-| `sort`       | `FALSE`   | Sort bars by height                |
-| `decreasing` | `TRUE`    | Sort order when `sort = TRUE`      |
-| `group_col`  | `NULL`    | Column for grouped bars            |
-| `sort_by`    | `"union"` | Which groups to base sort order on |
+| Parameter    | Default | Description                               |
+|--------------|---------|-------------------------------------------|
+| `data`       | —       | Data frame                                |
+| `x_col`      | —       | Column for x-axis categories              |
+| `y_col`      | —       | Column for bar heights                    |
+| `horizontal` | `FALSE` | Flip to a horizontal bar chart            |
+| `sort`       | `FALSE` | Sort bars by height                       |
+| `decreasing` | `TRUE`  | Sort order when `sort = TRUE`             |
+| `group_col`  | `NULL`  | Column for grouped bars                   |
+| `sort_by`    | `NULL`  | Group level used for sorting grouped bars |
 
 #### Basic usage
 
@@ -101,7 +101,7 @@ overlays, optional faceting, and palette customisation.
 | `x_col`     | —       | Numeric column for the distribution          |
 | `group_col` | `NULL`  | Column for overlaid group curves             |
 | `facet_col` | `NULL`  | Column for faceted panels                    |
-| `alpha`     | `0.3`   | Fill transparency                            |
+| `alpha`     | `0.7`   | Fill transparency                            |
 | `adjust`    | `1`     | Bandwidth multiplier                         |
 | `palette`   | `NULL`  | Named or unnamed character vector of colours |
 
@@ -144,21 +144,21 @@ plot_density(df3, x_col = "score", group_col = "group", facet_col = "cohort")
 
 ## 3 Pie Chart
 
-### `plot_pie()` — Pie / donut chart
+### `plot_pie()` — Pie chart
 
-Accepts either a plain named vector of counts or a data frame with
-separate group and count columns. Labels can show counts, percentages,
-both, or none.
+Accepts a character/factor vector (frequency counted automatically), a
+named numeric vector of counts, or a data frame with separate group and
+count columns. Labels can show counts, percentages, both, or none.
 
 **Key parameters**
 
-| Parameter   | Default     | Description                                   |
-|-------------|-------------|-----------------------------------------------|
-| `data`      | —           | Named numeric vector or data frame            |
-| `group_col` | `NULL`      | Column for slice labels (data frame only)     |
-| `count_col` | `NULL`      | Column for slice sizes (data frame only)      |
-| `label`     | `"percent"` | `"count"`, `"percent"`, `"both"`, or `"none"` |
-| `palette`   | `NULL`      | Character vector of fill colours              |
+| Parameter   | Default     | Description                                                  |
+|-------------|-------------|--------------------------------------------------------------|
+| `data`      | —           | Character/factor vector, named numeric vector, or data frame |
+| `group_col` | `NULL`      | Column for slice labels (data frame only)                    |
+| `count_col` | `NULL`      | Column for slice sizes (data frame only)                     |
+| `label`     | `"percent"` | `"count"`, `"percent"`, `"both"`, or `"none"`                |
+| `palette`   | `NULL`      | Character vector of fill colours                             |
 
 #### From a named vector
 
@@ -371,7 +371,7 @@ plot_forest(
   save_width  = 20,
   save_height = 8
 )
-#> # Saves forest_plot.pdf, .png, .svg, .tiff to results/
+#> # Saves forest_plot.png, .pdf, .jpg, .tiff to results/
 ```
 
 ------------------------------------------------------------------------

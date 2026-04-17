@@ -2,7 +2,7 @@
 
 ## Overview
 
-The base module provides eleven utility functions covering four areas:
+The base module provides thirteen utility functions covering six areas:
 
 | Area                  | Functions                                                                                                                                                                                                                                                                                                |
 |-----------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -10,6 +10,7 @@ The base module provides eleven utility functions covering four areas:
 | File system utilities | [`file_ls()`](https://evanbio.github.io/evanverse/reference/file_ls.md), [`file_info()`](https://evanbio.github.io/evanverse/reference/file_info.md), [`file_tree()`](https://evanbio.github.io/evanverse/reference/file_tree.md)                                                                        |
 | Gene ID conversion    | [`gene2entrez()`](https://evanbio.github.io/evanverse/reference/gene2entrez.md), [`gene2ensembl()`](https://evanbio.github.io/evanverse/reference/gene2ensembl.md)                                                                                                                                       |
 | GMT file parsing      | [`gmt2df()`](https://evanbio.github.io/evanverse/reference/gmt2df.md), [`gmt2list()`](https://evanbio.github.io/evanverse/reference/gmt2list.md)                                                                                                                                                         |
+| Math utilities        | [`perm()`](https://evanbio.github.io/evanverse/reference/perm.md), [`comb()`](https://evanbio.github.io/evanverse/reference/comb.md)                                                                                                                                                                     |
 
 ``` r
 library(evanverse)
@@ -74,8 +75,9 @@ df2vect(bad, "id", "val")
 ### `recode_column()` — Map column values via a named vector
 
 Replaces values in a column using a named vector (`dict`). Unmatched
-values receive `default` (NA by default). Set `name` to write to a new
-column instead of overwriting the source.
+values receive the scalar `default` (NA by default). Set `name` to write
+to a new column instead of overwriting the source. Explicit `NA` values
+in `dict` are kept as matched values rather than replaced by `default`.
 
 ``` r
 df <- data.frame(
@@ -216,7 +218,8 @@ ref <- toy_gene_ref(species = "human")
 | `"mouse"` | [`tolower()`](https://rdrr.io/r/base/chartr.html) — `"TRP53"` and `"Trp53"` both match `Trp53` |
 
 Unmatched symbols are returned with `NA` in the ID column rather than
-dropped.
+dropped. If the reference table contains duplicated symbols after case
+normalisation, the first match is used and a warning is emitted.
 
 ### `gene2entrez()`
 
@@ -295,13 +298,46 @@ gs[["HALLMARK_P53_PATHWAY"]]
 
 > Lines with fewer than 3 tab-separated fields are skipped with a
 > warning and removed from the result. If every line is malformed, both
-> functions return `NULL` rather than raising an error — this is the
-> current behaviour. Always check for a `NULL` return when parsing files
-> from untrusted sources.
+> functions raise an error because no valid gene set can be returned.
 
 ------------------------------------------------------------------------
 
-## 5 A Combined Workflow
+## 5 Math Utilities
+
+### `perm()` — Ordered arrangements
+
+Calculates the number of ordered arrangements of `k` items from `n`
+distinct items:
+
+``` r
+perm(8, 4)
+#> [1] 1680
+
+perm(5, 6)
+#> [1] 0
+```
+
+`perm(n, 0)` returns 1. If `k > n`, the result is 0.
+
+### `comb()` — Unordered combinations
+
+Calculates the number of ways to choose `k` items from `n` distinct
+items:
+
+``` r
+comb(8, 4)
+#> [1] 70
+
+comb(10, 3)
+#> [1] 120
+```
+
+`comb(n, 0)` and `comb(n, n)` return 1. If `k > n`, the result is 0.
+Very large inputs warn before returning an infinite result.
+
+------------------------------------------------------------------------
+
+## 6 A Combined Workflow
 
 Gene ID conversion and GMT parsing compose naturally. The example below
 reads a GMT file, converts all gene symbols to Entrez IDs, and produces
@@ -343,6 +379,8 @@ gs_entrez[["HALLMARK_P53_PATHWAY"]]
   [`?gene2ensembl`](https://evanbio.github.io/evanverse/reference/gene2ensembl.md)
 - [`?gmt2df`](https://evanbio.github.io/evanverse/reference/gmt2df.md),
   [`?gmt2list`](https://evanbio.github.io/evanverse/reference/gmt2list.md)
+- [`?perm`](https://evanbio.github.io/evanverse/reference/perm.md),
+  [`?comb`](https://evanbio.github.io/evanverse/reference/comb.md)
 - [`?toy_gene_ref`](https://evanbio.github.io/evanverse/reference/toy_gene_ref.md),
   [`?toy_gmt`](https://evanbio.github.io/evanverse/reference/toy_gmt.md),
   [`?download_gene_ref`](https://evanbio.github.io/evanverse/reference/download_gene_ref.md)

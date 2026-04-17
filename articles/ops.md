@@ -22,9 +22,9 @@ library(evanverse)
 > manually or switch chunks to `eval = TRUE`.
 
 All operators that accept character input validate their arguments and
-raise an informative error for non-character, `NA`, or empty inputs.
-`%nin%` and `%is%` are unrestricted — they mirror base R behaviour for
-any type.
+raise an informative error for non-character or `NA` inputs. `%match%`
+and `%map%` also reject empty strings. `%nin%` and `%is%` are
+unrestricted — they mirror base R behaviour for any type.
 
 ------------------------------------------------------------------------
 
@@ -50,6 +50,14 @@ fashion:
 ``` r
 "Gene:" %p% c("TP53", "BRCA1", "MYC")
 #> [1] "Gene: TP53"  "Gene: BRCA1" "Gene: MYC"
+```
+
+Other unequal lengths are rejected rather than recycled silently:
+
+``` r
+c("a", "b", "c") %p% c("x", "y")
+#> Error in `%p%()`:
+#> ! `lhs` and `rhs` must have equal lengths, or one side must have length 1.
 ```
 
 Empty strings are valid — the space is always inserted:
@@ -125,7 +133,8 @@ character(0) %nin% c("a", "b")
 
 Both `%match%` and `%map%` lower-case both sides before comparing, so
 `"tp53"` and `"TP53"` are treated as the same string. Both require
-non-`NA`, non-empty character vectors on both sides.
+non-`NA`, non-empty character vectors on both sides, and both reject
+empty strings.
 
 ### `%match%` — Return match indices
 
@@ -138,11 +147,13 @@ c("tp53", "BRCA1", "egfr") %match% c("TP53", "EGFR", "MYC")
 #> [1]  1 NA  2
 ```
 
-When `table` contains duplicates the index of the **first** match is
-returned, matching base R behaviour:
+When `table` contains duplicates after case normalisation, the index of
+the **first** match is returned with a warning:
 
 ``` r
 c("x") %match% c("X", "x", "X")
+#> Warning: `table` contains duplicated value after case normalization: "x".
+#> Using the first match.
 #> [1] 1
 ```
 
@@ -176,6 +187,11 @@ c("tp53") %match% character(0)
 c("tp53") %match% c("TP53", NA)
 #> Error in `%match%()`:
 #> ! `table` must be a non-empty character vector without NA values.
+
+# empty string in x
+c("tp53", "") %match% c("TP53")
+#> Error in `%match%()`:
+#> ! `x` must not contain NA or empty string values.
 ```
 
 ------------------------------------------------------------------------
@@ -224,6 +240,17 @@ c("tp53", "tp53") %map% c("TP53", "EGFR")
 #> "tp53" "tp53"
 ```
 
+Duplicate values in `table` after case normalisation warn and use the
+first canonical entry:
+
+``` r
+c("tp53") %map% c("TP53", "tp53")
+#> Warning: `table` contains duplicated value after case normalization: "tp53".
+#> Using the first match.
+#>   TP53
+#> "tp53"
+```
+
 The same error rules as `%match%` apply on both sides:
 
 ``` r
@@ -246,6 +273,11 @@ c("tp53") %map% character(0)
 c("tp53") %map% c("TP53", NA)
 #> Error in `%map%()`:
 #> ! `table` must be a non-empty character vector without NA values.
+
+# empty string in table
+c("tp53") %map% c("TP53", "")
+#> Error in `%map%()`:
+#> ! `table` must not contain NA or empty string values.
 ```
 
 ------------------------------------------------------------------------

@@ -1,7 +1,8 @@
 # Recode a column in a data frame using a named vector
 
 Maps values in a column to new values using a named vector (`dict`).
-Unmatched values are replaced with `default`.
+Unmatched values are replaced with `default`. Matched values are kept
+as-is, including explicit `NA` values in `dict`.
 
 ## Usage
 
@@ -30,7 +31,7 @@ recode_column(data, column, dict, name = NULL, default = NA)
 
 - default:
 
-  Default value for unmatched entries. Default: `NA`.
+  Scalar default value for unmatched entries. Default: `NA`.
 
 ## Value
 

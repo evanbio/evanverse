@@ -1,8 +1,9 @@
 # Pie chart from a vector or grouped data frame
 
-Accepts either a character/factor vector (frequency counted
-automatically) or a data frame with pre-computed counts. Slices with
-zero count are dropped. At least two groups are required.
+Accepts a character/factor vector (frequency counted automatically), a
+named numeric vector of pre-computed counts, or a data frame with
+pre-computed counts. Slices with zero count are dropped. At least two
+groups are required.
 
 ## Usage
 
@@ -20,7 +21,7 @@ plot_pie(
 
 - data:
 
-  A character/factor vector, or a data.frame.
+  A character/factor vector, named numeric vector, or data.frame.
 
 - group_col:
 

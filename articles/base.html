@@ -144,7 +144,7 @@
 <div class="section level2">
 <h2 id="overview">Overview<a class="anchor" aria-label="anchor" href="#overview"></a>
 </h2>
-<p>The base module provides eleven utility functions covering four
+<p>The base module provides thirteen utility functions covering six
 areas:</p>
 <table class="table">
 <colgroup>
@@ -180,6 +180,12 @@ areas:</p>
 <td>GMT file parsing</td>
 <td>
 <code><a href="../reference/gmt2df.html">gmt2df()</a></code>, <code><a href="../reference/gmt2list.html">gmt2list()</a></code>
+</td>
+</tr>
+<tr class="odd">
+<td>Math utilities</td>
+<td>
+<code><a href="../reference/perm.html">perm()</a></code>, <code><a href="../reference/comb.html">comb()</a></code>
 </td>
 </tr>
 </tbody>
@@ -246,9 +252,11 @@ error.</p>
 vector<a class="anchor" aria-label="anchor" href="#recode_column-map-column-values-via-a-named-vector"></a>
 </h3>
 <p>Replaces values in a column using a named vector (<code>dict</code>).
-Unmatched values receive <code>default</code> (NA by default). Set
-<code>name</code> to write to a new column instead of overwriting the
-source.</p>
+Unmatched values receive the scalar <code>default</code> (NA by
+default). Set <code>name</code> to write to a new column instead of
+overwriting the source. Explicit <code>NA</code> values in
+<code>dict</code> are kept as matched values rather than replaced by
+<code>default</code>.</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span></span>
 <span>  gene <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"TP53"</span>, <span class="st">"BRCA1"</span>, <span class="st">"EGFR"</span>, <span class="st">"XYZ"</span><span class="op">)</span>,</span>
@@ -415,7 +423,9 @@ both match <code>TP53</code>
 </tbody>
 </table>
 <p>Unmatched symbols are returned with <code>NA</code> in the ID column
-rather than dropped.</p>
+rather than dropped. If the reference table contains duplicated symbols
+after case normalisation, the first match is used and a warning is
+emitted.</p>
 </div>
 <div class="section level3">
 <h3 id="gene2entrez">
@@ -494,20 +504,54 @@ symbols. This is the format expected by most gene set enrichment tools
 <blockquote>
 <p>Lines with fewer than 3 tab-separated fields are skipped with a
 warning and removed from the result. If every line is malformed, both
-functions return <code>NULL</code> rather than raising an error — this
-is the current behaviour. Always check for a <code>NULL</code> return
-when parsing files from untrusted sources.</p>
+functions raise an error because no valid gene set can be returned.</p>
 </blockquote>
 <hr>
 </div>
 </div>
 <div class="section level2">
-<h2 id="a-combined-workflow">5 A Combined Workflow<a class="anchor" aria-label="anchor" href="#a-combined-workflow"></a>
+<h2 id="math-utilities">5 Math Utilities<a class="anchor" aria-label="anchor" href="#math-utilities"></a>
+</h2>
+<div class="section level3">
+<h3 id="perm-ordered-arrangements">
+<code>perm()</code> — Ordered arrangements<a class="anchor" aria-label="anchor" href="#perm-ordered-arrangements"></a>
+</h3>
+<p>Calculates the number of ordered arrangements of <code>k</code> items
+from <code>n</code> distinct items:</p>
+<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/perm.html">perm</a></span><span class="op">(</span><span class="fl">8</span>, <span class="fl">4</span><span class="op">)</span></span>
+<span><span class="co">#&gt; [1] 1680</span></span>
+<span></span>
+<span><span class="fu"><a href="../reference/perm.html">perm</a></span><span class="op">(</span><span class="fl">5</span>, <span class="fl">6</span><span class="op">)</span></span>
+<span><span class="co">#&gt; [1] 0</span></span></code></pre></div>
+<p><code>perm(n, 0)</code> returns 1. If <code>k &gt; n</code>, the
+result is 0.</p>
+</div>
+<div class="section level3">
+<h3 id="comb-unordered-combinations">
+<code>comb()</code> — Unordered combinations<a class="anchor" aria-label="anchor" href="#comb-unordered-combinations"></a>
+</h3>
+<p>Calculates the number of ways to choose <code>k</code> items from
+<code>n</code> distinct items:</p>
+<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/comb.html">comb</a></span><span class="op">(</span><span class="fl">8</span>, <span class="fl">4</span><span class="op">)</span></span>
+<span><span class="co">#&gt; [1] 70</span></span>
+<span></span>
+<span><span class="fu"><a href="../reference/comb.html">comb</a></span><span class="op">(</span><span class="fl">10</span>, <span class="fl">3</span><span class="op">)</span></span>
+<span><span class="co">#&gt; [1] 120</span></span></code></pre></div>
+<p><code>comb(n, 0)</code> and <code>comb(n, n)</code> return 1. If
+<code>k &gt; n</code>, the result is 0. Very large inputs warn before
+returning an infinite result.</p>
+<hr>
+</div>
+</div>
+<div class="section level2">
+<h2 id="a-combined-workflow">6 A Combined Workflow<a class="anchor" aria-label="anchor" href="#a-combined-workflow"></a>
 </h2>
 <p>Gene ID conversion and GMT parsing compose naturally. The example
 below reads a GMT file, converts all gene symbols to Entrez IDs, and
 produces a named list of ID vectors ready for enrichment analysis.</p>
-<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/evanbio/evanverse" class="external-link">evanverse</a></span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># 1. Parse GMT into long format</span></span>
@@ -545,6 +589,9 @@ produces a named list of ID vectors ready for enrichment analysis.</p>
 </li>
 <li>
 <code><a href="../reference/gmt2df.html">?gmt2df</a></code>, <code><a href="../reference/gmt2list.html">?gmt2list</a></code>
+</li>
+<li>
+<code><a href="../reference/perm.html">?perm</a></code>, <code><a href="../reference/comb.html">?comb</a></code>
 </li>
 <li>
 <code><a href="../reference/toy_gene_ref.html">?toy_gene_ref</a></code>, <code><a href="../reference/toy_gmt.html">?toy_gmt</a></code>,

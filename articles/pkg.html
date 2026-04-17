@@ -292,15 +292,14 @@ from any installed package. Use <code>key</code> to filter by a
 case-insensitive keyword.</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/pkg_functions.html">pkg_functions</a></span><span class="op">(</span><span class="st">"evanverse"</span><span class="op">)</span></span>
-<span><span class="co">#&gt;  [1] "compile_palettes" "create_palette"  "df2list"</span></span>
-<span><span class="co">#&gt;  [4] "df2vect"          "file_info"        "file_ls"</span></span>
+<span><span class="co">#&gt;  [1] "%is%"          "%map%"         "%match%"       "%nin%"</span></span>
+<span><span class="co">#&gt;  [5] "%p%"           "comb"          "df2list"       "df2vect"</span></span>
 <span><span class="co">#&gt;  ...</span></span></code></pre></div>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Filter by keyword (case-insensitive)</span></span>
-<span><span class="fu"><a href="../reference/pkg_functions.html">pkg_functions</a></span><span class="op">(</span><span class="st">"evanverse"</span>, key <span class="op">=</span> <span class="st">"palette"</span><span class="op">)</span></span>
-<span><span class="co">#&gt; [1] "compile_palettes" "create_palette"   "get_palette"</span></span>
-<span><span class="co">#&gt; [4] "list_palettes"    "palette_gallery"  "preview_palette"</span></span>
-<span><span class="co">#&gt; [7] "remove_palette"</span></span>
+<span><span class="fu"><a href="../reference/pkg_functions.html">pkg_functions</a></span><span class="op">(</span><span class="st">"evanverse"</span>, key <span class="op">=</span> <span class="st">"plot"</span><span class="op">)</span></span>
+<span><span class="co">#&gt; [1] "plot_bar"     "plot_density" "plot_forest"  "plot_pie"</span></span>
+<span><span class="co">#&gt; [5] "plot_venn"</span></span>
 <span></span>
 <span><span class="fu"><a href="../reference/pkg_functions.html">pkg_functions</a></span><span class="op">(</span><span class="st">"stats"</span>, key <span class="op">=</span> <span class="st">"test"</span><span class="op">)</span></span>
 <span><span class="co">#&gt; [1] "ansari.test"   "bartlett.test" "binom.test"</span></span>

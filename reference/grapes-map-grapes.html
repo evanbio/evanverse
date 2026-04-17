@@ -132,6 +132,12 @@ Unmatched values are dropped.</p>
     <p>A named character vector. Names are canonical entries from <code>table</code>; values are the
 original elements from <code>x</code>. Order follows <code>x</code> (not <code>table</code>). Unmatched entries are dropped.</p>
     </div>
+    <div class="section level2">
+    <h2 id="note">Note<a class="anchor" aria-label="anchor" href="#note"></a></h2>
+    <p>Both <code>x</code> and <code>table</code> must be non-empty character vectors without <code>NA</code>
+or empty string values. If <code>table</code> contains duplicated values after case
+normalization, the first match is used with a warning.</p>
+    </div>
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>

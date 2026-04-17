@@ -92,17 +92,16 @@ keyword.
 
 ``` r
 pkg_functions("evanverse")
-#>  [1] "compile_palettes" "create_palette"  "df2list"
-#>  [4] "df2vect"          "file_info"        "file_ls"
+#>  [1] "%is%"          "%map%"         "%match%"       "%nin%"
+#>  [5] "%p%"           "comb"          "df2list"       "df2vect"
 #>  ...
 ```
 
 ``` r
 # Filter by keyword (case-insensitive)
-pkg_functions("evanverse", key = "palette")
-#> [1] "compile_palettes" "create_palette"   "get_palette"
-#> [4] "list_palettes"    "palette_gallery"  "preview_palette"
-#> [7] "remove_palette"
+pkg_functions("evanverse", key = "plot")
+#> [1] "plot_bar"     "plot_density" "plot_forest"  "plot_pie"
+#> [5] "plot_venn"
 
 pkg_functions("stats", key = "test")
 #> [1] "ansari.test"   "bartlett.test" "binom.test"

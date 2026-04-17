@@ -26,7 +26,8 @@ A character vector of concatenated strings.
 ## Note
 
 Both `lhs` and `rhs` must be non-`NA` character vectors; `NA` values and
-non-character inputs (including `NULL`) raise an error.
+non-character inputs (including `NULL`) raise an error. Lengths must be
+equal, or one side must have length 1.
 
 ## Examples
 

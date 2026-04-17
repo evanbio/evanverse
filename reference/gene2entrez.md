@@ -32,7 +32,8 @@ gene2entrez(x, ref = NULL, species = c("human", "mouse"))
 
 A data.frame with columns `symbol` (original input), `symbol_std`
 (case-normalized), and `entrez_id`. Unmatched entries have `NA` in
-`entrez_id`.
+`entrez_id`. If the reference contains duplicated normalized symbols,
+the first match is used with a warning.
 
 ## Examples
 
@@ -40,13 +41,13 @@ A data.frame with columns `symbol` (original input), `symbol_std`
 ref <- toy_gene_ref(species = "human")
 gene2entrez(c("tp53", "brca1", "MYC"), ref = ref, species = "human")
 #>   symbol symbol_std entrez_id
-#> 1   tp53       TP53        NA
-#> 2  brca1      BRCA1        NA
-#> 3    MYC        MYC        NA
+#> 1   tp53       TP53      7157
+#> 2  brca1      BRCA1       672
+#> 3    MYC        MYC      4609
 
 ref <- toy_gene_ref(species = "mouse")
 gene2entrez(c("Trp53", "Zbp1"), ref = ref, species = "mouse")
 #>   symbol symbol_std entrez_id
-#> 1  Trp53      trp53        NA
-#> 2   Zbp1       zbp1     58203
+#> 1  Trp53      trp53     22059
+#> 2   Zbp1       zbp1        NA
 ```

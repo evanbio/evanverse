@@ -179,16 +179,18 @@ current implementation.</p>
 <code>toy_gene_ref()</code> - Generate a compact gene reference
 table<a class="anchor" aria-label="anchor" href="#toy_gene_ref---generate-a-compact-gene-reference-table"></a>
 </h3>
-<p><code><a href="../reference/toy_gene_ref.html">toy_gene_ref()</a></code> returns a small reference table
-compatible with <code><a href="../reference/gene2entrez.html">gene2entrez()</a></code> / <code><a href="../reference/gene2ensembl.html">gene2ensembl()</a></code>
-workflows.</p>
+<p><code><a href="../reference/toy_gene_ref.html">toy_gene_ref()</a></code> returns a small deterministic reference
+table compatible with <code><a href="../reference/gene2entrez.html">gene2entrez()</a></code> /
+<code><a href="../reference/gene2ensembl.html">gene2ensembl()</a></code> workflows. The human reference includes the
+symbols used by <code><a href="../reference/toy_gmt.html">toy_gmt()</a></code>, so GMT parsing and gene ID
+conversion examples can run offline together.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">ref_human</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/toy_gene_ref.html">toy_gene_ref</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">ref_human</span>, <span class="fl">3</span><span class="op">)</span></span>
 <span><span class="co">#&gt;          symbol       ensembl_id entrez_id      gene_type species ensembl_version download_date</span></span>
-<span><span class="co">#&gt; 1        RNA5S5 ENSG00000199396 124905431           rRNA   human             113    2025-04-24</span></span>
-<span><span class="co">#&gt; 2          &lt;NA&gt; ENSG00000295528        NA         lncRNA   human             113    2025-04-24</span></span>
-<span><span class="co">#&gt; 3          &lt;NA&gt; ENSG00000301748        NA         lncRNA   human             113    2025-04-24</span></span></code></pre></div>
+<span><span class="co">#&gt; 1          TP53 ENSG00000141510      7157 protein_coding   human             113    2025-04-23</span></span>
+<span><span class="co">#&gt; 2         BRCA1 ENSG00000012048       672         lncRNA   human             113    2025-04-23</span></span>
+<span><span class="co">#&gt; 3           MYC ENSG00000136997      4609     pseudogene   human             113    2025-04-23</span></span></code></pre></div>
 <p>Key behavior:</p>
 <ul>
 <li>
@@ -197,16 +199,15 @@ workflows.</p>
 <li>
 <code>n</code> controls returned rows and is capped at 100 available
 rows.</li>
-<li>Missing symbols are returned as <code>NA</code> (never empty
-strings).</li>
+<li>Symbols and Ensembl IDs are unique within each species.</li>
 </ul>
 <p>Mouse example:</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">ref_mouse</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/toy_gene_ref.html">toy_gene_ref</a></span><span class="op">(</span>species <span class="op">=</span> <span class="st">"mouse"</span>, n <span class="op">=</span> <span class="fl">10</span><span class="op">)</span></span>
 <span><span class="va">ref_mouse</span><span class="op">[</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"symbol"</span>, <span class="st">"ensembl_id"</span>, <span class="st">"species"</span><span class="op">)</span><span class="op">]</span></span>
 <span><span class="co">#&gt;          symbol          ensembl_id species</span></span>
-<span><span class="co">#&gt; 1          &lt;NA&gt; ENSMUSG00000123309   mouse</span></span>
-<span><span class="co">#&gt; 2       Gm45096 ENSMUSG00000108739   mouse</span></span>
+<span><span class="co">#&gt; 1         Trp53 ENSMUSG00000059552   mouse</span></span>
+<span><span class="co">#&gt; 2         Brca1 ENSMUSG00000017146   mouse</span></span>
 <span><span class="co">#&gt; ...</span></span></code></pre></div>
 <p><code>n</code> larger than 100 is silently capped:</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
