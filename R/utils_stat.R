@@ -517,6 +517,14 @@
                   paired = TRUE))
     }
 
+    if (stats::var(diffs) == 0) {
+      tests <- list(differences = list(p.value = NA, n = n, constant = TRUE))
+      return(list(tests = tests, sample_sizes = c(differences = n),
+                  recommendation = "parametric",
+                  rationale = "Paired differences are constant. Shapiro-Wilk is not applicable; defaulting to paired t-test.",
+                  paired = TRUE))
+    }
+
     sw    <- stats::shapiro.test(diffs)
     tests <- list(differences = list(p.value = sw$p.value, n = n, statistic = sw$statistic))
     p     <- sw$p.value
@@ -562,6 +570,8 @@
 
     if (n < 3) {
       tests[[grp]] <- list(p.value = NA, n = n)
+    } else if (stats::var(vals) == 0) {
+      tests[[grp]] <- list(p.value = NA, n = n, constant = TRUE)
     } else {
       sw           <- stats::shapiro.test(vals)
       tests[[grp]] <- list(p.value = sw$p.value, n = n, statistic = sw$statistic)
@@ -571,11 +581,18 @@
   min_n    <- min(sample_sizes)
   p_values <- vapply(tests, function(x) x$p.value, numeric(1L))
   p_values <- p_values[!is.na(p_values)]
+  constant_groups <- names(tests)[vapply(tests, function(x) isTRUE(x$constant), logical(1L))]
+
+  if (length(constant_groups) > 0) {
+    cli::cli_alert_warning(
+      "Shapiro-Wilk skipped for constant group{?s}: {.val {constant_groups}}."
+    )
+  }
 
   if (length(p_values) == 0) {
     return(list(tests = tests, sample_sizes = sample_sizes,
                 recommendation = "parametric",
-                rationale = "Too few observations for Shapiro-Wilk. Defaulting to t-test (use with caution).",
+                rationale = "No eligible group for Shapiro-Wilk. Defaulting to t-test (use with caution).",
                 paired = FALSE))
   }
 
@@ -679,6 +696,7 @@
       x = vecs$x, y = vecs$y,
       paired      = TRUE,
       alternative = alternative,
+      exact       = FALSE,
       conf.int    = TRUE,
       conf.level  = conf_level
     )
@@ -687,6 +705,7 @@
       value ~ group,
       data        = df,
       alternative = alternative,
+      exact       = FALSE,
       conf.int    = TRUE,
       conf.level  = conf_level
     )
@@ -880,7 +899,7 @@
     p_value     = test$p.value,
     statistic   = unname(test$statistic),
     parameter   = test$parameter,
-    effect_size = .compute_kruskal_effect(test, nrow(df))
+    effect_size = .compute_kruskal_effect(test, nrow(df), nlevels(df$group))
   )
 }
 
@@ -993,10 +1012,11 @@
 #' Compute epsilon-squared for Kruskal-Wallis
 #' @keywords internal
 #' @noRd
-.compute_kruskal_effect <- function(test, n) {
+.compute_kruskal_effect <- function(test, n, k) {
   # Reference: Tomczak & Tomczak (2014)
   H <- unname(test$statistic)
-  list(epsilon_squared = max(0, min(1, H / (n^2 - 1))))
+  eps <- (H - k + 1) / (n - k)
+  list(epsilon_squared = max(0, min(1, eps)))
 }
 
 

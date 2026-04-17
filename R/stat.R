@@ -1463,6 +1463,15 @@ quick_cor <- function(data,
   # Validation
   # ---------------------------------------------------------------------------
   .assert_data_frame(data)
+  .assert_scalar_string(use)
+  use_choices <- c("everything", "all.obs", "complete.obs", "na.or.complete",
+                   "pairwise.complete.obs")
+  if (!use %in% use_choices) {
+    cli::cli_abort(
+      "{.arg use} must be one of {.val {use_choices}}.",
+      call = NULL
+    )
+  }
   .assert_proportion(alpha)
 
   # ---------------------------------------------------------------------------

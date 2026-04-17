@@ -142,6 +142,12 @@ test_that("stat_power summary method runs without error", {
   expect_invisible(summary(res))
 })
 
+test_that("plot.power_result runs without error", {
+  res <- stat_power(n = 30, effect_size = 0.5)
+  expect_no_error(plot(res))
+  expect_invisible(plot(res))
+})
+
 
 # =============================================================================
 # stat_n
@@ -211,6 +217,12 @@ test_that("stat_n summary method runs without error", {
   expect_invisible(summary(res))
 })
 
+test_that("plot.power_result runs for sample-size results", {
+  res <- stat_n(power = 0.8, effect_size = 0.5)
+  expect_no_error(plot(res))
+  expect_invisible(plot(res))
+})
+
 test_that("stat_power and stat_n are inverse-consistent", {
   # stat_n gives n; plugging that n back into stat_power should recover ~80%
   n_req <- stat_n(power = 0.8, effect_size = 0.5)$n
@@ -252,6 +264,26 @@ test_that("quick_ttest forced method leaves normality_tests NULL", {
 test_that("quick_ttest forced wilcox.test uses Wilcoxon", {
   res <- quick_ttest(.ttest_df(), "group", "value", method = "wilcox.test")
   expect_equal(res$method_used, "wilcox.test")
+})
+
+test_that("quick_ttest handles constant groups in normality diagnostics", {
+  df <- data.frame(
+    group = rep(c("A", "B"), each = 10L),
+    value = c(rep(1, 10), rnorm(10))
+  )
+  expect_message(
+    res <- quick_ttest(df, "group", "value", method = "auto"),
+    regexp = "constant group"
+  )
+  expect_s3_class(res, "quick_ttest_result")
+})
+
+test_that("quick_ttest wilcox.test is quiet with ties", {
+  df <- data.frame(
+    group = rep(c("A", "B"), each = 3L),
+    value = c(1, 1, 2, 3, 4, 5)
+  )
+  expect_no_warning(quick_ttest(df, "group", "value", method = "wilcox.test"))
 })
 
 test_that("quick_ttest descriptive_stats has two rows (one per group)", {
@@ -327,6 +359,12 @@ test_that("quick_ttest summary method runs without error", {
   expect_invisible(summary(res))
 })
 
+test_that("plot.quick_ttest_result runs without error", {
+  res <- quick_ttest(.ttest_df(), "group", "value")
+  expect_no_error(plot(res, show_p_value = FALSE))
+  expect_invisible(plot(res, show_p_value = FALSE))
+})
+
 
 # =============================================================================
 # quick_anova
@@ -361,6 +399,28 @@ test_that("quick_anova forced anova method is respected", {
 test_that("quick_anova forced kruskal method is respected", {
   res <- quick_anova(.anova_df(), "group", "value", method = "kruskal")
   expect_equal(res$method_used, "kruskal")
+})
+
+test_that("quick_anova handles constant groups in normality diagnostics", {
+  df <- data.frame(
+    group = rep(LETTERS[1:3], each = 10L),
+    value = c(rep(1, 10), rep(2, 10), rnorm(10))
+  )
+  expect_message(
+    res <- quick_anova(df, "group", "value", method = "kruskal", post_hoc = "none"),
+    regexp = "constant group"
+  )
+  expect_s3_class(res, "quick_anova_result")
+  expect_equal(res$method_used, "kruskal")
+})
+
+test_that("quick_anova kruskal epsilon-squared uses H-based group formula", {
+  df <- data.frame(
+    group = rep(LETTERS[1:3], each = 10L),
+    value = c(seq_len(10), 101:110, 201:210)
+  )
+  res <- quick_anova(df, "group", "value", method = "kruskal", post_hoc = "none")
+  expect_gt(res$omnibus_result$effect_size$epsilon_squared, 0.8)
 })
 
 test_that("quick_anova p_value is in (0, 1)", {
@@ -421,6 +481,12 @@ test_that("quick_anova summary method runs without error", {
   res <- quick_anova(.anova_df(), "group", "value")
   expect_no_error(summary(res))
   expect_invisible(summary(res))
+})
+
+test_that("plot.quick_anova_result runs without error", {
+  res <- quick_anova(.anova_df(), "group", "value")
+  expect_no_error(plot(res, show_p_value = FALSE))
+  expect_invisible(plot(res, show_p_value = FALSE))
 })
 
 
@@ -514,6 +580,12 @@ test_that("quick_chisq summary method runs without error", {
   expect_invisible(summary(res))
 })
 
+test_that("plot.quick_chisq_result runs without error", {
+  res <- quick_chisq(.chisq_df(), "treatment", "response")
+  expect_no_error(plot(res, show_p_value = FALSE))
+  expect_invisible(plot(res, show_p_value = FALSE))
+})
+
 
 # =============================================================================
 # quick_cor
@@ -571,6 +643,13 @@ test_that("quick_cor p_adjust_method BH produces adjusted p-values", {
 test_that("quick_cor p_adjust_method none leaves p_adjusted NULL", {
   res <- quick_cor(.cor_df(), p_adjust_method = "none")
   expect_null(res$p_adjusted)
+})
+
+test_that("quick_cor errors on invalid missing-value handling", {
+  expect_error(
+    quick_cor(.cor_df(), use = "bad.use"),
+    class = "rlang_error"
+  )
 })
 
 test_that("quick_cor significant_pairs is a data.frame with expected columns", {
@@ -634,6 +713,13 @@ test_that("quick_cor summary method runs without error", {
   res <- quick_cor(.cor_df())
   expect_no_error(summary(res))
   expect_invisible(summary(res))
+})
+
+test_that("plot.quick_cor_result runs without error", {
+  skip_if_not_installed("ggcorrplot")
+  res <- quick_cor(.cor_df())
+  expect_no_error(plot(res, show_sig = FALSE))
+  expect_invisible(plot(res, show_sig = FALSE))
 })
 
 test_that("plot.quick_cor_result errors when sig_level length != 3", {
