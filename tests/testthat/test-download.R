@@ -36,6 +36,14 @@ test_that("download_gene_ref errors when dest is not a scalar string", {
   expect_error(download_gene_ref(dest = ""),                class = "rlang_error")
 })
 
+test_that("download_gene_ref errors with informative message when biomaRt is absent", {
+  local_mocked_bindings(
+    requireNamespace = function(pkg, ...) FALSE,
+    .package = "base"
+  )
+  expect_error(download_gene_ref(species = "human"), regexp = "biomaRt", class = "rlang_error")
+})
+
 test_that("download_gene_ref appends .rds when dest has no extension", {
   tmp <- withr::local_tempfile()   # no .rds extension
 
@@ -165,6 +173,26 @@ test_that("download_url does not skip when overwrite = TRUE", {
   expect_equal(readLines(dest), "new")
 })
 
+test_that("download_url does not leave dest file when non-resume download fails", {
+  dest <- withr::local_tempfile()
+
+  local_mocked_bindings(
+    curl_download = function(url, destfile, ...) {
+      writeLines("partial", destfile)
+      stop("simulated download failure")
+    },
+    new_handle    = function(...) list(),
+    handle_setopt = function(h, ...) invisible(h),
+    .package = "curl"
+  )
+
+  expect_error(
+    download_url("https://x.com/f.txt", dest = dest, retries = 0),
+    class = "rlang_error"
+  )
+  expect_false(file.exists(dest))
+})
+
 test_that("download_url sets resume_from when overwrite = TRUE and resume = TRUE", {
   dest <- withr::local_tempfile()
   writeLines("partial", dest)
@@ -188,6 +216,7 @@ test_that("download_url sets resume_from when overwrite = TRUE and resume = TRUE
 
 test_that("download_url network: downloads a small file successfully", {
   skip_on_cran()
+  skip_on_ci()
 
   dest <- withr::local_tempfile(fileext = ".txt")
   out  <- download_url("https://httpbin.org/robots.txt", dest = dest,
@@ -198,6 +227,7 @@ test_that("download_url network: downloads a small file successfully", {
 
 test_that("download_url network: errors after exhausting retries on bad URL", {
   skip_on_cran()
+  skip_on_ci()
 
   dest <- withr::local_tempfile()
   expect_error(
@@ -216,6 +246,7 @@ test_that("download_batch errors on invalid urls", {
   tmp <- withr::local_tempdir()
   expect_error(download_batch(123,       dest_dir = tmp), class = "rlang_error")
   expect_error(download_batch(list("a"), dest_dir = tmp), class = "rlang_error")
+  expect_error(download_batch(c("https://x.com/a.txt", ""), dest_dir = tmp), class = "rlang_error")
 })
 
 test_that("download_batch errors on invalid dest_dir", {
@@ -339,6 +370,7 @@ test_that("download_batch retries only failed files and succeeds on second attem
 
 test_that("download_batch network: downloads multiple files successfully", {
   skip_on_cran()
+  skip_on_ci()
 
   tmp  <- withr::local_tempdir()
   urls <- c("https://httpbin.org/robots.txt", "https://httpbin.org/encoding/utf8")
@@ -424,6 +456,7 @@ test_that(".geo_retry warning contains last error message on all-fail", {
 
 test_that("download_geo network: returns list with expected structure", {
   skip_on_cran()
+  skip_on_ci()
   skip_if_not_installed("GEOquery")
 
   # retries = 0 / timeout = 30: fail fast; supplemental files may be absent or

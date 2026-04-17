@@ -18,6 +18,10 @@ download_gene_ref <- function(species = c("human", "mouse"),
                               dest = NULL) {
 
   species <- match.arg(species)
+  if (!requireNamespace("biomaRt", quietly = TRUE)) {
+    cli::cli_abort("Please install {.pkg biomaRt}: BiocManager::install('biomaRt')", call = NULL)
+  }
+
   if (!is.null(dest)) {
     .assert_scalar_string(dest)
     .assert_dest_path(dest)
@@ -128,7 +132,15 @@ download_url <- function(url,
     on.exit(options(timeout = old_timeout), add = TRUE)
   }
 
-  # Download with retry
+  # Download with retry. Resume writes directly to dest by design; all other
+  # paths write to a temp file first so failed downloads do not leave a new
+  # partial destination that later calls would skip.
+  use_direct_dest <- overwrite && resume && file.exists(dest)
+  download_dest   <- if (use_direct_dest) dest else tempfile(tmpdir = dirname(dest))
+  if (!use_direct_dest) {
+    on.exit(unlink(download_dest), add = TRUE)
+  }
+
   download_error <- NULL
 
   for (attempt in seq_len(retries + 1L)) {
@@ -137,11 +149,18 @@ download_url <- function(url,
     }
 
     result <- tryCatch({
-      curl::curl_download(url = url, destfile = dest, handle = h, quiet = TRUE)
+      curl::curl_download(url = url, destfile = download_dest, handle = h, quiet = TRUE)
       "ok"
     }, error = function(e) e$message)
 
     if (identical(result, "ok")) {
+      if (!use_direct_dest) {
+        if (file.exists(dest)) unlink(dest)
+        ok <- file.rename(download_dest, dest)
+        if (!ok) {
+          cli::cli_abort("Failed to move downloaded file to {.path {dest}}.", call = NULL)
+        }
+      }
       return(invisible(dest))
     }
 
@@ -175,6 +194,7 @@ download_batch <- function(urls,
 
   # Validation
   .assert_character_vector(urls)
+  .assert_no_blank(urls)
   .assert_dir_path(dest_dir)
   .assert_flag(overwrite)
   .assert_flag(resume)
